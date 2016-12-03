@@ -5,7 +5,6 @@
         <file alias="Action.qml">src/controls/Action.qml</file>
         <file alias="Page.qml">src/controls/Page.qml</file>
         <file alias="AbstractListItem.qml">src/controls/AbstractListItem.qml</file>
-        <file alias="SplitDrawer.qml">src/controls/SplitDrawer.qml</file>
         <file alias="Theme.qml">src/controls/Theme.qml</file>
         <file alias="ToolBarApplicationHeader.qml">src/controls/ToolBarApplicationHeader.qml</file>
         <file alias="private/RefreshableScrollView.qml">src/controls/private/RefreshableScrollView.qml</file>
@@ -19,12 +18,9 @@
         <file alias="OverlaySheet.qml">src/controls/OverlaySheet.qml</file>
         <file alias="GlobalDrawer.qml">src/controls/GlobalDrawer.qml</file>
         <file alias="templates/AbstractListItem.qml">src/controls/templates/AbstractListItem.qml</file>
-        <file alias="templates/SplitDrawer.qml">src/controls/templates/SplitDrawer.qml</file>
         <file alias="templates/private/MenuIcon.qml">src/controls/templates/private/MenuIcon.qml</file>
         <file alias="templates/private/PassiveNotification.qml">src/controls/templates/private/PassiveNotification.qml</file>
-        <file alias="templates/private/PageRow.qml">src/controls/templates/private/PageRow.qml</file>
         <file alias="templates/private/ContextIcon.qml">src/controls/templates/private/ContextIcon.qml</file>
-        <file alias="templates/private/AbstractDrawer.qml">src/controls/templates/private/AbstractDrawer.qml</file>
         <file alias="templates/private/BackButton.qml">src/controls/templates/private/BackButton.qml</file>
         <file alias="templates/OverlayDrawer.qml">src/controls/templates/OverlayDrawer.qml</file>
         <file alias="templates/OverlaySheet.qml">src/controls/templates/OverlaySheet.qml</file>
