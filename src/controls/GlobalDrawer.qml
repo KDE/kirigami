@@ -288,6 +288,7 @@ OverlayDrawer {
                             Layout.minimumWidth: Units.iconSizes.large
                             Layout.minimumHeight: width
                             visible: valid
+                            enabled: false
                         }
                         Heading {
                             id: heading
