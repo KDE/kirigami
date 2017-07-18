@@ -73,8 +73,8 @@ Item {
 
         anchors.fill: parent
         source: image
-        color: Theme.highlightedTextColor
+        color: root.selected ? Theme.highlightedTextColor : Theme.textColor
         cached: true
-        visible: root.selected && root.valid
+        visible: root.enabled && root.valid
     }
 }
