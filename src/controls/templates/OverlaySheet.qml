@@ -380,16 +380,19 @@ QtObject {
                     rightMargin: rightPadding
                     bottomMargin: bottomPadding
                 }
+                Keys.onShortcutOverride: {
+                    event.accepted = (event.key === Qt.Key_Escape)
+                }
+                Keys.onEscapePressed: {
+                    if (root.sheetOpen) {
+                        root.close()
+                    } else {
+                        event.accepted = false
+                    }
+                }
             }
         }
 
-        Keys.onEscapePressed: {
-            if (root.sheetOpen) {
-                root.close()
-            } else {
-                event.accepted = false
-            }
-        }
 
         Connections {
             target: scrollView.flickableItem
