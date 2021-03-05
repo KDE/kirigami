@@ -133,15 +133,27 @@ QtObject {
      */
     property bool showCloseButton: !Settings.isMobile
 
+    /**
+     * focusedItem: Item
+     * This property holds which item will receive the focus
+     * when the sheet opens.
+     * @since 5.80
+     */
+    property Item focusedItem
+
     property Item parent
 
 
     function open() {
-        contentItemParent.forceActiveFocus();
         openAnimation.running = true;
         root.sheetOpen = true;
         contentLayout.initialHeight = contentLayout.height
         mainItem.visible = true;
+        if (focusedItem) {
+            focusedItem.forceActiveFocus();
+        } else {
+            flickableContents.forceActiveFocus();
+        }
     }
 
     function close() {
