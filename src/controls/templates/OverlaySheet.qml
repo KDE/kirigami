@@ -137,7 +137,7 @@ QtObject {
      * focusedItem: Item
      * This property holds which item will receive the focus
      * when the sheet opens.
-     * @since 5.80
+     * @since 5.81
      */
     property Item focusedItem
 
