@@ -8,6 +8,7 @@
 import QtQuick 2.12
 import QtQuick.Layouts 1.2
 import QtQuick.Window 2.2
+import QtQuick.Controls 2.15
 import org.kde.kirigami 2.14
 import QtGraphicalEffects 1.0
 import QtQuick.Templates 2.0 as T2
@@ -106,7 +107,18 @@ QtObject {
      * always kept on screen
      * @since 5.43
      */
-    property Item header
+    property Item header: Heading {
+        level: 1
+        text: root.title
+        elide: Text.ElideRight
+        
+        // use tooltip for long text that is elided
+        ToolTip.visible: truncated && titleHoverHandler.hovered
+        ToolTip.text: root.title
+        HoverHandler {
+            id: titleHoverHandler
+        }
+    }
 
     /**
      * header: Item
@@ -133,6 +145,15 @@ QtObject {
      */
     property bool showCloseButton: !Settings.isMobile
 
+    /**
+     * title: string
+     * This property holds the sheet title.
+     * 
+     * Note: If the header property is set, this will have no effect as the heading will be replaced by the header.
+     * @since 5.84
+     */
+    property string title
+    
     property Item parent
 
 
@@ -180,12 +201,7 @@ QtObject {
             root.parent.forceActiveFocus();
         }
     }
-    onHeaderChanged: {
-        header.parent = headerParent;
-        header.anchors.fill = headerParent;
-
-        //TODO: special case for actual ListViews
-    }
+    onHeaderChanged: headerItem.initHeader()
     onFooterChanged: {
         footer.parent = footerParent;
         footer.anchors.fill = footerParent;
@@ -195,6 +211,7 @@ QtObject {
         if (!root.parent && typeof applicationWindow !== "undefined") {
             root.parent = applicationWindow().overlay
         }
+        headerItem.initHeader();
     }
 
     readonly property Item rootItem: FocusScope {
@@ -580,6 +597,16 @@ QtObject {
                         Theme.colorSet: Theme.Header
                         Theme.inherit: false
                         color: Theme.backgroundColor
+                        
+                        function initHeader() {
+                            if (header) {
+                                header.parent = headerParent;
+                                header.anchors.fill = headerParent;
+
+                                //TODO: special case for actual ListViews
+                            }
+                        }
+                        
                         Item {
                             id: headerParent
                             implicitHeight: header ? header.implicitHeight : 0
