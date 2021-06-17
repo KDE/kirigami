@@ -158,7 +158,7 @@ QQC2.Control {
             }
 
             onClicked: {
-                if (mouseY > avatarRoot.height - secondaryRect.height && !!avatarRoot.actions.secondary) {
+                if (!!avatarRoot.actions.secondary && mouseY > avatarRoot.height - __private.secondaryHeight) {
                     avatarRoot.actions.secondary.trigger()
                     return
                 }
@@ -176,7 +176,7 @@ QQC2.Control {
                     when: (!Kirigami.Settings.isMobile) && (!!avatarRoot.actions.secondary) && (primaryMouse.containsMouse && primaryMouse.mouseInCircle)
                     PropertyChanges {
                         target: secondaryRect
-                        visible: true
+                        active: true
                     }
                 }
             ]
@@ -188,45 +188,69 @@ QQC2.Control {
         property color textColor: Kirigami.ColorUtils.brightnessForColor(avatarRoot.color) == Kirigami.ColorUtils.Light
                                 ? "black"
                                 : "white"
+        property bool shouldShowImage: (avatarRoot.imageMode == Kirigami.Avatar.ImageMode.AlwaysShowImage) || avatarRoot.source != ""
         property bool showImage: {
-            return (avatarRoot.imageMode == Kirigami.Avatar.ImageMode.AlwaysShowImage) ||
+            return shouldShowImage &&
                    (avatarImage.status == Image.Ready && avatarRoot.imageMode == Kirigami.Avatar.ImageMode.AdaptiveImageOrInitals)
         }
+        property int secondaryHeight: Kirigami.Units.iconSizes.small + Kirigami.Units.smallSpacing*2
     }
 
     contentItem: Item {
-        Text {
+        id: contItem
+
+        Component {
             id: avatarText
-            fontSizeMode: Text.Fit
-            visible: avatarRoot.initialsMode == Kirigami.Avatar.InitialsMode.UseInitials &&
-                    !__private.showImage &&
-                    !Kirigami.NameUtils.isStringUnsuitableForInitials(avatarRoot.name) &&
-                    avatarRoot.width > Kirigami.Units.gridUnit
 
-            text: Kirigami.NameUtils.initialsFromString(name)
-            color: __private.textColor
+            Text {
+                parent: contItem
+                fontSizeMode: Text.Fit
 
-            anchors.fill: parent
-            font {
-                // this ensures we don't get a both point and pixel size are set warning
-                pointSize: -1
-                pixelSize: (avatarRoot.height - Kirigami.Units.largeSpacing) / 2
+                text: Kirigami.NameUtils.initialsFromString(name)
+                color: __private.textColor
+
+                anchors.fill: parent
+                font {
+                    // this ensures we don't get a both point and pixel size are set warning
+                    pointSize: -1
+                    pixelSize: (avatarRoot.height - Kirigami.Units.largeSpacing) / 2
+                }
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignHCenter
             }
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
         }
-        Kirigami.Icon {
+        Component {
             id: avatarIcon
-            visible: (avatarRoot.initialsMode == Kirigami.Avatar.InitialsMode.UseIcon && !__private.showImage) ||
-                    (Kirigami.NameUtils.isStringUnsuitableForInitials(avatarRoot.name) && !__private.showImage)
 
-            source: "user"
+            Kirigami.Icon {
+                parent: contItem
+                source: "user"
 
-            anchors.fill: parent
-            anchors.margins: Kirigami.Units.largeSpacing
+                anchors.fill: parent
+                anchors.margins: Kirigami.Units.largeSpacing
 
-            color: __private.textColor
+                color: __private.textColor
+            }
         }
+
+        Loader {
+            sourceComponent: {
+                if ((avatarRoot.initialsMode == Kirigami.Avatar.InitialsMode.UseIcon && !__private.showImage) ||
+                        (Kirigami.NameUtils.isStringUnsuitableForInitials(avatarRoot.name) && !__private.showImage)) {
+                            return avatarIcon
+                        }
+
+                if (avatarRoot.initialsMode == Kirigami.Avatar.InitialsMode.UseInitials &&
+                        !__private.showImage &&
+                        !Kirigami.NameUtils.isStringUnsuitableForInitials(avatarRoot.name) &&
+                        avatarRoot.width > Kirigami.Units.gridUnit) {
+                            return avatarText
+                        }
+
+                return null
+            }
+        }
+
         Image {
             id: avatarImage
             visible: __private.showImage
@@ -254,29 +278,33 @@ QQC2.Control {
             }
         }
 
-        Rectangle {
+        Loader {
             id: secondaryRect
-            visible: false
+            active: false
 
-            anchors {
-                bottom: parent.bottom
-                left: parent.left
-                right: parent.right
-            }
+            sourceComponent: Rectangle {
+                parent: contentItem
 
-            height: Kirigami.Units.iconSizes.small + Kirigami.Units.smallSpacing*2
+                anchors {
+                    bottom: parent.bottom
+                    left: parent.left
+                    right: parent.right
+                }
 
-            color: Qt.rgba(0, 0, 0, 0.6)
+                height: __private.secondaryHeight
 
-            Kirigami.Icon {
-                Kirigami.Theme.textColor: "white"
-                source: (avatarRoot.actions.secondary || {iconName: ""}).iconName
+                color: Qt.rgba(0, 0, 0, 0.6)
 
-                width: Kirigami.Units.iconSizes.small
-                height: Kirigami.Units.iconSizes.small
+                Kirigami.Icon {
+                    Kirigami.Theme.textColor: "white"
+                    source: (avatarRoot.actions.secondary || {iconName: ""}).iconName
 
-                x: Math.round((parent.width/2)-(this.width/2))
-                y: Math.round((parent.height/2)-(this.height/2))
+                    width: Kirigami.Units.iconSizes.small
+                    height: Kirigami.Units.iconSizes.small
+
+                    x: Math.round((parent.width/2)-(this.width/2))
+                    y: Math.round((parent.height/2)-(this.height/2))
+                }
             }
         }
 
