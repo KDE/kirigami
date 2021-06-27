@@ -321,6 +321,7 @@ QtObject {
                 
                 delegate: Controls.Button {
                     action: modelData
+                    flat: root.flatFooterButtons
                 }
             }
         }
@@ -355,6 +356,11 @@ QtObject {
      * The `QtQuick.Controls.Popup` item used in the dialog.
      */
     property alias popup: dialog
+    
+    /**
+     * Whether or not the footer button style should be flat instead of raised.
+     */
+    property bool flatFooterButtons: false
     
     /**
      * Whether or not the dialog is visible.
