@@ -23,6 +23,7 @@
 #include "shadowedrectangle.h"
 #include "shadowedtexture.h"
 #include "sizegroup.h"
+#include "spellcheckinghint.h"
 #include "toolbarlayout.h"
 #include "wheelhandler.h"
 
@@ -274,6 +275,8 @@ void KirigamiPlugin::registerTypes(const char *uri)
     qmlRegisterType(componentUrl(QStringLiteral("swipenavigator/TabViewLayout.qml")), uri, 2, 17, "TabViewLayout");
     qmlRegisterType(componentUrl(QStringLiteral("swipenavigator/PageTab.qml")), uri, 2, 17, "PageTab");
 
+    // 2.18
+    qmlRegisterType<SpellCheckingAttached>(uri, 2, 18, "SpellChecking");
 
     qmlProtectModule(uri, 2);
 }
