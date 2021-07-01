@@ -17,10 +17,12 @@ MouseArea {
     //TODO: horizontalScrollBarPolicy is completely noop just for compatibility right now
     property int horizontalScrollBarPolicy: Qt.ScrollBarAlwaysOff
     property int verticalScrollBarPolicy: Qt.ScrollBarAsNeeded
-    property int topPadding: 0
-    property int leftPadding: 0
-    property int rightPadding: !Kirigami.Settings.hasTransientTouchInput && flickableItem.ScrollBar.vertical && flickableItem.ScrollBar.vertical.visible ? flickableItem.ScrollBar.vertical.width : 0
-    property int bottomPadding: 0
+    property real horizontalScrollBarHeight: !Kirigami.Settings.hasTransientTouchInput && flickableItem.ScrollBar.horizontal && flickableItem.ScrollBar.horizontal.visible ? flickableItem.ScrollBar.horizontal.width : 0
+    property real verticalScrollBarWidth: !Kirigami.Settings.hasTransientTouchInput && flickableItem.ScrollBar.vertical && flickableItem.ScrollBar.vertical.visible ? flickableItem.ScrollBar.vertical.width : 0
+    property real topPadding: 0
+    property real leftPadding: 0
+    property real rightPadding: verticalScrollBarWidth
+    property real bottomPadding: horizontalScrollBarHeight
     property bool canFlickWithMouse: false
 
     Accessible.onScrollDownAction: flickableItem.Accessible.onScrollDownAction

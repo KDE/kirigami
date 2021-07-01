@@ -8,6 +8,7 @@ import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.15 as Controls
 import QtGraphicalEffects 1.12
 import org.kde.kirigami 2.12 as Kirigami
+import "templates/private" as Private
 
 /**
  * Popup dialog that is used for short tasks and user interaction.
@@ -27,6 +28,12 @@ import org.kde.kirigami 2.12 as Kirigami
  * it is larger than `maximumHeight` and `maximumWidth`. Use
  * `preferredHeight` and `preferredWidth` in order to manually specify
  * a size for the dialog.
+ * 
+ * If the content height exceeds the maximum height of the dialog, the 
+ * dialog's contents will become scrollable.
+ * 
+ * If the contentItem is a ListView, the dialog will take care of the
+ * necessary scrollbars and scrolling behaviour.
  * 
  * Example for a selection dialog:
  * 
@@ -59,11 +66,33 @@ import org.kde.kirigami 2.12 as Kirigami
  * }
  * @endcode
  * 
+ * Example with scrolling (ListView scrolling behaviour is handled by Dialog):
+ * 
+ * @code{.qml}
+ * Kirigami.ScrollableDialog {
+ *     id: scrollableDialog
+ *     title: i18n("Select Number")
+ *     
+ *     ListView {
+ *         // hints for the dialog dimensions
+ *         implicitWidth: Kirigami.Units.gridUnit * 16
+ *         implicitHeight: Kirigami.Units.gridUnit * 16
+ *         
+ *         model: 100
+ *         delegate: Controls.RadioDelegate {
+ *             topPadding: Kirigami.Units.smallSpacing * 2
+ *             bottomPadding: Kirigami.Units.smallSpacing * 2
+ *             implicitWidth: Kirigami.Units.gridUnit * 16
+ *             text: modelData
+ *         }
+ *     }
+ * }
+ * @endcode
+ * 
  * There are also sub-components of Dialog that target specific usecases, 
  * and can reduce boilerplate code if used:
  * 
  * @see PromptDialog
- * @see ScrollableDialog
  * @see MenuDialog
  * 
  * @inherit QtQuick.QtObject
@@ -72,7 +101,7 @@ QtObject {
     id: root
     
     /**
-     * The dialog's contents. 
+     * The dialog's contents.
      * 
      * The initial height and width of the dialog is calculated from the 
      * `implicitWidth` and `implicitHeight` of this item.
@@ -83,18 +112,41 @@ QtObject {
      * The absolute maximum height the dialog can be (including the header 
      * and footer).
      * 
-     * By default, it is the window height, subtracted by largeSpacing on 
-     * both the top and bottom.
+     * The height restriction is solely applied on the content, so if the
+     * maximum height given is not larger than the height of the header and
+     * footer, it will be ignored.
+     * 
+     * This is the window height, subtracted by largeSpacing on both the top 
+     * and bottom.
      */
-    property real maximumHeight: dialog.parent.height - Kirigami.Units.largeSpacing * 2
+    readonly property real absoluteMaximumHeight: dialog.parent.height - Kirigami.Units.largeSpacing * 2
     
     /**
      * The absolute maximum width the dialog can be.
      * 
-     * By default, it is the window width, subtracted by largeSpacing on 
-     * both the top and bottom.
+     * By default, it is the window width, subtracted by largeSpacing on both 
+     * the top and bottom.
      */
-    property real maximumWidth: dialog.parent.width - Kirigami.Units.largeSpacing * 2
+    readonly property real absoluteMaximumWidth: dialog.parent.width - Kirigami.Units.largeSpacing * 2
+    
+    /**
+     * The maximum height the dialog can be (including the header 
+     * and footer).
+     * 
+     * The height restriction is solely enforced on the content, so if the
+     * maximum height given is not larger than the height of the header and
+     * footer, it will be ignored.
+     * 
+     * By default, this is `absoluteMaximumHeight`.
+     */
+    property real maximumHeight: absoluteMaximumHeight
+    
+    /**
+     * The maximum width the dialog can be.
+     * 
+     * By default, this is `absoluteMaximumWidth`.
+     */
+    property real maximumWidth: absoluteMaximumWidth
     
     /**
      * The current height of the dialog.
@@ -330,22 +382,22 @@ QtObject {
     /**
      * The left padding of the content.
      */
-    property alias leftPadding: contentControl.leftPadding
+    property real leftPadding: root.padding
     
     /**
      * The right padding of the content.
      */
-    property alias rightPadding: contentControl.rightPadding
+    property real rightPadding: root.padding
     
     /**
      * The top padding of the content.
      */
-    property alias topPadding: contentControl.topPadding
+    property real topPadding: root.padding
     
     /**
      * The bottom padding of the content.
      */
-    property alias bottomPadding: contentControl.bottomPadding
+    property real bottomPadding: root.padding
     
     /**
      * The padding of the content.
@@ -442,10 +494,12 @@ QtObject {
             NumberAnimation { property: "opacity"; from: 1.0; to: 0.0; duration: Kirigami.Units.longDuration }
         }
         
+        // black background
         Controls.Overlay.modal: Rectangle {
             color: Qt.rgba(0, 0, 0, 0.3 * dialog.opacity)
         }
         
+        // dialog background
         background: Item {
             RectangularGlow {
                 anchors.fill: rect
@@ -471,6 +525,10 @@ QtObject {
             id: column
             spacing: 0
             
+            // cap maximum width and maximum height at absoluteMaximumWidth and absoluteMaximumHeight
+            property real calculatedMaximumWidth: root.maximumWidth > root.absoluteMaximumWidth ? root.absoluteMaximumWidth : root.maximumWidth
+            property real calculatedMaximumHeight: root.maximumHeight > root.absoluteMaximumHeight ? root.absoluteMaximumHeight : root.maximumHeight
+            
             // ensure that the dialog has rounded top corners (if header is not shown)
             Rectangle {
                 id: roundedHeaderBuffer
@@ -493,7 +551,7 @@ QtObject {
                 property bool show: contentItem && contentItem.implicitHeight != 0
                 
                 Layout.fillWidth: true
-                Layout.maximumWidth: root.maximumWidth
+                Layout.maximumWidth: column.calculatedMaximumWidth
                 
                 // needs to explicitly be set for each side to work
                 // we let the contentItem do the padding themselves
@@ -525,17 +583,20 @@ QtObject {
             }
             
             // dialog content
-            Controls.Control {
+            Private.ScrollView {
                 id: contentControl
                 contentItem: root.contentItem
-                
-                // ensure view colour scheme
+                canFlickWithMouse: true
+
+                // ensure view colour scheme, and background color
                 Kirigami.Theme.inherit: false
                 Kirigami.Theme.colorSet: Kirigami.Theme.View
                 
-//                 Behavior on implicitHeight {
-                    //NumberAnimation { duration: Kirigami.Units.shortDuration }
-                //}
+                // needs to explicitly be set for each side to work
+                leftPadding: root.leftPadding
+                rightPadding: root.rightPadding + contentControl.verticalScrollBarWidth
+                topPadding: root.topPadding
+                bottomPadding: root.bottomPadding + contentControl.horizontalScrollBarHeight
                 
                 // height of everything else in the dialog other than the content
                 property real otherHeights: {
@@ -545,31 +606,38 @@ QtObject {
                     return h;
                 }
                 
+                property real calculatedImplicitWidth: root.contentItem.implicitWidth + leftPadding + rightPadding
+                property real calculatedImplicitHeight: root.contentItem.implicitHeight + topPadding + bottomPadding
+                
+                // don't enforce preferred width and height if not set
+                Layout.preferredWidth: root.preferredWidth >= 0 ? root.preferredWidth : calculatedImplicitWidth
+                Layout.preferredHeight: root.preferredHeight >= 0 ? root.preferredHeight - otherHeights : calculatedImplicitHeight
+                
                 Layout.fillWidth: true
-                Layout.maximumWidth: root.maximumWidth
-                Layout.maximumHeight: root.maximumHeight - otherHeights // we enforce maximum height from the content
+                Layout.maximumWidth: column.calculatedMaximumWidth
+                Layout.maximumHeight: column.calculatedMaximumHeight - otherHeights // we enforce maximum height solely from the content
                 
-                // don't enforce preferred width if not set
-                Layout.preferredWidth: root.preferredWidth >= 0 ? root.preferredWidth
-                                                                : contentItem.implicitWidth + contentControl.leftPadding + contentControl.rightPadding
-                // don't enforce preferred height if not set
-                Layout.preferredHeight: root.preferredHeight >= 0 ? root.preferredHeight - otherHeights 
-                                                                  : contentItem.implicitHeight + contentControl.topPadding + contentControl.bottomPadding
+                // give an implied width and height to the contentItem so that features like word wrapping work
+                // cannot placed directly in contentControl as a child, so we must use a property
+                property var widthHint: Binding {
+                    target: root.contentItem
+                    property: "width"
+                    value: contentControl.Layout.preferredWidth - contentControl.leftPadding - contentControl.rightPadding
+                }
+                property var heightHint: Binding {
+                    target: root.contentItem
+                    property: "height"
+                    value: contentControl.Layout.preferredHeight - contentControl.topPadding - contentControl.bottomPadding
+                }
                 
-                // needs to explicitly be set for each to work
-                leftPadding: root.padding
-                rightPadding: root.padding
-                topPadding: root.padding
-                bottomPadding: root.padding
-                
-                // different colour for dialog content background
-                background: Rectangle {
-                    Kirigami.Theme.inherit: false
-                    Kirigami.Theme.colorSet: Kirigami.Theme.View
-                    color: Kirigami.Theme.backgroundColor
+                // give explicit warnings since the maximumHeight is ignored when negative, so developers aren't confused
+                Component.onCompleted: {
+                    if (contentControl.Layout.maximumHeight < 0 || contentControl.Layout.maximumHeight === Infinity) {
+                        console.log("Dialog Warning: the calculated maximumHeight for the content is less than zero, ignoring...");
+                    }
                 }
             }
-
+            
             // footer separator
             Kirigami.Separator {
                 id: footerSeparator
@@ -585,7 +653,7 @@ QtObject {
                 property bool show: contentItem && contentItem.implicitHeight != 0
                 
                 Layout.fillWidth: true
-                Layout.maximumWidth: root.maximumWidth
+                Layout.maximumWidth: column.calculatedMaximumWidth
                 
                 // needs to explicitly be set for each side to work
                 // we let the contentItem do the padding themselves
