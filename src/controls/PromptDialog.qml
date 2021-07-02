@@ -39,11 +39,18 @@ Kirigami.Dialog {
      */
     property string subtitle: ""
     
-    padding: Kirigami.Units.largeSpacing
+    padding: 0 // we want content padding, not padding on the scrollview
     preferredWidth: Kirigami.Units.gridUnit * 18
     
-    Controls.Label {
-        text: subtitle
-        wrapMode: Controls.Label.Wrap
+    Controls.Control {
+        topPadding: Kirigami.Units.largeSpacing
+        bottomPadding: Kirigami.Units.largeSpacing
+        leftPadding: Kirigami.Units.largeSpacing
+        rightPadding: Kirigami.Units.largeSpacing
+        
+        contentItem: Controls.Label {
+            text: subtitle
+            wrapMode: Controls.Label.Wrap
+        }
     }
 }

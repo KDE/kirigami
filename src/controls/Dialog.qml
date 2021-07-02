@@ -354,9 +354,14 @@ QtObject {
             spacing: Kirigami.Units.smallSpacing
             Item { Layout.fillWidth: true }
             Repeater {
-                model: {
-                    // custom defined actions precede default actions
-                    let actions = root.customFooterActions;
+                id: buttonRepeater
+                
+                // separate property to avoid binding loop
+                property list<Action> actions
+                model: actions
+                
+                function fillActions() {
+                    actions = root.customFooterActions;
                     
                     // order matters here (in the left -> right arrangement of buttons)
                     if ((root.footerActions & Dialog.Actions.Ok) == Dialog.Actions.Ok) actions.push(okAction); 
@@ -367,8 +372,17 @@ QtObject {
                     if ((root.footerActions & Dialog.Actions.Apply) == Dialog.Actions.Apply) actions.push(applyAction);
                     if ((root.footerActions & Dialog.Actions.Yes) == Dialog.Actions.Yes) actions.push(yesAction);
                     if ((root.footerActions & Dialog.Actions.No) == Dialog.Actions.No) actions.push(noAction);
-                    
-                    return actions;
+                }
+                
+                Component.onCompleted: fillActions()
+                Connections {
+                    target: root
+                    function onCustomFooterActionsChanged() {
+                        buttonRepeater.fillActions();
+                    }
+                    function onFooterActionsChanged() {
+                        buttonRepeater.fillActions();
+                    }
                 }
                 
                 delegate: Controls.Button {
