@@ -535,11 +535,12 @@ QtObject {
         }
         
         // determine parent so that popup knows which window to popup in
+        // we want to open the dialog in the center of the window, if possible
         parent: {
-            if (root.parent) {
-                return root.parent;
-            } else {
+            if (typeof applicationWindow !== "undefined") {
                 return applicationWindow().overlay;
+            } else {
+                return root.parent;
             }
         }
         

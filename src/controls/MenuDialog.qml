@@ -74,6 +74,7 @@ Kirigami.Dialog {
     property alias contentHeaderControl: columnHeader
     
     preferredWidth: Kirigami.Units.gridUnit * 20
+    padding: 0
     
     ColumnLayout {
         id: column
