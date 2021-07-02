@@ -12,9 +12,14 @@ import org.kde.kirigami 2.18 as Kirigami
  * A simple dialog to quickly prompt a user with information,
  * and possibly perform an action.
  * 
+ * Provides content padding (instead of padding outside of the scroll
+ * area). Also has a default preferredWidth, as well as the `subtitle` property.
+ * 
+ * <b>Note:</b> If a `contentItem` is specified, it will replace
+ * the subtitle label, and so the respective property will have no effect.
+ * 
  * @see Dialog
  * @see MenuDialog
- * @see ScrollableDialog
  * 
  * Example usage:
  * 
@@ -24,29 +29,89 @@ import org.kde.kirigami 2.18 as Kirigami
  *     subtitle: "The stored settings for the application will be deleted, with the defaults restored."
  *     footerActions: Kirigami.Dialog.Actions.Ok | Kirigami.Dialog.Actions.Cancel
  *     
- *     onAccepted: console.log("Reset")
- *     onRejected: console.log("Cancelled")
+ *     onAccepted: console.log("Accepted")
+ *     onDismissed: console.log("Dismissed")
+ * }
+ * @endcode
+ * 
+ * Text field prompt dialog:
+ * 
+ * @code{.qml}
+ * Kirigami.PromptDialog {
+ *     id: textPromptDialog
+ *     title: "New Folder"
+ * 
+ *     footerActions: Kirigami.Dialog.Actions.None
+ *     customFooterActions: [
+ *         Kirigami.Action {
+ *             text: qsTr("Create Folder")
+ *             iconName: "dialog-ok"
+ *             onTriggered: { 
+ *                 showPassiveNotification("Created");
+ *                 textPromptDialog.close();
+ *             }
+ *         },
+ *         Kirigami.Action {
+ *             text: qsTr("Cancel")
+ *             iconName: "dialog-cancel"
+ *             onTriggered: { 
+ *                 textPromptDialog.close();
+ *             }
+ *         }
+ *     ]
+ *       
+ *     Controls.TextField {
+ *         placeholderText: qsTr("Folder name...")
+ *     }
  * }
  * @endcode
  * 
  * @inherit Dialog
  */
 Kirigami.Dialog {
-    default property QtObject item
+    default property alias contentItem: control.contentItem
     
     /**
      * The text to use in the dialog's contents.
      */
     property string subtitle: ""
     
-    padding: 0 // we want content padding, not padding on the scrollview
+    /**
+     * The padding around the content, within the scroll area.
+     * 
+     * Default is `Kirigami.Units.largeSpacing`.
+     */
+    property real contentPadding: Kirigami.Units.largeSpacing
+    
+    /**
+     * The top padding of the content, within the scroll area.
+     */
+    property real contentTopPadding: contentPadding
+    
+    /**
+     * The bottom padding of the content, within the scroll area.
+     */
+    property real contentBottomPadding: contentPadding
+    
+    /**
+     * The left padding of the content, within the scroll area.
+     */
+    property real contentLeftPadding: contentPadding
+    
+    /**
+     * The right padding of the content, within the scroll area.
+     */
+    property real contentRightPadding: contentPadding
+    
+    padding: 0 // we want content padding, not padding of the scrollview
     preferredWidth: Kirigami.Units.gridUnit * 18
     
     Controls.Control {
-        topPadding: Kirigami.Units.largeSpacing
-        bottomPadding: Kirigami.Units.largeSpacing
-        leftPadding: Kirigami.Units.largeSpacing
-        rightPadding: Kirigami.Units.largeSpacing
+        id: control
+        topPadding: contentTopPadding
+        bottomPadding: contentBottomPadding
+        leftPadding: contentLeftPadding
+        rightPadding: contentRightPadding
         
         contentItem: Controls.Label {
             text: subtitle

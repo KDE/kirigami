@@ -14,7 +14,6 @@ import org.kde.kirigami 2.18 as Kirigami
  * 
  * @see Dialog
  * @see PromptDialog
- * @see ScrollableDialog
  * 
  * Example usage:
  * 
@@ -62,17 +61,38 @@ Kirigami.Dialog {
      */
     property list<QtObject> actions
     
-    padding: 0
+    /**
+     * The content header, which appears above the actions
+     * but below the header bar.
+     */
+    property Item contentHeader
+    
+    /**
+     * Provides access to the content header QtQuick.Control, 
+     * which can allow for setting its padding (ex. `contentHeaderControl.topPadding`).
+     */
+    property alias contentHeaderControl: columnHeader
+    
+    preferredWidth: Kirigami.Units.gridUnit * 20
     
     ColumnLayout {
+        id: column
         spacing: 0
+        
+        Controls.Control {
+            id: columnHeader
+            topPadding: Kirigami.Units.largeSpacing
+            bottomPadding: Kirigami.Units.largeSpacing
+            leftPadding: Kirigami.Units.largeSpacing 
+            rightPadding: Kirigami.Units.largeSpacing
+            contentItem: contentHeader
+        }
         
         Repeater {
             model: actions
             
             delegate: Kirigami.BasicListItem {
                 Layout.fillWidth: true
-                Layout.preferredWidth: Kirigami.Units.gridUnit * 20
                 Layout.preferredHeight: Kirigami.Units.gridUnit * 2
                 
                 iconSize: Kirigami.Units.gridUnit

@@ -32,8 +32,10 @@ import "templates/private" as Private
  * If the content height exceeds the maximum height of the dialog, the 
  * dialog's contents will become scrollable.
  * 
- * If the contentItem is a ListView, the dialog will take care of the
- * necessary scrollbars and scrolling behaviour.
+ * If the contentItem is a <b>ListView</b>, the dialog will take care of the
+ * necessary scrollbars and scrolling behaviour. Do <b>not</b> attempt
+ * to nest ListViews (it must be the top level item), as the scrolling
+ * behaviour will not be handled. Use ListView's `header` and `footer` instead.
  * 
  * Example for a selection dialog:
  * 
@@ -46,6 +48,7 @@ import "templates/private" as Private
  * Kirigami.Dialog {
  *     title: i18n("Dialog")
  *     padding: 0
+ *     preferredWidth: Kirigami.Units.gridUnit * 16
  * 
  *     footerActions: Kirigami.Dialog.Actions.Ok | Kirigami.Dialog.Actions.Cancel
  * 
@@ -53,12 +56,13 @@ import "templates/private" as Private
  *     onDismissed: console.log("Dismissed")
  * 
  *     ColumnLayout {
+ *         spacing: 0
  *         Repeater {
  *             model: 5
  *             delegate: Controls.CheckDelegate {
  *                 topPadding: Kirigami.Units.smallSpacing * 2
  *                 bottomPadding: Kirigami.Units.smallSpacing * 2
- *                 implicitWidth: Kirigami.Units.gridUnit * 16
+ *                 Layout.fillWidth: true
  *                 text: modelData
  *             }
  *         }
@@ -74,6 +78,7 @@ import "templates/private" as Private
  *     title: i18n("Select Number")
  *     
  *     ListView {
+ *         id: listView
  *         // hints for the dialog dimensions
  *         implicitWidth: Kirigami.Units.gridUnit * 16
  *         implicitHeight: Kirigami.Units.gridUnit * 16
@@ -82,7 +87,7 @@ import "templates/private" as Private
  *         delegate: Controls.RadioDelegate {
  *             topPadding: Kirigami.Units.smallSpacing * 2
  *             bottomPadding: Kirigami.Units.smallSpacing * 2
- *             implicitWidth: Kirigami.Units.gridUnit * 16
+ *             implicitWidth: listView.width
  *             text: modelData
  *         }
  *     }
@@ -394,6 +399,21 @@ QtObject {
     }
     
     /**
+     * The padding of the content.
+     * 
+     * <b>Note:</b> This padding is outside of the scroll area (outside
+     * of the scrollbar). If you want to add padding within the scroll
+     * area, implement it in your contentItem directly instead.
+     * 
+     * Consider using PromptDialog if you want to quickly have padding 
+     * within the content, rather than outside the scroll area.
+     * @see PromptDialog
+     * 
+     * Default is `Kirigami.Units.smallSpacing`.
+     */
+    property double padding: Kirigami.Units.smallSpacing
+    
+    /**
      * The left padding of the content.
      */
     property real leftPadding: root.padding
@@ -412,11 +432,6 @@ QtObject {
      * The bottom padding of the content.
      */
     property real bottomPadding: root.padding
-    
-    /**
-     * The padding of the content.
-     */
-    property double padding: Kirigami.Units.smallSpacing
     
     /**
      * The `QtQuick.Controls.Popup` item used in the dialog.
@@ -625,6 +640,10 @@ QtObject {
             // dialog content
             Private.ScrollView {
                 id: contentControl
+                
+                // we cannot have contentItem inside a sub control (allowing for content padding within the scroll area),
+                // because if the contentItem is a Flickable (ex. ListView), the ScrollView needs it to be top level in order
+                // to decorate it
                 contentItem: root.contentItem
                 canFlickWithMouse: true
 
@@ -657,16 +676,20 @@ QtObject {
                 Layout.maximumWidth: column.calculatedMaximumWidth
                 Layout.maximumHeight: column.calculatedMaximumHeight - otherHeights // we enforce maximum height solely from the content
                 
-                // give an implied width and height to the contentItem so that features like word wrapping work
+                // give an implied width and height to the contentItem so that features like word wrapping/eliding work
                 // cannot placed directly in contentControl as a child, so we must use a property
                 property var widthHint: Binding {
                     target: root.contentItem
                     property: "width"
-                    value: contentControl.Layout.preferredWidth - contentControl.leftPadding - contentControl.rightPadding
+                    // we want to avoid horizontal scrolling, so we apply maximumWidth as a hint if necessary
+                    property real preferredWidthHint: contentControl.Layout.preferredWidth - contentControl.leftPadding - contentControl.rightPadding
+                    property real maximumWidthHint: column.calculatedMaximumWidth - contentControl.leftPadding - contentControl.rightPadding
+                    value: maximumWidthHint < preferredWidthHint ? maximumWidthHint : preferredWidthHint
                 }
                 property var heightHint: Binding {
                     target: root.contentItem
                     property: "height"
+                    // we are okay with overflow, if it exceeds maximumHeight we will allow scrolling
                     value: contentControl.Layout.preferredHeight - contentControl.topPadding - contentControl.bottomPadding
                 }
                 
@@ -735,49 +758,49 @@ QtObject {
         // default dialog actions provided
         Kirigami.Action {
             id: okAction
-            text: i18n("OK")
+            text: qsTr("OK")
             iconName: "dialog-ok"
             onTriggered: { root.accepted(); root.close(); }
         }
         Kirigami.Action {
             id: cancelAction
-            text: i18n("Cancel")
+            text: qsTr("Cancel")
             iconName: "dialog-cancel"
             onTriggered: { root.dismissed(); root.close(); }
         }
         Kirigami.Action {
             id: closeAction
-            text: i18n("Close")
+            text: qsTr("Close")
             iconName: "dialog-close"
             onTriggered: { root.accepted(); root.close(); }
         }
         Kirigami.Action {
             id: doneAction
-            text: i18n("Done")
+            text: qsTr("Done")
             iconName: "dialog-ok"
             onTriggered: { root.accepted(); root.close(); }
         }
         Kirigami.Action {
             id: saveAction
-            text: i18n("Save")
+            text: qsTr("Save")
             iconName: "dialog-close"
             onTriggered: { root.accepted(); root.close(); }
         }
         Kirigami.Action {
             id: applyAction
-            text: i18n("Apply")
+            text: qsTr("Apply")
             iconName: "dialog-ok-apply"
             onTriggered: { root.accepted(); root.close() }
         }
         Kirigami.Action {
             id: yesAction
-            text: i18n("Yes")
+            text: qsTr("Yes")
             iconName: "dialog-ok"
             onTriggered: { root.accepted(); root.close() }
         }
         Kirigami.Action {
             id: noAction
-            text: i18n("No")
+            text: qsTr("No")
             iconName: "dialog-cancel"
             onTriggered: { root.dismissed(); root.close(); }
         }
