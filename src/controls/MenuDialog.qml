@@ -81,10 +81,10 @@ Kirigami.Dialog {
         
         Controls.Control {
             id: columnHeader
-            topPadding: Kirigami.Units.largeSpacing
-            bottomPadding: Kirigami.Units.largeSpacing
-            leftPadding: Kirigami.Units.largeSpacing 
-            rightPadding: Kirigami.Units.largeSpacing
+            topPadding: 0
+            bottomPadding: 0
+            leftPadding: 0
+            rightPadding: 0
             contentItem: contentHeader
         }
         

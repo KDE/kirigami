@@ -444,7 +444,7 @@ QtObject {
     property bool flatFooterButtons: false
     
     /**
-     * Whether or not the dialog is visible.
+     * Whether or not the dialog is visible/open.
      */
     property alias visible: dialog.visible
     
@@ -489,6 +489,7 @@ QtObject {
      * Opens the dialog.
      */
     function open() {
+        Qt.inputMethod.hide();
         dialog.open();
     }
     
@@ -496,7 +497,14 @@ QtObject {
      * Closes the dialog.
      */
     function close() {
+        Qt.inputMethod.hide();
         dialog.close();
+    }
+    
+    Component.onCompleted: {
+        if (!root.parent && typeof applicationWindow !== "undefined") {
+            root.parent = applicationWindow().overlay
+        }
     }
     
     // visible dialog component
@@ -526,6 +534,7 @@ QtObject {
             root.closed();
         }
         
+        // determine parent so that popup knows which window to popup in
         parent: {
             if (root.parent) {
                 return root.parent;
