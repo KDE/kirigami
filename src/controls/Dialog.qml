@@ -50,7 +50,7 @@ import "templates/private" as Private
  *     footerActions: Kirigami.Dialog.Actions.Ok | Kirigami.Dialog.Actions.Cancel
  * 
  *     onAccepted: console.log("OK button pressed")
- *     onRejected: console.log("Cancel button pressed")
+ *     onDismissed: console.log("Dismissed")
  * 
  *     ColumnLayout {
  *         Repeater {
@@ -211,19 +211,19 @@ QtObject {
      * the footerActions property.
      * 
      * Clicking each action closes the dialog, and also either triggers
-     * the `accepted()` or `rejected()` signal.
+     * the `accepted()` or `dismissed()` signal.
      *
      * To specify custom footer buttons, see the `customFooterActions` property.
      *
      * * `None`
      * * `Ok` - triggers accepted() signal
-     * * `Cancel` - triggers rejected() signal
+     * * `Cancel` - triggers dismissed() signal
      * * `Close` - triggers accepted() signal
      * * `Done` - triggers accepted() signal
      * * `Save` - triggers accepted() signal
      * * `Apply` - triggers accepted() signal
      * * `Yes` - triggers accepted() signal
-     * * `No` - triggers rejected() signal
+     * * `No` - triggers dismissed() signal
      */
     enum Actions {
         None = 0,
@@ -261,7 +261,7 @@ QtObject {
      * If `footerActions` is not `Dialog.Actions.None`, then the footer actions
      * will be displayed after the `customFooterActions` in the row.
      * 
-     * Note: this is ignored if a custom footer is set.
+     * <b>Note:</b> this is ignored if a custom footer is set.
      * 
      * @code{.qml}
      * import QtQuick 2.15
@@ -452,17 +452,23 @@ QtObject {
      * Emitted when the dialog has had a footer button pressed
      * that has an `accepted()` signal associated with it.
      * 
+     * <b>Note:</b> Emitted before closed() signal.
+     * 
      * See the `footerActions` property.
      */
     signal accepted()
     
     /**
      * Emitted when the dialog has had a footer button pressed
-     * that has an `rejected()` signal associated with it.
+     * that has a `dismissed()` signal associated with it, or is
+     * closed by any other reason (clicking outside of dialog,
+     * pressing close button).
+     * 
+     * <b>Note:</b> Emitted before closed() signal.
      * 
      * See the `footerActions` property.
      */
-    signal rejected()
+    signal dismissed()
 
     /**
      * Opens the dialog.
@@ -481,9 +487,29 @@ QtObject {
     // visible dialog component
     property var rootItem: Controls.Popup {
         id: dialog
+        closePolicy: Controls.Popup.CloseOnEscape | Controls.Popup.CloseOnReleaseOutside
+        
+        // capture when root.accepted() and root.dismissed() is emitted
+        property bool popupEventEmitted: false
+        Connections {
+            target: root
+            function onAccepted() {
+                dialog.popupEventEmitted = true;
+            }
+            function onDismissed() {
+                dialog.popupEventEmitted = true;
+            }
+        }
         
         onOpened: root.opened();
-        onClosed: root.closed();
+        onClosed: {
+            // if no event has been emitted, then the dialog was closed because of clicking outside of it, which emits dismissed()
+            if (!dialog.popupEventEmitted) {
+                root.dismissed();
+            }
+            dialog.popupEventEmitted = false;
+            root.closed();
+        }
         
         parent: {
             if (root.parent) {
@@ -717,7 +743,7 @@ QtObject {
             id: cancelAction
             text: i18n("Cancel")
             iconName: "dialog-cancel"
-            onTriggered: { root.rejected(); root.close(); }
+            onTriggered: { root.dismissed(); root.close(); }
         }
         Kirigami.Action {
             id: closeAction
@@ -753,7 +779,7 @@ QtObject {
             id: noAction
             text: i18n("No")
             iconName: "dialog-cancel"
-            onTriggered: { root.rejected(); root.close(); }
+            onTriggered: { root.dismissed(); root.close(); }
         }
     }
 }
