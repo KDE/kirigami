@@ -25,7 +25,7 @@ Flickable {
     Connections {
         target: pageRow
         function onCurrentIndexChanged() {
-            var currentItem = mainLayout.children[pageRow.currentIndex];
+            const currentItem = mainLayout.children[pageRow.currentIndex];
             if (!currentItem)
                 return;
 
@@ -44,11 +44,20 @@ Flickable {
         spacing: 0
         Repeater {
             id: mainRepeater
-            model: pageRow.depth
+            readonly property bool useLayers: pageRow.layers.depth > 1
+            model: useLayers ? pageRow.layers.depth - 1 : pageRow.depth
             delegate: MouseArea {
                 Layout.preferredWidth: delegateLayout.implicitWidth
                 Layout.fillHeight: true
-                onClicked: pageRow.currentIndex = modelData;
+                onClicked: {
+                    if (mainRepeater.useLayers) {
+                        while (pageRow.layers.depth > modelData + 1) {
+                            pageRow.layers.pop();
+                        }
+                    } else {
+                        pageRow.currentIndex = modelData;
+                    }
+                }
                 hoverEnabled: !Kirigami.Settings.tabletMode
                 Rectangle {
                     color: Kirigami.Theme.highlightColor
@@ -59,7 +68,7 @@ Flickable {
                 RowLayout {
                     id: delegateLayout
                     anchors.fill: parent
-                    readonly property Kirigami.Page page: pageRow.get(modelData)
+                    readonly property Kirigami.Page page: mainRepeater.useLayers ? pageRow.layers.get(modelData + 1) : pageRow.get(modelData)
                     spacing: 0
 
                     Kirigami.Icon {
