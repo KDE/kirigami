@@ -956,6 +956,120 @@ Module {
         }
     }
     Component {
+        prototype: "QQuickPage"
+        name: "org.kde.kirigami/CategorizedSettings 2.17"
+        exports: ["org.kde.kirigami/CategorizedSettings 2.17"]
+        exportMetaObjectRevisions: [0]
+        isComposite: true
+        defaultProperty: "mainItem"
+        Property { name: "mainItem"; type: "QObject"; isPointer: true }
+        Property { name: "keyboardNavigationEnabled"; type: "bool" }
+        Property { name: "refreshing"; type: "bool" }
+        Property { name: "supportsRefreshing"; type: "bool" }
+        Property { name: "flickable"; type: "QQuickFlickable"; isPointer: true }
+        Property { name: "verticalScrollBarPolicy"; type: "int" }
+        Property { name: "horizontalScrollBarPolicy"; type: "int" }
+        Property { name: "isCurrentPage"; type: "bool"; isReadonly: true }
+        Property { name: "icon"; type: "ActionIconGroup_QMLTYPE_29"; isPointer: true }
+        Property { name: "needsAttention"; type: "bool" }
+        Property { name: "progress"; type: "QVariant" }
+        Property { name: "titleDelegate"; type: "QQmlComponent"; isPointer: true }
+        Property { name: "globalToolBarItem"; type: "QQuickItem"; isReadonly: true; isPointer: true }
+        Property { name: "globalToolBarStyle"; type: "int" }
+        Property { name: "contextualActions"; type: "QObject"; isList: true; isReadonly: true }
+        Property { name: "mainAction"; type: "QObject"; isPointer: true }
+        Property { name: "leftAction"; type: "QObject"; isPointer: true }
+        Property { name: "rightAction"; type: "QObject"; isPointer: true }
+        Property {
+            name: "actions"
+            type: "PageActionPropertyGroup_QMLTYPE_30"
+            isReadonly: true
+            isPointer: true
+        }
+        Property { name: "overlay"; type: "QQuickItem"; isReadonly: true; isPointer: true }
+        Signal { name: "contextualActionsAboutToShow" }
+        Signal {
+            name: "backRequested"
+            Parameter { name: "event"; type: "QVariant" }
+        }
+    }
+    Component {
+        prototype: "QQuickPage"
+        name: "org.kde.kirigami/GenericSettingsPage 2.17"
+        exports: ["org.kde.kirigami/GenericSettingsPage 2.17"]
+        exportMetaObjectRevisions: [0]
+        isComposite: true
+        defaultProperty: "mainItem"
+        Property { name: "mainItem"; type: "QObject"; isPointer: true }
+        Property { name: "keyboardNavigationEnabled"; type: "bool" }
+        Property { name: "refreshing"; type: "bool" }
+        Property { name: "supportsRefreshing"; type: "bool" }
+        Property { name: "flickable"; type: "QQuickFlickable"; isPointer: true }
+        Property { name: "verticalScrollBarPolicy"; type: "int" }
+        Property { name: "horizontalScrollBarPolicy"; type: "int" }
+        Property { name: "isCurrentPage"; type: "bool"; isReadonly: true }
+        Property { name: "icon"; type: "ActionIconGroup_QMLTYPE_29"; isPointer: true }
+        Property { name: "needsAttention"; type: "bool" }
+        Property { name: "progress"; type: "QVariant" }
+        Property { name: "titleDelegate"; type: "QQmlComponent"; isPointer: true }
+        Property { name: "globalToolBarItem"; type: "QQuickItem"; isReadonly: true; isPointer: true }
+        Property { name: "globalToolBarStyle"; type: "int" }
+        Property { name: "contextualActions"; type: "QObject"; isList: true; isReadonly: true }
+        Property { name: "mainAction"; type: "QObject"; isPointer: true }
+        Property { name: "leftAction"; type: "QObject"; isPointer: true }
+        Property { name: "rightAction"; type: "QObject"; isPointer: true }
+        Property {
+            name: "actions"
+            type: "PageActionPropertyGroup_QMLTYPE_30"
+            isReadonly: true
+            isPointer: true
+        }
+        Property { name: "overlay"; type: "QQuickItem"; isReadonly: true; isPointer: true }
+        Signal { name: "contextualActionsAboutToShow" }
+        Signal {
+            name: "backRequested"
+            Parameter { name: "event"; type: "QVariant" }
+        }
+    }
+    Component {
+        prototype: "QQuickPage"
+        name: "org.kde.kirigami/SettingAction 2.17"
+        exports: ["org.kde.kirigami/SettingAction 2.17"]
+        exportMetaObjectRevisions: [0]
+        isComposite: true
+        defaultProperty: "mainItem"
+        Property { name: "mainItem"; type: "QObject"; isPointer: true }
+        Property { name: "keyboardNavigationEnabled"; type: "bool" }
+        Property { name: "refreshing"; type: "bool" }
+        Property { name: "supportsRefreshing"; type: "bool" }
+        Property { name: "flickable"; type: "QQuickFlickable"; isPointer: true }
+        Property { name: "verticalScrollBarPolicy"; type: "int" }
+        Property { name: "horizontalScrollBarPolicy"; type: "int" }
+        Property { name: "isCurrentPage"; type: "bool"; isReadonly: true }
+        Property { name: "icon"; type: "ActionIconGroup_QMLTYPE_29"; isPointer: true }
+        Property { name: "needsAttention"; type: "bool" }
+        Property { name: "progress"; type: "QVariant" }
+        Property { name: "titleDelegate"; type: "QQmlComponent"; isPointer: true }
+        Property { name: "globalToolBarItem"; type: "QQuickItem"; isReadonly: true; isPointer: true }
+        Property { name: "globalToolBarStyle"; type: "int" }
+        Property { name: "contextualActions"; type: "QObject"; isList: true; isReadonly: true }
+        Property { name: "mainAction"; type: "QObject"; isPointer: true }
+        Property { name: "leftAction"; type: "QObject"; isPointer: true }
+        Property { name: "rightAction"; type: "QObject"; isPointer: true }
+        Property {
+            name: "actions"
+            type: "PageActionPropertyGroup_QMLTYPE_30"
+            isReadonly: true
+            isPointer: true
+        }
+        Property { name: "overlay"; type: "QQuickItem"; isReadonly: true; isPointer: true }
+        Signal { name: "contextualActionsAboutToShow" }
+        Signal {
+            name: "backRequested"
+            Parameter { name: "event"; type: "QVariant" }
+        }
+    }
+    Component {
         prototype: "QQuickItem"
         name: "org.kde.kirigami/AbstractApplicationHeader 2.0"
         exports: ["org.kde.kirigami/AbstractApplicationHeader 2.0"]

@@ -68,12 +68,15 @@
         <file alias="Units.qml">@kirigami_QML_DIR@/src/controls/Units.qml</file>
         <file alias="SwipeListItem.qml">@kirigami_QML_DIR@/src/controls/SwipeListItem.qml</file>
         <file alias="ApplicationWindow.qml">@kirigami_QML_DIR@/src/controls/ApplicationWindow.qml</file>
-	<file alias="AbstractApplicationItem.qml">@kirigami_QML_DIR@/src/controls/AbstractApplicationItem.qml</file>
-	<file alias="ApplicationItem.qml">@kirigami_QML_DIR@/src/controls/ApplicationItem.qml</file>
+        <file alias="AbstractApplicationItem.qml">@kirigami_QML_DIR@/src/controls/AbstractApplicationItem.qml</file>
+        <file alias="ApplicationItem.qml">@kirigami_QML_DIR@/src/controls/ApplicationItem.qml</file>
         <file alias="ApplicationHeader.qml">@kirigami_QML_DIR@/src/controls/ApplicationHeader.qml</file>
         <file alias="Heading.qml">@kirigami_QML_DIR@/src/controls/Heading.qml</file>
         <file alias="ScrollablePage.qml">@kirigami_QML_DIR@/src/controls/ScrollablePage.qml</file>
         <file alias="AboutPage.qml">@kirigami_QML_DIR@/src/controls/AboutPage.qml</file>
+        <file alias="CategorizedSettings.qml">@kirigami_QML_DIR@/src/controls/settingscomponents/CategorizedSettings.qml</file>
+        <file alias="GenericSettingsPage.qml">@kirigami_QML_DIR@/src/controls/settingscomponents/GenericSettingsPage.qml</file>
+        <file alias="SettingAction.qml">@kirigami_QML_DIR@/src/controls/settingscomponents/SettingAction.qml</file>
         <file alias="UrlButton.qml">@kirigami_QML_DIR@/src/controls/UrlButton.qml</file>
         <file alias="LinkButton.qml">@kirigami_QML_DIR@/src/controls/LinkButton.qml</file>
         <file alias="Label.qml">@kirigami_QML_DIR@/src/controls/Label.qml</file>

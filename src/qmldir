@@ -46,6 +46,9 @@ ListItemDragHandle 2.5 ListItemDragHandle.qml
 ActionToolBar 2.5 ActionToolBar.qml
 BannerImage 2.5 private/BannerImage.qml
 AboutPage 2.6 AboutPage.qml
+CategorizedSettings 2.17 CategorizedSettings.qml
+GenericSettingsPage 2.17 GenericSettingsPage
+SettingAction 2.17 SettingAction.qml
 UrlButton 2.6 UrlButton.qml
 LinkButton 2.6 LinkButton.qml
 ActionTextField 2.7 ActionTextField.qml

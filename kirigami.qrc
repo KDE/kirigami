@@ -74,6 +74,9 @@
         <file alias="Heading.qml">src/controls/Heading.qml</file>
         <file alias="ScrollablePage.qml">src/controls/ScrollablePage.qml</file>
         <file alias="AboutPage.qml">src/controls/AboutPage.qml</file>
+        <file alias="CategorizedSettings.qml">src/controls/settingscomponents/CategorizedSettings.qml</file>
+        <file alias="GenericSettingsPage.qml">src/controls/settingscomponents/GenericSettingsPage.qml</file>
+        <file alias="SettingAction.qml">src/controls/settingscomponents/SettingAction.qml</file>
         <file alias="UrlButton.qml">src/controls/UrlButton.qml</file>
         <file alias="LinkButton.qml">src/controls/LinkButton.qml</file>
         <file alias="Label.qml">src/controls/Label.qml</file>
