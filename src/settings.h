@@ -40,6 +40,14 @@ class Settings : public QObject
     Q_PROPERTY(bool tabletMode READ tabletMode NOTIFY tabletModeChanged)
 
     /**
+     * True if the system has a platform menu bar; e.g. a user is on macOS
+     * or has a global menu on KDE Plasma.
+     *
+     * @warning Android has a platform menu bar; which may not be what you expected.
+     */
+    Q_PROPERTY(bool hasPlatformMenuBar READ hasPlatformMenuBar CONSTANT)
+
+    /**
      * True if the user in this moment is interacting with the app with the touch screen
      */
     Q_PROPERTY(bool hasTransientTouchInput READ hasTransientTouchInput NOTIFY hasTransientTouchInputChanged)
@@ -88,6 +96,8 @@ public:
     void setTransientTouchInput(bool touch);
     bool hasTransientTouchInput() const;
 
+    bool hasPlatformMenuBar() const;
+
     QString style() const;
     void setStyle(const QString &style);
 
@@ -116,6 +126,7 @@ private:
     bool m_tabletMode : 1;
     bool m_hasTouchScreen : 1;
     bool m_hasTransientTouchInput : 1;
+    bool m_hasPlatformMenuBar : 1;
 };
 
 #endif

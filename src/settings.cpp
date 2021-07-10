@@ -16,6 +16,10 @@
 #include <QTouchDevice>
 #include <QWindow>
 
+#include <QtGui/private/qguiapplication_p.h>
+#include <QtGui/qpa/qplatformmenu.h>
+#include <QtGui/qpa/qplatformtheme.h>
+
 #include "libkirigami/tabletmodewatcher.h"
 
 #ifndef KIRIGAMI_BUILD_TYPE_STATIC
@@ -72,6 +76,12 @@ Settings::Settings(QObject *parent)
         });
     }
 #endif
+
+    auto bar = QGuiApplicationPrivate::platformTheme()->createPlatformMenuBar();
+    m_hasPlatformMenuBar = bar != nullptr;
+    if (bar != nullptr) {
+        bar->deleteLater();
+    }
 
     const QString configPath = QStandardPaths::locate(QStandardPaths::ConfigLocation, QStringLiteral("kdeglobals"));
     if (QFile::exists(configPath)) {
@@ -210,4 +220,9 @@ QVariant Settings::applicationWindowIcon() const
         return QVariant();
     }
     return windowIcon;
+}
+
+bool Settings::hasPlatformMenuBar() const
+{
+    return m_hasPlatformMenuBar;
 }
