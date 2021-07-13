@@ -15,7 +15,7 @@ import org.kde.kirigami 2.18 as Kirigami
  * Provides content padding (instead of padding outside of the scroll
  * area). Also has a default preferredWidth, as well as the `subtitle` property.
  * 
- * <b>Note:</b> If a `contentItem` is specified, it will replace
+ * <b>Note:</b> If a `mainItem` is specified, it will replace
  * the subtitle label, and so the respective property will have no effect.
  * 
  * @see Dialog
@@ -27,7 +27,7 @@ import org.kde.kirigami 2.18 as Kirigami
  * Kirigami.PromptDialog {
  *     title: "Reset settings?"
  *     subtitle: "The stored settings for the application will be deleted, with the defaults restored."
- *     footerActions: Kirigami.Dialog.Actions.Ok | Kirigami.Dialog.Actions.Cancel
+ *     footerActions: Kirigami.Dialog.Ok | Kirigami.Dialog.Cancel
  *     
  *     onAccepted: console.log("Accepted")
  *     onDismissed: console.log("Dismissed")
@@ -41,7 +41,7 @@ import org.kde.kirigami 2.18 as Kirigami
  *     id: textPromptDialog
  *     title: "New Folder"
  * 
- *     footerActions: Kirigami.Dialog.Actions.None
+ *     standardButtons: Kirigami.Dialog.None
  *     customFooterActions: [
  *         Kirigami.Action {
  *             text: qsTr("Create Folder")
@@ -69,7 +69,7 @@ import org.kde.kirigami 2.18 as Kirigami
  * @inherit Dialog
  */
 Kirigami.Dialog {
-    default property alias contentItem: control.contentItem
+    default property alias mainItem: control.contentItem
     
     /**
      * The text to use in the dialog's contents.

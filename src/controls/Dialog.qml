@@ -5,6 +5,7 @@
 
 import QtQuick 2.15
 import QtQuick.Layouts 1.2
+import QtQuick.Templates 2.15 as T
 import QtQuick.Controls 2.15 as Controls
 import QtGraphicalEffects 1.12
 import org.kde.kirigami 2.12 as Kirigami
@@ -50,7 +51,7 @@ import "templates/private" as Private
  *     padding: 0
  *     preferredWidth: Kirigami.Units.gridUnit * 16
  * 
- *     footerActions: Kirigami.Dialog.Actions.Ok | Kirigami.Dialog.Actions.Cancel
+ *     standardButtons: Kirigami.Dialog.Ok | Kirigami.Dialog.Cancel
  * 
  *     onAccepted: console.log("OK button pressed")
  *     onDismissed: console.log("Dismissed")
@@ -102,7 +103,7 @@ import "templates/private" as Private
  * 
  * @inherit QtQuick.QtObject
  */
-QtObject {
+T.Dialog {
     id: root
     
     /**
@@ -111,8 +112,8 @@ QtObject {
      * The initial height and width of the dialog is calculated from the 
      * `implicitWidth` and `implicitHeight` of this item.
      */
-    default property Item contentItem
-    
+    default property Item mainItem
+        
     /**
      * The absolute maximum height the dialog can be (including the header 
      * and footer).
@@ -124,7 +125,7 @@ QtObject {
      * This is the window height, subtracted by largeSpacing on both the top 
      * and bottom.
      */
-    readonly property real absoluteMaximumHeight: dialog.parent.height - Kirigami.Units.largeSpacing * 2
+    readonly property real absoluteMaximumHeight: parent.height - Kirigami.Units.largeSpacing * 2
     
     /**
      * The absolute maximum width the dialog can be.
@@ -132,7 +133,7 @@ QtObject {
      * By default, it is the window width, subtracted by largeSpacing on both 
      * the top and bottom.
      */
-    readonly property real absoluteMaximumWidth: dialog.parent.width - Kirigami.Units.largeSpacing * 2
+    readonly property real absoluteMaximumWidth: parent.width - Kirigami.Units.largeSpacing * 2
     
     /**
      * The maximum height the dialog can be (including the header 
@@ -152,22 +153,6 @@ QtObject {
      * By default, this is `absoluteMaximumWidth`.
      */
     property real maximumWidth: absoluteMaximumWidth
-    
-    /**
-     * The current height of the dialog.
-     * 
-     * It is not recommended to set the height of the dialog here, set 
-     * `preferredHeight` or the content's `implicitHeight` instead.
-     */
-    property alias height: dialog.height
-    
-    /**
-     * The current width of the dialog.
-     * 
-     * It is not recommended to set the width of the dialog here, set 
-     * `preferredWidth` or the content's `implicitWidth` instead.
-     */
-    property alias width: dialog.width
     
     /**
      * Specify the preferred height of the dialog.
@@ -190,83 +175,30 @@ QtObject {
      * of the dialog will expand to the necessary amount of space.
      */
     property real preferredWidth: -1
+
     
     /**
-     * The implicit height of the dialog's header, footer and contents together.
+     * The component before the footer buttons.
      */
-    readonly property alias implicitHeight: column.implicitHeight
+    property Component footerLeadingComponent
     
     /**
-     * The implicit width of the dialog's header, footer and contents together.
+     * The component after the footer buttons.
      */
-    readonly property alias implicitWidth: column.implicitWidth
+    property Component footerTrailingComponent
     
     /**
-     * The text to show in the dialog header.
-     * 
-     * The text is a single line, if it goes beyond the width of the dialog 
-     * header, it will be elided.
-     * 
-     * Note: This is ignored if a custom header is set.
+     * Whether or not to show the close button in the header.
      */
-    property string title: ""
+    property bool showCloseButton: true
     
     /**
-     * Dialog.Actions provides pre-built footer buttons for use with 
-     * the footerActions property.
-     * 
-     * Clicking each action closes the dialog, and also either triggers
-     * the `accepted()` or `dismissed()` signal.
-     *
-     * To specify custom footer buttons, see the `customFooterActions` property.
-     *
-     * * `None`
-     * * `Ok` - triggers accepted() signal
-     * * `Cancel` - triggers dismissed() signal
-     * * `Close` - triggers accepted() signal
-     * * `Done` - triggers accepted() signal
-     * * `Save` - triggers accepted() signal
-     * * `Apply` - triggers accepted() signal
-     * * `Yes` - triggers accepted() signal
-     * * `No` - triggers dismissed() signal
+     * Whether or not the footer button style should be flat instead of raised.
      */
-    enum Actions {
-        None = 0,
-        Ok = 1,
-        Cancel = 2,
-        Close = 4,
-        Done = 8,
-        Save = 16,
-        Apply = 32,
-        Yes = 64,
-        No = 128
-    }
-    
-    /**
-     * The actions provided in the footer.
-     * 
-     * If you would like to define custom actions, see `customFooterActions`.
-     * 
-     * Note: this is ignored if a custom footer is set.
-     * 
-     * Suggested pairings:
-     * * `Dialog.Actions.Ok` | `Dialog.Actions.Cancel`
-     * * `Dialog.Actions.Yes` | `Dialog.Actions.No`
-     * * `Dialog.Actions.Save` | `Dialog.Actions.Cancel`
-     * * `Dialog.Actions.Apply` | `Dialog.Actions.Cancel`
-     * * `Dialog.Actions.Done`
-     * * `Dialog.Actions.Close`
-     * * `Dialog.Actions.None`
-     */
-    property int footerActions: Dialog.Actions.Close
+    property bool flatFooterButtons: false
     
     /**
      * Define a list of custom actions in the footer.
-     * 
-     * If `footerActions` is not `Dialog.Actions.None`, then the footer actions
-     * will be displayed after the `customFooterActions` in the row.
-     * 
-     * <b>Note:</b> this is ignored if a custom footer is set.
      * 
      * @code{.qml}
      * import QtQuick 2.15
@@ -278,7 +210,7 @@ QtObject {
      *     title: i18n("Confirm Playback")
      *     subtitle: i18n("Are you sure you want to play this song? It's really loud!")
      * 
-     *     footerActions: Kirigami.Dialog.Actions.Cancel
+     *     standardButtons: Kirigami.Dialog.Cancel
      *     customFooterActions: [
      *         Kirigami.Action {
      *             text: i18n("Play")
@@ -294,526 +226,268 @@ QtObject {
      * 
      * @see Action
      */
-    property list<Action> customFooterActions
+    property list<Kirigami.Action> customFooterActions
     
-    /**
-     * The label used for the `title` property.
-     */
-    property alias headerLabel: heading
+    // default standard button
+    standardButtons: Controls.Dialog.Close
     
-    /**
-     * The header of the dialog.
-     * 
-     * Specifying a custom header will remove the label used in the 
-     * `title` property.
-     * 
-     * When specifying a custom header item, be sure to set an 
-     * `implicitHeight` and `implicitWidth`, as it will be used in 
-     * dialog calculations.
-     * 
-     * If you simply do not want a header, set the property to null.
-     */
-    property Item header: Controls.Control {
-        // needs to explicitly be set for each side to work
-        topPadding: Kirigami.Units.largeSpacing
-        bottomPadding: Kirigami.Units.largeSpacing
-        leftPadding: Kirigami.Units.largeSpacing
-        rightPadding: Kirigami.Units.largeSpacing
-        
-        // top header bar (title and close button)
-        contentItem: Kirigami.Heading {
-            id: heading
-            Layout.fillWidth: true
-            level: 2
-            text: root.title == "" ? " " : root.title // always have text to ensure header height
-            elide: Text.ElideRight
-            
-            // use tooltip for long text that is elided
-            Controls.ToolTip.visible: truncated && titleHoverHandler.hovered
-            Controls.ToolTip.text: root.title
-            HoverHandler { id: titleHoverHandler }
-        }
+    // calculate dimensions 
+    implicitWidth: {
+        let backgroundWidth = implicitBackgroundWidth + leftInset + rightInset,
+            contentWidth = contentItem.implicitWidth + leftPadding + rightPadding;
+        return Math.ceil(Math.min(root.maximumWidth, 
+                                  Math.max(backgroundWidth, contentWidth, implicitHeaderWidth, implicitFooterWidth)));
+    }
+    implicitHeight: {
+        let backgroundHeight = implicitBackgroundHeight + topInset + bottomInset,
+            contentHeight = contentItem.implicitHeight + topPadding + bottomPadding
+                            + (implicitHeaderHeight > 0 ? implicitHeaderHeight + spacing : 0)
+                            + (implicitFooterHeight > 0 ? implicitFooterHeight + spacing : 0);
+        return Math.ceil(Math.min(root.maximumHeight, Math.max(backgroundHeight, contentHeight)));
     }
     
-    /**
-     * The footer of the dialog.
-     * 
-     * Specifying a custom footer will remove the footer buttons.
-     * 
-     * When specifying a custom footer item, be sure to set an 
-     * `implicitHeight` and `implicitWidth`, as it will be used in 
-     * dialog calculations.
-     * 
-     * If you simply do not want a footer, set the property to null.
-     */
-    property Item footer: Controls.Control {
-        // needs to explicitly be set for each side to work
-        // don't have height if the footer has no buttons
-        topPadding: contentItem.implicitHeight > 0 ? Kirigami.Units.smallSpacing : 0
-        bottomPadding: contentItem.implicitHeight > 0 ? Kirigami.Units.smallSpacing : 0
-        leftPadding: contentItem.implicitHeight > 0 ? Kirigami.Units.smallSpacing : 0
-        rightPadding: contentItem.implicitHeight > 0 ? Kirigami.Units.smallSpacing : 0
-        
-        // footer buttons
-        contentItem: RowLayout {
-            spacing: Kirigami.Units.smallSpacing
-            Item { Layout.fillWidth: true }
-            Repeater {
-                id: buttonRepeater
-                
-                // separate property to avoid binding loop
-                property list<Action> actions
-                model: actions
-                
-                function fillActions() {
-                    actions = root.customFooterActions;
-                    
-                    // order matters here (in the left -> right arrangement of buttons)
-                    if ((root.footerActions & Dialog.Actions.Ok) == Dialog.Actions.Ok) actions.push(okAction); 
-                    if ((root.footerActions & Dialog.Actions.Cancel) == Dialog.Actions.Cancel) actions.push(cancelAction); 
-                    if ((root.footerActions & Dialog.Actions.Close) == Dialog.Actions.Close) actions.push(closeAction);
-                    if ((root.footerActions & Dialog.Actions.Done) == Dialog.Actions.Done) actions.push(doneAction);
-                    if ((root.footerActions & Dialog.Actions.Save) == Dialog.Actions.Save) actions.push(saveAction);
-                    if ((root.footerActions & Dialog.Actions.Apply) == Dialog.Actions.Apply) actions.push(applyAction);
-                    if ((root.footerActions & Dialog.Actions.Yes) == Dialog.Actions.Yes) actions.push(yesAction);
-                    if ((root.footerActions & Dialog.Actions.No) == Dialog.Actions.No) actions.push(noAction);
-                }
-                
-                Component.onCompleted: fillActions()
-                Connections {
-                    target: root
-                    function onCustomFooterActionsChanged() {
-                        buttonRepeater.fillActions();
-                    }
-                    function onFooterActionsChanged() {
-                        buttonRepeater.fillActions();
-                    }
-                }
-                
-                delegate: Controls.Button {
-                    action: modelData
-                    flat: root.flatFooterButtons
-                }
-            }
-        }
-    }
+    // misc. dialog settings
+    closePolicy: Controls.Popup.CloseOnEscape | Controls.Popup.CloseOnReleaseOutside
+    modal: true
+    clip: false
+    padding: 0
     
-    /**
-     * The padding of the content.
-     * 
-     * <b>Note:</b> This padding is outside of the scroll area (outside
-     * of the scrollbar). If you want to add padding within the scroll
-     * area, implement it in your contentItem directly instead.
-     * 
-     * Consider using PromptDialog if you want to quickly have padding 
-     * within the content, rather than outside the scroll area.
-     * @see PromptDialog
-     * 
-     * Default is `Kirigami.Units.smallSpacing`.
-     */
-    property double padding: Kirigami.Units.smallSpacing
-    
-    /**
-     * The left padding of the content.
-     */
-    property real leftPadding: root.padding
-    
-    /**
-     * The right padding of the content.
-     */
-    property real rightPadding: root.padding
-    
-    /**
-     * The top padding of the content.
-     */
-    property real topPadding: root.padding
-    
-    /**
-     * The bottom padding of the content.
-     */
-    property real bottomPadding: root.padding
-    
-    /**
-     * The `QtQuick.Controls.Popup` item used in the dialog.
-     */
-    property alias popup: dialog
-    
-    /**
-     * Whether or not the footer button style should be flat instead of raised.
-     */
-    property bool flatFooterButtons: false
-    
-    /**
-     * Whether or not the dialog is visible/open.
-     */
-    property alias visible: dialog.visible
-    
-    /**
-     * The parent of the item. 
-     */
-    property Item parent
-    
-    /**
-     * Emitted when the dialog has been opened.
-     */
-    signal opened()
-    
-    /**
-     * Emitted when the dialog has been closed.
-     */
-    signal closed()
-    
-    /**
-     * Emitted when the dialog has had a footer button pressed
-     * that has an `accepted()` signal associated with it.
-     * 
-     * <b>Note:</b> Emitted before closed() signal.
-     * 
-     * See the `footerActions` property.
-     */
-    signal accepted()
-    
-    /**
-     * Emitted when the dialog has had a footer button pressed
-     * that has a `dismissed()` signal associated with it, or is
-     * closed by any other reason (clicking outside of dialog,
-     * pressing close button).
-     * 
-     * <b>Note:</b> Emitted before closed() signal.
-     * 
-     * See the `footerActions` property.
-     */
-    signal dismissed()
-
-    /**
-     * Opens the dialog.
-     */
-    function open() {
-        Qt.inputMethod.hide();
-        dialog.open();
-    }
-    
-    /**
-     * Closes the dialog.
-     */
-    function close() {
-        Qt.inputMethod.hide();
-        dialog.close();
-    }
-    
+    // determine parent so that popup knows which window to popup in
+    // we want to open the dialog in the center of the window, if possible
     Component.onCompleted: {
-        if (!root.parent && typeof applicationWindow !== "undefined") {
-            root.parent = applicationWindow().overlay
+        if (typeof applicationWindow !== "undefined") {
+            parent = applicationWindow().overlay;
         }
     }
     
-    // visible dialog component
-    property var rootItem: Controls.Popup {
-        id: dialog
-        closePolicy: Controls.Popup.CloseOnEscape | Controls.Popup.CloseOnReleaseOutside
-        
-        // capture when root.accepted() and root.dismissed() is emitted
-        property bool popupEventEmitted: false
-        Connections {
-            target: root
-            function onAccepted() {
-                dialog.popupEventEmitted = true;
-            }
-            function onDismissed() {
-                dialog.popupEventEmitted = true;
-            }
+    // center dialog
+    x: Math.round((parent.width - implicitWidth) / 2)
+    y: Math.round((parent.height - implicitHeight) / 2) + Kirigami.Units.gridUnit * 2 * (1 - opacity) // move animation
+    
+    // dialog enter and exit transitions
+    enter: Transition {
+        NumberAnimation { property: "opacity"; from: 0; to: 1; easing.type: Easing.InOutQuad; duration: Kirigami.Units.longDuration }
+    }
+    exit: Transition {
+        NumberAnimation { property: "opacity"; from: 1; to: 0; easing.type: Easing.InOutQuad; duration: Kirigami.Units.longDuration }
+    }
+    
+    // black background, fades in and out
+    Controls.Overlay.modal: Rectangle {
+        color: Qt.rgba(0, 0, 0, 0.3 * root.opacity)
+    }
+    
+    // dialog view background
+    background: Kirigami.ShadowedRectangle {
+        Kirigami.Theme.colorSet: Kirigami.Theme.View
+        Kirigami.Theme.inherit: false
+        color: Kirigami.Theme.backgroundColor
+        radius: Kirigami.Units.smallSpacing
+        shadow {
+            color: Qt.rgba(0,0,0,0.2)
+            size: 15
+            yOffset: 3
         }
-        
-        onOpened: root.opened();
-        onClosed: {
-            // if no event has been emitted, then the dialog was closed because of clicking outside of it, which emits dismissed()
-            if (!dialog.popupEventEmitted) {
-                root.dismissed();
-            }
-            dialog.popupEventEmitted = false;
-            root.closed();
-        }
-        
-        // determine parent so that popup knows which window to popup in
-        // we want to open the dialog in the center of the window, if possible
-        parent: {
-            if (typeof applicationWindow !== "undefined") {
-                return applicationWindow().overlay;
-            } else {
-                return root.parent;
-            }
-        }
-        
-        modal: true
-        clip: false
-        padding: 0
+    }
+    
+    // dialog content
+    contentItem: ColumnLayout {
+        Private.ScrollView {
+            id: contentControl
+            
+            // we cannot have contentItem inside a sub control (allowing for content padding within the scroll area),
+            // because if the contentItem is a Flickable (ex. ListView), the ScrollView needs it to be top level in order
+            // to decorate it
+            contentItem: root.mainItem
+            canFlickWithMouse: true
 
-        // center dialog
-        x: Math.round((parent.width - implicitWidth) / 2)
-        y: Math.round((parent.height - implicitHeight) / 2) + Kirigami.Units.gridUnit * 2 * (1 - opacity) // move animation
-        
-        enter: Transition {
-            NumberAnimation { property: "opacity"; from: 0.0; to: 1.0; duration: Kirigami.Units.longDuration }
-        }
-        exit: Transition {
-            NumberAnimation { property: "opacity"; from: 1.0; to: 0.0; duration: Kirigami.Units.longDuration }
-        }
-        
-        // black background
-        Controls.Overlay.modal: Rectangle {
-            color: Qt.rgba(0, 0, 0, 0.3 * dialog.opacity)
-        }
-        
-        // dialog background
-        background: Item {
-            RectangularGlow {
-                anchors.fill: rect
-                anchors.topMargin: 1
-                cornerRadius: rect.radius * 2
-                glowRadius: 2
-                spread: 0.2
-                color: Qt.rgba(0, 0, 0, 0.3)
-            }
+            // ensure view colour scheme, and background color
+            Kirigami.Theme.inherit: false
+            Kirigami.Theme.colorSet: Kirigami.Theme.View
             
-            Rectangle {
-                id: rect
-                anchors.fill: parent
-                Kirigami.Theme.inherit: false
-                Kirigami.Theme.colorSet: Kirigami.Theme.View
-                color: Kirigami.Theme.backgroundColor
-                radius: Kirigami.Units.smallSpacing
-            }
-        }
-        
-        // actual dialog contents
-        ColumnLayout {
-            id: column
-            spacing: 0
+            // needs to explicitly be set for each side to work
+            leftPadding: 0; topPadding: 0
+            rightPadding: contentControl.verticalScrollBarWidth
+            bottomPadding: contentControl.horizontalScrollBarHeight
             
-            // cap maximum width and maximum height at absoluteMaximumWidth and absoluteMaximumHeight
+            // height of everything else in the dialog other than the content
+            property real otherHeights: root.header.height + root.footer.height + root.topPadding + root.bottomPadding;
+            
             property real calculatedMaximumWidth: root.maximumWidth > root.absoluteMaximumWidth ? root.absoluteMaximumWidth : root.maximumWidth
             property real calculatedMaximumHeight: root.maximumHeight > root.absoluteMaximumHeight ? root.absoluteMaximumHeight : root.maximumHeight
+            property real calculatedImplicitWidth: root.mainItem.implicitWidth + leftPadding + rightPadding
+            property real calculatedImplicitHeight: root.mainItem.implicitHeight + topPadding + bottomPadding
             
-            // ensure that the dialog has rounded top corners (if header is not shown)
-            Rectangle {
-                id: roundedHeaderBuffer
-                z: -1 // below content
-                visible: !headerControl.show
-                Layout.fillWidth: true
-                Kirigami.Theme.inherit: false
-                Kirigami.Theme.colorSet: Kirigami.Theme.View
-                
-                implicitHeight: Kirigami.Units.smallSpacing * 2
-                color: Kirigami.Theme.backgroundColor
-                radius: Kirigami.Units.smallSpacing
+            // don't enforce preferred width and height if not set
+            Layout.preferredWidth: root.preferredWidth >= 0 ? root.preferredWidth : calculatedImplicitWidth
+            Layout.preferredHeight: root.preferredHeight >= 0 ? root.preferredHeight - otherHeights : calculatedImplicitHeight
+            
+            Layout.fillWidth: true
+            Layout.maximumWidth: calculatedMaximumWidth
+            Layout.maximumHeight: calculatedMaximumHeight - otherHeights // we enforce maximum height solely from the content
+            
+            // give an implied width and height to the contentItem so that features like word wrapping/eliding work
+            // cannot placed directly in contentControl as a child, so we must use a property
+            property var widthHint: Binding {
+                target: root.mainItem
+                property: "width"
+                // we want to avoid horizontal scrolling, so we apply maximumWidth as a hint if necessary
+                property real preferredWidthHint: contentControl.Layout.preferredWidth - contentControl.leftPadding - contentControl.rightPadding
+                property real maximumWidthHint: contentControl.calculatedMaximumWidth - contentControl.leftPadding - contentControl.rightPadding
+                value: maximumWidthHint < preferredWidthHint ? maximumWidthHint : preferredWidthHint
+            }
+            property var heightHint: Binding {
+                target: root.mainItem
+                property: "height"
+                // we are okay with overflow, if it exceeds maximumHeight we will allow scrolling
+                value: contentControl.Layout.preferredHeight - contentControl.topPadding - contentControl.bottomPadding
             }
             
-            // header
-            Controls.Control {
-                id: headerControl
-                contentItem: root.header
-                
-                property bool show: contentItem && contentItem.implicitHeight != 0
-                
-                Layout.fillWidth: true
-                Layout.maximumWidth: column.calculatedMaximumWidth
-                
-                // needs to explicitly be set for each side to work
-                // we let the contentItem do the padding themselves
-                topPadding: 0; bottomPadding: 0; leftPadding: 0; rightPadding: 0
-                
-                background: Rectangle {
-                    visible: headerControl.show
-                    Kirigami.Theme.inherit: false
-                    Kirigami.Theme.colorSet: Kirigami.Theme.Window
-                    color: Kirigami.Theme.backgroundColor
-                    radius: Kirigami.Units.smallSpacing
-                    
-                    // cover bottom rounded corners
-                    Rectangle {
-                        color: Kirigami.Theme.backgroundColor
-                        height: Kirigami.Units.smallSpacing
-                        anchors.left: parent.left
-                        anchors.right: parent.right
-                        anchors.bottom: parent.bottom
-                    }
+            // give explicit warnings since the maximumHeight is ignored when negative, so developers aren't confused
+            Component.onCompleted: {
+                if (contentControl.Layout.maximumHeight < 0 || contentControl.Layout.maximumHeight === Infinity) {
+                    console.log("Dialog Warning: the calculated maximumHeight for the content is less than zero, ignoring...");
                 }
             }
-            
-            // header separator
-            Kirigami.Separator {
-                id: headerSeparator
-                Layout.fillWidth: true
-                visible: headerControl.show
-            }
-            
-            // dialog content
-            Private.ScrollView {
-                id: contentControl
-                
-                // we cannot have contentItem inside a sub control (allowing for content padding within the scroll area),
-                // because if the contentItem is a Flickable (ex. ListView), the ScrollView needs it to be top level in order
-                // to decorate it
-                contentItem: root.contentItem
-                canFlickWithMouse: true
+        }
+    }
+    
+    header: T.Control {
+        implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset,
+                                implicitContentWidth + leftPadding + rightPadding)
+        implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
+                                implicitContentHeight + topPadding + bottomPadding)
+        
+        padding: Kirigami.Units.largeSpacing
+        bottomPadding: verticalPadding + headerSeparator.implicitHeight // add space for bottom separator
 
-                // ensure view colour scheme, and background color
-                Kirigami.Theme.inherit: false
-                Kirigami.Theme.colorSet: Kirigami.Theme.View
-                
-                // needs to explicitly be set for each side to work
-                leftPadding: root.leftPadding
-                rightPadding: root.rightPadding + contentControl.verticalScrollBarWidth
-                topPadding: root.topPadding
-                bottomPadding: root.bottomPadding + contentControl.horizontalScrollBarHeight
-                
-                // height of everything else in the dialog other than the content
-                property real otherHeights: {
-                    let h = headerControl.height + footerControl.height + headerSeparator.height + footerSeparator.height;
-                    if (roundedHeaderBuffer.visible) h += roundedHeaderBuffer.height;
-                    if (roundedFooterBuffer.visible) h += roundedFooterBuffer.height;
-                    return h;
-                }
-                
-                property real calculatedImplicitWidth: root.contentItem.implicitWidth + leftPadding + rightPadding
-                property real calculatedImplicitHeight: root.contentItem.implicitHeight + topPadding + bottomPadding
-                
-                // don't enforce preferred width and height if not set
-                Layout.preferredWidth: root.preferredWidth >= 0 ? root.preferredWidth : calculatedImplicitWidth
-                Layout.preferredHeight: root.preferredHeight >= 0 ? root.preferredHeight - otherHeights : calculatedImplicitHeight
-                
+        contentItem: RowLayout {
+            Kirigami.Heading {
+                id: heading
                 Layout.fillWidth: true
-                Layout.maximumWidth: column.calculatedMaximumWidth
-                Layout.maximumHeight: column.calculatedMaximumHeight - otherHeights // we enforce maximum height solely from the content
+                Layout.alignment: Qt.AlignVCenter
+                level: 2
+                text: root.title == "" ? " " : root.title // always have text to ensure header height
+                elide: Text.ElideRight
                 
-                // give an implied width and height to the contentItem so that features like word wrapping/eliding work
-                // cannot placed directly in contentControl as a child, so we must use a property
-                property var widthHint: Binding {
-                    target: root.contentItem
-                    property: "width"
-                    // we want to avoid horizontal scrolling, so we apply maximumWidth as a hint if necessary
-                    property real preferredWidthHint: contentControl.Layout.preferredWidth - contentControl.leftPadding - contentControl.rightPadding
-                    property real maximumWidthHint: column.calculatedMaximumWidth - contentControl.leftPadding - contentControl.rightPadding
-                    value: maximumWidthHint < preferredWidthHint ? maximumWidthHint : preferredWidthHint
-                }
-                property var heightHint: Binding {
-                    target: root.contentItem
-                    property: "height"
-                    // we are okay with overflow, if it exceeds maximumHeight we will allow scrolling
-                    value: contentControl.Layout.preferredHeight - contentControl.topPadding - contentControl.bottomPadding
-                }
-                
-                // give explicit warnings since the maximumHeight is ignored when negative, so developers aren't confused
-                Component.onCompleted: {
-                    if (contentControl.Layout.maximumHeight < 0 || contentControl.Layout.maximumHeight === Infinity) {
-                        console.log("Dialog Warning: the calculated maximumHeight for the content is less than zero, ignoring...");
-                    }
-                }
+                // use tooltip for long text that is elided
+                Controls.ToolTip.visible: truncated && titleHoverHandler.hovered
+                Controls.ToolTip.text: root.title
+                HoverHandler { id: titleHoverHandler }
             }
-            
-            // footer separator
-            Kirigami.Separator {
-                id: footerSeparator
-                Layout.fillWidth: true
-                visible: footerControl.show
-            }
-            
-            // footer
-            Controls.Control {
-                id: footerControl
-                contentItem: root.footer
+            Kirigami.Icon {
+                id: closeIcon
+                visible: root.showCloseButton
                 
-                property bool show: contentItem && contentItem.implicitHeight != 0
+                // We want to position the close button in the top-right
+                // corner if the header is very tall, but we want to
+                // vertically center it in a short header
+                readonly property bool tallHeader: parent.height > (Kirigami.Units.iconSizes.smallMedium + Kirigami.Units.largeSpacing + Kirigami.Units.largeSpacing)
+                Layout.alignment: tallHeader ? Qt.AlignRight | Qt.AlignTop : Qt.AlignRight | Qt.AlignVCenter
+                Layout.topMargin: tallHeader ? Kirigami.Units.largeSpacing : 0
+                implicitHeight: Kirigami.Units.iconSizes.smallMedium
+                implicitWidth: implicitHeight
                 
-                Layout.fillWidth: true
-                Layout.maximumWidth: column.calculatedMaximumWidth
-                
-                // needs to explicitly be set for each side to work
-                // we let the contentItem do the padding themselves
-                topPadding: 0; bottomPadding: 0; leftPadding: 0; rightPadding: 0
-                
-                background: Rectangle {
-                    visible: footerControl.show
-                    Kirigami.Theme.inherit: false
-                    Kirigami.Theme.colorSet: Kirigami.Theme.Window
-                    color: Kirigami.Theme.backgroundColor
-                    radius: Kirigami.Units.smallSpacing
-                    
-                    // cover top rounded corners
-                    Rectangle {
-                        color: Kirigami.Theme.backgroundColor
-                        height: Kirigami.Units.smallSpacing
-                        anchors.left: parent.left
-                        anchors.right: parent.right
-                        anchors.top: parent.top
-                    }
+                source: closeMouseArea.containsMouse ? "window-close" : "window-close-symbolic"
+                active: closeMouseArea.containsMouse
+                MouseArea {
+                    id: closeMouseArea
+                    hoverEnabled: Qt.styleHints.useHoverEffects
+                    anchors.fill: parent
+                    onClicked: root.reject()
                 }
-            }
-            
-            // ensure that the dialog has rounded bottom corners (if header is not shown)
-            Rectangle {
-                id: roundedFooterBuffer
-                z: -1 // below content
-                visible: !footerControl.show
-                Layout.fillWidth: true
-                Kirigami.Theme.inherit: false
-                Kirigami.Theme.colorSet: Kirigami.Theme.View
-                
-                implicitHeight: Kirigami.Units.smallSpacing
-                color: Kirigami.Theme.backgroundColor
-                radius: Kirigami.Units.smallSpacing
             }
         }
         
-        // default dialog actions provided
-        Kirigami.Action {
-            id: okAction
-            text: qsTr("OK")
-            iconName: "dialog-ok"
-            onTriggered: { root.accepted(); root.close(); }
-        }
-        Kirigami.Action {
-            id: cancelAction
-            text: qsTr("Cancel")
-            iconName: "dialog-cancel"
-            onTriggered: { root.dismissed(); root.close(); }
-        }
-        Kirigami.Action {
-            id: closeAction
-            text: qsTr("Close")
-            iconName: "dialog-close"
-            onTriggered: { root.accepted(); root.close(); }
-        }
-        Kirigami.Action {
-            id: doneAction
-            text: qsTr("Done")
-            iconName: "dialog-ok"
-            onTriggered: { root.accepted(); root.close(); }
-        }
-        Kirigami.Action {
-            id: saveAction
-            text: qsTr("Save")
-            iconName: "dialog-close"
-            onTriggered: { root.accepted(); root.close(); }
-        }
-        Kirigami.Action {
-            id: applyAction
-            text: qsTr("Apply")
-            iconName: "dialog-ok-apply"
-            onTriggered: { root.accepted(); root.close() }
-        }
-        Kirigami.Action {
-            id: yesAction
-            text: qsTr("Yes")
-            iconName: "dialog-ok"
-            onTriggered: { root.accepted(); root.close() }
-        }
-        Kirigami.Action {
-            id: noAction
-            text: qsTr("No")
-            iconName: "dialog-cancel"
-            onTriggered: { root.dismissed(); root.close(); }
+        // header background
+        background: Kirigami.ShadowedRectangle {
+            corners.topLeftRadius: Kirigami.Units.smallSpacing
+            corners.topRightRadius: Kirigami.Units.smallSpacing
+            Kirigami.Theme.colorSet: Kirigami.Theme.Header
+            Kirigami.Theme.inherit: false
+            color: Kirigami.Theme.backgroundColor
+            Kirigami.Separator {
+                id: headerSeparator
+                width: parent.width
+                anchors.bottom: parent.bottom
+            }
         }
     }
-}
 
+    footer: Controls.ToolBar {
+        id: footerToolBar
+        
+        // if there is nothing in the footer, still maintain a height so that we can create a rounded bottom buffer for the dialog
+        property bool bufferMode: contentItem.implicitHeight === 0
+        implicitHeight: bufferMode ? Kirigami.Units.smallSpacing : contentItem.implicitHeight
+        
+        leftPadding: 0; rightPadding: 0; bottomPadding: 0
+        topPadding: bufferMode ? 0 : footerSeparator.implicitHeight // add space for the separator above the footer
+        
+        contentItem: RowLayout {
+            spacing: parent.spacing
+            
+            Loader {
+                id: leadingLoader
+                sourceComponent: root.footerLeadingComponent
+            }
+            
+            // footer buttons
+            Controls.DialogButtonBox {
+                // we don't explicitly set padding, to let the style choose the padding
+                id: dialogButtonBox
+                standardButtons: root.standardButtons
+                visible: count > 0
+                
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                Layout.alignment: dialogButtonBox.alignment
+                
+                position: Controls.DialogButtonBox.Footer
+                
+                // we need to hook all of the buttonbox events to the dialog events
+                onAccepted: root.accept()
+                onRejected: root.reject()
+                onApplied: root.applied()
+                onDiscarded: root.discarded()
+                onHelpRequested: root.helpRequested()
+                onReset: root.reset()
+                
+                // add custom footer buttons
+                Repeater {
+                    model: root.customFooterActions
+                    // we have to use Button instead of ToolButton, because ToolButton has no visual distinction when disabled
+                    delegate: Controls.Button {
+                        flat: flatFooterButtons
+                        action: modelData
+                        visible: modelData.visible
+                    }
+                }
+            }
+            
+            Loader {
+                id: trailingLoader
+                sourceComponent: root.footerTrailingComponent
+            }
+        }
+        
+        background: Kirigami.ShadowedRectangle {
+            // curved footer bottom corners
+            corners.bottomLeftRadius: Kirigami.Units.smallSpacing
+            corners.bottomRightRadius: Kirigami.Units.smallSpacing
+            
+            // we act as a content buffer if nothing is in the footer
+            Kirigami.Theme.colorSet: footerToolBar.bufferMode ? Kirigami.Theme.View : Kirigami.Theme.Window
+            Kirigami.Theme.inherit: false
+            color: Kirigami.Theme.backgroundColor
+
+            // separator above footer
+            Kirigami.Separator {
+                id: footerSeparator
+                visible: !footerToolBar.bufferMode
+                width: parent.width
+                anchors.top: parent.top
+            }
+        }
+    }
+} 
