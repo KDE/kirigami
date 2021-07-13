@@ -235,8 +235,7 @@ T.Dialog {
     implicitWidth: {
         let backgroundWidth = implicitBackgroundWidth + leftInset + rightInset,
             contentWidth = contentItem.implicitWidth + leftPadding + rightPadding;
-        return Math.ceil(Math.min(root.maximumWidth, 
-                                  Math.max(backgroundWidth, contentWidth, implicitHeaderWidth, implicitFooterWidth)));
+        return Math.ceil(Math.min(root.maximumWidth, Math.max(backgroundWidth, contentWidth, implicitHeaderWidth, implicitFooterWidth)));
     }
     implicitHeight: {
         let backgroundHeight = implicitBackgroundHeight + topInset + bottomInset,
@@ -315,8 +314,8 @@ T.Dialog {
             
             property real calculatedMaximumWidth: root.maximumWidth > root.absoluteMaximumWidth ? root.absoluteMaximumWidth : root.maximumWidth
             property real calculatedMaximumHeight: root.maximumHeight > root.absoluteMaximumHeight ? root.absoluteMaximumHeight : root.maximumHeight
-            property real calculatedImplicitWidth: root.mainItem.implicitWidth + leftPadding + rightPadding
-            property real calculatedImplicitHeight: root.mainItem.implicitHeight + topPadding + bottomPadding
+            property real calculatedImplicitWidth: (root.mainItem.implicitWidth ? root.mainItem.implicitWidth : root.mainItem.width) + leftPadding + rightPadding
+            property real calculatedImplicitHeight: (root.mainItem.implicitHeight ? root.mainItem.implicitHeight : root.mainItem.height) + topPadding + bottomPadding
             
             // don't enforce preferred width and height if not set
             Layout.preferredWidth: root.preferredWidth >= 0 ? root.preferredWidth : calculatedImplicitWidth
@@ -414,7 +413,8 @@ T.Dialog {
         }
     }
 
-    footer: Controls.ToolBar {
+    // use top level control rather than toolbar, since toolbar causes button rendering glitches
+    footer: T.Control {
         id: footerToolBar
         
         // if there is nothing in the footer, still maintain a height so that we can create a rounded bottom buffer for the dialog
@@ -440,7 +440,6 @@ T.Dialog {
                 visible: count > 0
                 
                 Layout.fillWidth: true
-                Layout.fillHeight: true
                 Layout.alignment: dialogButtonBox.alignment
                 
                 position: Controls.DialogButtonBox.Footer
