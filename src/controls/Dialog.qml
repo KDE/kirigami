@@ -54,7 +54,7 @@ import "templates/private" as Private
  *     standardButtons: Kirigami.Dialog.Ok | Kirigami.Dialog.Cancel
  * 
  *     onAccepted: console.log("OK button pressed")
- *     onDismissed: console.log("Dismissed")
+ *     onRejected: console.log("Rejected")
  * 
  *     ColumnLayout {
  *         spacing: 0
@@ -74,7 +74,7 @@ import "templates/private" as Private
  * Example with scrolling (ListView scrolling behaviour is handled by Dialog):
  * 
  * @code{.qml}
- * Kirigami.ScrollableDialog {
+ * Kirigami.Dialog {
  *     id: scrollableDialog
  *     title: i18n("Select Number")
  *     

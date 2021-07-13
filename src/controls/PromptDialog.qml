@@ -30,7 +30,7 @@ import org.kde.kirigami 2.18 as Kirigami
  *     footerActions: Kirigami.Dialog.Ok | Kirigami.Dialog.Cancel
  *     
  *     onAccepted: console.log("Accepted")
- *     onDismissed: console.log("Dismissed")
+ *     onRejected: console.log("Rejected")
  * }
  * @endcode
  * 
