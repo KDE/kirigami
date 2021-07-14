@@ -21,8 +21,9 @@ import org.kde.kirigami 2.15 as Kirigami
  *
  * @see CategorizedSettingsPage
  */
-Kirigami.Action {
-    required property string page
+Kirigami.PagePoolAction {
+    required property var page
+    checkable: false
 
     onTriggered: stack.push(page)
 }
