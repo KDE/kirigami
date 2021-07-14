@@ -27,14 +27,22 @@ Kirigami.Page {
 
     title: qsTr("Settings")
 
-    property list<Kirigami.SettingAction> actions
+    property list<Kirigami.PagePoolAction> actions
     property alias stack: pageSettingStack
-//     property alias settingsPool: pageSettingsPool
 
     bottomPadding: 0
     leftPadding: 0
     rightPadding: 0
     topPadding: 0
+
+    onActionsChanged: {
+        for (let i in actions) {
+            let action = actions[i];
+            action.pageStack = pageSettingStack;
+            action.pagePool = pageSettingsPool;
+            action.basePage = pageSettingStack.initialPage
+        }
+    }
 
     onBackRequested: {
         if (pageSettingStack.depth > 1 && !pageSettingStack.wideMode && pageSettingStack.currentIndex !== 0) {
@@ -43,15 +51,17 @@ Kirigami.Page {
         }
     }
 
-    //Kirigami.PagePool {
-        //id: pageSettingsPool
-    //}
+    Kirigami.PagePool {
+        id: pageSettingsPool
+    }
 
     Kirigami.PageRow {
         id: pageSettingStack
         anchors.fill: parent
         columnView.columnWidth: Kirigami.Units.gridUnit * 12
+        globalToolBar.style: Kirigami.ApplicationHeaderStyle.Breadcrumb
         initialPage: Kirigami.ScrollablePage {
+            title: qsTr("Settings")
             bottomPadding: 0
             leftPadding: 0
             rightPadding: 0
