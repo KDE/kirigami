@@ -22,10 +22,9 @@ import org.kde.kirigami 2.17 as Kirigami
  * @since 5.84
  * @since org.kde.kirigami 2.17
  */
-Kirigami.Page {
-    id: page
+Kirigami.PageRow {
+    id: pageSettingStack
 
-    title: qsTr("Settings")
 
     property list<Kirigami.PagePoolAction> actions
     property alias stack: pageSettingStack
@@ -34,6 +33,10 @@ Kirigami.Page {
     leftPadding: 0
     rightPadding: 0
     topPadding: 0
+
+    columnView.columnWidth: Kirigami.Units.gridUnit * 12
+    globalToolBar.showNavigationButtons: Kirigami.ApplicationHeaderStyle.NoNavigationButtons
+    globalToolBar.style: Kirigami.ApplicationHeaderStyle.Breadcrumb
 
     onActionsChanged: {
         for (let i in actions) {
@@ -44,6 +47,7 @@ Kirigami.Page {
         }
     }
 
+    signal backRequested(var event)
     onBackRequested: {
         if (pageSettingStack.depth > 1 && !pageSettingStack.wideMode && pageSettingStack.currentIndex !== 0) {
             event.accepted = true;
@@ -55,27 +59,22 @@ Kirigami.Page {
         id: pageSettingsPool
     }
 
-    Kirigami.PageRow {
-        id: pageSettingStack
-        anchors.fill: parent
-        columnView.columnWidth: Kirigami.Units.gridUnit * 12
-        globalToolBar.style: Kirigami.ApplicationHeaderStyle.Breadcrumb
-        initialPage: Kirigami.ScrollablePage {
-            title: qsTr("Settings")
-            bottomPadding: 0
-            leftPadding: 0
-            rightPadding: 0
-            topPadding: 0
-            Kirigami.Theme.colorSet: Kirigami.Theme.View
-            ListView {
-                Component.onCompleted: if (page.width >= Kirigami.Units.gridUnit * 40) {
-                    actions[0].trigger();
-                }
-                model: page.actions
-                delegate: Kirigami.BasicListItem {
-                    action: modelData
-                }
+    initialPage: Kirigami.ScrollablePage {
+        title: qsTr("Settings")
+        bottomPadding: 0
+        leftPadding: 0
+        rightPadding: 0
+        topPadding: 0
+        Kirigami.Theme.colorSet: Kirigami.Theme.View
+        ListView {
+            Component.onCompleted: if (pageSettingStack.width >= Kirigami.Units.gridUnit * 40) {
+                actions[0].trigger();
+            }
+            model: pageSettingStack.actions
+            delegate: Kirigami.BasicListItem {
+                action: modelData
             }
         }
     }
 }
+

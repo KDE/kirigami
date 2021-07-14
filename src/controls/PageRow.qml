@@ -761,6 +761,7 @@ T.Control {
             right: parent.right
         }
         z: 100
+        property T.Control pageRow: root
         active: globalToolBar.actualStyle != ApplicationHeaderStyle.None || (firstVisibleItem && firstVisibleItem.globalToolBarStyle == ApplicationHeaderStyle.ToolBar)
         visible: active
         height: active ? implicitHeight : 0

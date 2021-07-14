@@ -37,6 +37,11 @@ Kirigami.AbstractApplicationHeader {
         spacing: 0
 
         Item {
+            Layout.preferredWidth: applicationWindow().pageStack.globalToolBar.leftReservedSpace
+            visible: applicationWindow().pageStack !== root
+        }
+
+        Item {
             id: leftHandleAnchor
             visible: (typeof applicationWindow() !== "undefined" && applicationWindow().globalDrawer && applicationWindow().globalDrawer.enabled && applicationWindow().globalDrawer.handleVisible &&
             applicationWindow().globalDrawer.handle.handleAnchor == leftHandleAnchor) &&
@@ -70,7 +75,7 @@ Kirigami.AbstractApplicationHeader {
 
             Layout.leftMargin: leftHandleAnchor.visible ? Kirigami.Units.smallSpacing : 0
 
-            visible: (globalToolBar.showNavigationButtons != Kirigami.ApplicationHeaderStyle.NoNavigationButtons || root.layers.depth > 0) && (globalToolBar.actualStyle != Kirigami.ApplicationHeaderStyle.None)
+            visible: (globalToolBar.showNavigationButtons != Kirigami.ApplicationHeaderStyle.NoNavigationButtons || root.layers.depth > 1) && (globalToolBar.actualStyle != Kirigami.ApplicationHeaderStyle.None)
 
             Layout.maximumWidth: visibleChildren.length > 0 ? Layout.preferredWidth : 0
 

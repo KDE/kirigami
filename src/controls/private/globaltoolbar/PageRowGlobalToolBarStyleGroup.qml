@@ -27,7 +27,6 @@ QtObject {
         }
     }
 
-
     property var showNavigationButtons: (style != Kirigami.ApplicationHeaderStyle.TabBar && (!Kirigami.Settings.isMobile || Qt.platform.os == "ios")) ? (Kirigami.ApplicationHeaderStyle.ShowBackButton | Kirigami.ApplicationHeaderStyle.ShowForwardButton) : Kirigami.ApplicationHeaderStyle.NoNavigationButtons
     property bool separatorVisible: true
     //Unfortunately we can't access pageRow.globalToolbar.Kirigami.Theme directly in a declarative way
