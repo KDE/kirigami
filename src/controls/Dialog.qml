@@ -1,6 +1,7 @@
 /*
     SPDX-FileCopyrightText: 2021 Devin Lin <espidev@gmail.com>
-    SPDX-License-Identifier: GPL-2.0-or-later
+    SPDX-FileCopyrightText: 2021 Noah Davis <noahadvs@gmail.com>
+    SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
 import QtQuick 2.15
