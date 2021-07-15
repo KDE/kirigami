@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="main.qml">main.qml</file>
+        <file alias="SettingsPage.qml">SettingsPage.qml</file>
+        <file alias="GeneralSettingsPage.qml">GeneralSettingsPage.qml</file>
+    </qresource>
+</RCC>
