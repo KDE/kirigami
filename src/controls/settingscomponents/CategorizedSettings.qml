@@ -34,7 +34,7 @@ Kirigami.PageRow {
     rightPadding: 0
     topPadding: 0
 
-    columnView.columnWidth: Kirigami.Units.gridUnit * 12
+    columnView.columnWidth: Kirigami.Units.gridUnit * 7
     globalToolBar.showNavigationButtons: Kirigami.ApplicationHeaderStyle.NoNavigationButtons
     globalToolBar.style: Kirigami.ApplicationHeaderStyle.Breadcrumb
 
@@ -71,9 +71,35 @@ Kirigami.PageRow {
                 actions[0].trigger();
             }
             model: pageSettingStack.actions
-            delegate: Kirigami.BasicListItem {
-                action: modelData
+            delegate: pageSettingStack.width >= Kirigami.Units.gridUnit * 40 ? desktopStyle : mobileStyle
+        }
+    }
+
+    Component {
+        id: desktopStyle
+
+        Kirigami.AbstractListItem {
+            ColumnLayout {
+                anchors.centerIn: parent
+                Kirigami.Icon {
+                    Layout.alignment: Qt.AlignHCenter
+                    source: model.icon.name
+                }
+                QQC2.Label {
+                    Layout.alignment: Qt.AlignHCenter
+                    text: model.text
+                    color: highlighted ? activeTextColor : textColor
+                }
             }
+            action: modelData
+        }
+    }
+
+    Component {
+        id: mobileStyle
+
+        Kirigami.BasicListItem {
+            action: modelData
         }
     }
 }
