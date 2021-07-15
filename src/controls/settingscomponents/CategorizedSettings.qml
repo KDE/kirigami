@@ -25,7 +25,6 @@ import org.kde.kirigami 2.17 as Kirigami
 Kirigami.PageRow {
     id: pageSettingStack
 
-
     property list<Kirigami.PagePoolAction> actions
     property alias stack: pageSettingStack
 
@@ -34,7 +33,7 @@ Kirigami.PageRow {
     rightPadding: 0
     topPadding: 0
 
-    columnView.columnWidth: Kirigami.Units.gridUnit * 7
+    columnView.columnWidth: Kirigami.Units.gridUnit * 7 // So it's the same size as the kxmlgui settings dialogs
     globalToolBar.showNavigationButtons: Kirigami.ApplicationHeaderStyle.NoNavigationButtons
     globalToolBar.style: Kirigami.ApplicationHeaderStyle.Breadcrumb
 
@@ -67,11 +66,11 @@ Kirigami.PageRow {
         topPadding: 0
         Kirigami.Theme.colorSet: Kirigami.Theme.View
         ListView {
-            Component.onCompleted: if (pageSettingStack.width >= Kirigami.Units.gridUnit * 40) {
+            Component.onCompleted: if (pageSettingStack.width >= Kirigami.Units.gridUnit * 40) { // using pageSettingStack doesn't work here apparently
                 actions[0].trigger();
             }
             model: pageSettingStack.actions
-            delegate: pageSettingStack.width >= Kirigami.Units.gridUnit * 40 ? desktopStyle : mobileStyle
+            delegate: pageSettingStack.wideMode ? desktopStyle : mobileStyle
         }
     }
 
