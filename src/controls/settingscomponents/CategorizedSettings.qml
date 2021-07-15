@@ -10,18 +10,17 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
-import org.kde.kirigami 2.17 as Kirigami
+import org.kde.kirigami 2.11 as Kirigami
 
 
 /**
- * A categorized settings component that is ready to integrate in a kirigami app.
  *
- * Allows to have a component that will show a list of settings pages in a sidebar
- * and a available area on the right that will show the actual settings page
- * content.
  *
- * @since 5.84
- * @since org.kde.kirigami 2.17
+ * A container for setting actions showing them in a list view and displaying
+ * the actual page next to it.
+ *
+ * @since 5.85
+ * @since org.kde.kirigami 2.11
  */
 Kirigami.PageRow {
     id: pageSettingStack

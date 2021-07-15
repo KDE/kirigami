@@ -7,8 +7,16 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
-import org.kde.kirigami 2.17 as Kirigami
+import org.kde.kirigami 2.11 as Kirigami
 
+/**
+ * A thin abstraction for creating settings pages.
+ *
+ * @since 5.85
+ * @since org.kde.kirigami 2.11
+ *
+ * @see CategorizedSettings
+ */
 Kirigami.ScrollablePage {
     id: page
 

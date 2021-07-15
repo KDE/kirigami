@@ -957,8 +957,8 @@ Module {
     }
     Component {
         prototype: "QQuickPage"
-        name: "org.kde.kirigami/CategorizedSettings 2.17"
-        exports: ["org.kde.kirigami/CategorizedSettings 2.17"]
+        name: "org.kde.kirigami/CategorizedSettings 2.11"
+        exports: ["org.kde.kirigami/CategorizedSettings 2.11"]
         exportMetaObjectRevisions: [0]
         isComposite: true
         defaultProperty: "mainItem"
@@ -995,8 +995,8 @@ Module {
     }
     Component {
         prototype: "QQuickPage"
-        name: "org.kde.kirigami/GenericSettingsPage 2.17"
-        exports: ["org.kde.kirigami/GenericSettingsPage 2.17"]
+        name: "org.kde.kirigami/GenericSettingsPage 2.11"
+        exports: ["org.kde.kirigami/GenericSettingsPage 2.11"]
         exportMetaObjectRevisions: [0]
         isComposite: true
         defaultProperty: "mainItem"
@@ -1033,8 +1033,8 @@ Module {
     }
     Component {
         prototype: "QQuickPage"
-        name: "org.kde.kirigami/SettingAction 2.17"
-        exports: ["org.kde.kirigami/SettingAction 2.17"]
+        name: "org.kde.kirigami/SettingAction 2.11"
+        exports: ["org.kde.kirigami/SettingAction 2.11"]
         exportMetaObjectRevisions: [0]
         isComposite: true
         defaultProperty: "mainItem"

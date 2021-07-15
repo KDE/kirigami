@@ -7,19 +7,16 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
-import org.kde.kirigami 2.15 as Kirigami
+import org.kde.kirigami 2.11 as Kirigami
 
 /**
- * A settings page action that is ready to integrate in a kirigami app.
+ * A action for creating setting actions, it requires a
+ * page to send to the CategorizedSettings components.
  *
- * Allows to have an action that requires a component field, which will
- * be the page sent to the categorized settings page component.
+ * @since 5.85
+ * @since org.kde.kirigami 2.11
  *
- *
- * @since 5.84
- * @since org.kde.kirigami 2.17
- *
- * @see CategorizedSettingsPage
+ * @see CategorizedSettings
  */
 Kirigami.PagePoolAction {
     required property var page

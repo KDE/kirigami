@@ -230,6 +230,9 @@ void KirigamiPlugin::registerTypes(const char *uri)
     // 2.11
     qmlRegisterType<PagePool>(uri, 2, 11, "PagePool");
     qmlRegisterType(componentUrl(QStringLiteral("PagePoolAction.qml")), uri, 2, 11, "PagePoolAction");
+    qmlRegisterType(componentUrl(QStringLiteral("settingscomponents/CategorizedSettings.qml")), uri, 2, 11, "CategorizedSettings");
+    qmlRegisterType(componentUrl(QStringLiteral("settingscomponents/GenericSettingsPage.qml")), uri, 2, 11, "GenericSettingsPage");
+    qmlRegisterType(componentUrl(QStringLiteral("settingscomponents/SettingAction.qml")), uri, 2, 11, "SettingAction");
 
     // TODO: remove
     qmlRegisterType(componentUrl(QStringLiteral("SwipeListItem2.qml")), uri, 2, 11, "SwipeListItem2");
@@ -273,10 +276,6 @@ void KirigamiPlugin::registerTypes(const char *uri)
     // 2.17
     qmlRegisterType(componentUrl(QStringLiteral("swipenavigator/TabViewLayout.qml")), uri, 2, 17, "TabViewLayout");
     qmlRegisterType(componentUrl(QStringLiteral("swipenavigator/PageTab.qml")), uri, 2, 17, "PageTab");
-    qmlRegisterType(componentUrl(QStringLiteral("settingscomponents/CategorizedSettings.qml")), uri, 2, 17, "CategorizedSettings");
-    qmlRegisterType(componentUrl(QStringLiteral("settingscomponents/GenericSettingsPage.qml")), uri, 2, 17, "GenericSettingsPage");
-    qmlRegisterType(componentUrl(QStringLiteral("settingscomponents/SettingAction.qml")), uri, 2, 17, "SettingAction");
-
 
     qmlProtectModule(uri, 2);
 }
