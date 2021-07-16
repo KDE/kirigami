@@ -995,8 +995,8 @@ Module {
     }
     Component {
         prototype: "QQuickPage"
-        name: "org.kde.kirigami/GenericSettingsPage 2.11"
-        exports: ["org.kde.kirigami/GenericSettingsPage 2.11"]
+        name: "org.kde.kirigami/FormLayoutPage 2.11"
+        exports: ["org.kde.kirigami/FormLayoutPage 2.11"]
         exportMetaObjectRevisions: [0]
         isComposite: true
         defaultProperty: "mainItem"

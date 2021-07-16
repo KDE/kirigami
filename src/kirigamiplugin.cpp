@@ -231,8 +231,8 @@ void KirigamiPlugin::registerTypes(const char *uri)
     qmlRegisterType<PagePool>(uri, 2, 11, "PagePool");
     qmlRegisterType(componentUrl(QStringLiteral("PagePoolAction.qml")), uri, 2, 11, "PagePoolAction");
     qmlRegisterType(componentUrl(QStringLiteral("settingscomponents/CategorizedSettings.qml")), uri, 2, 11, "CategorizedSettings");
-    qmlRegisterType(componentUrl(QStringLiteral("settingscomponents/GenericSettingsPage.qml")), uri, 2, 11, "GenericSettingsPage");
     qmlRegisterType(componentUrl(QStringLiteral("settingscomponents/SettingAction.qml")), uri, 2, 11, "SettingAction");
+    qmlRegisterType(componentUrl(QStringLiteral("FormLayoutPage.qml")), uri, 2, 11, "FormLayoutPage");
 
     // TODO: remove
     qmlRegisterType(componentUrl(QStringLiteral("SwipeListItem2.qml")), uri, 2, 11, "SwipeListItem2");

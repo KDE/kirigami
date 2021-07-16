@@ -53,7 +53,7 @@ SearchField 2.8 SearchField.qml
 PasswordField 2.8 PasswordField.qml
 ListSectionHeader 2.10 ListSectionHeader.qml
 CategorizedSettings 2.11 CategorizedSettings.qml
-GenericSettingsPage 2.11 GenericSettingsPage
 SettingAction 2.11 SettingAction.qml
+FormLayoutPage 2.11 FormLayoutPage.qml
 PlaceholderMessage 2.12 PlaceholderMessage.qml
 CheckableListItem 2.14 CheckableListItem.qml
