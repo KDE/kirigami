@@ -10,12 +10,10 @@ import QtQuick.Layouts 1.15
 import org.kde.kirigami 2.11 as Kirigami
 
 /**
- * A thin abstraction for creating settings pages.
+ * A thin abstraction for creating form layout pages.
  *
  * @since 5.85
  * @since org.kde.kirigami 2.11
- *
- * @see CategorizedSettings
  */
 Kirigami.ScrollablePage {
     id: page
