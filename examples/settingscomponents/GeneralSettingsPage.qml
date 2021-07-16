@@ -9,7 +9,7 @@ import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.11 as Kirigami
 import QtQuick.Layouts 1.15
 
-Kirigami.GenericSettingsPage {
+Kirigami.FormLayoutPage {
     title: i18n("General")
 
     QQC2.CheckBox {
