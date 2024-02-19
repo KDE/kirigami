@@ -135,7 +135,7 @@ QQC2.Page {
      * desired to be used in that case.
      */
     property int globalToolBarStyle: {
-        if (globalToolBar.row && !globalToolBar.stack) {
+        if ((globalToolBar.row && !globalToolBar.stack) || globalToolBar.style !== Kirigami.ApplicationHeaderStyle.Auto) {
             return globalToolBar.row.globalToolBar.actualStyle;
         } else if (globalToolBar.stack) {
             return Kirigami.Settings.isMobile ? Kirigami.ApplicationHeaderStyle.Titles : Kirigami.ApplicationHeaderStyle.ToolBar;
