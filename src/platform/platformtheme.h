@@ -69,6 +69,7 @@ class KIRIGAMIPLATFORM_EXPORT PlatformTheme : public QObject
 
     /**
      * Foreground color for disabled areas, usually a mid-gray
+     * This is doesn't take it from the disabled palette but the "Inactive Text" color
      */
     Q_PROPERTY(QColor disabledTextColor READ disabledTextColor WRITE setCustomDisabledTextColor RESET setCustomDisabledTextColor NOTIFY colorsChanged FINAL)
 
