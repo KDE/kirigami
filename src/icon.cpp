@@ -234,9 +234,26 @@ QSGNode *Icon::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaintNodeData * 
         }
 
         if (node->childCount() > 1) {
-            auto toRemove = node->firstChild();
-            node->removeChildNode(toRemove);
-            delete toRemove;
+            // Workaround for QTBUG-123799
+            // When using the software renderer, scene graph nodes may end up being placed
+            // incorrectly when doing certain add/remove operations. Most notably, we may
+            // end up briefly creating two nodes after Icon creation because of the above
+            // animation code. This would then result in icons being drawn at scene 0,0
+            // instead of item 0,0. However, if we instead ensure to always delete the
+            // mostly-invisible node, placement is remains correct.
+            QSGNode *toRemove = nullptr;
+            for (int i = 0; i < node->childCount(); ++i) {
+                auto opacityNode = static_cast<QSGOpacityNode *>(node->childAtIndex(i));
+                if (opacityNode->opacity() <= 0.01) {
+                    toRemove = opacityNode;
+                    break;
+                }
+            }
+
+            if (toRemove) {
+                node->removeChildNode(toRemove);
+                delete toRemove;
+            }
         }
 
         updateSubtree(node->firstChild(), 1.0);
