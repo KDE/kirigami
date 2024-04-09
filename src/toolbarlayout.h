@@ -76,6 +76,12 @@ class ToolBarLayout : public QQuickItem
      */
     Q_PROPERTY(QQmlComponent *iconDelegate READ iconDelegate WRITE setIconDelegate NOTIFY iconDelegateChanged FINAL)
     /**
+     * A component that is used to create separator delegates from.
+     *
+     * \sa fullDelegate
+     */
+    Q_PROPERTY(QQmlComponent *separatorDelegate READ separatorDelegate WRITE setSeparatorDelegate NOTIFY separatorDelegateChanged FINAL)
+    /**
      * A component that is used to create the "more button" item from.
      *
      * The more button is shown when there are actions that do not fit the
@@ -178,6 +184,10 @@ public:
     QQmlComponent *iconDelegate() const;
     void setIconDelegate(QQmlComponent *newIconDelegate);
     Q_SIGNAL void iconDelegateChanged();
+
+    QQmlComponent *separatorDelegate() const;
+    void setSeparatorDelegate(QQmlComponent *newSeparatorDelegate);
+    Q_SIGNAL void separatorDelegateChanged();
 
     QQmlComponent *moreButton() const;
     void setMoreButton(QQmlComponent *newMoreButton);

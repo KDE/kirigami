@@ -60,6 +60,7 @@ public:
     QList<QObject *> hiddenActions;
     QQmlComponent *fullDelegate = nullptr;
     QQmlComponent *iconDelegate = nullptr;
+    QQmlComponent *separatorDelegate = nullptr;
     QQmlComponent *moreButton = nullptr;
     qreal spacing = 0.0;
     Qt::Alignment alignment = Qt::AlignLeft;
@@ -219,6 +220,23 @@ void ToolBarLayout::setIconDelegate(QQmlComponent *newIconDelegate)
     Q_EMIT iconDelegateChanged();
 }
 
+QQmlComponent *ToolBarLayout::separatorDelegate() const
+{
+    return d->iconDelegate;
+}
+
+void ToolBarLayout::setSeparatorDelegate(QQmlComponent *newSeparatorDelegate)
+{
+    if (newSeparatorDelegate == d->separatorDelegate) {
+        return;
+    }
+
+    d->separatorDelegate = newSeparatorDelegate;
+    d->delegates.clear();
+    relayout();
+    Q_EMIT separatorDelegateChanged();
+}
+
 QQmlComponent *ToolBarLayout::moreButton() const
 {
     return d->moreButton;
@@ -371,7 +389,7 @@ void ToolBarLayoutPrivate::calculateImplicitSize()
         return;
     }
 
-    if (!fullDelegate || !iconDelegate || !moreButton) {
+    if (!fullDelegate || !iconDelegate || !separatorDelegate || !moreButton) {
         qCWarning(KirigamiLog) << "ToolBarLayout: Unable to layout, required properties are not set";
         return;
     }
@@ -620,6 +638,11 @@ ToolBarLayoutDelegate *ToolBarLayoutPrivate::createDelegate(QObject *action)
 
     if (!fullComponent) {
         fullComponent = fullDelegate;
+    }
+
+    auto separator = action->property("separator");
+    if (separator.isValid() && separator.toBool()) {
+        fullComponent = separatorDelegate;
     }
 
     auto result = new ToolBarLayoutDelegate(q);

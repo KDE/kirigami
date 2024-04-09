@@ -184,6 +184,8 @@ QQC2.Control {
             }
         }
 
+        separatorDelegate: QQC2.ToolSeparator {}
+
         moreButton: P.PrivateActionToolButton {
             flat: root.flat
 
