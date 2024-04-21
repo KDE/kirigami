@@ -140,7 +140,7 @@ T.TabButton {
             radius: Kirigami.Units.cornerRadius
             color: control.down ? control.__pressedColor : (control.checked || control.hovered ? control.__hoverSelectColor : "transparent")
 
-            border.color: control.checked ? control.__checkedBorderColor : (control.down ? control.__pressedBorderColor : color)
+            border.color: control.visualFocus ? control.__checkedBorderColor : (control.down ? control.__pressedBorderColor : color)
             border.width: 1
 
             Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration } }
