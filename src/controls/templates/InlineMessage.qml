@@ -225,7 +225,34 @@ T.Control {
             width: Kirigami.Units.iconSizes.smallMedium
             height: Kirigami.Units.iconSizes.smallMedium
 
-            anchors.left: parent.left
+            anchors {
+                left: parent.left
+                leftMargin: Kirigami.Units.smallSpacing
+                topMargin: Kirigami.Units.smallSpacing
+            }
+
+            states: [
+                State {
+                    name: "multi-line"
+                    when: label.height > icon.height * 1.7
+                    AnchorChanges {
+                        target: icon
+                        anchors.top: icon.parent.top
+                        anchors.verticalCenter: undefined
+                    }
+                },
+                // States are evaluated in the order they are declared.
+                // This is a fallback state.
+                State {
+                    name: "single-line"
+                    when: true
+                    AnchorChanges {
+                        target: icon
+                        anchors.top: undefined
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+                }
+            ]
 
             source: {
                 if (root.icon.name) {
@@ -247,25 +274,6 @@ T.Control {
             }
 
             color: root.icon.color
-
-            states: [
-                State {
-                    when: contentLayout.atBottom
-                    AnchorChanges {
-                        target: icon
-                        anchors.top: contentLayout.top
-                    }
-                },
-                // States are evaluated in the order they are declared.
-                // This is a fallback state.
-                State {
-                    when: true
-                    AnchorChanges {
-                        target: icon
-                        anchors.verticalCenter: contentLayout.verticalCenter
-                    }
-                }
-            ]
         }
 
         Kirigami.SelectableLabel {
@@ -273,7 +281,7 @@ T.Control {
 
             anchors {
                 left: icon.right
-                leftMargin: Kirigami.Units.smallSpacing
+                leftMargin: Kirigami.Units.largeSpacing
                 right: root.showCloseButton ? closeButton.left : parent.right
                 rightMargin: root.showCloseButton ? Kirigami.Units.smallSpacing : 0
                 top: parent.top
