@@ -54,18 +54,15 @@ Item {
     /**
      * The color to use for the title.
      *
-     * By default this is `Kirigami.Theme.textColor` unless `selected` is true
-     * in which case this is `Kirigami.Theme.highlightedTextColor`.
+     * By default this is `Kirigami.Theme.textColor`.
      */
-    property color color: selected ? Platform.Theme.highlightedTextColor : Platform.Theme.textColor
+    property color color: Platform.Theme.textColor
     /**
      * The color to use for the subtitle.
      *
      * By default this is `color` mixed with the background color.
      */
-    property color subtitleColor: selected
-        ? Platform.Theme.highlightedTextColor
-        : Platform.ColorUtils.linearInterpolation(color, Platform.Theme.backgroundColor, 0.3)
+    property color subtitleColor: Platform.ColorUtils.linearInterpolation(color, Platform.Theme.backgroundColor, 0.3)
     /**
      * The font used to display the title.
      */
