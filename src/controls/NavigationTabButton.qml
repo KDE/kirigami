@@ -218,26 +218,9 @@ T.TabButton {
                 }
             }
 
-            // Work around bold text changing implicit size
-            Layout.preferredWidth: boldMetrics.implicitWidth
-            Layout.preferredHeight: boldMetrics.implicitHeight * label.lineCount
             Layout.fillWidth: true
 
             Accessible.ignored: true
-
-            QQC2.Label {
-                id: boldMetrics
-                visible: false
-                text: label.text
-                font.bold: true
-                font.family: Kirigami.Theme.smallFont.family
-                font.pointSize: Kirigami.Theme.smallFont.pointSize
-                horizontalAlignment: Text.AlignHCenter
-                wrapMode: Text.Wrap
-                elide: Text.ElideMiddle
-
-                Accessible.ignored: true
-            }
         }
     }
 }
