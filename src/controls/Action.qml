@@ -5,10 +5,12 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
+import QtQml
 import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
+import org.kde.kirigami.private as P
 
 /**
  * @brief An item that represents an abstract Action
@@ -24,7 +26,7 @@ QQC2.Action {
      *
      * default: ``true``
      */
-    property bool visible: true
+    property bool visible: !fromQAction || fromQAction.visible
 
     /**
      * @brief This property holds the tooltip text that is shown when the cursor is hovering over the control.
@@ -103,6 +105,15 @@ QQC2.Action {
      * @property list<T.Action> children
      */
     default property list<T.Action> children
+
+    /**
+     * This property holds a QAction
+     *
+     * When provided Kirigami.Action will be initialized from the given QAction.
+     *
+     * @since Kirigami 6.4.0
+     */
+    property QtObject fromQAction
 //END properties
 
     onChildrenChanged: {
@@ -119,4 +130,19 @@ QQC2.Action {
      */
     readonly property list<T.Action> visibleChildren: children
         .filter(action => !(action instanceof Kirigami.Action) || action.visible)
+
+    shortcut: fromQAction?.shortcut
+    text: fromQAction?.text ?? ''
+    icon.name: fromQAction ? P.ActionHelper.iconName(fromQAction.icon) : ''
+    onTriggered: if (fromQAction) {
+        fromQAction.trigger();
+    }
+    checkable: fromQAction?.checkable ?? false
+    checked: fromQAction?.checked ?? false
+    enabled: !fromQAction || fromQAction.enabled && parent.enabled
+
+    readonly property Shortcut alternateShortcut : Shortcut {
+        sequences: P.ActionHelper.alternateShortcuts(fromQAction)
+        onActivated: root.trigger()
+    }
 }

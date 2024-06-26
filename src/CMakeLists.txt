@@ -267,12 +267,13 @@ ecm_add_qml_module(KirigamiPrivatePlugin
 target_sources(KirigamiPrivatePlugin PRIVATE
     copyhelper.cpp
     copyhelper.h
+    actionhelper.cpp
+    actionhelper_p.h
 )
 
 target_link_libraries(KirigamiPrivatePlugin PRIVATE Qt6::Gui)
 
 ecm_finalize_qml_module(KirigamiPrivatePlugin DESTINATION ${KDE_INSTALL_QMLDIR})
-
 
 if (ANDROID)
     install(FILES Kirigami-android-dependencies.xml
