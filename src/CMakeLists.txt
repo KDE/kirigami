@@ -22,10 +22,40 @@ if (ANDROID)
     set(_extra_options ${_extra_options} OPTIONAL_IMPORTS org.kde.breeze)
 endif()
 
+# Module: org.kde.kirigami.private
+
+add_library(KirigamiPrivate)
+ecm_add_qml_module(KirigamiPrivate
+    URI "org.kde.kirigami.private"
+    GENERATE_PLUGIN_SOURCE
+)
+
+target_sources(KirigamiPrivate PRIVATE
+    copyhelper.cpp
+    copyhelper.h
+    actionhelper.cpp
+    actionhelper.h
+)
+
+include_static_dependencies(KirigamiPrivate EXPORT KirigamiTargets)
+
+target_link_libraries(KirigamiPrivate PRIVATE Qt6::Gui)
+
+ecm_finalize_qml_module(KirigamiPrivate DESTINATION ${KDE_INSTALL_QMLDIR})
+
+if (NOT BUILD_SHARED_LIBS)
+    install(TARGETS KirigamiPrivateplugin EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
+endif()
+
+install(TARGETS KirigamiPrivate EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
+
+# Module: org.kde.kirigami
+
 ecm_add_qml_module(Kirigami URI "org.kde.kirigami" VERSION 2.0
     CLASS_NAME KirigamiPlugin
     DEPENDENCIES
     "QtQuick.Controls"
+    "org.kde.kirigami.private"
     IMPORTS
     "org.kde.kirigami.platform"
     "org.kde.kirigami.primitives"
@@ -243,10 +273,27 @@ endif()
 if (NOT BUILD_SHARED_LIBS)
     # Ensure we install the plugin library file as that's required to link
     # against for static builds to work properly
-    target_link_libraries(Kirigamiplugin PRIVATE KirigamiPlatformplugin KirigamiDelegatesplugin KirigamiPrimitivesplugin KirigamiDialogsplugin KirigamiLayoutsplugin)
+    target_link_libraries(Kirigamiplugin
+        PRIVATE
+            KirigamiPlatformplugin
+            KirigamiDelegatesplugin
+            KirigamiPrimitivesplugin
+            KirigamiDialogsplugin
+            KirigamiLayoutsplugin
+            KirigamiPrivateplugin
+    )
     install(TARGETS Kirigamiplugin EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
 else()
-    target_link_libraries(Kirigami PUBLIC KirigamiPlatform PRIVATE KirigamiDelegates KirigamiPrimitives KirigamiDialogs KirigamiLayouts)
+    target_link_libraries(Kirigami
+        PUBLIC
+            KirigamiPlatform
+        PRIVATE
+            KirigamiDelegates
+            KirigamiPrimitives
+            KirigamiDialogs
+            KirigamiLayouts
+            KirigamiPrivate
+    )
 endif()
 
 install(TARGETS Kirigami EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
@@ -257,23 +304,6 @@ install(EXPORT KirigamiTargets
 )
 
 ecm_finalize_qml_module(Kirigami DESTINATION ${KDE_INSTALL_QMLDIR})
-
-ecm_add_qml_module(KirigamiPrivatePlugin
-    URI "org.kde.kirigami.private"
-    VERSION 2.6
-    GENERATE_PLUGIN_SOURCE
-)
-
-target_sources(KirigamiPrivatePlugin PRIVATE
-    copyhelper.cpp
-    copyhelper.h
-    actionhelper.cpp
-    actionhelper_p.h
-)
-
-target_link_libraries(KirigamiPrivatePlugin PRIVATE Qt6::Gui)
-
-ecm_finalize_qml_module(KirigamiPrivatePlugin DESTINATION ${KDE_INSTALL_QMLDIR})
 
 if (ANDROID)
     install(FILES Kirigami-android-dependencies.xml
