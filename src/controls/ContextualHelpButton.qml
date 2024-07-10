@@ -63,7 +63,7 @@ QQC2.ToolButton {
 
     QQC2.ToolTip {
         id: toolTip
-        visible: root.hovered || root.toolTipVisible
+        visible: root.hovered || root.toolTipVisible || toolTipHandler.hovered
         onVisibleChanged: {
             if (!visible && root.toolTipVisible) {
                 root.toolTipVisible = false;
@@ -71,6 +71,13 @@ QQC2.ToolButton {
             }
         }
         timeout: -1 // Don't disappear while the user might still be reading it!
+
+        HoverHandler {
+            // Also keep the tooltip open while hovering it
+            // Fixes the flickering when the popup covers the button
+            id: toolTipHandler
+            enabled: !root.toolTipVisible // Only if activated by hovering
+        }
     }
 
     MouseArea {
