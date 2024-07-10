@@ -63,6 +63,7 @@ QQC2.ToolButton {
 
     QQC2.ToolTip {
         id: toolTip
+        clip: true
         visible: root.hovered || root.toolTipVisible || toolTipHandler.hovered
         onVisibleChanged: {
             if (!visible && root.toolTipVisible) {
