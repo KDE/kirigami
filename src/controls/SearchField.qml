@@ -8,7 +8,7 @@
 import QtQuick
 import org.kde.kirigami as Kirigami
 
-/**
+/*!
  * \brief This is a standard TextField following the KDE HIG, which, by default,
  * uses Ctrl+F as the focus keyboard shortcut and "Search…" as a placeholder text.
  *
@@ -26,7 +26,7 @@ import org.kde.kirigami as Kirigami
  */
 Kirigami.ActionTextField {
     id: root
-    /**
+    /*!
      * \brief This property sets whether the accepted signal is fired automatically
      * when the text is changed.
      *
@@ -40,7 +40,7 @@ Kirigami.ActionTextField {
      */
     property bool autoAccept: true
 
-    /**
+    /*!
      * \brief This property sets whether to delay automatic acceptance of the search input.
      *
      * Set this to true if your search is expensive (such as for online

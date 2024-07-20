@@ -11,7 +11,7 @@ import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 import "private" as KP
 
-/**
+/*!
  * A specialized type of drawer that will show a list of actions
  * relevant to the application's current page.
  *
@@ -51,14 +51,14 @@ Kirigami.OverlayDrawer {
     handleClosedIcon.source: null
     handleOpenIcon.source: null
 
-    /**
+    /*!
      * \brief A title for the action list that will be shown to the user when opens the drawer
      *
      * default: ``qsTr("Actions")``
      */
     property string title: qsTr("Actions")
 
-    /**
+    /*!
      * List of contextual actions to be displayed in a ListView.
      *
      * \sa QtQuick.Action
@@ -67,7 +67,7 @@ Kirigami.OverlayDrawer {
      */
     property list<T.Action> actions
 
-    /**
+    /*!
      * \brief Arbitrary content to show above the list view.
      *
      * default: `an Item containing a Kirigami.Heading that displays a title whose text is
@@ -78,7 +78,7 @@ Kirigami.OverlayDrawer {
      */
     property alias header: menu.header
 
-    /**
+    /*!
      * \brief Arbitrary content to show below the list view.
      * @property Component footer
      * @since 2.7

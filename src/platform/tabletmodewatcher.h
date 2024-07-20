@@ -32,7 +32,7 @@ public:
     inline static QEvent::Type type = QEvent::None;
 };
 
-/**
+/*!
  * @class TabletModeWatcher tabletmodewatcher.h <Kirigami/TabletModeWatcher>
  *
  * This class reports on the status of certain transformable
@@ -53,7 +53,7 @@ public:
     ~TabletModeWatcher() override;
     static TabletModeWatcher *self();
 
-    /**
+    /*!
      * @returns true if the device supports a tablet mode and has a switch
      * to report when the device has been transformed.
      * For debug purposes, if either the environment variable QT_QUICK_CONTROLS_MOBILE
@@ -61,7 +61,7 @@ public:
      */
     bool isTabletModeAvailable() const;
 
-    /**
+    /*!
      * @returns true if the machine is now in tablet mode, such as the
      * laptop keyboard flipped away or detached.
      * Note that this doesn't mean exactly a tablet form factor, but
@@ -73,7 +73,7 @@ public:
      */
     bool isTabletMode() const;
 
-    /**
+    /*!
      * Register an arbitrary QObject to send events from this.
      * At the moment only one event will be sent: TabletModeChangedEvent
      */

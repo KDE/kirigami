@@ -9,7 +9,7 @@
 
 #include <qqmlregistration.h>
 
-/**
+/*!
  * \brief This attached property contains hints for spell checker.
  *
  * @warning Kirigami doesn't provide any spell checker per se, this is just a
@@ -37,7 +37,7 @@ class SpellCheckAttached : public QObject
     QML_UNCREATABLE("Attached property only")
     QML_ATTACHED(SpellCheckAttached)
 
-    /**
+    /*!
      * This property holds whether the spell checking should be enabled on the
      * TextField/TextArea.
      *

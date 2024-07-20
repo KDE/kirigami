@@ -9,7 +9,7 @@ import org.kde.kirigami as Kirigami
 
 Item {
     id: shadow
-    /**
+    /*!
      * \brief This property holds the edge of the shadow that will determine the direction of the gradient.
      * The acceptable values are:
      * * ``Qt.TopEdge``: the top edge of the content item.

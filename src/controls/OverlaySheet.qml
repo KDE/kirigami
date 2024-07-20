@@ -8,7 +8,7 @@ import org.kde.kirigami as Kirigami
 import "private" as P
 import "templates" as T
 
-/**
+/*!
  * \brief An overlay sheet that covers the current Page content.
  *
  * Its contents can be scrolled up or down, scrolling all the way up or

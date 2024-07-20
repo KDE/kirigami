@@ -19,7 +19,7 @@ namespace Kirigami
 namespace Platform
 {
 
-/**
+/*!
  * This exposes information about the current used input method.
  */
 class KIRIGAMIPLATFORM_EXPORT InputMethod : public QObject
@@ -32,7 +32,7 @@ public:
     InputMethod(QObject *parent = nullptr);
     ~InputMethod() override;
 
-    /**
+    /*!
      * Is an input method available?
      *
      * This will be true if there is an input method available. When it is
@@ -43,7 +43,7 @@ public:
     bool available() const;
     Q_SIGNAL void availableChanged();
 
-    /**
+    /*!
      * Is the current input method enabled?
      *
      * If this is false, that means the input method is available but not in use.
@@ -52,7 +52,7 @@ public:
     bool enabled() const;
     Q_SIGNAL void enabledChanged();
 
-    /**
+    /*!
      * Is the current input method active?
      *
      * What active means depends on the type of input method. In case of a
@@ -63,7 +63,7 @@ public:
     bool active() const;
     Q_SIGNAL void activeChanged();
 
-    /**
+    /*!
      * Is the current input method visible?
      *
      * For some input methods this will match \ref active however for others this
@@ -73,7 +73,7 @@ public:
     bool visible() const;
     Q_SIGNAL void visibleChanged();
 
-    /**
+    /*!
      * Will the input method be shown when a text input field gains focus?
      *
      * This is intended to be used to decide whether to give an input field

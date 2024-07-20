@@ -12,7 +12,7 @@
 
 class QQuickItem;
 
-/**
+/*!
  * This attached property contains the information for decorating a org::kde::kirigami::FormLayout:
  *
  * It contains the text labels of fields and information about sections.
@@ -39,15 +39,15 @@ class FormLayoutAttached : public QObject
     QML_NAMED_ELEMENT(FormData)
     QML_ATTACHED(FormLayoutAttached)
     QML_UNCREATABLE("")
-    /**
+    /*!
      * The label for a org::kde::kirigami::FormLayout field
      */
     Q_PROPERTY(QString label READ label WRITE setLabel NOTIFY labelChanged FINAL)
-    /**
+    /*!
      * The alignment for the label of a org::kde::kirigami::FormLayout field
      */
     Q_PROPERTY(int labelAlignment READ labelAlignment WRITE setLabelAlignment NOTIFY labelAlignmentChanged FINAL)
-    /**
+    /*!
      * If true, the child item of a org::kde::kirigami::FormLayout becomes a section separator, and
      * may have different looks:
      * * To make it just a space between two fields, just put an empty item with FormData.isSection:
@@ -94,7 +94,7 @@ class FormLayoutAttached : public QObject
      */
     Q_PROPERTY(bool isSection READ isSection WRITE setIsSection NOTIFY isSectionChanged FINAL)
 
-    /**
+    /*!
      * This property can only be used
      * in conjunction with a Kirigami.FormData.label,
      * often in a layout that is a child of a org::kde::kirigami::FormLayout.

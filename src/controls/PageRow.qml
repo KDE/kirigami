@@ -12,7 +12,7 @@ import org.kde.kirigami as Kirigami
 import "private/globaltoolbar" as GlobalToolBar
 import "templates" as KT
 
-/**
+/*!
  * PageRow implements a row-based navigation model, which can be used
  * with a set of interlinked information pages. Pages are pushed in the
  * back of the row and the view scrolls until that row is visualized.
@@ -26,19 +26,19 @@ QT.Control {
     id: root
 
 //BEGIN PROPERTIES
-    /**
+    /*!
      * \brief This property holds the number of pages currently pushed onto the view.
      * @property int depth
      */
     readonly property alias depth: columnView.count
 
-    /**
+    /*!
      * \brief This property holds the last page in the row.
      * @property Page lastItem
      */
     readonly property Item lastItem: columnView.contentChildren.length > 0 ?  columnView.contentChildren[columnView.contentChildren.length - 1] : null
 
-    /**
+    /*!
      * \brief This property holds the currently visible/active page.
      *
      * Because of the ability to display multiple pages, it will hold the currently active page.
@@ -47,26 +47,26 @@ QT.Control {
      */
     readonly property alias currentItem: columnView.currentItem
 
-    /**
+    /*!
      * \brief This property holds the index of the currently active page.
      * \sa currentItem
      * @property int currentIndex
      */
     property alias currentIndex: columnView.currentIndex
 
-    /**
+    /*!
      * \brief This property sets the initial page for this PageRow.
      * @property Page initialPage
      */
     property var initialPage
 
-    /**
+    /*!
      * \brief This property holds the main ColumnView of this Row.
      * @property ColumnView contentItem
      */
     contentItem: columnView
 
-    /**
+    /*!
      * \brief This property holds the ColumnView that this PageRow owns.
      *
      * Generally, you shouldn't need to change the value of this property.
@@ -76,14 +76,14 @@ QT.Control {
      */
     property alias columnView: columnView
 
-    /**
+    /*!
      * \brief This property holds the present pages in the PageRow.
      * @property list<Page> items
      * @since 2.6
      */
     readonly property alias items: columnView.contentChildren
 
-    /**
+    /*!
      * \brief This property holds all visible pages in the PageRow,
      * excluding those which are scrolled away.
      * @property list<Page> visibleItems
@@ -91,7 +91,7 @@ QT.Control {
      */
     readonly property alias visibleItems: columnView.visibleItems
 
-    /**
+    /*!
      * \brief This property holds the first page in the PageRow that is at least partially visible.
      * @note Pages before that one (the one contained in the property) will be out of the viewport.
      * \sa ColumnView::leadingVisibleItem
@@ -100,7 +100,7 @@ QT.Control {
      */
     readonly property alias leadingVisibleItem: columnView.leadingVisibleItem
 
-    /**
+    /*!
      * \brief This property holds the last page in the PageRow that is at least partially visible.
      * @note Pages after that one (the one contained in the property) will be out of the viewport.
      * \sa ColumnView::trailingVisibleItem
@@ -109,7 +109,7 @@ QT.Control {
      */
     readonly property alias trailingVisibleItem: columnView.trailingVisibleItem
 
-    /**
+    /*!
      * \brief This property holds the default width for a column.
      *
      * default: ``20 * Kirigami.Units.gridUnit``
@@ -118,7 +118,7 @@ QT.Control {
      */
     property int defaultColumnWidth: Kirigami.Units.gridUnit * 20
 
-    /**
+    /*!
      * \brief This property sets whether it is possible to go back/forward
      * by swiping with a gesture on the content view.
      *
@@ -128,13 +128,13 @@ QT.Control {
      */
     property alias interactive: columnView.interactive
 
-    /**
+    /*!
      * \brief This property tells whether the PageRow is wide enough to show multiple pages.
      * @since 5.37
      */
     readonly property bool wideMode: width >= defaultColumnWidth * 2 && depth >= 2
 
-    /**
+    /*!
      * \brief This property sets whether the separators between pages should be displayed.
      *
      * default: ``true``
@@ -144,7 +144,7 @@ QT.Control {
      */
     property alias separatorVisible: columnView.separatorVisible
 
-    /**
+    /*!
      * \brief This property sets the appearance of an optional global toolbar for the whole PageRow.
      *
      * It's a grouped property comprised of the following properties:
@@ -168,7 +168,7 @@ QT.Control {
      */
     readonly property alias globalToolBar: globalToolBar
 
-    /**
+    /*!
      * \brief This property assigns a drawer as an internal left sidebar for this PageRow.
      *
      * In this case, when open and not modal, the drawer contents will be in the same layer as the base pagerow.
@@ -179,7 +179,7 @@ QT.Control {
     // TODO KF6: globaldrawer should use actions also used by this sidebar instead of reparenting globaldrawer contents?
     property OverlayDrawer leftSidebar
 
-    /**
+    /*!
      * \brief This property holds the modal layers.
      *
      * Sometimes an application needs a modal page that always covers all the rows.
@@ -190,7 +190,7 @@ QT.Control {
      */
     property alias layers: layersStack
 
-    /**
+    /*!
      * \brief This property holds whether to automatically pop pages at the top of the stack if they are not visible.
      *
      * If a user navigates to a previous page on the stack (ex. pressing back button) and pages above
@@ -202,7 +202,7 @@ QT.Control {
 //END PROPERTIES
 
 //BEGIN FUNCTIONS
-    /**
+    /*!
      * \brief This method pushes a page on the stack.
      *
      * A single page can be defined as an url, a component, or an object. It can
@@ -229,7 +229,7 @@ QT.Control {
         return item
     }
 
-    /**
+    /*!
      * \brief Pushes a page as a new dialog on desktop and as a layer on mobile.
      *
      * @param page A single page defined as either a string url, a component or
@@ -333,7 +333,7 @@ QT.Control {
         return item;
     }
 
-    /**
+    /*!
      * \brief Inserts a new page or a list of new pages at an arbitrary position.
      *
      * A single page can be defined as an url, a component, or an object. It can
@@ -364,7 +364,7 @@ QT.Control {
         return pagesLogic.insertPage_unchecked(position, page, properties)
     }
 
-    /**
+    /*!
      * Move the page at position fromPos to the new position toPos
      * If needed, currentIndex will be adjusted
      * in order to keep the same current page.
@@ -374,7 +374,7 @@ QT.Control {
         columnView.moveItem(fromPos, toPos);
     }
 
-    /**
+    /*!
      * \brief Remove the given page.
      * @param page The page can be given both as integer position or by reference
      * @return The page that has just been removed
@@ -387,7 +387,7 @@ QT.Control {
         return null
     }
 
-    /**
+    /*!
      * \brief Pops a page off the stack.
      * @param page If page is specified then the stack is unwound to that page,
      * to unwind to the first page specify page as null.
@@ -397,7 +397,7 @@ QT.Control {
         return columnView.pop(page);
     }
 
-    /**
+    /*!
      * \brief Replaces a page on the current index.
      *
      * A single page can be defined as an url, a component, or an object. It can
@@ -467,7 +467,7 @@ QT.Control {
         return pageItem;
     }
 
-    /**
+    /*!
      * \brief Clears the page stack.
      *
      * Destroy (or reparent) all the pages contained.
@@ -476,7 +476,7 @@ QT.Control {
         columnView.clear();
     }
 
-    /**
+    /*!
      * @return the page at idx
      * @param idx the depth of the page we want
      */
@@ -484,7 +484,7 @@ QT.Control {
         return items[idx];
     }
 
-    /**
+    /*!
      * Go back to the previous index and scroll to the left to show one more column.
      */
     function flickBack(): void {
@@ -493,7 +493,7 @@ QT.Control {
         }
     }
 
-    /**
+    /*!
      * Acts as if you had pressed the "back" button on Android or did Alt-Left on desktop,
      * "going back" in the layers and page row. Results in a layer being popped if available,
      * or the currentIndex being set to currentIndex-1 if not available.
@@ -536,7 +536,7 @@ QT.Control {
         }
     }
 
-    /**
+    /*!
      * Acts as if you had pressed the "forward" shortcut on desktop,
      * "going forward" in the page row. Results in the active page
      * becoming the next page in the row from the current active page,
@@ -548,7 +548,7 @@ QT.Control {
 //END FUNCTIONS
 
 //BEGIN signals & signal handlers
-    /**
+    /*!
      * \brief Emitted when a page has been inserted anywhere.
      * @param position where the page has been inserted
      * @param page the new page
@@ -556,14 +556,14 @@ QT.Control {
      */
     signal pageInserted(int position, Item page)
 
-    /**
+    /*!
      * \brief Emitted when a page has been pushed to the bottom.
      * @param page the new page
      * @since 2.5
      */
     signal pagePushed(Item page)
 
-    /**
+    /*!
      * \brief Emitted when a page has been removed from the row.
      * @param page the page that has been removed: at this point it's still valid,
      *           but may be auto deleted soon.

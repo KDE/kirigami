@@ -9,7 +9,7 @@ import org.kde.kirigami as Kirigami
 import org.kde.kirigami.private as KirigamiPrivate
 import QtQuick.Controls as QQC2
 
-/**
+/*!
  * \brief A link button that contains a URL.
  *
  * It will open the url by default, allow to copy it if triggered with the

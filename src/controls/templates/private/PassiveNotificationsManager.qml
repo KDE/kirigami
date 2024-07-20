@@ -9,7 +9,7 @@ import QtQuick.Controls as QQC2
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
-/**
+/*!
  * \brief PassiveNotificationManager is meant to display small, passive and inline notifications in the app.
  *
  * It is used to show messages of limited importance that make sense only when
@@ -64,7 +64,7 @@ Item {
         }
     }
 
-    /**
+    /*!
      * \brief Remove a notification at specific index. By default, index is set to 0.
      */
     function hideNotification(index = 0) {

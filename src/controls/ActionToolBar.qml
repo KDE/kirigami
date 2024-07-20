@@ -12,7 +12,7 @@ import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 import "private" as P
 
-/**
+/*!
  * \sa A toolbar built out of a list of actions.
  *
  * The default representation for visible actions is a QtQuick.Controls.ToolButton, but
@@ -31,7 +31,7 @@ QQC2.Control {
     id: root
 
 //BEGIN properties
-    /**
+    /*!
      * \sa This property holds a list of visible actions.
      *
      * The ActionToolBar will try to display as many actions as possible.
@@ -41,14 +41,14 @@ QQC2.Control {
      */
     readonly property alias actions: layout.actions
 
-    /**
+    /*!
      * \sa This property holds whether the buttons will have a flat appearance.
      *
      * default: ``true``
      */
     property bool flat: true
 
-    /**
+    /*!
      * \sa This property determines how the icon and text are displayed within the button.
      *
      * Permitted values are:
@@ -64,7 +64,7 @@ QQC2.Control {
      */
     property int display: QQC2.Button.TextBesideIcon
 
-    /**
+    /*!
      * \sa This property holds the alignment of the buttons.
      *
      * When there is more space available than required by the visible delegates,
@@ -80,7 +80,7 @@ QQC2.Control {
      */
     property alias alignment: layout.alignment
 
-    /**
+    /*!
      * \sa This property holds the position of the toolbar.
      *
      * If this ActionToolBar is the contentItem of a QQC2 Toolbar, the position is bound to the ToolBar's position
@@ -93,7 +93,7 @@ QQC2.Control {
      */
     property int position: parent instanceof T.ToolBar ? parent.position : QQC2.ToolBar.Header
 
-    /**
+    /*!
      * \sa This property holds the maximum width of the content of this ToolBar.
      *
      * If the toolbar's width is larger than this value, empty space will
@@ -105,7 +105,7 @@ QQC2.Control {
      */
     readonly property alias maximumContentWidth: layout.implicitWidth
 
-    /**
+    /*!
      * \sa This property holds the name of the icon to use for the overflow menu button.
      *
      * default: ``"overflow-menu"``
@@ -115,13 +115,13 @@ QQC2.Control {
      */
     property string overflowIconName: "overflow-menu"
 
-    /**
+    /*!
      * \sa This property holds the combined width of all visible delegates.
      * @property int visibleWidth
      */
     readonly property alias visibleWidth: layout.visibleWidth
 
-    /**
+    /*!
      * \sa This property sets the handling method for items that do not match the toolbar's height.
      *
      * When toolbar items do not match the height of the toolbar, there are

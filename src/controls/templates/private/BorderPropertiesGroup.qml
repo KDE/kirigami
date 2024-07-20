@@ -7,12 +7,12 @@
 import QtQuick
 
 QtObject {
-    /**
+    /*!
      *  \brief This property holds the color of this border.
      */
     property color color
 
-    /**
+    /*!
      *  \brief This property holds the width of this border.
      */
     property real width

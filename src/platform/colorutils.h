@@ -13,7 +13,7 @@
 
 #include "kirigamiplatform_export.h"
 
-/**
+/*!
  * Utilities for processing items to obtain colors and information useful for
  * UIs that need to adjust to variable elements.
  */
@@ -23,18 +23,18 @@ class KIRIGAMIPLATFORM_EXPORT ColorUtils : public QObject
     QML_ELEMENT
     QML_SINGLETON
 public:
-    /**
+    /*!
      * Describes the contrast of an item.
      */
     enum Brightness {
-        Dark, /**< The item is dark and requires a light foreground color to achieve readable contrast. */
-        Light, /**< The item is light and requires a dark foreground color to achieve readable contrast. */
+        Dark, /*!< The item is dark and requires a light foreground color to achieve readable contrast. */
+        Light, /*!< The item is light and requires a dark foreground color to achieve readable contrast. */
     };
     Q_ENUM(Brightness)
 
     explicit ColorUtils(QObject *parent = nullptr);
 
-    /**
+    /*!
      * Returns whether a color is bright or dark.
      *
      * \code{.qml}
@@ -57,7 +57,7 @@ public:
      */
     Q_INVOKABLE ColorUtils::Brightness brightnessForColor(const QColor &color);
 
-    /**
+    /*!
      * Same Algorithm as brightnessForColor but returns a 0 to 1 value for an
      * estimate of the equivalent gray light value (luma).
      * 0 as full black, 1 as full white and 0.5 equivalent to a 50% gray.
@@ -67,7 +67,7 @@ public:
      */
     Q_INVOKABLE qreal grayForColor(const QColor &color);
 
-    /**
+    /*!
      * Returns the result of overlaying the foreground color on the background
      * color.
      *
@@ -89,7 +89,7 @@ public:
      */
     Q_INVOKABLE QColor alphaBlend(const QColor &foreground, const QColor &background);
 
-    /**
+    /*!
      * Returns a linearly interpolated color between color one and color two.
      *
      * @param one The color to linearly interpolate from.
@@ -114,7 +114,7 @@ public:
      */
     Q_INVOKABLE QColor linearInterpolation(const QColor &one, const QColor &two, double balance);
 
-    /**
+    /*!
      * Increases or decreases the properties of `color` by fixed amounts.
      *
      * @param color The color to adjust.
@@ -140,7 +140,7 @@ public:
      */
     Q_INVOKABLE QColor adjustColor(const QColor &color, const QJSValue &adjustments);
 
-    /**
+    /*!
      * Smoothly scales colors.
      *
      * @param color The color to adjust.
@@ -168,7 +168,7 @@ public:
      */
     Q_INVOKABLE QColor scaleColor(const QColor &color, const QJSValue &adjustments);
 
-    /**
+    /*!
      * Tint a color using a separate alpha value.
      *
      * This does the same as Qt.tint() except that rather than using the tint
@@ -186,7 +186,7 @@ public:
      */
     Q_INVOKABLE QColor tintWithAlpha(const QColor &targetColor, const QColor &tintColor, double alpha);
 
-    /**
+    /*!
      * Returns the CIELAB chroma of the given color.
      *
      * CIELAB chroma may give a better quantification of how vibrant a color is compared to HSV saturation.

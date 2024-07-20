@@ -10,7 +10,7 @@ import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 import "private" as KTP
 
-/**
+/*!
  * Overlay Drawers are used to expose additional UI elements needed for
  * small secondary tasks for which the main UI elements are not needed.
  * For example in Okular Mobile, an Overlay Drawer is used to display
@@ -23,14 +23,14 @@ T.Drawer {
     id: root
 
 //BEGIN properties
-    /**
+    /*!
      * \brief This property tells whether the drawer is open and visible.
      *
      * default: ``false``
      */
     property bool drawerOpen: false
 
-    /**
+    /*!
      * \brief This property tells whether the drawer is in a state between open
      * and closed.
      *
@@ -42,12 +42,12 @@ T.Drawer {
      */
     property bool peeking: false
 
-    /**
+    /*!
      * \brief This property tells whether the drawer is currently opening or closing itself.
      */
     readonly property bool animating : enterAnimation.animating || exitAnimation.animating || positionResetAnim.running
 
-    /**
+    /*!
      * \brief This property holds whether the drawer can be collapsed to a
      * very thin, usually icon only sidebar.
      *
@@ -58,7 +58,7 @@ T.Drawer {
      */
     property bool collapsible: false
 
-    /**
+    /*!
      * \brief This property tells whether the drawer is collapsed to a
      * very thin sidebar, usually icon only.
      *
@@ -71,7 +71,7 @@ T.Drawer {
      */
     property bool collapsed: false
 
-    /**
+    /*!
      * \brief This property holds the size of the collapsed drawer.
      *
      * For vertical drawers this will be the width of the drawer and for horizontal
@@ -81,7 +81,7 @@ T.Drawer {
      */
     property int collapsedSize: Kirigami.Units.iconSizes.medium
 
-    /**
+    /*!
      * \brief This property holds the options for handle's open icon.
      *
      * This is a grouped property with following components:
@@ -102,7 +102,7 @@ T.Drawer {
         source: root.edge === Qt.RightEdge ? "view-right-close" : "view-left-close"
     }
 
-    /**
+    /*!
      * \brief This property holds the options for the handle's close icon.
      *
      * This is a grouped property with the following components:
@@ -121,19 +121,19 @@ T.Drawer {
         source: root.edge === Qt.RightEdge ? "view-right-new" : "view-left-new"
     }
 
-    /**
+    /*!
      * \brief This property holds the tooltip displayed when the drawer is open.
      * @since 2.15
      */
     property string handleOpenToolTip: qsTr("Close drawer")
 
-    /**
+    /*!
      * \brief This property holds the tooltip displayed when the drawer is closed.
      * @since 2.15
      */
     property string handleClosedToolTip: qsTr("Open drawer")
 
-    /**
+    /*!
      * \brief This property holds whether the handle is visible, to make opening the
      * drawer easier.
      *
@@ -150,7 +150,7 @@ T.Drawer {
         return true;
     }
 
-    /**
+    /*!
      * \brief Readonly property that points to the item that will act as a physical
      * handle for the Drawer.
      * @property MouseArea handle

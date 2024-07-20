@@ -28,7 +28,7 @@ class Units;
 }
 }
 
-/**
+/*!
  * Class for rendering an icon in UI.
  */
 class Icon : public QQuickItem
@@ -36,7 +36,7 @@ class Icon : public QQuickItem
     Q_OBJECT
     QML_ELEMENT
 
-    /**
+    /*!
      * The source of this icon. An `Icon` can pull from:
      *
      * * The icon theme:
@@ -64,7 +64,7 @@ class Icon : public QQuickItem
      */
     Q_PROPERTY(QVariant source READ source WRITE setSource NOTIFY sourceChanged FINAL)
 
-    /**
+    /*!
      * The name of a fallback icon to load from the icon theme when the `source`
      * cannot be found. The default fallback icon is `"unknown"`.
      *
@@ -74,7 +74,7 @@ class Icon : public QQuickItem
      */
     Q_PROPERTY(QString fallback READ fallback WRITE setFallback NOTIFY fallbackChanged FINAL)
 
-    /**
+    /*!
      * The name of an icon from the icon theme to show while the icon set in `source` is
      * being loaded. This is primarily relevant for remote sources, or those using slow-
      * loading image providers. The default temporary icon is `"image-x-icon"`
@@ -87,7 +87,7 @@ class Icon : public QQuickItem
      */
     Q_PROPERTY(QString placeholder READ placeholder WRITE setPlaceholder NOTIFY placeholderChanged FINAL)
 
-    /**
+    /*!
      * Whether this icon will use the QIcon::Active mode when drawing the icon,
      * resulting in a graphical effect being applied to the icon to indicate that
      * it is currently active.
@@ -102,12 +102,12 @@ class Icon : public QQuickItem
      */
     Q_PROPERTY(bool active READ active WRITE setActive NOTIFY activeChanged FINAL)
 
-    /**
+    /*!
      * Whether this icon's `source` is valid and it is being used.
      */
     Q_PROPERTY(bool valid READ valid NOTIFY validChanged FINAL)
 
-    /**
+    /*!
      * Whether this icon will use the QIcon::Selected mode when drawing the icon,
      * resulting in a graphical effect being applied to the icon to indicate that
      * it is currently selected.
@@ -121,7 +121,7 @@ class Icon : public QQuickItem
      */
     Q_PROPERTY(bool selected READ selected WRITE setSelected NOTIFY selectedChanged FINAL)
 
-    /**
+    /*!
      * Whether this icon will be treated as a mask. When an icon is being used
      * as a mask, all non-transparent colors are replaced with the color provided in the Icon's
      * @link Icon::color color @endlink property.
@@ -130,7 +130,7 @@ class Icon : public QQuickItem
      */
     Q_PROPERTY(bool isMask READ isMask WRITE setIsMask NOTIFY isMaskChanged FINAL)
 
-    /**
+    /*!
      * The color to use when drawing this icon when `isMask` is enabled.
      * If this property is not set or is `Qt::transparent`, the icon will use
      * the text or the selected text color, depending on if `selected` is set to
@@ -138,7 +138,7 @@ class Icon : public QQuickItem
      */
     Q_PROPERTY(QColor color READ color WRITE setColor NOTIFY colorChanged FINAL)
 
-    /**
+    /*!
      * Whether the icon is correctly loaded, is asynchronously loading or there was an error.
      * Note that image loading will not be initiated until the item is shown, so if the Icon is not visible,
      * it can only have Null or Loading states.
@@ -146,7 +146,7 @@ class Icon : public QQuickItem
      */
     Q_PROPERTY(Icon::Status status READ status NOTIFY statusChanged FINAL)
 
-    /**
+    /*!
      * The width of the painted area measured in pixels. This will be smaller than or
      * equal to the width of the area taken up by the Item itself. This can be 0.
      *
@@ -154,7 +154,7 @@ class Icon : public QQuickItem
      */
     Q_PROPERTY(qreal paintedWidth READ paintedWidth NOTIFY paintedAreaChanged FINAL)
 
-    /**
+    /*!
      * The height of the painted area measured in pixels. This will be smaller than or
      * equal to the height of the area taken up by the Item itself. This can be 0.
      *
@@ -162,12 +162,12 @@ class Icon : public QQuickItem
      */
     Q_PROPERTY(qreal paintedHeight READ paintedHeight NOTIFY paintedAreaChanged FINAL)
 
-    /**
+    /*!
      * If set, icon will blend when the source is changed
      */
     Q_PROPERTY(bool animated READ isAnimated WRITE setAnimated NOTIFY animatedChanged FINAL)
 
-    /**
+    /*!
      * If set, icon will round the painted size to defined icon sizes. Default is true.
      */
     Q_PROPERTY(bool roundToIconSize READ roundToIconSize WRITE setRoundToIconSize NOTIFY roundToIconSizeChanged FINAL)

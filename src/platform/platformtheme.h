@@ -23,7 +23,7 @@ namespace Platform
 class PlatformThemeData;
 class PlatformThemePrivate;
 
-/**
+/*!
  * @class PlatformTheme platformtheme.h <Kirigami/PlatformTheme>
  *
  * This class is the base for color management in Kirigami,
@@ -37,7 +37,7 @@ class KIRIGAMIPLATFORM_EXPORT PlatformTheme : public QObject
     QML_ATTACHED(Kirigami::Platform::PlatformTheme)
     QML_UNCREATABLE("Attached Property")
 
-    /**
+    /*!
      * This enumeration describes the color set for which a color is being selected.
      *
      * Color sets define a color "environment", suitable for drawing all parts of a
@@ -45,7 +45,7 @@ class KIRIGAMIPLATFORM_EXPORT PlatformTheme : public QObject
      */
     Q_PROPERTY(ColorSet colorSet READ colorSet WRITE setColorSet NOTIFY colorSetChanged FINAL)
 
-    /**
+    /*!
      * This enumeration describes the color group used to generate the colors.
      * The enum value is based upon QPalette::ColorGroup and has the same values.
      * It's redefined here in order to make it work with QML.
@@ -53,7 +53,7 @@ class KIRIGAMIPLATFORM_EXPORT PlatformTheme : public QObject
      */
     Q_PROPERTY(ColorGroup colorGroup READ colorGroup WRITE setColorGroup NOTIFY colorGroupChanged FINAL)
 
-    /**
+    /*!
      * If true, the colorSet will be inherited from the colorset of a theme of one
      * of the ancestor items
      * default: true
@@ -61,63 +61,63 @@ class KIRIGAMIPLATFORM_EXPORT PlatformTheme : public QObject
     Q_PROPERTY(bool inherit READ inherit WRITE setInherit NOTIFY inheritChanged FINAL)
 
     // foreground colors
-    /**
+    /*!
      * Color for normal foregrounds, usually text, but not limited to it,
      * anything that should be painted with a clear contrast should use this color
      */
     Q_PROPERTY(QColor textColor READ textColor WRITE setCustomTextColor RESET setCustomTextColor NOTIFY colorsChanged FINAL)
 
-    /**
+    /*!
      * Foreground color for disabled areas, usually a mid-gray
-     * @note Depending on the implementation, the color used for this property may not be 
-     *       based on the disabled palette. For example, for the Plasma implementation, 
+     * @note Depending on the implementation, the color used for this property may not be
+     *       based on the disabled palette. For example, for the Plasma implementation,
      *       "Inactive Text Color" of the active palette is used.
      */
     Q_PROPERTY(QColor disabledTextColor READ disabledTextColor WRITE setCustomDisabledTextColor RESET setCustomDisabledTextColor NOTIFY colorsChanged FINAL)
 
-    /**
+    /*!
      * Color for text that has been highlighted, often is a light color while normal text is dark
      */
     Q_PROPERTY(
         QColor highlightedTextColor READ highlightedTextColor WRITE setCustomHighlightedTextColor RESET setCustomHighlightedTextColor NOTIFY colorsChanged)
 
-    /**
+    /*!
      * Foreground for areas that are active or requesting attention
      */
     Q_PROPERTY(QColor activeTextColor READ activeTextColor WRITE setCustomActiveTextColor RESET setCustomActiveTextColor NOTIFY colorsChanged FINAL)
 
-    /**
+    /*!
      * Color for links
      */
     Q_PROPERTY(QColor linkColor READ linkColor WRITE setCustomLinkColor RESET setCustomLinkColor NOTIFY colorsChanged FINAL)
 
-    /**
+    /*!
      * Color for visited links, usually a bit darker than linkColor
      */
     Q_PROPERTY(QColor visitedLinkColor READ visitedLinkColor WRITE setCustomVisitedLinkColor RESET setCustomVisitedLinkColor NOTIFY colorsChanged FINAL)
 
-    /**
+    /*!
      * Foreground color for negative areas, such as critical error text
      */
     Q_PROPERTY(QColor negativeTextColor READ negativeTextColor WRITE setCustomNegativeTextColor RESET setCustomNegativeTextColor NOTIFY colorsChanged FINAL)
 
-    /**
+    /*!
      * Foreground color for neutral areas, such as warning texts (but not critical)
      */
     Q_PROPERTY(QColor neutralTextColor READ neutralTextColor WRITE setCustomNeutralTextColor RESET setCustomNeutralTextColor NOTIFY colorsChanged FINAL)
 
-    /**
+    /*!
      * Success messages, trusted content
      */
     Q_PROPERTY(QColor positiveTextColor READ positiveTextColor WRITE setCustomPositiveTextColor RESET setCustomPositiveTextColor NOTIFY colorsChanged FINAL)
 
     // background colors
-    /**
+    /*!
      * The generic background color
      */
     Q_PROPERTY(QColor backgroundColor READ backgroundColor WRITE setCustomBackgroundColor RESET setCustomBackgroundColor NOTIFY colorsChanged FINAL)
 
-    /**
+    /*!
      * The generic background color
      * Alternate background; for example, for use in lists.
      * This color may be the same as BackgroundNormal,
@@ -126,59 +126,59 @@ class KIRIGAMIPLATFORM_EXPORT PlatformTheme : public QObject
     Q_PROPERTY(QColor alternateBackgroundColor READ alternateBackgroundColor WRITE setCustomAlternateBackgroundColor RESET setCustomAlternateBackgroundColor
                    NOTIFY colorsChanged)
 
-    /**
+    /*!
      * The background color for selected areas
      */
     Q_PROPERTY(QColor highlightColor READ highlightColor WRITE setCustomHighlightColor RESET setCustomHighlightColor NOTIFY colorsChanged FINAL)
 
-    /**
+    /*!
      * Background for areas that are active or requesting attention
      */
     Q_PROPERTY(
         QColor activeBackgroundColor READ activeBackgroundColor WRITE setCustomActiveBackgroundColor RESET setCustomActiveBackgroundColor NOTIFY colorsChanged)
 
-    /**
+    /*!
      * Background color for links
      */
     Q_PROPERTY(
         QColor linkBackgroundColor READ linkBackgroundColor WRITE setCustomLinkBackgroundColor RESET setCustomLinkBackgroundColor NOTIFY colorsChanged FINAL)
 
-    /**
+    /*!
      * Background color for visited links, usually a bit darker than linkBackgroundColor
      */
     Q_PROPERTY(QColor visitedLinkBackgroundColor READ visitedLinkBackgroundColor WRITE setCustomVisitedLinkBackgroundColor RESET
                    setCustomVisitedLinkBackgroundColor NOTIFY colorsChanged)
 
-    /**
+    /*!
      * Background color for negative areas, such as critical errors and destructive actions
      */
     Q_PROPERTY(QColor negativeBackgroundColor READ negativeBackgroundColor WRITE setCustomNegativeBackgroundColor RESET setCustomNegativeBackgroundColor NOTIFY
                    colorsChanged)
 
-    /**
+    /*!
      * Background color for neutral areas, such as warnings (but not critical)
      */
     Q_PROPERTY(QColor neutralBackgroundColor READ neutralBackgroundColor WRITE setCustomNeutralBackgroundColor RESET setCustomNeutralBackgroundColor NOTIFY
                    colorsChanged)
 
-    /**
+    /*!
      * Background color for positive areas, such as success messages and trusted content
      */
     Q_PROPERTY(QColor positiveBackgroundColor READ positiveBackgroundColor WRITE setCustomPositiveBackgroundColor RESET setCustomPositiveBackgroundColor NOTIFY
                    colorsChanged)
 
     // decoration colors
-    /**
+    /*!
      * A decoration color that indicates active focus
      */
     Q_PROPERTY(QColor focusColor READ focusColor WRITE setCustomFocusColor RESET setCustomFocusColor NOTIFY colorsChanged FINAL)
 
-    /**
+    /*!
      * A decoration color that indicates mouse hovering
      */
     Q_PROPERTY(QColor hoverColor READ hoverColor WRITE setCustomHoverColor RESET setCustomHoverColor NOTIFY colorsChanged FINAL)
 
-    /**
+    /*!
      * Hint for item views to actually make use of the alternate background color feature
      */
     Q_PROPERTY(
@@ -203,13 +203,13 @@ class KIRIGAMIPLATFORM_EXPORT PlatformTheme : public QObject
 
 public:
     enum ColorSet {
-        View = 0, /** Color set for item views, usually the lightest of all */
-        Window, /** Default Color set for windows and "chrome" areas */
-        Button, /** Color set used by buttons */
-        Selection, /** Color set used by selected areas */
-        Tooltip, /** Color set used by tooltips */
-        Complementary, /** Color set meant to be complementary to Window: usually is a dark theme for light themes */
-        Header, /** Color set to be used by heading areas of applications, such as toolbars */
+        View = 0, /*! Color set for item views, usually the lightest of all */
+        Window, /*! Default Color set for windows and "chrome" areas */
+        Button, /*! Color set used by buttons */
+        Selection, /*! Color set used by selected areas */
+        Tooltip, /*! Color set used by tooltips */
+        Complementary, /*! Color set meant to be complementary to Window: usually is a dark theme for light themes */
+        Header, /*! Color set to be used by heading areas of applications, such as toolbars */
 
         ColorSetCount, // Number of items in this enum, this should always be the last item.
     };

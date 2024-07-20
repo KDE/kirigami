@@ -10,7 +10,7 @@ import QtQuick
 import org.kde.kirigami as Kirigami
 import org.kde.kirigami.templates as KT
 
-/**
+/*!
  * An inline message item with support for informational, positive,
  * warning and error types, and with support for associated actions.
  *

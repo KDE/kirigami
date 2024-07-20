@@ -9,7 +9,7 @@ import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 
-/**
+/*!
  * This is advanced textfield. It is recommended to use this class when there
  * is a need to create a create a textfield with action buttons (e.g a clear
  * action).
@@ -44,13 +44,13 @@ import org.kde.kirigami as Kirigami
 QQC2.TextField {
     id: root
 
-    /**
+    /*!
      * \sa This property holds a shortcut sequence that will focus the text field.
      * @since 5.56
      */
     property alias focusSequence: focusShortcut.sequence
 
-    /**
+    /*!
      * \sa This property holds a list of actions that will be displayed on the left side of the text field.
      *
      * By default this list is empty.
@@ -59,7 +59,7 @@ QQC2.TextField {
      */
     property list<T.Action> leftActions
 
-    /**
+    /*!
      * \sa This property holds a list of actions that will be displayed on the right side of the text field.
      *
      * By default this list is empty.

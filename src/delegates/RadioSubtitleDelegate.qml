@@ -9,7 +9,7 @@ import QtQuick.Controls as QQC2
 
 import org.kde.kirigami.platform as Platform
 
-/**
+/*!
  * A convenience wrapper combining QtQuick Controls RadioDelegate and IconTitleSubtitle
  *
  * This is an intentionally minimal wrapper that replaces the RadioDelegate's
@@ -29,7 +29,7 @@ QQC2.RadioDelegate {
 
     // Please see the developer note in ItemDelegate
 
-    /**
+    /*!
      * The subtitle to display.
      */
     property string subtitle

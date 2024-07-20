@@ -7,7 +7,7 @@
 import QtQuick
 import org.kde.kirigami as Kirigami
 
-/**
+/*!
  * \brief An item that provides the features of ApplicationWindow without the window itself.
  *
  * This allows embedding into a larger application.
@@ -75,7 +75,7 @@ import org.kde.kirigami as Kirigami
 Kirigami.AbstractApplicationItem {
     id: root
 
-    /**
+    /*!
      * \brief This property holds the PageRow used to allocate the pages and
      * manage the transitions between them.
      *

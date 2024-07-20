@@ -7,7 +7,7 @@
 import QtQuick
 import org.kde.kirigami as Kirigami
 
-/**
+/*!
  * Implements a drag handle supposed to be in items in ListViews to reorder items
  * The ListView must visualize a model which supports item reordering,
  * such as ListModel.move() or QAbstractItemModel  instances with moveRows() correctly implemented.
@@ -75,19 +75,19 @@ import org.kde.kirigami as Kirigami
 Item {
     id: root
 
-    /**
+    /*!
      * \brief This property holds the delegate that will be dragged around.
      *
      * This item *must* be a child of the actual ListView's delegate.
      */
     property Item listItem
 
-    /**
+    /*!
      * \brief This property holds the ListView that the delegate belong to.
      */
     property ListView listView
 
-    /**
+    /*!
      * \brief This signal is emitted when the drag handle wants to move the item in the model.
      *
      * The following example does the move in the case a ListModel is used:
@@ -101,7 +101,7 @@ Item {
      */
     signal moveRequested(int oldIndex, int newIndex)
 
-    /**
+    /*!
      * \brief This signal is emitted when the drag operation is complete and the item has been
      * dropped in the new final position.
      */

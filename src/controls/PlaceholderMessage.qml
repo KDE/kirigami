@@ -10,7 +10,7 @@ import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 import "private" as P
 
-/**
+/*!
  * \brief A placeholder message indicating that a view is empty.
  *
  * The message comprises a label with text, an optional explanation below the main text,
@@ -129,7 +129,7 @@ ColumnLayout {
     }
 
 //BEGIN properties
-    /**
+    /*!
      * \brief This property holds the PlaceholderMessage type.
      *
      * The type of the message. This can be:
@@ -144,7 +144,7 @@ ColumnLayout {
         ? PlaceholderMessage.Type.Actionable
         : PlaceholderMessage.Type.Informational
 
-    /**
+    /*!
      * \brief This property holds the text to show in the placeholder label.
      *
      * Optional; if not defined, the message will have no large text label
@@ -155,7 +155,7 @@ ColumnLayout {
      */
     property string text
 
-    /**
+    /*!
      * \brief This property holds the smaller explanatory text to show below the larger title-style text
      *
      * Useful for providing a user-friendly explanation on how to proceed.
@@ -167,7 +167,7 @@ ColumnLayout {
      */
     property string explanation
 
-    /**
+    /*!
      * \brief This property provides an icon to display above the top text label.
      * @note It accepts ``icon.name`` and ``icon.source`` to set the icon source.
      * It is suggested to use ``icon.name``.
@@ -181,7 +181,7 @@ ColumnLayout {
      */
     property P.ActionIconGroup icon: P.ActionIconGroup {}
 
-    /**
+    /*!
      * \brief This property holds an action that helps the user proceed.
      *
      * Typically used to guide the user to the next step for adding
@@ -194,20 +194,20 @@ ColumnLayout {
      */
     property alias helpfulAction: actionButton.action
 
-    /**
+    /*!
      * This property holds the link embedded in the explanatory message text that
      * the user is hovering over.
      */
     readonly property alias hoveredLink: label.hoveredLink
 
-    /**
+    /*!
      * This signal is emitted when a link is hovered in the explanatory message
      * text.
      * @param The hovered link.
      */
     signal linkHovered(string link)
 
-    /**
+    /*!
      * This signal is emitted when a link is clicked or tapped in the explanatory
      * message text.
      * @param The clicked or tapped link.
