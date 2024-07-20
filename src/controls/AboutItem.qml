@@ -27,7 +27,7 @@ Item {
      * \brief This property holds an object with the same shape as KAboutData.
      *
      * Example usage:
-     * @code{json}
+     * \code{json}
      * aboutData: {
           "displayName" : "KirigamiApp",
           "productName" : "kirigami/app",
@@ -58,7 +58,7 @@ Item {
           "copyrightStatement" : "© 2010-2018 Plasma Development Team",
           "desktopFileName" : "org.kde.kirigamiapp"
        }
-       @endcode
+       \endcode
      *
      * \sa KAboutData
      */

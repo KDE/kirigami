@@ -31,7 +31,7 @@ import org.kde.kirigami.templates as KT
  * can fit, an overflow menu is provided.
  *
  * Example usage:
- * @code
+ * \code
  * import org.kde.kirigami as Kirigami
  *
  * Kirigami.InlineMessage {
@@ -56,7 +56,7 @@ import org.kde.kirigami.templates as KT
  *         }
  *     ]
  * }
- * @endcode
+ * \endcode
  * @inherit org::kde::kirigami::templates::InlineMessage
  * @since 5.45
  */

@@ -17,7 +17,7 @@ import org.kde.kirigami as Kirigami
  * don't include the shadow.
  *
  * Example usage:
- * @code
+ * \code
  * import org.kde.kirigami
  *
  * ShadowedImage {
@@ -37,7 +37,7 @@ import org.kde.kirigami as Kirigami
  *     corners.bottomLeftRadius: 2
  *     corners.bottomRightRadius: 10
  * }
- * @endcode
+ * \endcode
  *
  * @since 5.69
  * @since 2.12

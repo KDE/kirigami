@@ -19,7 +19,7 @@ class PaddingPrivate;
  * but is more lightweight and thus efficient. Its implicit size is set
  * to that of its contentItem's implicit size plus padding.
  *
- * @code
+ * \code
  * import QtQuick.Controls as QQC2
  * import org.kde.kirigami as Kirigami
  *
@@ -27,13 +27,13 @@ class PaddingPrivate;
  *     padding: Kirigami.Units.largeSpacing
  *     contentItem: QQC2.Button {}
  * }
- * @endcode
+ * \endcode
  *
  * With this component it is possible to add external paddings as a
  * placeholder for an item, whereas with QtQuick.Layouts you would need to
  * manually assign or bind attached properties whenever content item changes.
  *
- * @code
+ * \code
  * import QtQuick
  * import QtQuick.Layouts
  * import QtQuick.Controls as QQC2
@@ -53,7 +53,7 @@ class PaddingPrivate;
  *         padding: Kirigami.Units.largeSpacing
  *     }
  * }
- * @endcode
+ * \endcode
  *
  * @since KDE Frameworks 6.0
  */

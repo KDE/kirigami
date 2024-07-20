@@ -14,7 +14,7 @@ import org.kde.kirigami as Kirigami
  * It's based around the PageRow component that allows adding/removing of pages.
  *
  * Example usage:
- * @code
+ * \code
  * import org.kde.kirigami as Kirigami
  *
  * Kirigami.ApplicationItem {
@@ -70,7 +70,7 @@ import org.kde.kirigami as Kirigami
  *         // ...
  *     }
  * }
- * @endcode
+ * \endcode
 */
 Kirigami.AbstractApplicationItem {
     id: root

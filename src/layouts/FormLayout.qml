@@ -24,7 +24,7 @@ import org.kde.kirigami as Kirigami
  * attached property, see FormLayoutAttached::isSection for details.
  *
  * Example usage:
- * @code
+ * \code
  * import QtQuick.Controls as QQC2
  * import org.kde.kirigami as Kirigami
  *
@@ -42,7 +42,7 @@ import org.kde.kirigami as Kirigami
  *    QQC2.TextField {
  *    }
  * }
- * @endcode
+ * \endcode
  * \sa FormLayoutAttached
  * @since 2.3
  * @inherit QtQuick.Item

@@ -87,7 +87,7 @@ QQC2.Action {
      * This is useful for tree-like menus, such as the GlobalDrawer.
      *
      * Example usage:
-     * @code
+     * \code
      * import QtQuick.Controls as QQC2
      * import org.kde.kirigami as Kirigami
      *
@@ -101,7 +101,7 @@ QQC2.Action {
      *        text: "Action2"
      *    }
      * }
-     * @endcode
+     * \endcode
      * @property list<T.Action> children
      */
     default property list<T.Action> children

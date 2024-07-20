@@ -17,14 +17,14 @@
  * want to  add spell checking to your custom application theme checkout
  * \ref Sonnet.
  *
- * @code
+ * \code
  * import QtQuick.Controls as QQC2
  * import org.kde.kirigami as Kirigami
  *
  * QQC2.TextArea {
  *    Kirigami.SpellCheck.enabled: true
  * }
- * @endcode
+ * \endcode
  *
  * @author Carl Schwan <carl@carlschwan.eu>
  * @since 2.18

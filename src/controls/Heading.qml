@@ -16,7 +16,7 @@ import org.kde.kirigami as Kirigami
  * for example page or section titles.
  *
  * Example usage:
- * @code
+ * \code
  * import org.kde.kirigami as Kirigami
  * [...]
  * Column {
@@ -26,7 +26,7 @@ import org.kde.kirigami as Kirigami
  *     }
  *   [...]
  * }
- * @endcode
+ * \endcode
  *
  * The most important property is "text", which applies to the text property of
  * Label. See the Label component from QtQuick.Controls 2 and primitive QML Text

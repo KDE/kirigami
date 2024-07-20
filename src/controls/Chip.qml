@@ -15,7 +15,7 @@ import "private" as P
  * Should be used in a group of multiple elements. e.g when displaying tags in a image viewer.
  *
  * Example usage:
- *  * @code
+ *  * \code
  * import org.kde.kirigami as Kirigami
  *
  * Flow {
@@ -35,7 +35,7 @@ import "private" as P
  *         }
  *     }
  * }
- * @endcode
+ * \endcode
  *
  * @since 2.19
  */

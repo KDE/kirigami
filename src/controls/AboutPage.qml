@@ -28,7 +28,7 @@ Kirigami.ScrollablePage {
      * \brief This property holds an object with the same shape as KAboutData.
      *
      * For example:
-     * @code{json}
+     * \code{json}
      * aboutData: {
           "displayName" : "KirigamiApp",
           "productName" : "kirigami/app",
@@ -59,7 +59,7 @@ Kirigami.ScrollablePage {
           "copyrightStatement" : "© 2010-2018 Plasma Development Team",
           "desktopFileName" : "org.kde.kirigamiapp"
        }
-       @endcode
+       \endcode
      *
      * \sa KAboutData
      * \sa org::kde::kirigami::AboutItem::aboutData

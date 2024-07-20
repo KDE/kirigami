@@ -29,7 +29,7 @@ import "templates/private" as TP
  *
  *
  * Example usage:
- * @code
+ * \code
  * import org.kde.kirigami as Kirigami
  *
  * Kirigami.ApplicationWindow {
@@ -65,7 +65,7 @@ import "templates/private" as TP
  *     }
  *  [...]
  * }
- * @endcode
+ * \endcode
  *
  * @inherit QtQuick.Controls.ApplicationWindow
  */
@@ -123,7 +123,7 @@ QQC2.ApplicationWindow {
      *
      * Example usage:
      *
-     * @code
+     * \code
      * import org.kde.kirigami as Kirigami
      *
      * Kirigami.ApplicationWindow {
@@ -147,7 +147,7 @@ QQC2.ApplicationWindow {
      *         ]
      *     }
      * }
-     * @endcode
+     * \endcode
      *
      * @property org::kde::kirigami::ContextDrawer contextDrawer
      */
@@ -162,14 +162,14 @@ QQC2.ApplicationWindow {
      * This property holds a standard action that will quit the application when triggered.
      * Its properties have the following values:
      *
-     * @code
+     * \code
      * Action {
      *     text: "Quit"
      *     icon.name: "application-exit-symbolic"
      *     shortcut: StandardKey.Quit
      *     // ...
      * }
-     * @endcode
+     * \endcode
      * @since 5.76
      */
     readonly property Kirigami.Action quitAction: Kirigami.Action {

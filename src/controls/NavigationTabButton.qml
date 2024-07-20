@@ -18,7 +18,7 @@ import org.kde.kirigami as Kirigami
  * with Repeater to generate buttons from models.
  *
  * Example usage:
- * @code{.qml}
+ * \code{.qml}
  * Kirigami.NavigationTabBar {
  *      id: navTabBar
  *      Kirigami.NavigationTabButton {
@@ -61,7 +61,7 @@ import org.kde.kirigami as Kirigami
  *          }
  *      ]
  *  }
- * @endcode
+ * \endcode
  *
  * @since 5.87
  * @since org.kde.kirigami 2.19

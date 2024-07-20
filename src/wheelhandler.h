@@ -93,7 +93,7 @@ class KirigamiWheelEvent : public QObject
      *
      * If set, the event shouldn't be managed anymore,
      * for instance it can be used to block the handler to manage the scroll of a view on some scenarios
-     * @code
+     * \code
      * // This handler handles automatically the scroll of
      * // flickableItem, unless Ctrl is pressed, in this case the
      * // app has custom code to handle Ctrl+wheel zooming
@@ -108,7 +108,7 @@ class KirigamiWheelEvent : public QObject
      *       }
      *   }
      * }
-     * @endcode
+     * \endcode
      *
      */
     Q_PROPERTY(bool accepted READ isAccepted WRITE setAccepted FINAL)

@@ -15,12 +15,12 @@ class QQuickItem;
 /**
  * This attached property contains the information about the scene position of the item:
  * Its global x and y coordinates will update automatically and can be binded
- * @code
+ * \code
  * import org.kde.kirigami as Kirigami
  * Text {
  *    text: ScenePosition.x
  * }
- * @endcode
+ * \endcode
  * @since 2.3
  */
 class ScenePositionAttached : public QObject

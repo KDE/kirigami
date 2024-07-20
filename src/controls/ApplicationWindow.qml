@@ -23,7 +23,7 @@ import org.kde.kirigami as Kirigami
  * be assigned again in an imperative fashion
  *
  * Example usage:
- * @code
+ * \code
  * import org.kde.kirigami as Kirigami
  *
  * Kirigami.ApplicationWindow {
@@ -81,7 +81,7 @@ import org.kde.kirigami as Kirigami
  *     }
  *  [...]
  * }
- * @endcode
+ * \endcode
  *
 */
 Kirigami.AbstractApplicationWindow {

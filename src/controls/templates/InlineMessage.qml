@@ -32,7 +32,7 @@ import org.kde.kirigami.templates.private as TP
  * can fit, an overflow menu is provided.
  *
  * Example:
- * @code
+ * \code
  * import org.kde.kirigami as Kirigami
  *
  * Kirigami.InlineMessage {
@@ -57,7 +57,7 @@ import org.kde.kirigami.templates.private as TP
  *         }
  *     ]
  * }
- * @endcode
+ * \endcode
  *
  * @since 5.45
  * @inherit QtQuick.Templates.Control

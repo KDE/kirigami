@@ -18,7 +18,7 @@ class QQuickItem;
  * It contains the text labels of fields and information about sections.
  *
  * Some of its properties can be used with other <a href="https://doc.qt.io/qt-6/qml-qtquick-layouts-layout.html">Layout</a> types.
- * @code{.qml}
+ * \code{.qml}
  * import org.kde.kirigami as Kirigami
  *
  * Kirigami.FormLayout {
@@ -29,7 +29,7 @@ class QQuickItem;
  *       Kirigami.FormData.label: "Password:"
  *    }
  * }
- * @endcode
+ * \endcode
  * \sa org::kde::kirigami::FormLayout
  * @since 2.3
  */
@@ -51,7 +51,7 @@ class FormLayoutAttached : public QObject
      * If true, the child item of a org::kde::kirigami::FormLayout becomes a section separator, and
      * may have different looks:
      * * To make it just a space between two fields, just put an empty item with FormData.isSection:
-     * @code
+     * \code
      * TextField {
      *     Kirigami.FormData.label: "Label:"
      * }
@@ -61,10 +61,10 @@ class FormLayoutAttached : public QObject
      * TextField {
      *     Kirigami.FormData.label: "Label:"
      * }
-     * @endcode
+     * \endcode
      *
      * * To make it a space with a section title:
-     * @code
+     * \code
      * TextField {
      *     Kirigami.FormData.label: "Label:"
      * }
@@ -75,10 +75,10 @@ class FormLayoutAttached : public QObject
      * TextField {
      *     Kirigami.FormData.label: "Label:"
      * }
-     * @endcode
+     * \endcode
      *
      * * To make it a space with a section title and a separator line:
-     * @code
+     * \code
      * TextField {
      *     Kirigami.FormData.label: "Label:"
      * }
@@ -89,7 +89,7 @@ class FormLayoutAttached : public QObject
      * TextField {
      *     Kirigami.FormData.label: "Label:"
      * }
-     * @endcode
+     * \endcode
      * \sa org::kde::kirigami::FormLayout
      */
     Q_PROPERTY(bool isSection READ isSection WRITE setIsSection NOTIFY isSectionChanged FINAL)
@@ -110,7 +110,7 @@ class FormLayoutAttached : public QObject
      * Custom buddy can only be a direct child of that item; nested components
      * are not supported at the moment.
      *
-     * @code
+     * \code
      * Kirigami.FormLayout {
      *     Layouts.ColumnLayout {
      *         // If the accelerator is in the letter S,
@@ -126,7 +126,7 @@ class FormLayoutAttached : public QObject
      *         }
      *     }
      * }
-     * @endcode
+     * \endcode
      */
     Q_PROPERTY(QQuickItem *buddyFor READ buddyFor WRITE setBuddyFor NOTIFY buddyForChanged FINAL)
 

@@ -18,7 +18,7 @@ import "private"
  * This acts as a container for normal list items.
  *
  * Example usage:
- * @code
+ * \code
  * ListView {
  *     model: myModel
  *     delegate: SwipeListItem {
@@ -38,7 +38,7 @@ import "private"
  *     }
  *
  * }
- * @endcode
+ * \endcode
  *
  * @inherit QtQuick.Templates.SwipeDelegate
  */

@@ -24,7 +24,7 @@ class QQuickItem;
  * than its logical parent popup, but also no lower than its siblings on the same
  * logical layer.
  *
- * @code
+ * \code
  * import QtQuick.Controls as QQC2
  * import org.kde.kirigami as Kirigami
  *
@@ -32,7 +32,7 @@ class QQuickItem;
  *     Kirigami.OverlayZStacking.layer: Kirigami.OverlayZStacking.ToolTip
  *     z: Kirigami.OverlayZStacking.z
  * }
- * @endcode
+ * \endcode
  *
  * @since 6.0
  */

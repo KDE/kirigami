@@ -11,7 +11,7 @@ import org.kde.kirigami as Kirigami
  * \brief This is a standard password text field.
  *
  * Example usage:
- * @code{.qml}
+ * \code{.qml}
  * import org.kde.kirigami as Kirigami
  *
  * Kirigami.PasswordField {
@@ -20,7 +20,7 @@ import org.kde.kirigami as Kirigami
  *         // check if passwordField.text is valid
  *     }
  * }
- * @endcode
+ * \endcode
  *
  * @inherit org::kde::kirgami::ActionTextField
  * @since 5.57

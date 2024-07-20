@@ -10,14 +10,14 @@ import org.kde.kirigami as Kirigami
  * \brief A placeholder for loading pages.
  *
  * Example usage:
- * @code{.qml}
+ * \code{.qml}
  *     Kirigami.Page {
  *         Kirigami.LoadingPlaceholder {
  *             anchors.centerIn: parent
  *         }
  *     }
- * @endcode
- * @code{.qml}
+ * \endcode
+ * \code{.qml}
  *     Kirigami.Page {
  *         Kirigami.LoadingPlaceholder {
  *             anchors.centerIn: parent
@@ -25,7 +25,7 @@ import org.kde.kirigami as Kirigami
  *             progressBar.value: loadingValue
  *         }
  *     }
- * @endcode
+ * \endcode
  * @inherit org::kde::kirigami::PlaceholderMessage
  */
 Kirigami.PlaceholderMessage {

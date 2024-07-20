@@ -55,7 +55,7 @@ Kirigami.Action {
      * when it is pushed onto the Kirigami.PagePool.
      *
      * Example usage:
-     * @code{.qml}
+     * \code{.qml}
      * Kirigami.PagePoolAction {
      *     text: i18n("Security")
      *     icon.name: "security-low"
@@ -66,7 +66,7 @@ Kirigami.Action {
      *         }
      *     }
      * }
-     * @endcode
+     * \endcode
      * @property QVariantMap initialProperties
      */
     property var initialProperties

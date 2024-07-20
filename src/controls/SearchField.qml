@@ -13,14 +13,14 @@ import org.kde.kirigami as Kirigami
  * uses Ctrl+F as the focus keyboard shortcut and "Search…" as a placeholder text.
  *
  * Example usage for the search field component:
- * @code
+ * \code
  * import org.kde.kirigami as Kirigami
  *
  * Kirigami.SearchField {
  *     id: searchField
  *     onAccepted: console.log("Search text is " + searchField.text)
  * }
- * @endcode
+ * \endcode
  *
  * @inherit org::kde::kirigami::ActionTextField
  */

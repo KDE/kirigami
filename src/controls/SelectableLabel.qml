@@ -15,11 +15,11 @@ import QtQuick.Controls as QQC2
  * the "text" property to define the label text.
  *
  * Example usage:
- * @code{.qml}
+ * \code{.qml}
  *     Kirigami.SelectableLabel {
  *         text: "Label"
  *     }
- * @endcode
+ * \endcode
  *
  * \sa https://bugreports.qt.io/browse/QTBUG-14077
  * @since 5.95

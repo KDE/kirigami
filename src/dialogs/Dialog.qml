@@ -42,7 +42,7 @@ import org.kde.kirigami as Kirigami
  *
  * Example for a selection dialog:
  *
- * @code{.qml}
+ * \code{.qml}
  * import QtQuick
  * import QtQuick.Layouts
  * import QtQuick.Controls as QQC2
@@ -71,11 +71,11 @@ import org.kde.kirigami as Kirigami
  *         }
  *     }
  * }
- * @endcode
+ * \endcode
  *
  * Example with scrolling (ListView scrolling behaviour is handled by the Dialog):
  *
- * @code{.qml}
+ * \code{.qml}
  * import QtQuick
  * import QtQuick.Layouts
  * import QtQuick.Controls as QQC2
@@ -100,7 +100,7 @@ import org.kde.kirigami as Kirigami
  *         }
  *     }
  * }
- * @endcode
+ * \endcode
  *
  * There are also sub-components of the Dialog that target specific usecases,
  * and can reduce boilerplate code if used:
@@ -217,7 +217,7 @@ T.Dialog {
      * \brief This property holds the custom actions displayed in the footer.
      *
      * Example usage:
-     * @code{.qml}
+     * \code{.qml}
      * import QtQuick
      * import org.kde.kirigami as Kirigami
      *
@@ -238,7 +238,7 @@ T.Dialog {
      *         }
      *     ]
      * }
-     * @endcode
+     * \endcode
      *
      * \sa org::kde::kirigami::Action
      */

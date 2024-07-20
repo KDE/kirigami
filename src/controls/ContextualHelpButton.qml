@@ -21,7 +21,7 @@ import org.kde.kirigami as Kirigami
  * @image html ContextualHelpButton.png "Example of ContextualHelpButton usage"
  *
  * Example usage:
- * @code{.qml}
+ * \code{.qml}
  * import QtQuick.Controls as QQC2
  * import QtQuick.Layouts
  * import org.kde.kirigami as Kirigami
@@ -38,7 +38,7 @@ import org.kde.kirigami as Kirigami
  *     }
  * }
  *
- * @endcode
+ * \endcode
  */
 
 QQC2.ToolButton {

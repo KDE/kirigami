@@ -15,7 +15,7 @@ import org.kde.kirigami as Kirigami
  * action).
  *
  * Example usage for a search field:
- * @code
+ * \code
  * import org.kde.kirigami as Kirigami
  *
  * Kirigami.ActionTextField {
@@ -36,7 +36,7 @@ import org.kde.kirigami as Kirigami
  *
  *     onAccepted: console.log("Search text is " + searchField.text);
  * }
- * @endcode
+ * \endcode
  *
  * @since 5.56
  * @inherit QtQuick.Controls.TextField
@@ -45,13 +45,13 @@ QQC2.TextField {
     id: root
 
     /**
-     * @brief This property holds a shortcut sequence that will focus the text field.
+     * \sa This property holds a shortcut sequence that will focus the text field.
      * @since 5.56
      */
     property alias focusSequence: focusShortcut.sequence
 
     /**
-     * @brief This property holds a list of actions that will be displayed on the left side of the text field.
+     * \sa This property holds a list of actions that will be displayed on the left side of the text field.
      *
      * By default this list is empty.
      *
@@ -60,7 +60,7 @@ QQC2.TextField {
     property list<T.Action> leftActions
 
     /**
-     * @brief This property holds a list of actions that will be displayed on the right side of the text field.
+     * \sa This property holds a list of actions that will be displayed on the right side of the text field.
      *
      * By default this list is empty.
      *

@@ -16,7 +16,7 @@ import org.kde.kirigami as Kirigami
  *
  * Example usage for a chat app where we want to quickly search for a room.
  *
- * @code{.qml}
+ * \code{.qml}
  * import QtQuick
  * import org.kde.kitemmodels as KItemModels
  * import org.kde.kirigami as Kirigami
@@ -46,7 +46,7 @@ import org.kde.kirigami as Kirigami
  *        onActivated: root.open()
  *    }
  * }
- * @endcode{}
+ * \endcode{}
  *
  * @image html searchdialog.html
  *

@@ -23,7 +23,7 @@ import org.kde.kirigami as Kirigami
  * The width: property must be manually set to the parent view's width.
  *
  * Example usage:
- * @code{.qml}
+ * \code{.qml}
  * import org.kde.kirigami as Kirigami
  *
  * ListView {
@@ -47,7 +47,7 @@ import org.kde.kirigami as Kirigami
  *     model: [...]
  *     delegate: [...]
  * }
- * @endcode
+ * \endcode
  * @inherit QtQuick.QQC2.ToolBar
  */
 T.ToolBar {

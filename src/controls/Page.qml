@@ -44,7 +44,7 @@ QQC2.Page {
      * These actions will be displayed in the toolbar on the desktop and inside
      * the ContextDrawer on mobile.
      *
-     * @code
+     * \code
      * import org.kde.kirigami as Kirigami
      *
      * Kirigami.Page {
@@ -53,7 +53,7 @@ QQC2.Page {
      *         Kirigami.Action {...}
      *     }
      * }
-     * @endcode
+     * \endcode
      */
     property list<T.Action> actions
 

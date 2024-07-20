@@ -17,7 +17,7 @@ import org.kde.kirigami as Kirigami
  * list items that perform actions.
  *
  * Example usage:
- * @code{.qml}
+ * \code{.qml}
  * Kirigami.MenuDialog {
  *     title: i18n("Track Options")
  *
@@ -50,7 +50,7 @@ import org.kde.kirigami as Kirigami
  *         }
  *     ]
  * }
- * @endcode
+ * \endcode
  *
  * \sa Dialog
  * \sa PromptDialog

@@ -17,7 +17,7 @@ import "private" as KP
  *
  * Example usage:
  *
- * @code
+ * \code
  * import org.kde.kirigami as Kirigami
  *
  * Kirigami.ApplicationWindow {
@@ -41,7 +41,7 @@ import "private" as KP
  *         ]
  *     }
  * }
- * @endcode
+ * \endcode
  *
  * @inherit OverlayDrawer
  */

@@ -20,7 +20,7 @@ import "private"
  * Scrolling and scrolling indicators will be automatically managed.
  *
  * Example usage:
- * @code
+ * \code
  * ScrollablePage {
  *     id: root
  *     // The page will automatically be scrollable
@@ -29,7 +29,7 @@ import "private"
  *         height: 99999
  *     }
  * }
- * @endcode
+ * \endcode
  *
  * @warning Do not put a ScrollView inside of a ScrollablePage; children of a ScrollablePage are already inside a ScrollView.
  *
@@ -41,7 +41,7 @@ import "private"
  * Implementations should handle the refresh themselves as follows
  *
  * Example usage:
- * @code
+ * \code
  * Kirigami.ScrollablePage {
  *     id: view
  *     supportsRefreshing: true
@@ -62,7 +62,7 @@ import "private"
  *     }
  * }
  * [...]
- * @endcode
+ * \endcode
  */
 Kirigami.Page {
     id: root

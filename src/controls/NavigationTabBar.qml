@@ -18,7 +18,7 @@ import org.kde.kirigami as Kirigami
  * Can be combined with secondary toolbars above (if in the footer) to provide page actions.
  *
  * Example usage:
- * @code{.qml}
+ * \code{.qml}
  * import QtQuick
  * import org.kde.kirigami as Kirigami
  *
@@ -105,7 +105,7 @@ import org.kde.kirigami as Kirigami
  *         ]
  *     }
  * }
- * @endcode
+ * \endcode
  *
  * \sa NavigationTabButton
  * @since 5.87

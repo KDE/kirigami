@@ -19,7 +19,7 @@ import "private" as KP
  * a desktop application's menubar.
  *
  * Example usage:
- * @code
+ * \code
  * import org.kde.kirigami as Kirigami
  *
  * Kirigami.ApplicationWindow {
@@ -45,7 +45,7 @@ import "private" as KP
  *         ]
  *     }
  * }
- * @endcode
+ * \endcode
  */
 Kirigami.OverlayDrawer {
     id: root
@@ -99,7 +99,7 @@ Kirigami.OverlayDrawer {
      *
      * Example usage:
      *
-     * @code
+     * \code
      * import org.kde.kirigami as Kirigami
      *
      * Kirigami.ApplicationWindow {
@@ -125,7 +125,7 @@ Kirigami.OverlayDrawer {
      *         ]
      *     }
      * }
-     * @endcode
+     * \endcode
      * @property list<T.Action> actions
      */
     property list<T.Action> actions
@@ -154,7 +154,7 @@ Kirigami.OverlayDrawer {
      * \brief This property holds items that are displayed above the actions.
      *
      * Example usage:
-     * @code
+     * \code
      * import org.kde.kirigami as Kirigami
      *
      * Kirigami.ApplicationWindow {
@@ -168,7 +168,7 @@ Kirigami.OverlayDrawer {
      *     }
      *  [...]
      * }
-     * @endcode
+     * \endcode
      * @property list<QtObject> topContent
      */
     property alias topContent: topContent.data
@@ -177,7 +177,7 @@ Kirigami.OverlayDrawer {
      * \brief This property holds items that are displayed under the actions.
      *
      * Example usage:
-     * @code
+     * \code
      * import org.kde.kirigami as Kirigami
      *
      * Kirigami.ApplicationWindow {
@@ -191,7 +191,7 @@ Kirigami.OverlayDrawer {
      *     }
      *  [...]
      * }
-     * @endcode
+     * \endcode
      * @note This is a `default` property.
      * @property list<QtObject> content
      */

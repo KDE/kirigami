@@ -25,7 +25,7 @@ import org.kde.kirigami as Kirigami
  *
  * Example usage:
  *
- * @code{.qml}
+ * \code{.qml}
  * Kirigami.PromptDialog {
  *     title: "Reset settings?"
  *     subtitle: "The stored settings for the application will be deleted, with the defaults restored."
@@ -34,11 +34,11 @@ import org.kde.kirigami as Kirigami
  *     onAccepted: console.log("Accepted")
  *     onRejected: console.log("Rejected")
  * }
- * @endcode
+ * \endcode
  *
  * Text field prompt dialog:
  *
- * @code{.qml}
+ * \code{.qml}
  * Kirigami.PromptDialog {
  *     id: textPromptDialog
  *     title: qsTr("New Folder")
@@ -66,7 +66,7 @@ import org.kde.kirigami as Kirigami
  *         placeholderText: qsTr("Folder name…")
  *     }
  * }
- * @endcode
+ * \endcode
  *
  * @inherit Dialog
  */

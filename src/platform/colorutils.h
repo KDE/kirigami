@@ -37,7 +37,7 @@ public:
     /**
      * Returns whether a color is bright or dark.
      *
-     * @code{.qml}
+     * \code{.qml}
      * import QtQuick
      * import org.kde.kirigami as Kirigami
      *
@@ -50,7 +50,7 @@ public:
      *         }
      *     }
      * }
-     * @endcode
+     * \endcode
      *
      * @since 5.69
      * @since org.kde.kirigami 2.12
@@ -75,14 +75,14 @@ public:
      *
      * @param background The color to overlay the foreground on.
      *
-     * @code{.qml}
+     * \code{.qml}
      * import QtQuick
      * import org.kde.kirigami as Kirigami
      *
      * Rectangle {
      *     color: Kirigami.ColorUtils.alphaBlend(Qt.rgba(0, 0, 0, 0.5), Qt.rgba(1, 1, 1, 1))
      * }
-     * @endcode
+     * \endcode
      *
      * @since 5.69
      * @since org.kde.kirigami 2.12
@@ -100,14 +100,14 @@ public:
      * first color, 1.0 will return the second color. Values beyond these bounds
      * are valid, and will result in extrapolation.
      *
-     * @code{.qml}
+     * \code{.qml}
      * import QtQuick
      * import org.kde.kirigami as Kirigami
      *
      * Rectangle {
      *     color: Kirigami.ColorUtils.linearInterpolation("black", "white", 0.5)
      * }
-     * @endcode
+     * \endcode
      *
      * @since 5.69
      * @since org.kde.kirigami 2.12
@@ -121,7 +121,7 @@ public:
      *
      * @param adjustments The adjustments to apply to the color.
      *
-     * @code{.js}
+     * \code{.js}
      * {
      *     red: null, // Range: -255 to 255
      *     green: null, // Range: -255 to 255
@@ -131,7 +131,7 @@ public:
      *     value: null // Range: -255 to 255
      *     alpha: null, // Range: -255 to 255
      * }
-     * @endcode
+     * \endcode
      *
      * @warning It is an error to adjust both RGB and HSV properties.
      *
@@ -150,7 +150,7 @@ public:
      * be scaled from its original to the maximum if positive or to the minimum if
      * negative.
      *
-     * @code{.js}
+     * \code{.js}
      * {
      *     red: null
      *     green: null
@@ -159,7 +159,7 @@ public:
      *     value: null
      *     alpha: null
      * }
-     * @endcode
+     * \endcode
      *
      * @warning It is an error to scale both RGB and HSV properties.
      *

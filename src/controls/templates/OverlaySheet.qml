@@ -20,14 +20,14 @@ import org.kde.kirigami as Kirigami
  * are taller than the screen space.
  *
  * Example usage:
- * @code
+ * \code
  * Kirigami.OverlaySheet {
  *    ColumnLayout { ... }
  * }
  * Kirigami.OverlaySheet {
  *    ListView { ... }
  * }
- * @endcode
+ * \endcode
  *
  * It needs a single element declared inside, do *not* override its contentItem
  *

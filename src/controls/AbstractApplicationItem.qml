@@ -18,7 +18,7 @@ import "templates" as KT
  * Unless you need extra flexibility it is recommended to use ApplicationItem instead.
  *
  * Example usage:
- * @code
+ * \code
  * import org.kde.kirigami as Kirigami
  *
  * Kirigami.AbstractApplicationItem {
@@ -54,7 +54,7 @@ import "templates" as KT
  *     }
  *  [...]
  * }
- * @endcode
+ * \endcode
  *
  * @inherit QtQuick.Item
  */
@@ -153,7 +153,7 @@ Item {
      *
      * Example usage:
      *
-     * @code
+     * \code
      * import org.kde.kirigami as Kirigami
      *
      * Kirigami.ApplicationWindow {
@@ -177,7 +177,7 @@ Item {
      *         ]
      *     }
      * }
-     * @endcode
+     * \endcode
      *
      * @property org::kde::kirigami::ContextDrawer contextDrawer
      */

@@ -15,7 +15,7 @@ import org.kde.kirigami as Kirigami
  * should not directly be the delegate of the ListView, but a child of it.
  *
  * It is recommended to use DelagateRecycler as base delegate like the following code:
- * @code
+ * \code
  * import QtQuick
  * import QtQuick.Layouts
  * import QtQuick.Controls as QQC2
@@ -67,7 +67,7 @@ import org.kde.kirigami as Kirigami
  *       }
  *   }
  *   ...
- * @endcode
+ * \endcode
  *
  * @since 2.5
  * @inherit QtQuick.Item
@@ -91,11 +91,11 @@ Item {
      * \brief This signal is emitted when the drag handle wants to move the item in the model.
      *
      * The following example does the move in the case a ListModel is used:
-     * @code
+     * \code
      * onMoveRequested: (oldIndex, newIndex) => {
      *     listModel.move(oldIndex, newIndex, 1);
      * }
-     * @endcode
+     * \endcode
      * @param oldIndex the index the item is currently at
      * @param newIndex the index we want to move the item to
      */

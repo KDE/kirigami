@@ -18,7 +18,7 @@ import org.kde.kirigami as Kirigami
  * of this component.
  *
  * Example usage:
- * @code
+ * \code
  * import QtQuick
  * import QtQuick.Controls as QQC2
  * import org.kde.kirigami as Kirigami
@@ -35,7 +35,7 @@ import org.kde.kirigami as Kirigami
  *         }
  *     }
  * }
- * @endcode
+ * \endcode
  */
 QQC2.ItemDelegate {
     id: listSection

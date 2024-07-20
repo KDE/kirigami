@@ -227,12 +227,12 @@ class ShadowedRectangle : public QQuickItem
      * \brief This property holds the border's grouped property.
      *
      * Example usage:
-     * @code
+     * \code
      * Kirigami.ShadowedRectangle {
      *     border.width: 2
      *     border.color: Kirigami.Theme.textColor
      * }
-     * @endcode
+     * \endcode
      * \sa BorderGroup
      */
     Q_PROPERTY(BorderGroup *border READ border CONSTANT FINAL)
@@ -241,13 +241,13 @@ class ShadowedRectangle : public QQuickItem
      * \brief This property holds the shadow's grouped property.
      *
      * Example usage:
-     * @code
+     * \code
      * Kirigami.ShadowedRectangle {
      *     shadow.size: 20
      *     shadow.xOffset: 5
      *     shadow.yOffset: 5
      * }
-     * @endcode
+     * \endcode
      *
      * \sa ShadowGroup
      */
@@ -260,13 +260,13 @@ class ShadowedRectangle : public QQuickItem
      * corner they affect.
      *
      * Example usage:
-     * @code
+     * \code
      * Kirigami.ShadowedRectangle {
      *     corners.topLeftRadius: 4
      *     corners.topRightRadius: 5
      *     corners.bottomLeftRadius: 2
      *     corners.bottomRightRadius: 10
-     * @endcode
+     * \endcode
      *
      * \sa CornersGroup
      */
