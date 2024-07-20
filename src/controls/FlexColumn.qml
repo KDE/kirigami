@@ -10,7 +10,7 @@ import org.kde.kirigami as Kirigami
 
 //TODO KF6: how much is this used? can be removed?
 /**
- * @brief FlexColumn is a column that grows in width to a fixed cap.
+ * \brief FlexColumn is a column that grows in width to a fixed cap.
  * @inherit QtQuick.Layouts.ColumnLayout
  */
 ColumnLayout {
@@ -19,7 +19,7 @@ ColumnLayout {
     default property alias columnChildren: __inner.children
 
     /**
-     * @brief This property holds the column's offset from the cross axis.
+     * \brief This property holds the column's offset from the cross axis.
      *
      * Note that padding is applied on both sides
      * when the column is aligned to a centered cross axis.
@@ -29,14 +29,14 @@ ColumnLayout {
     property real padding: Kirigami.Units.largeSpacing
 
     /**
-     * @brief This property holds maximum column width.
+     * \brief This property holds maximum column width.
      *
      * default: ``Kirigami.Units.gridUnit * 50``
      */
     property real maximumWidth: Kirigami.Units.gridUnit * 50
 
     /**
-     * @brief This property sets column's alignment when it hits its maximum width.
+     * \brief This property sets column's alignment when it hits its maximum width.
      *
      * default: ``Qt.AlignHCenter | Qt.AlignTop``
      *
@@ -45,7 +45,7 @@ ColumnLayout {
     property int alignment: Qt.AlignHCenter | Qt.AlignTop
 
     /**
-     * @brief This property holds the inner column's width.
+     * \brief This property holds the inner column's width.
      */
     property real innerWidth: __inner.width
 

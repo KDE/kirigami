@@ -10,7 +10,7 @@ import QtQuick
 import org.kde.kirigami.platform as Platform
 
 /**
- * @brief A visual separator.
+ * \brief A visual separator.
  *
  * Useful for splitting one set of items from another.
  *
@@ -28,7 +28,7 @@ Rectangle {
     }
 
     /**
-     * @brief This property holds the visual weight of the separator.
+     * \brief This property holds the visual weight of the separator.
      *
      * Weight options:
      * * ``Kirigami.Separator.Weight.Light``

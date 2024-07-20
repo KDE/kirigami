@@ -26,7 +26,7 @@ QQC2.Page {
     padding: Kirigami.Units.gridUnit
 
     /**
-     * @brief If the central element of the page is a Flickable
+     * \brief If the central element of the page is a Flickable
      * (ListView and Gridview as well) you can set it there.
      *
      * Normally, you wouldn't need to do that, but just use the
@@ -39,7 +39,7 @@ QQC2.Page {
     property Flickable flickable
 
     /**
-     * @brief This property holds the actions for the page.
+     * \brief This property holds the actions for the page.
      *
      * These actions will be displayed in the toolbar on the desktop and inside
      * the ContextDrawer on mobile.
@@ -58,7 +58,7 @@ QQC2.Page {
     property list<T.Action> actions
 
     /**
-     * @brief This property tells us if it is the currently active page.
+     * \brief This property tells us if it is the currently active page.
      *
      * Specifies if it's the currently selected page in the window's pages row, or if layers
      * are used whether this is the topmost item on the layers stack. If the page is
@@ -86,13 +86,13 @@ QQC2.Page {
     readonly property alias overlay: overlayItem
 
     /**
-     * @brief This holds the icon that represents this page.
+     * \brief This holds the icon that represents this page.
      * @property var icon
      */
     property P.ActionIconGroup icon: P.ActionIconGroup {}
 
     /**
-     * @brief Progress of a task this page is doing.
+     * \brief Progress of a task this page is doing.
      *
      * Set to undefined to indicate that there are no ongoing tasks.
      *
@@ -103,7 +103,7 @@ QQC2.Page {
     property var progress: undefined
 
     /**
-     * @brief The delegate which will be used to draw the page title.
+     * \brief The delegate which will be used to draw the page title.
      *
      * It can be customized to put any kind of Item in there.
      *
@@ -147,7 +147,7 @@ QQC2.Page {
 
 //BEGIN signal and signal handlers
     /**
-     * @brief Emitted when the application requests a Back action.
+     * \brief Emitted when the application requests a Back action.
      *
      * For instance a global "back" shortcut or the Android
      * Back button has been pressed.

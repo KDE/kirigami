@@ -74,7 +74,7 @@ QQC2.ApplicationWindow {
 
 //BEGIN properties
     /**
-     * @brief This property holds the stack used to allocate the pages and to manage the
+     * \brief This property holds the stack used to allocate the pages and to manage the
      * transitions between them.
      *
      * Put a container here, such as QtQuick.Controls.StackView.
@@ -82,7 +82,7 @@ QQC2.ApplicationWindow {
     property Item pageStack
 
     /**
-     * @brief This property sets whether the standard chrome of the app is visible.
+     * \brief This property sets whether the standard chrome of the app is visible.
      *
      * These are the action button, the drawer handles, and the application header.
      *
@@ -91,7 +91,7 @@ QQC2.ApplicationWindow {
     property bool controlsVisible: true
 
     /**
-     * @brief This property holds the drawer for global actions.
+     * \brief This property holds the drawer for global actions.
      *
      * This drawer can be opened by sliding from the left screen edge
      * or by dragging the ActionButton to the right.
@@ -102,7 +102,7 @@ QQC2.ApplicationWindow {
     property OverlayDrawer globalDrawer
 
     /**
-     * @brief This property tells whether the application is in "widescreen" mode.
+     * \brief This property tells whether the application is in "widescreen" mode.
      *
      * This is enabled on desktops or horizontal tablets.
      *
@@ -111,7 +111,7 @@ QQC2.ApplicationWindow {
     property bool wideScreen: width >= Kirigami.Units.gridUnit * 60
 
     /**
-     * @brief This property holds the drawer for context-dependent actions.
+     * \brief This property holds the drawer for context-dependent actions.
      *
      * The drawer that will be opened by sliding from the right screen edge
      * or by dragging the ActionButton to the left.
@@ -182,7 +182,7 @@ QQC2.ApplicationWindow {
 
 //BEGIN functions
     /**
-     * @brief This function shows a little passive notification at the bottom of the app window
+     * \brief This function shows a little passive notification at the bottom of the app window
      * lasting for few seconds, with an optional action button.
      *
      * @param message The text message to be shown to the user.
@@ -197,7 +197,7 @@ QQC2.ApplicationWindow {
     }
 
    /**
-    * @brief This function hides the passive notification at specified index, if any is shown.
+    * \brief This function hides the passive notification at specified index, if any is shown.
     * @param index Index of the notification to hide. Default is 0 (oldest notification).
     */
     function hidePassiveNotification(index = 0) {
@@ -205,7 +205,7 @@ QQC2.ApplicationWindow {
     }
 
     /**
-     * @brief This function returns application window's object anywhere in the application.
+     * \brief This function returns application window's object anywhere in the application.
      * @returns a pointer to this application window
      * can be used anywhere in the application.
      */

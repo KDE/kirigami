@@ -8,7 +8,7 @@ import "templates" as T
 import "private" as P
 
 /**
- * @brief AbstractCard is the base for cards.
+ * \brief AbstractCard is the base for cards.
  *
  * A Card is a visual object that serves as an entry point for more detailed information.
  * An abstractCard is empty, providing just the look and the base properties and signals

@@ -8,7 +8,7 @@ import QtQuick
 import org.kde.kirigami as Kirigami
 
 /**
- * @brief An item that provides the features of ApplicationWindow without the window itself.
+ * \brief An item that provides the features of ApplicationWindow without the window itself.
  *
  * This allows embedding into a larger application.
  * It's based around the PageRow component that allows adding/removing of pages.
@@ -76,7 +76,7 @@ Kirigami.AbstractApplicationItem {
     id: root
 
     /**
-     * @brief This property holds the PageRow used to allocate the pages and
+     * \brief This property holds the PageRow used to allocate the pages and
      * manage the transitions between them.
      *
      * It's using a PageRow, while having the same API as PageStack,

@@ -9,7 +9,7 @@ import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 
 /**
- * @brief A heading label used for subsections of texts.
+ * \brief A heading label used for subsections of texts.
  *
  * The characteristics of the text will be automatically set according to the
  * Kirigami.Theme. Use this components for section titles or headings in your UI,
@@ -38,7 +38,7 @@ QQC2.Label {
     id: heading
 
     /**
-     * @brief This property holds the level of the heading, which determines its size.
+     * \brief This property holds the level of the heading, which determines its size.
      *
      * This property holds the level, which determines how large the header is.
      *
@@ -49,7 +49,7 @@ QQC2.Label {
     property int level: 1
 
     /**
-     * @brief This enumeration defines heading types.
+     * \brief This enumeration defines heading types.
      *
      * This enum helps with heading visibility (making it less or more important).
      */
@@ -60,7 +60,7 @@ QQC2.Label {
     }
 
     /**
-     * @brief This property holds the heading type.
+     * \brief This property holds the heading type.
      *
      * The type of the heading. This can be:
      * * ``Kirigami.Heading.Type.Normal``: Create a normal heading (default)

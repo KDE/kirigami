@@ -27,7 +27,7 @@ T.ItemDelegate {
 
 //BEGIN properties
     /**
-     * @brief This property holds an item that serves as a header.
+     * \brief This property holds an item that serves as a header.
      *
      * This item will be positioned on top if headerOrientation is ``Qt.Vertical``
      * or on the left if it is ``Qt.Horizontal``.
@@ -35,7 +35,7 @@ T.ItemDelegate {
     property alias header: headerFooterLayout.header
 
     /**
-     * @brief This property sets the card's orientation.
+     * \brief This property sets the card's orientation.
      *
      * * ``Qt.Vertical``: the header will be positioned on top
      * * ``Qt.Horizontal``: the header will be positioned on the left (or right if an RTL layout is used)
@@ -47,7 +47,7 @@ T.ItemDelegate {
     property int headerOrientation: Qt.Vertical
 
     /**
-     * @brief This property holds an item that serves as a footer.
+     * \brief This property holds an item that serves as a footer.
      *
      * This item will be positioned at the bottom if headerOrientation is ``Qt.Vertical``
      * or on the right if it is ``Qt.Horizontal``.
@@ -55,7 +55,7 @@ T.ItemDelegate {
     property alias footer: headerFooterLayout.footer
 
     /**
-     * @brief This property sets whether clicking or tapping on the card area shows a visual click feedback.
+     * \brief This property sets whether clicking or tapping on the card area shows a visual click feedback.
      *
      * Use this if you want to do an action in the onClicked signal handler of the card.
      *

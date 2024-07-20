@@ -10,7 +10,7 @@ import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 
 /**
- * @brief Navigation buttons to be used for the NavigationTabBar component.
+ * \brief Navigation buttons to be used for the NavigationTabBar component.
  *
  * It supplies its own padding, and also supports using the QQC2 AbstractButton ``display`` property to be used in column lists.
  *
@@ -71,7 +71,7 @@ T.TabButton {
     id: control
 
     /**
-     * @brief This property tells the index of this tab within the tab bar.
+     * \brief This property tells the index of this tab within the tab bar.
      */
     readonly property int tabIndex: {
         let tabIdx = 0

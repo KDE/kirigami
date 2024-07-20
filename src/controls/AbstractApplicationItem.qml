@@ -12,7 +12,7 @@ import "templates/private" as TP
 import "templates" as KT
 
 /**
- * @brief An item that provides the features of AbstractApplicationWindow without the window itself.
+ * \brief An item that provides the features of AbstractApplicationWindow without the window itself.
  *
  * This allows embedding into a larger application.
  * Unless you need extra flexibility it is recommended to use ApplicationItem instead.
@@ -63,7 +63,7 @@ Item {
 
 //BEGIN properties
     /**
-     * @brief This property holds the stack used to allocate the pages and to manage the
+     * \brief This property holds the stack used to allocate the pages and to manage the
      * transitions between them.
      *
      * Put a container here, such as QtQuick.Controls.StackView.
@@ -71,24 +71,24 @@ Item {
     property Item pageStack
 
     /**
-     * @brief This property holds the font for this item.
+     * \brief This property holds the font for this item.
      *
      * default: ``Kirigami.Theme.defaultFont``
      */
     property font font: Kirigami.Theme.defaultFont
 
     /**
-     * @brief This property holds the locale for this item.
+     * \brief This property holds the locale for this item.
      */
     property Locale locale
 
     /**
-     * @brief This property holds an item that can be used as a menuBar for the application.
+     * \brief This property holds an item that can be used as a menuBar for the application.
      */
     property T.MenuBar menuBar
 
     /**
-    * @brief This property holds an item that can be used as a title for the application.
+    * \brief This property holds an item that can be used as a title for the application.
     *
     * Scrolling the main page will make it taller or shorter (through the point of going away).
     *
@@ -107,12 +107,12 @@ Item {
     property KT.AbstractApplicationHeader header
 
     /**
-     * @brief This property holds an item that can be used as a footer for the application.
+     * \brief This property holds an item that can be used as a footer for the application.
      */
     property Item footer
 
     /**
-     * @brief This property sets whether the standard chrome of the app is visible.
+     * \brief This property sets whether the standard chrome of the app is visible.
      *
      * These are the action button, the drawer handles and the application header.
      *
@@ -121,7 +121,7 @@ Item {
     property bool controlsVisible: true
 
     /**
-     * @brief This property holds the drawer for global actions.
+     * \brief This property holds the drawer for global actions.
      *
      * Thos drawer can be opened by sliding from the left screen edge
      * or by dragging the ActionButton to the right.
@@ -132,7 +132,7 @@ Item {
     property OverlayDrawer globalDrawer
 
     /**
-     * @brief This property tells us whether the application is in "widescreen" mode.
+     * \brief This property tells us whether the application is in "widescreen" mode.
      *
      * This is enabled on desktops or horizontal tablets.
      *
@@ -141,7 +141,7 @@ Item {
     property bool wideScreen: width >= Kirigami.Units.gridUnit * 60
 
     /**
-     * @brief This property holds the drawer for context-dependent actions.
+     * \brief This property holds the drawer for context-dependent actions.
      *
      * The drawer that will be opened by sliding from the right screen edge
      * or by dragging the ActionButton to the left.
@@ -184,14 +184,14 @@ Item {
     property OverlayDrawer contextDrawer
 
     /**
-     * @brief This property holds the list of all children of this item.
+     * \brief This property holds the list of all children of this item.
      * @internal
      * @property list<Object> __data
      */
     default property alias __data: contentItemRoot.data
 
     /**
-     * @brief This property holds the Item of the main part of the Application UI.
+     * \brief This property holds the Item of the main part of the Application UI.
      */
     readonly property Item contentItem: Item {
         id: contentItemRoot
@@ -206,14 +206,14 @@ Item {
     }
 
     /**
-     * @brief This property holds the color for the background.
+     * \brief This property holds the color for the background.
      *
      * default: ``Kirigami.Theme.backgroundColor``
      */
     property color color: Kirigami.Theme.backgroundColor
 
     /**
-     * @brief This property holds the background of the Application UI.
+     * \brief This property holds the background of the Application UI.
      */
     property Item background
 
@@ -222,7 +222,7 @@ Item {
 
 //BEGIN functions
     /**
-     * @brief This function shows a little passive notification at the bottom of the app window
+     * \brief This function shows a little passive notification at the bottom of the app window
      * lasting for few seconds, with an optional action button.
      *
      * @param message The text message to be shown to the user.
@@ -237,7 +237,7 @@ Item {
     }
 
     /**
-     * @brief This function hides the passive notification at specified index, if any is shown.
+     * \brief This function hides the passive notification at specified index, if any is shown.
      * @param index Index of the notification to hide. Default is 0 (oldest notification).
     */
     function hidePassiveNotification(index = 0) {
@@ -245,7 +245,7 @@ Item {
     }
 
     /**
-     * @brief This property gets application windows object anywhere in the application.
+     * \brief This property gets application windows object anywhere in the application.
      * @returns a pointer to this item.
      */
     function applicationWindow() {

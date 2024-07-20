@@ -10,7 +10,7 @@ import org.kde.kirigami as Kirigami
 
 //TODO KF6: move somewhere else? kirigami addons?
 /**
- * @brief An "About" page that is ready to integrate in a Kirigami app.
+ * \brief An "About" page that is ready to integrate in a Kirigami app.
  *
  * Allows to have a page that will show the copyright notice of the application
  * together with the contributors and some information of which platform it's
@@ -25,7 +25,7 @@ Kirigami.ScrollablePage {
 
 //BEGIN properties
     /**
-     * @brief This property holds an object with the same shape as KAboutData.
+     * \brief This property holds an object with the same shape as KAboutData.
      *
      * For example:
      * @code{json}
@@ -68,7 +68,7 @@ Kirigami.ScrollablePage {
     property alias aboutData: aboutItem.aboutData
 
     /**
-     * @brief This property holds a link to a "Get Involved" page.
+     * \brief This property holds a link to a "Get Involved" page.
      *
      * default: `"https://community.kde.org/Get_Involved" when your application id starts with "org.kde.", otherwise is empty`
      *
@@ -77,7 +77,7 @@ Kirigami.ScrollablePage {
     property alias getInvolvedUrl: aboutItem.getInvolvedUrl
 
     /**
-     * @brief This property holds a link to a "Donate" page.
+     * \brief This property holds a link to a "Donate" page.
      * @since 5.101
      *
      * default: `"https://kde.org/community/donations" when application id starts with "org.kde.", otherwise it is empty.`
@@ -85,7 +85,7 @@ Kirigami.ScrollablePage {
     property alias donateUrl: aboutItem.donateUrl
 
     /**
-     * @brief This property controls whether to load avatars by URL.
+     * \brief This property controls whether to load avatars by URL.
      *
      * If set to false, a fallback "user" icon will be displayed.
      *

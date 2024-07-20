@@ -14,7 +14,7 @@ import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 
 /**
- * @brief Popup dialog that is used for short tasks and user interaction.
+ * \brief Popup dialog that is used for short tasks and user interaction.
  *
  * Dialog consists of three components: the header, the content,
  * and the footer.
@@ -114,13 +114,13 @@ T.Dialog {
     id: root
 
     /**
-     * @brief This property holds the dialog's contents; includes Items and QtObjects.
+     * \brief This property holds the dialog's contents; includes Items and QtObjects.
      * @property list<QtObject> dialogData
      */
     default property alias dialogData: contentControl.contentData
 
     /**
-     * @brief This property holds the content items of the dialog.
+     * \brief This property holds the content items of the dialog.
      *
      * The initial height and width of the dialog is calculated from the
      * `implicitWidth` and `implicitHeight` of the content.
@@ -130,7 +130,7 @@ T.Dialog {
     property alias dialogChildren: contentControl.contentChildren
 
     /**
-     * @brief This property sets the absolute maximum height the dialog can have.
+     * \brief This property sets the absolute maximum height the dialog can have.
      *
      * The height restriction is solely applied on the content, so if the
      * maximum height given is not larger than the height of the header and
@@ -142,7 +142,7 @@ T.Dialog {
     readonly property real absoluteMaximumHeight: parent ? (parent.height - Kirigami.Units.largeSpacing * 2) : Infinity
 
     /**
-     * @brief This property holds the absolute maximum width the dialog can have.
+     * \brief This property holds the absolute maximum width the dialog can have.
      *
      * By default, it is the window width, subtracted by largeSpacing on both
      * the top and bottom.
@@ -152,7 +152,7 @@ T.Dialog {
     readonly property real __borderWidth: 1
 
     /**
-     * @brief This property holds the maximum height the dialog can have
+     * \brief This property holds the maximum height the dialog can have
      * (including the header and footer).
      *
      * The height restriction is solely enforced on the content, so if the
@@ -164,14 +164,14 @@ T.Dialog {
     property real maximumHeight: absoluteMaximumHeight
 
     /**
-     * @brief This property holds the maximum width the dialog can have.
+     * \brief This property holds the maximum width the dialog can have.
      *
      * By default, this is `absoluteMaximumWidth`.
      */
     property real maximumWidth: absoluteMaximumWidth
 
     /**
-     * @brief This property holds the preferred height of the dialog.
+     * \brief This property holds the preferred height of the dialog.
      *
      * The content will receive a hint for how tall it should be to have
      * the dialog to be this height.
@@ -182,7 +182,7 @@ T.Dialog {
     property real preferredHeight: -1
 
     /**
-     * @brief This property holds the preferred width of the dialog.
+     * \brief This property holds the preferred width of the dialog.
      *
      * The content will receive a hint for how wide it should be to have
      * the dialog be this wide.
@@ -194,27 +194,27 @@ T.Dialog {
 
 
     /**
-     * @brief This property holds the component to the left of the footer buttons.
+     * \brief This property holds the component to the left of the footer buttons.
      */
     property Component footerLeadingComponent
 
     /**
-     * @brief his property holds the component to the right of the footer buttons.
+     * \brief his property holds the component to the right of the footer buttons.
      */
     property Component footerTrailingComponent
 
     /**
-     * @brief This property sets whether to show the close button in the header.
+     * \brief This property sets whether to show the close button in the header.
      */
     property bool showCloseButton: true
 
     /**
-     * @brief This property sets whether the footer button style should be flat.
+     * \brief This property sets whether the footer button style should be flat.
      */
     property bool flatFooterButtons: false
 
     /**
-     * @brief This property holds the custom actions displayed in the footer.
+     * \brief This property holds the custom actions displayed in the footer.
      *
      * Example usage:
      * @code{.qml}

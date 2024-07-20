@@ -12,7 +12,7 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
 /**
- * @brief An inline help button that shows a tooltip when clicked.
+ * \brief An inline help button that shows a tooltip when clicked.
  *
  * Use this component when you want to explain details or usage of a feature of
  * the UI, but the explanation is too long to fit in an inline label, and too

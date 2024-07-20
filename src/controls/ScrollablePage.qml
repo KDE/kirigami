@@ -15,7 +15,7 @@ import "private"
 // TODO KF6: undo many workarounds to make existing code work?
 
 /**
- * @brief ScrollablePage is a Page that holds scrollable content, such as a ListView.
+ * \brief ScrollablePage is a Page that holds scrollable content, such as a ListView.
  *
  * Scrolling and scrolling indicators will be automatically managed.
  *
@@ -69,7 +69,7 @@ Kirigami.Page {
 
 //BEGIN properties
     /**
-     * @brief This property tells whether the list is asking for a refresh.
+     * \brief This property tells whether the list is asking for a refresh.
      *
      * This property will automatically be set to true when the user pulls the list down enough,
      * which in return, shows a loading spinner. When this is set to true, it signals
@@ -82,27 +82,27 @@ Kirigami.Page {
     property bool refreshing: false
 
     /**
-     * @brief This property sets whether scrollable page supports "pull down to refresh" behaviour.
+     * \brief This property sets whether scrollable page supports "pull down to refresh" behaviour.
      *
      * default: ``false``
      */
     property bool supportsRefreshing: false
 
     /**
-     * @brief This property holds the main Flickable item of this page.
+     * \brief This property holds the main Flickable item of this page.
      * @deprecated here for compatibility; will be removed in KF6.
      */
     property Flickable flickable: Flickable {} // FIXME KF6: this empty flickable exists for compatibility reasons. some apps assume flickable exists right from the beginning but ScrollView internally assumes it does not
     onFlickableChanged: scrollView.contentItem = flickable;
 
     /**
-     * @brief This property sets the vertical scrollbar policy.
+     * \brief This property sets the vertical scrollbar policy.
      * @property Qt::ScrollBarPolicy verticalScrollBarPolicy
      */
     property int verticalScrollBarPolicy
 
     /**
-     * @brief This property sets the horizontal scrollbar policy.
+     * \brief This property sets the horizontal scrollbar policy.
      * @property Qt::ScrollBarPolicy horizontalScrollBarPolicy
      */
     property int horizontalScrollBarPolicy: QQC2.ScrollBar.AlwaysOff
@@ -120,7 +120,7 @@ Kirigami.Page {
     }
 
     /**
-     * @brief This property sets whether it is possible to navigate the items in a view that support it.
+     * \brief This property sets whether it is possible to navigate the items in a view that support it.
      *
      * If true, and if flickable is an item view (e.g. ListView, GridView), it will be possible
      * to navigate the view current items with keyboard up/down arrow buttons.

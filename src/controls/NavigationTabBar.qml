@@ -13,7 +13,7 @@ import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 
 /**
- * @brief Page navigation tab-bar, used as an alternative to sidebars for 3-5 elements.
+ * \brief Page navigation tab-bar, used as an alternative to sidebars for 3-5 elements.
  *
  * Can be combined with secondary toolbars above (if in the footer) to provide page actions.
  *
@@ -118,12 +118,12 @@ QQC2.ToolBar {
 
 //BEGIN properties
     /**
-     * @brief This property holds the list of actions to be displayed in the toolbar.
+     * \brief This property holds the list of actions to be displayed in the toolbar.
      */
     property list<T.Action> actions
 
     /**
-     * @brief This property holds a subset of visible actions of the list of actions.
+     * \brief This property holds a subset of visible actions of the list of actions.
      *
      * An action is considered visible if it is either a Kirigami.Action with
      * ``visible`` property set to true, or it is a plain QQC2.Action.
@@ -136,7 +136,7 @@ QQC2.ToolBar {
         )
 
     /**
-     * @brief The property holds the maximum width of the toolbar actions, before margins are added.
+     * \brief The property holds the maximum width of the toolbar actions, before margins are added.
      */
     property real maximumContentWidth: {
         const minDelegateWidth = Kirigami.Units.gridUnit * 5;
@@ -145,7 +145,7 @@ QQC2.ToolBar {
     }
 
     /**
-     * @brief This property holds the index of currently checked tab.
+     * \brief This property holds the index of currently checked tab.
      *
      * If the index set is out of bounds, or the triggered signal did not change any checked property of an action, the index
      * will remain the same.
@@ -153,17 +153,17 @@ QQC2.ToolBar {
     property int currentIndex: tabGroup.checkedButton && tabGroup.buttons.length > 0 ? tabGroup.checkedButton.tabIndex : -1
 
     /**
-     * @brief This property holds the number of tab buttons.
+     * \brief This property holds the number of tab buttons.
      */
     readonly property int count: tabGroup.buttons.length
 
     /**
-     * @brief This property holds the ButtonGroup used to manage the tabs.
+     * \brief This property holds the ButtonGroup used to manage the tabs.
      */
     readonly property T.ButtonGroup tabGroup: tabGroup
 
     /**
-     * @brief This property holds the calculated width that buttons on the tab bar use.
+     * \brief This property holds the calculated width that buttons on the tab bar use.
      *
      * @since 5.102
      */

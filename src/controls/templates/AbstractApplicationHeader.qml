@@ -10,7 +10,7 @@ import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 
 /**
- * @brief An item that can be used as a title for the application.
+ * \brief An item that can be used as a title for the application.
  *
  * Scrolling the main page will make it taller or shorter (through the point of going away)
  * It's a behavior similar to the typical mobile web browser addressbar
@@ -64,7 +64,7 @@ Item {
     height: Layout.preferredHeight
 
     /**
-     * @brief This property holds the background item.
+     * \brief This property holds the background item.
      * @note the background will be automatically sized to fill the whole control
      */
     property Item background

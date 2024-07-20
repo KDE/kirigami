@@ -10,7 +10,7 @@
 #include <qqmlregistration.h>
 
 /**
- * @brief This attached property contains hints for spell checker.
+ * \brief This attached property contains hints for spell checker.
  *
  * @warning Kirigami doesn't provide any spell checker per se, this is just a
  * hint for QQC2 style implementation and other downstream components. If you

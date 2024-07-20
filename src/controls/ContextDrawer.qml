@@ -52,7 +52,7 @@ Kirigami.OverlayDrawer {
     handleOpenIcon.source: null
 
     /**
-     * @brief A title for the action list that will be shown to the user when opens the drawer
+     * \brief A title for the action list that will be shown to the user when opens the drawer
      *
      * default: ``qsTr("Actions")``
      */
@@ -68,7 +68,7 @@ Kirigami.OverlayDrawer {
     property list<T.Action> actions
 
     /**
-     * @brief Arbitrary content to show above the list view.
+     * \brief Arbitrary content to show above the list view.
      *
      * default: `an Item containing a Kirigami.Heading that displays a title whose text is
      * controlled by the title property.`
@@ -79,7 +79,7 @@ Kirigami.OverlayDrawer {
     property alias header: menu.header
 
     /**
-     * @brief Arbitrary content to show below the list view.
+     * \brief Arbitrary content to show below the list view.
      * @property Component footer
      * @since 2.7
      */

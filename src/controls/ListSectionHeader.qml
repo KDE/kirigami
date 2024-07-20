@@ -10,7 +10,7 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
 /**
- * @brief A section delegate for the primitive ListView component.
+ * \brief A section delegate for the primitive ListView component.
  *
  * It's intended to make all listviews look coherent.
  *
@@ -41,7 +41,7 @@ QQC2.ItemDelegate {
     id: listSection
 
     /**
-     * @brief This property sets the text of the ListView's section header.
+     * \brief This property sets the text of the ListView's section header.
      * @property string label
      * @deprecated since 6.2 Use base type's AbstractButton::text property directly
      */
