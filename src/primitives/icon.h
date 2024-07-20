@@ -126,7 +126,7 @@ class Icon : public QQuickItem
      * as a mask, all non-transparent colors are replaced with the color provided in the Icon's
      * @link Icon::color color @endlink property.
      *
-     * @see color
+     * \sa color
      */
     Q_PROPERTY(bool isMask READ isMask WRITE setIsMask NOTIFY isMaskChanged FINAL)
 

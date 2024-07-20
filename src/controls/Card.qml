@@ -60,7 +60,7 @@ Kirigami.AbstractCard {
      *
      * It also has the full set of properties that QtQuick.Image has, such as sourceSize and fillMode.
      *
-     * @see org::kde::kirigami::private::BannerImage
+     * \sa org::kde::kirigami::private::BannerImage
      * @property Image banner
      */
     readonly property alias banner: bannerImage

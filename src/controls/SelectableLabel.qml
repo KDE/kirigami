@@ -21,7 +21,7 @@ import QtQuick.Controls as QQC2
  *     }
  * @endcode
  *
- * @see https://bugreports.qt.io/browse/QTBUG-14077
+ * \sa https://bugreports.qt.io/browse/QTBUG-14077
  * @since 5.95
  * @since org.kde.kirigami 2.20
  * @inherit QtQuick.Controls.TextArea

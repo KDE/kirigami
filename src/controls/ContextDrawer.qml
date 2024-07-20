@@ -61,8 +61,8 @@ Kirigami.OverlayDrawer {
     /**
      * List of contextual actions to be displayed in a ListView.
      *
-     * @see QtQuick.Action
-     * @see org::kde::kirigami::Action
+     * \sa QtQuick.Action
+     * \sa org::kde::kirigami::Action
      * @property list<T.Action> actions
      */
     property list<T.Action> actions

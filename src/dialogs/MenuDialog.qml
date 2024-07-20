@@ -52,8 +52,8 @@ import org.kde.kirigami as Kirigami
  * }
  * @endcode
  *
- * @see Dialog
- * @see PromptDialog
+ * \sa Dialog
+ * \sa PromptDialog
  * @inherit org::kde::kirigami::Dialog
  */
 Kirigami.Dialog {

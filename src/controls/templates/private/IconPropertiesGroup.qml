@@ -27,7 +27,7 @@ QtObject {
      *
      * The icon will be loaded as a regular image.
      *
-     * @see QtQuick.Image::source
+     * \sa QtQuick.Image::source
      */
     property var source
 

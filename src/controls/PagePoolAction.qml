@@ -13,7 +13,7 @@ import org.kde.kirigami as Kirigami
  * An action used to load Pages coming from a common PagePool
  * in a PageRow or QtQuickControls2 StackView.
  *
- * @see PagePool
+ * \sa PagePool
  */
 Kirigami.Action {
     id: root

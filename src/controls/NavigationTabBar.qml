@@ -107,7 +107,7 @@ import org.kde.kirigami as Kirigami
  * }
  * @endcode
  *
- * @see NavigationTabButton
+ * \sa NavigationTabButton
  * @since 5.87
  * @since org.kde.kirigami 2.19
  * @inherit QtQuick.Templates.Toolbar

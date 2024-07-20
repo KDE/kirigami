@@ -210,7 +210,7 @@ class ShadowedRectangle : public QQuickItem
      *
      * default: ``0``
      *
-     * @see corners
+     * \sa corners
      */
     Q_PROPERTY(qreal radius READ radius WRITE setRadius NOTIFY radiusChanged FINAL)
 
@@ -233,7 +233,7 @@ class ShadowedRectangle : public QQuickItem
      *     border.color: Kirigami.Theme.textColor
      * }
      * @endcode
-     * @see BorderGroup
+     * \sa BorderGroup
      */
     Q_PROPERTY(BorderGroup *border READ border CONSTANT FINAL)
 
@@ -249,7 +249,7 @@ class ShadowedRectangle : public QQuickItem
      * }
      * @endcode
      *
-     * @see ShadowGroup
+     * \sa ShadowGroup
      */
     Q_PROPERTY(ShadowGroup *shadow READ shadow CONSTANT FINAL)
 
@@ -268,7 +268,7 @@ class ShadowedRectangle : public QQuickItem
      *     corners.bottomRightRadius: 10
      * @endcode
      *
-     * @see CornersGroup
+     * \sa CornersGroup
      */
     Q_PROPERTY(CornersGroup *corners READ corners CONSTANT FINAL)
 
@@ -277,7 +277,7 @@ class ShadowedRectangle : public QQuickItem
      *
      * default: ``RenderType::Auto``
      *
-     * @see RenderType
+     * \sa RenderType
      */
     Q_PROPERTY(RenderType renderType READ renderType WRITE setRenderType NOTIFY renderTypeChanged FINAL)
 

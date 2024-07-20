@@ -20,8 +20,8 @@ import org.kde.kirigami as Kirigami
  * <b>Note:</b> If a `mainItem` is specified, it will replace
  * the subtitle label, and so the respective property will have no effect.
  *
- * @see Dialog
- * @see MenuDialog
+ * \sa Dialog
+ * \sa MenuDialog
  *
  * Example usage:
  *

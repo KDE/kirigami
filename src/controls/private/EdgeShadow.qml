@@ -17,7 +17,7 @@ Item {
      * * ``Qt.RightEdge``: the right edge of the content item.
      * * ``Qt.BottomEdge``: the bottom edge of the content item.
      *
-     * @see Qt::Edges
+     * \sa Qt::Edges
      */
     property int edge: Qt.LeftEdge
 

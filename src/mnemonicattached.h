@@ -21,7 +21,7 @@
  * Different kinds of controls will have different priorities in assigning the
  * shortcut: for instance the "Ok/Cancel" buttons in a dialog will have priority
  * over fields of a FormLayout.
- * @see ControlType
+ * \sa ControlType
  *
  * Usually the developer shouldn't use this directly as base components
  * already use this, but only when implementing a custom graphical Control.
@@ -59,7 +59,7 @@ class MnemonicAttached : public QObject
 
     /**
      * The type of control this mnemonic is attached: different types of controls have different importance and priority for shortcut assignment.
-     * @see ControlType
+     * \sa ControlType
      */
     Q_PROPERTY(MnemonicAttached::ControlType controlType READ controlType WRITE setControlType NOTIFY controlTypeChanged FINAL)
 

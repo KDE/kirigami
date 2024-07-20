@@ -61,8 +61,8 @@ Kirigami.ScrollablePage {
        }
        @endcode
      *
-     * @see KAboutData
-     * @see org::kde::kirigami::AboutItem::aboutData
+     * \sa KAboutData
+     * \sa org::kde::kirigami::AboutItem::aboutData
      * @property KAboutData aboutData
      */
     property alias aboutData: aboutItem.aboutData

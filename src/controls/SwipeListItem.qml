@@ -61,7 +61,7 @@ QQC2.SwipeDelegate {
      *
      * On mobile touch devices, this will be true only when pressed.
      *
-     * @see QtQuick.Templates.ItemDelegate::hovered
+     * \sa QtQuick.Templates.ItemDelegate::hovered
      * @deprecated This will be removed in KF6; use the ``hovered`` property instead.
      * @property bool containsMouse
      */
@@ -86,7 +86,7 @@ QQC2.SwipeDelegate {
      *
      * default: ``false``
      *
-     * @see ListSectionHeader
+     * \sa ListSectionHeader
      */
     property bool sectionDelegate: false
 

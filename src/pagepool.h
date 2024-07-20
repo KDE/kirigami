@@ -17,7 +17,7 @@
  * url, you should instantiate them in the traditional way
  * or use a different PagePool instance.
  *
- * @see org::kde::kirigami::PagePoolAction
+ * \sa org::kde::kirigami::PagePoolAction
  */
 class PagePool : public QObject
 {

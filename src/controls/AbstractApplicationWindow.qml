@@ -16,7 +16,7 @@ import "templates/private" as TP
  * different from the Page Row behavior recommended by the HIG and provided
  * by ApplicationWindow.
  * It is recommended to use ApplicationWindow instead
- * @see ApplicationWindow
+ * \sa ApplicationWindow
  *
  * It's usually used as a root QML component for the application.
  * It provides support for a central page stack, side drawers, and
