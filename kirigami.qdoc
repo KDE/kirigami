@@ -1,0 +1,9 @@
+/*!
+    \qmlmodule org.kde.kirigami
+    \brief Kirigami Stuff
+*/
+
+/*!
+    \qmlmodule org.kde.kirigami.delegates
+    \brief Kirigami Delegates
+*/

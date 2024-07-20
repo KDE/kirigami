@@ -1,0 +1,14 @@
+project = Kirigami
+description = Stuff
+
+documentationinheaders = true
+
+headerdirs = .
+sourcedirs = .
+
+headers.fileextensions = "*.h"
+
+sources.fileextensions = "*.qdoc *.qml *.h"
+
+outputdir  = doc/html
+outputformats = HTML
