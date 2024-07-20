@@ -69,7 +69,7 @@ import org.kde.kirigami as Kirigami
  *   ...
  * \endcode
  *
- * @since 2.5
+ * \since Kirigami 2.5
  * @inherit QtQuick.Item
  */
 Item {

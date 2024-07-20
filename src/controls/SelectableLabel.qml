@@ -22,8 +22,8 @@ import QtQuick.Controls as QQC2
  * \endcode
  *
  * \sa https://bugreports.qt.io/browse/QTBUG-14077
- * @since 5.95
- * @since org.kde.kirigami 2.20
+ * \since Kirigami 5.95
+ * \since Kirigami org.kde.kirigami 2.20
  * @inherit QtQuick.Controls.TextArea
  */
 QQC2.TextArea {

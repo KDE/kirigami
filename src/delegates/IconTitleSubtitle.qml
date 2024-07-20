@@ -12,50 +12,53 @@ import org.kde.kirigami.primitives as Primitives
 import org.kde.kirigami.templates.private as KTP
 
 /*!
- * A simple item containing an icon, title and subtitle.
- *
- * This is an extension of TitleSubtitle that adds an icon to the side.
- * It is intended as a contentItem for ItemDelegate and related controls.
- *
- * When using it as a contentItem, make sure to bind the appropriate properties
- * to those of the Control. Prefer binding to the Control's properties over
- * setting the properties directly, as the Control's properties may affect other
- * things like setting accessible names.
- *
- * This (and TitleSubtitle) can be combined with other controls in a layout to
- * create complex content items for controls.
- *
- * Example usage creating a CheckDelegate with an extra button on the side:
- *
- * ```qml
- * CheckDelegate {
- *     id: delegate
- *
- *     text: "Example"
- *     icon.name: "document-new"
- *
- *     contentItem: RowLayout {
- *         spacing: Kirigami.Theme.smallSpacing
- *
- *         Kirigami.IconTitleSubtitle {
- *             Layout.fillWidth: true
- *
- *             icon: icon.fromControlsIcon(delegate.icon)
- *             title: delegate.text
- *             selected: delegate.highlighted || delegate.down
- *             font: delegate.font
- *         }
- *
- *         Button {
- *             icon.name: "document-open"
- *             text: "Extra Action"
- *         }
- *     }
- * }
- * ```
- *
- * \sa Kirigami::Delegates::TitleSubtitle
- * \sa Kirigami::Delegates::ItemDelegate
+  \qmltype IconTitleSubtitle
+  \inqmlmodule org.kde.kirigami.delegates
+
+  A simple item containing an icon, title and subtitle.
+
+  This is an extension of TitleSubtitle that adds an icon to the side.
+  It is intended as a contentItem for ItemDelegate and related controls.
+
+  When using it as a contentItem, make sure to bind the appropriate properties
+  to those of the Control. Prefer binding to the Control's properties over
+  setting the properties directly, as the Control's properties may affect other
+  things like setting accessible names.
+
+  This (and TitleSubtitle) can be combined with other controls in a layout to
+  create complex content items for controls.
+
+  Example usage creating a CheckDelegate with an extra button on the side:
+
+  \badcode
+  CheckDelegate {
+      id: delegate
+
+      text: "Example"
+      icon.name: "document-new"
+
+      contentItem: RowLayout {
+          spacing: Kirigami.Theme.smallSpacing
+
+          Kirigami.IconTitleSubtitle {
+              Layout.fillWidth: true
+
+              icon: icon.fromControlsIcon(delegate.icon)
+              title: delegate.text
+              selected: delegate.highlighted || delegate.down
+              font: delegate.font
+          }
+
+          Button {
+              icon.name: "document-open"
+              text: "Extra Action"
+          }
+      }
+  }
+  \endcode
+
+  \sa Kirigami::Delegates::TitleSubtitle
+  \sa Kirigami::Delegates::ItemDelegate
  */
 Item {
     id: root

@@ -170,7 +170,7 @@ QQC2.ApplicationWindow {
      *     // ...
      * }
      * \endcode
-     * @since 5.76
+     * \since Kirigami 5.76
      */
     readonly property Kirigami.Action quitAction: Kirigami.Action {
         text: qsTr("Quit")

@@ -95,7 +95,7 @@ class KIRIGAMIPLATFORM_EXPORT Units : public QObject
      * The icon sizes provided are normalized for different DPI, so icons
      * will scale depending on the DPI.
      *
-     * * sizeForLabels (the largest icon size that fits within fontMetrics.height) @since 5.80 @since org.kde.kirigami 2.16
+     * * sizeForLabels (the largest icon size that fits within fontMetrics.height) \since Kirigami 5.80 \since Kirigami org.kde.kirigami 2.16
      * * small
      * * smallMedium
      * * medium
@@ -178,8 +178,8 @@ class KIRIGAMIPLATFORM_EXPORT Units : public QObject
      * the user should expect some kind of feedback. See veryShortDuration, shortDuration, longDuration, and
      * veryLongDuration for animation duration choices.
      *
-     * @since 5.81
-     * @since org.kde.kirigami 2.16
+     * \since Kirigami 5.81
+     * \since Kirigami org.kde.kirigami 2.16
      */
     Q_PROPERTY(int humanMoment READ humanMoment NOTIFY humanMomentChanged FINAL)
 
@@ -193,7 +193,7 @@ class KIRIGAMIPLATFORM_EXPORT Units : public QObject
     /*!
      * Corner radius value shared by buttons and other rectangle elements
      *
-     * @since 6.2
+     * \since Kirigami 6.2
      */
     Q_PROPERTY(qreal cornerRadius READ cornerRadius NOTIFY cornerRadiusChanged FINAL)
 

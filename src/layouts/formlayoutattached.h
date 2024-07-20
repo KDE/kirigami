@@ -31,7 +31,7 @@ class QQuickItem;
  * }
  * \endcode
  * \sa org::kde::kirigami::FormLayout
- * @since 2.3
+ * \since Kirigami 2.3
  */
 class FormLayoutAttached : public QObject
 {

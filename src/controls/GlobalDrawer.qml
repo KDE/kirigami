@@ -136,7 +136,7 @@ Kirigami.OverlayDrawer {
      * If the drawer contents can be scrolled, this item will stay still and won't scroll.
      *
      * @note This property is mainly intended for toolbars.
-     * @since 2.12
+     * \since Kirigami 2.12
      */
     property alias header: mainLayout.header
 
@@ -146,7 +146,7 @@ Kirigami.OverlayDrawer {
      * If the drawer contents can be scrolled, this item will stay still and won't scroll.
      *
      * @note This property is mainly intended for toolbars.
-     * @since 6.0
+     * \since Kirigami 6.0
      */
     property alias footer: mainLayout.footer
 
@@ -207,7 +207,7 @@ Kirigami.OverlayDrawer {
      *
      * default: ``false``
      *
-     * @since 2.5
+     * \since Kirigami 2.5
      */
     property bool showTopContentWhenCollapsed: false
 
@@ -222,7 +222,7 @@ Kirigami.OverlayDrawer {
      * default: ``false``
      *
      * \sa content
-     * @since 2.5
+     * \since Kirigami 2.5
      */
     property bool showContentWhenCollapsed: false
 
@@ -249,7 +249,7 @@ Kirigami.OverlayDrawer {
      *
      * default: ``false``
      *
-     * @since 2.11
+     * \since Kirigami 2.11
      */
     property bool isMenu: false
 
@@ -259,7 +259,7 @@ Kirigami.OverlayDrawer {
      *
      * default: ``true``
      *
-     * @since 2.12
+     * \since Kirigami 2.12
      */
     property bool collapseButtonVisible: true
 //END properties

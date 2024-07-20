@@ -194,7 +194,7 @@ class WheelHandler : public QObject, public QQmlParserStatus
      *
      * @sa horizontalStepSize
      *
-     * @since KDE Frameworks 5.89
+     * \since Kirigami KDE Frameworks 5.89
      */
     Q_PROPERTY(qreal verticalStepSize READ verticalStepSize WRITE setVerticalStepSize RESET resetVerticalStepSize NOTIFY verticalStepSizeChanged FINAL)
 
@@ -205,7 +205,7 @@ class WheelHandler : public QObject, public QQmlParserStatus
      *
      * @sa verticalStepSize
      *
-     * @since KDE Frameworks 5.89
+     * \since Kirigami KDE Frameworks 5.89
      */
     Q_PROPERTY(
         qreal horizontalStepSize READ horizontalStepSize WRITE setHorizontalStepSize RESET resetHorizontalStepSize NOTIFY horizontalStepSizeChanged FINAL)
@@ -215,7 +215,7 @@ class WheelHandler : public QObject, public QQmlParserStatus
      *
      * The default value is equivalent to `Qt.ControlModifier | Qt.ShiftModifier`. This matches QScrollBar, which uses QAbstractSlider behavior.
      *
-     * @since KDE Frameworks 5.89
+     * \since Kirigami KDE Frameworks 5.89
      */
     Q_PROPERTY(Qt::KeyboardModifiers pageScrollModifiers READ pageScrollModifiers WRITE setPageScrollModifiers RESET resetPageScrollModifiers NOTIFY
                    pageScrollModifiersChanged FINAL)
@@ -231,7 +231,7 @@ class WheelHandler : public QObject, public QQmlParserStatus
      *
      * The default value is `false`.
      *
-     * @since KDE Frameworks 5.89
+     * \since Kirigami KDE Frameworks 5.89
      */
     Q_PROPERTY(bool filterMouseEvents READ filterMouseEvents WRITE setFilterMouseEvents NOTIFY filterMouseEventsChanged FINAL)
 
@@ -250,7 +250,7 @@ class WheelHandler : public QObject, public QQmlParserStatus
      *
      * The default value is `false`.
      *
-     * @since KDE Frameworks 5.89
+     * \since Kirigami KDE Frameworks 5.89
      */
     Q_PROPERTY(bool keyNavigationEnabled READ keyNavigationEnabled WRITE setKeyNavigationEnabled NOTIFY keyNavigationEnabledChanged FINAL)
 
@@ -304,7 +304,7 @@ public:
      *
      * returns true if the contentItem was moved.
      *
-     * @since KDE Frameworks 5.89
+     * \since Kirigami KDE Frameworks 5.89
      */
     Q_INVOKABLE bool scrollUp(qreal stepSize = -1);
 
@@ -313,7 +313,7 @@ public:
      *
      * returns true if the contentItem was moved.
      *
-     * @since KDE Frameworks 5.89
+     * \since Kirigami KDE Frameworks 5.89
      */
     Q_INVOKABLE bool scrollDown(qreal stepSize = -1);
 
@@ -322,7 +322,7 @@ public:
      *
      * returns true if the contentItem was moved.
      *
-     * @since KDE Frameworks 5.89
+     * \since Kirigami KDE Frameworks 5.89
      */
     Q_INVOKABLE bool scrollLeft(qreal stepSize = -1);
 
@@ -331,7 +331,7 @@ public:
      *
      * returns true if the contentItem was moved.
      *
-     * @since KDE Frameworks 5.89
+     * \since Kirigami KDE Frameworks 5.89
      */
     Q_INVOKABLE bool scrollRight(qreal stepSize = -1);
 

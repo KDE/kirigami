@@ -37,7 +37,7 @@ import "private" as P
  * }
  * \endcode
  *
- * @since 2.19
+ * \since Kirigami 2.19
  */
 KT.Chip {
     id: chip

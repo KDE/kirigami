@@ -20,13 +20,15 @@ namespace Platform
 {
 
 /*!
+ * \class Kirigami::Platform::InputMethod
+ * \inmodule Kirigami
  * This exposes information about the current used input method.
  */
-class KIRIGAMIPLATFORM_EXPORT InputMethod : public QObject
+class /*KIRIGAMIPLATFORM_EXPORT*/ InputMethod : public QObject
 {
     Q_OBJECT
-    QML_ELEMENT
-    QML_SINGLETON
+    // QML_ELEMENT
+    // QML_SINGLETON
 
 public:
     InputMethod(QObject *parent = nullptr);
@@ -66,7 +68,7 @@ public:
     /*!
      * Is the current input method visible?
      *
-     * For some input methods this will match \ref active however for others this
+     * For some input methods this will match active however for others this
      * may differ.
      */
     Q_PROPERTY(bool visible READ visible NOTIFY visibleChanged FINAL)

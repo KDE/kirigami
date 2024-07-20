@@ -18,8 +18,8 @@ import org.kde.kirigami as Kirigami
  * together with the contributors and some information of which platform it's
  * running on.
  *
- * @since 5.87
- * @since org.kde.kirigami 2.19
+ * \since Kirigami 5.87
+ * \since Kirigami org.kde.kirigami 2.19
  */
 Item {
     id: aboutItem

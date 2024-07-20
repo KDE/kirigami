@@ -108,8 +108,8 @@ import org.kde.kirigami as Kirigami
  * \endcode
  *
  * \sa NavigationTabButton
- * @since 5.87
- * @since org.kde.kirigami 2.19
+ * \since Kirigami 5.87
+ * \since Kirigami org.kde.kirigami 2.19
  * @inherit QtQuick.Templates.Toolbar
  */
 
@@ -165,7 +165,7 @@ QQC2.ToolBar {
     /*!
      * \brief This property holds the calculated width that buttons on the tab bar use.
      *
-     * @since 5.102
+     * \since Kirigami 5.102
      */
     property real buttonWidth: {
         // Counting buttons because Repeaters can be counted among visibleChildren

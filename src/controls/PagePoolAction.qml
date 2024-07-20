@@ -80,8 +80,8 @@ Kirigami.Action {
      *
      * default: ``false``
      *
-     * @since 5.70
-     * @since org.kde.kirigami 2.12
+     * \since Kirigami 5.70
+     * \since Kirigami org.kde.kirigami 2.12
      */
     property bool useLayers: false
 //END properties

@@ -23,7 +23,7 @@ import org.kde.kirigami as Kirigami
  * \endcode
  *
  * @inherit org::kde::kirgami::ActionTextField
- * @since 5.57
+ * \since Kirigami 5.57
  * @author Carl Schwan <carl@carlschwan.eu>
  */
 Kirigami.ActionTextField {
@@ -34,7 +34,7 @@ Kirigami.ActionTextField {
      *
      * default: ``false``
      *
-     * @since 5.57
+     * \since Kirigami 5.57
      */
     property bool showPassword: false
 

@@ -17,8 +17,8 @@ import org.kde.kirigami as Kirigami
  * Maps to the Command Link in the HIG:
  * https://develop.kde.org/hig/components/navigation/commandlink/
  *
- * @since 5.52
- * @since org.kde.kirigami 2.6
+ * \since Kirigami 5.52
+ * \since Kirigami org.kde.kirigami 2.6
  * @inherit QtQuick.Controls.Label
  */
 QQC2.Label {

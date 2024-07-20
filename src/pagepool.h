@@ -37,13 +37,13 @@ class PagePool : public QObject
 
     /*!
      * All items loaded/managed by the PagePool.
-     * @since 5.84
+     * \since Kirigami 5.84
      */
     Q_PROPERTY(QList<QQuickItem *> items READ items NOTIFY itemsChanged FINAL)
 
     /*!
      * All page URLs loaded/managed by the PagePool.
-     * @since 5.84
+     * \since Kirigami 5.84
      */
     Q_PROPERTY(QList<QUrl> urls READ urls NOTIFY urlsChanged FINAL)
 

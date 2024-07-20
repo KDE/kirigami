@@ -24,7 +24,7 @@ import org.kde.kirigami as Kirigami
  * It is recommended to use default values.
  *
  * @inherit QtQuick.ListView
- * @since 2.4
+ * \since Kirigami 2.4
  */
 ListView {
     id: root

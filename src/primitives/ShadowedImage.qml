@@ -39,8 +39,8 @@ import org.kde.kirigami as Kirigami
  * }
  * \endcode
  *
- * @since 5.69
- * @since 2.12
+ * \since Kirigami 5.69
+ * \since Kirigami 2.12
  * @inherit Item
  */
 Item {

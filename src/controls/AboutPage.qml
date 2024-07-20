@@ -16,8 +16,8 @@ import org.kde.kirigami as Kirigami
  * together with the contributors and some information of which platform it's
  * running on.
  *
- * @since 5.52
- * @since org.kde.kirigami 2.6
+ * \since Kirigami 5.52
+ * \since Kirigami org.kde.kirigami 2.6
  * @inherit org::kde::kirigami::ScrollablePage
  */
 Kirigami.ScrollablePage {
@@ -78,7 +78,7 @@ Kirigami.ScrollablePage {
 
     /*!
      * \brief This property holds a link to a "Donate" page.
-     * @since 5.101
+     * \since Kirigami 5.101
      *
      * default: `"https://kde.org/community/donations" when application id starts with "org.kde.", otherwise it is empty.`
      */

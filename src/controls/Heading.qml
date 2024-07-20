@@ -70,7 +70,7 @@ QQC2.Label {
      *   Useful when an heading is for a less important section in an application.
      *
      * @property Heading::Type type
-     * @since 5.82
+     * \since Kirigami 5.82
      */
     property int type: Heading.Type.Normal
 

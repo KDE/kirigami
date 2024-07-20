@@ -10,18 +10,21 @@ import org.kde.kirigami.private as KirigamiPrivate
 import QtQuick.Controls as QQC2
 
 /*!
- * \brief A link button that contains a URL.
- *
- * It will open the url by default, allow to copy it if triggered with the
- * secondary mouse button.
- *
- * @since 5.63
- * @since org.kde.kirigami 2.6
- * @inherit QtQuick.LinkButton
+  \qmltype UrlButton
+  \inqmlmodule org.kde.kirigami
+  \brief A link button that contains a URL.
+
+  It will open the url by default, allow to copy it if triggered with the
+  secondary mouse button.
+
+  \since Kirigami 5.63
  */
 Kirigami.LinkButton {
     id: button
 
+    /*!
+      The URL to open
+     */
     property string url
 
     text: url

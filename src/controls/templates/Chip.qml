@@ -5,13 +5,15 @@ import QtQuick
 import QtQuick.Templates as T
 
 /*!
- * \brief Chip is a visual object based on AbstractButton
- * that provides a friendly way to display predetermined elements
- * with the visual styling of "tags" or "tokens."
- *
- * \sa Chip
- * @since 2.19
- * @inherit QtQuick.Controls.AbstractButton
+  \qmltype Chip
+  \inqmlmodule org.kde.kirigami.templates
+
+  \brief Chip is a visual object based on AbstractButton
+  that provides a friendly way to display predetermined elements
+  with the visual styling of "tags" or "tokens."
+
+  \sa org.kde.kirigami::Chip
+  \since Kirigami 2.19
  */
 T.AbstractButton {
     id: chip
@@ -19,14 +21,14 @@ T.AbstractButton {
     /*!
      * \brief This property holds whether or not to display a close button.
      *
-     * default: ``true``
+     * default: \c true
      */
     property bool closable: true
 
     /*!
      * \brief This property holds whether the icon should be masked or not. This controls the Kirigami.Icon.isMask property.
      *
-     * default: ``false``
+     * default: \c false
      */
     property bool iconMask: false
 

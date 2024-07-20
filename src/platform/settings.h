@@ -86,8 +86,8 @@ class KIRIGAMIPLATFORM_EXPORT Settings : public QObject
     /*!
      * This property holds the runtime information about the libraries in use.
      *
-     * @since 5.52
-     * @since org.kde.kirigami 2.6
+     * \since Kirigami 5.52
+     * \since Kirigami org.kde.kirigami 2.6
      */
     Q_PROPERTY(QStringList information READ information CONSTANT FINAL)
 
@@ -95,8 +95,8 @@ class KIRIGAMIPLATFORM_EXPORT Settings : public QObject
      * This property holds the name of the application window icon.
      * \sa QGuiApplication::windowIcon()
      *
-     * @since 5.62
-     * @since org.kde.kirigami 2.10
+     * \since Kirigami 5.62
+     * \since Kirigami org.kde.kirigami 2.10
      */
     Q_PROPERTY(QVariant applicationWindowIcon READ applicationWindowIcon CONSTANT FINAL)
 
