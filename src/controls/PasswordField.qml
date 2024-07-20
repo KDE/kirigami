@@ -8,7 +8,7 @@ import QtQuick
 import org.kde.kirigami as Kirigami
 
 /**
- * @brief This is a standard password text field.
+ * \brief This is a standard password text field.
  *
  * Example usage:
  * @code{.qml}
@@ -30,7 +30,7 @@ Kirigami.ActionTextField {
     id: root
 
     /**
-     * @brief This property tells whether the password will be displayed in cleartext rather than obfuscated.
+     * \brief This property tells whether the password will be displayed in cleartext rather than obfuscated.
      *
      * default: ``false``
      *

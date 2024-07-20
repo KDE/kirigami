@@ -9,7 +9,7 @@ import "private" as P
 import "templates" as T
 
 /**
- * @brief An overlay sheet that covers the current Page content.
+ * \brief An overlay sheet that covers the current Page content.
  *
  * Its contents can be scrolled up or down, scrolling all the way up or
  * all the way down, dismisses it.

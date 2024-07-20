@@ -51,7 +51,7 @@ Item {
     id: root
 
     /**
-     * @brief This property tells whether the form layout is in wide mode.
+     * \brief This property tells whether the form layout is in wide mode.
      *
      * If true, the layout will be optimized for a wide screen, such as
      * a desktop machine (the labels will be on a left column,

@@ -77,14 +77,14 @@ Kirigami.OverlayDrawer {
 
 //BEGIN properties
     /**
-     * @brief This property holds the title displayed at the top of the drawer.
+     * \brief This property holds the title displayed at the top of the drawer.
      * \sa org::kde::kirigami::private::BannerImage::title
      * @property string title
      */
     property string title
 
     /**
-     * @brief This property holds an icon to be displayed alongside the title.
+     * \brief This property holds an icon to be displayed alongside the title.
      * \sa org::kde::kirigami::private::BannerImage::titleIcon
      * \sa org::kde::kirigami::Icon::source
      * @property var titleIcon
@@ -92,7 +92,7 @@ Kirigami.OverlayDrawer {
     property var titleIcon
 
     /**
-     * @brief This property holds the actions displayed in the drawer.
+     * \brief This property holds the actions displayed in the drawer.
      *
      * The list of actions can be nested having a tree structure.
      * A tree depth bigger than 2 is discouraged.
@@ -131,7 +131,7 @@ Kirigami.OverlayDrawer {
     property list<T.Action> actions
 
     /**
-     * @brief This property holds an item that will always be displayed at the top of the drawer.
+     * \brief This property holds an item that will always be displayed at the top of the drawer.
      *
      * If the drawer contents can be scrolled, this item will stay still and won't scroll.
      *
@@ -141,7 +141,7 @@ Kirigami.OverlayDrawer {
     property alias header: mainLayout.header
 
     /**
-     * @brief This property holds an item that will always be displayed at the bottom of the drawer.
+     * \brief This property holds an item that will always be displayed at the bottom of the drawer.
      *
      * If the drawer contents can be scrolled, this item will stay still and won't scroll.
      *
@@ -151,7 +151,7 @@ Kirigami.OverlayDrawer {
     property alias footer: mainLayout.footer
 
     /**
-     * @brief This property holds items that are displayed above the actions.
+     * \brief This property holds items that are displayed above the actions.
      *
      * Example usage:
      * @code
@@ -174,7 +174,7 @@ Kirigami.OverlayDrawer {
     property alias topContent: topContent.data
 
     /**
-     * @brief This property holds items that are displayed under the actions.
+     * \brief This property holds items that are displayed under the actions.
      *
      * Example usage:
      * @code
@@ -198,7 +198,7 @@ Kirigami.OverlayDrawer {
     default property alias content: mainContent.data
 
     /**
-     * @brief This property sets whether content items at the top should be shown.
+     * \brief This property sets whether content items at the top should be shown.
      * when the drawer is collapsed as a sidebar.
      *
      * If you want to keep some items visible and some invisible, set this to
@@ -212,7 +212,7 @@ Kirigami.OverlayDrawer {
     property bool showTopContentWhenCollapsed: false
 
     /**
-     * @brief This property sets whether content items at the bottom should be shown.
+     * \brief This property sets whether content items at the bottom should be shown.
      * when the drawer is collapsed as a sidebar.
      *
      * If you want to keep some items visible and some invisible, set this to
@@ -230,7 +230,7 @@ Kirigami.OverlayDrawer {
     property bool showHeaderWhenCollapsed: false
 
     /**
-     * @brief This property sets whether activating a leaf action resets the
+     * \brief This property sets whether activating a leaf action resets the
      * menu to show leaf's parent actions.
      *
      * A leaf action is an action without any child actions.
@@ -240,12 +240,12 @@ Kirigami.OverlayDrawer {
     property bool resetMenuOnTriggered: true
 
     /**
-     * @brief This property points to the action acting as a submenu
+     * \brief This property points to the action acting as a submenu
      */
     readonly property T.Action currentSubMenu: stackView.currentItem?.current ?? null
 
     /**
-     * @brief This property sets whether the drawer becomes a menu on the desktop.
+     * \brief This property sets whether the drawer becomes a menu on the desktop.
      *
      * default: ``false``
      *
@@ -254,7 +254,7 @@ Kirigami.OverlayDrawer {
     property bool isMenu: false
 
     /**
-     * @brief This property sets the visibility of the collapse button
+     * \brief This property sets the visibility of the collapse button
      * when the drawer collapsible.
      *
      * default: ``true``
@@ -265,7 +265,7 @@ Kirigami.OverlayDrawer {
 //END properties
 
     /**
-     * @brief This function reverts the menu back to its initial state
+     * \brief This function reverts the menu back to its initial state
      */
     function resetMenu() {
         stackView.pop(stackView.get(0, T.StackView.DontLoad));

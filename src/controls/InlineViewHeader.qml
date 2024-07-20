@@ -11,7 +11,7 @@ import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 
 /**
- * @brief A fancy inline view header showing a title and optional actions.
+ * \brief A fancy inline view header showing a title and optional actions.
  *
  * Designed to be set as the header: property of a ListView or GridView, this
  * component provides a fancy inline header suitable for explaining the contents
@@ -55,7 +55,7 @@ T.ToolBar {
 
 //BEGIN properties
     /**
-     * @brief This property holds the title text.
+     * \brief This property holds the title text.
      */
     property string text
 

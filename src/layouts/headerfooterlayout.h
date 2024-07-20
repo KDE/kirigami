@@ -23,7 +23,7 @@ class HeaderFooterLayout : public QQuickItem
     Q_OBJECT
     QML_ELEMENT
     /**
-     * @brief This property holds the page header item.
+     * \brief This property holds the page header item.
      *
      * The header item is positioned to the top,
      * and resized to the width of the page. The default value is null.
@@ -31,7 +31,7 @@ class HeaderFooterLayout : public QQuickItem
     Q_PROPERTY(QQuickItem *header READ header WRITE setHeader NOTIFY headerChanged FINAL)
 
     /**
-     * @brief This property holds the visual content Item.
+     * \brief This property holds the visual content Item.
      *
      * It will be resized both in width and height with the layout resizing.
      * Its height will be resized to still have room for the heder and footer
@@ -39,7 +39,7 @@ class HeaderFooterLayout : public QQuickItem
     Q_PROPERTY(QQuickItem *contentItem READ contentItem WRITE setContentItem NOTIFY contentItemChanged FINAL)
 
     /**
-     * @brief This property holds the page footer item.
+     * \brief This property holds the page footer item.
      *
      * The footer item is positioned to the bottom,
      * and resized to the width of the page. The default value is null.
@@ -60,7 +60,7 @@ public:
     QQuickItem *footer();
 
     /**
-     * @brief HeaderFooterLayout normally positions its header, footer and
+     * \brief HeaderFooterLayout normally positions its header, footer and
      * contentItem once per frame (at polish event). This method forces the it
      * to recalculate the layout immediately.
      */

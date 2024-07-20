@@ -20,12 +20,12 @@ Kirigami.Action {
 
 //BEGIN properties
     /**
-     * @brief This property holds the url or filename of the page that this action will load.
+     * \brief This property holds the url or filename of the page that this action will load.
      */
     property string page
 
     /**
-     * @brief This property holds the PagePool object used by this PagePoolAction.
+     * \brief This property holds the PagePool object used by this PagePoolAction.
      *
      * PagePool will make sure only one instance of the page identified by the page url will be created and reused.
      * PagePool's lastLoaderUrl property will be used to control the mutual exclusivity of the checked
@@ -43,7 +43,7 @@ Kirigami.Action {
     property Item pageStack: typeof applicationWindow !== 'undefined' ? applicationWindow().pageStack : null
 
     /**
-     * @brief This property sets the page in the pageStack after which
+     * \brief This property sets the page in the pageStack after which
      * new pages will be pushed.
      *
      * All pages present after the given basePage will be removed from the pageStack
@@ -72,7 +72,7 @@ Kirigami.Action {
     property var initialProperties
 
     /**
-     * @brief This property sets whether PagePoolAction will use the layers property
+     * \brief This property sets whether PagePoolAction will use the layers property
      * implemented by the pageStack.
      *
      * This is intended for use with PageRow layers to allow PagePoolActions to

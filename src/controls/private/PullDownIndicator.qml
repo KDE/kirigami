@@ -10,14 +10,14 @@ import org.kde.kirigami as Kirigami
 import QtQuick.Shapes as QQShapes
 
 /**
- * @brief A pull-down to refresh indicator that can be added to any Flickable or ScrollablePage.
+ * \brief A pull-down to refresh indicator that can be added to any Flickable or ScrollablePage.
  */
 Item {
     id: root
 
     //BEGIN properties
     /**
-     * @brief The flickable that this indicator is attached to.
+     * \brief The flickable that this indicator is attached to.
      *
      * If this is not set, the indicator will search for a Flickable in its parent chain.
      */
@@ -35,7 +35,7 @@ Item {
     }
 
     /**
-     * @brief Whether to show the busy indicator at the top of the flickable
+     * \brief Whether to show the busy indicator at the top of the flickable
      *
      * This should be set to true whenever a refresh is in progress. It should typically
      * be set to true whe triggered() is emitted, and set to false when the refresh is
@@ -45,12 +45,12 @@ Item {
     property bool active: false
 
     /**
-     * @brief How far the flickable has been pulled down, between 0 (not at all) and 1 (where a refresh is triggered).
+     * \brief How far the flickable has been pulled down, between 0 (not at all) and 1 (where a refresh is triggered).
      */
     readonly property real progress: !refreshing ? Math.min(-Math.min(flickable?.verticalOvershoot ?? 0, 0) / indicatorContainer.height, 1) : 0
 
     /**
-     * @brief Time to wait after the flickable has been pulled down before triggering a refresh
+     * \brief Time to wait after the flickable has been pulled down before triggering a refresh
      *
      * This gives the user a chance to back out of the refresh if they release the flickable
      * before the refreshDelay has elapsed.
@@ -58,7 +58,7 @@ Item {
     property int refreshDelay: 500
 
     /**
-     * @brief emitted when the flickable is pulled down far enough to trigger a refresh
+     * \brief emitted when the flickable is pulled down far enough to trigger a refresh
      */
     signal triggered()
     //END properties

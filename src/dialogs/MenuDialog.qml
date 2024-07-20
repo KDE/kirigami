@@ -60,18 +60,18 @@ Kirigami.Dialog {
     id: root
 
     /**
-     * @brief This property holds the actions displayed in the context menu.
+     * \brief This property holds the actions displayed in the context menu.
      */
     property list<T.Action> actions
 
     /**
-     * @brief This property holds the content header, which appears above the actions.
+     * \brief This property holds the content header, which appears above the actions.
      * but below the header bar.
      */
     property alias contentHeader: columnHeader.contentItem
 
     /**
-     * @brief This property holds the content header.
+     * \brief This property holds the content header.
      *
      * This makes it possible to access its internal properties to, for example, change its padding:
      * ``contentHeaderControl.topPadding``

@@ -333,7 +333,7 @@ public:
     void setAcceptsMouse(bool accepts);
 
     /**
-     * @brief This method removes all the items after the specified item or
+     * \brief This method removes all the items after the specified item or
      * index from the view and returns the last item that was removed.
      *
      * Note that if the passed value is neither of the values said below, it
@@ -345,7 +345,7 @@ public:
     Q_INVOKABLE QQuickItem *pop(const QVariant &item);
 
     /**
-     * @brief This method removes all the items after the specified item from
+     * \brief This method removes all the items after the specified item from
      * the view and returns the last item that was removed.
      *
      * \sa ::removeItem()
@@ -356,7 +356,7 @@ public:
     QQuickItem *pop(QQuickItem *item);
 
     /**
-     * @brief This method removes all the items after the specified position
+     * \brief This method removes all the items after the specified position
      * from the view and returns the last item that was removed.
      *
      * It starts iterating from the last item to the first item calling
@@ -370,7 +370,7 @@ public:
     QQuickItem *pop(int index);
 
     /**
-     * @brief This method removes the last item from the view and returns it.
+     * \brief This method removes the last item from the view and returns it.
      *
      * This method calls removeItem() on the last item.
      *
@@ -381,7 +381,7 @@ public:
     Q_INVOKABLE QQuickItem *pop();
 
     /**
-     * @brief This method removes the specified item from the view.
+     * \brief This method removes the specified item from the view.
      *
      * Items will be reparented to their old parent. If they have JavaScript
      * ownership and they didn't have an old parent, they will be destroyed.
@@ -393,7 +393,7 @@ public:
     QQuickItem *removeItem(QQuickItem *item);
 
     /**
-     * @brief This method removes an item at a given index from the view.
+     * \brief This method removes an item at a given index from the view.
      *
      * This method calls removeItem(QQuickItem *item) to remove the item at
      * the specified index.
@@ -416,7 +416,7 @@ public Q_SLOTS:
     void addItem(QQuickItem *item);
 
     /**
-     * @brief This method removes an item from the view.
+     * \brief This method removes an item from the view.
      *
      * If the argument is a number, this method dispatches to removeItem(int index)
      * to remove an item by its index. Otherwise the argument should be the item

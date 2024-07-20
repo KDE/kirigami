@@ -14,7 +14,7 @@
 class PaintedRectangleItem;
 
 /**
- * @brief Grouped property for rectangle border.
+ * \brief Grouped property for rectangle border.
  */
 class BorderGroup : public QObject
 {
@@ -22,13 +22,13 @@ class BorderGroup : public QObject
     QML_ELEMENT
     QML_UNCREATABLE("")
     /**
-     * @brief This property holds the border's width in pixels.
+     * \brief This property holds the border's width in pixels.
      *
      * default: ``0``px
      */
     Q_PROPERTY(qreal width READ width WRITE setWidth NOTIFY changed FINAL)
     /**
-     * @brief This property holds the border's color.
+     * \brief This property holds the border's color.
      *
      * Full RGBA colors are supported.
      *
@@ -58,7 +58,7 @@ private:
 };
 
 /**
- * @brief Grouped property for the rectangle's shadow.
+ * \brief Grouped property for the rectangle's shadow.
  */
 class ShadowGroup : public QObject
 {
@@ -66,26 +66,26 @@ class ShadowGroup : public QObject
     QML_ELEMENT
     QML_UNCREATABLE("")
     /**
-     * @brief This property holds the shadow's approximate size in pixels.
+     * \brief This property holds the shadow's approximate size in pixels.
      * @note The actual shadow size can be less than this value due to falloff.
      *
      * default: ``0``px
      */
     Q_PROPERTY(qreal size READ size WRITE setSize NOTIFY changed FINAL)
     /**
-     * @brief This property holds the shadow's offset in pixels on the X axis.
+     * \brief This property holds the shadow's offset in pixels on the X axis.
      *
      * default: ``0``px
      */
     Q_PROPERTY(qreal xOffset READ xOffset WRITE setXOffset NOTIFY changed FINAL)
     /**
-     * @brief This property holds the shadow's offset in pixels on the Y axis.
+     * \brief This property holds the shadow's offset in pixels on the Y axis.
      *
      * default: ``0``px
      */
     Q_PROPERTY(qreal yOffset READ yOffset WRITE setYOffset NOTIFY changed FINAL)
     /**
-     * @brief This property holds the shadow's color.
+     * \brief This property holds the shadow's color.
      *
      * Full RGBA colors are supported.
      *
@@ -118,7 +118,7 @@ private:
 };
 
 /**
- * @brief Grouped property for corner radius.
+ * \brief Grouped property for corner radius.
  */
 class CornersGroup : public QObject
 {
@@ -126,7 +126,7 @@ class CornersGroup : public QObject
     QML_ELEMENT
     QML_UNCREATABLE("")
     /**
-     * @brief This property holds the top-left corner's radius in pixels.
+     * \brief This property holds the top-left corner's radius in pixels.
      *
      * Setting this to ``-1`` indicates that the value should be ignored.
      *
@@ -135,7 +135,7 @@ class CornersGroup : public QObject
     Q_PROPERTY(qreal topLeftRadius READ topLeft WRITE setTopLeft NOTIFY changed FINAL)
 
     /**
-     * @brief This property holds the top-right corner's radius in pixels.
+     * \brief This property holds the top-right corner's radius in pixels.
      *
      * Setting this to ``-1`` indicates that the value should be ignored.
      *
@@ -144,7 +144,7 @@ class CornersGroup : public QObject
     Q_PROPERTY(qreal topRightRadius READ topRight WRITE setTopRight NOTIFY changed FINAL)
 
     /**
-     * @brief This property holds the bottom-left corner's radius in pixels.
+     * \brief This property holds the bottom-left corner's radius in pixels.
      *
      * Setting this to ``-1`` indicates that the value should be ignored.
      *
@@ -153,7 +153,7 @@ class CornersGroup : public QObject
     Q_PROPERTY(qreal bottomLeftRadius READ bottomLeft WRITE setBottomLeft NOTIFY changed FINAL)
 
     /**
-     * @brief This property holds the bottom-right corner's radius in pixels.
+     * \brief This property holds the bottom-right corner's radius in pixels.
      *
      * Setting this to ``-1`` indicates that the value should be ignored.
      *
@@ -188,7 +188,7 @@ private:
 };
 
 /**
- * @brief A rectangle with a shadow behind it.
+ * \brief A rectangle with a shadow behind it.
  *
  * This item will render a rectangle, with a shadow below it. The rendering is done
  * using distance fields, which provide greatly improved performance. The shadow is
@@ -203,7 +203,7 @@ class ShadowedRectangle : public QQuickItem
     Q_OBJECT
     QML_ELEMENT
     /**
-     * @brief This property holds the radii of the rectangle's corners.
+     * \brief This property holds the radii of the rectangle's corners.
      *
      * This is the amount of rounding to apply to all of the rectangle's
      * corners, in pixels. Each corner can have a different radius.
@@ -215,7 +215,7 @@ class ShadowedRectangle : public QQuickItem
     Q_PROPERTY(qreal radius READ radius WRITE setRadius NOTIFY radiusChanged FINAL)
 
     /**
-     * @brief This property holds the rectangle's color.
+     * \brief This property holds the rectangle's color.
      *
      * Full RGBA colors are supported.
      *
@@ -224,7 +224,7 @@ class ShadowedRectangle : public QQuickItem
     Q_PROPERTY(QColor color READ color WRITE setColor NOTIFY colorChanged FINAL)
 
     /**
-     * @brief This property holds the border's grouped property.
+     * \brief This property holds the border's grouped property.
      *
      * Example usage:
      * @code
@@ -238,7 +238,7 @@ class ShadowedRectangle : public QQuickItem
     Q_PROPERTY(BorderGroup *border READ border CONSTANT FINAL)
 
     /**
-     * @brief This property holds the shadow's grouped property.
+     * \brief This property holds the shadow's grouped property.
      *
      * Example usage:
      * @code
@@ -254,7 +254,7 @@ class ShadowedRectangle : public QQuickItem
     Q_PROPERTY(ShadowGroup *shadow READ shadow CONSTANT FINAL)
 
     /**
-     * @brief This property holds the corners grouped property
+     * \brief This property holds the corners grouped property
      *
      * Note that the values from this group override \property radius for the
      * corner they affect.
@@ -273,7 +273,7 @@ class ShadowedRectangle : public QQuickItem
     Q_PROPERTY(CornersGroup *corners READ corners CONSTANT FINAL)
 
     /**
-     * @brief This property holds the rectangle's render mode.
+     * \brief This property holds the rectangle's render mode.
      *
      * default: ``RenderType::Auto``
      *
@@ -282,7 +282,7 @@ class ShadowedRectangle : public QQuickItem
     Q_PROPERTY(RenderType renderType READ renderType WRITE setRenderType NOTIFY renderTypeChanged FINAL)
 
     /**
-     * @brief This property tells whether software rendering is being used.
+     * \brief This property tells whether software rendering is being used.
      *
      * default: ``false``
      */
@@ -293,12 +293,12 @@ public:
     ~ShadowedRectangle() override;
 
     /**
-     * @brief Available rendering types for ShadowedRectangle.
+     * \brief Available rendering types for ShadowedRectangle.
      */
     enum RenderType {
 
         /**
-         * @brief Automatically determine the optimal rendering type.
+         * \brief Automatically determine the optimal rendering type.
          *
          * This will use the highest rendering quality possible, falling back to
          * lower quality if the hardware doesn't support it. It will use software
@@ -307,13 +307,13 @@ public:
         Auto,
 
         /**
-         * @brief Use the highest rendering quality possible, even if the hardware might
+         * \brief Use the highest rendering quality possible, even if the hardware might
          * not be able to handle it normally.
          */
         HighQuality,
 
         /**
-         * @brief Use the lowest rendering quality, even if the hardware could handle
+         * \brief Use the lowest rendering quality, even if the hardware could handle
          * higher quality rendering.
          *
          * This might result in certain effects being omitted, like shadows.
@@ -321,7 +321,7 @@ public:
         LowQuality,
 
         /**
-         * @brief Always use software rendering for this rectangle.
+         * \brief Always use software rendering for this rectangle.
          *
          * Software rendering is intended as a fallback when the QtQuick scene
          * graph is configured to use software rendering. It will result in

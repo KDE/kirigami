@@ -148,7 +148,7 @@ public:
 };
 
 /**
- * @brief Handles scrolling for a Flickable and 2 attached ScrollBars.
+ * \brief Handles scrolling for a Flickable and 2 attached ScrollBars.
  *
  * WheelHandler filters events from a Flickable, a vertical ScrollBar and a horizontal ScrollBar.
  * Wheel and KeyPress events (when `keyNavigationEnabled` is true) are used to scroll the Flickable.
@@ -183,12 +183,12 @@ class WheelHandler : public QObject, public QQmlParserStatus
     QML_ELEMENT
 
     /**
-     * @brief This property holds the Qt Quick Flickable that the WheelHandler will control.
+     * \brief This property holds the Qt Quick Flickable that the WheelHandler will control.
      */
     Q_PROPERTY(QQuickItem *target READ target WRITE setTarget NOTIFY targetChanged FINAL)
 
     /**
-     * @brief This property holds the vertical step size.
+     * \brief This property holds the vertical step size.
      *
      * The default value is equivalent to `20 * Qt.styleHints.wheelScrollLines`. This is consistent with the default increment for QScrollArea.
      *
@@ -199,7 +199,7 @@ class WheelHandler : public QObject, public QQmlParserStatus
     Q_PROPERTY(qreal verticalStepSize READ verticalStepSize WRITE setVerticalStepSize RESET resetVerticalStepSize NOTIFY verticalStepSizeChanged FINAL)
 
     /**
-     * @brief This property holds the horizontal step size.
+     * \brief This property holds the horizontal step size.
      *
      * The default value is equivalent to `20 * Qt.styleHints.wheelScrollLines`. This is consistent with the default increment for QScrollArea.
      *
@@ -211,7 +211,7 @@ class WheelHandler : public QObject, public QQmlParserStatus
         qreal horizontalStepSize READ horizontalStepSize WRITE setHorizontalStepSize RESET resetHorizontalStepSize NOTIFY horizontalStepSizeChanged FINAL)
 
     /**
-     * @brief This property holds the keyboard modifiers that will be used to start page scrolling.
+     * \brief This property holds the keyboard modifiers that will be used to start page scrolling.
      *
      * The default value is equivalent to `Qt.ControlModifier | Qt.ShiftModifier`. This matches QScrollBar, which uses QAbstractSlider behavior.
      *
@@ -221,7 +221,7 @@ class WheelHandler : public QObject, public QQmlParserStatus
                    pageScrollModifiersChanged FINAL)
 
     /**
-     * @brief This property holds whether the WheelHandler filters mouse events like a Qt Quick Controls ScrollView would.
+     * \brief This property holds whether the WheelHandler filters mouse events like a Qt Quick Controls ScrollView would.
      *
      * Touch events are allowed to flick the view and they make the scrollbars not interactive.
      *
@@ -236,7 +236,7 @@ class WheelHandler : public QObject, public QQmlParserStatus
     Q_PROPERTY(bool filterMouseEvents READ filterMouseEvents WRITE setFilterMouseEvents NOTIFY filterMouseEventsChanged FINAL)
 
     /**
-     * @brief This property holds whether the WheelHandler handles keyboard scrolling.
+     * \brief This property holds whether the WheelHandler handles keyboard scrolling.
      *
      * - Left arrow scrolls a step to the left.
      * - Right arrow scrolls a step to the right.
@@ -255,7 +255,7 @@ class WheelHandler : public QObject, public QQmlParserStatus
     Q_PROPERTY(bool keyNavigationEnabled READ keyNavigationEnabled WRITE setKeyNavigationEnabled NOTIFY keyNavigationEnabledChanged FINAL)
 
     /**
-     * @brief This property holds whether the WheelHandler blocks all wheel events from reaching the Flickable.
+     * \brief This property holds whether the WheelHandler blocks all wheel events from reaching the Flickable.
      *
      * When this property is false, scrolling the Flickable with WheelHandler will only block an event from reaching the Flickable if the Flickable is actually
      * scrolled by WheelHandler.
@@ -268,7 +268,7 @@ class WheelHandler : public QObject, public QQmlParserStatus
     Q_PROPERTY(bool blockTargetWheel MEMBER m_blockTargetWheel NOTIFY blockTargetWheelChanged FINAL)
 
     /**
-     * @brief This property holds whether the WheelHandler can use wheel events to scroll the Flickable.
+     * \brief This property holds whether the WheelHandler can use wheel events to scroll the Flickable.
      *
      * The default value is true.
      */
@@ -346,7 +346,7 @@ Q_SIGNALS:
     void scrollFlickableTargetChanged();
 
     /**
-     * @brief This signal is emitted when a wheel event reaches the event filter, just before scrolling is handled.
+     * \brief This signal is emitted when a wheel event reaches the event filter, just before scrolling is handled.
      *
      * Accepting the wheel event in the `onWheel` signal handler prevents scrolling from happening.
      */

@@ -103,12 +103,12 @@ Item {
     readonly property bool truncated: labelItem.truncated || subtitleItem.truncated
 
     /**
-     * @brief Emitted when the user clicks on a link embedded in the text of the title or subtitle.
+     * \brief Emitted when the user clicks on a link embedded in the text of the title or subtitle.
      */
     signal linkActivated(string link)
 
     /**
-     * @brief Emitted when the user hovers on a link embedded in the text of the title or subtitle.
+     * \brief Emitted when the user hovers on a link embedded in the text of the title or subtitle.
      */
     signal linkHovered(string link)
 

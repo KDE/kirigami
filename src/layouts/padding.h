@@ -63,14 +63,14 @@ class Padding : public QQuickItem
     QML_ELEMENT
 
     /**
-     * @brief This property holds the visual content Item.
+     * \brief This property holds the visual content Item.
      *
      * It will automatically resized taking into account all the paddings
      */
     Q_PROPERTY(QQuickItem *contentItem READ contentItem WRITE setContentItem NOTIFY contentItemChanged FINAL)
 
     /**
-     * @brief This property holds the default padding.
+     * \brief This property holds the default padding.
      *
      * Padding adds a space between each edge of  this ITem and its contentItem, effectively controlling its size.
      * To specify a padding value for a specific edge of the control, set its relevant property:
@@ -82,21 +82,21 @@ class Padding : public QQuickItem
     Q_PROPERTY(qreal padding READ padding WRITE setPadding NOTIFY paddingChanged RESET resetPadding FINAL)
 
     /**
-     * @brief This property holds the horizontal padding.
+     * \brief This property holds the horizontal padding.
      *
      * Unless explicitly set, the value is equal to padding.
      */
     Q_PROPERTY(qreal horizontalPadding READ horizontalPadding WRITE setHorizontalPadding NOTIFY horizontalPaddingChanged RESET resetHorizontalPadding FINAL)
 
     /**
-     * @brief This property holds the vertical padding.
+     * \brief This property holds the vertical padding.
      *
      * Unless explicitly set, the value is equal to padding.
      */
     Q_PROPERTY(qreal verticalPadding READ verticalPadding WRITE setVerticalPadding NOTIFY verticalPaddingChanged RESET resetVerticalPadding FINAL)
 
     /**
-     * @brief This property holds the padding on the left side.
+     * \brief This property holds the padding on the left side.
      *
      * Unless explicitly set, it falls back to horizontalPadding and then to padding.
      * This always refers to the actual left, it won't be flipped on RTL layouts.
@@ -104,14 +104,14 @@ class Padding : public QQuickItem
     Q_PROPERTY(qreal leftPadding READ leftPadding WRITE setLeftPadding NOTIFY leftPaddingChanged RESET resetLeftPadding FINAL)
 
     /**
-     * @brief the padding on the top side.
+     * \brief the padding on the top side.
      *
      * Unless explicitly set, it falls back to verticalPadding and then to padding.
      */
     Q_PROPERTY(qreal topPadding READ topPadding WRITE setTopPadding NOTIFY topPaddingChanged RESET resetTopPadding FINAL)
 
     /**
-     * @brief This property holds the padding on the right side.
+     * \brief This property holds the padding on the right side.
      *
      * Unless explicitly set, it falls back to horizontalPadding and then to padding.
      * This always refers to the actual right, it won't be flipped on RTL layouts.
@@ -119,29 +119,29 @@ class Padding : public QQuickItem
     Q_PROPERTY(qreal rightPadding READ rightPadding WRITE setRightPadding NOTIFY rightPaddingChanged RESET resetRightPadding FINAL)
 
     /**
-     * @brief This property holds the padding on the bottom side.
+     * \brief This property holds the padding on the bottom side.
      *
      * Unless explicitly set, it falls back to verticalPadding and then to padding.
      */
     Q_PROPERTY(qreal bottomPadding READ bottomPadding WRITE setBottomPadding NOTIFY bottomPaddingChanged RESET resetBottomPadding FINAL)
 
     /**
-     *  @brief The width available to the contentItem after deducting horizontal padding from the width of the Padding.
+     *  \brief The width available to the contentItem after deducting horizontal padding from the width of the Padding.
      */
     Q_PROPERTY(qreal availableWidth READ availableWidth NOTIFY availableWidthChanged FINAL)
 
     /**
-     *  @brief The height available to the contentItem after deducting vertical padding from the width of the Padding.
+     *  \brief The height available to the contentItem after deducting vertical padding from the width of the Padding.
      */
     Q_PROPERTY(qreal availableHeight READ availableHeight NOTIFY availableHeightChanged FINAL)
 
     /**
-     *  @brief The implicitWidth of its contentItem, or 0 if not present.
+     *  \brief The implicitWidth of its contentItem, or 0 if not present.
      */
     Q_PROPERTY(qreal implicitContentWidth READ implicitContentWidth NOTIFY implicitContentWidthChanged FINAL)
 
     /**
-     *  @brief The implicitHeight of its contentItem, or 0 if not present.
+     *  \brief The implicitHeight of its contentItem, or 0 if not present.
      */
     Q_PROPERTY(qreal implicitContentHeight READ implicitContentHeight NOTIFY implicitContentHeightChanged FINAL)
 

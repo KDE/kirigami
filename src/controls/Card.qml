@@ -12,7 +12,7 @@ import org.kde.kirigami as Kirigami
 import "private" as P
 
 /**
- * @brief This is the standard layout of a Card.
+ * \brief This is the standard layout of a Card.
  *
  * It is recommended to use this class when the concept of Cards is needed
  * in the application.
@@ -33,7 +33,7 @@ Kirigami.AbstractCard {
     id: root
 
     /**
-     * @brief This property holds the clickable actions that will be available in the footer
+     * \brief This property holds the clickable actions that will be available in the footer
      * of the card.
      *
      * The actions will be represented by a list of ToolButtons with an optional overflow
@@ -44,7 +44,7 @@ Kirigami.AbstractCard {
     property list<T.Action> actions
 
     /**
-     * @brief This grouped property controls the banner image present in the header.
+     * \brief This grouped property controls the banner image present in the header.
      *
      * This grouped property has the following sub-properties:
      * * ``source: url``: The source for the image. It understands any URL valid for an Image component.

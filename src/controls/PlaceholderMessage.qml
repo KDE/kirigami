@@ -11,7 +11,7 @@ import org.kde.kirigami as Kirigami
 import "private" as P
 
 /**
- * @brief A placeholder message indicating that a view is empty.
+ * \brief A placeholder message indicating that a view is empty.
  *
  * The message comprises a label with text, an optional explanation below the main text,
  * an optional icon above all the text, and an optional button below all the text which
@@ -130,7 +130,7 @@ ColumnLayout {
 
 //BEGIN properties
     /**
-     * @brief This property holds the PlaceholderMessage type.
+     * \brief This property holds the PlaceholderMessage type.
      *
      * The type of the message. This can be:
      * * ``Kirigami.PlaceholderMessage.Type.Actionable``: Makes it more attention-getting. Useful when the user is expected to interact with the message.
@@ -145,7 +145,7 @@ ColumnLayout {
         : PlaceholderMessage.Type.Informational
 
     /**
-     * @brief This property holds the text to show in the placeholder label.
+     * \brief This property holds the text to show in the placeholder label.
      *
      * Optional; if not defined, the message will have no large text label
      * text. If both text: and explanation: are omitted, the message will have
@@ -156,7 +156,7 @@ ColumnLayout {
     property string text
 
     /**
-     * @brief This property holds the smaller explanatory text to show below the larger title-style text
+     * \brief This property holds the smaller explanatory text to show below the larger title-style text
      *
      * Useful for providing a user-friendly explanation on how to proceed.
      *
@@ -168,7 +168,7 @@ ColumnLayout {
     property string explanation
 
     /**
-     * @brief This property provides an icon to display above the top text label.
+     * \brief This property provides an icon to display above the top text label.
      * @note It accepts ``icon.name`` and ``icon.source`` to set the icon source.
      * It is suggested to use ``icon.name``.
      *
@@ -182,7 +182,7 @@ ColumnLayout {
     property P.ActionIconGroup icon: P.ActionIconGroup {}
 
     /**
-     * @brief This property holds an action that helps the user proceed.
+     * \brief This property holds an action that helps the user proceed.
      *
      * Typically used to guide the user to the next step for adding
      * content or items to an empty view.

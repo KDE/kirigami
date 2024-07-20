@@ -20,7 +20,7 @@ Kirigami.ShadowedImage {
 
 //BEGIN properties
     /**
-     * @brief This property holds an icon to be displayed alongside the title.
+     * \brief This property holds an icon to be displayed alongside the title.
      *
      * It can be a QIcon, a FreeDesktop-compatible icon name, or any URL understood by QtQuick.Image.
      *
@@ -29,7 +29,7 @@ Kirigami.ShadowedImage {
     property alias titleIcon: headingIcon.source
 
     /**
-     * @brief This property holds the title's text which is to be displayed on top.
+     * \brief This property holds the title's text which is to be displayed on top.
      * of the image.
      * \sa QtQuick.Text::text
      * @property string title
@@ -37,7 +37,7 @@ Kirigami.ShadowedImage {
     property alias title: heading.text
 
     /**
-     * @brief This property holds the title's position.
+     * \brief This property holds the title's position.
      *
      * default: ``Qt.AlignTop | Qt.AlignLeft``
      *
@@ -46,7 +46,7 @@ Kirigami.ShadowedImage {
     property int titleAlignment: Qt.AlignTop | Qt.AlignLeft
 
     /**
-     * @brief This property holds the title's level.
+     * \brief This property holds the title's level.
      *
      * Available text size values range from 1 (largest) to 5 (smallest).
      *
@@ -58,7 +58,7 @@ Kirigami.ShadowedImage {
     property alias titleLevel: heading.level
 
     /**
-     * @brief This property holds the title's wrap mode.
+     * \brief This property holds the title's wrap mode.
      *
      * default: ``Text.NoWrap``
      *
@@ -68,7 +68,7 @@ Kirigami.ShadowedImage {
     property alias titleWrapMode: heading.wrapMode
 
     /**
-     * @brief This property holds whether the title is part of an item considered
+     * \brief This property holds whether the title is part of an item considered
      * checkable.
      *
      * If true, a checkbox will appear in the top-right corner of the title area.
@@ -80,7 +80,7 @@ Kirigami.ShadowedImage {
     property bool checkable: false
 
     /**
-     * @brief This property holds whether the title's checkbox is currently checked.
+     * \brief This property holds whether the title's checkbox is currently checked.
      *
      * If using this outside of a GlobalDrawer or a Card, you must manually bind
      * this to the checked condition of the parent item, or whatever else in your

@@ -7,7 +7,7 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
 /**
- * @brief A placeholder for loading pages.
+ * \brief A placeholder for loading pages.
  *
  * Example usage:
  * @code{.qml}
@@ -32,7 +32,7 @@ Kirigami.PlaceholderMessage {
     id: loadingPlaceholder
 
     /**
-     * @brief This property holds whether the loading message shows a
+     * \brief This property holds whether the loading message shows a
      * determinate progress bar or not.
      *
      * This should be true if you want to display the actual
@@ -43,7 +43,7 @@ Kirigami.PlaceholderMessage {
     property bool determinate: false
 
     /**
-     * @brief This property holds a progress bar.
+     * \brief This property holds a progress bar.
      *
      * This should be used to access the progress bar to change its value.
      *

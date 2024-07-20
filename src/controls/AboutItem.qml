@@ -12,7 +12,7 @@ import org.kde.kirigami as Kirigami
 
 //TODO: Kf6: move somewhere else which can depend from KAboutData?
 /**
- * @brief An about item that displays the about data
+ * \brief An about item that displays the about data
  *
  * Allows to show the copyright notice of the application
  * together with the contributors and some information of which platform it's
@@ -24,7 +24,7 @@ import org.kde.kirigami as Kirigami
 Item {
     id: aboutItem
     /**
-     * @brief This property holds an object with the same shape as KAboutData.
+     * \brief This property holds an object with the same shape as KAboutData.
      *
      * Example usage:
      * @code{json}
@@ -65,14 +65,14 @@ Item {
     property var aboutData
 
     /**
-     * @brief This property holds a link to a "Get Involved" page.
+     * \brief This property holds a link to a "Get Involved" page.
      *
      * default: `"https://community.kde.org/Get_Involved" when application id starts with "org.kde.", otherwise it is empty.`
      */
     property url getInvolvedUrl: aboutData.desktopFileName.startsWith("org.kde.") ? "https://community.kde.org/Get_Involved" : ""
 
     /**
-     * @brief This property holds a link to a "Donate" page.
+     * \brief This property holds a link to a "Donate" page.
      *
      * default: `"https://kde.org/community/donations" when application id starts with "org.kde.", otherwise it is empty.`
      */
@@ -100,7 +100,7 @@ Item {
     }
 
     /**
-     * @brief This property controls whether to load avatars by URL.
+     * \brief This property controls whether to load avatars by URL.
      *
      * If set to false, a fallback "user" icon will be displayed.
      *

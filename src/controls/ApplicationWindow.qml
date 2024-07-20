@@ -8,7 +8,7 @@ import QtQuick
 import org.kde.kirigami as Kirigami
 
 /**
- * @brief A window that provides some basic features needed for all apps
+ * \brief A window that provides some basic features needed for all apps
  *
  * It's usually used as a root QML component for the application.
  * It's based around the PageRow component, the application will be
@@ -88,7 +88,7 @@ Kirigami.AbstractApplicationWindow {
     id: root
 
     /**
-     * @brief This property holds the stack used to allocate the pages and to
+     * \brief This property holds the stack used to allocate the pages and to
      * manage the transitions between them.
      *
      * It's using a PageRow, while having the same API as PageStack,
