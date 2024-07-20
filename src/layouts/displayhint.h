@@ -64,7 +64,7 @@ public:
      *
      * @return true if the hint was set for this action, false if not.
      *
-     * @since 2.14
+     * \since Kirigami 2.14
      */
     Q_INVOKABLE bool displayHintSet(DisplayHints values, Hint hint);
 

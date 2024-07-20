@@ -55,7 +55,7 @@ class PaddingPrivate;
  * }
  * \endcode
  *
- * @since KDE Frameworks 6.0
+ * \since Kirigami KDE Frameworks 6.0
  */
 class Padding : public QQuickItem
 {

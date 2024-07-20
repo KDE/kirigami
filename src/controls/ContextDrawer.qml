@@ -74,14 +74,14 @@ Kirigami.OverlayDrawer {
      * controlled by the title property.`
      *
      * @property Component header
-     * @since 2.7
+     * \since Kirigami 2.7
      */
     property alias header: menu.header
 
     /*!
      * \brief Arbitrary content to show below the list view.
      * @property Component footer
-     * @since 2.7
+     * \since Kirigami 2.7
      */
     property alias footer: menu.footer
 

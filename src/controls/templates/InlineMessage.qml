@@ -59,7 +59,7 @@ import org.kde.kirigami.templates.private as TP
  * }
  * \endcode
  *
- * @since 5.45
+ * \since Kirigami 5.45
  * @inherit QtQuick.Templates.Control
  */
 T.Control {

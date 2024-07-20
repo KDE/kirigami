@@ -75,7 +75,7 @@ QQC2.SwipeDelegate {
      *
      * default: ``false``
      *
-     * @since 2.7
+     * \since Kirigami 2.7
      */
     property bool alternatingBackground: false
 
@@ -114,7 +114,7 @@ QQC2.SwipeDelegate {
      * It is advised to use the default value.
      * default: ``Kirigami.Theme.alternateBackgroundColor``
      *
-     * @since 2.7
+     * \since Kirigami 2.7
      */
     property color alternateBackgroundColor: Kirigami.Theme.alternateBackgroundColor
 
@@ -156,7 +156,7 @@ QQC2.SwipeDelegate {
      *
      * Actions become hidden while editing of an item, for example.
      *
-     * @since 2.5
+     * \since Kirigami 2.5
      */
     readonly property bool actionsVisible: actionsLayout.hasVisibleActions
 
@@ -165,7 +165,7 @@ QQC2.SwipeDelegate {
      *
      * default: `true in desktop and tablet mode`
      *
-     * @since 2.15
+     * \since Kirigami 2.15
      */
     property bool alwaysVisibleActions: !Kirigami.Settings.isMobile
 
@@ -182,7 +182,7 @@ QQC2.SwipeDelegate {
      *
      * The value can represent the width of the handle component or the action layout.
      *
-     * @since 2.19
+     * \since Kirigami 2.19
      * @property real overlayWidth
      */
     readonly property alias overlayWidth: overlayLoader.width

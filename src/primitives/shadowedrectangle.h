@@ -195,8 +195,8 @@ private:
  * rendered outside of the item's bounds, so the item's width and height are the
  * rectangle's width and height.
  *
- * @since 5.69
- * @since 2.12
+ * \since Kirigami 5.69
+ * \since Kirigami 2.12
  */
 class ShadowedRectangle : public QQuickItem
 {

@@ -118,7 +118,7 @@ import "private" as P
  * }
  * \endcode
  * @inherit QtQuick.Layouts.ColumnLayout
- * @since 2.12
+ * \since Kirigami 2.12
  */
 ColumnLayout {
     id: root
@@ -138,7 +138,7 @@ ColumnLayout {
      *
      * default: `if a helpfulAction is provided this will be of type Actionable otherwise of type Informational.`
      *
-     * @since 5.94
+     * \since Kirigami 5.94
      */
     property int type: actionButton.action?.enabled
         ? PlaceholderMessage.Type.Actionable
@@ -151,7 +151,7 @@ ColumnLayout {
      * text. If both text: and explanation: are omitted, the message will have
      * no text and only an icon, action button, and/or other custom content.
      *
-     * @since 5.70
+     * \since Kirigami 5.70
      */
     property string text
 
@@ -163,7 +163,7 @@ ColumnLayout {
      * Optional; if not defined, the message will have no supplementary
      * explanatory text.
      *
-     * @since 5.80
+     * \since Kirigami 5.80
      */
     property string explanation
 
@@ -177,7 +177,7 @@ ColumnLayout {
      * be loaded.
      *
      * \sa org::kde::kirigami::private::ActionIconGroup
-     * @since 5.70
+     * \since Kirigami 5.70
      */
     property P.ActionIconGroup icon: P.ActionIconGroup {}
 
@@ -190,7 +190,7 @@ ColumnLayout {
      * Optional; if undefined, no button will appear below the text label.
      *
      * @property QtQuick.Controls.Action helpfulAction
-     * @since 5.70
+     * \since Kirigami 5.70
      */
     property alias helpfulAction: actionButton.action
 

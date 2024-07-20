@@ -20,7 +20,7 @@ import org.kde.kirigami as Kirigami
  *
  * \sa Card
  * @inherit QtQuick.Controls.ItemDelegate
- * @since 2.4
+ * \since Kirigami 2.4
  */
 T.ItemDelegate {
     id: root

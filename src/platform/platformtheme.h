@@ -24,7 +24,8 @@ class PlatformThemeData;
 class PlatformThemePrivate;
 
 /*!
- * @class PlatformTheme platformtheme.h <Kirigami/PlatformTheme>
+ * \class Kirigami::Platform::PlatformTheme
+ * \inmodule Kirigami
  *
  * This class is the base for color management in Kirigami,
  * different platforms can reimplement this class to integrate with
@@ -49,7 +50,7 @@ class KIRIGAMIPLATFORM_EXPORT PlatformTheme : public QObject
      * This enumeration describes the color group used to generate the colors.
      * The enum value is based upon QPalette::ColorGroup and has the same values.
      * It's redefined here in order to make it work with QML.
-     * @since 4.43
+     * \since Kirigami 4.43
      */
     Q_PROPERTY(ColorGroup colorGroup READ colorGroup WRITE setColorGroup NOTIFY colorGroupChanged FINAL)
 

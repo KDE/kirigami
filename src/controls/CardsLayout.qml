@@ -22,7 +22,7 @@ import org.kde.kirigami as Kirigami
  *
  * A CardsLayout should always be contained within a ColumnLayout.
  *
- * @since 2.4
+ * \since Kirigami 2.4
  * @inherit QtQuick.Layouts.GridLayout
  */
 GridLayout {
@@ -33,7 +33,7 @@ GridLayout {
      *
      * default: ``2``
      *
-     * @since 2.5
+     * \since Kirigami 2.5
      */
     property int maximumColumns: 2
 
@@ -59,7 +59,7 @@ GridLayout {
      *
      * default: ``12 * Kirigami.Units.gridUnit``
      *
-     * @since 2.5
+     * \since Kirigami 2.5
      */
     property int minimumColumnWidth: Kirigami.Units.gridUnit * 12
 

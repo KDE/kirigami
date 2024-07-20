@@ -50,7 +50,7 @@ QQC2.Action {
      *
      * default: ``false``
      *
-     * @since 2.6
+     * \since Kirigami 2.6
      */
     property bool expandible: false
 
@@ -69,15 +69,15 @@ QQC2.Action {
      *
      * @note This property contains only preferences, implementations may choose to disregard them.
      * \sa org::kde::kirigami::DisplayHint
-     * @since 2.12
+     * \since Kirigami 2.12
      */
     property int displayHint: Kirigami.DisplayHint.NoPreference
 
     /*!
      * \sa This property holds the component that should be used for displaying this action.
      * @note This can be used to display custom components in the toolbar.
-     * @since 5.65
-     * @since 2.12
+     * \since Kirigami 5.65
+     * \since Kirigami 2.12
      */
     property Component displayComponent
 
@@ -111,7 +111,7 @@ QQC2.Action {
      *
      * When provided Kirigami.Action will be initialized from the given QAction.
      *
-     * @since Kirigami 6.4.0
+     * \since Kirigami Kirigami 6.4.0
      */
     property QtObject fromQAction
 //END properties

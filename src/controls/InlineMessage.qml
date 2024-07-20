@@ -58,7 +58,7 @@ import org.kde.kirigami.templates as KT
  * }
  * \endcode
  * @inherit org::kde::kirigami::templates::InlineMessage
- * @since 5.45
+ * \since Kirigami 5.45
  */
 KT.InlineMessage {
     id: root

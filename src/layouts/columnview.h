@@ -33,7 +33,7 @@ public:
 /*!
  * This is an attached property to every item that is inserted in the ColumnView,
  * used to access the view and page information such as the position and information for layouting, such as fillWidth
- * @since 2.7
+ * \since Kirigami 2.7
  */
 class ColumnViewAttached : public QObject
 {
@@ -74,7 +74,7 @@ class ColumnViewAttached : public QObject
 
     /*!
      * True if this column is at least partly visible in the ColumnView's viewport.
-     * @since 5.77
+     * \since Kirigami 5.77
      */
     Q_PROPERTY(bool inViewport READ inViewport NOTIFY inViewportChanged FINAL)
 
@@ -155,7 +155,7 @@ private:
  * Items inside the ColumnView can access info of the view and set layouting hints via the ColumnView attached property.
  *
  * This is the base for the implementation of PageRow
- * @since 2.7
+ * \since Kirigami 2.7
  */
 class ColumnView : public QQuickItem
 {

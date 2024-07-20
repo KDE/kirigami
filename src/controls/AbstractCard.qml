@@ -19,7 +19,7 @@ import "private" as P
  *
  * \sa org::kde::kirigami::Card
  * @inherit org::kde::kirigami::templates::AbstractCard
- * @since 2.4
+ * \since Kirigami 2.4
  */
 T.AbstractCard {
     id: root
