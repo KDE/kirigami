@@ -9,12 +9,12 @@ add_subdirectory(layouts)
 add_library(Kirigami)
 add_library(KF6::Kirigami ALIAS Kirigami)
 
-if (WIN32)
-    # Kirigami apparently adds too many sources so on Windows we end
-    # up running into command line length limits. So disable cache
-    # generation on Windows for now.
-    set(_extra_options NO_CACHEGEN)
-endif()
+# On Windows Kirigami apparently adds too many sources so on Windows we end
+# up running into command line length limits. So disable cache
+# generation on Windows for now.
+# On Qt 6.7.2 cachegen is causing https://bugs.kde.org/show_bug.cgi?id=488326
+# investigate if future versions fix it and we can re-enable it
+set(_extra_options NO_CACHEGEN)
 if (BUILD_SHARED_LIBS)
     set(_extra_options ${_extra_options} NO_PLUGIN_OPTIONAL)
 endif()
