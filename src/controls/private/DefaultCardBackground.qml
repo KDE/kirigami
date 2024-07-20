@@ -41,7 +41,7 @@ Kirigami.ShadowedRectangle {
 
     /**
      * @brief This property holds the color displayed when a click event is triggered.
-     * @see DefaultCardBackground::clickFeedback
+     * \sa DefaultCardBackground::clickFeedback
      */
     property color pressedColor: Kirigami.ColorUtils.tintWithAlpha(
                                      defaultColor,
@@ -49,7 +49,7 @@ Kirigami.ShadowedRectangle {
 
     /**
      * @brief This property holds the color displayed when a hover event is triggered.
-     * @see DefaultCardBackground::hoverFeedback
+     * \sa DefaultCardBackground::hoverFeedback
      */
     property color hoverColor: Kirigami.ColorUtils.tintWithAlpha(
                                    defaultColor,

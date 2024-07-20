@@ -18,7 +18,7 @@ import org.kde.kirigami as Kirigami
  * Use this only when you need particular custom contents, for a standard layout
  * for cards, use the Card component.
  *
- * @see Card
+ * \sa Card
  * @inherit QtQuick.Controls.ItemDelegate
  * @since 2.4
  */

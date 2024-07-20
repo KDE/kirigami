@@ -52,35 +52,35 @@ Item {
      *
      * This will be visible if the image has transparancy.
      *
-     * @see org::kde::kirigami::ShadowedRectangle::radius
+     * \sa org::kde::kirigami::ShadowedRectangle::radius
      * @property color color
      */
     property alias color: shadowRectangle.color
 
     /**
      * @brief This propery holds the corner radius of the image.
-     * @see org::kde::kirigami::ShadowedRectangle::radius
+     * \sa org::kde::kirigami::ShadowedRectangle::radius
      * @property real radius
      */
     property alias radius: shadowRectangle.radius
 
     /**
      * @brief This property holds shadow's properties group.
-     * @see org::kde::kirigami::ShadowedRectangle::shadow
+     * \sa org::kde::kirigami::ShadowedRectangle::shadow
      * @property org::kde::kirigami::ShadowedRectangle::ShadowGroup shadow
      */
     property alias shadow: shadowRectangle.shadow
 
     /**
      * @brief This propery holds the border's properties of the image.
-     * @see org::kde::kirigami::ShadowedRectangle::border
+     * \sa org::kde::kirigami::ShadowedRectangle::border
      * @property org::kde::kirigami::ShadowedRectangle::BorderGroup border
      */
     property alias border: shadowRectangle.border
 
     /**
      * @brief This propery holds the corner radius properties of the image.
-     * @see org::kde::kirigami::ShadowedRectangle::corners
+     * \sa org::kde::kirigami::ShadowedRectangle::corners
      * @property org::kde::kirigami::ShadowedRectangle::CornersGroup corners
      */
     property alias corners: shadowRectangle.corners
@@ -99,7 +99,7 @@ Item {
      * image in a separate thread which is useful when maintaining a responsive
      * user interface is more desirable than having images immediately visible.
      *
-     * @see QtQuick.Image::asynchronous
+     * \sa QtQuick.Image::asynchronous
      * @property bool asynchronous
      */
     property alias asynchronous: image.asynchronous
@@ -107,7 +107,7 @@ Item {
     /**
      * @brief This property defines what happens when the source image has a different
      * size than the item.
-     * @see QtQuick.Image::fillMode
+     * \sa QtQuick.Image::fillMode
      * @property int fillMode
      */
     property alias fillMode: image.fillMode
@@ -115,14 +115,14 @@ Item {
     /**
      * @brief This property holds whether the image uses mipmap filtering when scaled
      * or transformed.
-     * @see QtQuick.Image::mipmap
+     * \sa QtQuick.Image::mipmap
      * @property bool mipmap
      */
     property alias mipmap: image.mipmap
 
     /**
      * @brief This property holds the scaled width and height of the full-frame image.
-     * @see QtQuick.Image::sourceSize
+     * \sa QtQuick.Image::sourceSize
      */
     property alias sourceSize: image.sourceSize
 

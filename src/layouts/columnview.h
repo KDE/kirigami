@@ -348,7 +348,7 @@ public:
      * @brief This method removes all the items after the specified item from
      * the view and returns the last item that was removed.
      *
-     * @see ::removeItem()
+     * \sa ::removeItem()
      *
      * @param the item where the iteration should stop at
      * @returns the last item that has been removed
@@ -362,7 +362,7 @@ public:
      * It starts iterating from the last item to the first item calling
      * removeItem() for each of them until it reaches the specified position.
      *
-     * @see ::removeItem()
+     * \sa ::removeItem()
      *
      * @param the position where the iteration should stop at
      * @returns the last item that has been removed
@@ -374,7 +374,7 @@ public:
      *
      * This method calls removeItem() on the last item.
      *
-     * @see ::removeItem()
+     * \sa ::removeItem()
      *
      * @return the removed item
      */
@@ -398,7 +398,7 @@ public:
      * This method calls removeItem(QQuickItem *item) to remove the item at
      * the specified index.
      *
-     * @see ::removeItem(QQuickItem *item)
+     * \sa ::removeItem(QQuickItem *item)
      *
      * @param index the index of the item which should be removed
      * @return the removed item
@@ -422,7 +422,7 @@ public Q_SLOTS:
      * to remove an item by its index. Otherwise the argument should be the item
      * itself to be removed itself, and this method will dispatch to removeItem(QQuickItem *item).
      *
-     * @see ::removeItem(QQuickItem *item)
+     * \sa ::removeItem(QQuickItem *item)
      *
      * @param index the index of the item which should be removed, or the item itself
      * @return the removed item

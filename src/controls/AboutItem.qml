@@ -60,7 +60,7 @@ Item {
        }
        @endcode
      *
-     * @see KAboutData
+     * \sa KAboutData
      */
     property var aboutData
 
@@ -82,7 +82,7 @@ Item {
     property bool _usePageStack: false
 
     /**
-     * @see org::kde::kirigami::FormLayout::wideMode
+     * \sa org::kde::kirigami::FormLayout::wideMode
      * @property bool wideMode
      */
     property alias wideMode: form.wideMode

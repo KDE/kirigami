@@ -13,7 +13,7 @@ import org.kde.kirigami as Kirigami
 import "private" as P
 
 /**
- * @brief A toolbar built out of a list of actions.
+ * \sa A toolbar built out of a list of actions.
  *
  * The default representation for visible actions is a QtQuick.Controls.ToolButton, but
  * it can be changed by setting the `Action.displayComponent` for an action.
@@ -32,7 +32,7 @@ QQC2.Control {
 
 //BEGIN properties
     /**
-     * @brief This property holds a list of visible actions.
+     * \sa This property holds a list of visible actions.
      *
      * The ActionToolBar will try to display as many actions as possible.
      * Those that won't fit will go into an overflow menu.
@@ -42,14 +42,14 @@ QQC2.Control {
     readonly property alias actions: layout.actions
 
     /**
-     * @brief This property holds whether the buttons will have a flat appearance.
+     * \sa This property holds whether the buttons will have a flat appearance.
      *
      * default: ``true``
      */
     property bool flat: true
 
     /**
-     * @brief This property determines how the icon and text are displayed within the button.
+     * \sa This property determines how the icon and text are displayed within the button.
      *
      * Permitted values are:
      * * ``Button.IconOnly``
@@ -59,13 +59,13 @@ QQC2.Control {
      *
      * default: ``Controls.Button.TextBesideIcon``
      *
-     * @see QtQuick.Controls.AbstractButton
+     * \sa QtQuick.Controls.AbstractButton
      * @property int display
      */
     property int display: QQC2.Button.TextBesideIcon
 
     /**
-     * @brief This property holds the alignment of the buttons.
+     * \sa This property holds the alignment of the buttons.
      *
      * When there is more space available than required by the visible delegates,
      * we need to determine how to place the delegates.
@@ -75,13 +75,13 @@ QQC2.Control {
      *
      * default: ``Qt.AlignLeft``
      *
-     * @see Qt::AlignmentFlag
+     * \sa Qt::AlignmentFlag
      * @property int alignment
      */
     property alias alignment: layout.alignment
 
     /**
-     * @brief This property holds the position of the toolbar.
+     * \sa This property holds the position of the toolbar.
      *
      * If this ActionToolBar is the contentItem of a QQC2 Toolbar, the position is bound to the ToolBar's position
      *
@@ -94,7 +94,7 @@ QQC2.Control {
     property int position: parent instanceof T.ToolBar ? parent.position : QQC2.ToolBar.Header
 
     /**
-     * @brief This property holds the maximum width of the content of this ToolBar.
+     * \sa This property holds the maximum width of the content of this ToolBar.
      *
      * If the toolbar's width is larger than this value, empty space will
      * be added on the sides, according to the Alignment property.
@@ -106,7 +106,7 @@ QQC2.Control {
     readonly property alias maximumContentWidth: layout.implicitWidth
 
     /**
-     * @brief This property holds the name of the icon to use for the overflow menu button.
+     * \sa This property holds the name of the icon to use for the overflow menu button.
      *
      * default: ``"overflow-menu"``
      *
@@ -116,13 +116,13 @@ QQC2.Control {
     property string overflowIconName: "overflow-menu"
 
     /**
-     * @brief This property holds the combined width of all visible delegates.
+     * \sa This property holds the combined width of all visible delegates.
      * @property int visibleWidth
      */
     readonly property alias visibleWidth: layout.visibleWidth
 
     /**
-     * @brief This property sets the handling method for items that do not match the toolbar's height.
+     * \sa This property sets the handling method for items that do not match the toolbar's height.
      *
      * When toolbar items do not match the height of the toolbar, there are
      * several ways we can deal with this. This property sets the preferred way.
@@ -134,8 +134,8 @@ QQC2.Control {
      *
      * default: ``HeightMode::ConstrainIfLarger``
      *
-     * @see ToolBarLayout::heightMode
-     * @see ToolBarLayout::HeightMode
+     * \sa ToolBarLayout::heightMode
+     * \sa ToolBarLayout::HeightMode
      * @property ToolBarLayout::HeightMode heightMode
      */
     property alias heightMode: layout.heightMode

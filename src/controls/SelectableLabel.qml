@@ -24,7 +24,7 @@ import QtQuick.Templates as T
  *     }
  * @endcode
  *
- * @see https://bugreports.qt.io/browse/QTBUG-14077
+ * \sa https://bugreports.qt.io/browse/QTBUG-14077
  * @since org.kde.kirigami 2.20
  * @since 5.95
  * @inherit QtQuick.Control

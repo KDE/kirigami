@@ -67,7 +67,7 @@ T.Drawer {
      *
      * default: ``false``
      *
-     * @see collapsible Only collapsible drawers can be collapsed.
+     * \sa collapsible Only collapsible drawers can be collapsed.
      */
     property bool collapsed: false
 

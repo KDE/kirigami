@@ -43,7 +43,7 @@ import org.kde.kirigami as Kirigami
  *    }
  * }
  * @endcode
- * @see FormLayoutAttached
+ * \sa FormLayoutAttached
  * @since 2.3
  * @inherit QtQuick.Item
  */

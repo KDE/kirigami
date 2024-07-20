@@ -93,7 +93,7 @@ class KIRIGAMIPLATFORM_EXPORT Settings : public QObject
 
     /**
      * This property holds the name of the application window icon.
-     * @see QGuiApplication::windowIcon()
+     * \sa QGuiApplication::windowIcon()
      *
      * @since 5.62
      * @since org.kde.kirigami 2.10

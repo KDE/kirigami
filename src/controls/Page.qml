@@ -15,7 +15,7 @@ import "private" as P
  * Page is a container for all the app pages: everything pushed to the
  * ApplicationWindow's pageStack should be a Page.
  *
- * @see ScrollablePage
+ * \sa ScrollablePage
  * For content that should be scrollable, such as ListViews, use ScrollablePage instead.
  * @inherit QtQuick.Controls.Page
  */
@@ -34,7 +34,7 @@ QQC2.Page {
      *
      * Use this if your flickable has some non standard properties, such as not covering the whole Page.
      *
-     * @see ScrollablePage
+     * \sa ScrollablePage
      */
     property Flickable flickable
 

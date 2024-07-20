@@ -105,8 +105,8 @@ import org.kde.kirigami as Kirigami
  * There are also sub-components of the Dialog that target specific usecases,
  * and can reduce boilerplate code if used:
  *
- * @see PromptDialog
- * @see MenuDialog
+ * \sa PromptDialog
+ * \sa MenuDialog
  *
  * @inherit QtQuick.QtObject
  */
@@ -240,7 +240,7 @@ T.Dialog {
      * }
      * @endcode
      *
-     * @see org::kde::kirigami::Action
+     * \sa org::kde::kirigami::Action
      */
     property list<T.Action> customFooterActions
 

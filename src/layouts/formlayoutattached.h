@@ -30,7 +30,7 @@ class QQuickItem;
  *    }
  * }
  * @endcode
- * @see org::kde::kirigami::FormLayout
+ * \sa org::kde::kirigami::FormLayout
  * @since 2.3
  */
 class FormLayoutAttached : public QObject
@@ -90,7 +90,7 @@ class FormLayoutAttached : public QObject
      *     Kirigami.FormData.label: "Label:"
      * }
      * @endcode
-     * @see org::kde::kirigami::FormLayout
+     * \sa org::kde::kirigami::FormLayout
      */
     Q_PROPERTY(bool isSection READ isSection WRITE setIsSection NOTIFY isSectionChanged FINAL)
 

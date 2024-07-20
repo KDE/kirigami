@@ -49,7 +49,7 @@ QT.Control {
 
     /**
      * @brief This property holds the index of the currently active page.
-     * @see currentItem
+     * \sa currentItem
      * @property int currentIndex
      */
     property alias currentIndex: columnView.currentIndex
@@ -94,7 +94,7 @@ QT.Control {
     /**
      * @brief This property holds the first page in the PageRow that is at least partially visible.
      * @note Pages before that one (the one contained in the property) will be out of the viewport.
-     * @see ColumnView::leadingVisibleItem
+     * \sa ColumnView::leadingVisibleItem
      * @property Item leadingVisibleItem
      * @since 2.6
      */
@@ -103,7 +103,7 @@ QT.Control {
     /**
      * @brief This property holds the last page in the PageRow that is at least partially visible.
      * @note Pages after that one (the one contained in the property) will be out of the viewport.
-     * @see ColumnView::trailingVisibleItem
+     * \sa ColumnView::trailingVisibleItem
      * @property Item trailingVisibleItem
      * @since 2.6
      */
@@ -411,7 +411,7 @@ QT.Control {
      * objects.
      *
      * @return The new created page (or the last one if it was an array).
-     * @see push() for details.
+     * \sa push() for details.
      */
     function replace(page, properties): QT.Page {
         if (!pagesLogic.verifyPages(page, properties)) {

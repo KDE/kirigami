@@ -78,15 +78,15 @@ Kirigami.OverlayDrawer {
 //BEGIN properties
     /**
      * @brief This property holds the title displayed at the top of the drawer.
-     * @see org::kde::kirigami::private::BannerImage::title
+     * \sa org::kde::kirigami::private::BannerImage::title
      * @property string title
      */
     property string title
 
     /**
      * @brief This property holds an icon to be displayed alongside the title.
-     * @see org::kde::kirigami::private::BannerImage::titleIcon
-     * @see org::kde::kirigami::Icon::source
+     * \sa org::kde::kirigami::private::BannerImage::titleIcon
+     * \sa org::kde::kirigami::Icon::source
      * @property var titleIcon
      */
     property var titleIcon
@@ -221,7 +221,7 @@ Kirigami.OverlayDrawer {
      *
      * default: ``false``
      *
-     * @see content
+     * \sa content
      * @since 2.5
      */
     property bool showContentWhenCollapsed: false

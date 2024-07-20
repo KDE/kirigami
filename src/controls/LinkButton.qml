@@ -28,7 +28,7 @@ QQC2.Label {
 
     /**
      * @brief This property holds the mouse buttons that the mouse area reacts to.
-     * @see QtQuick.MouseArea::acceptedButtons
+     * \sa QtQuick.MouseArea::acceptedButtons
      * @property Qt::MouseButtons acceptedButtons
      */
     property alias acceptedButtons: area.acceptedButtons

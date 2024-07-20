@@ -176,7 +176,7 @@ ColumnLayout {
      * Falls back to `undefined` if the specified icon is not valid or cannot
      * be loaded.
      *
-     * @see org::kde::kirigami::private::ActionIconGroup
+     * \sa org::kde::kirigami::private::ActionIconGroup
      * @since 5.70
      */
     property P.ActionIconGroup icon: P.ActionIconGroup {}

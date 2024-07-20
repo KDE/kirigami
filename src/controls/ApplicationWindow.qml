@@ -15,7 +15,7 @@ import org.kde.kirigami as Kirigami
  * about pages adding and removal.
  * For most of the usages, this class should be used instead
  * of AbstractApplicationWindow
- * @see AbstractApplicationWindow
+ * \sa AbstractApplicationWindow
  *
  * Setting a width and height property on the ApplicationWindow
  * will set its initial size, but it won't set it as an automatically binding.

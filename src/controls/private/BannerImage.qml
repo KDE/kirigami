@@ -31,7 +31,7 @@ Kirigami.ShadowedImage {
     /**
      * @brief This property holds the title's text which is to be displayed on top.
      * of the image.
-     * @see QtQuick.Text::text
+     * \sa QtQuick.Text::text
      * @property string title
      */
     property alias title: heading.text
@@ -52,7 +52,7 @@ Kirigami.ShadowedImage {
      *
      * default: ``1``
      *
-     * @see org::kde::kirigami::Heading::level
+     * \sa org::kde::kirigami::Heading::level
      * @property int titleLevel
      */
     property alias titleLevel: heading.level
@@ -62,7 +62,7 @@ Kirigami.ShadowedImage {
      *
      * default: ``Text.NoWrap``
      *
-     * @see QtQuick.Text::wrapMode
+     * \sa QtQuick.Text::wrapMode
      * @property int titleWrapMode
      */
     property alias titleWrapMode: heading.wrapMode

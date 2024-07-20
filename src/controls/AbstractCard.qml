@@ -17,7 +17,7 @@ import "private" as P
  * Use this only when you need particular custom contents, for a standard layout
  * for cards, use the Card component.
  *
- * @see org::kde::kirigami::Card
+ * \sa org::kde::kirigami::Card
  * @inherit org::kde::kirigami::templates::AbstractCard
  * @since 2.4
  */
