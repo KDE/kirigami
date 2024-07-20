@@ -78,12 +78,13 @@ QQC2.Page {
                 : true)
 
     /*!
+      \qmlproperty Item overlay
+
       An item which stays on top of every other item in the page,
       if you want to make sure some elements are completely in a
       layer on top of the whole content, parent items to this one.
       It's a "local" version of ApplicationWindow's overlay
 
-      @property Item overlay
       @since 2.5
      */
     readonly property alias overlay: overlayItem
