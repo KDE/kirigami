@@ -7,7 +7,7 @@
 import QtQuick
 import org.kde.kirigami as Kirigami
 
-/**
+/*!
  * \brief A window that provides some basic features needed for all apps
  *
  * It's usually used as a root QML component for the application.
@@ -23,7 +23,7 @@ import org.kde.kirigami as Kirigami
  * be assigned again in an imperative fashion
  *
  * Example usage:
- * @code
+ * \code
  * import org.kde.kirigami as Kirigami
  *
  * Kirigami.ApplicationWindow {
@@ -81,13 +81,13 @@ import org.kde.kirigami as Kirigami
  *     }
  *  [...]
  * }
- * @endcode
+ * \endcode
  *
 */
 Kirigami.AbstractApplicationWindow {
     id: root
 
-    /**
+    /*!
      * \brief This property holds the stack used to allocate the pages and to
      * manage the transitions between them.
      *

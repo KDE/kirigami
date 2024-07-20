@@ -21,7 +21,7 @@ class QWheelEvent;
 class QQmlEngine;
 class WheelHandler;
 
-/**
+/*!
  * Describes the mouse wheel event
  */
 class KirigamiWheelEvent : public QObject
@@ -30,21 +30,21 @@ class KirigamiWheelEvent : public QObject
     QML_NAMED_ELEMENT(WheelEvent)
     QML_UNCREATABLE("")
 
-    /**
+    /*!
      * x: real
      *
      * X coordinate of the mouse pointer
      */
     Q_PROPERTY(qreal x READ x CONSTANT FINAL)
 
-    /**
+    /*!
      * y: real
      *
      * Y coordinate of the mouse pointer
      */
     Q_PROPERTY(qreal y READ y CONSTANT FINAL)
 
-    /**
+    /*!
      * angleDelta: point
      *
      * The distance the wheel is rotated in degrees.
@@ -54,14 +54,14 @@ class KirigamiWheelEvent : public QObject
      */
     Q_PROPERTY(QPointF angleDelta READ angleDelta CONSTANT FINAL)
 
-    /**
+    /*!
      * pixelDelta: point
      *
      * provides the delta in screen pixels available on high resolution trackpads
      */
     Q_PROPERTY(QPointF pixelDelta READ pixelDelta CONSTANT FINAL)
 
-    /**
+    /*!
      * buttons: int
      *
      * it contains an OR combination of the buttons that were pressed during the wheel, they can be:
@@ -69,7 +69,7 @@ class KirigamiWheelEvent : public QObject
      */
     Q_PROPERTY(int buttons READ buttons CONSTANT FINAL)
 
-    /**
+    /*!
      * modifiers: int
      *
      * Keyboard mobifiers that were pressed during the wheel event, such as:
@@ -80,7 +80,7 @@ class KirigamiWheelEvent : public QObject
      */
     Q_PROPERTY(int modifiers READ modifiers CONSTANT FINAL)
 
-    /**
+    /*!
      * inverted: bool
      *
      * Whether the delta values are inverted
@@ -88,12 +88,12 @@ class KirigamiWheelEvent : public QObject
      */
     Q_PROPERTY(bool inverted READ inverted CONSTANT FINAL)
 
-    /**
+    /*!
      * accepted: bool
      *
      * If set, the event shouldn't be managed anymore,
      * for instance it can be used to block the handler to manage the scroll of a view on some scenarios
-     * @code
+     * \code
      * // This handler handles automatically the scroll of
      * // flickableItem, unless Ctrl is pressed, in this case the
      * // app has custom code to handle Ctrl+wheel zooming
@@ -108,7 +108,7 @@ class KirigamiWheelEvent : public QObject
      *       }
      *   }
      * }
-     * @endcode
+     * \endcode
      *
      */
     Q_PROPERTY(bool accepted READ isAccepted WRITE setAccepted FINAL)
@@ -147,7 +147,7 @@ public:
     WheelFilterItem(QQuickItem *parent = nullptr);
 };
 
-/**
+/*!
  * \brief Handles scrolling for a Flickable and 2 attached ScrollBars.
  *
  * WheelHandler filters events from a Flickable, a vertical ScrollBar and a horizontal ScrollBar.
@@ -182,12 +182,12 @@ class WheelHandler : public QObject, public QQmlParserStatus
     Q_INTERFACES(QQmlParserStatus)
     QML_ELEMENT
 
-    /**
+    /*!
      * \brief This property holds the Qt Quick Flickable that the WheelHandler will control.
      */
     Q_PROPERTY(QQuickItem *target READ target WRITE setTarget NOTIFY targetChanged FINAL)
 
-    /**
+    /*!
      * \brief This property holds the vertical step size.
      *
      * The default value is equivalent to `20 * Qt.styleHints.wheelScrollLines`. This is consistent with the default increment for QScrollArea.
@@ -198,7 +198,7 @@ class WheelHandler : public QObject, public QQmlParserStatus
      */
     Q_PROPERTY(qreal verticalStepSize READ verticalStepSize WRITE setVerticalStepSize RESET resetVerticalStepSize NOTIFY verticalStepSizeChanged FINAL)
 
-    /**
+    /*!
      * \brief This property holds the horizontal step size.
      *
      * The default value is equivalent to `20 * Qt.styleHints.wheelScrollLines`. This is consistent with the default increment for QScrollArea.
@@ -210,7 +210,7 @@ class WheelHandler : public QObject, public QQmlParserStatus
     Q_PROPERTY(
         qreal horizontalStepSize READ horizontalStepSize WRITE setHorizontalStepSize RESET resetHorizontalStepSize NOTIFY horizontalStepSizeChanged FINAL)
 
-    /**
+    /*!
      * \brief This property holds the keyboard modifiers that will be used to start page scrolling.
      *
      * The default value is equivalent to `Qt.ControlModifier | Qt.ShiftModifier`. This matches QScrollBar, which uses QAbstractSlider behavior.
@@ -220,7 +220,7 @@ class WheelHandler : public QObject, public QQmlParserStatus
     Q_PROPERTY(Qt::KeyboardModifiers pageScrollModifiers READ pageScrollModifiers WRITE setPageScrollModifiers RESET resetPageScrollModifiers NOTIFY
                    pageScrollModifiersChanged FINAL)
 
-    /**
+    /*!
      * \brief This property holds whether the WheelHandler filters mouse events like a Qt Quick Controls ScrollView would.
      *
      * Touch events are allowed to flick the view and they make the scrollbars not interactive.
@@ -235,7 +235,7 @@ class WheelHandler : public QObject, public QQmlParserStatus
      */
     Q_PROPERTY(bool filterMouseEvents READ filterMouseEvents WRITE setFilterMouseEvents NOTIFY filterMouseEventsChanged FINAL)
 
-    /**
+    /*!
      * \brief This property holds whether the WheelHandler handles keyboard scrolling.
      *
      * - Left arrow scrolls a step to the left.
@@ -254,7 +254,7 @@ class WheelHandler : public QObject, public QQmlParserStatus
      */
     Q_PROPERTY(bool keyNavigationEnabled READ keyNavigationEnabled WRITE setKeyNavigationEnabled NOTIFY keyNavigationEnabledChanged FINAL)
 
-    /**
+    /*!
      * \brief This property holds whether the WheelHandler blocks all wheel events from reaching the Flickable.
      *
      * When this property is false, scrolling the Flickable with WheelHandler will only block an event from reaching the Flickable if the Flickable is actually
@@ -267,7 +267,7 @@ class WheelHandler : public QObject, public QQmlParserStatus
      */
     Q_PROPERTY(bool blockTargetWheel MEMBER m_blockTargetWheel NOTIFY blockTargetWheelChanged FINAL)
 
-    /**
+    /*!
      * \brief This property holds whether the WheelHandler can use wheel events to scroll the Flickable.
      *
      * The default value is true.
@@ -299,7 +299,7 @@ public:
     bool keyNavigationEnabled() const;
     void setKeyNavigationEnabled(bool enabled);
 
-    /**
+    /*!
      * Scroll up one step. If the stepSize parameter is less than 0, the verticalStepSize will be used.
      *
      * returns true if the contentItem was moved.
@@ -308,7 +308,7 @@ public:
      */
     Q_INVOKABLE bool scrollUp(qreal stepSize = -1);
 
-    /**
+    /*!
      * Scroll down one step. If the stepSize parameter is less than 0, the verticalStepSize will be used.
      *
      * returns true if the contentItem was moved.
@@ -317,7 +317,7 @@ public:
      */
     Q_INVOKABLE bool scrollDown(qreal stepSize = -1);
 
-    /**
+    /*!
      * Scroll left one step. If the stepSize parameter is less than 0, the horizontalStepSize will be used.
      *
      * returns true if the contentItem was moved.
@@ -326,7 +326,7 @@ public:
      */
     Q_INVOKABLE bool scrollLeft(qreal stepSize = -1);
 
-    /**
+    /*!
      * Scroll right one step. If the stepSize parameter is less than 0, the horizontalStepSize will be used.
      *
      * returns true if the contentItem was moved.
@@ -345,7 +345,7 @@ Q_SIGNALS:
     void blockTargetWheelChanged();
     void scrollFlickableTargetChanged();
 
-    /**
+    /*!
      * \brief This signal is emitted when a wheel event reaches the event filter, just before scrolling is handled.
      *
      * Accepting the wheel event in the `onWheel` signal handler prevents scrolling from happening.

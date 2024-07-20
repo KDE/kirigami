@@ -9,7 +9,7 @@ import QtQuick
 import org.kde.kirigami as Kirigami
 
 //TODO KF6: move somewhere else? kirigami addons?
-/**
+/*!
  * \brief An "About" page that is ready to integrate in a Kirigami app.
  *
  * Allows to have a page that will show the copyright notice of the application
@@ -24,11 +24,11 @@ Kirigami.ScrollablePage {
     id: page
 
 //BEGIN properties
-    /**
+    /*!
      * \brief This property holds an object with the same shape as KAboutData.
      *
      * For example:
-     * @code{json}
+     * \code{json}
      * aboutData: {
           "displayName" : "KirigamiApp",
           "productName" : "kirigami/app",
@@ -59,7 +59,7 @@ Kirigami.ScrollablePage {
           "copyrightStatement" : "© 2010-2018 Plasma Development Team",
           "desktopFileName" : "org.kde.kirigamiapp"
        }
-       @endcode
+       \endcode
      *
      * \sa KAboutData
      * \sa org::kde::kirigami::AboutItem::aboutData
@@ -67,7 +67,7 @@ Kirigami.ScrollablePage {
      */
     property alias aboutData: aboutItem.aboutData
 
-    /**
+    /*!
      * \brief This property holds a link to a "Get Involved" page.
      *
      * default: `"https://community.kde.org/Get_Involved" when your application id starts with "org.kde.", otherwise is empty`
@@ -76,7 +76,7 @@ Kirigami.ScrollablePage {
      */
     property alias getInvolvedUrl: aboutItem.getInvolvedUrl
 
-    /**
+    /*!
      * \brief This property holds a link to a "Donate" page.
      * @since 5.101
      *
@@ -84,7 +84,7 @@ Kirigami.ScrollablePage {
      */
     property alias donateUrl: aboutItem.donateUrl
 
-    /**
+    /*!
      * \brief This property controls whether to load avatars by URL.
      *
      * If set to false, a fallback "user" icon will be displayed.
@@ -93,7 +93,7 @@ Kirigami.ScrollablePage {
      */
     property alias loadAvatars: aboutItem.loadAvatars
 
-    /** @internal */
+    /*! @internal */
     default property alias _content: aboutItem._content
 //END properties
 

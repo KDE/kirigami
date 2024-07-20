@@ -6,18 +6,18 @@ import QtQuick.Controls as QQC2
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
-/**
+/*!
  * \brief A placeholder for loading pages.
  *
  * Example usage:
- * @code{.qml}
+ * \code{.qml}
  *     Kirigami.Page {
  *         Kirigami.LoadingPlaceholder {
  *             anchors.centerIn: parent
  *         }
  *     }
- * @endcode
- * @code{.qml}
+ * \endcode
+ * \code{.qml}
  *     Kirigami.Page {
  *         Kirigami.LoadingPlaceholder {
  *             anchors.centerIn: parent
@@ -25,13 +25,13 @@ import org.kde.kirigami as Kirigami
  *             progressBar.value: loadingValue
  *         }
  *     }
- * @endcode
+ * \endcode
  * @inherit org::kde::kirigami::PlaceholderMessage
  */
 Kirigami.PlaceholderMessage {
     id: loadingPlaceholder
 
-    /**
+    /*!
      * \brief This property holds whether the loading message shows a
      * determinate progress bar or not.
      *
@@ -42,7 +42,7 @@ Kirigami.PlaceholderMessage {
      */
     property bool determinate: false
 
-    /**
+    /*!
      * \brief This property holds a progress bar.
      *
      * This should be used to access the progress bar to change its value.

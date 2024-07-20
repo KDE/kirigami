@@ -24,7 +24,7 @@ namespace Platform
 class Units;
 class UnitsPrivate;
 
-/**
+/*!
  * @class IconSizes units.h <Kirigami/Units>
  *
  * Provides access to platform-dependent icon sizing
@@ -71,7 +71,7 @@ Q_SIGNALS:
     void enormousChanged();
 };
 
-/**
+/*!
  * @class Units units.h <Kirigami/Units>
  *
  * A set of values to define semantically sizes and durations.
@@ -84,12 +84,12 @@ class KIRIGAMIPLATFORM_EXPORT Units : public QObject
 
     friend class IconSizes;
 
-    /**
+    /*!
      * The fundamental unit of space that should be used for sizes, expressed in pixels.
      */
     Q_PROPERTY(int gridUnit READ gridUnit NOTIFY gridUnitChanged FINAL)
 
-    /**
+    /*!
      * units.iconSizes provides access to platform-dependent icon sizing
      *
      * The icon sizes provided are normalized for different DPI, so icons
@@ -105,49 +105,49 @@ class KIRIGAMIPLATFORM_EXPORT Units : public QObject
      */
     Q_PROPERTY(Kirigami::Platform::IconSizes *iconSizes READ iconSizes CONSTANT FINAL)
 
-    /**
+    /*!
      * This property holds the amount of spacing that should be used between smaller UI elements,
      * such as a small icon and a label in a button.
      */
     Q_PROPERTY(int smallSpacing READ smallSpacing NOTIFY smallSpacingChanged FINAL)
 
-    /**
+    /*!
      * This property holds the amount of spacing that should be used between medium UI elements,
      * such as buttons and text fields in a toolbar.
      */
     Q_PROPERTY(int mediumSpacing READ mediumSpacing NOTIFY mediumSpacingChanged FINAL)
 
-    /**
+    /*!
      * This property holds the amount of spacing that should be used between bigger UI elements,
      * such as a large icon and a heading in a card.
      */
     Q_PROPERTY(int largeSpacing READ largeSpacing NOTIFY largeSpacingChanged FINAL)
 
-    /**
+    /*!
      * units.veryLongDuration should be used for specialty animations that benefit
      * from being even longer than longDuration.
      */
     Q_PROPERTY(int veryLongDuration READ veryLongDuration NOTIFY veryLongDurationChanged FINAL)
 
-    /**
+    /*!
      * units.longDuration should be used for longer, screen-covering animations, for opening and
      * closing of dialogs and other "not too small" animations
      */
     Q_PROPERTY(int longDuration READ longDuration NOTIFY longDurationChanged FINAL)
 
-    /**
+    /*!
      * units.shortDuration should be used for short animations, such as accentuating a UI event,
      * hover events, etc..
      */
     Q_PROPERTY(int shortDuration READ shortDuration NOTIFY shortDurationChanged FINAL)
 
-    /**
+    /*!
      * units.veryShortDuration should be used for elements that should have a hint of smoothness,
      * but otherwise animate near instantly.
      */
     Q_PROPERTY(int veryShortDuration READ veryShortDuration NOTIFY veryShortDurationChanged FINAL)
 
-    /**
+    /*!
      * Time in milliseconds equivalent to the theoretical human moment, which can be used
      * to determine whether how long to wait until the user should be informed of something,
      * or can be used as the limit for how long something should wait before being
@@ -183,14 +183,14 @@ class KIRIGAMIPLATFORM_EXPORT Units : public QObject
      */
     Q_PROPERTY(int humanMoment READ humanMoment NOTIFY humanMomentChanged FINAL)
 
-    /**
+    /*!
      * time in ms by which the display of tooltips will be delayed.
      *
      * @sa ToolTip.delay property
      */
     Q_PROPERTY(int toolTipDelay READ toolTipDelay NOTIFY toolTipDelayChanged FINAL)
 
-    /**
+    /*!
      * Corner radius value shared by buttons and other rectangle elements
      *
      * @since 6.2

@@ -8,7 +8,7 @@ import QtQuick
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
-/**
+/*!
  * \brief A GridLayout optimized for showing one or two columns of cards,
  * depending on the available space.
  *
@@ -26,7 +26,7 @@ import org.kde.kirigami as Kirigami
  * @inherit QtQuick.Layouts.GridLayout
  */
 GridLayout {
-    /**
+    /*!
      * \brief This property holds the maximum number of columns.
      *
      * This layout will never lay out the items in more columns than maximumColumns
@@ -37,7 +37,7 @@ GridLayout {
      */
     property int maximumColumns: 2
 
-    /**
+    /*!
      * \brief This property holds the maximum width the columns may have.
      *
      * The cards will never become wider than this size; when the GridLayout is wider than
@@ -51,7 +51,7 @@ GridLayout {
      */
     property int maximumColumnWidth: Kirigami.Units.gridUnit * 20
 
-    /**
+    /*!
      * \brief This property holds the minimum width the columns may have.
      *
      * The layout will try to dispose of items

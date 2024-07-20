@@ -10,7 +10,7 @@ import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 
-/**
+/*!
  * \brief An overlay sheet that covers the current Page content.
  *
  * Its contents can be scrolled up or down, scrolling all the way up or
@@ -20,14 +20,14 @@ import org.kde.kirigami as Kirigami
  * are taller than the screen space.
  *
  * Example usage:
- * @code
+ * \code
  * Kirigami.OverlaySheet {
  *    ColumnLayout { ... }
  * }
  * Kirigami.OverlaySheet {
  *    ListView { ... }
  * }
- * @endcode
+ * \endcode
  *
  * It needs a single element declared inside, do *not* override its contentItem
  *
@@ -44,12 +44,12 @@ T.Popup {
 
 //BEGIN Own Properties
 
-    /**
+    /*!
      * \brief A title to be displayed in the header of this Sheet
      */
     property string title
 
-    /**
+    /*!
      * \brief This property sets the visibility of the close button in the top-right corner.
      *
      * default: `Only shown in desktop mode`
@@ -57,7 +57,7 @@ T.Popup {
      */
     property bool showCloseButton: !Kirigami.Settings.isMobile
 
-    /**
+    /*!
      * \brief This property holds an optional item which will be used as the sheet's header,
      * and will always be displayed.
      */
@@ -75,7 +75,7 @@ T.Popup {
         }
     }
 
-    /**
+    /*!
      * \brief An optional item which will be used as the sheet's footer,
      * always kept on screen.
      */

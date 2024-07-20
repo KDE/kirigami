@@ -20,7 +20,7 @@ namespace Platform
 class PlatformTheme;
 class Units;
 
-/**
+/*!
  * @class PlatformPluginFactory platformpluginfactory.h <Kirigami/PlatformPluginFactory>
  *
  * This class is reimpleented by plugins to provide different implementations
@@ -34,7 +34,7 @@ public:
     explicit PlatformPluginFactory(QObject *parent = nullptr);
     ~PlatformPluginFactory() override;
 
-    /**
+    /*!
      * Creates an instance of PlatformTheme which can come out from
      * an implementation provided by a plugin
      *
@@ -45,14 +45,14 @@ public:
      */
     virtual PlatformTheme *createPlatformTheme(QObject *parent) = 0;
 
-    /**
+    /*!
      * Creates an instance of Units which can come from an implementation
      * provided by a plugin
      * @param parent the parent of the units object
      */
     virtual Units *createUnits(QObject *parent) = 0;
 
-    /**
+    /*!
      * finds the plugin providing units and platformtheme for the current style
      * The plugin pointer is cached, so only the first call is a potentially heavy operation
      * @param pluginName The name we want to search for, if empty the name of

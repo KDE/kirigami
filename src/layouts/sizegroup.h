@@ -14,7 +14,7 @@
 #include <QQmlParserStatus>
 #include <QQuickItem>
 
-/**
+/*!
  * SizeGroup is a utility object that makes groups of items request the same size.
  */
 class SizeGroup : public QObject, public QQmlParserStatus
@@ -39,13 +39,13 @@ private:
     QMap<QQuickItem *, QPair<QMetaObject::Connection, QMetaObject::Connection>> m_connections;
 
 public:
-    /**
+    /*!
      * Which dimensions this SizeGroup should adjust
      */
     Q_PROPERTY(Mode mode MEMBER m_mode NOTIFY modeChanged FINAL)
     Q_SIGNAL void modeChanged();
 
-    /**
+    /*!
      * Which items this SizeGroup should adjust
      */
     Q_PROPERTY(QQmlListProperty<QQuickItem> items READ items CONSTANT FINAL)
@@ -54,7 +54,7 @@ public:
     void adjustItems(Mode whatChanged);
     void connectItem(QQuickItem *item);
 
-    /**
+    /*!
      * Forces the SizeGroup to relayout items.
      *
      * Normally this is never needed as the SizeGroup automatically

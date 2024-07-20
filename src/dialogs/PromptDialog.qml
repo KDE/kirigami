@@ -10,7 +10,7 @@ import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 
-/**
+/*!
  * A simple dialog to quickly prompt a user with information,
  * and possibly perform an action.
  *
@@ -25,7 +25,7 @@ import org.kde.kirigami as Kirigami
  *
  * Example usage:
  *
- * @code{.qml}
+ * \code{.qml}
  * Kirigami.PromptDialog {
  *     title: "Reset settings?"
  *     subtitle: "The stored settings for the application will be deleted, with the defaults restored."
@@ -34,11 +34,11 @@ import org.kde.kirigami as Kirigami
  *     onAccepted: console.log("Accepted")
  *     onRejected: console.log("Rejected")
  * }
- * @endcode
+ * \endcode
  *
  * Text field prompt dialog:
  *
- * @code{.qml}
+ * \code{.qml}
  * Kirigami.PromptDialog {
  *     id: textPromptDialog
  *     title: qsTr("New Folder")
@@ -66,7 +66,7 @@ import org.kde.kirigami as Kirigami
  *         placeholderText: qsTr("Folder name…")
  *     }
  * }
- * @endcode
+ * \endcode
  *
  * @inherit Dialog
  */
@@ -83,7 +83,7 @@ Kirigami.Dialog {
         None
     }
 
-    /**
+    /*!
      * This property holds the dialogType. It can be either:
      *
      * - `PromptDialog.Success`: For a sucess message
@@ -96,39 +96,39 @@ Kirigami.Dialog {
      */
     property int dialogType: Kirigami.PromptDialog.None
 
-    /**
+    /*!
      * The text to use in the dialog's contents.
      */
     property string subtitle
 
-    /**
+    /*!
      * The padding around the content, within the scroll area.
      *
      * Default is `Kirigami.Units.largeSpacing`.
      */
     property real contentPadding: Kirigami.Units.largeSpacing
 
-    /**
+    /*!
      * The top padding of the content, within the scroll area.
      */
     property real contentTopPadding: contentPadding
 
-    /**
+    /*!
      * The bottom padding of the content, within the scroll area.
      */
     property real contentBottomPadding: footer.padding === 0 ? contentPadding : 0 // add bottom padding if there is no footer
 
-    /**
+    /*!
      * The left padding of the content, within the scroll area.
      */
     property real contentLeftPadding: contentPadding
 
-    /**
+    /*!
      * The right padding of the content, within the scroll area.
      */
     property real contentRightPadding: contentPadding
 
-    /**
+    /*!
      * This property holds the icon name used by the PromptDialog.
      */
     property string iconName: switch (dialogType) {

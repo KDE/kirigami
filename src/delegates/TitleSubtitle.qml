@@ -9,7 +9,7 @@
 import QtQuick
 import org.kde.kirigami.platform as Platform
 
-/**
+/*!
  * A simple item containing a title and subtitle label.
  *
  * This is mainly intended as a replacement for a list delegate content item,
@@ -43,22 +43,22 @@ import org.kde.kirigami.platform as Platform
 Item {
     id: root
 
-    /**
+    /*!
      * The title to display.
      */
     required property string title
-    /**
+    /*!
      * The subtitle to display.
      */
     property string subtitle
-    /**
+    /*!
      * The color to use for the title.
      *
      * By default this is `Kirigami.Theme.textColor` unless `selected` is true
      * in which case this is `Kirigami.Theme.highlightedTextColor`.
      */
     property color color: selected ? Platform.Theme.highlightedTextColor : Platform.Theme.textColor
-    /**
+    /*!
      * The color to use for the subtitle.
      *
      * By default this is `color` mixed with the background color.
@@ -66,48 +66,48 @@ Item {
     property color subtitleColor: selected
         ? Platform.Theme.highlightedTextColor
         : Platform.ColorUtils.linearInterpolation(color, Platform.Theme.backgroundColor, 0.3)
-    /**
+    /*!
      * The font used to display the title.
      */
     property font font: Platform.Theme.defaultFont
-    /**
+    /*!
      * The font used to display the subtitle.
      */
     property font subtitleFont: Platform.Theme.smallFont
-    /**
+    /*!
      * The text elision mode used for both the title and subtitle.
      */
     property int elide: Text.ElideRight
-    /**
+    /*!
      * The text wrap mode used for both the title and subtitle.
      */
     property int wrapMode: Text.NoWrap
-    /**
+    /*!
      * Make the implicit height use the subtitle's height even if no subtitle is set.
      */
     property bool reserveSpaceForSubtitle: false
-    /**
+    /*!
      * Should this item be displayed in a selected style?
      */
     property bool selected: false
-    /**
+    /*!
      * Is the subtitle visible?
      */
     // Note: Don't rely on subtitleItem.visible because visibility is an
     // implicitly propagated property, and we don't wanna re-layout on
     // hide/show events. Copy-paste its bound expression instead.
     readonly property bool subtitleVisible: subtitle.length > 0 || reserveSpaceForSubtitle
-    /**
+    /*!
      * Is the title or subtitle truncated?
      */
     readonly property bool truncated: labelItem.truncated || subtitleItem.truncated
 
-    /**
+    /*!
      * \brief Emitted when the user clicks on a link embedded in the text of the title or subtitle.
      */
     signal linkActivated(string link)
 
-    /**
+    /*!
      * \brief Emitted when the user hovers on a link embedded in the text of the title or subtitle.
      */
     signal linkHovered(string link)

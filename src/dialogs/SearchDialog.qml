@@ -10,13 +10,13 @@ import QtQuick.Layouts
 
 import org.kde.kirigami as Kirigami
 
-/**
+/*!
  * A dialog to let's you do a global search accross your applications
  * documents, chat rooms and more.
  *
  * Example usage for a chat app where we want to quickly search for a room.
  *
- * @code{.qml}
+ * \code{.qml}
  * import QtQuick
  * import org.kde.kitemmodels as KItemModels
  * import org.kde.kirigami as Kirigami
@@ -46,7 +46,7 @@ import org.kde.kirigami as Kirigami
  *        onActivated: root.open()
  *    }
  * }
- * @endcode{}
+ * \endcode{}
  *
  * @image html searchdialog.html
  *
@@ -58,58 +58,58 @@ import org.kde.kirigami as Kirigami
 QQC2.Dialog {
     id: root
 
-    /**
+    /*!
      * This property holds an alias to the model of the internal ListView.
      */
     property alias model: listView.model
 
-    /**
+    /*!
      * This property holds an alias to the delegate component of the internal ListView.
      */
     property alias delegate: listView.delegate
 
-    /**
+    /*!
      * This property holds an alias to the currentItem component of the internal ListView.
      */
     property alias currentItem: listView.currentItem
 
-    /**
+    /*!
      * This property holds an alias to the section component of the internal ListView.
      */
     property alias section: listView.section
 
-    /**
+    /*!
      * This property holds an alias to the content of the search field.
      */
     property alias text: searchField.text
 
-    /**
+    /*!
      * This property holds an alias to the left actions of the seach field.
      */
     property alias searchFieldLeftActions: searchField.leftActions
 
-    /**
+    /*!
      * This property holds an alias to the right actions of the seach field.
      */
     property alias searchFieldRightActions: searchField.rightActions
 
-    /**
+    /*!
      * The placeholder text shown in the (empty) search field.
      */
     property alias searchFieldPlaceholderText: searchField.placeholderText
 
-    /**
+    /*!
      * This property holds the number of search results displayed in the internal ListView.
      */
     property alias count: listView.count
 
-    /**
+    /*!
      * This property holds an alias to the placeholder message text displayed
      * when the internal list view is empty.
      */
     property alias emptyText: placeholder.text
 
-    /**
+    /*!
      * This property holds an alias to the placeholder message icon displayed
      * when the internal list view is empty.
      */

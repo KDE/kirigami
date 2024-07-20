@@ -11,7 +11,7 @@ import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 import "private" as P
 
-/**
+/*!
  * \brief This is the standard layout of a Card.
  *
  * It is recommended to use this class when the concept of Cards is needed
@@ -32,7 +32,7 @@ import "private" as P
 Kirigami.AbstractCard {
     id: root
 
-    /**
+    /*!
      * \brief This property holds the clickable actions that will be available in the footer
      * of the card.
      *
@@ -43,7 +43,7 @@ Kirigami.AbstractCard {
      */
     property list<T.Action> actions
 
-    /**
+    /*!
      * \brief This grouped property controls the banner image present in the header.
      *
      * This grouped property has the following sub-properties:

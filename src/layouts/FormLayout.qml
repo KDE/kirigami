@@ -12,7 +12,7 @@ import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 
-/**
+/*!
  * This is the base class for Form layouts conforming to the
  * Kirigami Human Interface Guidelines. The layout consists
  * of two columns: the left column contains only right-aligned
@@ -24,7 +24,7 @@ import org.kde.kirigami as Kirigami
  * attached property, see FormLayoutAttached::isSection for details.
  *
  * Example usage:
- * @code
+ * \code
  * import QtQuick.Controls as QQC2
  * import org.kde.kirigami as Kirigami
  *
@@ -42,7 +42,7 @@ import org.kde.kirigami as Kirigami
  *    QQC2.TextField {
  *    }
  * }
- * @endcode
+ * \endcode
  * \sa FormLayoutAttached
  * @since 2.3
  * @inherit QtQuick.Item
@@ -50,7 +50,7 @@ import org.kde.kirigami as Kirigami
 Item {
     id: root
 
-    /**
+    /*!
      * \brief This property tells whether the form layout is in wide mode.
      *
      * If true, the layout will be optimized for a wide screen, such as
@@ -66,7 +66,7 @@ Item {
      */
     property bool wideMode: width >= lay.wideImplicitWidth
 
-    /**
+    /*!
      * If for some implementation reason multiple FormLayouts have to appear
      * on the same page, they can have each other in twinFormLayouts,
      * so they will vertically align with each other perfectly
@@ -220,7 +220,7 @@ Item {
     Item {
         id: temp
 
-        /**
+        /*!
          * The following two functions are used in the label buddy items.
          *
          * They're in this mostly unused item to keep them private to the FormLayout
@@ -232,7 +232,7 @@ Item {
          * will kick in.
          */
 
-        /**
+        /*!
          * @param {Item} item
          * @returns {Qt::Alignment}
          */
@@ -254,7 +254,7 @@ Item {
             return Qt.AlignLeft | Qt.AlignBottom;
         }
 
-        /**
+        /*!
          * @param {Item} item
          * @returns vertical alignment of the item passed as an argument.
          */

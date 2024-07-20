@@ -12,13 +12,13 @@ import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 import org.kde.kirigami.private as P
 
-/**
+/*!
  * \sa An item that represents an abstract Action
  * @inherit QtQuick.QQC2.Action
  */
 QQC2.Action {
 //BEGIN properties
-    /**
+    /*!
      * \sa This property holds whether the graphic representation of the action
      * is supposed to be visible.
      *
@@ -28,7 +28,7 @@ QQC2.Action {
      */
     property bool visible: !fromQAction || fromQAction.visible
 
-    /**
+    /*!
      * \sa This property holds the tooltip text that is shown when the cursor is hovering over the control.
      *
      * Leaving this undefined or setting it to an empty string means that no tooltip will be shown when
@@ -37,14 +37,14 @@ QQC2.Action {
      */
     property string tooltip
 
-    /**
+    /*!
      * \sa This property sets whether this action is a separator action.
      *
      * default: ``false``
      */
     property bool separator: false
 
-    /**
+    /*!
      * \sa This property sets whether this action  becomes a title displaying
      * its child actions as sub-items in GlobalDrawers and ContextDrawers.
      *
@@ -54,12 +54,12 @@ QQC2.Action {
      */
     property bool expandible: false
 
-    /**
+    /*!
      * \sa This property holds the parent action.
      */
     property T.Action parent
 
-    /**
+    /*!
      * \sa This property sets this action's display type.
      *
      * These are provided to implementations to indicate a preference for certain display
@@ -73,7 +73,7 @@ QQC2.Action {
      */
     property int displayHint: Kirigami.DisplayHint.NoPreference
 
-    /**
+    /*!
      * \sa This property holds the component that should be used for displaying this action.
      * @note This can be used to display custom components in the toolbar.
      * @since 5.65
@@ -81,13 +81,13 @@ QQC2.Action {
      */
     property Component displayComponent
 
-    /**
+    /*!
      * \sa This property holds a list of child actions.
      *
      * This is useful for tree-like menus, such as the GlobalDrawer.
      *
      * Example usage:
-     * @code
+     * \code
      * import QtQuick.Controls as QQC2
      * import org.kde.kirigami as Kirigami
      *
@@ -101,12 +101,12 @@ QQC2.Action {
      *        text: "Action2"
      *    }
      * }
-     * @endcode
+     * \endcode
      * @property list<T.Action> children
      */
     default property list<T.Action> children
 
-    /**
+    /*!
      * This property holds a QAction
      *
      * When provided Kirigami.Action will be initialized from the given QAction.
@@ -124,7 +124,7 @@ QQC2.Action {
             });
     }
 
-    /**
+    /*!
      * \sa This property holds the action's visible child actions.
      * @property list<T.Action> visibleChildren
      */

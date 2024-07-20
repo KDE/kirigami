@@ -10,7 +10,7 @@ import QtQuick
 import org.kde.kirigami as Kirigami
 import org.kde.kirigami.templates as KT
 
-/**
+/*!
  * An inline message item with support for informational, positive,
  * warning and error types, and with support for associated actions.
  *
@@ -31,7 +31,7 @@ import org.kde.kirigami.templates as KT
  * can fit, an overflow menu is provided.
  *
  * Example usage:
- * @code
+ * \code
  * import org.kde.kirigami as Kirigami
  *
  * Kirigami.InlineMessage {
@@ -56,7 +56,7 @@ import org.kde.kirigami.templates as KT
  *         }
  *     ]
  * }
- * @endcode
+ * \endcode
  * @inherit org::kde::kirigami::templates::InlineMessage
  * @since 5.45
  */

@@ -8,7 +8,7 @@
 
 #include "shadowedrectangle.h"
 
-/**
+/*!
  * A rectangle with a shadow, using a QQuickItem as texture.
  *
  * This item will render a source item, with a shadow below it. The rendering is done
@@ -23,7 +23,7 @@ class ShadowedTexture : public ShadowedRectangle
     Q_OBJECT
     QML_ELEMENT
 
-    /**
+    /*!
      * This property holds the source item that will get rendered with the
      * shadow.
      */

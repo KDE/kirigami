@@ -9,7 +9,7 @@ import QtQml
 import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 
-/**
+/*!
  * An action used to load Pages coming from a common PagePool
  * in a PageRow or QtQuickControls2 StackView.
  *
@@ -19,12 +19,12 @@ Kirigami.Action {
     id: root
 
 //BEGIN properties
-    /**
+    /*!
      * \brief This property holds the url or filename of the page that this action will load.
      */
     property string page
 
-    /**
+    /*!
      * \brief This property holds the PagePool object used by this PagePoolAction.
      *
      * PagePool will make sure only one instance of the page identified by the page url will be created and reused.
@@ -33,7 +33,7 @@ Kirigami.Action {
      */
     property Kirigami.PagePool pagePool
 
-    /**
+    /*!
      * The pageStack property accepts either a Kirigami.PageRow or a QtQuickControls2 StackView.
      * The component that will instantiate the pages, which has to work with a stack logic.
      * Kirigami.PageRow is recommended, but will work with QtQuicControls2 StackView as well.
@@ -42,7 +42,7 @@ Kirigami.Action {
      */
     property Item pageStack: typeof applicationWindow !== 'undefined' ? applicationWindow().pageStack : null
 
-    /**
+    /*!
      * \brief This property sets the page in the pageStack after which
      * new pages will be pushed.
      *
@@ -50,12 +50,12 @@ Kirigami.Action {
      */
     property T.Page basePage
 
-    /**
+    /*!
      * This property holds a function that generate the property values for the created page
      * when it is pushed onto the Kirigami.PagePool.
      *
      * Example usage:
-     * @code{.qml}
+     * \code{.qml}
      * Kirigami.PagePoolAction {
      *     text: i18n("Security")
      *     icon.name: "security-low"
@@ -66,12 +66,12 @@ Kirigami.Action {
      *         }
      *     }
      * }
-     * @endcode
+     * \endcode
      * @property QVariantMap initialProperties
      */
     property var initialProperties
 
-    /**
+    /*!
      * \brief This property sets whether PagePoolAction will use the layers property
      * implemented by the pageStack.
      *
@@ -86,14 +86,14 @@ Kirigami.Action {
     property bool useLayers: false
 //END properties
 
-    /**
+    /*!
      * @returns the page item held in the PagePool or null if it has not been loaded yet.
      */
     function pageItem(): Item {
         return pagePool.pageForUrl(page)
     }
 
-    /**
+    /*!
      * @returns true if the page has been loaded and placed on pageStack.layers
      * and useLayers is true, otherwise returns null.
      */
@@ -107,7 +107,7 @@ Kirigami.Action {
         return item !== null;
     }
 
-    /**
+    /*!
      * @returns true if the page has been loaded and placed on the pageStack,
      * otherwise returns null.
      */

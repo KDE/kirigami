@@ -11,14 +11,14 @@ import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 import "private"
 
-/**
+/*!
  * An item delegate intended to support extra actions obtainable
  * by uncovering them by dragging away the item with the handle.
  *
  * This acts as a container for normal list items.
  *
  * Example usage:
- * @code
+ * \code
  * ListView {
  *     model: myModel
  *     delegate: SwipeListItem {
@@ -38,7 +38,7 @@ import "private"
  *     }
  *
  * }
- * @endcode
+ * \endcode
  *
  * @inherit QtQuick.Templates.SwipeDelegate
  */
@@ -46,7 +46,7 @@ QQC2.SwipeDelegate {
     id: listItem
 
 //BEGIN properties
-    /**
+    /*!
      * \brief This property sets whether the item should emit signals related to mouse interaction.
      *
      * default: ``true``
@@ -56,7 +56,7 @@ QQC2.SwipeDelegate {
      */
     property alias supportsMouseEvents: listItem.hoverEnabled
 
-    /**
+    /*!
      * \brief This property tells whether the cursor is currently hovering over the item.
      *
      * On mobile touch devices, this will be true only when pressed.
@@ -67,7 +67,7 @@ QQC2.SwipeDelegate {
      */
     readonly property alias containsMouse: listItem.hovered
 
-    /**
+    /*!
      * \brief This property sets whether instances of this list item will alternate
      * between two colors, helping readability.
      *
@@ -79,7 +79,7 @@ QQC2.SwipeDelegate {
      */
     property bool alternatingBackground: false
 
-    /**
+    /*!
      * \brief This property sets whether this item is a section delegate.
      *
      * Setting this to true will make the list item look like a "title" for items under it.
@@ -90,7 +90,7 @@ QQC2.SwipeDelegate {
      */
     property bool sectionDelegate: false
 
-    /**
+    /*!
      * \brief This property sets whether the separator is visible.
      *
      * The separator is a line between this and the item under it.
@@ -99,7 +99,7 @@ QQC2.SwipeDelegate {
      */
     property bool separatorVisible: false
 
-    /**
+    /*!
      * \brief This property holds the background color of the list item.
      *
      * It is advised to use the default value.
@@ -107,7 +107,7 @@ QQC2.SwipeDelegate {
      */
     property color backgroundColor: Kirigami.Theme.backgroundColor
 
-    /**
+    /*!
      * \brief This property holds the background color to be used when
      * background alternating is enabled.
      *
@@ -118,7 +118,7 @@ QQC2.SwipeDelegate {
      */
     property color alternateBackgroundColor: Kirigami.Theme.alternateBackgroundColor
 
-    /**
+    /*!
      * \brief This property holds the color of the background
      * when the item is pressed or selected.
      *
@@ -127,7 +127,7 @@ QQC2.SwipeDelegate {
      */
     property color activeBackgroundColor: Kirigami.Theme.highlightColor
 
-    /**
+    /*!
      * \brief This property holds the color of the text in the item.
      *
      * It is advised to use the default value.
@@ -138,7 +138,7 @@ QQC2.SwipeDelegate {
      */
     property color textColor: Kirigami.Theme.textColor
 
-    /**
+    /*!
      * \brief This property holds the color of the text when the item is pressed or selected.
      *
      * It is advised to use the default value.
@@ -149,7 +149,7 @@ QQC2.SwipeDelegate {
      */
     property color activeTextColor: Kirigami.Theme.highlightedTextColor
 
-    /**
+    /*!
      * \brief This property tells whether actions are visible and interactive.
      *
      * True if it's possible to see and interact with the item's actions.
@@ -160,7 +160,7 @@ QQC2.SwipeDelegate {
      */
     readonly property bool actionsVisible: actionsLayout.hasVisibleActions
 
-    /**
+    /*!
      * \brief This property sets whether actions behind this SwipeListItem will always be visible.
      *
      * default: `true in desktop and tablet mode`
@@ -169,7 +169,7 @@ QQC2.SwipeDelegate {
      */
     property bool alwaysVisibleActions: !Kirigami.Settings.isMobile
 
-    /**
+    /*!
      * \brief This property holds actions of the list item.
      *
      * At most 4 actions can be revealed when sliding away the list item;
@@ -177,7 +177,7 @@ QQC2.SwipeDelegate {
      */
     property list<T.Action> actions
 
-    /**
+    /*!
      * \brief This property holds the width of the overlay.
      *
      * The value can represent the width of the handle component or the action layout.

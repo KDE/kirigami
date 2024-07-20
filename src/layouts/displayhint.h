@@ -17,29 +17,29 @@ class DisplayHint : public QObject
     QML_SINGLETON
 
 public:
-    /**
+    /*!
      * Hints for implementations using Actions indicating preferences about how to display the action.
      */
     enum Hint : uint {
-        /**
+        /*!
          * Indicates there is no specific preference.
          */
         NoPreference = 0,
-        /**
+        /*!
          * Only display an icon for this Action.
          */
         IconOnly = 1,
-        /**
+        /*!
          * Try to keep the action visible even when space constrained.
          * Mutually exclusive with AlwaysHide, KeepVisible has priority.
          */
         KeepVisible = 2,
-        /**
+        /*!
          * If possible, hide the action in an overflow menu or similar location.
          * Mutually exclusive with KeepVisible, KeepVisible has priority.
          */
         AlwaysHide = 4,
-        /**
+        /*!
          * When this action has children, do not display any indicator (like a
          * menu arrow) for this action.
          */
@@ -52,7 +52,7 @@ public:
     // Note: These functions are instance methods because they need to be
     // exposed to QML. Unfortunately static methods are not supported.
 
-    /**
+    /*!
      * Helper function to check if a certain display hint has been set.
      *
      * This function is mostly convenience to enforce certain behaviour of the
@@ -68,7 +68,7 @@ public:
      */
     Q_INVOKABLE bool displayHintSet(DisplayHints values, Hint hint);
 
-    /**
+    /*!
      * Check if a certain display hint has been set on an object.
      *
      * This overloads @f displayHintSet(DisplayHints, Hint) to accept a QObject
@@ -84,7 +84,7 @@ public:
      */
     Q_INVOKABLE bool displayHintSet(QObject *object, Hint hint);
 
-    /**
+    /*!
      * Static version of \f displayHintSet(DisplayHints, Hint) that can be
      * called from C++ code.
      */

@@ -8,7 +8,7 @@ import QtQuick
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 
-/**
+/*!
  * \brief A heading label used for subsections of texts.
  *
  * The characteristics of the text will be automatically set according to the
@@ -16,7 +16,7 @@ import org.kde.kirigami as Kirigami
  * for example page or section titles.
  *
  * Example usage:
- * @code
+ * \code
  * import org.kde.kirigami as Kirigami
  * [...]
  * Column {
@@ -26,7 +26,7 @@ import org.kde.kirigami as Kirigami
  *     }
  *   [...]
  * }
- * @endcode
+ * \endcode
  *
  * The most important property is "text", which applies to the text property of
  * Label. See the Label component from QtQuick.Controls 2 and primitive QML Text
@@ -37,7 +37,7 @@ import org.kde.kirigami as Kirigami
 QQC2.Label {
     id: heading
 
-    /**
+    /*!
      * \brief This property holds the level of the heading, which determines its size.
      *
      * This property holds the level, which determines how large the header is.
@@ -48,7 +48,7 @@ QQC2.Label {
      */
     property int level: 1
 
-    /**
+    /*!
      * \brief This enumeration defines heading types.
      *
      * This enum helps with heading visibility (making it less or more important).
@@ -59,7 +59,7 @@ QQC2.Label {
         Secondary
     }
 
-    /**
+    /*!
      * \brief This property holds the heading type.
      *
      * The type of the heading. This can be:

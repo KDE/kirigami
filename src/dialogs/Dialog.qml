@@ -13,7 +13,7 @@ import QtQuick.Templates as T
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 
-/**
+/*!
  * \brief Popup dialog that is used for short tasks and user interaction.
  *
  * Dialog consists of three components: the header, the content,
@@ -42,7 +42,7 @@ import org.kde.kirigami as Kirigami
  *
  * Example for a selection dialog:
  *
- * @code{.qml}
+ * \code{.qml}
  * import QtQuick
  * import QtQuick.Layouts
  * import QtQuick.Controls as QQC2
@@ -71,11 +71,11 @@ import org.kde.kirigami as Kirigami
  *         }
  *     }
  * }
- * @endcode
+ * \endcode
  *
  * Example with scrolling (ListView scrolling behaviour is handled by the Dialog):
  *
- * @code{.qml}
+ * \code{.qml}
  * import QtQuick
  * import QtQuick.Layouts
  * import QtQuick.Controls as QQC2
@@ -100,7 +100,7 @@ import org.kde.kirigami as Kirigami
  *         }
  *     }
  * }
- * @endcode
+ * \endcode
  *
  * There are also sub-components of the Dialog that target specific usecases,
  * and can reduce boilerplate code if used:
@@ -113,13 +113,13 @@ import org.kde.kirigami as Kirigami
 T.Dialog {
     id: root
 
-    /**
+    /*!
      * \brief This property holds the dialog's contents; includes Items and QtObjects.
      * @property list<QtObject> dialogData
      */
     default property alias dialogData: contentControl.contentData
 
-    /**
+    /*!
      * \brief This property holds the content items of the dialog.
      *
      * The initial height and width of the dialog is calculated from the
@@ -129,7 +129,7 @@ T.Dialog {
      */
     property alias dialogChildren: contentControl.contentChildren
 
-    /**
+    /*!
      * \brief This property sets the absolute maximum height the dialog can have.
      *
      * The height restriction is solely applied on the content, so if the
@@ -141,7 +141,7 @@ T.Dialog {
      */
     readonly property real absoluteMaximumHeight: parent ? (parent.height - Kirigami.Units.largeSpacing * 2) : Infinity
 
-    /**
+    /*!
      * \brief This property holds the absolute maximum width the dialog can have.
      *
      * By default, it is the window width, subtracted by largeSpacing on both
@@ -151,7 +151,7 @@ T.Dialog {
 
     readonly property real __borderWidth: 1
 
-    /**
+    /*!
      * \brief This property holds the maximum height the dialog can have
      * (including the header and footer).
      *
@@ -163,14 +163,14 @@ T.Dialog {
      */
     property real maximumHeight: absoluteMaximumHeight
 
-    /**
+    /*!
      * \brief This property holds the maximum width the dialog can have.
      *
      * By default, this is `absoluteMaximumWidth`.
      */
     property real maximumWidth: absoluteMaximumWidth
 
-    /**
+    /*!
      * \brief This property holds the preferred height of the dialog.
      *
      * The content will receive a hint for how tall it should be to have
@@ -181,7 +181,7 @@ T.Dialog {
      */
     property real preferredHeight: -1
 
-    /**
+    /*!
      * \brief This property holds the preferred width of the dialog.
      *
      * The content will receive a hint for how wide it should be to have
@@ -193,31 +193,31 @@ T.Dialog {
     property real preferredWidth: -1
 
 
-    /**
+    /*!
      * \brief This property holds the component to the left of the footer buttons.
      */
     property Component footerLeadingComponent
 
-    /**
+    /*!
      * \brief his property holds the component to the right of the footer buttons.
      */
     property Component footerTrailingComponent
 
-    /**
+    /*!
      * \brief This property sets whether to show the close button in the header.
      */
     property bool showCloseButton: true
 
-    /**
+    /*!
      * \brief This property sets whether the footer button style should be flat.
      */
     property bool flatFooterButtons: false
 
-    /**
+    /*!
      * \brief This property holds the custom actions displayed in the footer.
      *
      * Example usage:
-     * @code{.qml}
+     * \code{.qml}
      * import QtQuick
      * import org.kde.kirigami as Kirigami
      *
@@ -238,7 +238,7 @@ T.Dialog {
      *         }
      *     ]
      * }
-     * @endcode
+     * \endcode
      *
      * \sa org::kde::kirigami::Action
      */

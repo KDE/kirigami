@@ -7,7 +7,7 @@
 import QtQuick
 import org.kde.kirigami as Kirigami
 
-/**
+/*!
  * CardsListView is a ListView which can have AbstractCard as its delegate: it will
  * automatically assign the proper spacings and margins around the cards adhering
  * to the design guidelines.

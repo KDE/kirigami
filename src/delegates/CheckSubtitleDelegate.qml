@@ -8,7 +8,7 @@ import QtQuick
 import QtQuick.Controls as QQC2
 import org.kde.kirigami.platform as Platform
 
-/**
+/*!
  * A convenience wrapper combining QtQuick Controls CheckDelegate and IconTitleSubtitle
  *
  * This is an intentionally minimal wrapper that replaces the CheckDelegate's
@@ -28,7 +28,7 @@ QQC2.CheckDelegate {
 
     // Please see the developer note in ItemDelegate
 
-    /**
+    /*!
      * The subtitle to display.
      */
     property string subtitle

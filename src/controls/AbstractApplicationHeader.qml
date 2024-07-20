@@ -11,7 +11,7 @@ import "templates" as T
 
 
 //TODO KF6: remove
-/**
+/*!
  * \brief An item that can be used as a title for the application.
  *
  * Scrolling the main page will make it taller or shorter (through the point of going away)

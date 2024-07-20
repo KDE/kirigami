@@ -9,7 +9,7 @@ import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 
-/**
+/*!
  * \brief A button that looks like a link.
  *
  * It uses the link color settings and triggers an action when clicked.
@@ -26,14 +26,14 @@ QQC2.Label {
 
     property T.Action action
 
-    /**
+    /*!
      * \brief This property holds the mouse buttons that the mouse area reacts to.
      * \sa QtQuick.MouseArea::acceptedButtons
      * @property Qt::MouseButtons acceptedButtons
      */
     property alias acceptedButtons: area.acceptedButtons
 
-    /**
+    /*!
      * \brief This property holds the mouse area element covering the button.
      * @property MouseArea area
      */

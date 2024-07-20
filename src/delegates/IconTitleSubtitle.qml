@@ -11,7 +11,7 @@ import org.kde.kirigami.platform as Platform
 import org.kde.kirigami.primitives as Primitives
 import org.kde.kirigami.templates.private as KTP
 
-/**
+/*!
  * A simple item containing an icon, title and subtitle.
  *
  * This is an extension of TitleSubtitle that adds an icon to the side.
@@ -60,52 +60,52 @@ import org.kde.kirigami.templates.private as KTP
 Item {
     id: root
 
-    /**
+    /*!
      * @copydoc Kirigami::TitleSubtitle::title
      */
     required property string title
-    /**
+    /*!
      * @copydoc Kirigami::TitleSubtitle::subtitle
      */
     property alias subtitle: titleSubtitle.subtitle
-    /**
+    /*!
      * @copydoc Kirigami::TitleSubtitle::color
      */
     property alias color: titleSubtitle.color
-    /**
+    /*!
      * @copydoc Kirigami::TitleSubtitle::subtitleColor
      */
     property alias subtitleColor: titleSubtitle.subtitleColor
-    /**
+    /*!
      * @copydoc Kirigami::TitleSubtitle::font
      */
     property alias font: titleSubtitle.font
-    /**
+    /*!
      * @copydoc Kirigami::TitleSubtitle::subtitleFont
      */
     property alias subtitleFont: titleSubtitle.subtitleFont
-    /**
+    /*!
      * @copydoc Kirigami::TitleSubtitle::reserveSpaceForSubtitle
      */
     property alias reserveSpaceForSubtitle: titleSubtitle.reserveSpaceForSubtitle
-    /**
+    /*!
      * @copydoc Kirigami::TitleSubtitle::selected
      */
     property alias selected: titleSubtitle.selected
-    /**
+    /*!
      * @copydoc Kirigami::TitleSubtitle::elide
      */
     property alias elide: titleSubtitle.elide
-    /**
+    /*!
      * @copydoc Kirigami::TitleSubtitle::wrapMode
      */
     property alias wrapMode: titleSubtitle.wrapMode
-    /**
+    /*!
      * @copydoc Kirigami::TitleSubtitle::truncated
      */
     property alias truncated: titleSubtitle.truncated
 
-    /**
+    /*!
      * Grouped property for icon properties.
      *
      * \note By default, IconTitleSubtitle will reserve the space for the icon,
@@ -116,12 +116,12 @@ Item {
         height: width
     }
 
-    /**
+    /*!
      * @copydoc Kirigami::TitleSubtitle::linkActivated
      */
     signal linkActivated(string link)
 
-    /**
+    /*!
      * @copydoc Kirigami::TitleSubtitle::linkHovered
      */
     signal linkHovered(string link)

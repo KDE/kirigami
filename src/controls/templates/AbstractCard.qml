@@ -9,7 +9,7 @@ import QtQuick.Layouts
 import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 
-/**
+/*!
  * A AbstractCard is the base for cards. A Card is a visual object that serves
  * as an entry point for more detailed information. An abstractCard is empty,
  * providing just the look and the base properties and signals for an ItemDelegate.
@@ -26,7 +26,7 @@ T.ItemDelegate {
     id: root
 
 //BEGIN properties
-    /**
+    /*!
      * \brief This property holds an item that serves as a header.
      *
      * This item will be positioned on top if headerOrientation is ``Qt.Vertical``
@@ -34,7 +34,7 @@ T.ItemDelegate {
      */
     property alias header: headerFooterLayout.header
 
-    /**
+    /*!
      * \brief This property sets the card's orientation.
      *
      * * ``Qt.Vertical``: the header will be positioned on top
@@ -46,7 +46,7 @@ T.ItemDelegate {
      */
     property int headerOrientation: Qt.Vertical
 
-    /**
+    /*!
      * \brief This property holds an item that serves as a footer.
      *
      * This item will be positioned at the bottom if headerOrientation is ``Qt.Vertical``
@@ -54,7 +54,7 @@ T.ItemDelegate {
      */
     property alias footer: headerFooterLayout.footer
 
-    /**
+    /*!
      * \brief This property sets whether clicking or tapping on the card area shows a visual click feedback.
      *
      * Use this if you want to do an action in the onClicked signal handler of the card.

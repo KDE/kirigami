@@ -11,7 +11,7 @@ import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 import org.kde.kirigami.templates.private as TP
 
-/**
+/*!
  * An inline message item with support for informational, positive,
  * warning and error types, and with support for associated actions.
  *
@@ -32,7 +32,7 @@ import org.kde.kirigami.templates.private as TP
  * can fit, an overflow menu is provided.
  *
  * Example:
- * @code
+ * \code
  * import org.kde.kirigami as Kirigami
  *
  * Kirigami.InlineMessage {
@@ -57,7 +57,7 @@ import org.kde.kirigami.templates.private as TP
  *         }
  *     ]
  * }
- * @endcode
+ * \endcode
  *
  * @since 5.45
  * @inherit QtQuick.Templates.Control
@@ -67,7 +67,7 @@ T.Control {
 
     visible: false
 
-    /**
+    /*!
      * Defines a position for the message: whether it's to be used as an inline component inside the page,
      * a page header, or a page footer.
      */
@@ -77,7 +77,7 @@ T.Control {
         Footer
     }
 
-    /**
+    /*!
      * Adjust the look of the message based upon the position.
      * If a message is positioned in the header area or in the footer area
      * of a page, it might be desirable to not have borders but just a line
@@ -87,31 +87,31 @@ T.Control {
      */
     property int position: InlineMessage.Position.Inline
 
-    /**
+    /*!
      * This signal is emitted when a link is hovered in the message text.
      * @param The hovered link.
      */
     signal linkHovered(string link)
 
-    /**
+    /*!
      * This signal is emitted when a link is clicked or tapped in the message text.
      * @param The clicked or tapped link.
      */
     signal linkActivated(string link)
 
-    /**
+    /*!
      * This property holds the link embedded in the message text that the user is hovering over.
      */
     readonly property alias hoveredLink: label.hoveredLink
 
-    /**
+    /*!
      * This property holds the message type. One of Information, Positive, Warning or Error.
      *
      * The default is Kirigami.MessageType.Information.
      */
     property int type: Kirigami.MessageType.Information
 
-    /**
+    /*!
      * This grouped property holds the description of an optional icon.
      *
      * * source: The source of the icon, a freedesktop-compatible icon name is recommended.
@@ -122,26 +122,26 @@ T.Control {
      */
     property TP.IconPropertiesGroup icon: TP.IconPropertiesGroup {}
 
-    /**
+    /*!
      * This property holds the message text.
      */
     property string text
 
-    /**
+    /*!
      * This property holds whether the close button is displayed.
      *
      * The default is false.
      */
     property bool showCloseButton: false
 
-    /**
+    /*!
      * This property holds the list of actions to show. Actions are added from left to
      * right. If more actions are set than can fit, an overflow menu is
      * provided.
      */
     property list<T.Action> actions
 
-    /**
+    /*!
      * This property holds whether the current message item is animating.
      */
     readonly property bool animating: _animating

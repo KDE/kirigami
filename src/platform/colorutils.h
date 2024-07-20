@@ -13,7 +13,7 @@
 
 #include "kirigamiplatform_export.h"
 
-/**
+/*!
  * Utilities for processing items to obtain colors and information useful for
  * UIs that need to adjust to variable elements.
  */
@@ -23,21 +23,21 @@ class KIRIGAMIPLATFORM_EXPORT ColorUtils : public QObject
     QML_ELEMENT
     QML_SINGLETON
 public:
-    /**
+    /*!
      * Describes the contrast of an item.
      */
     enum Brightness {
-        Dark, /**< The item is dark and requires a light foreground color to achieve readable contrast. */
-        Light, /**< The item is light and requires a dark foreground color to achieve readable contrast. */
+        Dark, /*!< The item is dark and requires a light foreground color to achieve readable contrast. */
+        Light, /*!< The item is light and requires a dark foreground color to achieve readable contrast. */
     };
     Q_ENUM(Brightness)
 
     explicit ColorUtils(QObject *parent = nullptr);
 
-    /**
+    /*!
      * Returns whether a color is bright or dark.
      *
-     * @code{.qml}
+     * \code{.qml}
      * import QtQuick
      * import org.kde.kirigami as Kirigami
      *
@@ -50,14 +50,14 @@ public:
      *         }
      *     }
      * }
-     * @endcode
+     * \endcode
      *
      * @since 5.69
      * @since org.kde.kirigami 2.12
      */
     Q_INVOKABLE ColorUtils::Brightness brightnessForColor(const QColor &color);
 
-    /**
+    /*!
      * Same Algorithm as brightnessForColor but returns a 0 to 1 value for an
      * estimate of the equivalent gray light value (luma).
      * 0 as full black, 1 as full white and 0.5 equivalent to a 50% gray.
@@ -67,7 +67,7 @@ public:
      */
     Q_INVOKABLE qreal grayForColor(const QColor &color);
 
-    /**
+    /*!
      * Returns the result of overlaying the foreground color on the background
      * color.
      *
@@ -75,21 +75,21 @@ public:
      *
      * @param background The color to overlay the foreground on.
      *
-     * @code{.qml}
+     * \code{.qml}
      * import QtQuick
      * import org.kde.kirigami as Kirigami
      *
      * Rectangle {
      *     color: Kirigami.ColorUtils.alphaBlend(Qt.rgba(0, 0, 0, 0.5), Qt.rgba(1, 1, 1, 1))
      * }
-     * @endcode
+     * \endcode
      *
      * @since 5.69
      * @since org.kde.kirigami 2.12
      */
     Q_INVOKABLE QColor alphaBlend(const QColor &foreground, const QColor &background);
 
-    /**
+    /*!
      * Returns a linearly interpolated color between color one and color two.
      *
      * @param one The color to linearly interpolate from.
@@ -100,28 +100,28 @@ public:
      * first color, 1.0 will return the second color. Values beyond these bounds
      * are valid, and will result in extrapolation.
      *
-     * @code{.qml}
+     * \code{.qml}
      * import QtQuick
      * import org.kde.kirigami as Kirigami
      *
      * Rectangle {
      *     color: Kirigami.ColorUtils.linearInterpolation("black", "white", 0.5)
      * }
-     * @endcode
+     * \endcode
      *
      * @since 5.69
      * @since org.kde.kirigami 2.12
      */
     Q_INVOKABLE QColor linearInterpolation(const QColor &one, const QColor &two, double balance);
 
-    /**
+    /*!
      * Increases or decreases the properties of `color` by fixed amounts.
      *
      * @param color The color to adjust.
      *
      * @param adjustments The adjustments to apply to the color.
      *
-     * @code{.js}
+     * \code{.js}
      * {
      *     red: null, // Range: -255 to 255
      *     green: null, // Range: -255 to 255
@@ -131,7 +131,7 @@ public:
      *     value: null // Range: -255 to 255
      *     alpha: null, // Range: -255 to 255
      * }
-     * @endcode
+     * \endcode
      *
      * @warning It is an error to adjust both RGB and HSV properties.
      *
@@ -140,7 +140,7 @@ public:
      */
     Q_INVOKABLE QColor adjustColor(const QColor &color, const QJSValue &adjustments);
 
-    /**
+    /*!
      * Smoothly scales colors.
      *
      * @param color The color to adjust.
@@ -150,7 +150,7 @@ public:
      * be scaled from its original to the maximum if positive or to the minimum if
      * negative.
      *
-     * @code{.js}
+     * \code{.js}
      * {
      *     red: null
      *     green: null
@@ -159,7 +159,7 @@ public:
      *     value: null
      *     alpha: null
      * }
-     * @endcode
+     * \endcode
      *
      * @warning It is an error to scale both RGB and HSV properties.
      *
@@ -168,7 +168,7 @@ public:
      */
     Q_INVOKABLE QColor scaleColor(const QColor &color, const QJSValue &adjustments);
 
-    /**
+    /*!
      * Tint a color using a separate alpha value.
      *
      * This does the same as Qt.tint() except that rather than using the tint
@@ -186,7 +186,7 @@ public:
      */
     Q_INVOKABLE QColor tintWithAlpha(const QColor &targetColor, const QColor &tintColor, double alpha);
 
-    /**
+    /*!
      * Returns the CIELAB chroma of the given color.
      *
      * CIELAB chroma may give a better quantification of how vibrant a color is compared to HSV saturation.

@@ -10,7 +10,7 @@ import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 import "templates/private" as TP
 
-/**
+/*!
  * A window that provides some basic features needed for all apps
  * Use this class only if you need a custom content for your application,
  * different from the Page Row behavior recommended by the HIG and provided
@@ -29,7 +29,7 @@ import "templates/private" as TP
  *
  *
  * Example usage:
- * @code
+ * \code
  * import org.kde.kirigami as Kirigami
  *
  * Kirigami.ApplicationWindow {
@@ -65,7 +65,7 @@ import "templates/private" as TP
  *     }
  *  [...]
  * }
- * @endcode
+ * \endcode
  *
  * @inherit QtQuick.Controls.ApplicationWindow
  */
@@ -73,7 +73,7 @@ QQC2.ApplicationWindow {
     id: root
 
 //BEGIN properties
-    /**
+    /*!
      * \brief This property holds the stack used to allocate the pages and to manage the
      * transitions between them.
      *
@@ -81,7 +81,7 @@ QQC2.ApplicationWindow {
      */
     property Item pageStack
 
-    /**
+    /*!
      * \brief This property sets whether the standard chrome of the app is visible.
      *
      * These are the action button, the drawer handles, and the application header.
@@ -90,7 +90,7 @@ QQC2.ApplicationWindow {
      */
     property bool controlsVisible: true
 
-    /**
+    /*!
      * \brief This property holds the drawer for global actions.
      *
      * This drawer can be opened by sliding from the left screen edge
@@ -101,7 +101,7 @@ QQC2.ApplicationWindow {
      */
     property OverlayDrawer globalDrawer
 
-    /**
+    /*!
      * \brief This property tells whether the application is in "widescreen" mode.
      *
      * This is enabled on desktops or horizontal tablets.
@@ -110,7 +110,7 @@ QQC2.ApplicationWindow {
      */
     property bool wideScreen: width >= Kirigami.Units.gridUnit * 60
 
-    /**
+    /*!
      * \brief This property holds the drawer for context-dependent actions.
      *
      * The drawer that will be opened by sliding from the right screen edge
@@ -123,7 +123,7 @@ QQC2.ApplicationWindow {
      *
      * Example usage:
      *
-     * @code
+     * \code
      * import org.kde.kirigami as Kirigami
      *
      * Kirigami.ApplicationWindow {
@@ -147,29 +147,29 @@ QQC2.ApplicationWindow {
      *         ]
      *     }
      * }
-     * @endcode
+     * \endcode
      *
      * @property org::kde::kirigami::ContextDrawer contextDrawer
      */
     property OverlayDrawer contextDrawer
 
-    /**
+    /*!
      * Effectively the same as T.Overlay.overlay
      */
     readonly property Item overlay: T.Overlay.overlay
 
-    /**
+    /*!
      * This property holds a standard action that will quit the application when triggered.
      * Its properties have the following values:
      *
-     * @code
+     * \code
      * Action {
      *     text: "Quit"
      *     icon.name: "application-exit-symbolic"
      *     shortcut: StandardKey.Quit
      *     // ...
      * }
-     * @endcode
+     * \endcode
      * @since 5.76
      */
     readonly property Kirigami.Action quitAction: Kirigami.Action {
@@ -181,7 +181,7 @@ QQC2.ApplicationWindow {
 //END properties
 
 //BEGIN functions
-    /**
+    /*!
      * \brief This function shows a little passive notification at the bottom of the app window
      * lasting for few seconds, with an optional action button.
      *
@@ -196,7 +196,7 @@ QQC2.ApplicationWindow {
         notificationsObject.showNotification(message, timeout, actionText, callBack);
     }
 
-   /**
+   /*!
     * \brief This function hides the passive notification at specified index, if any is shown.
     * @param index Index of the notification to hide. Default is 0 (oldest notification).
     */
@@ -204,7 +204,7 @@ QQC2.ApplicationWindow {
         notificationsObject.hideNotification(index);
     }
 
-    /**
+    /*!
      * \brief This function returns application window's object anywhere in the application.
      * @returns a pointer to this application window
      * can be used anywhere in the application.

@@ -14,7 +14,7 @@
 
 class QQuickItem;
 
-/**
+/*!
  * This attached property manages z-index for stacking overlays relative to each other.
  *
  * When a popup is about to show, OverlayZStacking object kicks in, searches for the
@@ -24,7 +24,7 @@ class QQuickItem;
  * than its logical parent popup, but also no lower than its siblings on the same
  * logical layer.
  *
- * @code
+ * \code
  * import QtQuick.Controls as QQC2
  * import org.kde.kirigami as Kirigami
  *
@@ -32,7 +32,7 @@ class QQuickItem;
  *     Kirigami.OverlayZStacking.layer: Kirigami.OverlayZStacking.ToolTip
  *     z: Kirigami.OverlayZStacking.z
  * }
- * @endcode
+ * \endcode
  *
  * @since 6.0
  */
@@ -43,12 +43,12 @@ class OverlayZStackingAttached : public QObject
     QML_NAMED_ELEMENT(OverlayZStacking)
     QML_UNCREATABLE("Cannot create objects of type OverlayZStacking, use it as an attached property")
     QML_ATTACHED(OverlayZStackingAttached)
-    /**
+    /*!
      * An optimal z-index that attachee popup should bind to.
      */
     Q_PROPERTY(qreal z READ z NOTIFY zChanged FINAL)
 
-    /**
+    /*!
      * The logical stacking layer of attachee popup, akin to window manager's layers.
      */
     Q_PROPERTY(Layer layer READ layer WRITE setLayer NOTIFY layerChanged FINAL)

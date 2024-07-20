@@ -11,14 +11,14 @@ import org.kde.kirigami as Kirigami
 import "templates/private" as TP
 import "templates" as KT
 
-/**
+/*!
  * \brief An item that provides the features of AbstractApplicationWindow without the window itself.
  *
  * This allows embedding into a larger application.
  * Unless you need extra flexibility it is recommended to use ApplicationItem instead.
  *
  * Example usage:
- * @code
+ * \code
  * import org.kde.kirigami as Kirigami
  *
  * Kirigami.AbstractApplicationItem {
@@ -54,7 +54,7 @@ import "templates" as KT
  *     }
  *  [...]
  * }
- * @endcode
+ * \endcode
  *
  * @inherit QtQuick.Item
  */
@@ -62,7 +62,7 @@ Item {
     id: root
 
 //BEGIN properties
-    /**
+    /*!
      * \brief This property holds the stack used to allocate the pages and to manage the
      * transitions between them.
      *
@@ -70,24 +70,24 @@ Item {
      */
     property Item pageStack
 
-    /**
+    /*!
      * \brief This property holds the font for this item.
      *
      * default: ``Kirigami.Theme.defaultFont``
      */
     property font font: Kirigami.Theme.defaultFont
 
-    /**
+    /*!
      * \brief This property holds the locale for this item.
      */
     property Locale locale
 
-    /**
+    /*!
      * \brief This property holds an item that can be used as a menuBar for the application.
      */
     property T.MenuBar menuBar
 
-    /**
+    /*!
     * \brief This property holds an item that can be used as a title for the application.
     *
     * Scrolling the main page will make it taller or shorter (through the point of going away).
@@ -106,12 +106,12 @@ Item {
     */
     property KT.AbstractApplicationHeader header
 
-    /**
+    /*!
      * \brief This property holds an item that can be used as a footer for the application.
      */
     property Item footer
 
-    /**
+    /*!
      * \brief This property sets whether the standard chrome of the app is visible.
      *
      * These are the action button, the drawer handles and the application header.
@@ -120,7 +120,7 @@ Item {
      */
     property bool controlsVisible: true
 
-    /**
+    /*!
      * \brief This property holds the drawer for global actions.
      *
      * Thos drawer can be opened by sliding from the left screen edge
@@ -131,7 +131,7 @@ Item {
      */
     property OverlayDrawer globalDrawer
 
-    /**
+    /*!
      * \brief This property tells us whether the application is in "widescreen" mode.
      *
      * This is enabled on desktops or horizontal tablets.
@@ -140,7 +140,7 @@ Item {
      */
     property bool wideScreen: width >= Kirigami.Units.gridUnit * 60
 
-    /**
+    /*!
      * \brief This property holds the drawer for context-dependent actions.
      *
      * The drawer that will be opened by sliding from the right screen edge
@@ -153,7 +153,7 @@ Item {
      *
      * Example usage:
      *
-     * @code
+     * \code
      * import org.kde.kirigami as Kirigami
      *
      * Kirigami.ApplicationWindow {
@@ -177,20 +177,20 @@ Item {
      *         ]
      *     }
      * }
-     * @endcode
+     * \endcode
      *
      * @property org::kde::kirigami::ContextDrawer contextDrawer
      */
     property OverlayDrawer contextDrawer
 
-    /**
+    /*!
      * \brief This property holds the list of all children of this item.
      * @internal
      * @property list<Object> __data
      */
     default property alias __data: contentItemRoot.data
 
-    /**
+    /*!
      * \brief This property holds the Item of the main part of the Application UI.
      */
     readonly property Item contentItem: Item {
@@ -205,14 +205,14 @@ Item {
         }
     }
 
-    /**
+    /*!
      * \brief This property holds the color for the background.
      *
      * default: ``Kirigami.Theme.backgroundColor``
      */
     property color color: Kirigami.Theme.backgroundColor
 
-    /**
+    /*!
      * \brief This property holds the background of the Application UI.
      */
     property Item background
@@ -221,7 +221,7 @@ Item {
 //END properties
 
 //BEGIN functions
-    /**
+    /*!
      * \brief This function shows a little passive notification at the bottom of the app window
      * lasting for few seconds, with an optional action button.
      *
@@ -236,7 +236,7 @@ Item {
         notificationsObject.showNotification(message, timeout, actionText, callBack);
     }
 
-    /**
+    /*!
      * \brief This function hides the passive notification at specified index, if any is shown.
      * @param index Index of the notification to hide. Default is 0 (oldest notification).
     */
@@ -244,7 +244,7 @@ Item {
         notificationsObject.hideNotification(index);
     }
 
-    /**
+    /*!
      * \brief This property gets application windows object anywhere in the application.
      * @returns a pointer to this item.
      */

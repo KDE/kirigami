@@ -10,7 +10,7 @@ import QtQuick.Layouts
 import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 
-/**
+/*!
  * \brief A fancy inline view header showing a title and optional actions.
  *
  * Designed to be set as the header: property of a ListView or GridView, this
@@ -23,7 +23,7 @@ import org.kde.kirigami as Kirigami
  * The width: property must be manually set to the parent view's width.
  *
  * Example usage:
- * @code{.qml}
+ * \code{.qml}
  * import org.kde.kirigami as Kirigami
  *
  * ListView {
@@ -47,19 +47,19 @@ import org.kde.kirigami as Kirigami
  *     model: [...]
  *     delegate: [...]
  * }
- * @endcode
+ * \endcode
  * @inherit QtQuick.QQC2.ToolBar
  */
 T.ToolBar {
     id: root
 
 //BEGIN properties
-    /**
+    /*!
      * \brief This property holds the title text.
      */
     property string text
 
-    /**
+    /*!
      * This property holds the list of actions to show on the header. Actions
      * are added from left to right. If more actions are set than can fit, an
      * overflow menu is provided.

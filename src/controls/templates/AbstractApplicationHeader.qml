@@ -9,7 +9,7 @@ import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 
-/**
+/*!
  * \brief An item that can be used as a title for the application.
  *
  * Scrolling the main page will make it taller or shorter (through the point of going away)
@@ -47,7 +47,7 @@ Item {
     property int bottomPadding: 0
     property bool separatorVisible: true
 
-    /**
+    /*!
      * This property specifies whether the header should be pushed back when
      * scrolling using the touch screen.
      */
@@ -63,7 +63,7 @@ Item {
     implicitHeight: preferredHeight
     height: Layout.preferredHeight
 
-    /**
+    /*!
      * \brief This property holds the background item.
      * @note the background will be automatically sized to fill the whole control
      */
