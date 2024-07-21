@@ -148,6 +148,9 @@ private:
 };
 
 /*!
+ * \qmltype ColumnView
+ * \inqmlmodule org.kde.kirigami.layouts
+ *
  * ColumnView is a container that lays out items horizontally in a row,
  * when not all items fit in the ColumnView, it will behave like a Flickable and will be a scrollable view which shows only a determined number of columns.
  * The columns can either all have the same fixed size (recommended),

@@ -16,7 +16,7 @@
 struct QSGMaterialType;
 class ShadowedBorderRectangleMaterial;
 
-/*!
+/*
  * Scene graph node for a shadowed rectangle.
  *
  * This node will set up the geometry and materials for a shadowed rectangle,

@@ -12,3 +12,18 @@
     \qmlmodule org.kde.kirigami.primitives
     \brief Kirigami Primitives
 */
+
+/*!
+    \qmlmodule org.kde.kirigami.platform
+    \brief Kirigami Primitives
+*/
+
+/*!
+    \qmlmodule org.kde.kirigami.dialogs
+    \brief Kirigami Dialogs
+*/
+
+/*!
+    \qmlmodule org.kde.kirigami.layouts
+    \brief Kirigami Layouts
+*/

@@ -21,7 +21,8 @@ class PlatformTheme;
 class Units;
 
 /*!
- * @class PlatformPluginFactory platformpluginfactory.h <Kirigami/PlatformPluginFactory>
+ * \class Kirigami::Platform::PlatformPluginFactory
+ * \inmodule KirigamiPlatform
  *
  * This class is reimpleented by plugins to provide different implementations
  * of PlatformTheme

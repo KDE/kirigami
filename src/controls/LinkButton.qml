@@ -10,16 +10,16 @@ import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 
 /*!
- * \brief A button that looks like a link.
- *
- * It uses the link color settings and triggers an action when clicked.
- *
- * Maps to the Command Link in the HIG:
- * https://develop.kde.org/hig/components/navigation/commandlink/
- *
- * \since Kirigami 5.52
- * \since Kirigami org.kde.kirigami 2.6
- * @inherit QtQuick.Controls.Label
+  \qmltype LinkButton
+  \inqmlmodule org.kde.kirigami
+  \brief A button that looks like a link.
+
+  It uses the link color settings and triggers an action when clicked.
+
+  Maps to the Command Link in the HIG:
+  https://develop.kde.org/hig/components/navigation/commandlink/
+
+  \since Kirigami 5.52
  */
 QQC2.Label {
     id: control
@@ -27,9 +27,9 @@ QQC2.Label {
     property T.Action action
 
     /*!
-     * \brief This property holds the mouse buttons that the mouse area reacts to.
-     * \sa QtQuick.MouseArea::acceptedButtons
-     * @property Qt::MouseButtons acceptedButtons
+      \brief This property holds the mouse buttons that the mouse area reacts to.
+      \sa MouseArea::acceptedButtons
+      \qmlproperty Qt::MouseButtons acceptedButtons
      */
     property alias acceptedButtons: area.acceptedButtons
 

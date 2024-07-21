@@ -12,5 +12,14 @@ sources.fileextensions = "*.qdoc *.qml *.h"
 
 exampledirs = examples
 
+QT_VER = 6.5
+QT_VERSION = 6.5
+QT_VERSION_TAG = 6.5
+BUILDDIR=/home/nico/kde/build/kirigami
+
 outputdir  = doc/html
 outputformats = HTML
+
+depends = qtcore qtquick qtquickcontrols
+
+include(doc/global/qt-module-defaults.qdocconf)
