@@ -14,6 +14,9 @@
 class PaintedRectangleItem;
 
 /*!
+ * \qmltype BorderGroup
+ * \inqmlmodule org.kde.kirigami.primitives
+ *
  * \brief Grouped property for rectangle border.
  */
 class BorderGroup : public QObject
@@ -58,6 +61,8 @@ private:
 };
 
 /*!
+ * \qmltype ShadowGroup
+ * \inqmlmodule org.kde.kirigami.primitives
  * \brief Grouped property for the rectangle's shadow.
  */
 class ShadowGroup : public QObject
@@ -118,6 +123,8 @@ private:
 };
 
 /*!
+ * \qmltype CornersGroup
+ * \inqmlmodule org.kde.kirigami.primitives
  * \brief Grouped property for corner radius.
  */
 class CornersGroup : public QObject
@@ -188,6 +195,9 @@ private:
 };
 
 /*!
+ * \qmltype ShadowedRectangle
+ * \inqmlmodule org.kde.kirigami.primitives
+ *
  * \brief A rectangle with a shadow behind it.
  *
  * This item will render a rectangle, with a shadow below it. The rendering is done
@@ -196,19 +206,20 @@ private:
  * rectangle's width and height.
  *
  * \since Kirigami 5.69
- * \since Kirigami 2.12
  */
 class ShadowedRectangle : public QQuickItem
 {
     Q_OBJECT
     QML_ELEMENT
     /*!
+     * \qmlproperty qreal ShadowedRectangle::radius
+     *
      * \brief This property holds the radii of the rectangle's corners.
      *
      * This is the amount of rounding to apply to all of the rectangle's
      * corners, in pixels. Each corner can have a different radius.
      *
-     * default: ``0``
+     * default: 0
      *
      * \sa corners
      */
