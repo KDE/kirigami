@@ -27,7 +27,7 @@ class WheelHandler;
 class KirigamiWheelEvent : public QObject
 {
     Q_OBJECT
-    QML_ELEMENT
+    QML_NAMED_ELEMENT(WheelEvent)
     QML_UNCREATABLE("")
 
     /**
