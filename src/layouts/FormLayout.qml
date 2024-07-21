@@ -13,39 +13,41 @@ import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 
 /*!
- * This is the base class for Form layouts conforming to the
- * Kirigami Human Interface Guidelines. The layout consists
- * of two columns: the left column contains only right-aligned
- * labels provided by a Kirigami.FormData attached property,
- * the right column contains left-aligned child types.
- *
- * Child types can be sectioned using an QtQuick.Item
- * or Kirigami.Separator with a Kirigami.FormData
- * attached property, see FormLayoutAttached::isSection for details.
- *
- * Example usage:
- * \code
- * import QtQuick.Controls as QQC2
- * import org.kde.kirigami as Kirigami
- *
- * Kirigami.FormLayout {
- *    QQC2.TextField {
- *       Kirigami.FormData.label: "Label:"
- *    }
- *    Kirigami.Separator {
- *        Kirigami.FormData.label: "Section Title"
- *        Kirigami.FormData.isSection: true
- *    }
- *    QQC2.TextField {
- *       Kirigami.FormData.label: "Label:"
- *    }
- *    QQC2.TextField {
- *    }
- * }
- * \endcode
- * \sa FormLayoutAttached
- * \since Kirigami 2.3
- * @inherit QtQuick.Item
+  \qmltype FormLayout
+  \inqmlmodule org.kde.kirigami.layouts
+
+  This is the base class for Form layouts conforming to the
+  Kirigami Human Interface Guidelines. The layout consists
+  of two columns: the left column contains only right-aligned
+  labels provided by a FormData attached property,
+  the right column contains left-aligned child types.
+
+  Child types can be sectioned using an QtQuick.Item
+  or Kirigami.Separator with a FormData
+  attached property, see FormLayoutAttached::isSection for details.
+
+  Example usage:
+  \code
+  import QtQuick.Controls as QQC2
+  import org.kde.kirigami as Kirigami
+
+  Kirigami.FormLayout {
+     QQC2.TextField {
+        Kirigami.FormData.label: "Label:"
+     }
+     Kirigami.Separator {
+         Kirigami.FormData.label: "Section Title"
+         Kirigami.FormData.isSection: true
+     }
+     QQC2.TextField {
+        Kirigami.FormData.label: "Label:"
+     }
+     QQC2.TextField {
+     }
+  }
+  \endcode
+  \sa FormData
+  \since Kirigami 2.3
  */
 Item {
     id: root

@@ -72,7 +72,8 @@ Q_SIGNALS:
 };
 
 /*!
- * @class Units units.h <Kirigami/Units>
+ * \qmltype Units
+ * \inqmlmodule org.kde.kirigami.platform
  *
  * A set of values to define semantically sizes and durations.
  */
@@ -85,69 +86,97 @@ class KIRIGAMIPLATFORM_EXPORT Units : public QObject
     friend class IconSizes;
 
     /*!
+     * \qmlproperty int Units::gridUnit
+     *
      * The fundamental unit of space that should be used for sizes, expressed in pixels.
      */
     Q_PROPERTY(int gridUnit READ gridUnit NOTIFY gridUnitChanged FINAL)
 
     /*!
+     * \qmlproperty int Units::iconSizes.sizeForLabels
+     * \qmlproperty int Units::iconSizes.small
+     * \qmlproperty int Units::iconSizes.smallMedium
+     * \qmlproperty int Units::iconSizes.medium
+     * \qmlproperty int Units::iconSizes.large
+     * \qmlproperty int Units::iconSizes.huge
+     * \qmlproperty int Units::iconSizes.enormous
+     *
      * units.iconSizes provides access to platform-dependent icon sizing
      *
      * The icon sizes provided are normalized for different DPI, so icons
      * will scale depending on the DPI.
      *
-     * * sizeForLabels (the largest icon size that fits within fontMetrics.height) \since Kirigami 5.80 \since Kirigami org.kde.kirigami 2.16
-     * * small
-     * * smallMedium
-     * * medium
-     * * large
-     * * huge
-     * * enormous
+     * \list
+     * \li sizeForLabels (the largest icon size that fits within fontMetrics.height)
+     * \li small
+     * \li smallMedium
+     * \li medium
+     * \li large
+     * \li huge
+     * \li enormous
+     * \endlist
      */
     Q_PROPERTY(Kirigami::Platform::IconSizes *iconSizes READ iconSizes CONSTANT FINAL)
 
     /*!
+     * \qmlproperty int Units::smallSpacing
+     *
      * This property holds the amount of spacing that should be used between smaller UI elements,
      * such as a small icon and a label in a button.
      */
     Q_PROPERTY(int smallSpacing READ smallSpacing NOTIFY smallSpacingChanged FINAL)
 
     /*!
+     * \qmlproperty int Units::mediumSpacing
+     *
      * This property holds the amount of spacing that should be used between medium UI elements,
      * such as buttons and text fields in a toolbar.
      */
     Q_PROPERTY(int mediumSpacing READ mediumSpacing NOTIFY mediumSpacingChanged FINAL)
 
     /*!
+     * \qmlproperty int Units::largeSpacing
+     *
      * This property holds the amount of spacing that should be used between bigger UI elements,
      * such as a large icon and a heading in a card.
      */
     Q_PROPERTY(int largeSpacing READ largeSpacing NOTIFY largeSpacingChanged FINAL)
 
     /*!
+     * \qmlproperty int Units::veryLongDuration
+     *
      * units.veryLongDuration should be used for specialty animations that benefit
      * from being even longer than longDuration.
      */
     Q_PROPERTY(int veryLongDuration READ veryLongDuration NOTIFY veryLongDurationChanged FINAL)
 
     /*!
+     * \qmlproperty int Units::longDuration
+     *
      * units.longDuration should be used for longer, screen-covering animations, for opening and
      * closing of dialogs and other "not too small" animations
      */
     Q_PROPERTY(int longDuration READ longDuration NOTIFY longDurationChanged FINAL)
 
     /*!
+     * \qmlproperty int Units::shortDuration
+     *
      * units.shortDuration should be used for short animations, such as accentuating a UI event,
      * hover events, etc..
      */
     Q_PROPERTY(int shortDuration READ shortDuration NOTIFY shortDurationChanged FINAL)
 
     /*!
+     * \qmlproperty int Units::veryShortDuration
+     *
      * units.veryShortDuration should be used for elements that should have a hint of smoothness,
      * but otherwise animate near instantly.
      */
     Q_PROPERTY(int veryShortDuration READ veryShortDuration NOTIFY veryShortDurationChanged FINAL)
 
     /*!
+     * \qmlproperty int Units::humanMoment
+     *
      * Time in milliseconds equivalent to the theoretical human moment, which can be used
      * to determine whether how long to wait until the user should be informed of something,
      * or can be used as the limit for how long something should wait before being
@@ -179,18 +208,20 @@ class KIRIGAMIPLATFORM_EXPORT Units : public QObject
      * veryLongDuration for animation duration choices.
      *
      * \since Kirigami 5.81
-     * \since Kirigami org.kde.kirigami 2.16
      */
     Q_PROPERTY(int humanMoment READ humanMoment NOTIFY humanMomentChanged FINAL)
 
     /*!
+     * \qmlproperty int Units::toolTipDelay
+     *
      * time in ms by which the display of tooltips will be delayed.
      *
-     * @sa ToolTip.delay property
      */
     Q_PROPERTY(int toolTipDelay READ toolTipDelay NOTIFY toolTipDelayChanged FINAL)
 
     /*!
+     * \qmlproperty qreal Units::cornerRadius
+     *
      * Corner radius value shared by buttons and other rectangle elements
      *
      * \since Kirigami 6.2

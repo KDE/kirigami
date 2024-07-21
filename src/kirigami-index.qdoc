@@ -1,0 +1,29 @@
+/*!
+    \page kirigami-index.html
+    \title Kirigami
+
+    Convergent stuff
+
+    \section1 Using the Module
+
+    \include {module-use.qdocinc} {using the c++ api}
+
+    \section2 Building with CMake
+
+    \include {module-use.qdocinc} {building with cmake} {Widgets}
+
+    \section1 API Reference
+
+    \list
+        \li \l{Kirigami QML Types}
+        \li \l{Kirigami Delegates QML Types}
+        \li \l{Kirigami Primitives QML Types}
+        \li \l{Kirigami Platform QML Types}
+        \li \l{Kirigami Delegates QML Types}
+        \li \l{Kirigami Layouts QML Types}
+    \endlist
+
+    \section1 Licenses
+
+    TODO
+*/

@@ -12,55 +12,57 @@ import org.kde.kirigami as Kirigami
 import org.kde.kirigami.templates.private as TP
 
 /*!
- * An inline message item with support for informational, positive,
- * warning and error types, and with support for associated actions.
- *
- * InlineMessage can be used to give information to the user or
- * interact with the user, without requiring the use of a dialog.
- *
- * The InlineMessage item is hidden by default. It also manages its
- * height (and implicitHeight) during an animated reveal when shown.
- * You should avoid setting height on an InlineMessage unless it is
- * already visible.
- *
- * Optionally an icon can be set, defaulting to an icon appropriate
- * to the message type otherwise.
- *
- * Optionally a close button can be shown.
- *
- * Actions are added from left to right. If more actions are set than
- * can fit, an overflow menu is provided.
- *
- * Example:
- * \code
- * import org.kde.kirigami as Kirigami
- *
- * Kirigami.InlineMessage {
- *     type: Kirigami.MessageType.Error
- *
- *     text: i18n("My error message")
- *
- *     actions: [
- *         Kirigami.Action {
- *             icon.name: "list-add"
- *             text: i18n("Add")
- *             onTriggered: source => {
- *                 // do stuff
- *             }
- *         },
- *         Kirigami.Action {
- *             icon.name: "edit"
- *             text: i18n("Edit")
- *             onTriggered: source => {
- *                 // do stuff
- *             }
- *         }
- *     ]
- * }
- * \endcode
- *
- * \since Kirigami 5.45
- * @inherit QtQuick.Templates.Control
+  \qmltype InlineMessage
+  \inqmlmodule org.kde.kirigami
+
+  An inline message item with support for informational, positive,
+  warning and error types, and with support for associated actions.
+
+  InlineMessage can be used to give information to the user or
+  interact with the user, without requiring the use of a dialog.
+
+  The InlineMessage item is hidden by default. It also manages its
+  height (and implicitHeight) during an animated reveal when shown.
+  You should avoid setting height on an InlineMessage unless it is
+  already visible.
+
+  Optionally an icon can be set, defaulting to an icon appropriate
+  to the message type otherwise.
+
+  Optionally a close button can be shown.
+
+  Actions are added from left to right. If more actions are set than
+  can fit, an overflow menu is provided.
+
+  Example:
+  \qml
+  import org.kde.kirigami as Kirigami
+
+  Kirigami.InlineMessage {
+      type: Kirigami.MessageType.Error
+
+      text: i18n("My error message")
+
+      actions: [
+          Kirigami.Action {
+              icon.name: "list-add"
+              text: i18n("Add")
+              onTriggered: source => {
+                  // do stuff
+              }
+          },
+          Kirigami.Action {
+              icon.name: "edit"
+              text: i18n("Edit")
+              onTriggered: source => {
+                  // do stuff
+              }
+          }
+      ]
+  }
+  \endqml
+
+  \since Kirigami 5.45
  */
 T.Control {
     id: root
@@ -78,36 +80,57 @@ T.Control {
     }
 
     /*!
-     * Adjust the look of the message based upon the position.
-     * If a message is positioned in the header area or in the footer area
-     * of a page, it might be desirable to not have borders but just a line
-     * separating it from the content area. In this case, use the Header or
-     * Footer position.
-     * Default is InlineMessage.Position.Inline
+      \qmlproperty enumeration InlineMessage::position
+
+      Adjust the look of the message based upon the position.
+      If a message is positioned in the header area or in the footer area
+      of a page, it might be desirable to not have borders but just a line
+      separating it from the content area. In this case, use the Header or
+      Footer position.
+
+      Possible values are:
+      \list
+      \li InlineMessage.Position.Inline
+      \li InlineMessage.Position.Header
+      \li InlineMessage.Position.Footer
+      \endlist
+
+      Default is InlineMessage.Position.Inline
      */
     property int position: InlineMessage.Position.Inline
 
     /*!
-     * This signal is emitted when a link is hovered in the message text.
-     * @param The hovered link.
+      This signal is emitted when a link is hovered in the message text.
+      \a link The hovered link.
      */
     signal linkHovered(string link)
 
     /*!
-     * This signal is emitted when a link is clicked or tapped in the message text.
-     * @param The clicked or tapped link.
+      This signal is emitted when a link is clicked or tapped in the message text.
+      \a link The clicked or tapped link.
      */
     signal linkActivated(string link)
 
     /*!
-     * This property holds the link embedded in the message text that the user is hovering over.
+      \qmlproperty string InlineMessage::hoveredLink
+
+      This property holds the link embedded in the message text that the user is hovering over.
      */
     readonly property alias hoveredLink: label.hoveredLink
 
     /*!
-     * This property holds the message type. One of Information, Positive, Warning or Error.
-     *
-     * The default is Kirigami.MessageType.Information.
+      \qmlproperty enumeration InlineMessage::type
+
+      This property holds the message type.
+      One of
+      \list
+      \li Information
+      \li Positive
+      \li Warning
+      \li Error
+      \endlist
+
+      The default is Kirigami.MessageType.Information.
      */
     property int type: Kirigami.MessageType.Information
 
@@ -135,6 +158,8 @@ T.Control {
     property bool showCloseButton: false
 
     /*!
+     * \qmlproperty list<Action> InlineMessage::actions
+     *
      * This property holds the list of actions to show. Actions are added from left to
      * right. If more actions are set than can fit, an overflow menu is
      * provided.

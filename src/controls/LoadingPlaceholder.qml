@@ -7,47 +7,50 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
 /*!
- * \brief A placeholder for loading pages.
- *
- * Example usage:
- * \code{.qml}
- *     Kirigami.Page {
- *         Kirigami.LoadingPlaceholder {
- *             anchors.centerIn: parent
- *         }
- *     }
- * \endcode
- * \code{.qml}
- *     Kirigami.Page {
- *         Kirigami.LoadingPlaceholder {
- *             anchors.centerIn: parent
- *             determinate: true
- *             progressBar.value: loadingValue
- *         }
- *     }
- * \endcode
- * @inherit org::kde::kirigami::PlaceholderMessage
+  \qmltype PlaceholderMessage
+  \inqmlmodule org.kde.kirigami
+
+  \brief A placeholder for loading pages.
+
+  Example usage:
+  \badcode
+      Kirigami.Page {
+          Kirigami.LoadingPlaceholder {
+              anchors.centerIn: parent
+          }
+      }
+  \endcode
+
+  \badcode
+      Kirigami.Page {
+          Kirigami.LoadingPlaceholder {
+              anchors.centerIn: parent
+              determinate: true
+              progressBar.value: loadingValue
+          }
+      }
+  \endcode
  */
 Kirigami.PlaceholderMessage {
     id: loadingPlaceholder
 
     /*!
-     * \brief This property holds whether the loading message shows a
-     * determinate progress bar or not.
-     *
-     * This should be true if you want to display the actual
-     * percentage when it's loading.
-     *
-     * default: ``false``
+      \brief This property holds whether the loading message shows a
+      determinate progress bar or not.
+
+      This should be true if you want to display the actual
+      percentage when it's loading.
+
+      \default false
      */
     property bool determinate: false
 
     /*!
-     * \brief This property holds a progress bar.
-     *
-     * This should be used to access the progress bar to change its value.
-     *
-     * @property QtQuick.Controls.ProgressBar _progressBar
+      \qmlproperty ProgressBar LoadingPlaceholder::progressBar
+
+      \brief This property holds a progress bar.
+
+      This should be used to access the progress bar to change its value.
      */
     property alias progressBar: _progressBar
 

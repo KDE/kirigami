@@ -1,3 +1,5 @@
+include($KDE_DOCS/global/qt-module-defaults-online.qdocconf)
+
 project = Kirigami
 description = Stuff
 
@@ -10,7 +12,4 @@ headers.fileextensions = "*.h"
 
 sources.fileextensions = "*.qdoc *.qml *.h"
 
-exampledirs = examples
-
-outputdir  = doc/html
-outputformats = HTML
+depends = qtcore qtquick qtquickcontrols

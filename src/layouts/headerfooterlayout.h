@@ -11,7 +11,11 @@
 #include <qtmetamacros.h>
 
 /*!
- * replicates a little part of what Page does,
+ * \qmltype HeaderFooterLayout
+ * \inqmlmodule org.kde.kirigami.layouts
+ *
+ * \brief Replicates a little part of what Page does.
+ *
  * It's a container with 3 properties, header, contentItem and footer
  * which will be laid out oone on top of each other. It works better than a
  * ColumnLayout when the elements are to be defined by properties by the
@@ -23,6 +27,7 @@ class HeaderFooterLayout : public QQuickItem
     Q_OBJECT
     QML_ELEMENT
     /*!
+     * \qmlproperty Item HeaderFooterLayout::header
      * \brief This property holds the page header item.
      *
      * The header item is positioned to the top,
@@ -31,6 +36,7 @@ class HeaderFooterLayout : public QQuickItem
     Q_PROPERTY(QQuickItem *header READ header WRITE setHeader NOTIFY headerChanged FINAL)
 
     /*!
+     * \qmlproperty Item HeaderFooterLayout::contentItem
      * \brief This property holds the visual content Item.
      *
      * It will be resized both in width and height with the layout resizing.
@@ -39,6 +45,7 @@ class HeaderFooterLayout : public QQuickItem
     Q_PROPERTY(QQuickItem *contentItem READ contentItem WRITE setContentItem NOTIFY contentItemChanged FINAL)
 
     /*!
+     * \qmlproperty Item HeaderFooterLayout::footer
      * \brief This property holds the page footer item.
      *
      * The footer item is positioned to the bottom,
@@ -60,6 +67,7 @@ public:
     QQuickItem *footer();
 
     /*!
+     * \qmlmethod void HeaderFooterLayout::forceLayout()
      * \brief HeaderFooterLayout normally positions its header, footer and
      * contentItem once per frame (at polish event). This method forces the it
      * to recalculate the layout immediately.

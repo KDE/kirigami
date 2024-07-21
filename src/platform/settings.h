@@ -17,6 +17,9 @@ namespace Kirigami
 namespace Platform
 {
 /*!
+ * \qmltype Settings
+ * \inqmlmodule org.kde.kirigami.platform
+ *
  * This class contains global kirigami settings about the current device setup
  * It is exposed to QML as the singleton "Settings"
  */
@@ -27,6 +30,8 @@ class KIRIGAMIPLATFORM_EXPORT Settings : public QObject
     QML_SINGLETON
 
     /*!
+     * \qmlproperty bool Settings::tabletModeAvailable
+     *
      * This property holds whether the system can dynamically enter and exit tablet mode
      * (or the device is actually a tablet).
      * This is the case for foldable convertibles and transformable laptops that support
@@ -35,6 +40,8 @@ class KIRIGAMIPLATFORM_EXPORT Settings : public QObject
     Q_PROPERTY(bool tabletModeAvailable READ isTabletModeAvailable NOTIFY tabletModeAvailableChanged FINAL)
 
     /*!
+     * \qmlproperty bool Settings::isMobile
+     *
      * This property holds whether the application is running on a small mobile device
      * such as a mobile phone. This is used when we want to do specific adaptations to
      * the UI for small screen form factors, such as having bigger touch areas.
@@ -42,30 +49,38 @@ class KIRIGAMIPLATFORM_EXPORT Settings : public QObject
     Q_PROPERTY(bool isMobile READ isMobile NOTIFY isMobileChanged FINAL)
 
     /*!
+     * \qmlproperty bool Settings::tabletMode
+     *
      * This property holds whether the application is running on a device that is
      * behaving like a tablet.
      *
-     * @note This doesn't mean exactly a tablet form factor, but
+     * \note This doesn't mean exactly a tablet form factor, but
      * that the preferred input mode for the device is the touch screen
      * and that pointer and keyboard are either secondary or not available.
      */
     Q_PROPERTY(bool tabletMode READ tabletMode NOTIFY tabletModeChanged FINAL)
 
     /*!
+     * \qmlproperty bool Settings::hasPlatformMenuBar
+     *
      * This property holds whether the system has a platform menu bar; e.g. a user is
      * on macOS or has a global menu on KDE Plasma.
      *
-     * @warning Android has a platform menu bar; which may not be what you expected.
+     * \warning Android has a platform menu bar; which may not be what you expected.
      */
     Q_PROPERTY(bool hasPlatformMenuBar READ hasPlatformMenuBar CONSTANT FINAL)
 
     /*!
+     * \qmlproperty bool Settings::hasTransientTouchInput
+     *
      * This property holds whether the user in this moment is interacting with the app
      * with the touch screen.
      */
     Q_PROPERTY(bool hasTransientTouchInput READ hasTransientTouchInput NOTIFY hasTransientTouchInputChanged FINAL)
 
     /*!
+     * \qmlproperty string Settings::style
+     *
      * This property holds the name of the QtQuickControls2 style the application is using,
      * for instance org.kde.desktop, Plasma, Material, Universal etc
      */
@@ -73,17 +88,23 @@ class KIRIGAMIPLATFORM_EXPORT Settings : public QObject
 
     // TODO: make this adapt without file watchers?
     /*!
+     * \qmlproperty int Settings::mouseWheelScrollLines
+     *
      * This property holds the number of lines of text the mouse wheel should scroll.
      */
     Q_PROPERTY(int mouseWheelScrollLines READ mouseWheelScrollLines CONSTANT FINAL)
 
     /*!
+     * \qmlproperty bool Settings::smoothScroll
+     *
      * This property holds whether to display animated transitions when scrolling with a
      * mouse wheel or the keyboard.
      */
     Q_PROPERTY(bool smoothScroll READ smoothScroll NOTIFY smoothScrollChanged FINAL)
 
     /*!
+     * \qmlproperty list<string> Settings::information
+     *
      * This property holds the runtime information about the libraries in use.
      *
      * \since Kirigami 5.52
@@ -92,6 +113,7 @@ class KIRIGAMIPLATFORM_EXPORT Settings : public QObject
     Q_PROPERTY(QStringList information READ information CONSTANT FINAL)
 
     /*!
+     * \qmlproperty var Settings::applicationWindowIcon
      * This property holds the name of the application window icon.
      * \sa QGuiApplication::windowIcon()
      *

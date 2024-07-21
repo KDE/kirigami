@@ -14,38 +14,41 @@ import org.kde.kirigami as Kirigami
 import "private" as KP
 
 /*!
- * A specialized form of the Drawer intended for showing an application's
- * always-available global actions. Think of it like a mobile version of
- * a desktop application's menubar.
- *
- * Example usage:
- * \code
- * import org.kde.kirigami as Kirigami
- *
- * Kirigami.ApplicationWindow {
- *     globalDrawer: Kirigami.GlobalDrawer {
- *         actions: [
- *             Kirigami.Action {
- *                 text: "View"
- *                 icon.name: "view-list-icons"
- *                 Kirigami.Action {
- *                     text: "action 1"
- *                 }
- *                 Kirigami.Action {
- *                     text: "action 2"
- *                 }
- *                 Kirigami.Action {
- *                     text: "action 3"
- *                 }
- *             },
- *             Kirigami.Action {
- *                 text: "Sync"
- *                 icon.name: "folder-sync"
- *             }
- *         ]
- *     }
- * }
- * \endcode
+  \qmltype GlobalDrawer
+  \inqmlmodule org.kde.kirigami
+
+  A specialized form of the Drawer intended for showing an application's
+  always-available global actions. Think of it like a mobile version of
+  a desktop application's menubar.
+
+  Example usage:
+  \code
+  import org.kde.kirigami as Kirigami
+
+  Kirigami.ApplicationWindow {
+      globalDrawer: Kirigami.GlobalDrawer {
+          actions: [
+              Kirigami.Action {
+                  text: "View"
+                  icon.name: "view-list-icons"
+                  Kirigami.Action {
+                      text: "action 1"
+                  }
+                  Kirigami.Action {
+                      text: "action 2"
+                  }
+                  Kirigami.Action {
+                      text: "action 3"
+                  }
+              },
+              Kirigami.Action {
+                  text: "Sync"
+                  icon.name: "folder-sync"
+              }
+          ]
+      }
+  }
+  \endcode
  */
 Kirigami.OverlayDrawer {
     id: root
@@ -77,152 +80,150 @@ Kirigami.OverlayDrawer {
 
 //BEGIN properties
     /*!
-     * \brief This property holds the title displayed at the top of the drawer.
-     * \sa org::kde::kirigami::private::BannerImage::title
-     * @property string title
+      \brief This property holds the title displayed at the top of the drawer.
      */
     property string title
 
     /*!
-     * \brief This property holds an icon to be displayed alongside the title.
-     * \sa org::kde::kirigami::private::BannerImage::titleIcon
-     * \sa org::kde::kirigami::Icon::source
-     * @property var titleIcon
+      \brief This property holds an icon to be displayed alongside the title.
+      \sa Icon::source
      */
     property var titleIcon
 
     /*!
-     * \brief This property holds the actions displayed in the drawer.
-     *
-     * The list of actions can be nested having a tree structure.
-     * A tree depth bigger than 2 is discouraged.
-     *
-     * Example usage:
-     *
-     * \code
-     * import org.kde.kirigami as Kirigami
-     *
-     * Kirigami.ApplicationWindow {
-     *     globalDrawer: Kirigami.GlobalDrawer {
-     *         actions: [
-     *            Kirigami.Action {
-     *                text: "View"
-     *                icon.name: "view-list-icons"
-     *                Kirigami.Action {
-     *                    text: "action 1"
-     *                }
-     *                Kirigami.Action {
-     *                    text: "action 2"
-     *                }
-     *                Kirigami.Action {
-     *                    text: "action 3"
-     *                }
-     *            },
-     *            Kirigami.Action {
-     *                text: "Sync"
-     *                icon.name: "folder-sync"
-     *            }
-     *         ]
-     *     }
-     * }
-     * \endcode
-     * @property list<T.Action> actions
+      \qmlproperty list<Action> GlobalDrawer::actions
+      \brief This property holds the actions displayed in the drawer.
+
+      The list of actions can be nested having a tree structure.
+      A tree depth bigger than 2 is discouraged.
+
+      Example usage:
+
+      \code
+      import org.kde.kirigami as Kirigami
+
+      Kirigami.ApplicationWindow {
+          globalDrawer: Kirigami.GlobalDrawer {
+              actions: [
+                 Kirigami.Action {
+                     text: "View"
+                     icon.name: "view-list-icons"
+                     Kirigami.Action {
+                         text: "action 1"
+                     }
+                     Kirigami.Action {
+                         text: "action 2"
+                     }
+                     Kirigami.Action {
+                         text: "action 3"
+                     }
+                 },
+                 Kirigami.Action {
+                     text: "Sync"
+                     icon.name: "folder-sync"
+                 }
+              ]
+          }
+      }
+      \endcode
      */
     property list<T.Action> actions
 
     /*!
-     * \brief This property holds an item that will always be displayed at the top of the drawer.
-     *
-     * If the drawer contents can be scrolled, this item will stay still and won't scroll.
-     *
-     * @note This property is mainly intended for toolbars.
-     * \since Kirigami 2.12
+      \qmlproperty Item GlobalDrawer::header
+      \brief This property holds an item that will always be displayed at the top of the drawer.
+
+      If the drawer contents can be scrolled, this item will stay still and won't scroll.
+
+      \note This property is mainly intended for toolbars.
+      \since Kirigami 2.12
      */
     property alias header: mainLayout.header
 
     /*!
-     * \brief This property holds an item that will always be displayed at the bottom of the drawer.
-     *
-     * If the drawer contents can be scrolled, this item will stay still and won't scroll.
-     *
-     * @note This property is mainly intended for toolbars.
-     * \since Kirigami 6.0
+      \qmlproperty Item GlobalDrawer::footer
+
+      \brief This property holds an item that will always be displayed at the bottom of the drawer.
+
+      If the drawer contents can be scrolled, this item will stay still and won't scroll.
+
+      \note This property is mainly intended for toolbars.
      */
     property alias footer: mainLayout.footer
 
     /*!
-     * \brief This property holds items that are displayed above the actions.
-     *
-     * Example usage:
-     * \code
-     * import org.kde.kirigami as Kirigami
-     *
-     * Kirigami.ApplicationWindow {
-     *  [...]
-     *     globalDrawer: Kirigami.GlobalDrawer {
-     *         actions: [...]
-     *         topContent: [Button {
-     *             text: "Button"
-     *             onClicked: //do stuff
-     *         }]
-     *     }
-     *  [...]
-     * }
-     * \endcode
-     * @property list<QtObject> topContent
+      \qmlproperty list<QtObject> GlobalDrawer::topContent
+      \brief This property holds items that are displayed above the actions.
+
+      Example usage:
+      \code
+      import org.kde.kirigami as Kirigami
+
+      Kirigami.ApplicationWindow {
+       [...]
+          globalDrawer: Kirigami.GlobalDrawer {
+              actions: [...]
+              topContent: [Button {
+                  text: "Button"
+                  onClicked: //do stuff
+              }]
+          }
+       [...]
+      }
+      \endcode
      */
     property alias topContent: topContent.data
 
     /*!
-     * \brief This property holds items that are displayed under the actions.
-     *
-     * Example usage:
-     * \code
-     * import org.kde.kirigami as Kirigami
-     *
-     * Kirigami.ApplicationWindow {
-     *  [...]
-     *     globalDrawer: Kirigami.GlobalDrawer {
-     *         actions: [...]
-     *         Button {
-     *             text: "Button"
-     *             onClicked: //do stuff
-     *         }
-     *     }
-     *  [...]
-     * }
-     * \endcode
-     * @note This is a `default` property.
-     * @property list<QtObject> content
+      \qmlproperty list<QtObject> GlobalDrawer::content
+
+      \brief This property holds items that are displayed under the actions.
+
+      Example usage:
+      \code
+      import org.kde.kirigami as Kirigami
+
+      Kirigami.ApplicationWindow {
+       [...]
+          globalDrawer: Kirigami.GlobalDrawer {
+              actions: [...]
+              Button {
+                  text: "Button"
+                  onClicked: //do stuff
+              }
+          }
+       [...]
+      }
+      \endcode
      */
     default property alias content: mainContent.data
 
     /*!
-     * \brief This property sets whether content items at the top should be shown.
-     * when the drawer is collapsed as a sidebar.
-     *
-     * If you want to keep some items visible and some invisible, set this to
-     * false and control the visibility/opacity of individual items,
-     * binded to the collapsed property
-     *
-     * default: ``false``
-     *
-     * \since Kirigami 2.5
+      \brief This property sets whether content items at the top should be shown.
+      when the drawer is collapsed as a sidebar.
+
+      If you want to keep some items visible and some invisible, set this to
+      false and control the visibility/opacity of individual items,
+      binded to the collapsed property
+
+      default: false
+
+      \since Kirigami 2.5
      */
     property bool showTopContentWhenCollapsed: false
 
     /*!
-     * \brief This property sets whether content items at the bottom should be shown.
-     * when the drawer is collapsed as a sidebar.
-     *
-     * If you want to keep some items visible and some invisible, set this to
-     * false and control the visibility/opacity of individual items,
-     * binded to the collapsed property
-     *
-     * default: ``false``
-     *
-     * \sa content
-     * \since Kirigami 2.5
+      \brief This property sets whether content items at the bottom should be shown.
+      when the drawer is collapsed as a sidebar.
+
+      If you want to keep some items visible and some invisible, set this to
+      false and control the visibility/opacity of individual items,
+      binded to the collapsed property
+
+      default: false
+
+      \sa content
+      \since Kirigami 2.5
      */
     property bool showContentWhenCollapsed: false
 
@@ -230,42 +231,43 @@ Kirigami.OverlayDrawer {
     property bool showHeaderWhenCollapsed: false
 
     /*!
-     * \brief This property sets whether activating a leaf action resets the
-     * menu to show leaf's parent actions.
-     *
-     * A leaf action is an action without any child actions.
-     *
-     * default: ``true``
+      \brief This property sets whether activating a leaf action resets the
+      menu to show leaf's parent actions.
+
+      A leaf action is an action without any child actions.
+
+      default: true
      */
     property bool resetMenuOnTriggered: true
 
     /*!
-     * \brief This property points to the action acting as a submenu
+      \brief This property points to the action acting as a submenu
      */
     readonly property T.Action currentSubMenu: stackView.currentItem?.current ?? null
 
     /*!
-     * \brief This property sets whether the drawer becomes a menu on the desktop.
-     *
-     * default: ``false``
-     *
-     * \since Kirigami 2.11
+      \brief This property sets whether the drawer becomes a menu on the desktop.
+
+      default: ``false``
+
+      \since Kirigami 2.11
      */
     property bool isMenu: false
 
     /*!
-     * \brief This property sets the visibility of the collapse button
-     * when the drawer collapsible.
-     *
-     * default: ``true``
-     *
-     * \since Kirigami 2.12
+      \brief This property sets the visibility of the collapse button
+      when the drawer collapsible.
+
+      default: true
+
+      \since Kirigami 2.12
      */
     property bool collapseButtonVisible: true
 //END properties
 
     /*!
-     * \brief This function reverts the menu back to its initial state
+      \qmlmethod void GlobalDrawer::resetMenu()
+      \brief This function reverts the menu back to its initial state
      */
     function resetMenu() {
         stackView.pop(stackView.get(0, T.StackView.DontLoad));
