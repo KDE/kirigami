@@ -10,6 +10,9 @@
 #include <QQuickItem>
 
 /*!
+ * \qmltype PagePool
+ * \inqmlmodule org.kde.kirigami
+ *
  * A Pool of Page items, pages will be unique per url and the items
  * will be kept around unless explicitly deleted.
  * Instances are C++ owned and can be deleted only manually using deletePage()
@@ -17,40 +20,50 @@
  * url, you should instantiate them in the traditional way
  * or use a different PagePool instance.
  *
- * \sa org::kde::kirigami::PagePoolAction
+ * \sa PagePoolAction
  */
 class PagePool : public QObject
 {
     Q_OBJECT
     QML_ELEMENT
     /*!
-     * The last url that was loaded with @loadPage. Useful if you need
+     * \qmlproperty url PagePool::lastLoadedUrl
+     *
+     * The last url that was loaded with loadPage. Useful if you need
      * to have a "checked" state to buttons or list items that
      * load the page when clicked.
      */
     Q_PROPERTY(QUrl lastLoadedUrl READ lastLoadedUrl NOTIFY lastLoadedUrlChanged FINAL)
 
     /*!
-     * The last item that was loaded with @loadPage.
+     * \qmlproperty Item PagePool::lastLoadedItem
+     *
+     * The last item that was loaded with loadPage.
      */
     Q_PROPERTY(QQuickItem *lastLoadedItem READ lastLoadedItem NOTIFY lastLoadedItemChanged FINAL)
 
     /*!
+     * \qmlproperty list<Item> PagePool::items
+     *
      * All items loaded/managed by the PagePool.
      * \since Kirigami 5.84
      */
     Q_PROPERTY(QList<QQuickItem *> items READ items NOTIFY itemsChanged FINAL)
 
     /*!
+     * \qmlproperty list<url> PagePool::urls
+     *
      * All page URLs loaded/managed by the PagePool.
      * \since Kirigami 5.84
      */
     Q_PROPERTY(QList<QUrl> urls READ urls NOTIFY urlsChanged FINAL)
 
     /*!
-     * If true (default) the pages will be kept around, will have C++ ownership and
+     * \qmlproperty bool PagePool::cachePages
+     *
+     * If \c true (default) the pages will be kept around, will have C++ ownership and
      * only one instance per page will be created.
-     * If false the pages will have Javascript ownership (thus deleted on pop by the
+     * If \c false the pages will have Javascript ownership (thus deleted on pop by the
      * page stacks) and each call to loadPage will create a new page instance. When
      * cachePages is false, Components get cached nevertheless.
      */
