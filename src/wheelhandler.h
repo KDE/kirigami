@@ -22,6 +22,9 @@ class QQmlEngine;
 class WheelHandler;
 
 /*!
+ * \qmltype WheelEvent
+ * \inqmlmodule org.kde.kirigami
+ *
  * Describes the mouse wheel event
  */
 class KirigamiWheelEvent : public QObject
@@ -31,21 +34,21 @@ class KirigamiWheelEvent : public QObject
     QML_UNCREATABLE("")
 
     /*!
-     * x: real
+     * \qmlproperty double WheelEvent::x
      *
      * X coordinate of the mouse pointer
      */
     Q_PROPERTY(qreal x READ x CONSTANT FINAL)
 
     /*!
-     * y: real
+     * \qmlproperty double WheelEvent::y
      *
      * Y coordinate of the mouse pointer
      */
     Q_PROPERTY(qreal y READ y CONSTANT FINAL)
 
     /*!
-     * angleDelta: point
+     * \qmlproperty point WheelEvent::angleDelta
      *
      * The distance the wheel is rotated in degrees.
      * The x and y coordinates indicate the horizontal and vertical wheels respectively.
@@ -55,14 +58,14 @@ class KirigamiWheelEvent : public QObject
     Q_PROPERTY(QPointF angleDelta READ angleDelta CONSTANT FINAL)
 
     /*!
-     * pixelDelta: point
+     * \qmlproperty point WheelEvent::pixelDelta
      *
      * provides the delta in screen pixels available on high resolution trackpads
      */
     Q_PROPERTY(QPointF pixelDelta READ pixelDelta CONSTANT FINAL)
 
     /*!
-     * buttons: int
+     * \qmlproperty int WheelEvent::buttons
      *
      * it contains an OR combination of the buttons that were pressed during the wheel, they can be:
      * Qt.LeftButton, Qt.MiddleButton, Qt.RightButton
@@ -70,9 +73,9 @@ class KirigamiWheelEvent : public QObject
     Q_PROPERTY(int buttons READ buttons CONSTANT FINAL)
 
     /*!
-     * modifiers: int
+     * \qmlproperty int WheelEvent::modifiers
      *
-     * Keyboard mobifiers that were pressed during the wheel event, such as:
+     * Keyboard modifiers that were pressed during the wheel event, such as:
      * Qt.NoModifier (default, no modifiers)
      * Qt.ControlModifier
      * Qt.ShiftModifier
@@ -81,7 +84,7 @@ class KirigamiWheelEvent : public QObject
     Q_PROPERTY(int modifiers READ modifiers CONSTANT FINAL)
 
     /*!
-     * inverted: bool
+     * \qmlproperty bool WheelEvent::inverted
      *
      * Whether the delta values are inverted
      * On some platformsthe returned delta are inverted, so positive values would mean bottom/left
@@ -89,7 +92,7 @@ class KirigamiWheelEvent : public QObject
     Q_PROPERTY(bool inverted READ inverted CONSTANT FINAL)
 
     /*!
-     * accepted: bool
+     * \qmlproperty bool WheelEvent::accepted
      *
      * If set, the event shouldn't be managed anymore,
      * for instance it can be used to block the handler to manage the scroll of a view on some scenarios
@@ -148,32 +151,35 @@ public:
 };
 
 /*!
+ * \qmltype WheelHandler
+ * \inqmlmodule org.kde.kirigami
+ *
  * \brief Handles scrolling for a Flickable and 2 attached ScrollBars.
  *
  * WheelHandler filters events from a Flickable, a vertical ScrollBar and a horizontal ScrollBar.
- * Wheel and KeyPress events (when `keyNavigationEnabled` is true) are used to scroll the Flickable.
- * When `filterMouseEvents` is true, WheelHandler blocks mouse button input from reaching the Flickable
- * and sets the `interactive` property of the scrollbars to false when touch input is used.
+ * Wheel and KeyPress events (when keyNavigationEnabled is true) are used to scroll the Flickable.
+ * When filterMouseEvents is true, WheelHandler blocks mouse button input from reaching the Flickable
+ * and sets the interactive property of the scrollbars to false when touch input is used.
  *
  * Wheel event handling behavior:
- *
- * - Pixel delta is ignored unless angle delta is not available because pixel delta scrolling is too slow. Qt Widgets doesn't use pixel delta either, so the
+ * \list
+ * \li Pixel delta is ignored unless angle delta is not available because pixel delta scrolling is too slow. Qt Widgets doesn't use pixel delta either, so the
  * default scroll speed should be consistent with Qt Widgets.
- * - When using angle delta, scroll using the step increments defined by `verticalStepSize` and `horizontalStepSize`.
- * - When one of the keyboard modifiers in `pageScrollModifiers` is used, scroll by pages.
- * - When using a device that doesn't use 120 angle delta unit increments such as a touchpad, the `verticalStepSize`, `horizontalStepSize` and page increments
- * (if using page scrolling) will be multiplied by `angle delta / 120` to keep scrolling smooth.
- * - If scrolling has happened in the last 400ms, use an internal QQuickItem stacked over the Flickable's contentItem to catch wheel events and use those wheel
- * events to scroll, if possible. This prevents controls inside the Flickable's contentItem that allow scrolling to change the value (e.g., Sliders, SpinBoxes)
- * from conflicting with scrolling the page.
+ * \li When using angle delta, scroll using the step increments defined by verticalStepSize and horizontalStepSize.
+ * \li When one of the keyboard modifiers in pageScrollModifiers is used, scroll by pages.
+ * \li When using a device that doesn't use 120 angle delta unit increments such as a touchpad, the verticalStepSize, horizontalStepSize and page increments
+ * (if using page scrolling) will be multiplied by \c{angle delta / 120} to keep scrolling smooth.
+ * \li If scrolling has happened in the last 400ms, use an internal QQuickItem stacked over the Flickable's contentItem to catch wheel events and use those
+ * wheel events to scroll, if possible. This prevents controls inside the Flickable's contentItem that allow scrolling to change the value (e.g., Sliders,
+ * SpinBoxes) from conflicting with scrolling the page. \endlist
  *
  * Common usage with a Flickable:
  *
- * @include wheelhandler/FlickableUsage.qml
+ * \quotefile wheelhandler/FlickableUsage.qml
  *
  * Common usage inside of a ScrollView template:
  *
- * @include wheelhandler/ScrollViewUsage.qml
+ * \quotefile wheelhandler/ScrollViewUsage.qml
  *
  */
 class WheelHandler : public QObject, public QQmlParserStatus
@@ -183,44 +189,54 @@ class WheelHandler : public QObject, public QQmlParserStatus
     QML_ELEMENT
 
     /*!
+     * \qmlproperty Item WheelHandler::target
+     *
      * \brief This property holds the Qt Quick Flickable that the WheelHandler will control.
      */
     Q_PROPERTY(QQuickItem *target READ target WRITE setTarget NOTIFY targetChanged FINAL)
 
     /*!
+     * \qmlproperty double WheelHandler::verticalStepSize
+     *
      * \brief This property holds the vertical step size.
      *
-     * The default value is equivalent to `20 * Qt.styleHints.wheelScrollLines`. This is consistent with the default increment for QScrollArea.
+     * The default value is equivalent to \c{20 * Qt.styleHints.wheelScrollLines}. This is consistent with the default increment for QScrollArea.
      *
-     * @sa horizontalStepSize
+     * \sa horizontalStepSize
      *
-     * \since Kirigami KDE Frameworks 5.89
+     * \since Kirigami 5.89
      */
     Q_PROPERTY(qreal verticalStepSize READ verticalStepSize WRITE setVerticalStepSize RESET resetVerticalStepSize NOTIFY verticalStepSizeChanged FINAL)
 
     /*!
+     * \qmlproperty double WheelHandler::horizontalStepSize
+     *
      * \brief This property holds the horizontal step size.
      *
-     * The default value is equivalent to `20 * Qt.styleHints.wheelScrollLines`. This is consistent with the default increment for QScrollArea.
+     * The default value is equivalent to \c{20 * Qt.styleHints.wheelScrollLines}. This is consistent with the default increment for QScrollArea.
      *
-     * @sa verticalStepSize
+     * \sa verticalStepSize
      *
-     * \since Kirigami KDE Frameworks 5.89
+     * \since Kirigami 5.89
      */
     Q_PROPERTY(
         qreal horizontalStepSize READ horizontalStepSize WRITE setHorizontalStepSize RESET resetHorizontalStepSize NOTIFY horizontalStepSizeChanged FINAL)
 
     /*!
+     * \qmlproperty int WheelHandler::pageScrollModifiers
+     *
      * \brief This property holds the keyboard modifiers that will be used to start page scrolling.
      *
-     * The default value is equivalent to `Qt.ControlModifier | Qt.ShiftModifier`. This matches QScrollBar, which uses QAbstractSlider behavior.
+     * The default value is equivalent to \c{Qt.ControlModifier | Qt.ShiftModifier}. This matches QScrollBar, which uses QAbstractSlider behavior.
      *
-     * \since Kirigami KDE Frameworks 5.89
+     * \since Kirigami 5.89
      */
     Q_PROPERTY(Qt::KeyboardModifiers pageScrollModifiers READ pageScrollModifiers WRITE setPageScrollModifiers RESET resetPageScrollModifiers NOTIFY
                    pageScrollModifiersChanged FINAL)
 
     /*!
+     * \qmlproperty bool WheelHandler::filterMouseEvents
+     *
      * \brief This property holds whether the WheelHandler filters mouse events like a Qt Quick Controls ScrollView would.
      *
      * Touch events are allowed to flick the view and they make the scrollbars not interactive.
@@ -229,38 +245,44 @@ class WheelHandler : public QObject, public QQmlParserStatus
      *
      * Hover events on the scrollbars and wheel events on anything also make the scrollbars interactive when this property is set to true.
      *
-     * The default value is `false`.
+     * The default value is \c false.
      *
-     * \since Kirigami KDE Frameworks 5.89
+     * \since Kirigami 5.89
      */
     Q_PROPERTY(bool filterMouseEvents READ filterMouseEvents WRITE setFilterMouseEvents NOTIFY filterMouseEventsChanged FINAL)
 
     /*!
+     * \qmlproperty bool WheelHandler::keyNavigationEnabled
+     *
      * \brief This property holds whether the WheelHandler handles keyboard scrolling.
      *
-     * - Left arrow scrolls a step to the left.
-     * - Right arrow scrolls a step to the right.
-     * - Up arrow scrolls a step upwards.
-     * - Down arrow scrolls a step downwards.
-     * - PageUp scrolls to the previous page.
-     * - PageDown scrolls to the next page.
-     * - Home scrolls to the beginning.
-     * - End scrolls to the end.
-     * - When Alt is held, scroll horizontally when using PageUp, PageDown, Home or End.
+     * \list
+     * \li Left arrow scrolls a step to the left.
+     * \li Right arrow scrolls a step to the right.
+     * \li Up arrow scrolls a step upwards.
+     * \li Down arrow scrolls a step downwards.
+     * \li PageUp scrolls to the previous page.
+     * \li PageDown scrolls to the next page.
+     * \li Home scrolls to the beginning.
+     * \li End scrolls to the end.
+     * \li When Alt is held, scroll horizontally when using PageUp, PageDown, Home or End.
+     * \endlist
      *
-     * The default value is `false`.
+     * The default value is \c false.
      *
-     * \since Kirigami KDE Frameworks 5.89
+     * \since Kirigami 5.89
      */
     Q_PROPERTY(bool keyNavigationEnabled READ keyNavigationEnabled WRITE setKeyNavigationEnabled NOTIFY keyNavigationEnabledChanged FINAL)
 
     /*!
+     * \qmlproperty bool WheelHandler::blockTargetWheel
+     *
      * \brief This property holds whether the WheelHandler blocks all wheel events from reaching the Flickable.
      *
      * When this property is false, scrolling the Flickable with WheelHandler will only block an event from reaching the Flickable if the Flickable is actually
      * scrolled by WheelHandler.
      *
-     * NOTE: Wheel events created by touchpad gestures with pixel deltas will always be accepted no matter what. This is because they will cause the Flickable
+     * \note Wheel events created by touchpad gestures with pixel deltas will always be accepted no matter what. This is because they will cause the Flickable
      * to jump back to where scrolling started unless the events are always accepted before they reach the Flickable.
      *
      * The default value is true.
@@ -268,6 +290,8 @@ class WheelHandler : public QObject, public QQmlParserStatus
     Q_PROPERTY(bool blockTargetWheel MEMBER m_blockTargetWheel NOTIFY blockTargetWheelChanged FINAL)
 
     /*!
+     * \qmlproperty bool WheelHandler::scrollFlickableTarget
+     *
      * \brief This property holds whether the WheelHandler can use wheel events to scroll the Flickable.
      *
      * The default value is true.
@@ -300,38 +324,46 @@ public:
     void setKeyNavigationEnabled(bool enabled);
 
     /*!
+     * \qmlmethod bool WheelHandler::scrollUp(double stepSize = -1)
+     *
      * Scroll up one step. If the stepSize parameter is less than 0, the verticalStepSize will be used.
      *
      * returns true if the contentItem was moved.
      *
-     * \since Kirigami KDE Frameworks 5.89
+     * \since Kirigami 5.89
      */
     Q_INVOKABLE bool scrollUp(qreal stepSize = -1);
 
     /*!
+     * \qmlmethod bool WheelHandler::scrollDown(double stepSize = -1)
+     *
      * Scroll down one step. If the stepSize parameter is less than 0, the verticalStepSize will be used.
      *
      * returns true if the contentItem was moved.
      *
-     * \since Kirigami KDE Frameworks 5.89
+     * \since Kirigami 5.89
      */
     Q_INVOKABLE bool scrollDown(qreal stepSize = -1);
 
     /*!
-     * Scroll left one step. If the stepSize parameter is less than 0, the horizontalStepSize will be used.
+     * \qmlmethod bool WheelHandler::scrollLeft(double stepSize = -1)
+     *
+     * Scroll left one step. If the \a stepSize is less than 0, the horizontalStepSize will be used.
      *
      * returns true if the contentItem was moved.
      *
-     * \since Kirigami KDE Frameworks 5.89
+     * \since Kirigami 5.89
      */
     Q_INVOKABLE bool scrollLeft(qreal stepSize = -1);
 
     /*!
+     * \qmlmethod bool WheelHandler::scrollRight(double stepSize = -1)
+     *
      * Scroll right one step. If the stepSize parameter is less than 0, the horizontalStepSize will be used.
      *
      * returns true if the contentItem was moved.
      *
-     * \since Kirigami KDE Frameworks 5.89
+     * \since Kirigami 5.89
      */
     Q_INVOKABLE bool scrollRight(qreal stepSize = -1);
 
@@ -346,9 +378,11 @@ Q_SIGNALS:
     void scrollFlickableTargetChanged();
 
     /*!
+     * \qmlsignal WheelHandler::wheel(WheelEvent wheel)
+     *
      * \brief This signal is emitted when a wheel event reaches the event filter, just before scrolling is handled.
      *
-     * Accepting the wheel event in the `onWheel` signal handler prevents scrolling from happening.
+     * Accepting the wheel event in the \c onWheel signal handler prevents scrolling from happening.
      */
     void wheel(KirigamiWheelEvent *wheel);
 

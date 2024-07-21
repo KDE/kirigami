@@ -10,5 +10,7 @@ headers.fileextensions = "*.h"
 
 sources.fileextensions = "*.qdoc *.qml *.h"
 
+exampledirs = examples
+
 outputdir  = doc/html
 outputformats = HTML
