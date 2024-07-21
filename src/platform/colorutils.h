@@ -14,6 +14,9 @@
 #include "kirigamiplatform_export.h"
 
 /*!
+ * \qmltype ColorUtils
+ * \inqmlmodule org.kde.kirigami
+ *
  * Utilities for processing items to obtain colors and information useful for
  * UIs that need to adjust to variable elements.
  */
@@ -24,11 +27,17 @@ class KIRIGAMIPLATFORM_EXPORT ColorUtils : public QObject
     QML_SINGLETON
 public:
     /*!
+     * \enum ColorUtils::Brightness
+     *
      * Describes the contrast of an item.
+     *
+     * \value Dark The item is dark and requires a light foreground color to achieve readable contrast
+     * \value Light The item is light and requires a dark foreground color to achieve readable contrast
+     *
      */
     enum Brightness {
-        Dark, /*!< The item is dark and requires a light foreground color to achieve readable contrast. */
-        Light, /*!< The item is light and requires a dark foreground color to achieve readable contrast. */
+        Dark,
+        Light,
     };
     Q_ENUM(Brightness)
 
@@ -37,7 +46,7 @@ public:
     /*!
      * Returns whether a color is bright or dark.
      *
-     * \code{.qml}
+     * \badcode
      * import QtQuick
      * import org.kde.kirigami as Kirigami
      *
@@ -53,7 +62,6 @@ public:
      * \endcode
      *
      * \since Kirigami 5.69
-     * \since Kirigami org.kde.kirigami 2.12
      */
     Q_INVOKABLE ColorUtils::Brightness brightnessForColor(const QColor &color);
 
