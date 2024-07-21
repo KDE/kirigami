@@ -7,3 +7,8 @@
     \qmlmodule org.kde.kirigami.delegates
     \brief Kirigami Delegates
 */
+
+/*!
+    \qmlmodule org.kde.kirigami.primitives
+    \brief Kirigami Primitives
+*/

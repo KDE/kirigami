@@ -13,6 +13,9 @@
 #include <QQmlEngine>
 
 /*!
+ * \qmltype MnemonicData
+ * \inqmlmodule org.kde.kirigami
+ *
  * This Attached property is used to calculate automated keyboard sequences
  * to trigger actions based upon their text: if an "&" mnemonic is
  * used (ie "&Ok"), the system will attempt to assign the desired letter giving
@@ -33,42 +36,57 @@ class MnemonicAttached : public QObject
     QML_NAMED_ELEMENT(MnemonicData)
     QML_ATTACHED(MnemonicAttached)
     QML_UNCREATABLE("Cannot create objects of type MnemonicData, use it as an attached property")
+
     /*!
+     * \qmlattachedproperty string MnemonicData::label
+     *
      * The label of the control we want to compute a mnemonic for, instance
      * "Label:" or "&Ok"
      */
     Q_PROPERTY(QString label READ label WRITE setLabel NOTIFY labelChanged FINAL)
 
     /*!
+     * \qmlattachedproperty string MnemonicData::richTextLabel
+     *
      * The user-visible final label, which will have the shortcut letter underlined,
-     * such as "&lt;u&gt;O&lt;/u&gt;k"
+     * such as "<u>O</u>k"
      */
     Q_PROPERTY(QString richTextLabel READ richTextLabel NOTIFY richTextLabelChanged FINAL)
 
     /*!
+     * \qmlattachedproperty string MnemonicData::mnemonicLabel
+     *
      * The label with an "&" mnemonic in the place which will have the shortcut
      * assigned, regardless of whether the & was assigned by the user or automatically generated.
      */
     Q_PROPERTY(QString mnemonicLabel READ mnemonicLabel NOTIFY mnemonicLabelChanged FINAL)
 
     /*!
+     * \qmlattachedproperty bool MnemonicData::enabled
+     *
      * Only if true this mnemonic will be considered for the global assignment
      * default: true
      */
     Q_PROPERTY(bool enabled READ enabled WRITE setEnabled NOTIFY enabledChanged FINAL)
 
     /*!
+     * \qmlattachedproperty enumeration MnemonicData::controlType
+     *
      * The type of control this mnemonic is attached: different types of controls have different importance and priority for shortcut assignment.
      * \sa ControlType
      */
     Q_PROPERTY(MnemonicAttached::ControlType controlType READ controlType WRITE setControlType NOTIFY controlTypeChanged FINAL)
 
     /*!
+     * \qmlattachedproperty keysequence MnemonicData::sequence
+     *
      * The final key sequence assigned, if any: it will be Alt+alphanumeric char
      */
     Q_PROPERTY(QKeySequence sequence READ sequence NOTIFY sequenceChanged FINAL)
 
     /*!
+     * \qmlattachedproperty bool MnemonicData::active
+     *
      * True when the user is pressing alt and the accelerators should be shown
      *
      * \since Kirigami 5.72
