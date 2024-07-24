@@ -423,6 +423,9 @@ Item {
                 return Kirigami.Units.largeSpacing * 2;
             }
             onItemChanged: {
+
+                item.Accessible.labelledBy = this
+
                 if (!item) {
                     destroy();
                 }
