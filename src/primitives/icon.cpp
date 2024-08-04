@@ -535,11 +535,7 @@ QImage Icon::findIcon(const QSize &size)
             iconSource = QUrl(iconSource).path();
         }
 
-        QIcon icon;
-
-        const QColor tintColor =
-            !m_color.isValid() || m_color == Qt::transparent ? (m_selected ? m_theme->highlightedTextColor() : m_theme->textColor()) : m_color;
-        icon = m_theme->iconFromTheme(iconSource, tintColor);
+        const QIcon icon = loadFromTheme(iconSource);
 
         if (!icon.isNull()) {
             img = iconPixmap(icon);
@@ -631,7 +627,24 @@ QSize Icon::iconSizeHint() const
 QImage Icon::iconPixmap(const QIcon &icon) const
 {
     const QSize actualSize = icon.actualSize(iconSizeHint());
-    return icon.pixmap(actualSize, m_devicePixelRatio, iconMode(), QIcon::On).toImage();
+    QIcon sourceIcon = icon;
+
+    // if we have a non-default theme we need to load the icon with
+    // the right colors
+    if (!qmlEngine(this)->property("_kirigamiTheme").toString().isEmpty()) {
+        const QString iconName = icon.name();
+        if (!iconName.isEmpty()) {
+            sourceIcon = loadFromTheme(iconName);
+        }
+    }
+
+    return sourceIcon.pixmap(actualSize, m_devicePixelRatio, iconMode(), QIcon::On).toImage();
+}
+
+QIcon Icon::loadFromTheme(const QString &iconName) const
+{
+    const QColor tintColor = !m_color.isValid() || m_color == Qt::transparent ? (m_selected ? m_theme->highlightedTextColor() : m_theme->textColor()) : m_color;
+    return m_theme->iconFromTheme(iconName, tintColor);
 }
 
 void Icon::updatePaintedGeometry()

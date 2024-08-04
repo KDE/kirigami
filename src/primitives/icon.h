@@ -256,6 +256,7 @@ private:
     void updateSubtree(QSGNode *node, qreal opacity);
     QSize iconSizeHint() const;
     inline QImage iconPixmap(const QIcon &icon) const;
+    QIcon loadFromTheme(const QString &iconName) const;
 
     Kirigami::Platform::PlatformTheme *m_theme = nullptr;
     Kirigami::Platform::Units *m_units = nullptr;
