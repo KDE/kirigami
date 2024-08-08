@@ -143,12 +143,12 @@ void VirtualKeyboardWatcher::Private::updateWillShowOnActive()
 
     willShowOnActiveCall = new QDBusPendingCallWatcher(settingsInterface->Read(GROUP, KEY_WILL_SHOW_ON_ACTIVE), q);
     connect(willShowOnActiveCall, &QDBusPendingCallWatcher::finished, q, [this](auto call) {
-        QDBusPendingReply<bool> reply = *call;
+        QDBusPendingReply<QVariant> reply = *call;
         if (reply.isError()) {
             qCDebug(KirigamiPlatform) << reply.error().message();
         } else {
-            if (reply.value() != willShowOnActive) {
-                willShowOnActive = reply.value();
+            if (reply.value().toBool() != willShowOnActive) {
+                willShowOnActive = reply.value().toBool();
                 Q_EMIT q->willShowOnActiveChanged();
             }
         }
