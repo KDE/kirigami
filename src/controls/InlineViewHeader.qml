@@ -7,8 +7,8 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Templates as T
 import QtQuick.Controls as QQC2
+import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 
 /*!
@@ -55,7 +55,7 @@ import org.kde.kirigami as Kirigami
 
   TODO inheritance
  */
-QQC2.ToolBar {
+T.ToolBar {
     id: root
 
 //BEGIN properties
@@ -65,6 +65,8 @@ QQC2.ToolBar {
     property string text
 
     /*!
+      \qmlproperty list<Action> InlineViewHeader::actions
+
       This property holds the list of actions to show on the header. Actions
       are added from left to right. If more actions are set than can fit, an
       overflow menu is provided.

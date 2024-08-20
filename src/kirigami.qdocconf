@@ -13,3 +13,5 @@ headers.fileextensions = "*.h"
 sources.fileextensions = "*.qdoc *.qml *.h"
 
 depends = qtcore qtquick qtquickcontrols
+
+excludedirs = platform

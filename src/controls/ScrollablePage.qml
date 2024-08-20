@@ -15,54 +15,56 @@ import "private"
 // TODO KF6: undo many workarounds to make existing code work?
 
 /*!
- * \brief ScrollablePage is a Page that holds scrollable content, such as a ListView.
- *
- * Scrolling and scrolling indicators will be automatically managed.
- *
- * Example usage:
- * \code
- * ScrollablePage {
- *     id: root
- *     // The page will automatically be scrollable
- *     Rectangle {
- *         width: root.width
- *         height: 99999
- *     }
- * }
- * \endcode
- *
- * @warning Do not put a ScrollView inside of a ScrollablePage; children of a ScrollablePage are already inside a ScrollView.
- *
- * Another behavior added by this class is a "scroll down to refresh" behavior
- * It also can give the contents of the flickable to have more top margins in order
- * to make possible to scroll down the list to reach it with the thumb while using the
- * phone with a single hand.
- *
- * Implementations should handle the refresh themselves as follows
- *
- * Example usage:
- * \code
- * Kirigami.ScrollablePage {
- *     id: view
- *     supportsRefreshing: true
- *     onRefreshingChanged: {
- *         if (refreshing) {
- *             myModel.refresh();
- *         }
- *     }
- *     ListView {
- *         // NOTE: MyModel doesn't come from the components,
- *         // it's purely an example on how it can be used together
- *         // some application logic that can update the list model
- *         // and signals when it's done.
- *         model: MyModel {
- *             onRefreshDone: view.refreshing = false;
- *         }
- *         delegate: ItemDelegate {}
- *     }
- * }
- * [...]
- * \endcode
+  \qmltype ScrollablePage
+  \inqmlmodule org.kde.kirigami
+  \brief ScrollablePage is a Page that holds scrollable content, such as a ListView.
+
+  Scrolling and scrolling indicators will be automatically managed.
+
+  Example usage:
+  \code
+  ScrollablePage {
+      id: root
+      // The page will automatically be scrollable
+      Rectangle {
+          width: root.width
+          height: 99999
+      }
+  }
+  \endcode
+
+  @warning Do not put a ScrollView inside of a ScrollablePage; children of a ScrollablePage are already inside a ScrollView.
+
+  Another behavior added by this class is a "scroll down to refresh" behavior
+  It also can give the contents of the flickable to have more top margins in order
+  to make possible to scroll down the list to reach it with the thumb while using the
+  phone with a single hand.
+
+  Implementations should handle the refresh themselves as follows
+
+  Example usage:
+  \code
+  Kirigami.ScrollablePage {
+      id: view
+      supportsRefreshing: true
+      onRefreshingChanged: {
+          if (refreshing) {
+              myModel.refresh();
+          }
+      }
+      ListView {
+          // NOTE: MyModel doesn't come from the components,
+          // it's purely an example on how it can be used together
+          // some application logic that can update the list model
+          // and signals when it's done.
+          model: MyModel {
+              onRefreshDone: view.refreshing = false;
+          }
+          delegate: ItemDelegate {}
+      }
+  }
+  [...]
+  \endcode
  */
 Kirigami.Page {
     id: root
