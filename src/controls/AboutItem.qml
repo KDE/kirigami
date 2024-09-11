@@ -161,7 +161,7 @@ Item {
 
             QQC2.Label {
                 Layout.fillWidth: true
-                readonly property bool withTask: typeof(delegate.modelData.task) !== "undefined" && delegate.modelData.task.length > 0
+                private readonly property bool withTask: (delegate?.modelData?.task?.length ?? 0) > 0
                 text: withTask ? qsTr("%1 (%2)").arg(delegate.modelData.name).arg(delegate.modelData.task) : delegate.modelData.name
                 wrapMode: Text.WordWrap
             }
