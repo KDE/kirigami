@@ -293,7 +293,7 @@ QQC2.Page {
             }
 
             // Legacy
-            if (typeof applicationWindow === "undefined") {
+            if (typeof applicationWindow !== "function") {
                 return true;
             }
 

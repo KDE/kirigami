@@ -88,7 +88,7 @@ KT.OverlayDrawer {
                 if (root.edge !== Qt.LeftEdge && root.edge !== Qt.RightEdge) {
                     return 0;
                 }
-                if (typeof applicationWindow === "undefined") {
+                if (typeof applicationWindow !== "function") {
                     return 0;
                 }
                 const window = applicationWindow();

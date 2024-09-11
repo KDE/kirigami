@@ -959,7 +959,7 @@ QT.Control {
                 if (!pageComp) {
                     pageComp = pagesLogic.componentCache[page] = Qt.createComponent(page);
                 }
-            } else if (typeof page === "object" && !(page instanceof Item) && page.toString !== undefined) {
+            } else if (typeof page === "object" && !(page instanceof Item) && typeof page.toString === "function") {
                 // page defined as url (QML value type, not a string)
                 pageComp = pagesLogic.componentCache[page.toString()];
                 if (!pageComp) {

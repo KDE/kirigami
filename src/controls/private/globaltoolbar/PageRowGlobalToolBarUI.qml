@@ -29,7 +29,7 @@ KC.AbstractApplicationHeader {
     readonly property Item currentItem: layerIsMainRow ? root.columnView : root.layers.currentItem
 
     function __shouldHandleAnchorBeVisible(handleAnchor: Item, drawerProperty: string, itemProperty: string): bool {
-        if (typeof applicationWindow === "undefined") {
+        if (typeof applicationWindow !== "function") {
             return false;
         }
         const w = applicationWindow();

@@ -97,7 +97,7 @@ KC.OverlayDrawer {
 
     // Disable for empty menus or when we have a global toolbar
     enabled: {
-        const pageStack = typeof applicationWindow !== "undefined" ? applicationWindow().pageStack : null;
+        const pageStack = typeof applicationWindow === "function" ? applicationWindow().pageStack : null;
         const itemExistsButStyleIsNotToolBar = item => item && item.globalToolBarStyle !== KC.ApplicationHeaderStyle.ToolBar;
         return menu.count > 0
             && (!pageStack
