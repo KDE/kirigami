@@ -193,7 +193,7 @@ Item {
             // `displaced` animations to change the opacity.
             opacity: Platform.Units.longDuration > 0 ? 0 : 1
 
-            anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
+            anchors.horizontalCenter: parent?.horizontalCenter ?? undefined
             width: Math.min(implicitWidth, root.maximumNotificationWidth)
             implicitHeight: {
                 // HACK: contentItem.implicitHeight needs to be updated manually for some reason

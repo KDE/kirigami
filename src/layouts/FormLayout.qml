@@ -185,7 +185,7 @@ Item {
             let hint = 0;
 
             for (const buddy of buddies) {
-                if (buddy.visible && buddy.item !== null && !buddy.item.KirigamiLayouts.FormData.isSection) {
+                if (buddy.visible && (!buddy?.item.Kirigami.FormData.isSection) ?? false) {
                     hint = Math.max(hint, buddy.implicitWidth);
                 }
             }

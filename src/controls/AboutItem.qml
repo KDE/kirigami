@@ -98,8 +98,7 @@ Item {
     readonly property bool __hasAvatars: aboutItem.aboutData.authors.some(__hasAvatar)
 
     function __hasAvatar(person): bool {
-        return typeof person.avatarUrl !== "undefined"
-            && person.avatarUrl.toString().length > 0;
+        return person?.avatarUrl?.toString().length > 0 ?? false;
     }
 
     /*!
