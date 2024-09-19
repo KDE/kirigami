@@ -19,7 +19,7 @@ import org.kde.kirigami as Kirigami
   Maps to the Command Link in the HIG:
   https://develop.kde.org/hig/components/navigation/commandlink/
 
-  \since Kirigami 5.52
+  \since 5.52
  */
 QQC2.Label {
     id: control

@@ -47,7 +47,7 @@ import org.kde.kirigami as Kirigami
   }
   \endcode
   \sa FormData
-  \since Kirigami 2.3
+  \since 2.3
  */
 Item {
     id: root
@@ -73,7 +73,7 @@ Item {
      * on the same page, they can have each other in twinFormLayouts,
      * so they will vertically align with each other perfectly
      *
-     * \since Kirigami 5.53
+     * \since 5.53
      */
     property list<Item> twinFormLayouts  // should be list<FormLayout> but we can't have a recursive declaration
 

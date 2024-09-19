@@ -66,7 +66,7 @@ import org.kde.kirigami as Kirigami
    }
   \endcode
 
-  \since Kirigami 5.87
+  \since 5.87
   @inherit QtQuick.Templates.TabButton
  */
 T.TabButton {

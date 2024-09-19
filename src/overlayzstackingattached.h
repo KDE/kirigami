@@ -37,7 +37,7 @@ class QQuickItem;
  * }
  * \endcode
  *
- * \since Kirigami 6.0
+ * \since 6.0
  */
 class OverlayZStackingAttached : public QObject
 {

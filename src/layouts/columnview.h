@@ -85,7 +85,7 @@ class ColumnViewAttached : public QObject
      * \readonly
      *
      * True if this column is at least partly visible in the ColumnView's viewport.
-     * \since Kirigami 5.77
+     * \since 5.77
      */
     Q_PROPERTY(bool inViewport READ inViewport NOTIFY inViewportChanged FINAL)
 
@@ -169,7 +169,7 @@ private:
  * Items inside the ColumnView can access info of the view and set layouting hints via the ColumnView attached property.
  *
  * This is the base for the implementation of PageRow.
- * \since Kirigami 2.7
+ * \since 2.7
  */
 class ColumnView : public QQuickItem
 {

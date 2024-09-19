@@ -25,7 +25,7 @@ import org.kde.kirigami as Kirigami
   }
   \endcode
 
-  \since Kirigami 5.57
+  \since 5.57
  */
 Kirigami.ActionTextField {
     id: root
@@ -35,7 +35,7 @@ Kirigami.ActionTextField {
 
       default: \c false
 
-      \since Kirigami 5.57
+      \since 5.57
      */
     property bool showPassword: false
 

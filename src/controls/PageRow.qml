@@ -70,14 +70,14 @@ QT.Control {
 
       Generally, you shouldn't need to change the value of this property.
 
-      \since Kirigami 2.12
+      \since 2.12
      */
     property alias columnView: columnView
 
     /*!
       \qmlproperty list<Page> PageRow::items
       \brief This property holds the present pages in the PageRow.
-      \since Kirigami 2.6
+      \since 2.6
      */
     readonly property alias items: columnView.contentChildren
 
@@ -85,7 +85,7 @@ QT.Control {
       \qmlproperty list<Page> PageRow::visibleItems
       \brief This property holds all visible pages in the PageRow,
       excluding those which are scrolled away.
-      \since Kirigami 2.6
+      \since 2.6
      */
     readonly property alias visibleItems: columnView.visibleItems
 
@@ -94,7 +94,7 @@ QT.Control {
       \brief This property holds the first page in the PageRow that is at least partially visible.
       \note Pages before that one (the one contained in the property) will be out of the viewport.
       \sa ColumnView::leadingVisibleItem
-      \since Kirigami 2.6
+      \since 2.6
      */
     readonly property alias leadingVisibleItem: columnView.leadingVisibleItem
 
@@ -103,7 +103,7 @@ QT.Control {
       \brief This property holds the last page in the PageRow that is at least partially visible.
       \note Pages after that one (the one contained in the property) will be out of the viewport.
       \sa ColumnView::trailingVisibleItem
-      \since Kirigami 2.6
+      \since 2.6
      */
     readonly property alias trailingVisibleItem: columnView.trailingVisibleItem
 
@@ -129,7 +129,7 @@ QT.Control {
 
     /*!
       \brief This property tells whether the PageRow is wide enough to show multiple pages.
-      \since Kirigami 5.37
+      \since 5.37
      */
     readonly property bool wideMode: width >= defaultColumnWidth * 2 && depth >= 2
 
@@ -140,7 +140,7 @@ QT.Control {
 
       default: \c true
 
-      \since Kirigami 5.38
+      \since 5.38
      */
     property alias separatorVisible: columnView.separatorVisible
 
@@ -169,7 +169,7 @@ QT.Control {
       \li rightReservedSpace: int, readonly How many pixels of extra space  are reserved at the right of the page toolbar (typically for a drawer handle).
       \endlist
 
-      \since Kirigami 5.48
+      \since 5.48
      */
     readonly property alias globalToolBar: globalToolBar
 
@@ -179,7 +179,7 @@ QT.Control {
       In this case, when open and not modal, the drawer contents will be in the same layer as the base pagerow.
       Pushing any other layer on top will cover the sidebar.
 
-      \since Kirigami 5.84
+      \since 5.84
      */
     // TODO KF6: globaldrawer should use actions also used by this sidebar instead of reparenting globaldrawer contents?
     property OverlayDrawer leftSidebar
@@ -191,7 +191,7 @@ QT.Control {
       Sometimes an application needs a modal page that always covers all the rows.
       For instance the full screen image of an image viewer or a settings page.
 
-      \since Kirigami 5.38
+      \since 5.38
      */
     property alias layers: layersStack
 
@@ -201,7 +201,7 @@ QT.Control {
       If a user navigates to a previous page on the stack (ex. pressing back button) and pages above
       it on the stack are not visible, they will be popped if this property is true.
 
-      \since Kirigami 5.101
+      \since 5.101
      */
     property bool popHiddenPages: false
 //END PROPERTIES
@@ -362,7 +362,7 @@ QT.Control {
       objects.
 
       Returns the new created page (or the last one if it was an array).
-      \since Kirigami 2.7
+      \since 2.7
      */
     function insertPage(position, page, properties): QT.Page {
         if (!pagesLogic.verifyPages(page, properties)) {
@@ -385,7 +385,7 @@ QT.Control {
       Move the page at position fromPos to the new position toPos
       If needed, currentIndex will be adjusted
       in order to keep the same current page.
-      \since Kirigami 2.7
+      \since 2.7
      */
     function movePage(fromPos, toPos): void {
         columnView.moveItem(fromPos, toPos);
@@ -399,7 +399,7 @@ QT.Control {
       \a page The page can be given both as integer position or by reference
 
       Returns the page that has just been removed
-      \since Kirigami 2.7
+      \since 2.7
      */
     function removePage(page): QT.Page {
         if (depth > 0) {
@@ -589,14 +589,14 @@ QT.Control {
       \brief Emitted when a page has been inserted anywhere.
       \a position where the page has been inserted
       \a page the new page
-      \since Kirigami 2.7
+      \since 2.7
      */
     signal pageInserted(int position, Item page)
 
     /*!
       \brief Emitted when a page has been pushed to the bottom.
       \a page the new page
-      \since Kirigami 2.5
+      \since 2.5
      */
     signal pagePushed(Item page)
 
@@ -604,7 +604,7 @@ QT.Control {
       \brief Emitted when a page has been removed from the row.
       \a page the page that has been removed: at this point it's still valid,
                 but may be auto deleted soon.
-      \since Kirigami 2.5
+      \since 2.5
      */
     signal pageRemoved(Item page)
 

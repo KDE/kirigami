@@ -82,7 +82,7 @@ Kirigami.Action {
 
       default: \c false
 
-      \since Kirigami 5.70
+      \since 5.70
      */
     property bool useLayers: false
 //END properties

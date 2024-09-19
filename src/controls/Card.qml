@@ -27,7 +27,7 @@ import "private" as P
  * in this case the actions property shouldn't be used.
  *
  * @inherit org::kde::kirigami::AbstractCard
- * \since Kirigami 2.4
+ * \since 2.4
  */
 Kirigami.AbstractCard {
     id: root

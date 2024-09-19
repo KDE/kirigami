@@ -53,7 +53,7 @@ import org.kde.kirigami as Kirigami
  * @note This component is unsuitable on mobile. Instead on mobile prefer to
  * use a seperate page for the search.
  *
- * \since Kirigami Kirigami 6.3
+ * \since Kirigami 6.3
  */
 QQC2.Dialog {
     id: root

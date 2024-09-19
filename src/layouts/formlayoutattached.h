@@ -35,7 +35,7 @@ class QQuickItem;
  * }
  * \endcode
  * \sa FormLayout
- * \since Kirigami 2.3
+ * \since 2.3
  */
 class FormLayoutAttached : public QObject
 {

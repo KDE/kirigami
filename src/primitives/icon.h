@@ -93,7 +93,7 @@ class Icon : public QQuickItem
      * that a temporary image makes sense (e.g. a remote image, or from an ImageProvider
      * of the type QQmlImageProviderBase::ImageResponse)
      *
-     * \since Kirigami 5.15
+     * \since 5.15
      */
     Q_PROPERTY(QString placeholder READ placeholder WRITE setPlaceholder NOTIFY placeholderChanged FINAL)
 
@@ -164,7 +164,7 @@ class Icon : public QQuickItem
      * Whether the icon is correctly loaded, is asynchronously loading or there was an error.
      * Note that image loading will not be initiated until the item is shown, so if the Icon is not visible,
      * it can only have Null or Loading states.
-     * \since Kirigami 5.15
+     * \since 5.15
      */
     Q_PROPERTY(Icon::Status status READ status NOTIFY statusChanged FINAL)
 
@@ -174,7 +174,7 @@ class Icon : public QQuickItem
      * The width of the painted area measured in pixels. This will be smaller than or
      * equal to the width of the area taken up by the Item itself. This can be 0.
      *
-     * \since Kirigami 5.15
+     * \since 5.15
      */
     Q_PROPERTY(qreal paintedWidth READ paintedWidth NOTIFY paintedAreaChanged FINAL)
 
@@ -184,7 +184,7 @@ class Icon : public QQuickItem
      * The height of the painted area measured in pixels. This will be smaller than or
      * equal to the height of the area taken up by the Item itself. This can be 0.
      *
-     * \since Kirigami 5.15
+     * \since 5.15
      */
     Q_PROPERTY(qreal paintedHeight READ paintedHeight NOTIFY paintedAreaChanged FINAL)
 

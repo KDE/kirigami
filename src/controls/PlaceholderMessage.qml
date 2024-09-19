@@ -146,7 +146,7 @@ ColumnLayout {
       \endlist
       default: if a helpfulAction is provided this will be of type Actionable otherwise of type Informational.
 
-      \since Kirigami 5.94
+      \since 5.94
      */
     property int type: actionButton.action?.enabled
         ? PlaceholderMessage.Type.Actionable
@@ -159,7 +159,7 @@ ColumnLayout {
       text. If both text and explanation are omitted, the message will have
       no text and only an icon, action button, and/or other custom content.
 
-      \since Kirigami 5.70
+      \since 5.70
      */
     property string text
 
@@ -171,7 +171,7 @@ ColumnLayout {
       Optional; if not defined, the message will have no supplementary
       explanatory text.
 
-      \since Kirigami 5.80
+      \since 5.80
      */
     property string explanation
 
@@ -185,7 +185,7 @@ ColumnLayout {
       Falls back to \c undefined if the specified icon is not valid or cannot
       be loaded.
 
-      \since Kirigami 5.70
+      \since 5.70
      */
     property P.ActionIconGroup icon: P.ActionIconGroup {}
 
@@ -199,7 +199,7 @@ ColumnLayout {
 
       Optional; if undefined, no button will appear below the text label.
 
-      \since Kirigami 5.70
+      \since 5.70
      */
     property alias helpfulAction: actionButton.action
 

@@ -28,7 +28,7 @@
  *
  * Usually the developer shouldn't use this directly as base components
  * already use this, but only when implementing a custom graphical Control.
- * \since Kirigami 2.3
+ * \since 2.3
  */
 class MnemonicAttached : public QObject
 {
@@ -89,8 +89,8 @@ class MnemonicAttached : public QObject
      *
      * True when the user is pressing alt and the accelerators should be shown
      *
-     * \since Kirigami 5.72
-     * \since Kirigami 2.15
+     * \since 5.72
+     * \since 2.15
      */
     Q_PROPERTY(bool active READ active WRITE setActive NOTIFY activeChanged FINAL)
 

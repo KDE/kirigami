@@ -25,7 +25,7 @@ import "private" as P
  * does not fit.
  *
  * @inherit QtQuick.Controls.Control
- * \since Kirigami 2.5
+ * \since 2.5
  */
 QQC2.Control {
     id: root
@@ -110,8 +110,8 @@ QQC2.Control {
      *
      * default: ``"overflow-menu"``
      *
-     * \since Kirigami 5.65
-     * \since Kirigami 2.12
+     * \since 5.65
+     * \since 2.12
      */
     property string overflowIconName: "overflow-menu"
 

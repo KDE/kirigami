@@ -61,7 +61,7 @@ public:
      * }
      * \endcode
      *
-     * \since Kirigami 5.69
+     * \since 5.69
      */
     Q_INVOKABLE ColorUtils::Brightness brightnessForColor(const QColor &color);
 
@@ -70,8 +70,8 @@ public:
      * estimate of the equivalent gray light value (luma).
      * 0 as full black, 1 as full white and 0.5 equivalent to a 50% gray.
      *
-     * \since Kirigami 5.81
-     * \since Kirigami org.kde.kirigami 2.16
+     * \since 5.81
+     * \since org.kde.kirigami 2.16
      */
     Q_INVOKABLE qreal grayForColor(const QColor &color);
 
@@ -92,8 +92,8 @@ public:
      * }
      * \endcode
      *
-     * \since Kirigami 5.69
-     * \since Kirigami org.kde.kirigami 2.12
+     * \since 5.69
+     * \since org.kde.kirigami 2.12
      */
     Q_INVOKABLE QColor alphaBlend(const QColor &foreground, const QColor &background);
 
@@ -117,8 +117,8 @@ public:
      * }
      * \endcode
      *
-     * \since Kirigami 5.69
-     * \since Kirigami org.kde.kirigami 2.12
+     * \since 5.69
+     * \since org.kde.kirigami 2.12
      */
     Q_INVOKABLE QColor linearInterpolation(const QColor &one, const QColor &two, double balance);
 
@@ -143,8 +143,8 @@ public:
      *
      * @warning It is an error to adjust both RGB and HSV properties.
      *
-     * \since Kirigami 5.69
-     * \since Kirigami org.kde.kirigami 2.12
+     * \since 5.69
+     * \since org.kde.kirigami 2.12
      */
     Q_INVOKABLE QColor adjustColor(const QColor &color, const QJSValue &adjustments);
 
@@ -171,8 +171,8 @@ public:
      *
      * @warning It is an error to scale both RGB and HSV properties.
      *
-     * \since Kirigami 5.69
-     * \since Kirigami org.kde.kirigami 2.12
+     * \since 5.69
+     * \since org.kde.kirigami 2.12
      */
     Q_INVOKABLE QColor scaleColor(const QColor &color, const QJSValue &adjustments);
 

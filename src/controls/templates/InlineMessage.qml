@@ -62,7 +62,7 @@ import org.kde.kirigami.templates.private as TP
   }
   \endqml
 
-  \since Kirigami 5.45
+  \since 5.45
  */
 T.Control {
     id: root

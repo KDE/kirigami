@@ -17,7 +17,7 @@ import QtQuick.Controls as QQC2
   It will open the url by default, allow to copy it if triggered with the
   secondary mouse button.
 
-  \since Kirigami 5.63
+  \since 5.63
  */
 Kirigami.LinkButton {
     id: button

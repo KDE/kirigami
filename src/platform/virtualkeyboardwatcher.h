@@ -23,7 +23,7 @@ namespace Platform
  *
  * This class reports on the status of KWin's VirtualKeyboard DBus interface.
  *
- * \since Kirigami 5.91
+ * \since 5.91
  */
 class KIRIGAMIPLATFORM_EXPORT VirtualKeyboardWatcher : public QObject
 {

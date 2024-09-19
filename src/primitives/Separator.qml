@@ -42,7 +42,7 @@ Rectangle {
 
       default: Kirigami.Separator.Weight.Normal
 
-      \since Kirigami 5.72
+      \since 5.72
      */
     property int weight: Separator.Weight.Normal
 

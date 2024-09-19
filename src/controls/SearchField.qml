@@ -35,8 +35,8 @@ Kirigami.ActionTextField {
      *
      * default: ``true``
      *
-     * \since Kirigami 5.81
-     * \since Kirigami org.kde.kirigami 2.16
+     * \since 5.81
+     * \since org.kde.kirigami 2.16
      */
     property bool autoAccept: true
 
@@ -52,8 +52,8 @@ Kirigami.ActionTextField {
      *
      * default: ``false``
      *
-     * \since Kirigami 5.81
-     * \since Kirigami org.kde.kirigami 2.16
+     * \since 5.81
+     * \since org.kde.kirigami 2.16
      */
     property bool delaySearch: false
 

@@ -207,7 +207,7 @@ class KIRIGAMIPLATFORM_EXPORT Units : public QObject
      * the user should expect some kind of feedback. See veryShortDuration, shortDuration, longDuration, and
      * veryLongDuration for animation duration choices.
      *
-     * \since Kirigami 5.81
+     * \since 5.81
      */
     Q_PROPERTY(int humanMoment READ humanMoment NOTIFY humanMomentChanged FINAL)
 
@@ -224,7 +224,7 @@ class KIRIGAMIPLATFORM_EXPORT Units : public QObject
      *
      * Corner radius value shared by buttons and other rectangle elements
      *
-     * \since Kirigami 6.2
+     * \since 6.2
      */
     Q_PROPERTY(qreal cornerRadius READ cornerRadius NOTIFY cornerRadiusChanged FINAL)
 

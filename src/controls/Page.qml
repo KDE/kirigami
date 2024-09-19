@@ -67,7 +67,7 @@ QQC2.Page {
       are used whether this is the topmost item on the layers stack. If the page is
       not attached to either a column view or a stack view, expect this to be true.
 
-      \since Kirigami 2.1
+      \since 2.1
      */
     //TODO KF6: remove this or at least all the assumptions about the internal tree structure of items
     // Kirigami.ColumnView.view.parent.parent is the StackView in which the ColumnView is, the condition means "is the ColumnView the current layer of the pagerow"
@@ -112,7 +112,7 @@ QQC2.Page {
 
       It can be customized to put any kind of Item in there.
 
-      \since Kirigami 2.7
+      \since 2.7
      */
     property Component titleDelegate: Component {
         id: defaultTitleDelegate
@@ -126,7 +126,7 @@ QQC2.Page {
       present only if we are in a PageRow as a page or as a layer,
       and the style is either Titles or ToolBar.
 
-      \since Kirigami 2.5
+      \since 2.5
      */
     readonly property Item globalToolBarItem: globalToolBar.item
 

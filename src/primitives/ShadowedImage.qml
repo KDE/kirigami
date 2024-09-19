@@ -42,7 +42,7 @@ import org.kde.kirigami as Kirigami
   }
   \endcode
 
-  \since Kirigami 5.69
+  \since 5.69
  */
 Item {
     id: root

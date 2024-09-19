@@ -55,7 +55,7 @@ T.Drawer {
      * Only modal drawers are collapsible. Collapsible is not supported in
      * the mobile mode.
      *
-     * \since Kirigami 2.5
+     * \since 2.5
      */
     property bool collapsible: false
 
@@ -97,7 +97,7 @@ T.Drawer {
      * For OverlayDrawer the default is view-right-close or view-left-close depending on
      * the drawer location
      *
-     * \since Kirigami 2.5
+     * \since 2.5
      */
     readonly property KTP.IconPropertiesGroup handleOpenIcon: KTP.IconPropertiesGroup {
         source: root.edge === Qt.RightEdge ? "view-right-close" : "view-left-close"
@@ -116,7 +116,7 @@ T.Drawer {
      * For OverlayDrawer the default is view-right-new or view-left-new depending on
      * the drawer location.
      *
-     * \since Kirigami 2.5
+     * \since 2.5
      */
     property KTP.IconPropertiesGroup handleClosedIcon: KTP.IconPropertiesGroup {
         source: root.edge === Qt.RightEdge ? "view-right-new" : "view-left-new"
@@ -124,13 +124,13 @@ T.Drawer {
 
     /*!
      * \brief This property holds the tooltip displayed when the drawer is open.
-     * \since Kirigami 2.15
+     * \since 2.15
      */
     property string handleOpenToolTip: qsTr("Close drawer")
 
     /*!
      * \brief This property holds the tooltip displayed when the drawer is closed.
-     * \since Kirigami 2.15
+     * \since 2.15
      */
     property string handleClosedToolTip: qsTr("Open drawer")
 

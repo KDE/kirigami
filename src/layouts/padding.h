@@ -58,7 +58,7 @@ class PaddingPrivate;
  * }
  * \endcode
  *
- * \since Kirigami 6.0
+ * \since 6.0
  */
 class Padding : public QQuickItem
 {

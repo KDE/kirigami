@@ -41,7 +41,7 @@ import org.kde.kirigami as Kirigami
   }
   \endcode
 
-  \since Kirigami 5.56
+  \since 5.56
  */
 QQC2.TextField {
     id: root
@@ -49,7 +49,7 @@ QQC2.TextField {
     /*!
       \qmlproperty keysequence ActionTextField::focusSequence
       This property holds a shortcut sequence that will focus the text field.
-      \since Kirigami 5.56
+      \since 5.56
      */
     property alias focusSequence: focusShortcut.sequence
 
@@ -60,7 +60,7 @@ QQC2.TextField {
 
       By default this list is empty.
 
-      \since Kirigami 5.56
+      \since 5.56
      */
     property list<T.Action> leftActions
 
@@ -69,7 +69,7 @@ QQC2.TextField {
 
       By default this list is empty.
 
-      \since Kirigami 5.56
+      \since 5.56
      */
     property list<T.Action> rightActions
 

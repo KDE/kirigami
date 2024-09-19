@@ -13,7 +13,7 @@ import QtQuick.Templates as T
   with the visual styling of "tags" or "tokens."
 
   \sa org.kde.kirigami::Chip
-  \since Kirigami 2.19
+  \since 2.19
  */
 T.AbstractButton {
     id: chip

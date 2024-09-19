@@ -28,7 +28,7 @@
  * }
  * \endcode
  *
- * \since Kirigami 2.18
+ * \since 2.18
  */
 class SpellCheckAttached : public QObject
 {
@@ -47,7 +47,7 @@ class SpellCheckAttached : public QObject
      * \note By default, false. This might change in KF6, so if you don't want
      * spellcheck in your application, explicitly set it to false.
      *
-     * \since Kirigami 2.18
+     * \since 2.18
      */
     Q_PROPERTY(bool enabled READ enabled WRITE setEnabled NOTIFY enabledChanged FINAL)
 public:
