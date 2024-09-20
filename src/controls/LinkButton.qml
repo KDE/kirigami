@@ -24,9 +24,13 @@ import org.kde.kirigami as Kirigami
 QQC2.Label {
     id: control
 
+    /*!
+      An action that will be triggered when the button is clicked
+     */
     property T.Action action
 
     /*!
+      \qmlproperty Qt::MouseButtons LinkButton::acceptedButtons
       \brief This property holds the mouse buttons that the mouse area reacts to.
       \sa MouseArea::acceptedButtons
       \qmlproperty Qt::MouseButtons acceptedButtons
@@ -34,8 +38,8 @@ QQC2.Label {
     property alias acceptedButtons: area.acceptedButtons
 
     /*!
-     * \brief This property holds the mouse area element covering the button.
-     * @property MouseArea area
+      \qmlproperty MouseArea LinkButton::mouseArea
+      \brief This property holds the mouse area element covering the button.
      */
     property alias mouseArea: area
 

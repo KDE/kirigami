@@ -12,56 +12,57 @@ import org.kde.kirigami as Kirigami
 import "private" as P
 
 /*!
- * \brief This is the standard layout of a Card.
- *
- * It is recommended to use this class when the concept of Cards is needed
- * in the application.
- *
- * This Card has default items as header and footer. The header is an
- * image that can contain an optional title and icon, accessible via the
- * banner grouped property.
- *
- * The footer will show a series of toolbuttons (and eventual overflow menu)
- * representing the actions list accessible with the list property actions.
- * It is possible even tough is discouraged to override the footer:
- * in this case the actions property shouldn't be used.
- *
- * @inherit org::kde::kirigami::AbstractCard
- * \since 2.4
+  \qmltype Card
+  \inqmlmodule
+
+  \brief This is the standard layout of a Card.
+
+  It is recommended to use this class when the concept of Cards is needed
+  in the application.
+
+  This Card has default items as header and footer. The header is an
+  image that can contain an optional title and icon, accessible via the
+  banner grouped property.
+
+  The footer will show a series of toolbuttons (and eventual overflow menu)
+  representing the actions list accessible with the list property actions.
+  It is possible even tough is discouraged to override the footer:
+  in this case the actions property shouldn't be used.
+
+  \since 2.4
  */
 Kirigami.AbstractCard {
     id: root
 
     /*!
-     * \brief This property holds the clickable actions that will be available in the footer
-     * of the card.
-     *
-     * The actions will be represented by a list of ToolButtons with an optional overflow
-     * menu, when not all of them will fit in the available Card width.
-     *
-     * @property list<T.Action> actions
+      \brief This property holds the clickable actions that will be available in the footer
+      of the card.
+
+      The actions will be represented by a list of ToolButtons with an optional overflow
+      menu, when not all of them will fit in the available Card width.
+
      */
     property list<T.Action> actions
 
     /*!
-     * \brief This grouped property controls the banner image present in the header.
-     *
-     * This grouped property has the following sub-properties:
-     * * ``source: url``: The source for the image. It understands any URL valid for an Image component.
-     * * ``titleIcon: string``: The optional icon to put in the banner, either a freedesktop-compatible
-     * icon name (recommended) or any URL supported by QtQuick.Image.
-     * * ``title: string``: The title for the banner, shown as contrasting text over the image.
-     * * ``titleAlignment: Qt::Alignment``: The alignment of the title inside the image.
-     * default: ``Qt.AlignTop | Qt.AlignLeft``
-     * * ``titleLevel: int``: The Kirigami.Heading level for the title, which controls the font size.
-     * default: ``1``, which is the largest size.
-     * * ``titleWrapMode: QtQuick.Text::wrapMode``: Whether the header text should be able to wrap.
-     * default: ``Text.NoWrap``
-     *
-     * It also has the full set of properties that QtQuick.Image has, such as sourceSize and fillMode.
-     *
-     * \sa org::kde::kirigami::private::BannerImage
-     * @property Image banner
+      \brief This grouped property controls the banner image present in the header.
+
+      TODO qdoc
+
+      This grouped property has the following sub-properties:
+      * ``source: url``: The source for the image. It understands any URL valid for an Image component.
+      * ``titleIcon: string``: The optional icon to put in the banner, either a freedesktop-compatible
+      icon name (recommended) or any URL supported by QtQuick.Image.
+      * ``title: string``: The title for the banner, shown as contrasting text over the image.
+      * ``titleAlignment: Qt::Alignment``: The alignment of the title inside the image.
+      default: ``Qt.AlignTop | Qt.AlignLeft``
+      * ``titleLevel: int``: The Kirigami.Heading level for the title, which controls the font size.
+      default: ``1``, which is the largest size.
+      * ``titleWrapMode: QtQuick.Text::wrapMode``: Whether the header text should be able to wrap.
+      default: ``Text.NoWrap``
+
+      It also has the full set of properties that QtQuick.Image has, such as sourceSize and fillMode.
+
      */
     readonly property alias banner: bannerImage
 

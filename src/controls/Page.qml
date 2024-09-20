@@ -101,9 +101,7 @@ QQC2.Page {
 
       Set to undefined to indicate that there are no ongoing tasks.
 
-      default: ``undefined``
-
-      @property real progress
+      default: \c undefined
      */
     property var progress: undefined
 

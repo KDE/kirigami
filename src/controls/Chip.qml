@@ -9,7 +9,10 @@ import org.kde.kirigami as Kirigami
 import "templates" as KT
 import "private" as P
 
+
 /*!
+ * TODO qdoc
+ *
  * \brief A compact element that represents an attribute, action, or filter.
  *
  * Should be used in a group of multiple elements. e.g when displaying tags in a image viewer.

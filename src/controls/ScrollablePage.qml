@@ -17,6 +17,7 @@ import "private"
 /*!
   \qmltype ScrollablePage
   \inqmlmodule org.kde.kirigami
+
   \brief ScrollablePage is a Page that holds scrollable content, such as a ListView.
 
   Scrolling and scrolling indicators will be automatically managed.
@@ -33,7 +34,7 @@ import "private"
   }
   \endcode
 
-  @warning Do not put a ScrollView inside of a ScrollablePage; children of a ScrollablePage are already inside a ScrollView.
+  \warning Do not put a ScrollView inside of a ScrollablePage; children of a ScrollablePage are already inside a ScrollView.
 
   Another behavior added by this class is a "scroll down to refresh" behavior
   It also can give the contents of the flickable to have more top margins in order
@@ -65,41 +66,52 @@ import "private"
   }
   [...]
   \endcode
+
+  TODO qdoc inherits wrong page
  */
 Kirigami.Page {
     id: root
 
 //BEGIN properties
     /*!
-     * \brief This property tells whether the list is asking for a refresh.
-     *
-     * This property will automatically be set to true when the user pulls the list down enough,
-     * which in return, shows a loading spinner. When this is set to true, it signals
-     * the application logic to start its refresh procedure.
-     *
-     * default: ``false``
-     *
-     * @note The application itself will have to set back this property to false when done.
+      \brief This property tells whether the list is asking for a refresh.
+
+      This property will automatically be set to true when the user pulls the list down enough,
+      which in return, shows a loading spinner. When this is set to true, it signals
+      the application logic to start its refresh procedure.
+
+      default: \c false
+
+      \note The application itself will have to set back this property to false when done.
      */
     property bool refreshing: false
 
     /*!
-     * \brief This property sets whether scrollable page supports "pull down to refresh" behaviour.
-     *
-     * default: ``false``
+      \brief This property sets whether scrollable page supports "pull down to refresh" behaviour.
+
+      default: \c false
      */
     property bool supportsRefreshing: false
 
     /*!
-     * \brief This property holds the main Flickable item of this page.
-     * @deprecated here for compatibility; will be removed in KF6.
+      \brief This property holds the main Flickable item of this page.
+
+      here for compatibility; will be removed in KF6.
+
+      \deprecated
      */
     property Flickable flickable: Flickable {} // FIXME KF6: this empty flickable exists for compatibility reasons. some apps assume flickable exists right from the beginning but ScrollView internally assumes it does not
     onFlickableChanged: scrollView.contentItem = flickable;
 
     /*!
-     * \brief This property sets the vertical scrollbar policy.
-     * @property Qt::ScrollBarPolicy verticalScrollBarPolicy
+      \brief This property sets the vertical scrollbar policy.
+
+      \sa Qt::ScrollBarPolicy
+
+       Possible values:
+       \value QQC2.ScrollBar.AsNeeded The scroll bar is only shown when the content is too large to fit.
+       \value QQC2.ScrollBar.AlwaysOff The scroll bar is never shown.
+       \value QQC2.ScrollBar.AlwaysOn The scroll bar is always shown.
      */
     property int verticalScrollBarPolicy
 
@@ -110,8 +122,16 @@ Kirigami.Page {
     property bool verticalScrollBarInteractive: true
 
     /*!
-     * \brief This property sets the horizontal scrollbar policy.
-     * @property Qt::ScrollBarPolicy horizontalScrollBarPolicy
+      \brief This property sets the horizontal scrollbar policy.
+
+      \sa Qt::ScrollBarPolicy
+
+      Possible values:
+      \value QQC2.ScrollBar.AsNeeded The scroll bar is only shown when the content is too large to fit.
+      \value QQC2.ScrollBar.AlwaysOff The scroll bar is never shown.
+      \value QQC2.ScrollBar.AlwaysOn The scroll bar is always shown.
+
+      The default value is ScrollBar.AlwaysOff
      */
     property int horizontalScrollBarPolicy: QQC2.ScrollBar.AlwaysOff
 
@@ -124,8 +144,9 @@ Kirigami.Page {
     default property alias scrollablePageData: itemsParent.data
     property alias scrollablePageChildren: itemsParent.children
 
-    /*
-     * @deprecated here for compatibility; will be removed in KF6.
+    /*!
+      \deprecated
+      here for compatibility; will be removed in KF6.
      */
     property QtObject mainItem
     onMainItemChanged: {
@@ -134,13 +155,13 @@ Kirigami.Page {
     }
 
     /*!
-     * \brief This property sets whether it is possible to navigate the items in a view that support it.
-     *
-     * If true, and if flickable is an item view (e.g. ListView, GridView), it will be possible
-     * to navigate the view current items with keyboard up/down arrow buttons.
-     * Also, any key event will be forwarded to the current list item.
-     *
-     * default: ``true``
+      \brief This property sets whether it is possible to navigate the items in a view that support it.
+
+      If true, and if flickable is an item view (e.g. ListView, GridView), it will be possible
+      to navigate the view current items with keyboard up/down arrow buttons.
+      Also, any key event will be forwarded to the current list item.
+
+      default: \c true
      */
     property bool keyboardNavigationEnabled: true
 //END properties

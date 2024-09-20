@@ -16,7 +16,7 @@ class PaddingPrivate;
  * \qmltype Padding
  * \inqmlmodule org.kde.kirigami.layouts
  *
- * This item simply adds an external padding to contentItem's size.
+ * \brief This item simply adds an external padding to contentItem's size.
  *
  * Padding item behaves similarly to Control::padding,
  * but is more lightweight and thus efficient. Its implicit size is set

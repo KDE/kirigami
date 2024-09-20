@@ -67,7 +67,6 @@ import org.kde.kirigami as Kirigami
   \endcode
 
   \since 5.87
-  @inherit QtQuick.Templates.TabButton
  */
 T.TabButton {
     id: control

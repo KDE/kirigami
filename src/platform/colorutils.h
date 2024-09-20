@@ -15,7 +15,7 @@
 
 /*!
  * \qmltype ColorUtils
- * \inqmlmodule org.kde.kirigami
+ * \inqmlmodule org.kde.kirigami.platform
  *
  * Utilities for processing items to obtain colors and information useful for
  * UIs that need to adjust to variable elements.

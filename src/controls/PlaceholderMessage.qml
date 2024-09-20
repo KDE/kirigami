@@ -176,6 +176,14 @@ ColumnLayout {
     property string explanation
 
     /*!
+      \qmlproperty string PlaceholderMessage::icon.name
+      \qmlproperty string PlaceholderMessage::icon.source
+      \qmlproperty int PlaceholderMessage::icon.width
+      \qmlproperty int PlaceholderMessage::icon.height
+      \qmlproperty color PlaceholderMessage::icon.color
+
+      TODO qdoc grouped properties don't work yet
+
       \brief This property provides an icon to display above the top text label.
 
       \note It accepts icon.name and icon.source to set the icon source.
