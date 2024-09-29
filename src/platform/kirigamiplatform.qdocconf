@@ -1,4 +1,4 @@
-include($KDE_DOCS/global/qt-module-defaults-online.qdocconf)
+include($KDE_DOCS/global/qt-module-defaults.qdocconf)
 
 project = KirigamiPlatform
 description = Stuff
@@ -10,6 +10,6 @@ sourcedirs = .
 
 headers.fileextensions = "*.h"
 
-sources.fileextensions = "*.qdoc *.qml *.h"
+sources.fileextensions = "*.qdoc *.qml"
 
 depends = qtcore qtquick qtquickcontrols

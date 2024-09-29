@@ -33,7 +33,9 @@ public:
 };
 
 /*!
- * @class TabletModeWatcher tabletmodewatcher.h <Kirigami/TabletModeWatcher>
+ * \class Kirigami::Platform::TabletModeWatcher
+ * \inmodule KirigamiPlatfrom
+ * \inheaderfile Kirigami/TabletModeWatcher
  *
  * This class reports on the status of certain transformable
  * devices which can be both tablets and laptops at the same time,

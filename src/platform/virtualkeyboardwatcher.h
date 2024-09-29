@@ -19,7 +19,9 @@ namespace Kirigami
 namespace Platform
 {
 /*!
- * @class VirtualKeyboardWatcher virtualkeyboardwatcher.h <Kirigami/VirtualKeyboardWatcher>
+ * \class Kirigami::Platform::VirtualKeyboardWatcher
+ * \inmodule KirigamiPlatform
+ * \inheaderfile Kirigami/VirtualKeyboardWatcher
  *
  * This class reports on the status of KWin's VirtualKeyboard DBus interface.
  *
