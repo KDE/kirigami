@@ -20,21 +20,26 @@ namespace Platform
 {
 
 /*!
- * \class Kirigami::Platform::InputMethod
- * \inmodule Kirigami
- * This exposes information about the current used input method.
+ * \qmltype InputMethod
+ * \inqmlmodule org.kde.kirigami.platform
+ *
+ * \brief This exposes information about the current used input method.
  */
-class /*KIRIGAMIPLATFORM_EXPORT*/ InputMethod : public QObject
+class KIRIGAMIPLATFORM_EXPORT InputMethod : public QObject
 {
     Q_OBJECT
-    // QML_ELEMENT
-    // QML_SINGLETON
+    QML_ELEMENT
+    QML_SINGLETON
 
 public:
     InputMethod(QObject *parent = nullptr);
     ~InputMethod() override;
 
     /*!
+     * \qmlproperty bool InputMethod::available
+     *
+     * \readonly
+     *
      * Is an input method available?
      *
      * This will be true if there is an input method available. When it is
@@ -46,6 +51,10 @@ public:
     Q_SIGNAL void availableChanged();
 
     /*!
+     * \qmlproperty bool InputMethod::enabled
+     *
+     * \readonly
+     *
      * Is the current input method enabled?
      *
      * If this is false, that means the input method is available but not in use.
@@ -55,6 +64,10 @@ public:
     Q_SIGNAL void enabledChanged();
 
     /*!
+     * \qmlproperty bool InputMethod::active
+     *
+     * \readonly
+     *
      * Is the current input method active?
      *
      * What active means depends on the type of input method. In case of a
@@ -66,6 +79,10 @@ public:
     Q_SIGNAL void activeChanged();
 
     /*!
+     * \qmlproperty bool InputMethod::visible
+     *
+     * \readonly
+     *
      * Is the current input method visible?
      *
      * For some input methods this will match active however for others this
@@ -76,6 +93,10 @@ public:
     Q_SIGNAL void visibleChanged();
 
     /*!
+     * \qmlproperty bool InputMethod::willShowOnActive
+     *
+     * \readonly
+     *
      * Will the input method be shown when a text input field gains focus?
      *
      * This is intended to be used to decide whether to give an input field

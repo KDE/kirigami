@@ -33,7 +33,10 @@ private:
 };
 
 /*!
- * An item that creates delegates for actions and lays them out in a row.
+ * \qmlitem ToolBarLayout
+ * \inqmlmodule org.kde.kirigami.layouts
+ *
+ * \brief An item that creates delegates for actions and lays them out in a row.
  *
  * This effectively combines RowLayout and Repeater in a single item, with the
  * addition of some extra performance enhancing tweaks. It will create instances

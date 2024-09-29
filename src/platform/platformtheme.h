@@ -24,8 +24,15 @@ class PlatformThemeData;
 class PlatformThemePrivate;
 
 /*!
+ * \qmltype Theme
+ * \inqmlmodule org.kde.kirigami.platform
+ *
+ * Theme
+ */
+
+/*!
  * \class Kirigami::Platform::PlatformTheme
- * \inmodule Kirigami
+ * \inmodule KirigamiPlatform
  *
  * This class is the base for color management in Kirigami,
  * different platforms can reimplement this class to integrate with
@@ -39,6 +46,7 @@ class KIRIGAMIPLATFORM_EXPORT PlatformTheme : public QObject
     QML_UNCREATABLE("Attached Property")
 
     /*!
+     * \qmlattachedproperty enumeration Theme::colorSet
      * This enumeration describes the color set for which a color is being selected.
      *
      * Color sets define a color "environment", suitable for drawing all parts of a
@@ -47,6 +55,8 @@ class KIRIGAMIPLATFORM_EXPORT PlatformTheme : public QObject
     Q_PROPERTY(ColorSet colorSet READ colorSet WRITE setColorSet NOTIFY colorSetChanged FINAL)
 
     /*!
+     * \qmlattachedproperty enumeration Theme::colorGroup
+     *
      * This enumeration describes the color group used to generate the colors.
      * The enum value is based upon QPalette::ColorGroup and has the same values.
      * It's redefined here in order to make it work with QML.
@@ -55,6 +65,8 @@ class KIRIGAMIPLATFORM_EXPORT PlatformTheme : public QObject
     Q_PROPERTY(ColorGroup colorGroup READ colorGroup WRITE setColorGroup NOTIFY colorGroupChanged FINAL)
 
     /*!
+     * \qmlattachedproperty bool Theme::inherit
+     *
      * If true, the colorSet will be inherited from the colorset of a theme of one
      * of the ancestor items
      * default: true
@@ -63,12 +75,15 @@ class KIRIGAMIPLATFORM_EXPORT PlatformTheme : public QObject
 
     // foreground colors
     /*!
+     * \qmlattachedproperty color Theme::textColor
      * Color for normal foregrounds, usually text, but not limited to it,
      * anything that should be painted with a clear contrast should use this color
      */
     Q_PROPERTY(QColor textColor READ textColor WRITE setCustomTextColor RESET setCustomTextColor NOTIFY colorsChanged FINAL)
 
     /*!
+     * \qmlattachedproperty color Theme::disabledTextColor
+     *
      * Foreground color for disabled areas, usually a mid-gray
      * @note Depending on the implementation, the color used for this property may not be
      *       based on the disabled palette. For example, for the Plasma implementation,
@@ -77,48 +92,66 @@ class KIRIGAMIPLATFORM_EXPORT PlatformTheme : public QObject
     Q_PROPERTY(QColor disabledTextColor READ disabledTextColor WRITE setCustomDisabledTextColor RESET setCustomDisabledTextColor NOTIFY colorsChanged FINAL)
 
     /*!
+     * \qmlattachedproperty color Theme::highlightedTextColor
+     *
      * Color for text that has been highlighted, often is a light color while normal text is dark
      */
     Q_PROPERTY(
         QColor highlightedTextColor READ highlightedTextColor WRITE setCustomHighlightedTextColor RESET setCustomHighlightedTextColor NOTIFY colorsChanged)
 
     /*!
+     * \qmlattachedproperty color Theme::activeTextColor
+     *
      * Foreground for areas that are active or requesting attention
      */
     Q_PROPERTY(QColor activeTextColor READ activeTextColor WRITE setCustomActiveTextColor RESET setCustomActiveTextColor NOTIFY colorsChanged FINAL)
 
     /*!
+     * \qmlattachedproperty color Theme::linkColor
+     *
      * Color for links
      */
     Q_PROPERTY(QColor linkColor READ linkColor WRITE setCustomLinkColor RESET setCustomLinkColor NOTIFY colorsChanged FINAL)
 
     /*!
+     * \qmlattachedproperty color Theme::visitedLinkColor
+     *
      * Color for visited links, usually a bit darker than linkColor
      */
     Q_PROPERTY(QColor visitedLinkColor READ visitedLinkColor WRITE setCustomVisitedLinkColor RESET setCustomVisitedLinkColor NOTIFY colorsChanged FINAL)
 
     /*!
+     * \qmlattachedproperty color Theme::negativeTextColor
+     *
      * Foreground color for negative areas, such as critical error text
      */
     Q_PROPERTY(QColor negativeTextColor READ negativeTextColor WRITE setCustomNegativeTextColor RESET setCustomNegativeTextColor NOTIFY colorsChanged FINAL)
 
     /*!
+     * \qmlattachedproperty color Theme::neutralTextColor
+     *
      * Foreground color for neutral areas, such as warning texts (but not critical)
      */
     Q_PROPERTY(QColor neutralTextColor READ neutralTextColor WRITE setCustomNeutralTextColor RESET setCustomNeutralTextColor NOTIFY colorsChanged FINAL)
 
     /*!
+     * \qmlattachedproperty color Theme::positiveTextColor
+     *
      * Success messages, trusted content
      */
     Q_PROPERTY(QColor positiveTextColor READ positiveTextColor WRITE setCustomPositiveTextColor RESET setCustomPositiveTextColor NOTIFY colorsChanged FINAL)
 
     // background colors
     /*!
+     * \qmlattachedproperty color Theme::backgroundColor
+     *
      * The generic background color
      */
     Q_PROPERTY(QColor backgroundColor READ backgroundColor WRITE setCustomBackgroundColor RESET setCustomBackgroundColor NOTIFY colorsChanged FINAL)
 
     /*!
+     * \qmlattachedproperty color Theme::alternateBackgroundColor
+     *
      * The generic background color
      * Alternate background; for example, for use in lists.
      * This color may be the same as BackgroundNormal,
@@ -128,41 +161,55 @@ class KIRIGAMIPLATFORM_EXPORT PlatformTheme : public QObject
                    NOTIFY colorsChanged)
 
     /*!
+     * \qmlattachedproperty color Theme::highlightColor
+     *
      * The background color for selected areas
      */
     Q_PROPERTY(QColor highlightColor READ highlightColor WRITE setCustomHighlightColor RESET setCustomHighlightColor NOTIFY colorsChanged FINAL)
 
     /*!
+     * \qmlattachedproperty color Theme::activeBackgroundColor
+     *
      * Background for areas that are active or requesting attention
      */
     Q_PROPERTY(
         QColor activeBackgroundColor READ activeBackgroundColor WRITE setCustomActiveBackgroundColor RESET setCustomActiveBackgroundColor NOTIFY colorsChanged)
 
     /*!
+     * \qmlattachedproperty color Theme::linkBackgroundColor
+     *
      * Background color for links
      */
     Q_PROPERTY(
         QColor linkBackgroundColor READ linkBackgroundColor WRITE setCustomLinkBackgroundColor RESET setCustomLinkBackgroundColor NOTIFY colorsChanged FINAL)
 
     /*!
+     * \qmlattachedproperty color Theme::visitedLinkBackgroundColor
+     *
      * Background color for visited links, usually a bit darker than linkBackgroundColor
      */
     Q_PROPERTY(QColor visitedLinkBackgroundColor READ visitedLinkBackgroundColor WRITE setCustomVisitedLinkBackgroundColor RESET
                    setCustomVisitedLinkBackgroundColor NOTIFY colorsChanged)
 
     /*!
+     * \qmlattachedproperty color Theme::negativeBackgroundColor
+     *
      * Background color for negative areas, such as critical errors and destructive actions
      */
     Q_PROPERTY(QColor negativeBackgroundColor READ negativeBackgroundColor WRITE setCustomNegativeBackgroundColor RESET setCustomNegativeBackgroundColor NOTIFY
                    colorsChanged)
 
     /*!
+     * \qmlattachedproperty color Theme::neutralBackgroundColor
+     *
      * Background color for neutral areas, such as warnings (but not critical)
      */
     Q_PROPERTY(QColor neutralBackgroundColor READ neutralBackgroundColor WRITE setCustomNeutralBackgroundColor RESET setCustomNeutralBackgroundColor NOTIFY
                    colorsChanged)
 
     /*!
+     * \qmlattachedproperty color Theme::positiveBackgroundColor
+     *
      * Background color for positive areas, such as success messages and trusted content
      */
     Q_PROPERTY(QColor positiveBackgroundColor READ positiveBackgroundColor WRITE setCustomPositiveBackgroundColor RESET setCustomPositiveBackgroundColor NOTIFY
@@ -170,36 +217,62 @@ class KIRIGAMIPLATFORM_EXPORT PlatformTheme : public QObject
 
     // decoration colors
     /*!
+     * \qmlattachedproperty color Theme::focusColor
+     *
      * A decoration color that indicates active focus
      */
     Q_PROPERTY(QColor focusColor READ focusColor WRITE setCustomFocusColor RESET setCustomFocusColor NOTIFY colorsChanged FINAL)
 
     /*!
+     * \qmlattachedproperty color Theme::hoverColor
+     *
      * A decoration color that indicates mouse hovering
      */
     Q_PROPERTY(QColor hoverColor READ hoverColor WRITE setCustomHoverColor RESET setCustomHoverColor NOTIFY colorsChanged FINAL)
 
     /*!
+     * \qmlattachedproperty color Theme::useAlternateBackgroundColor
+     *
      * Hint for item views to actually make use of the alternate background color feature
      */
     Q_PROPERTY(
         bool useAlternateBackgroundColor READ useAlternateBackgroundColor WRITE setUseAlternateBackgroundColor NOTIFY useAlternateBackgroundColorChanged FINAL)
 
-    // font and palette
+    /*!
+     * \qmlattachedproperty font Theme::defaultFont
+     *
+     * The default font
+     */
     Q_PROPERTY(QFont defaultFont READ defaultFont NOTIFY defaultFontChanged FINAL)
 
-    // small font
+    /*!
+     * \qmlattachedproperty font Theme::smallFont
+     *
+     * Small font
+     */
     Q_PROPERTY(QFont smallFont READ smallFont NOTIFY smallFontChanged FINAL)
 
-    // Active palette
+    /*!
+     * \qmlattachedproperty QPalette Theme::palette
+     *
+     * Palette
+     */
     Q_PROPERTY(QPalette palette READ palette NOTIFY paletteChanged FINAL)
 
-    // Frame contrast value, usually used for separators and outlines
-    // Value is between 0.0 and 1.0
+    /*!
+     * \qmlattachedproperty real Theme::frameContrast
+     *
+     * Frame contrast value, usually used for separators and outlines
+     * Value is between 0.0 and 1.0
+     */
     Q_PROPERTY(qreal frameContrast READ frameContrast CONSTANT FINAL)
 
-    // Returns half of the frameContrast value; used by Separator.Weight.Light
-    // Value is between 0.0 and 1.0
+    /*!
+     * \qmlattachedproperty real Theme::lightFrameContrast
+     *
+     * Returns half of the frameContrast value; used by Separator.Weight.Light
+     * Value is between 0.0 and 1.0
+     */
     Q_PROPERTY(qreal lightFrameContrast READ lightFrameContrast CONSTANT FINAL)
 
 public:

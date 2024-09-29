@@ -13,7 +13,7 @@ import org.kde.kirigami.platform as Platform
   \qmltype TitleSubtitle
   \inqmlmodule org.kde.kirigami.delegates
 
-  A simple item containing a title and subtitle label.
+  \brief A simple item containing a title and subtitle label.
 
   This is mainly intended as a replacement for a list delegate content item,
   but can be used as a replacement for other content items as well.
@@ -25,7 +25,7 @@ import org.kde.kirigami.platform as Platform
 
   Example usage as contentItem of an ItemDelegate:
 
-  \badcode
+  \qml
   ItemDelegate {
       id: delegate
 
@@ -38,7 +38,7 @@ import org.kde.kirigami.platform as Platform
           selected: delegate.highlighted || delegate.down
       }
   }
-  \endcode
+  \endqml
 
   \sa IconTitleSubtitle
   \sa ItemDelegate

@@ -24,7 +24,7 @@ class Units;
  * \class Kirigami::Platform::PlatformPluginFactory
  * \inmodule KirigamiPlatform
  *
- * This class is reimpleented by plugins to provide different implementations
+ * This class is reimplemented by plugins to provide different implementations
  * of PlatformTheme
  */
 class KIRIGAMIPLATFORM_EXPORT PlatformPluginFactory : public QObject

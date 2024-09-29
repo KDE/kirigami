@@ -9,19 +9,22 @@ import QtQuick.Controls as QQC2
 import org.kde.kirigami.platform as Platform
 
 /*!
- * A convenience wrapper combining QtQuick Controls ItemDelegate and IconTitleSubtitle
- *
- * This is an intentionally minimal wrapper that replaces the ItemDelegate's
- * contentItem with an IconTitleSubtitle and adds a subtitle property.
- *
- * If you wish to customize the layout further, create your own `ItemDelegate`
- * subclass with the `contentItem:` property set to the content of your choice.
- * This can include `IconTitleSubtitle` inside a Layout, for example.
- *
- * \note If you don't need a subtitle, use `ItemDelegate` directly.
- *
- * \sa Kirigami::Delegates::TitleSubtitle
- * \sa Kirigami::Delegates::IconTitleSubtitle
+  \qmltype SubtitleDelegate
+  \inqmlmodule org.kde.kirigami.delegates
+
+  \brief A convenience wrapper combining QtQuick Controls ItemDelegate and IconTitleSubtitle.
+
+  This is an intentionally minimal wrapper that replaces the ItemDelegate's
+  contentItem with an IconTitleSubtitle and adds a subtitle property.
+
+  If you wish to customize the layout further, create your own ItemDelegate
+  subclass with the contentItem property set to the content of your choice.
+  This can include IconTitleSubtitle inside a Layout, for example.
+
+  \note If you don't need a subtitle, use ItemDelegate directly.
+
+  \sa TitleSubtitle
+  \sa IconTitleSubtitle
  */
 QQC2.ItemDelegate {
     id: delegate
@@ -33,7 +36,7 @@ QQC2.ItemDelegate {
     // directly.
 
     /*!
-     * The subtitle to display.
+      The subtitle to display.
      */
     property string subtitle
 

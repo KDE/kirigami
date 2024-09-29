@@ -15,7 +15,7 @@ import org.kde.kirigami.templates.private as KTP
   \qmltype IconTitleSubtitle
   \inqmlmodule org.kde.kirigami.delegates
 
-  A simple item containing an icon, title and subtitle.
+  \brief A simple item containing an icon, title and subtitle.
 
   This is an extension of TitleSubtitle that adds an icon to the side.
   It is intended as a contentItem for ItemDelegate and related controls.
@@ -30,7 +30,7 @@ import org.kde.kirigami.templates.private as KTP
 
   Example usage creating a CheckDelegate with an extra button on the side:
 
-  \badcode
+  \qml
   CheckDelegate {
       id: delegate
 
@@ -55,10 +55,10 @@ import org.kde.kirigami.templates.private as KTP
           }
       }
   }
-  \endcode
+  \endqml
 
-  \sa Kirigami::Delegates::TitleSubtitle
-  \sa Kirigami::Delegates::ItemDelegate
+  \sa TitleSubtitle
+  \sa ItemDelegate
  */
 Item {
     id: root
