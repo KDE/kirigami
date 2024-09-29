@@ -45,7 +45,7 @@ import org.kde.kirigami as Kirigami
 
   Example for a selection dialog:
 
-  \code
+  \qml
   import QtQuick
   import QtQuick.Layouts
   import QtQuick.Controls as QQC2
@@ -74,11 +74,11 @@ import org.kde.kirigami as Kirigami
           }
       }
   }
-  \endcode
+  \endqml
 
   Example with scrolling (ListView scrolling behaviour is handled by the Dialog):
 
-  \code
+  \qml
   import QtQuick
   import QtQuick.Layouts
   import QtQuick.Controls as QQC2
@@ -103,7 +103,7 @@ import org.kde.kirigami as Kirigami
           }
       }
   }
-  \endcode
+  \endqml
 
   There are also sub-components of the Dialog that target specific usecases,
   and can reduce boilerplate code if used:

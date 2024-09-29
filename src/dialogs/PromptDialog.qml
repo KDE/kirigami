@@ -15,7 +15,7 @@ import org.kde.kirigami.dialogs as KirigamiDialogs
   \qmltype PromptDialog
   \inqmlmodule org.kde.kirigami.dialogs
 
-  A simple dialog to quickly prompt a user with information,
+  \brief A simple dialog to quickly prompt a user with information,
   and possibly perform an action.
 
   Provides content padding (instead of padding outside of the scroll
@@ -29,7 +29,7 @@ import org.kde.kirigami.dialogs as KirigamiDialogs
 
   Example usage:
 
-  \badcode
+  \qml
   Kirigami.PromptDialog {
       title: "Reset settings?"
       subtitle: "The stored settings for the application will be deleted, with the defaults restored."
@@ -38,11 +38,11 @@ import org.kde.kirigami.dialogs as KirigamiDialogs
       onAccepted: console.log("Accepted")
       onRejected: console.log("Rejected")
   }
-  \endcode
+  \endqml
 
   Text field prompt dialog:
 
-  \badcode
+  \qml
   Kirigami.PromptDialog {
       id: textPromptDialog
       title: qsTr("New Folder")
@@ -70,7 +70,7 @@ import org.kde.kirigami.dialogs as KirigamiDialogs
           placeholderText: qsTr("Folder name…")
       }
   }
-  \endcode
+  \endqml
  */
 KirigamiDialogs.Dialog {
     id: root

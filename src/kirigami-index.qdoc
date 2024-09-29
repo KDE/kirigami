@@ -22,6 +22,7 @@
         \li \l{Kirigami Platform C++ Classes}
         \li \l{Kirigami Delegates QML Types}
         \li \l{Kirigami Layouts QML Types}
+        \li \l{Kirigami Dialogs QML Types}
     \endlist
 
     \section1 Licenses

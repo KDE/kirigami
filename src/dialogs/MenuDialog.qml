@@ -17,11 +17,11 @@ import org.kde.kirigami.dialogs as KirigamiDialogs
   \qmltype MenuDialog
   \inqmlmodule org.kde.kirigami.dialogs
 
-  A dialog that prompts users with a context menu, with
+  \brief A dialog that prompts users with a context menu, with
   list items that perform actions.
 
   Example usage:
-  \code
+  \qml
   Kirigami.MenuDialog {
       title: i18n("Track Options")
 
@@ -54,7 +54,7 @@ import org.kde.kirigami.dialogs as KirigamiDialogs
           }
       ]
   }
-  \endcode
+  \endqml
 
   \sa Dialog
   \sa PromptDialog
@@ -76,7 +76,7 @@ KirigamiDialogs.Dialog {
     property alias contentHeader: columnHeader.contentItem
 
     /*!
-      \qmlproperty QtQuick.Controls.Control MenuDialog::contentHeaderControl
+      \qmlproperty Control MenuDialog::contentHeaderControl
 
       \brief This property holds the content header.
 
