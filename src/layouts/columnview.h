@@ -169,6 +169,7 @@ class ColumnView : public QQuickItem
      * * FixedColumns: every column is fixed at the same width of the columnWidth property
      * * DynamicColumns: columns take their width from their implicitWidth
      * * SingleColumn: only one column at a time is shown, as wide as the viewport, eventual reservedSpace on the column's attached property is ignored
+     * The default is FixedColumns.
      */
     Q_PROPERTY(ColumnResizeMode columnResizeMode READ columnResizeMode WRITE setColumnResizeMode NOTIFY columnResizeModeChanged FINAL)
 
