@@ -39,7 +39,6 @@ Icon::Icon(QQuickItem *parent)
 
     connect(this, &QQuickItem::smoothChanged, this, &QQuickItem::polish);
     connect(this, &QQuickItem::enabledChanged, this, [this]() {
-        m_allowNextAnimation = true;
         polish();
     });
 }
@@ -109,9 +108,6 @@ void Icon::setActive(const bool active)
         return;
     }
     m_active = active;
-    if (isComponentComplete()) {
-        m_allowNextAnimation = true;
-    }
     polish();
     Q_EMIT activeChanged();
 }
@@ -409,14 +405,13 @@ void Icon::updatePolish()
     }
 
     // don't animate initial setting
-    bool animated = (m_animated || m_allowNextAnimation) && !m_oldIcon.isNull() && !m_sizeChanged && !m_blockNextAnimation;
+    bool animated = m_animated && !m_oldIcon.isNull() && !m_sizeChanged && !m_blockNextAnimation;
 
     if (animated && m_animation) {
         m_animValue = 0.0;
         m_animation->setStartValue((qreal)0);
         m_animation->setEndValue((qreal)1);
         m_animation->start();
-        m_allowNextAnimation = false;
     } else {
         if (m_animation) {
             m_animation->stop();
