@@ -19,7 +19,7 @@ Kirigami.BasicThemeDefinition {
     highlightedTextColor: palette.highlightedText
     backgroundColor: palette.window
     alternateBackgroundColor: Qt.darker(palette.window, 1.05)
-    activeTextColor: palette.highlight
+    activeTextColor: palette.highlightedText
     activeBackgroundColor: palette.highlight
     linkColor: "#2980B9"
     linkBackgroundColor: "#2980B9"
@@ -52,15 +52,15 @@ Kirigami.BasicThemeDefinition {
     selectionHoverColor: palette.highlight
     selectionFocusColor: palette.highlight
 
-    tooltipTextColor: palette.base
-    tooltipBackgroundColor: palette.text
-    tooltipAlternateBackgroundColor: Qt.darker(palette.text, 1.05)
+    tooltipTextColor: palette.text
+    tooltipBackgroundColor: palette.base
+    tooltipAlternateBackgroundColor: palette.alternateBase
     tooltipHoverColor: palette.highlight
     tooltipFocusColor: palette.highlight
 
-    complementaryTextColor: palette.base
-    complementaryBackgroundColor: palette.text
-    complementaryAlternateBackgroundColor: Qt.darker(palette.text, 1.05)
+    complementaryTextColor: palette.text
+    complementaryBackgroundColor: palette.base
+    complementaryAlternateBackgroundColor: palette.alternateBase
     complementaryHoverColor: palette.highlight
     complementaryFocusColor: palette.highlight
 
