@@ -141,6 +141,8 @@ QQC2.Action {
     checked: fromQAction?.checked ?? false
     enabled: !fromQAction || fromQAction.enabled
 
+    Accessible.name: text // https://bugreports.qt.io/browse/QTBUG-130360
+
     readonly property Shortcut alternateShortcut : Shortcut {
         sequences: P.ActionHelper.alternateShortcuts(fromQAction)
         onActivated: root.trigger()
