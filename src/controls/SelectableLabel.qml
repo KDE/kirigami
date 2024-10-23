@@ -11,25 +11,25 @@ import org.kde.kirigami as Kirigami
 import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
 
-/**
- * @brief This is a label which supports text selection.
- *
- * The label uses TextEdit component, which is wrapped inside a Control component.
- *
- *
- * Example usage:
- * @code{.qml}
- *     Kirigami.SelectableLabel {
- *         text: "Label"
- *     }
- * @endcode
- *
- * @see https://bugreports.qt.io/browse/QTBUG-14077
- * @since org.kde.kirigami 2.20
- * @since 5.95
- * @inherit QtQuick.Control
- */
+/*!
+  \qmltype SelectableLabel
+   \inqmlmodule org.kde.kirigami
 
+  \brief This is a label which supports text selection.
+
+  The label uses TextEdit component, which is wrapped inside a Control component.
+
+
+  Example usage:
+  \code
+      Kirigami.SelectableLabel {
+          text: "Label"
+      }
+  \endcode
+
+  \sa https://bugreports.qt.io/browse/QTBUG-14077
+  \since 5.95
+ */
 QQC2.Control {
     id: root
 
@@ -101,7 +101,9 @@ QQC2.Control {
     contentItem: TextEdit {
         id: textEdit
 
-        /**
+        /*!
+         * TODO qdoc ?
+         *
         * @brief This property holds the cursor shape that will appear whenever
         * the mouse is hovering over the label.
         *
