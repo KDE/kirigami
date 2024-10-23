@@ -8,10 +8,6 @@ documentationinheaders = true
 headerdirs = .
 sourcedirs = .
 
-headers.fileextensions = "*.h"
-
-sources.fileextensions = "*.qdoc *.qml *.h"
-
 depends = qtcore qtquick qtquickcontrols kcoreaddons kirigamiplatform
 
 excludedirs = platform

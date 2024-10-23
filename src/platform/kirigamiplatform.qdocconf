@@ -8,8 +8,4 @@ documentationinheaders = true
 headerdirs = .
 sourcedirs = .
 
-headers.fileextensions = "*.h"
-
-sources.fileextensions = "*.qdoc *.qml"
-
 depends = qtcore qtquick qtquickcontrols
