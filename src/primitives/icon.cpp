@@ -81,7 +81,11 @@ void Icon::setSource(const QVariant &icon)
         m_theme = static_cast<Kirigami::Platform::PlatformTheme *>(qmlAttachedPropertiesObject<Kirigami::Platform::PlatformTheme>(this, true));
         Q_ASSERT(m_theme);
 
-        connect(m_theme, &Kirigami::Platform::PlatformTheme::colorsChanged, this, &QQuickItem::polish);
+        // Only connect the signal if necessary.
+        // polish() is quite expensive, and colorsChanged can be emitted during interaction (ex. when window becomes not focused).
+        if (isMask()) {
+            connect(m_theme, &Kirigami::Platform::PlatformTheme::colorsChanged, this, &QQuickItem::polish);
+        }
     }
 
     if (m_networkReply) {
@@ -151,6 +155,16 @@ void Icon::setIsMask(bool mask)
     m_isMask = mask;
     polish();
     Q_EMIT isMaskChanged();
+
+    // Only connect the signal if necessary.
+    // polish() is quite expensive, and colorsChanged can be emitted during interaction (ex. when window becomes not focused).
+    if (m_theme) {
+        if (isMask()) {
+            connect(m_theme, &Kirigami::Platform::PlatformTheme::colorsChanged, this, &QQuickItem::polish);
+        } else {
+            disconnect(m_theme, &Kirigami::Platform::PlatformTheme::colorsChanged, this, &QQuickItem::polish);
+        }
+    }
 }
 
 bool Icon::isMask() const
