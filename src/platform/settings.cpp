@@ -218,7 +218,6 @@ QStringList Settings::information() const
 #ifndef KIRIGAMI_BUILD_TYPE_STATIC
         tr("KDE Frameworks %1").arg(QStringLiteral(KIRIGAMIPLATFORM_VERSION_STRING)),
 #endif
-        tr("The %1 windowing system").arg(QGuiApplication::platformName()),
         tr("Qt %2 (built against %3)").arg(QString::fromLocal8Bit(qVersion()), QStringLiteral(QT_VERSION_STR))};
 }
 
