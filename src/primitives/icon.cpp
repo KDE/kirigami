@@ -639,6 +639,16 @@ QImage Icon::iconPixmap(const QIcon &icon) const
 
 QIcon Icon::loadFromTheme(const QString &iconName) const
 {
+    // On applications, QIcon should use the kiconthemes engine under
+    // the hood, unless the icon is an absolute path, in which case
+    // it's not necessary. Calling m_theme->iconFromTheme allows us
+    // to set the tint colors, but it will force us to use kiconthemes,
+    // which does not work for e.g. absolute path to a png image.
+    // We restore the absolute path exception here.
+    if (QDir::isAbsolutePath(iconName)) {
+        return QIcon(iconName);
+    }
+
     const QColor tintColor = !m_color.isValid() || m_color == Qt::transparent ? (m_selected ? m_theme->highlightedTextColor() : m_theme->textColor()) : m_color;
     return m_theme->iconFromTheme(iconName, tintColor);
 }
