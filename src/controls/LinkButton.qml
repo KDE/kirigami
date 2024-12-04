@@ -9,33 +9,37 @@ import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 
-/**
- * @brief A button that looks like a link.
- *
- * It uses the link color settings and triggers an action when clicked.
- *
- * Maps to the Command Link in the HIG:
- * https://develop.kde.org/hig/components/navigation/commandlink/
- *
- * @since 5.52
- * @since org.kde.kirigami 2.6
- * @inherit QtQuick.Controls.Label
+/*!
+  \qmltype LinkButton
+  \inqmlmodule org.kde.kirigami
+  \brief A button that looks like a link.
+
+  It uses the link color settings and triggers an action when clicked.
+
+  Maps to the Command Link in the HIG:
+  https://develop.kde.org/hig/components/navigation/commandlink/
+
+  \since 5.52
  */
 QQC2.Label {
     id: control
 
+    /*!
+      \qmlproperty Action action
+      An action that will be triggered when the button is clicked
+     */
     property T.Action action
 
-    /**
-     * @brief This property holds the mouse buttons that the mouse area reacts to.
-     * @see QtQuick.MouseArea::acceptedButtons
-     * @property Qt::MouseButtons acceptedButtons
+    /*!
+      \qmlproperty Qt::MouseButtons LinkButton::acceptedButtons
+      \brief This property holds the mouse buttons that the mouse area reacts to.
+      \sa MouseArea::acceptedButtons
      */
     property alias acceptedButtons: area.acceptedButtons
 
-    /**
-     * @brief This property holds the mouse area element covering the button.
-     * @property MouseArea area
+    /*!
+      \qmlproperty MouseArea LinkButton::mouseArea
+      \brief This property holds the mouse area element covering the button.
      */
     property alias mouseArea: area
 

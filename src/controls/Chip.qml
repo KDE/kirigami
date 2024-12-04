@@ -9,36 +9,6 @@ import org.kde.kirigami as Kirigami
 import "templates" as KT
 import "private" as P
 
-/**
- * @brief A compact element that represents an attribute, action, or filter.
- *
- * Should be used in a group of multiple elements. e.g when displaying tags in a image viewer.
- *
- * Example usage:
- *  * @code
- * import org.kde.kirigami as Kirigami
- *
- * Flow {
- *     Repeater {
- *         model: chipsModel
- *
- *         Kirigami.Chip {
- *             text: model.text
- *             icon.name: "tag-symbolic"
- *             closable: model.closable
- *             onClicked: {
- *                 [...]
- *             }
- *             onRemoved: {
- *                 [...]
- *             }
- *         }
- *     }
- * }
- * @endcode
- *
- * @since 2.19
- */
 KT.Chip {
     id: chip
 
@@ -46,12 +16,7 @@ KT.Chip {
     implicitHeight: toolButton.implicitHeight
 
     checkable: !closable
-    hoverEnabled: true
 
-    /**
-     * @brief This property holds the label item; used for accessing the usual Text properties.
-     * @property QtQuick.Controls.Label labelItem
-     */
     property alias labelItem: label
 
     contentItem: RowLayout {

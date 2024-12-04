@@ -19,6 +19,7 @@ namespace Kirigami
 namespace Platform
 {
 
+// TODO qdoc document?
 class KIRIGAMIPLATFORM_EXPORT StyleSelector
 {
 public:

@@ -170,3 +170,4 @@ if(BUILD_QCH)
     )
 endif()
 
+ecm_generate_qdoc(KirigamiPlatform kirigamiplatform.qdocconf)
