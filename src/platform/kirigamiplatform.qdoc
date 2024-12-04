@@ -1,0 +1,26 @@
+/*!
+    \qmlmodule org.kde.kirigami.platform
+    \title Kirigami Platform QML Types
+    \brief Platform Integration Components.
+*/
+
+/*!
+    \module KirigamiPlatform
+    \title Kirigami Platform C++ Classes
+    \ingroup modules
+    \cmakepackage KF6
+    \cmakecomponent KirigamiPlatform
+
+    \brief Platform Integration Components.
+*/
+
+/*!
+ * \namespace Kirigami
+ * \inmodule KirigamiPlatform
+ */
+
+/*!
+ * \namespace Kirigami::Platform
+ * \inmodule KirigamiPlatform
+ * \brief Platform Integration Components.
+ */

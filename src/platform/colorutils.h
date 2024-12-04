@@ -13,8 +13,11 @@
 
 #include "kirigamiplatform_export.h"
 
-/**
- * Utilities for processing items to obtain colors and information useful for
+/*!
+ * \qmltype ColorUtils
+ * \inqmlmodule org.kde.kirigami.platform
+ *
+ * \brief Utilities for processing items to obtain colors and information useful for
  * UIs that need to adjust to variable elements.
  */
 class KIRIGAMIPLATFORM_EXPORT ColorUtils : public QObject
@@ -23,21 +26,29 @@ class KIRIGAMIPLATFORM_EXPORT ColorUtils : public QObject
     QML_ELEMENT
     QML_SINGLETON
 public:
-    /**
+    /*!
+     * \enum ColorUtils::Brightness
+     *
      * Describes the contrast of an item.
+     *
+     * \value Dark The item is dark and requires a light foreground color to achieve readable contrast
+     * \value Light The item is light and requires a dark foreground color to achieve readable contrast
+     *
      */
     enum Brightness {
-        Dark, /**< The item is dark and requires a light foreground color to achieve readable contrast. */
-        Light, /**< The item is light and requires a dark foreground color to achieve readable contrast. */
+        Dark,
+        Light,
     };
     Q_ENUM(Brightness)
 
     explicit ColorUtils(QObject *parent = nullptr);
 
-    /**
+    /*!
+     * \qmlmethod enumeration ColorUtils::brightnessForColor(color color)
+     *
      * Returns whether a color is bright or dark.
      *
-     * @code{.qml}
+     * \qml
      * import QtQuick
      * import org.kde.kirigami as Kirigami
      *
@@ -50,78 +61,82 @@ public:
      *         }
      *     }
      * }
-     * @endcode
+     * \endqml
      *
-     * @since 5.69
-     * @since org.kde.kirigami 2.12
+     * \since 5.69
      */
     Q_INVOKABLE ColorUtils::Brightness brightnessForColor(const QColor &color);
 
-    /**
+    /*!
+     * \qmlmethod real ColorUtils::grayForColor(color color)
+     *
      * Same Algorithm as brightnessForColor but returns a 0 to 1 value for an
      * estimate of the equivalent gray light value (luma).
      * 0 as full black, 1 as full white and 0.5 equivalent to a 50% gray.
      *
-     * @since 5.81
-     * @since org.kde.kirigami 2.16
+     * \since 5.81
      */
     Q_INVOKABLE qreal grayForColor(const QColor &color);
 
-    /**
+    /*!
+     * \qmlmethod color ColorUtils::alphaBlend(color foreground, color background)
+     *
      * Returns the result of overlaying the foreground color on the background
      * color.
      *
-     * @param foreground The color to overlay on the background.
+     * \a foreground The color to overlay on the background.
      *
-     * @param background The color to overlay the foreground on.
+     * \a background The color to overlay the foreground on.
      *
-     * @code{.qml}
+     * \qml
      * import QtQuick
      * import org.kde.kirigami as Kirigami
      *
      * Rectangle {
      *     color: Kirigami.ColorUtils.alphaBlend(Qt.rgba(0, 0, 0, 0.5), Qt.rgba(1, 1, 1, 1))
      * }
-     * @endcode
+     * \endqml
      *
-     * @since 5.69
-     * @since org.kde.kirigami 2.12
+     * \since 5.69
      */
     Q_INVOKABLE QColor alphaBlend(const QColor &foreground, const QColor &background);
 
-    /**
+    /*!
+     * \qmlmethod color ColorUtils::linearInterpolation(color one, color two, real balance)
+     *
      * Returns a linearly interpolated color between color one and color two.
      *
-     * @param one The color to linearly interpolate from.
+     * \a one The color to linearly interpolate from.
      *
-     * @param two The color to linearly interpolate to.
+     * \a two The color to linearly interpolate to.
      *
-     * @param balance The balance between the two colors. 0.0 will return the
+     * \a balance The balance between the two colors. 0.0 will return the
      * first color, 1.0 will return the second color. Values beyond these bounds
      * are valid, and will result in extrapolation.
      *
-     * @code{.qml}
+     * \qml
      * import QtQuick
      * import org.kde.kirigami as Kirigami
      *
      * Rectangle {
      *     color: Kirigami.ColorUtils.linearInterpolation("black", "white", 0.5)
      * }
-     * @endcode
+     * \endqml
      *
-     * @since 5.69
-     * @since org.kde.kirigami 2.12
+     * \since 5.69
      */
     Q_INVOKABLE QColor linearInterpolation(const QColor &one, const QColor &two, double balance);
 
-    /**
-     * Increases or decreases the properties of `color` by fixed amounts.
+    /*!
+     * \qmlmethod color ColorUtils::adjustColor
      *
-     * @param color The color to adjust.
+     * Increases or decreases the properties of color by fixed amounts.
      *
-     * @param adjustments The adjustments to apply to the color.
+     * \a color The color to adjust.
      *
-     * @code{.js}
+     * \a adjustments The adjustments to apply to the color.
+     *
+     * \qml
      * {
      *     red: null, // Range: -255 to 255
      *     green: null, // Range: -255 to 255
@@ -131,26 +146,27 @@ public:
      *     value: null // Range: -255 to 255
      *     alpha: null, // Range: -255 to 255
      * }
-     * @endcode
+     * \endqml
      *
-     * @warning It is an error to adjust both RGB and HSV properties.
+     * \warning It is an error to adjust both RGB and HSV properties.
      *
-     * @since 5.69
-     * @since org.kde.kirigami 2.12
+     * \since 5.69
      */
     Q_INVOKABLE QColor adjustColor(const QColor &color, const QJSValue &adjustments);
 
-    /**
+    /*!
+     * \qmlmethod color ColorUtils::scaleColor
+     *
      * Smoothly scales colors.
      *
-     * @param color The color to adjust.
+     * \a color The color to adjust.
      *
-     * @param adjustments The adjustments to apply to the color. Each value must
+     * \a adjustments The adjustments to apply to the color. Each value must
      * be between `-100.0` and `100.0`. This indicates how far the property should
      * be scaled from its original to the maximum if positive or to the minimum if
      * negative.
      *
-     * @code{.js}
+     * \qml
      * {
      *     red: null
      *     green: null
@@ -159,16 +175,17 @@ public:
      *     value: null
      *     alpha: null
      * }
-     * @endcode
+     * \endqml
      *
-     * @warning It is an error to scale both RGB and HSV properties.
+     * \warning It is an error to scale both RGB and HSV properties.
      *
-     * @since 5.69
-     * @since org.kde.kirigami 2.12
+     * \since 5.69
      */
     Q_INVOKABLE QColor scaleColor(const QColor &color, const QJSValue &adjustments);
 
-    /**
+    /*!
+     * \qmlmethod color ColorUtils::tintWithAlpha
+     *
      * Tint a color using a separate alpha value.
      *
      * This does the same as Qt.tint() except that rather than using the tint
@@ -176,23 +193,25 @@ public:
      * the tint color's alpha. This avoids needing to create a new color just to
      * adjust an alpha value.
      *
-     * \param targetColor The color to tint.
-     * \param tintColor The color to tint with.
-     * \param alpha The amount of tinting to apply.
+     * \a targetColor The color to tint.
      *
-     * \return The tinted color.
+     * \a tintColor The color to tint with.
+     *
+     * \a alpha The amount of tinting to apply.
      *
      * \sa Qt.tint()
      */
     Q_INVOKABLE QColor tintWithAlpha(const QColor &targetColor, const QColor &tintColor, double alpha);
 
-    /**
+    /*!
+     * \qmlmethod real ColorUtils::chroma
+     *
      * Returns the CIELAB chroma of the given color.
      *
      * CIELAB chroma may give a better quantification of how vibrant a color is compared to HSV saturation.
      *
-     * \sa https://en.wikipedia.org/wiki/Colorfulness
-     * \sa https://en.wikipedia.org/wiki/CIELAB_color_space
+     * \sa {https://en.wikipedia.org/wiki/Colorfulness} {Colorfulness (Wikipedia)}
+     * \sa {https://en.wikipedia.org/wiki/CIELAB_color_space} {CIELAB Color Space (Wikipedia)}
      */
     Q_INVOKABLE static qreal chroma(const QColor &color);
 

@@ -9,61 +9,59 @@ import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 
-/**
- * @brief A button that looks like a link.
- *
- * It uses the link color settings and triggers an action when clicked.
- *
- * Maps to the Command Link in the HIG:
- * https://develop.kde.org/hig/components/navigation/commandlink/
- *
- * @since 5.52
- * @since org.kde.kirigami 2.6
- * @inherit QtQuick.Controls.Label
+/*!
+  \qmltype LinkButton
+  \inqmlmodule org.kde.kirigami
+  \brief A button that looks like a link.
+
+  It uses the link color settings and triggers an action when clicked.
+
+  Maps to the Command Link in the HIG:
+  \l https://develop.kde.org/hig/components/navigation/commandlink/
+
+  \since 5.52
  */
 QQC2.Label {
     id: control
 
+    /*!
+      \qmlproperty Action action
+      An action that will be triggered when the button is clicked
+     */
     property T.Action action
 
-    /**
-     * @brief This property holds the mouse buttons that the mouse area reacts to.
-     * @see QtQuick.MouseArea::acceptedButtons
-     * @property Qt::MouseButtons acceptedButtons
+    /*!
+      \qmlproperty Qt::MouseButtons LinkButton::acceptedButtons
+      \brief This property holds the mouse buttons that the mouse area reacts to.
+      \sa MouseArea::acceptedButtons
      */
     property alias acceptedButtons: area.acceptedButtons
 
-    /**
-     * @brief This property holds the mouse area element covering the button.
-     * @property MouseArea area
+    /*!
+      \qmlproperty MouseArea LinkButton::mouseArea
+      \brief This property holds the mouse area element covering the button.
      */
     property alias mouseArea: area
 
-    /**
-     * @brief This property holds the normal color of the link when not pressed
-     * or disabled.
-     *
-     * default: Kirigami.Theme.linkColor
-     *
-     * @property color normalColor
+    /*!
+      This property holds the normal color of the link when not pressed
+      or disabled.
+
+      default: Kirigami.Theme.linkColor
      */
     property color normalColor: Kirigami.Theme.linkColor
 
-    /**
-     * @brief This property holds the color of the link while pressed.
-     *
-     * default: Whatever the normal color is set to, but 200% darker
-     *
-     * @property color pressedColor
+    /*!
+      This property holds the color of the link while pressed.
+
+      default: Whatever the normal color is set to, but 200% darker
      */
     property color pressedColor: Qt.darker(normalColor)
 
-    /**
-     * @brief This property holds the color of the link when disabled.
-     *
-     * default: Kirigami.Theme.textColor
-     *
-     * @property color disabledColor
+    /*!
+      This property holds the color of the link when disabled.
+
+      default: Kirigami.Theme.textColor
      */
     property color disabledColor: Kirigami.Theme.textColor
 

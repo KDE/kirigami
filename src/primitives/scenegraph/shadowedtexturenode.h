@@ -12,7 +12,7 @@
 #include "shadowedrectanglenode.h"
 #include "shadowedtexturematerial.h"
 
-/**
+/*
  * Scene graph node for a shadowed texture source.
  *
  * This node will set up the geometry and materials for a shadowed rectangle,

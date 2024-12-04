@@ -10,28 +10,30 @@ import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 
-/**
- * @brief An overlay sheet that covers the current Page content.
- *
- * Its contents can be scrolled up or down, scrolling all the way up or
- * all the way down, dismisses it.
- * Use this for big, modal dialogs or information display, that can't be
- * logically done as a new separate Page, even if potentially
- * are taller than the screen space.
- *
- * Example usage:
- * @code
- * Kirigami.OverlaySheet {
- *    ColumnLayout { ... }
- * }
- * Kirigami.OverlaySheet {
- *    ListView { ... }
- * }
- * @endcode
- *
- * It needs a single element declared inside, do *not* override its contentItem
- *
- * @inherit QtQuick.Templates.Popup
+/*!
+  \qmltype Overlay
+  \inqmlmodule org.kde.kirigami
+
+  \brief An overlay sheet that covers the current Page content.
+
+  Its contents can be scrolled up or down, scrolling all the way up or
+  all the way down, dismisses it.
+  Use this for big, modal dialogs or information display, that can't be
+  logically done as a new separate Page, even if potentially
+  are taller than the screen space.
+
+  Example usage:
+  \qml
+  Kirigami.OverlaySheet {
+     ColumnLayout { ... }
+  }
+  Kirigami.OverlaySheet {
+     ListView { ... }
+  }
+  \endqml
+
+  \note It needs a single element declared inside, do not override its contentItem.
+
  */
 T.Popup {
     id: root
@@ -44,22 +46,21 @@ T.Popup {
 
 //BEGIN Own Properties
 
-    /**
-     * @brief A title to be displayed in the header of this Sheet
+    /*!
+      \brief A title to be displayed in the header of this Sheet.
      */
     property string title
 
-    /**
-     * @brief This property sets the visibility of the close button in the top-right corner.
-     *
-     * default: `Only shown in desktop mode`
-     *
+    /*!
+      \brief This property sets the visibility of the close button in the top-right corner.
+
+      default: Only shown in desktop mode
      */
     property bool showCloseButton: !Kirigami.Settings.isMobile
 
-    /**
-     * @brief This property holds an optional item which will be used as the sheet's header,
-     * and will always be displayed.
+    /*!
+      \brief This property holds an optional item which will be used as the sheet's header,
+      and will always be displayed.
      */
     property Item header: Kirigami.Heading {
         level: 2
@@ -75,9 +76,9 @@ T.Popup {
         }
     }
 
-    /**
-     * @brief An optional item which will be used as the sheet's footer,
-     * always kept on screen.
+    /*!
+      \brief An optional item which will be used as the sheet's footer,
+      always kept on screen.
      */
     property Item footer
 
