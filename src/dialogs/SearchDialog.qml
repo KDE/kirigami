@@ -10,118 +10,146 @@ import QtQuick.Layouts
 
 import org.kde.kirigami as Kirigami
 
-/**
- * A dialog to let's you do a global search accross your applications
- * documents, chat rooms and more.
- *
- * Example usage for a chat app where we want to quickly search for a room.
- *
- * @code{.qml}
- * import QtQuick
- * import org.kde.kitemmodels as KItemModels
- * import org.kde.kirigami as Kirigami
- *
- * Kirigami.SearchDialog {
- *    id: root
- *
- *    onTextChanged: {
- *        sortModel.filterText = text;
- *    }
- *    onAccepted: listView.currentItem.clicked()
- *
- *    emptyText: i18nc("Placeholder message", "No room found.")
- *
- *    model: KItemModels.KSortFilterProxyModel {
- *        id: sortModel
- *
- *        sourceModel: RoomModel { }
- *    }
- *
- *    delegate: RoomDelegate {
- *        onClicked: root.close()
- *    }
- *
- *    Shortcut {
- *        sequence: "Ctrl+K"
- *        onActivated: root.open()
- *    }
- * }
- * @endcode{}
- *
- * @image html searchdialog.html
- *
- * @note This component is unsuitable on mobile. Instead on mobile prefer to
- * use a seperate page for the search.
- *
- * @since Kirigami 6.3
+/*!
+  \qmltype SearchDialog
+  \inqmlmodule org.kde.kirigami.dialogs
+
+  \brief A dialog to let's you do a global search accross your applications
+  documents, chat rooms and more.
+
+  Example usage for a chat app where we want to quickly search for a room.
+
+  \qml
+  import QtQuick
+  import org.kde.kitemmodels as KItemModels
+  import org.kde.kirigami as Kirigami
+
+  Kirigami.SearchDialog {
+     id: root
+
+     onTextChanged: {
+         sortModel.filterText = text;
+     }
+     onAccepted: listView.currentItem.clicked()
+
+     emptyText: i18nc("Placeholder message", "No room found.")
+
+     model: KItemModels.KSortFilterProxyModel {
+         id: sortModel
+
+         sourceModel: RoomModel { }
+     }
+
+     delegate: RoomDelegate {
+         onClicked: root.close()
+     }
+
+     Shortcut {
+         sequence: "Ctrl+K"
+         onActivated: root.open()
+     }
+  }
+  \endqml
+
+  \image searchdialog.png
+
+  \note This component is unsuitable on mobile. Instead on mobile prefer to
+  use a seperate page for the search.
+
+  \since 6.3
  */
 QQC2.Dialog {
     id: root
 
-    /**
-     * This property holds an alias to the model of the internal ListView.
+    /*!
+      \qmlproperty model SearchDialog::model
+      This property holds an alias to the model of the internal ListView.
      */
     property alias model: listView.model
 
-    /**
-     * This property holds an alias to the delegate component of the internal ListView.
+    /*!
+      \qmlproperty Component SearchDialog::delegate
+      This property holds an alias to the delegate component of the internal ListView.
      */
     property alias delegate: listView.delegate
 
-    /**
-     * This property holds an alias to the currentItem component of the internal ListView.
+    /*!
+      \qmlproperty Item SearchDialog::currentItem
+      This property holds an alias to the currentItem component of the internal ListView.
      */
     property alias currentItem: listView.currentItem
 
-    /**
-     * This property holds an alias to the section component of the internal ListView.
+    /*!
+      \qmlproperty enumeration SearchDialog::section.criteria
+      \qmlproperty Component SearchDialog::section.delegate
+      \qmlproperty enumneration SearchDialog::section.labelPositioning
+      \qmlproperty string SearchDialog::section.property
+
+      This property holds an alias to the section component of the internal ListView.
      */
     property alias section: listView.section
 
-    /**
-     * This property holds an alias to the content of the search field.
+    /*!
+      \qmlproperty string SearchDialog::text
+      This property holds an alias to the content of the search field.
      */
     property alias text: searchField.text
 
-    /**
-     * This property holds an alias to the left actions of the seach field.
+    /*!
+      \qmlproperty list<Action> SearchDialog::searchFieldLeftActions
+      This property holds an alias to the left actions of the search field.
+
+      \sa ActionTextField::leftActions
      */
     property alias searchFieldLeftActions: searchField.leftActions
 
-    /**
-     * This property holds an alias to the right actions of the seach field.
+    /*!
+      \qmlproperty list<Action> SearchDialog::searchFieldRightActions
+      This property holds an alias to the right actions of the search field.
+
+      \sa ActionTextField::rightActions
      */
     property alias searchFieldRightActions: searchField.rightActions
 
-    /**
-     * The placeholder text shown in the (empty) search field.
+    /*!
+      \qmlproperty string SearchDialog::searchFieldPlaceholderText
+      The placeholder text shown in the (empty) search field.
      */
     property alias searchFieldPlaceholderText: searchField.placeholderText
 
-    /**
-     * This property holds the number of search results displayed in the internal ListView.
+    /*!
+      \qmlproperty int SearchDialog::count
+      This property holds the number of search results displayed in the internal ListView.
      */
     property alias count: listView.count
 
-    /**
-     * This property holds an alias to the placeholder message text displayed
-     * when the internal list view is empty.
+    /*!
+      \qmlproperty string SearchDialog::emptyText
+      This property holds an alias to the placeholder message text displayed
+      when the internal list view is empty.
      */
     property alias emptyText: placeholder.text
 
-    /**
-     * This property holds an alias to the placeholder message icon displayed
-     * when the internal list view is empty.
+    /*!
+     \qmlproperty string SearchDialog::emptyIcon.name
+     \qmlproperty string SearchDialog::emptyIcon.source
+     \qmlproperty int SearchDialog::emptyIcon.width
+     \qmlproperty int SearchDialog::emptyIcon.height
+     \qmlproperty color SearchDialog::emptyIcon.color
+
+      This property holds an alias to the placeholder message icon displayed
+      when the internal list view is empty.
      */
     property alias emptyIcon: placeholder.icon
 
-    /**
-     * @brief Helpful action when the list is empty
-     *
-     * This property holds an alias to the helpful action of the placeholder message
-     * when the internal list view is empty.
-     *
-     * @since 6.10
+    /*!
+       \qmlproperty Action SearchDialog::emptyHelpfulAction
+       \brief Helpful action when the list is empty
+
+       This property holds an alias to the helpful action of the placeholder message
+       when the internal list view is empty.
+
+       \since 6.10
      */
     property alias emptyHelpfulAction: placeholder.helpfulAction
 

@@ -8,12 +8,17 @@
 #include <QQuickItem>
 #include <qqmlregistration.h>
 
-/**
- * This attached property makes possible to access from anywhere the
- * page stack this page was pushed into.
- * It can be an instance of org::kde::kirigami::PageRow or
- * a StackView from QtQuickControls
+/*!
+ * \qmltype PageStack
+ * \inqmlmodule org.kde.kirigami.layouts
  *
+ * \brief This attached property makes possible to access from anywhere the
+ * page stack this page was pushed into.
+ *
+ * It can be an instance of PageRow or
+ * a StackView from QtQuick Controls.
+ *
+ * \qml
  * Kirigami.Page {
  *     id: root
  *
@@ -22,8 +27,9 @@
  *         onClicked: Kirigami.PageStack.push(Qt.resolvedurl("AnotherPage"));
  *     }
  * }
+ * \endqml
  *
- * @since 6.10
+ * \since 6.10
  */
 class PageStackAttached : public QQuickAttachedPropertyPropagator
 {
@@ -32,27 +38,44 @@ class PageStackAttached : public QQuickAttachedPropertyPropagator
     QML_ATTACHED(PageStackAttached)
     QML_UNCREATABLE("")
 
+    /*!
+     * \qmlattachedproperty Item PageStack::pageStack
+     *
+     * This property holds the pageStack where this page was pushed.
+     *
+     * It will point to the proper instance in the parent hierarchy
+     * and normally is not necessary to explicitly write it.
+     *
+     * Write on this property only if it's desired this attached
+     * property and those of all the children to point to a different
+     * PageRow or StackView
+     */
     Q_PROPERTY(QQuickItem *pageStack READ pageStack WRITE setPageStack NOTIFY pageStackChanged)
 
 public:
     explicit PageStackAttached(QObject *parent);
 
-    /*!
-        \qmlattachedproperty PageRow PageStack::pageStack
-
-        This property holds the pageStack where this page was pushed.
-        It will point to the proper instance in the parent hyerarchy
-        and normally is not necessary to explicitly write it.
-        Write on this property only if it's desired this attached
-        property and those of all the children to point to a different
-        PageRow or StackView
-    */
     QQuickItem *pageStack() const;
     void setPageStack(QQuickItem *pageStack);
 
+    /*!
+     * \qmlattachedmethod void PageStack::push(variant page, object properties)
+     */
     Q_INVOKABLE void push(const QVariant &page, const QVariantMap &properties = QVariantMap());
+
+    /*!
+     * \qmlattachedmethod void PageStack::replace(variant page, object properties)
+     */
     Q_INVOKABLE void replace(const QVariant &page, const QVariantMap &properties = QVariantMap());
+
+    /*!
+     * \qmlattachedmethod void PageStack::pop(variant page)
+     */
     Q_INVOKABLE void pop(const QVariant &page = QVariant());
+
+    /*!
+     * \qmlattachedmethod void PageStack::clear()
+     */
     Q_INVOKABLE void clear();
 
     static PageStackAttached *qmlAttachedProperties(QObject *object);

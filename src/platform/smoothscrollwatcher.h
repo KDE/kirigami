@@ -15,9 +15,7 @@ namespace Kirigami
 {
 namespace Platform
 {
-/**
- * @class SmoothScrollWatcher smoothscrollwatcher.h <Kirigami/SmoothScrollWatcher>
- *
+/*
  * This class reports on the status of the SmoothScroll DBus interface,
  * which sends a message when the smooth scroll setting gets changed.
  */

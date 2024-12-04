@@ -9,47 +9,85 @@ import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 
-/**
- * @brief An item that can be used as a title for the application.
- *
- * Scrolling the main page will make it taller or shorter (through the point of going away)
- * It's a behavior similar to the typical mobile web browser addressbar
- * the minimum, preferred and maximum heights of the item can be controlled with
- * * minimumHeight: default is 0, i.e. hidden
- * * preferredHeight: default is Units.gridUnit * 1.6
- * * maximumHeight: default is Units.gridUnit * 3
- *
- * To achieve a titlebar that stays completely fixed just set the 3 sizes as the same
- *
- * @inherit QtQuick.Item
+/*!
+  \qmltype AbstractApplicationHeader
+  \inqmlmodule org.kde.kirigami
+
+  \brief An item that can be used as a title for the application.
+
+  Scrolling the main page will make it taller or shorter (through the point of going away)
+  It's a behavior similar to the typical mobile web browser addressbar
+  the minimum, preferred and maximum heights of the item can be controlled with:
+  \list
+  \li minimumHeight: default is 0, i.e. hidden
+  \li preferredHeight: default is Units.gridUnit * 1.6
+  \li maximumHeight: default is Units.gridUnit * 3
+  \endlist
+  To achieve a titlebar that stays completely fixed just set the 3 sizes as the same.
  */
 Item {
     id: root
     z: 90
+
+    /*!
+     */
     property int minimumHeight: 0
+
     // Use an inline arrow function, referring to an external normal function makes QV4 crash, see https://bugreports.qt.io/browse/QTBUG-119395
+    /*!
+     */
     property int preferredHeight: mainItem.children.reduce((accumulator, item) => {
         return Math.max(accumulator, item.implicitHeight);
     }, 0) + topPadding + bottomPadding
+
+    /*!
+     */
     property int maximumHeight: Kirigami.Units.gridUnit * 3
 
+    /*!
+     */
     property int position: QQC2.ToolBar.Header
 
+    /*!
+     */
     property Kirigami.PageRow pageRow: __appWindow?.pageStack ?? null
+
+    /*!
+     */
     property Kirigami.Page page: pageRow?.currentItem as Kirigami.Page ?? null
 
+    /*!
+     *
+     */
     default property alias contentItem: mainItem.data
+
+    /*!
+     */
     readonly property int paintedHeight: headerItem.y + headerItem.height - 1
 
+    /*!
+     */
     property int leftPadding: 0
+
+    /*!
+     */
     property int topPadding: 0
+
+    /*!
+     */
     property int rightPadding: 0
+
+    /*!
+     */
     property int bottomPadding: 0
+
+    /*!
+     */
     property bool separatorVisible: true
 
-    /**
-     * This property specifies whether the header should be pushed back when
-     * scrolling using the touch screen.
+    /*!
+      This property specifies whether the header should be pushed back when
+      scrolling using the touch screen.
      */
     property bool hideWhenTouchScrolling: root.pageRow?.globalToolBar.hideWhenTouchScrolling ?? false
 
@@ -63,9 +101,9 @@ Item {
     implicitHeight: preferredHeight
     height: Layout.preferredHeight
 
-    /**
-     * @brief This property holds the background item.
-     * @note the background will be automatically sized to fill the whole control
+    /*!
+      \brief This property holds the background item.
+      \note The background will be automatically sized to fill the whole control.
      */
     property Item background
 

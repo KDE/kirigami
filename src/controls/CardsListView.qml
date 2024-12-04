@@ -7,24 +7,27 @@
 import QtQuick
 import org.kde.kirigami as Kirigami
 
-/**
- * CardsListView is a ListView which can have AbstractCard as its delegate: it will
- * automatically assign the proper spacings and margins around the cards adhering
- * to the design guidelines.
- *
- * CardsListView should be used only with cards which can look good at any
- * horizontal size, so it is recommended to directly use AbstractCard with an
- * appropriate layout inside, because they are stretching for the whole list width.
- *
- * Therefore, it is discouraged to use it with the Card type.
- *
- * The choice between using this view with AbstractCard or a normal ListView
- * is purely a choice based on aesthetics alone.
- *
- * It is recommended to use default values.
- *
- * @inherit QtQuick.ListView
- * @since 2.4
+/*!
+  \qmltype CardsListView
+  \inqmlmodule org.kde.kirigami
+
+  \brief A ListView that can have AbstractCard as its delegate.
+
+  This control will automatically assign the proper spacings
+  and margins around the cards adhering to the design guidelines.
+
+  CardsListView should be used only with cards which can look good at any
+  horizontal size, so it is recommended to directly use AbstractCard with an
+  appropriate layout inside, because they are stretching for the whole list width.
+
+  Therefore, it is discouraged to use it with the Card type.
+
+  The choice between using this view with AbstractCard or a normal ListView
+  is purely a choice based on aesthetics alone.
+
+  It is recommended to use default values.
+
+  \since 2.4
  */
 ListView {
     id: root

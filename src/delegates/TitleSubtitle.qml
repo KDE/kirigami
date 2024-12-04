@@ -9,106 +9,109 @@
 import QtQuick
 import org.kde.kirigami.platform as Platform
 
-/**
- * A simple item containing a title and subtitle label.
- *
- * This is mainly intended as a replacement for a list delegate content item,
- * but can be used as a replacement for other content items as well.
- *
- * When using it as a contentItem, make sure to bind the appropriate properties
- * to those of the Control. Prefer binding to the Control's properties over
- * setting the properties directly, as the Control's properties may affect other
- * things like setting accessible names.
- *
- * Example usage as contentItem of an ItemDelegate:
- *
- * ```qml
- * ItemDelegate {
- *     id: delegate
- *
- *     text: "Example"
- *
- *     contentItem: Kirigami.TitleSubtitle {
- *         title: delegate.text
- *         subtitle: "This is an example."
- *         font: delegate.font
- *         selected: delegate.highlighted || delegate.down
- *     }
- * }
- * ```
- *
- * \sa Kirigami::Delegates::IconTitleSubtitle
- * \sa Kirigami::Delegates::ItemDelegate
+/*!
+  \qmltype TitleSubtitle
+  \inqmlmodule org.kde.kirigami.delegates
+
+  \brief A simple item containing a title and subtitle label.
+
+  This is mainly intended as a replacement for a list delegate content item,
+  but can be used as a replacement for other content items as well.
+
+  When using it as a contentItem, make sure to bind the appropriate properties
+  to those of the Control. Prefer binding to the Control's properties over
+  setting the properties directly, as the Control's properties may affect other
+  things like setting accessible names.
+
+  Example usage as contentItem of an ItemDelegate:
+
+  \qml
+  ItemDelegate {
+      id: delegate
+
+      text: "Example"
+
+      contentItem: Kirigami.TitleSubtitle {
+          title: delegate.text
+          subtitle: "This is an example."
+          font: delegate.font
+          selected: delegate.highlighted || delegate.down
+      }
+  }
+  \endqml
+
+  \sa IconTitleSubtitle
+  \sa ItemDelegate
  */
 Item {
     id: root
 
-    /**
-     * The title to display.
+    /*!
+      The title to display.
      */
     required property string title
-    /**
-     * The subtitle to display.
+    /*!
+      The subtitle to display.
      */
     property string subtitle
-    /**
-     * The color to use for the title.
-     *
-     * By default this is `Kirigami.Theme.textColor` unless `selected` is true
-     * in which case this is `Kirigami.Theme.highlightedTextColor`.
+    /*!
+      The color to use for the title.
+
+      By default this is Kirigami.Theme.textColor unless selected is true
+      in which case this is Kirigami.Theme.highlightedTextColor.
      */
     property color color: selected ? Platform.Theme.highlightedTextColor : Platform.Theme.textColor
-    /**
-     * The color to use for the subtitle.
-     *
-     * By default this is `color` mixed with the background color.
+    /*!
+      The color to use for the subtitle.
+
+      By default this is color mixed with the background color.
      */
     property color subtitleColor: selected
         ? Platform.Theme.highlightedTextColor
         : Platform.ColorUtils.linearInterpolation(color, Platform.Theme.backgroundColor, 0.3)
-    /**
-     * The font used to display the title.
+    /*!
+      The font used to display the title.
      */
     property font font: Platform.Theme.defaultFont
-    /**
-     * The font used to display the subtitle.
+    /*!
+      The font used to display the subtitle.
      */
     property font subtitleFont: Platform.Theme.smallFont
-    /**
-     * The text elision mode used for both the title and subtitle.
+    /*!
+      The text elision mode used for both the title and subtitle.
      */
     property int elide: Text.ElideRight
-    /**
-     * The text wrap mode used for both the title and subtitle.
+    /*!
+      The text wrap mode used for both the title and subtitle.
      */
     property int wrapMode: Text.NoWrap
-    /**
-     * Make the implicit height use the subtitle's height even if no subtitle is set.
+    /*!
+      Make the implicit height use the subtitle's height even if no subtitle is set.
      */
     property bool reserveSpaceForSubtitle: false
-    /**
-     * Should this item be displayed in a selected style?
+    /*!
+      Should this item be displayed in a selected style?
      */
     property bool selected: false
-    /**
-     * Is the subtitle visible?
+    /*!
+      Is the subtitle visible?
      */
     // Note: Don't rely on subtitleItem.visible because visibility is an
     // implicitly propagated property, and we don't wanna re-layout on
     // hide/show events. Copy-paste its bound expression instead.
     readonly property bool subtitleVisible: subtitle.length > 0 || reserveSpaceForSubtitle
-    /**
-     * Is the title or subtitle truncated?
+    /*!
+      Is the title or subtitle truncated?
      */
     readonly property bool truncated: labelItem.truncated || subtitleItem.truncated
 
-    /**
-     * @brief Emitted when the user clicks on a link embedded in the text of the title or subtitle.
+    /*!
+      \brief Emitted when the user clicks on a link embedded in the text of the title or subtitle.
      */
     signal linkActivated(string link)
 
-    /**
-     * @brief Emitted when the user hovers on a link embedded in the text of the title or subtitle.
+    /*!
+      \brief Emitted when the user hovers on a link embedded in the text of the title or subtitle.
      */
     signal linkHovered(string link)
 

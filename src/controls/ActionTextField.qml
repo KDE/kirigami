@@ -9,62 +9,68 @@ import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 
-/**
- * This is advanced textfield. It is recommended to use this class when there
- * is a need to create a create a textfield with action buttons (e.g a clear
- * action).
- *
- * Example usage for a search field:
- * @code
- * import org.kde.kirigami as Kirigami
- *
- * Kirigami.ActionTextField {
- *     id: searchField
- *
- *     placeholderText: i18n("Search…")
- *
- *     focusSequence: StandardKey.Find
- *
- *     rightActions: Kirigami.Action {
- *         icon.name: "edit-clear"
- *         visible: searchField.text.length > 0
- *         onTriggered: {
- *             searchField.clear();
- *             searchField.accepted();
- *         }
- *     }
- *
- *     onAccepted: console.log("Search text is " + searchField.text);
- * }
- * @endcode
- *
- * @since 5.56
- * @inherit QtQuick.Controls.TextField
+/*!
+  \qmltype ActionTextField
+  \inqmlmodule org.kde.kirigami
+
+  \brief An advanced control to create custom textfields
+  with action buttons (for example, with a Clear button).
+
+  Example usage for a search field:
+  \code
+  import org.kde.kirigami as Kirigami
+
+  Kirigami.ActionTextField {
+      id: searchField
+
+      placeholderText: i18n("Search…")
+
+      focusSequence: StandardKey.Find
+
+      rightActions: Kirigami.Action {
+          icon.name: "edit-clear"
+          visible: searchField.text.length > 0
+          onTriggered: {
+              searchField.clear();
+              searchField.accepted();
+          }
+      }
+
+      onAccepted: console.log("Search text is " + searchField.text);
+  }
+  \endcode
+
+  \since 5.56
  */
 QQC2.TextField {
     id: root
 
-    /**
-     * @brief This property holds a shortcut sequence that will focus the text field.
-     * @since 5.56
+    /*!
+      \qmlproperty keysequence ActionTextField::focusSequence
+      This property holds a shortcut sequence that will focus the text field.
+      \since 5.56
      */
     property alias focusSequence: focusShortcut.sequence
 
-    /**
-     * @brief This property holds a list of actions that will be displayed on the left side of the text field.
-     *
-     * By default this list is empty.
-     *
-     * @since 5.56
+    /*!
+      \qmlproperty list<Action> leftActions
+
+      This property holds a list of actions that will be displayed on the left side of the text field.
+
+      By default this list is empty.
+
+      \since 5.56
      */
     property list<T.Action> leftActions
 
-    /**
-     * @brief This property holds a list of actions that will be displayed on the right side of the text field.
-     *
-     * By default this list is empty.
-     *
-     * @since 5.56
+    /*!
+      \qmlproperty list<Action> rightActions
+
+      This property holds a list of actions that will be displayed on the right side of the text field.
+
+      By default this list is empty.
+
+      \since 5.56
      */
     property list<T.Action> rightActions
 

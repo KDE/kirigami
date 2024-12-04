@@ -11,39 +11,41 @@ import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 import "private" as KP
 
-/**
- * A specialized type of drawer that will show a list of actions
- * relevant to the application's current page.
- *
- * Example usage:
- *
- * @code
- * import org.kde.kirigami as Kirigami
- *
- * Kirigami.ApplicationWindow {
- *     contextDrawer: Kirigami.ContextDrawer {
- *         enabled: true
- *         actions: [
- *             Kirigami.Action {
- *                 icon.name: "edit"
- *                 text: "Action text"
- *                 onTriggered: {
- *                     // do stuff
- *                 }
- *             },
- *             Kirigami.Action {
- *                 icon.name: "edit"
- *                 text: "Action text"
- *                 onTriggered: {
- *                     // do stuff
- *                 }
- *             }
- *         ]
- *     }
- * }
- * @endcode
- *
- * @inherit OverlayDrawer
+/*!
+  \qmltype ContextDrawer
+  \inqmlmodule org.kde.kirigami
+
+  \brief A specialized type of drawer that will show a list of actions
+  relevant to the application's current page.
+
+  Example usage:
+
+  \code
+  import org.kde.kirigami as Kirigami
+
+  Kirigami.ApplicationWindow {
+      contextDrawer: Kirigami.ContextDrawer {
+          enabled: true
+          actions: [
+              Kirigami.Action {
+                  icon.name: "edit"
+                  text: "Action text"
+                  onTriggered: {
+                      // do stuff
+                  }
+              },
+              Kirigami.Action {
+                  icon.name: "edit"
+                  text: "Action text"
+                  onTriggered: {
+                      // do stuff
+                  }
+              }
+          ]
+      }
+  }
+  \endcode
+
  */
 Kirigami.OverlayDrawer {
     id: root
@@ -51,37 +53,35 @@ Kirigami.OverlayDrawer {
     handleClosedIcon.source: null
     handleOpenIcon.source: null
 
-    /**
-     * @brief A title for the action list that will be shown to the user when opens the drawer
-     *
-     * default: ``qsTr("Actions")``
+    /*!
+      \brief A title for the action list that will be shown to the user when opens the drawer
+
+      default: qsTr("Actions")
      */
     property string title: qsTr("Actions")
 
-    /**
-     * List of contextual actions to be displayed in a ListView.
-     *
-     * @see QtQuick.Action
-     * @see org::kde::kirigami::Action
-     * @property list<T.Action> actions
+    /*!
+      \qmlproperty list<Action> actions
+      List of contextual actions to be displayed in a ListView.
      */
     property list<T.Action> actions
 
-    /**
-     * @brief Arbitrary content to show above the list view.
-     *
-     * default: `an Item containing a Kirigami.Heading that displays a title whose text is
-     * controlled by the title property.`
-     *
-     * @property Component header
-     * @since 2.7
+    /*!
+      \qmlproperty Component ContextDrawer::header
+
+      \brief Arbitrary content to show above the list view.
+
+      default: an Item containing a Kirigami.Heading that displays a title whose text is
+      controlled by the title property.
+
+      \since 2.7
      */
     property alias header: menu.header
 
-    /**
-     * @brief Arbitrary content to show below the list view.
-     * @property Component footer
-     * @since 2.7
+    /*!
+      \qmlproperty Component ContextDrawer::footer
+      \brief Arbitrary content to show below the list view.
+      \since 2.7
      */
     property alias footer: menu.footer
 

@@ -10,5 +10,3 @@ find_dependency(Qt6Quick @REQUIRED_QT_VERSION@)
 include("${CMAKE_CURRENT_LIST_DIR}/KF6KirigamiPlatformTargets.cmake")
 
 set(KirigamiPlatform_INSTALL_PREFIX "@PACKAGE_CMAKE_INSTALL_PREFIX@")
-
-@PACKAGE_INCLUDE_QCHTARGETS@

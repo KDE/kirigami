@@ -1,0 +1,15 @@
+include($KDE_DOCS/global/qt-module-defaults.qdocconf)
+
+project = Kirigami
+description = Components for Convergent Applications
+
+documentationinheaders = true
+
+headerdirs += .
+sourcedirs += . ../docs/includes
+imagedirs = . ../docs/pics
+exampledirs = . ../examples primitives/examples
+
+depends = kde qtcore qtquick qtquickcontrols kcoreaddons kirigamiplatform
+
+excludedirs = platform

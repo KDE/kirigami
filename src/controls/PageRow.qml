@@ -12,210 +12,220 @@ import org.kde.kirigami as Kirigami
 import "private/globaltoolbar" as GlobalToolBar
 import "templates" as KT
 
-/**
- * PageRow implements a row-based navigation model, which can be used
- * with a set of interlinked information pages. Pages are pushed in the
- * back of the row and the view scrolls until that row is visualized.
- * A PageRow can show a single page or a multiple set of columns, depending
- * on the window width: on a phone a single column should be fullscreen,
- * while on a tablet or a desktop more than one column should be visible.
- *
- * @inherits QtQuick.Templates.Control
+/*!
+  \qmltype PageRow
+  \inqmlmodule org.kde.kirigami
+
+  \brief A row-based navigation model that can be used
+  with a set of interlinked information pages.
+
+  Pages are pushed in the back of the row and the view scrolls
+  until that row is visualized.
+  A PageRow can show a single page or a multiple set of columns, depending
+  on the window width: on a phone a single column should be fullscreen,
+  while on a tablet or a desktop more than one column should be visible.
+
  */
 QT.Control {
     id: root
 
 //BEGIN PROPERTIES
-    /**
-     * @brief This property holds the number of pages currently pushed onto the view.
-     * @property int depth
+    /*!
+      \qmlproperty int PageRow::depth
+      \brief This property holds the number of pages currently pushed onto the view.
      */
     readonly property alias depth: columnView.count
 
-    /**
-     * @brief This property holds the last page in the row.
-     * @property Page lastItem
+    /*!
+      \qmlproperty Page PageRow::lastItem
+      \brief This property holds the last page in the row.
      */
     readonly property Item lastItem: columnView.contentChildren.length > 0 ?  columnView.contentChildren[columnView.contentChildren.length - 1] : null
 
-    /**
-     * @brief This property holds the currently visible/active page.
-     *
-     * Because of the ability to display multiple pages, it will hold the currently active page.
-     *
-     * @property Page currentItem
+    /*!
+      \qmlproperty Page PageRow::currentItem
+      \brief This property holds the currently visible/active page.
+
+      Because of the ability to display multiple pages, it will hold the currently active page.
+
      */
     readonly property alias currentItem: columnView.currentItem
 
-    /**
-     * @brief This property holds the index of the currently active page.
-     * @see currentItem
-     * @property int currentIndex
+    /*!
+      \qmlproperty int PageRow::currentIndex
+      \brief This property holds the index of the currently active page.
+      \sa currentItem
      */
     property alias currentIndex: columnView.currentIndex
 
-    /**
-     * @brief This property sets the initial page for this PageRow.
-     * @property Page initialPage
+    /*!
+      \qmlproperty Page PageRow::initialPage
+      \brief This property sets the initial page for this PageRow.
      */
     property var initialPage
 
-    /**
-     * @brief This property holds the main ColumnView of this Row.
-     * @property ColumnView contentItem
-     */
     contentItem: columnView
 
-    /**
-     * @brief This property holds the ColumnView that this PageRow owns.
-     *
-     * Generally, you shouldn't need to change the value of this property.
-     *
-     * @property ColumnView columnView
-     * @since 2.12
+    /*!
+      \qmlproperty ColumnView PageRow::columnView
+      \brief This property holds the ColumnView that this PageRow owns.
+
+      Generally, you shouldn't need to change the value of this property.
+
+      \since 2.12
      */
     property alias columnView: columnView
 
-    /**
-     * @brief This property holds the present pages in the PageRow.
-     * @property list<Page> items
-     * @since 2.6
+    /*!
+      \qmlproperty list<Page> PageRow::items
+      \brief This property holds the present pages in the PageRow.
+      \since 2.6
      */
     readonly property alias items: columnView.contentChildren
 
-    /**
-     * @brief This property holds all visible pages in the PageRow,
-     * excluding those which are scrolled away.
-     * @property list<Page> visibleItems
-     * @since 2.6
+    /*!
+      \qmlproperty list<Page> PageRow::visibleItems
+      \brief This property holds all visible pages in the PageRow,
+      excluding those which are scrolled away.
+      \since 2.6
      */
     readonly property alias visibleItems: columnView.visibleItems
 
-    /**
-     * @brief This property holds the first page in the PageRow that is at least partially visible.
-     * @note Pages before that one (the one contained in the property) will be out of the viewport.
-     * @see ColumnView::leadingVisibleItem
-     * @property Item leadingVisibleItem
-     * @since 2.6
+    /*!
+      \qmlproperty Item PageRow::leadingVisibleItem
+      \brief This property holds the first page in the PageRow that is at least partially visible.
+      \note Pages before that one (the one contained in the property) will be out of the viewport.
+      \sa ColumnView::leadingVisibleItem
+      \since 2.6
      */
     readonly property alias leadingVisibleItem: columnView.leadingVisibleItem
 
-    /**
-     * @brief This property holds the last page in the PageRow that is at least partially visible.
-     * @note Pages after that one (the one contained in the property) will be out of the viewport.
-     * @see ColumnView::trailingVisibleItem
-     * @property Item trailingVisibleItem
-     * @since 2.6
+    /*!
+      \qmlproperty Item PageRow::trailingVisibleItem
+      \brief This property holds the last page in the PageRow that is at least partially visible.
+      \note Pages after that one (the one contained in the property) will be out of the viewport.
+      \sa ColumnView::trailingVisibleItem
+      \since 2.6
      */
     readonly property alias trailingVisibleItem: columnView.trailingVisibleItem
 
-    /**
-     * @brief This property holds the default width for a column.
-     *
-     * default: ``20 * Kirigami.Units.gridUnit``
-     *
-     * @note Pages can override it using implicitWidth, Layout.fillWidth, Layout.minimumWidth etc.
+    /*!
+      \brief This property holds the default width for a column.
+
+      default: \c{20 * Kirigami.Units.gridUnit}
+
+      \note Pages can override it using implicitWidth, Layout.fillWidth, Layout.minimumWidth etc.
      */
     property int defaultColumnWidth: Kirigami.Units.gridUnit * 20
 
-    /**
-     * @brief This property sets whether it is possible to go back/forward
-     * by swiping with a gesture on the content view.
-     *
-     * default: ``true``
-     *
-     * @property bool interactive
+    /*!
+      \qmlproperty bool PageRow::interactive
+
+      \brief This property sets whether it is possible to go back/forward
+      by swiping with a gesture on the content view.
+
+      default: \c true
+
      */
     property alias interactive: columnView.interactive
 
-    /**
-     * @brief This property tells whether the PageRow is wide enough to show multiple pages.
-     * @since 5.37
+    /*!
+      \brief This property tells whether the PageRow is wide enough to show multiple pages.
+      \since 5.37
      */
     readonly property bool wideMode: width >= defaultColumnWidth * 2 && depth >= 2
 
-    /**
-     * @brief This property sets whether the separators between pages should be displayed.
-     *
-     * default: ``true``
-     *
-     * @property bool separatorVisible
-     * @since 5.38
+    /*!
+      \qmlproperty bool PageRow::separatorVisible
+
+      \brief This property sets whether the separators between pages should be displayed.
+
+      default: \c true
+
+      \since 5.38
      */
     property alias separatorVisible: columnView.separatorVisible
 
-    /**
-     * @brief This property sets the appearance of an optional global toolbar for the whole PageRow.
-     *
-     * It's a grouped property comprised of the following properties:
-     * * style (``Kirigami.ApplicationHeaderStyle``): can have the following values:
-     *  * ``Auto``: Depending on application formfactor, it can behave automatically like other values, such as a Breadcrumb on mobile and ToolBar on desktop.
-     *  * ``Breadcrumb``: It will show a breadcrumb of all the page titles in the stack, for easy navigation.
-     *  * ``Titles``: Each page will only have its own title on top.
-     *  * ``ToolBar``: Each page will have the title on top together buttons and menus to represent all of the page actions. Not available on Mobile systems.
-     *  * ``None``: No global toolbar will be shown.
-     *
-     * * ``actualStyle``: This will represent the actual style of the toolbar; it can be different from style in the case style is Auto.
-     * * ``showNavigationButtons``: OR flags combination of Kirigami.ApplicationHeaderStyle.ShowBackButton and Kirigami.ApplicationHeaderStyle.ShowForwardButton.
-     * * ``toolbarActionAlignment: Qt::Alignment``: How to horizontally align the actions when using the ToolBar style. Note that anything but Qt.AlignRight will cause the title to be hidden (default: ``Qt.AlignRight``).
-     * * ``minimumHeight: int`` Minimum height of the header, which will be resized when scrolling. Only in Mobile mode (default: ``preferredHeight``, sliding but no scaling).
-     * * ``preferredHeight: int`` The height the toolbar will usually have.
-     * * ``leftReservedSpace: int, readonly`` How many pixels of extra space are reserved at the left of the page toolbar (typically for navigation buttons or a drawer handle).
-     * * ``rightReservedSpace: int, readonly`` How many pixels of extra space  are reserved at the right of the page toolbar (typically for a drawer handle).
-     *
-     * @property org::kde::kirigami::private::globaltoolbar::PageRowGlobalToolBarStyleGroup globalToolBar
-     * @since 5.48
+    /*!
+      \qmlproperty var PageRow::globalToolBar
+
+      \brief This property sets the appearance of an optional global toolbar for the whole PageRow.
+
+      It's a grouped property comprised of the following properties:
+      \list
+      \li style (Kirigami.ApplicationHeaderStyle): can have the following values:
+       \list
+       \li Auto: Depending on application formfactor, it can behave automatically like other values, such as a Breadcrumb on mobile and ToolBar on desktop.
+       \li Breadcrumb: It will show a breadcrumb of all the page titles in the stack, for easy navigation.
+       \li Titles: Each page will only have its own title on top.
+       \li ToolBar: Each page will have the title on top together buttons and menus to represent all of the page actions. Not available on Mobile systems.
+       \li None: No global toolbar will be shown.
+       \endlist
+
+      \li actualStyle: This will represent the actual style of the toolbar; it can be different from style in the case style is Auto.
+      \li showNavigationButtons: OR flags combination of Kirigami.ApplicationHeaderStyle.ShowBackButton and Kirigami.ApplicationHeaderStyle.ShowForwardButton.
+      \li toolbarActionAlignment (Qt::Alignment): How to horizontally align the actions when using the ToolBar style. Note that anything but Qt.AlignRight will cause the title to be hidden (default: Qt.AlignRight).
+      \li minimumHeight: int Minimum height of the header, which will be resized when scrolling. Only in Mobile mode (default: preferredHeight, sliding but no scaling).
+      \li preferredHeight: int The height the toolbar will usually have.
+      \li leftReservedSpace: int, readonly How many pixels of extra space are reserved at the left of the page toolbar (typically for navigation buttons or a drawer handle).
+      \li rightReservedSpace: int, readonly How many pixels of extra space  are reserved at the right of the page toolbar (typically for a drawer handle).
+      \endlist
+
+      \since 5.48
      */
     readonly property alias globalToolBar: globalToolBar
 
-    /**
-     * @brief This property assigns a drawer as an internal left sidebar for this PageRow.
-     *
-     * In this case, when open and not modal, the drawer contents will be in the same layer as the base pagerow.
-     * Pushing any other layer on top will cover the sidebar.
-     *
-     * @since 5.84
+    /*!
+      \brief This property assigns a drawer as an internal left sidebar for this PageRow.
+
+      In this case, when open and not modal, the drawer contents will be in the same layer as the base pagerow.
+      Pushing any other layer on top will cover the sidebar.
+
+      \since 5.84
      */
     // TODO KF6: globaldrawer should use actions also used by this sidebar instead of reparenting globaldrawer contents?
     property OverlayDrawer leftSidebar
 
-    /**
-     * @brief This property holds the modal layers.
-     *
-     * Sometimes an application needs a modal page that always covers all the rows.
-     * For instance the full screen image of an image viewer or a settings page.
-     *
-     * @property QtQuick.Controls.StackView layers
-     * @since 5.38
+    /*!
+      \qmlproperty QtQuick.Controls.StackView PageRow::layers
+      \brief This property holds the modal layers.
+
+      Sometimes an application needs a modal page that always covers all the rows.
+      For instance the full screen image of an image viewer or a settings page.
+
+      \since 5.38
      */
     property alias layers: layersStack
 
-    /**
-     * @brief This property holds whether to automatically pop pages at the top of the stack if they are not visible.
-     *
-     * If a user navigates to a previous page on the stack (ex. pressing back button) and pages above
-     * it on the stack are not visible, they will be popped if this property is true.
-     *
-     * @since 5.101
+    /*!
+      \brief This property holds whether to automatically pop pages at the top of the stack if they are not visible.
+
+      If a user navigates to a previous page on the stack (ex. pressing back button) and pages above
+      it on the stack are not visible, they will be popped if this property is true.
+
+      \since 5.101
      */
     property bool popHiddenPages: false
 //END PROPERTIES
 
 //BEGIN FUNCTIONS
-    /**
-     * @brief This method pushes a page on the stack.
-     *
-     * A single page can be defined as an url, a component, or an object. It can
-     * also be an array of the above said types, but in that case, the
-     * properties' array length must match pages' array length or it must be
-     * empty. Failing to comply with the following rules will make the method
-     * return null before doing anything.
-     *
-     * @param page A single page or an array of pages.
-     * @param properties A single property object or an array of property
-     * objects.
-     *
-     * @return The new created page (or the last one if it was an array).
+    /*!
+      \qmlmethod Page PageRow::push(var page, var properties)
+
+      \brief This method pushes a page on the stack.
+
+      A single page can be defined as an url, a component, or an object. It can
+      also be an array of the above said types, but in that case, the
+      properties' array length must match pages' array length or it must be
+      empty. Failing to comply with the following rules will make the method
+      return null before doing anything.
+
+      \a page A single page or an array of pages.
+
+      \a properties A single property object or an array of property
+      objects.
+
+      Returns The new created page (or the last one if it was an array).
      */
     function push(page, properties): QT.Page {
         if (!pagesLogic.verifyPages(page, properties)) {
@@ -229,18 +239,22 @@ QT.Control {
         return item
     }
 
-    /**
-     * @brief Pushes a page as a new dialog on desktop and as a layer on mobile.
-     *
-     * @param page A single page defined as either a string url, a component or
-     * an object (which will be reparented). The following page gains
-     * `closeDialog()` method allowing to make it indistinguishable to
-     * close/hide it when in desktop or mobile mode. Note that Kiriami supports
-     * calling `closeDialog()` only once.
-     *
-     * @param properties The properties given when initializing the page.
-     * @param windowProperties The properties given to the initialized window on desktop.
-     * @return Returns a newly created page.
+    /*!
+      \qmlmethod Page PageRow::pushDialogLayer(var page, var properties, var windowProperties)
+
+      \brief Pushes a page as a new dialog on desktop and as a layer on mobile.
+
+      \a page A single page defined as either a string url, a component or
+      an object (which will be reparented). The following page gains
+      closeDialog() method allowing to make it indistinguishable to
+      close/hide it when in desktop or mobile mode. Note that Kiriami supports
+      calling closeDialog() only once.
+
+      \a properties The properties given when initializing the page.
+
+      \a windowProperties The properties given to the initialized window on desktop.
+
+      Returns a newly created page.
      */
     function pushDialogLayer(page, properties = {}, windowProperties = {}): QT.Page {
         if (!pagesLogic.verifyPages(page, properties)) {
@@ -334,21 +348,24 @@ QT.Control {
         return item;
     }
 
-    /**
-     * @brief Inserts a new page or a list of new pages at an arbitrary position.
-     *
-     * A single page can be defined as an url, a component, or an object. It can
-     * also be an array of the above said types, but in that case, the
-     * properties' array length must match pages' array length or it must be
-     * empty. Failing to comply with the following rules will make the method
-     * return null before doing anything.
-     *
-     * @param page A single page or an array of pages.
-     * @param properties A single property object or an array of property
-     * objects.
-     *
-     * @return The new created page (or the last one if it was an array).
-     * @since 2.7
+    /*!
+      \qmlmethod Page PageRow::insertPage(int position, var page, var properties)
+
+      \brief Inserts a new page or a list of new pages at an arbitrary position.
+
+      A single page can be defined as an url, a component, or an object. It can
+      also be an array of the above said types, but in that case, the
+      properties' array length must match pages' array length or it must be
+      empty. Failing to comply with the following rules will make the method
+      return null before doing anything.
+
+      \a page A single page or an array of pages.
+
+      \a properties A single property object or an array of property
+      objects.
+
+      Returns the new created page (or the last one if it was an array).
+      \since 2.7
      */
     function insertPage(position, page, properties): QT.Page {
         if (!pagesLogic.verifyPages(page, properties)) {
@@ -365,21 +382,27 @@ QT.Control {
         return pagesLogic.insertPage_unchecked(position, page, properties)
     }
 
-    /**
-     * Move the page at position fromPos to the new position toPos
-     * If needed, currentIndex will be adjusted
-     * in order to keep the same current page.
-     * @since 2.7
+    /*!
+      \qmlmethod void PageRow::movePage(int fromPos, int toPos)
+
+      Move the page at position fromPos to the new position toPos
+      If needed, currentIndex will be adjusted
+      in order to keep the same current page.
+      \since 2.7
      */
     function movePage(fromPos, toPos): void {
         columnView.moveItem(fromPos, toPos);
     }
 
-    /**
-     * @brief Remove the given page.
-     * @param page The page can be given both as integer position or by reference
-     * @return The page that has just been removed
-     * @since 2.7
+    /*!
+      \qmlmethod Page PageRow::removePage(var page)
+
+      \brief Remove the given page.
+
+      \a page The page can be given both as integer position or by reference
+
+      Returns the page that has just been removed
+      \since 2.7
      */
     function removePage(page): QT.Page {
         if (depth > 0) {
@@ -388,31 +411,37 @@ QT.Control {
         return null
     }
 
-    /**
-     * @brief Pops a page off the stack.
-     * @param page If page is specified then the stack is unwound to that page,
-     * to unwind to the first page specify page as null.
-     * @return The page instance that was popped off the stack.
+    /*!
+      \qmlmethod Page PageRow::pop(var page)
+
+      \brief Pops a page off the stack.
+      \a page If page is specified then the stack is unwound to that page,
+      to unwind to the first page specify page as null.
+
+      Returns the page instance that was popped off the stack.
      */
     function pop(page): QT.Page {
         return columnView.pop(page);
     }
 
-    /**
-     * @brief Replaces a page on the current index.
-     *
-     * A single page can be defined as an url, a component, or an object. It can
-     * also be an array of the above said types, but in that case, the
-     * properties' array length must match pages' array length or it must be
-     * empty. Failing to comply with the following rules will make the method
-     * return null before doing anything.
-     *
-     * @param page A single page or an array of pages.
-     * @param properties A single property object or an array of property
-     * objects.
-     *
-     * @return The new created page (or the last one if it was an array).
-     * @see push() for details.
+    /*!
+      \qmlmethod Page PageRow::repace(var page, var properties)
+
+      \brief Replaces a page on the current index.
+
+      A single page can be defined as an url, a component, or an object. It can
+      also be an array of the above said types, but in that case, the
+      properties' array length must match pages' array length or it must be
+      empty. Failing to comply with the following rules will make the method
+      return null before doing anything.
+
+      \a page A single page or an array of pages.
+
+      \a properties A single property object or an array of property
+      objects.
+
+      Returns the new created page (or the last one if it was an array).
+      See push() for details.
      */
     function replace(page, properties): QT.Page {
         if (!pagesLogic.verifyPages(page, properties)) {
@@ -468,25 +497,31 @@ QT.Control {
         return pageItem;
     }
 
-    /**
-     * @brief Clears the page stack.
-     *
-     * Destroy (or reparent) all the pages contained.
+    /*!
+      \qmlmethod void PageRow::clear()
+      \brief Clears the page stack.
+
+      Destroy (or reparent) all the pages contained.
      */
     function clear(): void {
         columnView.clear();
     }
 
-    /**
-     * @return the page at idx
-     * @param idx the depth of the page we want
+    /*!
+      \qmlmethod Page PageRow::get(int idx)
+
+      \a idx the depth of the page we want
+
+      Returns the page at idx
      */
     function get(idx): QT.Page {
         return items[idx];
     }
 
-    /**
-     * Go back to the previous index and scroll to the left to show one more column.
+    /*!
+      \qmlmethod void PageRow::flickBack()
+
+      Go back to the previous index and scroll to the left to show one more column.
      */
     function flickBack(): void {
         if (depth > 1) {
@@ -494,13 +529,15 @@ QT.Control {
         }
     }
 
-    /**
-     * Acts as if you had pressed the "back" button on Android or did Alt-Left on desktop,
-     * "going back" in the layers and page row. Results in a layer being popped if available,
-     * or the currentIndex being set to currentIndex-1 if not available.
-     *
-     * @param event Optional, an event that will be accepted if a page is successfully
-     * "backed" on
+    /*!
+      \qmlmethod void PageRow::goBack(var event = null)
+
+      Acts as if you had pressed the "back" button on Android or did Alt-Left on desktop,
+      "going back" in the layers and page row. Results in a layer being popped if available,
+      or the currentIndex being set to currentIndex-1 if not available.
+
+      \a event Optional, an event that will be accepted if a page is successfully
+      "backed" on
      */
     function goBack(event = null): void {
         const backEvent = {accepted: false}
@@ -537,11 +574,13 @@ QT.Control {
         }
     }
 
-    /**
-     * Acts as if you had pressed the "forward" shortcut on desktop,
-     * "going forward" in the page row. Results in the active page
-     * becoming the next page in the row from the current active page,
-     * i.e. currentIndex + 1.
+    /*!
+      \qmlmethod void goForward()
+
+      Acts as if you had pressed the "forward" shortcut on desktop,
+      "going forward" in the page row. Results in the active page
+      becoming the next page in the row from the current active page,
+      i.e. currentIndex + 1.
      */
     function goForward(): void {
         currentIndex = Math.min(depth - 1, currentIndex + 1)
@@ -549,26 +588,26 @@ QT.Control {
 //END FUNCTIONS
 
 //BEGIN signals & signal handlers
-    /**
-     * @brief Emitted when a page has been inserted anywhere.
-     * @param position where the page has been inserted
-     * @param page the new page
-     * @since 2.7
+    /*!
+      \brief Emitted when a page has been inserted anywhere.
+      \a position where the page has been inserted
+      \a page the new page
+      \since 2.7
      */
     signal pageInserted(int position, Item page)
 
-    /**
-     * @brief Emitted when a page has been pushed to the bottom.
-     * @param page the new page
-     * @since 2.5
+    /*!
+      \brief Emitted when a page has been pushed to the bottom.
+      \a page the new page
+      \since 2.5
      */
     signal pagePushed(Item page)
 
-    /**
-     * @brief Emitted when a page has been removed from the row.
-     * @param page the page that has been removed: at this point it's still valid,
-     *           but may be auto deleted soon.
-     * @since 2.5
+    /*!
+      \brief Emitted when a page has been removed from the row.
+      \a page the page that has been removed: at this point it's still valid,
+                but may be auto deleted soon.
+      \since 2.5
      */
     signal pageRemoved(Item page)
 

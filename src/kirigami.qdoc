@@ -1,0 +1,29 @@
+/*!
+    \qmlmodule org.kde.kirigami
+    \title Kirigami QML Types
+    \brief Kirigami Types
+*/
+
+/*!
+    \qmlmodule org.kde.kirigami.delegates
+    \title Kirigami Delegates QML Types
+    \brief Kirigami Delegates
+*/
+
+/*!
+    \qmlmodule org.kde.kirigami.primitives
+    \title Kirigami Primitives QML Types
+    \brief Kirigami Primitives
+*/
+
+/*!
+    \qmlmodule org.kde.kirigami.dialogs
+    \title Kirigami Dialogs QML Types
+    \brief Kirigami Dialogs
+*/
+
+/*!
+    \qmlmodule org.kde.kirigami.layouts
+    \title Kirigami Layouts QML Types
+    \brief Kirigami Layouts
+*/

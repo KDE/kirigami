@@ -8,7 +8,7 @@ import QtQuick
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 
-/**
+/*!
  * This example show how to do a sidebar of an application what gets covered by new layers that might get pushed
  * in the PageRow layer system.
  * When a drawer is in sidebar mode, when it goes modal (for instance when on mobile) will still behave like a drawer

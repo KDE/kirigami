@@ -366,7 +366,7 @@ void ToolBarLayout::updatePolish()
     d->performLayout();
 }
 
-/**
+/*
  * Calculate the implicit size for this layout.
  *
  * This is a separate step from performing the actual layout, because of a nasty

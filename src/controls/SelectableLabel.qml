@@ -11,25 +11,25 @@ import org.kde.kirigami as Kirigami
 import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
 
-/**
- * @brief This is a label which supports text selection.
- *
- * The label uses TextEdit component, which is wrapped inside a Control component.
- *
- *
- * Example usage:
- * @code{.qml}
- *     Kirigami.SelectableLabel {
- *         text: "Label"
- *     }
- * @endcode
- *
- * @see https://bugreports.qt.io/browse/QTBUG-14077
- * @since org.kde.kirigami 2.20
- * @since 5.95
- * @inherit QtQuick.Control
- */
+/*!
+  \qmltype SelectableLabel
+   \inqmlmodule org.kde.kirigami
 
+  \brief This is a label which supports text selection.
+
+  The label uses TextEdit component, which is wrapped inside a Control component.
+
+
+  Example usage:
+  \code
+      Kirigami.SelectableLabel {
+          text: "Label"
+      }
+  \endcode
+
+  \sa https://bugreports.qt.io/browse/QTBUG-14077
+  \since 5.95
+ */
 QQC2.Control {
     id: root
 
@@ -47,55 +47,184 @@ QQC2.Control {
     Accessible.selectableText: true
     Accessible.editable: false
 
-    property bool contextMenuEnabled: true
-
+    /*!
+     */
     property alias readOnly: textEdit.readOnly
+
+    /*!
+     */
     property alias selectByMouse: textEdit.selectByMouse
+
+    /*!
+     */
     property alias color: textEdit.color
+
+    /*!
+     */
     property alias selectedTextColor: textEdit.selectedTextColor
+
+    /*!
+     */
     property alias selectionColor: textEdit.selectionColor
+
+    /*!
+     */
     property alias text: textEdit.text
+
+    /*!
+     */
     property alias baseUrl: textEdit.baseUrl
+
+    /*!
+     */
     property var cursorShape
+
+    /*!
+     */
     property alias horizontalAlignment: textEdit.horizontalAlignment
+
+    /*!
+     */
     property alias verticalAlignment: textEdit.verticalAlignment
+
+    /*!
+     */
     property alias textFormat: textEdit.textFormat
+
+    /*!
+     */
     property alias wrapMode: textEdit.wrapMode
 
+    /*!
+     */
     property alias activeFocusOnPress: textEdit.activeFocusOnPress
+
+    /*!
+     */
     property alias cursorDelegate: textEdit.cursorDelegate
+
+    /*!
+     */
     property alias cursorPosition: textEdit.cursorPosition
+
+    /*!
+     */
     property alias cursorVisible: textEdit.cursorVisible
+
+    /*!
+     */
     property alias inputMethodHints: textEdit.inputMethodHints
+
+    /*!
+     */
     property alias mouseSelectionMode: textEdit.mouseSelectionMode
+
+    /*!
+     */
     property alias overwriteMode: textEdit.overwriteMode
+
+    /*!
+     */
     property alias persistentSelection: textEdit.persistentSelection
+
+    /*!
+     */
     property alias renderType: textEdit.renderType
+
+    /*!
+     */
     property alias selectByKeyboard: textEdit.selectByKeyboard
+
+    /*!
+     */
     property alias tabStopDistance: textEdit.tabStopDistance
+
+    /*!
+     */
     property alias textMargin: textEdit.textMargin
 
+    /*!
+     */
     readonly property alias canPaste: textEdit.canPaste
+
+    /*!
+     */
     readonly property alias canRedo: textEdit.canRedo
+
+    /*!
+     */
     readonly property alias canUndo: textEdit.canUndo
+
+    /*!
+     */
     readonly property alias inputMethodComposing: textEdit.inputMethodComposing
+
+    /*!
+     */
     readonly property alias length: textEdit.length
+
+    /*!
+     */
     readonly property alias lineCount: textEdit.lineCount
+
+    /*!
+     */
     readonly property alias selectionEnd: textEdit.selectionEnd
+
+    /*!
+     */
     readonly property alias selectionStart: textEdit.selectionStart
+
+    /*!
+     */
     readonly property alias contentHeight: textEdit.contentHeight
+
+    /*!
+     */
     readonly property alias contentWidth: textEdit.contentWidth
+
+    /*!
+     */
     readonly property alias hoveredLink: textEdit.hoveredLink
+
+    /*!
+     */
     readonly property alias preeditText: textEdit.preeditText
+
+    /*!
+     */
     readonly property alias selectedText: textEdit.selectedText
+
+    /*!
+     */
     readonly property alias cursorRectangle: textEdit.cursorRectangle
+
+    /*!
+     */
     readonly property alias cursorSelection: textEdit.cursorSelection
+
+    /*!
+     */
     readonly property alias effectiveHorizontalAlignment: textEdit.effectiveHorizontalAlignment
+
+    /*!
+     */
     readonly property alias textDocument: textEdit.textDocument
 
+    /*!
+     */
     signal editingFinished()
+
+    /*!
+     */
     signal clicked()
+
+    /*!
+     */
     signal linkActivated(string link)
+
+    /*!
+     */
     signal linkHovered(string link)
 
 //BEGIN TextArea dummy entries
@@ -111,14 +240,6 @@ QQC2.Control {
     contentItem: TextEdit {
         id: textEdit
 
-        /**
-        * @brief This property holds the cursor shape that will appear whenever
-        * the mouse is hovering over the label.
-        *
-        * default: @c Qt.IBeamCursor
-        *
-        * @property Qt::CursorShape cursorShape
-        */
         property alias cursorShape: hoverHandler.cursorShape
 
         activeFocusOnTab: root.activeFocusOnTab
@@ -161,7 +282,7 @@ QQC2.Control {
         }
 
         TapHandler {
-            enabled: textEdit.selectByMouse && root.contextMenuEnabled
+            enabled: textEdit.selectByMouse
 
             acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad | PointerDevice.Stylus
             acceptedButtons: Qt.RightButton

@@ -13,66 +13,70 @@ import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 
-/**
- * This is the base class for Form layouts conforming to the
- * Kirigami Human Interface Guidelines. The layout consists
- * of two columns: the left column contains only right-aligned
- * labels provided by a Kirigami.FormData attached property,
- * the right column contains left-aligned child types.
- *
- * Child types can be sectioned using an QtQuick.Item
- * or Kirigami.Separator with a Kirigami.FormData
- * attached property, see FormLayoutAttached::isSection for details.
- *
- * Example usage:
- * @code
- * import QtQuick.Controls as QQC2
- * import org.kde.kirigami as Kirigami
- *
- * Kirigami.FormLayout {
- *    QQC2.TextField {
- *       Kirigami.FormData.label: "Label:"
- *    }
- *    Kirigami.Separator {
- *        Kirigami.FormData.label: "Section Title"
- *        Kirigami.FormData.isSection: true
- *    }
- *    QQC2.TextField {
- *       Kirigami.FormData.label: "Label:"
- *    }
- *    QQC2.TextField {
- *    }
- * }
- * @endcode
- * @see FormLayoutAttached
- * @since 2.3
- * @inherit QtQuick.Item
+/*!
+  \qmltype FormLayout
+  \inqmlmodule org.kde.kirigami.layouts
+
+  \brief The base class for Form layouts conforming to the
+  Kirigami Human Interface Guidelines.
+
+  The layout consists of two columns:
+  the left column contains only right-aligned
+  labels provided by a FormData attached property,
+  the right column contains left-aligned child types.
+
+  Child types can be sectioned using an QtQuick.Item
+  or Kirigami.Separator with a FormData
+  attached property, see FormLayoutAttached::isSection for details.
+
+  Example usage:
+  \qml
+  import QtQuick.Controls as QQC2
+  import org.kde.kirigami as Kirigami
+
+  Kirigami.FormLayout {
+     QQC2.TextField {
+        Kirigami.FormData.label: "Label:"
+     }
+     Kirigami.Separator {
+         Kirigami.FormData.label: "Section Title"
+         Kirigami.FormData.isSection: true
+     }
+     QQC2.TextField {
+        Kirigami.FormData.label: "Label:"
+     }
+     QQC2.TextField {
+     }
+  }
+  \endqml
+  \sa FormData
+  \since 2.3
  */
 Item {
     id: root
 
-    /**
-     * @brief This property tells whether the form layout is in wide mode.
-     *
-     * If true, the layout will be optimized for a wide screen, such as
-     * a desktop machine (the labels will be on a left column,
-     * the fields on a right column beside it), if false (such as on a phone)
-     * everything is laid out in a single column.
-     *
-     * By default this property automatically adjusts the layout
-     * if there is enough screen space.
-     *
-     * Set this to true for a convergent design,
-     * set this to false for a mobile-only design.
+    /*!
+      \brief This property tells whether the form layout is in wide mode.
+
+      If true, the layout will be optimized for a wide screen, such as
+      a desktop machine (the labels will be on a left column,
+      the fields on a right column beside it), if false (such as on a phone)
+      everything is laid out in a single column.
+
+      By default this property automatically adjusts the layout
+      if there is enough screen space.
+
+      Set this to \c true for a convergent design,
+      set this to \c false for a mobile-only design.
      */
     property bool wideMode: width >= lay.wideImplicitWidth
 
-    /**
-     * If for some implementation reason multiple FormLayouts have to appear
-     * on the same page, they can have each other in twinFormLayouts,
-     * so they will vertically align with each other perfectly
-     *
-     * @since 5.53
+    /*!
+      If for some implementation reason multiple FormLayouts have to appear
+      on the same page, they can have each other in twinFormLayouts,
+      so they will vertically align with each other perfectly
+
+      \since 5.53
      */
     property list<Item> twinFormLayouts  // should be list<FormLayout> but we can't have a recursive declaration
 
@@ -248,7 +252,7 @@ Item {
     Item {
         id: temp
 
-        /**
+        /*!
          * The following two functions are used in the label buddy items.
          *
          * They're in this mostly unused item to keep them private to the FormLayout
@@ -260,7 +264,7 @@ Item {
          * will kick in.
          */
 
-        /**
+        /*!
          * @param {Item} item
          * @returns {Qt::Alignment}
          */
@@ -282,7 +286,7 @@ Item {
             return Qt.AlignLeft | Qt.AlignBottom;
         }
 
-        /**
+        /*!
          * @param {Item} item
          * @returns vertical alignment of the item passed as an argument.
          */

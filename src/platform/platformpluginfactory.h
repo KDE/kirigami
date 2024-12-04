@@ -20,11 +20,13 @@ namespace Platform
 class PlatformTheme;
 class Units;
 
-/**
- * @class PlatformPluginFactory platformpluginfactory.h <Kirigami/PlatformPluginFactory>
+/*!
+ * \class Kirigami::Platform::PlatformPluginFactory
+ * \inheaderfile Kirigami/Platform/PlatformPluginFactory
+ * \inmodule KirigamiPlatform
  *
- * This class is reimpleented by plugins to provide different implementations
- * of PlatformTheme
+ * \brief This class is reimplemented by plugins to provide different implementations
+ * of PlatformTheme.
  */
 class KIRIGAMIPLATFORM_EXPORT PlatformPluginFactory : public QObject
 {
@@ -34,30 +36,33 @@ public:
     explicit PlatformPluginFactory(QObject *parent = nullptr);
     ~PlatformPluginFactory() override;
 
-    /**
+    /*!
      * Creates an instance of PlatformTheme which can come out from
-     * an implementation provided by a plugin
+     * an implementation provided by a plugin.
      *
      * If this returns nullptr the PlatformTheme will use a fallback
      * implementation that loads a theme definition from a QML file.
      *
-     * @param parent the parent object of the created PlatformTheme
+     * \a parent The parent object of the created PlatformTheme
      */
     virtual PlatformTheme *createPlatformTheme(QObject *parent) = 0;
 
-    /**
+    /*!
      * Creates an instance of Units which can come from an implementation
      * provided by a plugin
-     * @param parent the parent of the units object
+     *
+     * \a parent The parent of the units object
      */
     virtual Units *createUnits(QObject *parent) = 0;
 
-    /**
-     * finds the plugin providing units and platformtheme for the current style
+    /*!
+     * Finds the plugin providing units and platformtheme for the current style
      * The plugin pointer is cached, so only the first call is a potentially heavy operation
-     * @param pluginName The name we want to search for, if empty the name of
-     *           the current QtQuickControls style will be searched
-     * @return pointer to the PlatformPluginFactory of the current style
+     *
+     * \a pluginName The name we want to search for, if empty the name of
+     *           the current QtQuickControls style will be searched.
+     *
+     * Returns a pointer to the PlatformPluginFactory of the current style.
      */
     static PlatformPluginFactory *findPlugin(const QString &pluginName = {});
 };

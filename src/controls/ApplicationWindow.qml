@@ -7,96 +7,98 @@
 import QtQuick
 import org.kde.kirigami as Kirigami
 
-/**
- * @brief A window that provides some basic features needed for all apps
- *
- * It's usually used as a root QML component for the application.
- * It's based around the PageRow component, the application will be
- * about pages adding and removal.
- * For most of the usages, this class should be used instead
- * of AbstractApplicationWindow
- * @see AbstractApplicationWindow
- *
- * Setting a width and height property on the ApplicationWindow
- * will set its initial size, but it won't set it as an automatically binding.
- * to resize programmatically the ApplicationWindow they need to
- * be assigned again in an imperative fashion
- *
- * Example usage:
- * @code
- * import org.kde.kirigami as Kirigami
- *
- * Kirigami.ApplicationWindow {
- *  [...]
- *     globalDrawer: Kirigami.GlobalDrawer {
- *         actions: [
- *            Kirigami.Action {
- *                text: "View"
- *                icon.name: "view-list-icons"
- *                Kirigami.Action {
- *                        text: "action 1"
- *                }
- *                Kirigami.Action {
- *                        text: "action 2"
- *                }
- *                Kirigami.Action {
- *                        text: "action 3"
- *                }
- *            },
- *            Kirigami.Action {
- *                text: "Sync"
- *                icon.name: "folder-sync"
- *            }
- *         ]
- *     }
- *
- *     contextDrawer: Kirigami.ContextDrawer {
- *         id: contextDrawer
- *     }
- *
- *     pageStack.initialPage: Kirigami.Page {
- *         mainAction: Kirigami.Action {
- *             icon.name: "edit"
- *             onTriggered: {
- *                 // do stuff
- *             }
- *         }
- *         contextualActions: [
- *             Kirigami.Action {
- *                 icon.name: "edit"
- *                 text: "Action text"
- *                 onTriggered: {
- *                     // do stuff
- *                 }
- *             },
- *             Kirigami.Action {
- *                 icon.name: "edit"
- *                 text: "Action text"
- *                 onTriggered: {
- *                     // do stuff
- *                 }
- *             }
- *         ]
- *       [...]
- *     }
- *  [...]
- * }
- * @endcode
- *
+/*!
+  \qmltype ApplicationWindow
+  \inqmlmodule org.kde.kirigami
+
+  \brief A window that provides some basic features needed for all apps.
+
+  It's usually used as a root QML component for the application.
+  It's based around the PageRow component, the application will be
+  about pages adding and removal.
+  For most of the usages, this class should be used instead
+  of AbstractApplicationWindow
+
+  Setting a width and height property on the ApplicationWindow
+  will set its initial size, but it won't set it as an automatically binding.
+  to resize programmatically the ApplicationWindow they need to
+  be assigned again in an imperative fashion
+
+  Example usage:
+  \qml
+  import org.kde.kirigami as Kirigami
+
+  Kirigami.ApplicationWindow {
+   [...]
+      globalDrawer: Kirigami.GlobalDrawer {
+          actions: [
+             Kirigami.Action {
+                 text: "View"
+                 icon.name: "view-list-icons"
+                 Kirigami.Action {
+                         text: "action 1"
+                 }
+                 Kirigami.Action {
+                         text: "action 2"
+                 }
+                 Kirigami.Action {
+                         text: "action 3"
+                 }
+             },
+             Kirigami.Action {
+                 text: "Sync"
+                 icon.name: "folder-sync"
+             }
+          ]
+      }
+
+      contextDrawer: Kirigami.ContextDrawer {
+          id: contextDrawer
+      }
+
+      pageStack.initialPage: Kirigami.Page {
+          mainAction: Kirigami.Action {
+              icon.name: "edit"
+              onTriggered: {
+                  // do stuff
+              }
+          }
+          contextualActions: [
+              Kirigami.Action {
+                  icon.name: "edit"
+                  text: "Action text"
+                  onTriggered: {
+                      // do stuff
+                  }
+              },
+              Kirigami.Action {
+                  icon.name: "edit"
+                  text: "Action text"
+                  onTriggered: {
+                      // do stuff
+                  }
+              }
+          ]
+        [...]
+      }
+   [...]
+  }
+  \endqml
+
 */
 Kirigami.AbstractApplicationWindow {
     id: root
 
-    /**
-     * @brief This property holds the stack used to allocate the pages and to
-     * manage the transitions between them.
-     *
-     * It's using a PageRow, while having the same API as PageStack,
-     * it positions the pages as adjacent columns, with as many columns
-     * as can fit in the screen. An handheld device would usually have a single
-     * fullscreen column, a tablet device would have many tiled columns.
-     *
-     * @property org::kde::kirigami::PageRow pageStack
+    /*!
+      \qmlproperty PageRow ApplicationWindow::pageStack
+
+      \brief This property holds the stack used to allocate the pages and to
+      manage the transitions between them.
+
+      It's using a PageRow, while having the same API as PageStack,
+      it positions the pages as adjacent columns, with as many columns
+      as can fit in the screen. An handheld device would usually have a single
+      fullscreen column, a tablet device would have many tiled columns.
      */
     readonly property alias pageStack: __pageStack
 

@@ -11,24 +11,25 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
 //TODO: Kf6: move somewhere else which can depend from KAboutData?
-/**
- * @brief An about item that displays the about data
- *
- * Allows to show the copyright notice of the application
- * together with the contributors and some information of which platform it's
- * running on.
- *
- * @since 5.87
- * @since org.kde.kirigami 2.19
+/*!
+  \qmltype AboutItem
+  \inqmlmodule org.kde.kirigami
+  \brief An about item that displays the about data.
+
+  Allows to show the copyright notice of the application
+  together with the contributors and some information of which platform it's
+  running on.
+
+  \since 5.87
  */
 Item {
     id: aboutItem
-    /**
-     * @brief This property holds an object with the same shape as KAboutData.
-     *
-     * Example usage:
-     * @code{json}
-     * aboutData: {
+    /*!
+      \brief This property holds an object with the same shape as KAboutData.
+
+      Example usage:
+      \badcode
+      aboutData: {
           "displayName" : "KirigamiApp",
           "productName" : "kirigami/app",
           "componentName" : "kirigamiapp",
@@ -58,36 +59,34 @@ Item {
           "copyrightStatement" : "© 2010-2018 Plasma Development Team",
           "desktopFileName" : "org.kde.kirigamiapp"
        }
-       @endcode
-     *
-     * @see KAboutData
+       \endcode
+
+      \sa KAboutData
      */
     property var aboutData
 
-    /**
-     * @brief This property holds a link to a "Get Involved" page.
-     *
-     * default: `"https://community.kde.org/Get_Involved" when application id starts with "org.kde.", otherwise it is empty.`
+    /*!
+      \brief This property holds a link to a "Get Involved" page.
+
+      default: "https://community.kde.org/Get_Involved" when application id starts with "org.kde.", otherwise it is empty.
      */
     property url getInvolvedUrl: aboutData.desktopFileName.startsWith("org.kde.") ? "https://community.kde.org/Get_Involved" : ""
 
-    /**
-     * @brief This property holds a link to a "Donate" page.
-     *
-     * default: `"https://kde.org/community/donations" when application id starts with "org.kde.", otherwise it is empty.`
+    /*!
+      \brief This property holds a link to a "Donate" page.
+
+      default: "https://kde.org/community/donations" when application id starts with "org.kde.", otherwise it is empty.
      */
     property url donateUrl: aboutData.desktopFileName.startsWith("org.kde.") ? "https://kde.org/community/donations" : ""
 
-    /** @internal */
     property bool _usePageStack: false
 
-    /**
-     * @see org::kde::kirigami::FormLayout::wideMode
-     * @property bool wideMode
+    /*!
+       \qmlproperty bool wideMode
+       \sa FormLayout::wideMode
      */
     property alias wideMode: form.wideMode
 
-    /** @internal */
     default property alias _content: form.data
 
     // if aboutData is a native KAboutData object, avatarUrl should be a proper url instance,
@@ -99,12 +98,12 @@ Item {
             && person.avatarUrl.toString().length > 0;
     }
 
-    /**
-     * @brief This property controls whether to load avatars by URL.
-     *
-     * If set to false, a fallback "user" icon will be displayed.
-     *
-     * default: ``false``
+    /*!
+      \brief This property controls whether to load avatars by URL.
+
+      If set to false, a fallback "user" icon will be displayed.
+
+      default: false
      */
     property bool loadAvatars: false
 

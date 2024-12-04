@@ -12,15 +12,9 @@
 
 class ToolBarLayoutPrivate;
 
-/**
- * Attached property for ToolBarLayout delegates.
- */
 class ToolBarLayoutAttached : public QObject
 {
     Q_OBJECT
-    /**
-     * The action this delegate was created for.
-     */
     Q_PROPERTY(QObject *action READ action CONSTANT FINAL)
 public:
     ToolBarLayoutAttached(QObject *parent = nullptr);
@@ -32,50 +26,64 @@ private:
     QObject *m_action = nullptr;
 };
 
-/**
- * An item that creates delegates for actions and lays them out in a row.
+/*!
+ * \qmltype ToolBarLayout
+ * \inqmlmodule org.kde.kirigami.layouts
+ * \inherits Item
+ *
+ * \brief An item that creates delegates for actions and lays them out in a row.
  *
  * This effectively combines RowLayout and Repeater in a single item, with the
  * addition of some extra performance enhancing tweaks. It will create instances
- * of ::fullDelegate and ::itemDelegate for each action in ::actions . These are
+ * of fullDelegate and itemDelegate for each action in actions. These are
  * then positioned horizontally. Any action that ends up being placed outside
- * the width of the item is hidden and will be part of ::hiddenActions.
+ * the width of the item is hidden and will be part of hiddenActions.
  *
  * The items created as delegates are always created asynchronously, to avoid
  * creation lag spikes. Each delegate has access to the action it was created
- * for through the ToolBarLayoutAttached attached property.
+ * for through the action attached property.
  */
 class ToolBarLayout : public QQuickItem
 {
     Q_OBJECT
     QML_ELEMENT
     QML_ATTACHED(ToolBarLayoutAttached)
-    /**
+    /*!
+     * \qmlproperty list<QtObject> ToolBarLayout::actions
+     *
      * The actions this layout should create delegates for.
      */
     Q_PROPERTY(QQmlListProperty<QObject> actions READ actionsProperty NOTIFY actionsChanged FINAL)
-    /**
+    /*!
+     * \qmlproperty list<QtObject> ToolBarLayout::hiddenActions
+     *
      * A list of actions that do not fit in the current view and are thus hidden.
      */
     Q_PROPERTY(QList<QObject *> hiddenActions READ hiddenActions NOTIFY hiddenActionsChanged FINAL)
-    /**
+    /*!
+     * \qmlproperty Component ToolBarLayout::fullDelegate
+     *
      * A component that is used to create full-size delegates from.
      *
      * Each delegate has three states, it can be full-size, icon-only or hidden.
      * By default, the full-size delegate is used. When the action has the
-     * DisplayHint::IconOnly hint set, it will always use the iconDelegate. When
-     * it has the DisplayHint::KeepVisible hint set, it will use the full-size
+     * DisplayHint.IconOnly hint set, it will always use the iconDelegate. When
+     * it has the DisplayHint.KeepVisible hint set, it will use the full-size
      * delegate when it fits. If not, it will use the iconDelegate, unless even
      * that does not fit, in which case it will still be hidden.
      */
     Q_PROPERTY(QQmlComponent *fullDelegate READ fullDelegate WRITE setFullDelegate NOTIFY fullDelegateChanged FINAL)
-    /**
+    /*!
+     * \qmlproperty Component ToolBarLayout::iconDelegate
+     *
      * A component that is used to create icon-only delegates from.
      *
      * \sa fullDelegate
      */
     Q_PROPERTY(QQmlComponent *iconDelegate READ iconDelegate WRITE setIconDelegate NOTIFY iconDelegateChanged FINAL)
-    /**
+    /*!
+     * \qmlproperty Component ToolBarLayout::separatorDelegate
+     *
      * A component that is used to create separator delegates from.
      *
      * \since 6.7
@@ -83,7 +91,9 @@ class ToolBarLayout : public QQuickItem
      * \sa fullDelegate
      */
     Q_PROPERTY(QQmlComponent *separatorDelegate READ separatorDelegate WRITE setSeparatorDelegate NOTIFY separatorDelegateChanged FINAL)
-    /**
+    /*!
+     * \qmlproperty Component ToolBarLayout::moreButton
+     *
      * A component that is used to create the "more button" item from.
      *
      * The more button is shown when there are actions that do not fit the
@@ -91,11 +101,15 @@ class ToolBarLayout : public QQuickItem
      * actions, like popup a menu with them showing.
      */
     Q_PROPERTY(QQmlComponent *moreButton READ moreButton WRITE setMoreButton NOTIFY moreButtonChanged FINAL)
-    /**
+    /*!
+     * \qmlproperty real ToolBarLayout::spacing
+     *
      * The amount of spacing between individual delegates.
      */
     Q_PROPERTY(qreal spacing READ spacing WRITE setSpacing NOTIFY spacingChanged FINAL)
-    /**
+    /*!
+     * \qmlproperty Qt.Alignment ToolBarLayout::alignment
+     *
      * How to align the delegates within this layout.
      *
      * When there is more space available than required by the visible delegates,
@@ -104,17 +118,23 @@ class ToolBarLayout : public QQuickItem
      * placed at the end of the layout.
      */
     Q_PROPERTY(Qt::Alignment alignment READ alignment WRITE setAlignment NOTIFY alignmentChanged FINAL)
-    /**
+    /*!
+     * \qmlproperty real ToolBarLayout::visibleWidth
+     *
      * The combined width of visible delegates in this layout.
      */
     Q_PROPERTY(qreal visibleWidth READ visibleWidth NOTIFY visibleWidthChanged FINAL)
-    /**
+    /*!
+     * \qmlproperty real ToolBarLayout::minimumWidth
+     *
      * The minimum width this layout can have.
      *
      * This is equal to the width of the moreButton.
      */
     Q_PROPERTY(qreal minimumWidth READ minimumWidth NOTIFY minimumWidthChanged FINAL)
-    /**
+    /*!
+     * \qmlproperty Qt.LayoutDirection ToolBarLayout::layoutDirection
+     *
      * Which direction to layout in.
      *
      * This is primarily intended to support right-to-left layouts. When set to
@@ -128,29 +148,37 @@ class ToolBarLayout : public QQuickItem
      * AlignLeft will align items to the right, and vice-versa.
      */
     Q_PROPERTY(Qt::LayoutDirection layoutDirection READ layoutDirection WRITE setLayoutDirection NOTIFY layoutDirectionChanged FINAL)
-    /**
+    /*!
+     * \qmlproperty enumeration ToolBarLayout::heightMode
      * How to handle items that do not match the toolbar's height.
      *
      * When toolbar items do not match the height of the toolbar, there are
      * several ways we can deal with this. This property sets the preferred way.
      *
-     * The default is HeightMode::ConstrainIfLarger .
+     * Available are:
+     * \list
+     * \li AlwaysCenter Always center items, allowing them to go outside the bounds of the layout if they are larger
+     * \li AlwaysFill Always match the height of the layout. Larger items will be reduced in height, smaller items will be increased
+     * \li ConstrainIfLarger If the item is larger than the toolbar, reduce its height. Otherwise center it in the toolbar
+     * \endlist
      *
-     * \sa HeightMode
+     * The default is HeightMode::ConstrainIfLarger .
      */
     Q_PROPERTY(HeightMode heightMode READ heightMode WRITE setHeightMode NOTIFY heightModeChanged FINAL)
+
+    /*!
+     * \qmlattachedproperty QtObject ToolBarLayout::action
+     *
+     * The action this delegate was created for.
+     */
 
 public:
     using ActionsProperty = QQmlListProperty<QObject>;
 
-    /**
-     * An enum describing several modes that can be used to deal with items with
-     * a height that does not match the toolbar's height.
-     */
     enum HeightMode {
-        AlwaysCenter, ///< Always center items, allowing them to go outside the bounds of the layout if they are larger.
-        AlwaysFill, ///< Always match the height of the layout. Larger items will be reduced in height, smaller items will be increased.
-        ConstrainIfLarger, ///< If the item is larger than the toolbar, reduce its height. Otherwise center it in the toolbar.
+        AlwaysCenter,
+        AlwaysFill,
+        ConstrainIfLarger,
     };
     Q_ENUM(HeightMode)
 
@@ -158,21 +186,11 @@ public:
     ~ToolBarLayout() override;
 
     ActionsProperty actionsProperty() const;
-    /**
-     * Add an action to the list of actions.
-     *
-     * \param action The action to add.
-     */
+
     void addAction(QObject *action);
-    /**
-     * Remove an action from the list of actions.
-     *
-     * \param action The action to remove.
-     */
+
     void removeAction(QObject *action);
-    /**
-     * Clear the list of actions.
-     */
+
     void clearActions();
     Q_SIGNAL void actionsChanged();
 
@@ -217,7 +235,8 @@ public:
     void setHeightMode(HeightMode newHeightMode);
     Q_SIGNAL void heightModeChanged();
 
-    /**
+    /*!
+     * \qmlmethod void ToolBarLayout::relayout()
      * Queue a relayout of this layout.
      *
      * \note The layouting happens during the next scene graph polishing phase.

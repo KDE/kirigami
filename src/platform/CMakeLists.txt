@@ -145,28 +145,4 @@ ecm_qt_install_logging_categories(
 
 ecm_finalize_qml_module(KirigamiPlatform EXPORT KF6KirigamiPlatformTargets)
 
-if(BUILD_QCH)
-    ecm_add_qch(
-        KF6Kirigami_QCH
-        NAME KirigamiPlatform
-        BASE_NAME KF6KirigamiPlatform
-        VERSION ${KF_VERSION}
-        ORG_DOMAIN org.kde
-        SOURCES # using only public headers, to cover only public API
-            platformpluginfactory.h
-            platformtheme.h
-            tabletmodewatcher.h
-            units.h
-            virtualkeyboardwatcher.h
-        MD_MAINPAGE "${CMAKE_CURRENT_SOURCE_DIR}/README.md"
-        LINK_QCHS
-            Qt6Core_QCH
-        BLANK_MACROS
-            KIRIGAMIPLATFORM_EXPORT
-            KIRIGAMIPLATFORM_DEPRECATED
-        TAGFILE_INSTALL_DESTINATION ${KDE_INSTALL_QTQCHDIR}
-        QCH_INSTALL_DESTINATION ${KDE_INSTALL_QTQCHDIR}
-        COMPONENT Devel
-    )
-endif()
-
+ecm_generate_qdoc(KirigamiPlatform kirigamiplatform.qdocconf)

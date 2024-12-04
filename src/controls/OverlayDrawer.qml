@@ -11,15 +11,6 @@ import org.kde.kirigami as Kirigami
 import "private" as KP
 import "templates" as KT
 
-/**
- * Overlay Drawers are used to expose additional UI elements needed for
- * small secondary tasks for which the main UI elements are not needed.
- * For example in Okular Mobile, an Overlay Drawer is used to display
- * thumbnails of all pages within a document along with a search field.
- * This is used for the distinct task of navigating to another page.
- *
- * @inherit org::kde::kirigami::templates::OverlayDrawer
- */
 KT.OverlayDrawer {
     id: root
 

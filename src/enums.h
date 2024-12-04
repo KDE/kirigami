@@ -19,8 +19,8 @@ enum Status {
     Auto = 0,
     Breadcrumb,
     Titles,
-    ToolBar, ///@since 5.48
-    None, ///@since 5.48
+    ToolBar, ///\since 5.48
+    None, ///\since 5.48
 };
 Q_ENUM_NS(Status)
 

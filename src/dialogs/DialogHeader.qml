@@ -12,42 +12,44 @@ import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 import org.kde.kirigami.dialogs as KDialogs
 
-/**
- * @brief Base for a header, to be used as the header: item of a Dialog.
- *
- * Provides appropriate padding and a bottom separator when the dialog's content
- * is scrollable.
- *
- * Chiefly useful as the base element of a custom header. Example usage for this:
- *
- * @code{.qml}
- * import QtQuick
- * import org.kde.kirigami as Kirigami
- * import org.kde.kirigami.dialogs as KD
- *
- * Kirigami.Dialog {
- *     id: myDialog
- *
- *     title: i18n("My Dialog")
- *
- *     standardButtons: Kirigami.Dialog.Ok | Kirigami.Dialog.Cancel
- *
- *     header: KDialogs.DialogHeader {
- *         dialog: myDialog
- *         contentItem: [...]
- *     }
- *     [...]
- * }
- * @endcode
- * @inherit T.Control
+/*!
+  \qmltype DialogHeader
+  \inqmlmodule org.kde.kirigami.dialogs
+
+  \brief Base for a header, to be used as the header: item of a Dialog.
+
+  Provides appropriate padding and a bottom separator when the dialog's content
+  is scrollable.
+
+  Chiefly useful as the base element of a custom header. Example usage for this:
+
+  \qml
+  import QtQuick
+  import org.kde.kirigami as Kirigami
+  import org.kde.kirigami.dialogs as KD
+
+  Kirigami.Dialog {
+      id: myDialog
+
+      title: i18n("My Dialog")
+
+      standardButtons: Kirigami.Dialog.Ok | Kirigami.Dialog.Cancel
+
+      header: KDialogs.DialogHeader {
+          dialog: myDialog
+          contentItem: [...]
+      }
+      [...]
+  }
+  \endqml
  */
 T.Control {
     id: root
 
-    /**
-     * @brief This property points to the parent dialog, some of whose properties
-     * need to be available here.
-     * @property T.Dialog dialog
+    /*!
+      \qmlproperty Dialog DialogHeader::dialog
+      This property points to the parent dialog, some of whose properties
+      need to be available here.
      */
     required property T.Dialog dialog
 

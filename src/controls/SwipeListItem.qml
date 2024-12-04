@@ -11,179 +11,175 @@ import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 import "private"
 
-/**
- * An item delegate intended to support extra actions obtainable
- * by uncovering them by dragging away the item with the handle.
- *
- * This acts as a container for normal list items.
- *
- * Example usage:
- * @code
- * ListView {
- *     model: myModel
- *     delegate: SwipeListItem {
- *         QQC2.Label {
- *             text: model.text
- *         }
- *         actions: [
- *              Action {
- *                  icon.name: "document-decrypt"
- *                  onTriggered: print("Action 1 clicked")
- *              },
- *              Action {
- *                  icon.name: model.action2Icon
- *                  onTriggered: //do something
- *              }
- *         ]
- *     }
- *
- * }
- * @endcode
- *
- * @inherit QtQuick.Templates.SwipeDelegate
- */
+/*!
+  \qmltype SwipeListItem
+  \inqmlmodule org.kde.kirigami
+
+  An item delegate intended to support extra actions obtainable
+  by uncovering them by dragging away the item with the handle.
+
+  This acts as a container for normal list items.
+
+  Example usage:
+  \code
+  ListView {
+      model: myModel
+      delegate: SwipeListItem {
+          QQC2.Label {
+              text: model.text
+          }
+          actions: [
+               Action {
+                   icon.name: "document-decrypt"
+                   onTriggered: print("Action 1 clicked")
+               },
+               Action {
+                   icon.name: model.action2Icon
+                   onTriggered: //do something
+               }
+          ]
+      }
+
+  }
+  \endcode
+*/
 QQC2.SwipeDelegate {
     id: listItem
 
 //BEGIN properties
-    /**
-     * @brief This property sets whether the item should emit signals related to mouse interaction.
-     *
-     * default: ``true``
-     *
-     * @deprecated Use hoverEnabled instead.
-     * @property bool supportsMouseEvents
+    /*!
+      \property bool SwipeListItem::supportsMouseEvents
+      \brief This property sets whether the item should emit signals related to mouse interaction.
+
+      \default true
+
+      \deprecated Use hoverEnabled instead.
      */
     property alias supportsMouseEvents: listItem.hoverEnabled
 
-    /**
-     * @brief This property tells whether the cursor is currently hovering over the item.
-     *
-     * On mobile touch devices, this will be true only when pressed.
-     *
-     * @see QtQuick.Templates.ItemDelegate::hovered
-     * @deprecated This will be removed in KF6; use the ``hovered`` property instead.
-     * @property bool containsMouse
+    /*!
+      \property bool SwipeListItem::containsMouse
+      \brief This property tells whether the cursor is currently hovering over the item.
+
+      On mobile touch devices, this will be true only when pressed.
+
+      \sa ItemDelegate::hovered
+      \deprecated use the hovered property instead.
      */
     readonly property alias containsMouse: listItem.hovered
 
-    /**
-     * @brief This property sets whether instances of this list item will alternate
-     * between two colors, helping readability.
-     *
-     * It is suggested to use this only when implementing a view with multiple columns.
-     *
-     * default: ``false``
-     *
-     * @since 2.7
+    /*!
+      \brief This property sets whether instances of this list item will alternate
+      between two colors, helping readability.
+
+      It is suggested to use this only when implementing a view with multiple columns.
+
+      \default false
      */
     property bool alternatingBackground: false
 
-    /**
-     * @brief This property sets whether this item is a section delegate.
-     *
-     * Setting this to true will make the list item look like a "title" for items under it.
-     *
-     * default: ``false``
-     *
-     * @see ListSectionHeader
+    /*!
+      \brief This property sets whether this item is a section delegate.
+
+      Setting this to true will make the list item look like a "title" for items under it.
+
+      \default false
+
+      \sa ListSectionHeader
      */
     property bool sectionDelegate: false
 
-    /**
-     * @brief This property sets whether the separator is visible.
-     *
-     * The separator is a line between this and the item under it.
-     *
-     * default: ``false``
+    /*!
+      \brief This property sets whether the separator is visible.
+
+      The separator is a line between this and the item under it.
+
+      \default false
      */
     property bool separatorVisible: false
 
-    /**
-     * @brief This property holds the background color of the list item.
-     *
-     * It is advised to use the default value.
-     * default: ``Kirigami.Theme.backgroundColor``
+    /*!
+      \brief This property holds the background color of the list item.
+
+      It is advised to use the default value.
+
+      \default Kirigami.Theme.backgroundColor
      */
     property color backgroundColor: Kirigami.Theme.backgroundColor
 
-    /**
-     * @brief This property holds the background color to be used when
-     * background alternating is enabled.
-     *
-     * It is advised to use the default value.
-     * default: ``Kirigami.Theme.alternateBackgroundColor``
-     *
-     * @since 2.7
+    /*!
+      \brief This property holds the background color to be used when
+      background alternating is enabled.
+
+      It is advised to use the default value.
+      \default: Kirigami.Theme.alternateBackgroundColor
+
      */
     property color alternateBackgroundColor: Kirigami.Theme.alternateBackgroundColor
 
-    /**
-     * @brief This property holds the color of the background
-     * when the item is pressed or selected.
-     *
-     * It is advised to use the default value.
-     * default: ``Kirigami.Theme.highlightColor``
+    /*!
+      \brief This property holds the color of the background
+      when the item is pressed or selected.
+
+      It is advised to use the default value.
+      \default Kirigami.Theme.highlightColor
      */
     property color activeBackgroundColor: Kirigami.Theme.highlightColor
 
-    /**
-     * @brief This property holds the color of the text in the item.
-     *
-     * It is advised to use the default value.
-     * default: ``Theme.textColor``
-     *
-     * If custom text elements are inserted in a SwipeListItem,
-     * their color will have to be manually set with this property.
+    /*!
+      \brief This property holds the color of the text in the item.
+
+      It is advised to use the default value.
+      \default Theme.textColor
+
+      If custom text elements are inserted in a SwipeListItem,
+      their color will have to be manually set with this property.
      */
     property color textColor: Kirigami.Theme.textColor
 
-    /**
-     * @brief This property holds the color of the text when the item is pressed or selected.
-     *
-     * It is advised to use the default value.
-     * default: ``Kirigami.Theme.highlightedTextColor``
-     *
-     * If custom text elements are inserted in a SwipeListItem,
-     * their color property will have to be manually bound with this property
+    /*!
+      \brief This property holds the color of the text when the item is pressed or selected.
+
+      It is advised to use the default value.
+      default: Kirigami.Theme.highlightedTextColor
+
+      If custom text elements are inserted in a SwipeListItem,
+      their color property will have to be manually bound with this property
      */
     property color activeTextColor: Kirigami.Theme.highlightedTextColor
 
-    /**
-     * @brief This property tells whether actions are visible and interactive.
-     *
-     * True if it's possible to see and interact with the item's actions.
-     *
-     * Actions become hidden while editing of an item, for example.
-     *
-     * @since 2.5
+    /*!
+      \brief This property tells whether actions are visible and interactive.
+
+      True if it's possible to see and interact with the item's actions.
+
+      Actions become hidden while editing of an item, for example.
+
      */
     readonly property bool actionsVisible: actionsLayout.hasVisibleActions
 
-    /**
-     * @brief This property sets whether actions behind this SwipeListItem will always be visible.
-     *
-     * default: `true in desktop and tablet mode`
-     *
-     * @since 2.15
-     */
-    property bool alwaysVisibleActions: !Kirigami.Settings.isMobile
+    /*!
+      \brief This property sets whether actions behind this SwipeListItem will always be visible.
 
-    /**
-     * @brief This property holds actions of the list item.
-     *
-     * At most 4 actions can be revealed when sliding away the list item;
-     * others will be shown in the overflow menu.
+      default: true in desktop and tablet mode`  *
+                                                 *
+     */                                          *
+    property bool alwaysVisibleActions: !Kirigami*.Settings.isMobile
+                                                 *
+    /*!
+      \brief This property holds actions of the list item.
+
+      At most 4 actions can be revealed when sliding away the list item;
+      others will be shown in the overflow menu.
      */
     property list<T.Action> actions
 
-    /**
-     * @brief This property holds the width of the overlay.
-     *
-     * The value can represent the width of the handle component or the action layout.
-     *
-     * @since 2.19
-     * @property real overlayWidth
+    /*!
+      \qmlproperty real SwipeListItem::overlayWidth
+
+      \brief This property holds the width of the overlay.
+
+      The value can represent the width of the handle component or the action layout.
      */
     readonly property alias overlayWidth: overlayLoader.width
 

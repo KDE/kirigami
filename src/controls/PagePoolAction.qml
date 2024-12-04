@@ -9,93 +9,100 @@ import QtQml
 import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 
-/**
- * An action used to load Pages coming from a common PagePool
- * in a PageRow or QtQuickControls2 StackView.
- *
- * @see PagePool
+/*!
+  \qmltype PagePoolAction
+  \inqmlmodule org.kde.kirigami
+
+  \brief An action used to load Pages coming from a common PagePool
+  in a PageRow or QtQuickControls2 StackView.
+
+  \sa PagePool
  */
 Kirigami.Action {
     id: root
 
 //BEGIN properties
-    /**
-     * @brief This property holds the url or filename of the page that this action will load.
+    /*!
+      \brief This property holds the url or filename of the page that this action will load.
      */
     property string page
 
-    /**
-     * @brief This property holds the PagePool object used by this PagePoolAction.
-     *
-     * PagePool will make sure only one instance of the page identified by the page url will be created and reused.
-     * PagePool's lastLoaderUrl property will be used to control the mutual exclusivity of the checked
-     * state of the PagePoolAction instances sharing the same PagePool.
+    /*!
+      \brief This property holds the PagePool object used by this PagePoolAction.
+
+      PagePool will make sure only one instance of the page identified by the page url will be created and reused.
+
+      PagePool's lastLoaderUrl property will be used to control the mutual exclusivity of the checked
+      state of the PagePoolAction instances sharing the same PagePool.
      */
     property Kirigami.PagePool pagePool
 
-    /**
-     * The pageStack property accepts either a Kirigami.PageRow or a QtQuickControls2 StackView.
-     * The component that will instantiate the pages, which has to work with a stack logic.
-     * Kirigami.PageRow is recommended, but will work with QtQuicControls2 StackView as well.
-     *
-     * default: `bound to ApplicationWindow's global pageStack, which is a PageRow by default`
+    /*!
+      The pageStack property accepts either a Kirigami.PageRow or a QtQuickControls2 StackView;
+      the component that will instantiate the pages, which has to work with a stack logic.
+
+      Kirigami.PageRow is recommended, but will work with QtQuicControls2 StackView as well.
+
+      default: bound to ApplicationWindow's global pageStack, which is a PageRow by default
      */
     property Item pageStack: typeof applicationWindow !== 'undefined' ? applicationWindow().pageStack : null
 
-    /**
-     * @brief This property sets the page in the pageStack after which
-     * new pages will be pushed.
-     *
-     * All pages present after the given basePage will be removed from the pageStack
+    /*!
+      \qmlproperty Page basePage
+      \brief This property sets the page in the pageStack after which
+      new pages will be pushed.
+
+      All pages present after the given basePage will be removed from the pageStack
      */
     property T.Page basePage
 
-    /**
-     * This property holds a function that generate the property values for the created page
-     * when it is pushed onto the Kirigami.PagePool.
-     *
-     * Example usage:
-     * @code{.qml}
-     * Kirigami.PagePoolAction {
-     *     text: i18n("Security")
-     *     icon.name: "security-low"
-     *     page: Qt.resolvedUrl("Security.qml")
-     *     initialProperties: {
-     *         return {
-     *             room: root.room
-     *         }
-     *     }
-     * }
-     * @endcode
-     * @property QVariantMap initialProperties
+    /*!
+      This property holds a function that generate the property values for the created page
+      when it is pushed onto the Kirigami.PagePool.
+
+      Example usage:
+      \qml
+      Kirigami.PagePoolAction {
+          text: i18n("Security")
+          icon.name: "security-low"
+          page: Qt.resolvedUrl("Security.qml")
+          initialProperties: {
+              return {
+                  room: root.room
+              }
+          }
+      }
+      \endqml
      */
     property var initialProperties
 
-    /**
-     * @brief This property sets whether PagePoolAction will use the layers property
-     * implemented by the pageStack.
-     *
-     * This is intended for use with PageRow layers to allow PagePoolActions to
-     * push context-specific pages onto the layers stack.
-     *
-     * default: ``false``
-     *
-     * @since 5.70
-     * @since org.kde.kirigami 2.12
+    /*!
+      \brief This property sets whether PagePoolAction will use the layers property
+      implemented by the pageStack.
+
+      This is intended for use with PageRow layers to allow PagePoolActions to
+      push context-specific pages onto the layers stack.
+
+      default: \c false
+
+      \since 5.70
      */
     property bool useLayers: false
 //END properties
 
-    /**
-     * @returns the page item held in the PagePool or null if it has not been loaded yet.
+    /*!
+      \qmlmethod Item PagePoolAction::pageItem()
+
+      Returns the page item held in the PagePool or null if it has not been loaded yet.
      */
     function pageItem(): Item {
         return pagePool.pageForUrl(page)
     }
 
-    /**
-     * @returns true if the page has been loaded and placed on pageStack.layers
-     * and useLayers is true, otherwise returns null.
+    /*!
+      \qmlmethod bool PagePoolAction::layerContainsPage()
+      Returns \c true if the page has been loaded and placed on \c pageStack.layers
+      and useLayers is true, otherwise returns \c null.
      */
     function layerContainsPage(): bool {
         if (!useLayers || !pageStack.hasOwnProperty("layers")) {
@@ -107,9 +114,11 @@ Kirigami.Action {
         return item !== null;
     }
 
-    /**
-     * @returns true if the page has been loaded and placed on the pageStack,
-     * otherwise returns null.
+    /*!
+      \qmlmethod bool PagePoolAction::stackContainsPage()
+
+      Returns \c true if the page has been loaded and placed on the pageStack,
+      otherwise returns \c null.
      */
     function stackContainsPage(): bool {
         if (useLayers) {

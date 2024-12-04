@@ -11,187 +11,179 @@ import org.kde.kirigami as Kirigami
 import "templates/private" as TP
 import "templates" as KT
 
-/**
- * @brief An item that provides the features of AbstractApplicationWindow without the window itself.
- *
- * This allows embedding into a larger application.
- * Unless you need extra flexibility it is recommended to use ApplicationItem instead.
- *
- * Example usage:
- * @code
- * import org.kde.kirigami as Kirigami
- *
- * Kirigami.AbstractApplicationItem {
- *  [...]
- *     globalDrawer: Kirigami.GlobalDrawer {
- *         actions: [
- *            Kirigami.Action {
- *                text: "View"
- *                icon.name: "view-list-icons"
- *                Kirigami.Action {
- *                        text: "action 1"
- *                }
- *                Kirigami.Action {
- *                        text: "action 2"
- *                }
- *                Kirigami.Action {
- *                        text: "action 3"
- *                }
- *            },
- *            Kirigami.Action {
- *                text: "Sync"
- *                icon.name: "folder-sync"
- *            }
- *         ]
- *     }
- *
- *     contextDrawer: Kirigami.ContextDrawer {
- *         id: contextDrawer
- *     }
- *
- *     pageStack: Kirigami.PageRow {
- *         ...
- *     }
- *  [...]
- * }
- * @endcode
- *
- * @inherit QtQuick.Item
+/*!
+  \qmltype AbstractApplicationItem
+  \inqmlmodule org.kde.kirigami
+
+  \brief An item that provides the features of AbstractApplicationWindow without the window itself.
+
+  This allows embedding into a larger application.
+  Unless you need extra flexibility it is recommended to use ApplicationItem instead.
+
+  Example usage:
+  \code
+  import org.kde.kirigami as Kirigami
+
+  Kirigami.AbstractApplicationItem {
+   [...]
+      globalDrawer: Kirigami.GlobalDrawer {
+          actions: [
+             Kirigami.Action {
+                 text: "View"
+                 icon.name: "view-list-icons"
+                 Kirigami.Action {
+                         text: "action 1"
+                 }
+                 Kirigami.Action {
+                         text: "action 2"
+                 }
+                 Kirigami.Action {
+                         text: "action 3"
+                 }
+             },
+             Kirigami.Action {
+                 text: "Sync"
+                 icon.name: "folder-sync"
+             }
+          ]
+      }
+
+      contextDrawer: Kirigami.ContextDrawer {
+          id: contextDrawer
+      }
+
+      pageStack: Kirigami.PageRow {
+          ...
+      }
+   [...]
+  }
+  \endcode
  */
 Item {
     id: root
 
 //BEGIN properties
-    /**
-     * @brief This property holds the stack used to allocate the pages and to manage the
-     * transitions between them.
-     *
-     * Put a container here, such as QtQuick.Controls.StackView.
+    /*!
+      \brief This property holds the stack used to allocate the pages and to manage the
+      transitions between them.
+
+      Put a container here, such as QtQuick.Controls.StackView.
      */
     property Item pageStack
 
-    /**
-     * @brief This property holds the font for this item.
-     *
-     * default: ``Kirigami.Theme.defaultFont``
+    /*!
+      \brief This property holds the font for this item.
+
+      default: Kirigami.Theme.defaultFont
      */
     property font font: Kirigami.Theme.defaultFont
 
-    /**
-     * @brief This property holds the locale for this item.
+    /*!
+      \brief This property holds the locale for this item.
      */
     property Locale locale
 
-    /**
-     * @brief This property holds an item that can be used as a menuBar for the application.
+    /*!
+      \brief This property holds an item that can be used as a menuBar for the application.
      */
     property T.MenuBar menuBar
 
-    /**
-    * @brief This property holds an item that can be used as a title for the application.
-    *
-    * Scrolling the main page will make it taller or shorter (through the point of going away).
-    *
-    * It's a behavior similar to the typical mobile web browser addressbar.
-    *
-    * The minimum, preferred and maximum heights of the item can be controlled with
-    *
-    * * ``Layout.minimumHeight``: default is 0, i.e. hidden
-    * * ``Layout.preferredHeight``: default is Kirigami.Units.gridUnit * 1.6
-    * * ``Layout.maximumHeight``: default is Kirigami.Units.gridUnit * 3
-    *
-    * To achieve a titlebar that stays completely fixed, just set the 3 sizes as the same.
-    *
-    * @property kirigami::templates::AbstractApplicationHeader header
+    /*!
+     \qmlproperty AbstractApplicationHeader header
+     \brief This property holds an item that can be used as a title for the application.
+
+     Scrolling the main page will make it taller or shorter (through the point of going away).
+
+     It's a behavior similar to the typical mobile web browser addressbar.
+
+     The minimum, preferred and maximum heights of the item can be controlled with:
+     \list
+     \li Layout.minimumHeight: default is 0, i.e. hidden
+     \li Layout.preferredHeight: default is Kirigami.Units.gridUnit * 1.6
+     \li Layout.maximumHeight: default is Kirigami.Units.gridUnit * 3
+     \endlist
+     To achieve a titlebar that stays completely fixed, just set the 3 sizes as the same.
     */
     property KT.AbstractApplicationHeader header
 
-    /**
-     * @brief This property holds an item that can be used as a footer for the application.
+    /*!
+      \brief This property holds an item that can be used as a footer for the application.
      */
     property Item footer
 
-    /**
-     * @brief This property sets whether the standard chrome of the app is visible.
-     *
-     * These are the action button, the drawer handles and the application header.
-     *
-     * default: ``true``
+    /*!
+      \brief This property sets whether the standard chrome of the app is visible.
+
+      These are the action button, the drawer handles and the application header.
+
+      default: true
      */
     property bool controlsVisible: true
 
-    /**
-     * @brief This property holds the drawer for global actions.
-     *
-     * Thos drawer can be opened by sliding from the left screen edge
-     * or by dragging the ActionButton to the right.
-     *
-     * @note It is recommended to use the GlobalDrawer here.
-     * @property org::kde::kirigami::OverlayDrawer globalDrawer
+    /*!
+      \brief This property holds the drawer for global actions.
+
+      Thos drawer can be opened by sliding from the left screen edge
+      or by dragging the ActionButton to the right.
+
+      \note It is recommended to use the GlobalDrawer here.
      */
     property OverlayDrawer globalDrawer
 
-    /**
-     * @brief This property tells us whether the application is in "widescreen" mode.
-     *
-     * This is enabled on desktops or horizontal tablets.
-     *
-     * @note Different styles can have their own logic for deciding this.
+    /*!
+      \brief This property tells us whether the application is in "widescreen" mode.
+
+      This is enabled on desktops or horizontal tablets.
+
+      \note Different styles can have their own logic for deciding this.
      */
     property bool wideScreen: width >= Kirigami.Units.gridUnit * 60
 
-    /**
-     * @brief This property holds the drawer for context-dependent actions.
-     *
-     * The drawer that will be opened by sliding from the right screen edge
-     * or by dragging the ActionButton to the left.
-     *
-     * @note It is recommended to use the ContextDrawer type here.
-     *
-     * The contents of the context drawer should depend from what page is
-     * loaded in the main pageStack
-     *
-     * Example usage:
-     *
-     * @code
-     * import org.kde.kirigami as Kirigami
-     *
-     * Kirigami.ApplicationWindow {
-     *     contextDrawer: Kirigami.ContextDrawer {
-     *         enabled: true
-     *         actions: [
-     *             Kirigami.Action {
-     *                 icon.name: "edit"
-     *                 text: "Action text"
-     *                 onTriggered: {
-     *                     // do stuff
-     *                 }
-     *             },
-     *             Kirigami.Action {
-     *                 icon.name: "edit"
-     *                 text: "Action text"
-     *                 onTriggered: {
-     *                     // do stuff
-     *                 }
-     *             }
-     *         ]
-     *     }
-     * }
-     * @endcode
-     *
-     * @property org::kde::kirigami::ContextDrawer contextDrawer
+    /*!
+      \brief This property holds the drawer for context-dependent actions.
+
+      The drawer that will be opened by sliding from the right screen edge
+      or by dragging the ActionButton to the left.
+
+      \note It is recommended to use the ContextDrawer type here.
+
+      The contents of the context drawer should depend from what page is
+      loaded in the main pageStack.
+
+      Example usage:
+
+      \code
+      import org.kde.kirigami as Kirigami
+
+      Kirigami.ApplicationWindow {
+          contextDrawer: Kirigami.ContextDrawer {
+              enabled: true
+              actions: [
+                  Kirigami.Action {
+                      icon.name: "edit"
+                      text: "Action text"
+                      onTriggered: {
+                          // do stuff
+                      }
+                  },
+                  Kirigami.Action {
+                      icon.name: "edit"
+                      text: "Action text"
+                      onTriggered: {
+                          // do stuff
+                      }
+                  }
+              ]
+          }
+      }
+      \endcode
      */
     property OverlayDrawer contextDrawer
 
-    /**
-     * @brief This property holds the list of all children of this item.
-     * @internal
-     * @property list<Object> __data
-     */
     default property alias __data: contentItemRoot.data
 
-    /**
-     * @brief This property holds the Item of the main part of the Application UI.
+    /*!
+      \brief This property holds the Item of the main part of the Application UI.
      */
     readonly property Item contentItem: Item {
         id: contentItemRoot
@@ -205,15 +197,15 @@ Item {
         }
     }
 
-    /**
-     * @brief This property holds the color for the background.
-     *
-     * default: ``Kirigami.Theme.backgroundColor``
+    /*!
+      \brief This property holds the color for the background.
+
+      default: Kirigami.Theme.backgroundColor
      */
     property color color: Kirigami.Theme.backgroundColor
 
-    /**
-     * @brief This property holds the background of the Application UI.
+    /*!
+      \brief This property holds the background of the Application UI.
      */
     property Item background
 
@@ -221,32 +213,36 @@ Item {
 //END properties
 
 //BEGIN functions
-    /**
-     * @brief This function shows a little passive notification at the bottom of the app window
-     * lasting for few seconds, with an optional action button.
-     *
-     * @param message The text message to be shown to the user.
-     * @param timeout How long to show the message:
-     *            possible values: "short", "long" or the number of milliseconds
-     * @param actionText Text in the action button, if any.
-     * @param callBack A JavaScript function that will be executed when the
-     *            user clicks the button.
+    /*!
+      \brief This function shows a little passive notification at the bottom of the app window
+      lasting for few seconds, with an optional action button.
+
+      \a message The text message to be shown to the user.
+
+      \a timeout How long to show the message:
+                 possible values: "short", "long", or the number of milliseconds.
+
+      \a actionText Text in the action button, if any.
+
+      \a callBack A JavaScript function that will be executed when the
+                 user clicks the button.
      */
     function showPassiveNotification(message, timeout, actionText, callBack) {
         notificationsObject.showNotification(message, timeout, actionText, callBack);
     }
 
-    /**
-     * @brief This function hides the passive notification at specified index, if any is shown.
-     * @param index Index of the notification to hide. Default is 0 (oldest notification).
+    /*!
+      \brief This function hides the passive notification at specified index, if any is shown.
+
+      \a index Index of the notification to hide. Default is 0 (oldest notification).
     */
     function hidePassiveNotification(index = 0) {
         notificationsObject.hideNotification(index);
     }
 
-    /**
-     * @brief This property gets application windows object anywhere in the application.
-     * @returns a pointer to this item.
+    /*!
+      \brief This property gets application windows object anywhere in the application.
+      Returns a pointer to this item.
      */
     function applicationWindow() {
         return root;

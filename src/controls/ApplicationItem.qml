@@ -7,84 +7,87 @@
 import QtQuick
 import org.kde.kirigami as Kirigami
 
-/**
- * @brief An item that provides the features of ApplicationWindow without the window itself.
- *
- * This allows embedding into a larger application.
- * It's based around the PageRow component that allows adding/removing of pages.
- *
- * Example usage:
- * @code
- * import org.kde.kirigami as Kirigami
- *
- * Kirigami.ApplicationItem {
- *     globalDrawer: Kirigami.GlobalDrawer {
- *         actions: [
- *            Kirigami.Action {
- *                text: "View"
- *                icon.name: "view-list-icons"
- *                Kirigami.Action {
- *                        text: "action 1"
- *                }
- *                Kirigami.Action {
- *                        text: "action 2"
- *                }
- *                Kirigami.Action {
- *                        text: "action 3"
- *                }
- *            },
- *            Kirigami.Action {
- *                text: "Sync"
- *                icon.name: "folder-sync"
- *            }
- *         ]
- *     }
- *
- *     contextDrawer: Kirigami.ContextDrawer {
- *         id: contextDrawer
- *     }
- *
- *     pageStack.initialPage: Kirigami.Page {
- *         mainAction: Kirigami.Action {
- *             icon.name: "edit"
- *             onTriggered: {
- *                 // do stuff
- *             }
- *         }
- *         contextualActions: [
- *             Kirigami.Action {
- *                 icon.name: "edit"
- *                 text: "Action text"
- *                 onTriggered: {
- *                     // do stuff
- *                 }
- *             },
- *             Kirigami.Action {
- *                 icon.name: "edit"
- *                 text: "Action text"
- *                 onTriggered: {
- *                     // do stuff
- *                 }
- *             }
- *         ]
- *         // ...
- *     }
- * }
- * @endcode
+/*!
+  \qmltype ApplicationItem
+  \inqmlmodule org.kde.kirigami
+
+  \brief An item that provides the features of ApplicationWindow without the window itself.
+
+  This allows embedding into a larger application.
+  It's based around the PageRow component that allows adding/removing of pages.
+
+  Example usage:
+  \code
+  import org.kde.kirigami as Kirigami
+
+  Kirigami.ApplicationItem {
+      globalDrawer: Kirigami.GlobalDrawer {
+          actions: [
+             Kirigami.Action {
+                 text: "View"
+                 icon.name: "view-list-icons"
+                 Kirigami.Action {
+                         text: "action 1"
+                 }
+                 Kirigami.Action {
+                         text: "action 2"
+                 }
+                 Kirigami.Action {
+                         text: "action 3"
+                 }
+             },
+             Kirigami.Action {
+                 text: "Sync"
+                 icon.name: "folder-sync"
+             }
+          ]
+      }
+
+      contextDrawer: Kirigami.ContextDrawer {
+          id: contextDrawer
+      }
+
+      pageStack.initialPage: Kirigami.Page {
+          mainAction: Kirigami.Action {
+              icon.name: "edit"
+              onTriggered: {
+                  // do stuff
+              }
+          }
+          contextualActions: [
+              Kirigami.Action {
+                  icon.name: "edit"
+                  text: "Action text"
+                  onTriggered: {
+                      // do stuff
+                  }
+              },
+              Kirigami.Action {
+                  icon.name: "edit"
+                  text: "Action text"
+                  onTriggered: {
+                      // do stuff
+                  }
+              }
+          ]
+          // ...
+      }
+  }
+  \endcode
 */
 Kirigami.AbstractApplicationItem {
     id: root
 
-    /**
-     * @brief This property holds the PageRow used to allocate the pages and
-     * manage the transitions between them.
-     *
-     * It's using a PageRow, while having the same API as PageStack,
-     * it positions the pages as adjacent columns, with as many columns
-     * as can fit in the screen. An handheld device would usually have a single
-     * fullscreen column, a tablet device would have many tiled columns.
-     *
-     * @property org::kde::kirigami::PageRow pageStack
+    /*!
+      \qmlproperty PageRow ApplicationItem::pageStack
+
+      \brief This property holds the PageRow used to allocate the pages and
+      manage the transitions between them.
+
+      It's using a PageRow, while having the same API as PageStack,
+      it positions the pages as adjacent columns, with as many columns
+      as can fit in the screen. An handheld device would usually have a single
+      fullscreen column, a tablet device would have many tiled columns.
      */
     readonly property alias pageStack: __pageStack
 

@@ -12,14 +12,17 @@
 
 class PaddingPrivate;
 
-/**
- * This item simply adds an external padding to contentItem's size.
+/*!
+ * \qmltype Padding
+ * \inqmlmodule org.kde.kirigami.layouts
  *
- * Padding item behaves similarly to QtQuick.Controls/Control::padding,
+ * \brief This item simply adds an external padding to contentItem's size.
+ *
+ * Padding item behaves similarly to Control::padding,
  * but is more lightweight and thus efficient. Its implicit size is set
  * to that of its contentItem's implicit size plus padding.
  *
- * @code
+ * \code
  * import QtQuick.Controls as QQC2
  * import org.kde.kirigami as Kirigami
  *
@@ -27,13 +30,13 @@ class PaddingPrivate;
  *     padding: Kirigami.Units.largeSpacing
  *     contentItem: QQC2.Button {}
  * }
- * @endcode
+ * \endcode
  *
  * With this component it is possible to add external paddings as a
- * placeholder for an item, whereas with QtQuick.Layouts you would need to
+ * placeholder for an item, whereas with QtQuick Layouts} you would need to
  * manually assign or bind attached properties whenever content item changes.
  *
- * @code
+ * \code
  * import QtQuick
  * import QtQuick.Layouts
  * import QtQuick.Controls as QQC2
@@ -53,95 +56,125 @@ class PaddingPrivate;
  *         padding: Kirigami.Units.largeSpacing
  *     }
  * }
- * @endcode
+ * \endcode
  *
- * @since KDE Frameworks 6.0
+ * \since 6.0
  */
 class Padding : public QQuickItem
 {
     Q_OBJECT
     QML_ELEMENT
 
-    /**
-     * @brief This property holds the visual content Item.
+    /*!
+     * \qmlproperty Item Padding::contentItem
+     *
+     * \brief This property holds the visual content Item.
      *
      * It will automatically resized taking into account all the paddings
      */
     Q_PROPERTY(QQuickItem *contentItem READ contentItem WRITE setContentItem NOTIFY contentItemChanged FINAL)
 
-    /**
-     * @brief This property holds the default padding.
+    /*!
+     * \qmlproperty real Padding::padding
+     *
+     * \brief This property holds the default padding.
      *
      * Padding adds a space between each edge of  this ITem and its contentItem, effectively controlling its size.
      * To specify a padding value for a specific edge of the control, set its relevant property:
-     * * leftPadding
-     * * rightPadding
-     * * topPadding
-     * * bottomPadding
+     * \list
+     * \li leftPadding
+     * \li rightPadding
+     * \li topPadding
+     * \li bottomPadding
+     * \endlist
      */
     Q_PROPERTY(qreal padding READ padding WRITE setPadding NOTIFY paddingChanged RESET resetPadding FINAL)
 
-    /**
-     * @brief This property holds the horizontal padding.
+    /*!
+     * \qmlproperty real Padding::horizontalPadding
+     *
+     * \brief This property holds the horizontal padding.
      *
      * Unless explicitly set, the value is equal to padding.
      */
     Q_PROPERTY(qreal horizontalPadding READ horizontalPadding WRITE setHorizontalPadding NOTIFY horizontalPaddingChanged RESET resetHorizontalPadding FINAL)
 
-    /**
-     * @brief This property holds the vertical padding.
+    /*!
+     * \qmlproperty real Padding::verticalPadding
+     *
+     * \brief This property holds the vertical padding.
      *
      * Unless explicitly set, the value is equal to padding.
      */
     Q_PROPERTY(qreal verticalPadding READ verticalPadding WRITE setVerticalPadding NOTIFY verticalPaddingChanged RESET resetVerticalPadding FINAL)
 
-    /**
-     * @brief This property holds the padding on the left side.
+    /*!
+     * \qmlproperty real Padding::leftPadding
+     *
+     * \brief This property holds the padding on the left side.
      *
      * Unless explicitly set, it falls back to horizontalPadding and then to padding.
      * This always refers to the actual left, it won't be flipped on RTL layouts.
      */
     Q_PROPERTY(qreal leftPadding READ leftPadding WRITE setLeftPadding NOTIFY leftPaddingChanged RESET resetLeftPadding FINAL)
 
-    /**
-     * @brief the padding on the top side.
+    /*!
+     * \qmlproperty real Padding::topPadding
+     *
+     * \brief the padding on the top side.
      *
      * Unless explicitly set, it falls back to verticalPadding and then to padding.
      */
     Q_PROPERTY(qreal topPadding READ topPadding WRITE setTopPadding NOTIFY topPaddingChanged RESET resetTopPadding FINAL)
 
-    /**
-     * @brief This property holds the padding on the right side.
+    /*!
+     * \qmlproperty real Padding::rightPadding
+     *
+     * \brief This property holds the padding on the right side.
      *
      * Unless explicitly set, it falls back to horizontalPadding and then to padding.
      * This always refers to the actual right, it won't be flipped on RTL layouts.
      */
     Q_PROPERTY(qreal rightPadding READ rightPadding WRITE setRightPadding NOTIFY rightPaddingChanged RESET resetRightPadding FINAL)
 
-    /**
-     * @brief This property holds the padding on the bottom side.
+    /*!
+     * \qmlproperty real Padding::bottomPadding
+     *
+     * \brief This property holds the padding on the bottom side.
      *
      * Unless explicitly set, it falls back to verticalPadding and then to padding.
      */
     Q_PROPERTY(qreal bottomPadding READ bottomPadding WRITE setBottomPadding NOTIFY bottomPaddingChanged RESET resetBottomPadding FINAL)
 
-    /**
-     *  @brief The width available to the contentItem after deducting horizontal padding from the width of the Padding.
+    /*!
+     * \qmlproperty real Padding::availableWidth
+     * \readonly
+     *
+     * \brief The width available to the contentItem after deducting horizontal padding from the width of the Padding.
      */
     Q_PROPERTY(qreal availableWidth READ availableWidth NOTIFY availableWidthChanged FINAL)
 
-    /**
-     *  @brief The height available to the contentItem after deducting vertical padding from the width of the Padding.
+    /*!
+     * \qmlproperty real Padding::availableHeight
+     * \readonly
+     *
+     * \brief The height available to the contentItem after deducting vertical padding from the width of the Padding.
      */
     Q_PROPERTY(qreal availableHeight READ availableHeight NOTIFY availableHeightChanged FINAL)
 
-    /**
-     *  @brief The implicitWidth of its contentItem, or 0 if not present.
+    /*!
+     * \qmlproperty real Padding::implicitContentWidth
+     * \readonly
+     *
+     * \brief The implicitWidth of its contentItem, or 0 if not present.
      */
     Q_PROPERTY(qreal implicitContentWidth READ implicitContentWidth NOTIFY implicitContentWidthChanged FINAL)
 
-    /**
-     *  @brief The implicitHeight of its contentItem, or 0 if not present.
+    /*!
+     * \qmlproperty real Padding::implicitContentHeight
+     * \readonly
+     *
+     * \brief The implicitHeight of its contentItem, or 0 if not present.
      */
     Q_PROPERTY(qreal implicitContentHeight READ implicitContentHeight NOTIFY implicitContentHeightChanged FINAL)
 

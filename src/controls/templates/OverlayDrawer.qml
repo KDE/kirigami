@@ -10,134 +10,145 @@ import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 import "private" as KTP
 
-/**
- * Overlay Drawers are used to expose additional UI elements needed for
- * small secondary tasks for which the main UI elements are not needed.
- * For example in Okular Mobile, an Overlay Drawer is used to display
- * thumbnails of all pages within a document along with a search field.
- * This is used for the distinct task of navigating to another page.
- *
- * @inherit QtQuick.Controls.Drawer
+/*!
+  \qmltype OverlayDrawer
+  \inqmlmodule org.kde.kirigami
+
+  \brief A Drawer used to expose additional UI elements needed for
+  small secondary tasks for which the main UI elements are not needed.
+
+  For example in Okular Mobile, an Overlay Drawer is used to display
+  thumbnails of all pages within a document along with a search field.
+  This is used for the distinct task of navigating to another page.
  */
 T.Drawer {
     id: root
 
 //BEGIN properties
-    /**
-     * @brief This property tells whether the drawer is open and visible.
-     *
-     * default: ``false``
+    /*!
+      \brief This property tells whether the drawer is open and visible.
+
+      default: \c false
      */
     property bool drawerOpen: false
 
-    /**
-     * @brief This property tells whether the drawer is in a state between open
-     * and closed.
-     *
-     * The drawer is visible but not completely open. This is usually the case when
-     * the user is dragging the drawer from a screen edge, so the user is "peeking"
-     * at what's in the drawer.
-     *
-     * default: ``false``
+    /*!
+      \brief This property tells whether the drawer is in a state between open
+      and closed.
+
+      The drawer is visible but not completely open. This is usually the case when
+      the user is dragging the drawer from a screen edge, so the user is "peeking"
+      at what's in the drawer.
+
+      default: \c false
      */
     property bool peeking: false
 
-    /**
-     * @brief This property tells whether the drawer is currently opening or closing itself.
+    /*!
+      \brief This property tells whether the drawer is currently opening or closing itself.
      */
     readonly property bool animating : enterAnimation.animating || exitAnimation.animating || positionResetAnim.running
 
-    /**
-     * @brief This property holds whether the drawer can be collapsed to a
-     * very thin, usually icon only sidebar.
-     *
-     * Only modal drawers are collapsible. Collapsible is not supported in
-     * the mobile mode.
-     *
-     * @since 2.5
+    /*!
+      \brief This property holds whether the drawer can be collapsed to a
+      very thin, usually icon only sidebar.
+
+      Only modal drawers are collapsible. Collapsible is not supported in
+      the mobile mode.
+
+      \since 2.5
      */
     property bool collapsible: false
 
-    /**
-     * @brief This property tells whether the drawer is collapsed to a
-     * very thin sidebar, usually icon only.
-     *
-     * When true, the drawer will be collapsed to a very thin sidebar,
-     * usually icon only.
-     *
-     * default: ``false``
-     *
-     * @see collapsible Only collapsible drawers can be collapsed.
+    /*!
+      \brief This property tells whether the drawer is collapsed to a
+      very thin sidebar, usually icon only.
+
+      When true, the drawer will be collapsed to a very thin sidebar,
+      usually icon only.
+
+      Only collapsible drawers can be collapsed.
+
+      default: \c false
+
+      \sa collapsible
      */
     property bool collapsed: false
 
-    /**
-     * @brief This property holds the size of the collapsed drawer.
-     *
-     * For vertical drawers this will be the width of the drawer and for horizontal
-     * drawers this will be the height of the drawer.
-     *
-     * default: ``Units.iconSizes.medium``, just enough to accommodate medium sized icons
+    /*!
+      \brief This property holds the size of the collapsed drawer.
+
+      For vertical drawers this will be the width of the drawer and for horizontal
+      drawers this will be the height of the drawer.
+
+      default: Units.iconSizes.medium, just enough to accommodate medium sized icons
      */
     property int collapsedSize: Kirigami.Units.iconSizes.medium
 
-    /**
-     * @brief This property holds the options for handle's open icon.
-     *
-     * This is a grouped property with following components:
-     *
-     * * ``source: var``: The name of a freedesktop-compatible icon.
-     * * ``color: color``: An optional tint color for the icon.
-     *
-     * If no custom icon is set, a menu icon is shown for the application globalDrawer
-     * and an overflow menu icon is shown for the contextDrawer.
-     * That's the default for the GlobalDrawer and ContextDrawer components respectively.
-     *
-     * For OverlayDrawer the default is view-right-close or view-left-close depending on
-     * the drawer location
-     *
-     * @since 2.5
+    /*!
+      \qmlproperty string icon.name
+      \qmlproperty var icon.source
+      \qmlproperty color icon.color
+      \qmlproperty real icon.width
+      \qmlproperty real icon.height
+      \qmlproperty function icon.fromControlsIcon
+
+      This property holds the options for handle's open icon.
+
+      If no custom icon is set, a menu icon is shown for the application globalDrawer
+      and an overflow menu icon is shown for the contextDrawer.
+      That's the default for the GlobalDrawer and ContextDrawer components respectively.
+
+      For OverlayDrawer the default is view-right-close or view-left-close depending on
+      the drawer location
+
+      \since 2.5
+
+      \include iconpropertiesgroup.qdocinc grouped-properties
      */
     readonly property KTP.IconPropertiesGroup handleOpenIcon: KTP.IconPropertiesGroup {
         source: root.edge === Qt.RightEdge ? "view-right-close" : "view-left-close"
     }
 
-    /**
-     * @brief This property holds the options for the handle's close icon.
-     *
-     * This is a grouped property with the following components:
-     * * ``source: var``: The name of a freedesktop-compatible icon.
-     * * ``color: color``: An optional tint color for the icon.
-     *
-     * If no custom icon is set, an X icon is shown,
-     * which will morph into the Menu or overflow icons.
-     *
-     * For OverlayDrawer the default is view-right-new or view-left-new depending on
-     * the drawer location.
-     *
-     * @since 2.5
+    /*!
+      \qmlproperty string handleClosedIcon.name
+      \qmlproperty var handleClosedIcon.source
+      \qmlproperty color handleClosedIcon.color
+      \qmlproperty real handleClosedIcon.width
+      \qmlproperty real handleClosedIcon.height
+      \qmlproperty function handleClosedIcon.fromControlsIcon
+
+      This grouped property holds the description of an optional icon.
+
+      If no custom icon is set, an X icon is shown,
+      which will morph into the Menu or overflow icons.
+
+      For OverlayDrawer the default is view-right-new or view-left-new depending on
+      the drawer location.
+
+      \since 2.5
      */
     property KTP.IconPropertiesGroup handleClosedIcon: KTP.IconPropertiesGroup {
         source: root.edge === Qt.RightEdge ? "view-right-new" : "view-left-new"
     }
 
-    /**
-     * @brief This property holds the tooltip displayed when the drawer is open.
-     * @since 2.15
+    /*!
+      \brief This property holds the tooltip displayed when the drawer is open.
+      \since 2.15
      */
     property string handleOpenToolTip: qsTr("Close drawer")
 
-    /**
-     * @brief This property holds the tooltip displayed when the drawer is closed.
-     * @since 2.15
+    /*!
+      \brief This property holds the tooltip displayed when the drawer is closed.
+      \since 2.15
      */
     property string handleClosedToolTip: qsTr("Open drawer")
 
-    /**
-     * @brief This property holds whether the handle is visible, to make opening the
-     * drawer easier.
-     *
-     * Currently supported only on left and right drawers.
+    /*!
+      \brief This property holds whether the handle is visible, to make opening the
+      drawer easier.
+
+      Currently supported only on left and right drawers.
      */
     property bool handleVisible: {
         if (typeof applicationWindow === "function") {
@@ -150,11 +161,10 @@ T.Drawer {
         return true;
     }
 
-    /**
-     * @brief Readonly property that points to the item that will act as a physical
-     * handle for the Drawer.
-     * @property MouseArea handle
-     **/
+    /*!
+      \brief Readonly property that points to the item that will act as a physical
+      handle for the Drawer.
+     */
     readonly property Item handle: KTP.DrawerHandle {
         drawer: root
     }
