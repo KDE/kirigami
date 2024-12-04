@@ -1,0 +1,13 @@
+include($KDE_DOCS/global/qt-module-defaults.qdocconf)
+
+project = Kirigami
+description = Stuff
+
+documentationinheaders = true
+
+headerdirs = .
+sourcedirs = .
+
+depends = kde qtcore qtquick qtquickcontrols kcoreaddons kirigamiplatform
+
+excludedirs = platform

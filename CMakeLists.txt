@@ -71,6 +71,7 @@ include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
 include(KDEPackageAppTemplates)
 include(ECMQmlModule)
 include(ECMDeprecationSettings)
+include(ECMGenerateQDoc)
 
 set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF6Kirigami")
 

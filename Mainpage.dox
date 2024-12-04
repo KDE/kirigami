@@ -57,7 +57,7 @@ If you have any questions about Kirigami, feel free to drop by the <a href="http
 
 \subsection example Minimal Example
 
-@code
+\code
 import QtQuick
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
@@ -153,7 +153,7 @@ Kirigami.ApplicationWindow {
         }
     }
 }
-@endcode
+\endcode
 
 @image html MinimalExample.webp
 
@@ -175,7 +175,7 @@ The application needs to have a folder called "3rdparty" containing clones of tw
 
 The main.cpp file should then have something like:
 
-@code
+\code
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #ifdef Q_OS_ANDROID
@@ -193,7 +193,7 @@ int main(int argc, char *argv[])
 #endif
     ...
 }
-@endcode
+\endcode
 
 @authors
 Marco Martin \<notmart@gmail.com\><br>
