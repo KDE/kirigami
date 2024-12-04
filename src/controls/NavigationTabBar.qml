@@ -13,121 +13,124 @@ import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 
-/**
- * @brief Page navigation tab-bar, used as an alternative to sidebars for 3-5 elements.
- *
- * Can be combined with secondary toolbars above (if in the footer) to provide page actions.
- *
- * Example usage:
- * @code{.qml}
- * import QtQuick
- * import org.kde.kirigami as Kirigami
- *
- * Kirigami.ApplicationWindow {
- *     title: "Clock"
- *
- *     pageStack.initialPage: worldPage
- *
- *     Kirigami.Page {
- *         id: worldPage
- *         title: "World"
- *         visible: false
- *     }
- *     Kirigami.Page {
- *         id: timersPage
- *         title: "Timers"
- *         visible: false
- *     }
- *     Kirigami.Page {
- *         id: stopwatchPage
- *         title: "Stopwatch"
- *         visible: false
- *     }
- *     Kirigami.Page {
- *         id: alarmsPage
- *         title: "Alarms"
- *         visible: false
- *     }
- *
- *     footer: Kirigami.NavigationTabBar {
- *         actions: [
- *             Kirigami.Action {
- *                 icon.name: "globe"
- *                 text: "World"
- *                 checked: worldPage.visible
- *                 onTriggered: {
- *                      if (!worldPage.visible) {
- *                          while (pageStack.depth > 0) {
- *                              pageStack.pop();
- *                          }
- *                          pageStack.push(worldPage);
- *                     }
- *                 }
- *             },
- *             Kirigami.Action {
- *                 icon.name: "player-time"
- *                 text: "Timers"
- *                 checked: timersPage.visible
- *                 onTriggered: {
- *                     if (!timersPage.visible) {
- *                         while (pageStack.depth > 0) {
- *                             pageStack.pop();
- *                         }
- *                         pageStack.push(timersPage);
- *                     }
- *                 }
- *             },
- *             Kirigami.Action {
- *                 icon.name: "chronometer"
- *                 text: "Stopwatch"
- *                 checked: stopwatchPage.visible
- *                 onTriggered: {
- *                     if (!stopwatchPage.visible) {
- *                         while (pageStack.depth > 0) {
- *                             pageStack.pop();
- *                         }
- *                         pageStack.push(stopwatchPage);
- *                     }
- *                 }
- *             },
- *             Kirigami.Action {
- *                 icon.name: "notifications"
- *                 text: "Alarms"
- *                 checked: alarmsPage.visible
- *                 onTriggered: {
- *                     if (!alarmsPage.visible) {
- *                         while (pageStack.depth > 0) {
- *                             pageStack.pop();
- *                         }
- *                         pageStack.push(alarmsPage);
- *                     }
- *                 }
- *             }
- *         ]
- *     }
- * }
- * @endcode
- *
- * @see NavigationTabButton
- * @since 5.87
- * @since org.kde.kirigami 2.19
- * @inherit QtQuick.Templates.Toolbar
+/*!
+  \qmltype NavigationTabBar
+  \inqmlmodule org.kde.kirigami
+
+  \brief Page navigation tab-bar, used as an alternative to sidebars for 3-5 elements.
+
+  Can be combined with secondary toolbars above (if in the footer) to provide page actions.
+
+  Example usage:
+  \qml
+  import QtQuick
+  import org.kde.kirigami as Kirigami
+
+  Kirigami.ApplicationWindow {
+      title: "Clock"
+
+      pageStack.initialPage: worldPage
+
+      Kirigami.Page {
+          id: worldPage
+          title: "World"
+          visible: false
+      }
+      Kirigami.Page {
+          id: timersPage
+          title: "Timers"
+          visible: false
+      }
+      Kirigami.Page {
+          id: stopwatchPage
+          title: "Stopwatch"
+          visible: false
+      }
+      Kirigami.Page {
+          id: alarmsPage
+          title: "Alarms"
+          visible: false
+      }
+
+      footer: Kirigami.NavigationTabBar {
+          actions: [
+              Kirigami.Action {
+                  icon.name: "globe"
+                  text: "World"
+                  checked: worldPage.visible
+                  onTriggered: {
+                       if (!worldPage.visible) {
+                           while (pageStack.depth > 0) {
+                               pageStack.pop();
+                           }
+                           pageStack.push(worldPage);
+                      }
+                  }
+              },
+              Kirigami.Action {
+                  icon.name: "player-time"
+                  text: "Timers"
+                  checked: timersPage.visible
+                  onTriggered: {
+                      if (!timersPage.visible) {
+                          while (pageStack.depth > 0) {
+                              pageStack.pop();
+                          }
+                          pageStack.push(timersPage);
+                      }
+                  }
+              },
+              Kirigami.Action {
+                  icon.name: "chronometer"
+                  text: "Stopwatch"
+                  checked: stopwatchPage.visible
+                  onTriggered: {
+                      if (!stopwatchPage.visible) {
+                          while (pageStack.depth > 0) {
+                              pageStack.pop();
+                          }
+                          pageStack.push(stopwatchPage);
+                      }
+                  }
+              },
+              Kirigami.Action {
+                  icon.name: "notifications"
+                  text: "Alarms"
+                  checked: alarmsPage.visible
+                  onTriggered: {
+                      if (!alarmsPage.visible) {
+                          while (pageStack.depth > 0) {
+                              pageStack.pop();
+                          }
+                          pageStack.push(alarmsPage);
+                      }
+                  }
+              }
+          ]
+      }
+  }
+  \endqml
+
+  \sa NavigationTabButton
+  \since 5.87
  */
 
 QQC2.ToolBar {
     id: root
 
 //BEGIN properties
-    /**
-     * @brief This property holds the list of actions to be displayed in the toolbar.
+    /*!
+      \qmlproperty list<Action> actions
+      \brief This property holds the list of actions to be displayed in the toolbar.
      */
     property list<T.Action> actions
 
-    /**
-     * @brief This property holds a subset of visible actions of the list of actions.
-     *
-     * An action is considered visible if it is either a Kirigami.Action with
-     * ``visible`` property set to true, or it is a plain QQC2.Action.
+    /*!
+      \qmlproperty list<Action> visibleActions
+      \brief This property holds a subset of visible actions of the list of actions.
+
+      An action is considered visible if it is either a Kirigami.Action with
+      \c visible property set to true, or it is a plain QQC2.Action.
      */
     readonly property list<T.Action> visibleActions: actions
         // Note: instanceof check implies `!== null`
@@ -136,8 +139,8 @@ QQC2.ToolBar {
             : action !== null
         )
 
-    /**
-     * @brief The property holds the maximum width of the toolbar actions, before margins are added.
+    /*!
+      \brief The property holds the maximum width of the toolbar actions, before margins are added.
      */
     property real maximumContentWidth: {
         const minDelegateWidth = Kirigami.Units.gridUnit * 5;
@@ -145,28 +148,29 @@ QQC2.ToolBar {
         return minDelegateWidth * Math.max(visibleActions.length, 5);
     }
 
-    /**
-     * @brief This property holds the index of currently checked tab.
-     *
-     * If the index set is out of bounds, or the triggered signal did not change any checked property of an action, the index
-     * will remain the same.
+    /*!
+      \brief This property holds the index of currently checked tab.
+
+      If the index set is out of bounds, or the triggered signal did not change any checked property of an action, the index
+      will remain the same.
      */
     property int currentIndex: tabGroup.checkedButton && tabGroup.buttons.length > 0 ? tabGroup.checkedButton.tabIndex : -1
 
-    /**
-     * @brief This property holds the number of tab buttons.
+    /*!
+      \brief This property holds the number of tab buttons.
      */
     readonly property int count: tabGroup.buttons.length
 
-    /**
-     * @brief This property holds the ButtonGroup used to manage the tabs.
+    /*!
+      \qmlproperty ButtonGroup tabGroup
+      \brief This property holds the ButtonGroup used to manage the tabs.
      */
     readonly property T.ButtonGroup tabGroup: tabGroup
 
-    /**
-     * @brief This property holds the calculated width that buttons on the tab bar use.
-     *
-     * @since 5.102
+    /*!
+      \brief This property holds the calculated width that buttons on the tab bar use.
+
+      \since 5.102
      */
     property real buttonWidth: {
         // Counting buttons because Repeaters can be counted among visibleChildren

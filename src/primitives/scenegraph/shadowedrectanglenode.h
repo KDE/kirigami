@@ -16,7 +16,7 @@
 struct QSGMaterialType;
 class ShadowedBorderRectangleMaterial;
 
-/**
+/*
  * Scene graph node for a shadowed rectangle.
  *
  * This node will set up the geometry and materials for a shadowed rectangle,
@@ -32,7 +32,7 @@ class ShadowedRectangleNode : public QSGGeometryNode
 public:
     ShadowedRectangleNode();
 
-    /**
+    /*!
      * Set whether to draw a border.
      *
      * Note that this will switch between a material with or without border.
@@ -50,7 +50,7 @@ public:
     void setBorderColor(const QColor &color);
     void setShaderType(ShadowedRectangleMaterial::ShaderType type);
 
-    /**
+    /*!
      * Update the geometry for this node.
      *
      * This is done as an explicit step to avoid the geometry being recreated

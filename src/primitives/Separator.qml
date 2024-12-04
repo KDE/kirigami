@@ -9,12 +9,14 @@ import QtQuick
 
 import org.kde.kirigami.platform as Platform
 
-/**
- * @brief A visual separator.
- *
- * Useful for splitting one set of items from another.
- *
- * @inherit QtQuick.Rectangle
+/*!
+  \qmltype Separator
+  \inqmlmodule org.kde.kirigami.primitives
+
+  \brief A visual separator.
+
+  Useful for splitting one set of items from another.
+
  */
 Rectangle {
     id: root
@@ -27,17 +29,20 @@ Rectangle {
         Normal
     }
 
-    /**
-     * @brief This property holds the visual weight of the separator.
-     *
-     * Weight options:
-     * * ``Kirigami.Separator.Weight.Light``
-     * * ``Kirigami.Separator.Weight.Normal``
-     *
-     * default: ``Kirigami.Separator.Weight.Normal``
-     *
-     * @since 5.72
-     * @since org.kde.kirigami 2.12
+    /*!
+      TODO qdoc enum
+
+      \brief This property holds the visual weight of the separator.
+
+      Weight options:
+      \list
+      \li Kirigami.Separator.Weight.Light
+      \li Kirigami.Separator.Weight.Normal
+      \endlist
+
+      default: Kirigami.Separator.Weight.Normal
+
+      \since 5.72
      */
     property int weight: Separator.Weight.Normal
 

@@ -8,52 +8,53 @@
 import QtQuick
 import org.kde.kirigami as Kirigami
 
-/**
- * @brief This is a standard TextField following the KDE HIG, which, by default,
- * uses Ctrl+F as the focus keyboard shortcut and "Search…" as a placeholder text.
- *
- * Example usage for the search field component:
- * @code
- * import org.kde.kirigami as Kirigami
- *
- * Kirigami.SearchField {
- *     id: searchField
- *     onAccepted: console.log("Search text is " + searchField.text)
- * }
- * @endcode
- *
- * @inherit org::kde::kirigami::ActionTextField
+/*!
+  \qmltype SearchField
+  \inqmlmodule org.kde.kirigami
+
+  \brief Standard TextField following the KDE HIG.
+
+  By default uses Ctrl+F as the focus keyboard shortcut and "Search…" as a placeholder text.
+
+  Example usage for the search field component:
+  \code
+  import org.kde.kirigami as Kirigami
+
+  Kirigami.SearchField {
+      id: searchField
+      onAccepted: console.log("Search text is " + searchField.text)
+  }
+  \endcode
+
  */
 Kirigami.ActionTextField {
     id: root
-    /**
-     * @brief This property sets whether the accepted signal is fired automatically
-     * when the text is changed.
-     *
-     * Setting this to false will require that the user presses return or enter
-     * (the same way a QtQuick.Controls.TextInput works).
-     *
-     * default: ``true``
-     *
-     * @since 5.81
-     * @since org.kde.kirigami 2.16
+    /*!
+      \brief This property sets whether the accepted signal is fired automatically
+      when the text is changed.
+
+      Setting this to false will require that the user presses return or enter
+      (the same way a TextInput works).
+
+      default: \c true
+
+      \since 5.81
      */
     property bool autoAccept: true
 
-    /**
-     * @brief This property sets whether to delay automatic acceptance of the search input.
-     *
-     * Set this to true if your search is expensive (such as for online
-     * operations or in exceptionally slow data sets) and want to delay it
-     * for 2.5 seconds.
-     *
-     * @note If you must have immediate feedback (filter-style), use the
-     * text property directly instead of accepted()
-     *
-     * default: ``false``
-     *
-     * @since 5.81
-     * @since org.kde.kirigami 2.16
+    /*!
+      \brief This property sets whether to delay automatic acceptance of the search input.
+
+      Set this to true if your search is expensive (such as for online
+      operations or in exceptionally slow data sets) and want to delay it
+      for 2.5 seconds.
+
+      \note If you must have immediate feedback (filter-style), use the
+      text property directly instead of accepted()
+
+      default: \c false
+
+      \since 5.81
      */
     property bool delaySearch: false
 

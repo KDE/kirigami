@@ -9,25 +9,26 @@
 
 #include <qqmlregistration.h>
 
-/**
- * @brief This attached property contains hints for spell checker.
+/*!
+ * \qmltype SpellCheck
+ * \inqmlmodule org.kde.kirigami
  *
- * @warning Kirigami doesn't provide any spell checker per se, this is just a
+ * \brief This attached property contains hints for spell checker.
+ *
+ * \warning Kirigami doesn't provide any spell checker per se, this is just a
  * hint for QQC2 style implementation and other downstream components. If you
- * want to  add spell checking to your custom application theme checkout
- * \ref Sonnet.
+ * want to  add spell checking to your custom application theme check out Sonnet.
  *
- * @code
+ * \code
  * import QtQuick.Controls as QQC2
  * import org.kde.kirigami as Kirigami
  *
  * QQC2.TextArea {
  *    Kirigami.SpellCheck.enabled: true
  * }
- * @endcode
+ * \endcode
  *
- * @author Carl Schwan <carl@carlschwan.eu>
- * @since 2.18
+ * \since 2.18
  */
 class SpellCheckAttached : public QObject
 {
@@ -37,14 +38,16 @@ class SpellCheckAttached : public QObject
     QML_UNCREATABLE("Attached property only")
     QML_ATTACHED(SpellCheckAttached)
 
-    /**
+    /*!
+     * \qmlattachedproperty bool SpellCheck::enabled
+     *
      * This property holds whether the spell checking should be enabled on the
      * TextField/TextArea.
      *
-     * @note By default, false. This might change in KF6, so if you don't want
+     * \note By default, false. This might change in KF6, so if you don't want
      * spellcheck in your application, explicitly set it to false.
      *
-     * @since 2.18
+     * \since 2.18
      */
     Q_PROPERTY(bool enabled READ enabled WRITE setEnabled NOTIFY enabledChanged FINAL)
 public:

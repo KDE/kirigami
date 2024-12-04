@@ -9,15 +9,15 @@ import org.kde.kirigami as Kirigami
 
 Item {
     id: shadow
-    /**
-     * @brief This property holds the edge of the shadow that will determine the direction of the gradient.
-     * The acceptable values are:
-     * * ``Qt.TopEdge``: the top edge of the content item.
-     * * ``Qt.LeftEdge``: the left edge of the content item
-     * * ``Qt.RightEdge``: the right edge of the content item.
-     * * ``Qt.BottomEdge``: the bottom edge of the content item.
-     *
-     * @see Qt::Edges
+    /*!
+      \brief This property holds the edge of the shadow that will determine the direction of the gradient.
+      The acceptable values are:
+      - Qt.TopEdge: the top edge of the content item.
+      - Qt.LeftEdge: the left edge of the content item
+      - Qt.RightEdge: the right edge of the content item.
+      - Qt.BottomEdge: the bottom edge of the content item.
+
+      \sa Qt::Edges
      */
     property int edge: Qt.LeftEdge
 

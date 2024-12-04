@@ -12,16 +12,18 @@
 
 class QQuickItem;
 
-/**
+/*!
+ * \qmltype ScenePosition
+ * \inqmlmodule org.kde.kirigami
+ *
  * This attached property contains the information about the scene position of the item:
  * Its global x and y coordinates will update automatically and can be binded
- * @code
+ * \code
  * import org.kde.kirigami as Kirigami
  * Text {
  *    text: ScenePosition.x
  * }
- * @endcode
- * @since 2.3
+ * \endcode
  */
 class ScenePositionAttached : public QObject
 {
@@ -30,13 +32,18 @@ class ScenePositionAttached : public QObject
     QML_ATTACHED(ScenePositionAttached)
     QML_NAMED_ELEMENT(ScenePosition)
     QML_UNCREATABLE("")
-    /**
+
+    /*! \qmlattachedproperty double org.kde.kirigami::ScenePosition::x
+     *
      * The global scene X position
+     *
      */
     Q_PROPERTY(qreal x READ x NOTIFY xChanged FINAL)
 
-    /**
+    /*! \qmlattachedproperty double org.kde.kirigami::ScenePosition::y
+     *
      * The global scene Y position
+     *
      */
     Q_PROPERTY(qreal y READ y NOTIFY yChanged FINAL)
 
