@@ -7,34 +7,35 @@
 import QtQuick
 import org.kde.kirigami as Kirigami
 
-/**
- * @brief This is a standard password text field.
- *
- * Example usage:
- * @code{.qml}
- * import org.kde.kirigami as Kirigami
- *
- * Kirigami.PasswordField {
- *     id: passwordField
- *     onAccepted: {
- *         // check if passwordField.text is valid
- *     }
- * }
- * @endcode
- *
- * @inherit org::kde::kirgami::ActionTextField
- * @since 5.57
- * @author Carl Schwan <carl@carlschwan.eu>
+/*!
+  \qmltype PasswordField
+  \inqmlmodule org.kde.kirigami
+
+  \brief This is a standard password text field.
+
+  Example usage:
+  \code
+  import org.kde.kirigami as Kirigami
+
+  Kirigami.PasswordField {
+      id: passwordField
+      onAccepted: {
+          // check if passwordField.text is valid
+      }
+  }
+  \endcode
+
+  \since 5.57
  */
 Kirigami.ActionTextField {
     id: root
 
-    /**
-     * @brief This property tells whether the password will be displayed in cleartext rather than obfuscated.
-     *
-     * default: ``false``
-     *
-     * @since 5.57
+    /*!
+      \brief This property tells whether the password will be displayed in cleartext rather than obfuscated.
+
+      default: \c false
+
+      \since 5.57
      */
     property bool showPassword: false
 

@@ -10,167 +10,167 @@ import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 import "templates/private" as TP
 
-/**
- * A window that provides some basic features needed for all apps
- * Use this class only if you need a custom content for your application,
- * different from the Page Row behavior recommended by the HIG and provided
- * by ApplicationWindow.
- * It is recommended to use ApplicationWindow instead
- * @see ApplicationWindow
- *
- * It's usually used as a root QML component for the application.
- * It provides support for a central page stack, side drawers, and
- * basic support for the Android back button.
- *
- * Setting a width and height property on the ApplicationWindow
- * will set its initial size, but it won't set it as an automatically binding.
- * to resize programmatically the ApplicationWindow they need to
- * be assigned again in an imperative fashion
- *
- *
- * Example usage:
- * @code
- * import org.kde.kirigami as Kirigami
- *
- * Kirigami.ApplicationWindow {
- *  [...]
- *     globalDrawer: Kirigami.GlobalDrawer {
- *         actions: [
- *            Kirigami.Action {
- *                text: "View"
- *                icon.name: "view-list-icons"
- *                Kirigami.Action {
- *                        text: "action 1"
- *                }
- *                Kirigami.Action {
- *                        text: "action 2"
- *                }
- *                Kirigami.Action {
- *                        text: "action 3"
- *                }
- *            },
- *            Kirigami.Action {
- *                text: "Sync"
- *                icon.name: "folder-sync"
- *            }
- *         ]
- *     }
- *
- *     contextDrawer: Kirigami.ContextDrawer {
- *         id: contextDrawer
- *     }
- *
- *     pageStack: PageStack {
- *         ...
- *     }
- *  [...]
- * }
- * @endcode
- *
- * @inherit QtQuick.Controls.ApplicationWindow
+/*!
+  \qmltype AbstractApplicationWindow
+  \inqmlmodule org.kde.kirigami
+  \inherits QQC2.ApplicationWindow
+
+  \brief A window that provides some basic features needed for all apps.
+
+  Use this class only if you need a custom content for your application,
+  different from the Page Row behavior recommended by the HIG and provided
+  by ApplicationWindow.
+  It is recommended to use ApplicationWindow instead
+
+  It's usually used as a root QML component for the application.
+  It provides support for a central page stack, side drawers, and
+  basic support for the Android back button.
+
+  Setting a width and height property on the ApplicationWindow
+  will set its initial size, but it won't set it as an automatically binding.
+  to resize programmatically the ApplicationWindow they need to
+  be assigned again in an imperative fashion
+
+
+  Example usage:
+  \code
+  import org.kde.kirigami as Kirigami
+
+  Kirigami.ApplicationWindow {
+   [...]
+      globalDrawer: Kirigami.GlobalDrawer {
+          actions: [
+             Kirigami.Action {
+                 text: "View"
+                 icon.name: "view-list-icons"
+                 Kirigami.Action {
+                         text: "action 1"
+                 }
+                 Kirigami.Action {
+                         text: "action 2"
+                 }
+                 Kirigami.Action {
+                         text: "action 3"
+                 }
+             },
+             Kirigami.Action {
+                 text: "Sync"
+                 icon.name: "folder-sync"
+             }
+          ]
+      }
+
+      contextDrawer: Kirigami.ContextDrawer {
+          id: contextDrawer
+      }
+
+      pageStack: PageStack {
+          ...
+      }
+   [...]
+  }
+  \endcode
+
  */
 QQC2.ApplicationWindow {
     id: root
 
 //BEGIN properties
-    /**
-     * @brief This property holds the stack used to allocate the pages and to manage the
-     * transitions between them.
-     *
-     * Put a container here, such as QtQuick.Controls.StackView.
+    /*!
+      \brief This property holds the stack used to allocate the pages and to manage the
+      transitions between them.
+
+      Put a container here, such as QtQuick.Controls.StackView.
      */
     property Item pageStack
 
-    /**
-     * @brief This property sets whether the standard chrome of the app is visible.
-     *
-     * These are the action button, the drawer handles, and the application header.
-     *
-     * default: ``true``
+    /*!
+      \brief This property sets whether the standard chrome of the app is visible.
+
+      These are the action button, the drawer handles, and the application header.
+
+      \default true
      */
     property bool controlsVisible: true
 
-    /**
-     * @brief This property holds the drawer for global actions.
-     *
-     * This drawer can be opened by sliding from the left screen edge
-     * or by dragging the ActionButton to the right.
-     *
-     * @note It is recommended to use the GlobalDrawer here.
-     * @property org::kde::kirigami::OverlayDrawer globalDrawer
+    /*!
+      \brief This property holds the drawer for global actions.
+
+      This drawer can be opened by sliding from the left screen edge
+      or by dragging the ActionButton to the right.
+
+      \note It is recommended to use the GlobalDrawer here.
      */
     property OverlayDrawer globalDrawer
 
-    /**
-     * @brief This property tells whether the application is in "widescreen" mode.
-     *
-     * This is enabled on desktops or horizontal tablets.
-     *
-     * @note Different styles can have their own logic for deciding this.
+    /*!
+      \brief This property tells whether the application is in "widescreen" mode.
+
+      This is enabled on desktops or horizontal tablets.
+
+      \note Different styles can have their own logic for deciding this.
      */
     property bool wideScreen: width >= Kirigami.Units.gridUnit * 60
 
-    /**
-     * @brief This property holds the drawer for context-dependent actions.
-     *
-     * The drawer that will be opened by sliding from the right screen edge
-     * or by dragging the ActionButton to the left.
-     *
-     * @note It is recommended to use the ContextDrawer type here.
-     *
-     * The contents of the context drawer should depend from what page is
-     * loaded in the main pageStack
-     *
-     * Example usage:
-     *
-     * @code
-     * import org.kde.kirigami as Kirigami
-     *
-     * Kirigami.ApplicationWindow {
-     *     contextDrawer: Kirigami.ContextDrawer {
-     *         enabled: true
-     *         actions: [
-     *             Kirigami.Action {
-     *                 icon.name: "edit"
-     *                 text: "Action text"
-     *                 onTriggered: {
-     *                     // do stuff
-     *                 }
-     *             },
-     *             Kirigami.Action {
-     *                 icon.name: "edit"
-     *                 text: "Action text"
-     *                 onTriggered: {
-     *                     // do stuff
-     *                 }
-     *             }
-     *         ]
-     *     }
-     * }
-     * @endcode
-     *
-     * @property org::kde::kirigami::ContextDrawer contextDrawer
+    /*!
+      \brief This property holds the drawer for context-dependent actions.
+
+      The drawer that will be opened by sliding from the right screen edge
+      or by dragging the ActionButton to the left.
+
+      \note It is recommended to use the ContextDrawer type here.
+
+      The contents of the context drawer should depend from what page is
+      loaded in the main pageStack.
+
+      Example usage:
+
+      \code
+      import org.kde.kirigami as Kirigami
+
+      Kirigami.ApplicationWindow {
+          contextDrawer: Kirigami.ContextDrawer {
+              enabled: true
+              actions: [
+                  Kirigami.Action {
+                      icon.name: "edit"
+                      text: "Action text"
+                      onTriggered: {
+                          // do stuff
+                      }
+                  },
+                  Kirigami.Action {
+                      icon.name: "edit"
+                      text: "Action text"
+                      onTriggered: {
+                          // do stuff
+                      }
+                  }
+              ]
+          }
+      }
+      \endcode
      */
     property OverlayDrawer contextDrawer
 
-    /**
-     * Effectively the same as T.Overlay.overlay
+    /*!
+      The same as Overlay.overlay.
      */
     readonly property Item overlay: T.Overlay.overlay
 
-    /**
-     * This property holds a standard action that will quit the application when triggered.
-     * Its properties have the following values:
-     *
-     * @code
-     * Action {
-     *     text: "Quit"
-     *     icon.name: "application-exit-symbolic"
-     *     shortcut: StandardKey.Quit
-     *     // ...
-     * }
-     * @endcode
-     * @since 5.76
+    /*!
+      This property holds a standard action that will quit the application when triggered.
+      Its properties have the following values:
+
+      \code
+      Action {
+          text: "Quit"
+          icon.name: "application-exit-symbolic"
+          shortcut: StandardKey.Quit
+          // ...
+      }
+      \endcode
+      \since 5.76
      */
     readonly property Kirigami.Action quitAction: Kirigami.Action {
         text: qsTr("Quit")
@@ -181,33 +181,39 @@ QQC2.ApplicationWindow {
 //END properties
 
 //BEGIN functions
-    /**
-     * @brief This function shows a little passive notification at the bottom of the app window
-     * lasting for few seconds, with an optional action button.
-     *
-     * @param message The text message to be shown to the user.
-     * @param timeout How long to show the message:
-     *            possible values: "short", "long" or the number of milliseconds
-     * @param actionText Text in the action button, if any.
-     * @param callBack A JavaScript function that will be executed when the
-     *            user clicks the button.
+    /*!
+      \qmlmethod void showPassiveNotification(string message, int timeout, string actionText, var callBack)
+
+      \brief This function shows a little passive notification at the bottom of the app window
+      lasting for few seconds, with an optional action button.
+
+      \a message The text message to be shown to the user.
+
+      \a timeout How long to show the message:
+                 possible values: "short", "long", or the number of milliseconds.
+
+      \a actionText Text in the action button, if any.
+
+      \a callBack A JavaScript function that will be executed when the
+                 user clicks the button.
      */
     function showPassiveNotification(message, timeout, actionText, callBack) {
         notificationsObject.showNotification(message, timeout, actionText, callBack);
     }
 
-   /**
-    * @brief This function hides the passive notification at specified index, if any is shown.
-    * @param index Index of the notification to hide. Default is 0 (oldest notification).
+   /*!
+     \brief This function hides the passive notification at specified index, if any is shown.
+
+     \a index Index of the notification to hide. Default is 0 (oldest notification).
     */
     function hidePassiveNotification(index = 0) {
         notificationsObject.hideNotification(index);
     }
 
-    /**
-     * @brief This function returns application window's object anywhere in the application.
-     * @returns a pointer to this application window
-     * can be used anywhere in the application.
+    /*!
+      \brief This function returns application window's object anywhere in the application.
+      Returns a pointer to this application window
+      can be used anywhere in the application.
      */
     function applicationWindow() {
         return root;

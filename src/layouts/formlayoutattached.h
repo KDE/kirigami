@@ -12,13 +12,17 @@
 
 class QQuickItem;
 
-/**
- * This attached property contains the information for decorating a org::kde::kirigami::FormLayout:
+/*!
+ *
+ * \qmltype FormData
+ * \inqmlmodule org.kde.kirigami.layouts
+ *
+ * \brief An attached property with information for decorating a FormLayout.
  *
  * It contains the text labels of fields and information about sections.
  *
- * Some of its properties can be used with other <a href="https://doc.qt.io/qt-6/qml-qtquick-layouts-layout.html">Layout</a> types.
- * @code{.qml}
+ * Some of its properties can be used with other Layout types.
+ * \qml
  * import org.kde.kirigami as Kirigami
  *
  * Kirigami.FormLayout {
@@ -29,9 +33,9 @@ class QQuickItem;
  *       Kirigami.FormData.label: "Password:"
  *    }
  * }
- * @endcode
- * @see org::kde::kirigami::FormLayout
- * @since 2.3
+ * \endqml
+ * \sa FormLayout
+ * \since 2.3
  */
 class FormLayoutAttached : public QObject
 {
@@ -39,19 +43,26 @@ class FormLayoutAttached : public QObject
     QML_NAMED_ELEMENT(FormData)
     QML_ATTACHED(FormLayoutAttached)
     QML_UNCREATABLE("")
-    /**
-     * The label for a org::kde::kirigami::FormLayout field
+    /*!
+     * \qmlattachedproperty string FormData::label
+     *
+     * The label for a FormLayout field
      */
     Q_PROPERTY(QString label READ label WRITE setLabel NOTIFY labelChanged FINAL)
-    /**
-     * The alignment for the label of a org::kde::kirigami::FormLayout field
+    /*!
+     * \qmlattachedproperty int FormData::labelAlignment
+     *
+     * The alignment for the label of a FormLayout field
      */
     Q_PROPERTY(int labelAlignment READ labelAlignment WRITE setLabelAlignment NOTIFY labelAlignmentChanged FINAL)
-    /**
-     * If true, the child item of a org::kde::kirigami::FormLayout becomes a section separator, and
+    /*!
+     * \qmlattachedproperty bool FormData::isSection
+     *
+     * If true, the child item of a FormLayout becomes a section separator, and
      * may have different looks:
-     * * To make it just a space between two fields, just put an empty item with FormData.isSection:
-     * @code
+     *
+     * To make it just a space between two fields, just put an empty item with \c{FormData.isSection}:
+     * \code
      * TextField {
      *     Kirigami.FormData.label: "Label:"
      * }
@@ -61,10 +72,10 @@ class FormLayoutAttached : public QObject
      * TextField {
      *     Kirigami.FormData.label: "Label:"
      * }
-     * @endcode
+     * \endcode
      *
-     * * To make it a space with a section title:
-     * @code
+     * To make it a space with a section title:
+     * \code
      * TextField {
      *     Kirigami.FormData.label: "Label:"
      * }
@@ -75,10 +86,10 @@ class FormLayoutAttached : public QObject
      * TextField {
      *     Kirigami.FormData.label: "Label:"
      * }
-     * @endcode
+     * \endcode
      *
-     * * To make it a space with a section title and a separator line:
-     * @code
+     * To make it a space with a section title and a separator line:
+     * \code
      * TextField {
      *     Kirigami.FormData.label: "Label:"
      * }
@@ -89,28 +100,29 @@ class FormLayoutAttached : public QObject
      * TextField {
      *     Kirigami.FormData.label: "Label:"
      * }
-     * @endcode
-     * @see org::kde::kirigami::FormLayout
+     * \endcode
      */
     Q_PROPERTY(bool isSection READ isSection WRITE setIsSection NOTIFY isSectionChanged FINAL)
 
-    /**
+    /*!
+     * \qmlattachedproperty Item FormData::buddyFor
+     *
      * This property can only be used
-     * in conjunction with a Kirigami.FormData.label,
-     * often in a layout that is a child of a org::kde::kirigami::FormLayout.
+     * in conjunction with a FormData::label,
+     * often in a layout that is a child of a FormLayout.
      *
      * It then turns the item specified into a "buddy"
      * of the label, making it work as if it were
-     * a child of the org::kde::kirigami::FormLayout.
+     * a child of the FormLayout.
      *
      * A buddy item is useful for instance when the label has a keyboard accelerator,
      * which when triggered provides active keyboard focus to the buddy item.
      *
-     * By default buddy is the item that Kirigami.FormData is attached to.
+     * By default buddy is the item that FormData is attached to.
      * Custom buddy can only be a direct child of that item; nested components
      * are not supported at the moment.
      *
-     * @code
+     * \code
      * Kirigami.FormLayout {
      *     Layouts.ColumnLayout {
      *         // If the accelerator is in the letter S,
@@ -126,7 +138,7 @@ class FormLayoutAttached : public QObject
      *         }
      *     }
      * }
-     * @endcode
+     * \endcode
      */
     Q_PROPERTY(QQuickItem *buddyFor READ buddyFor WRITE setBuddyFor NOTIFY buddyForChanged FINAL)
 

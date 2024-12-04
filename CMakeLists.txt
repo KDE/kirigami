@@ -71,16 +71,13 @@ include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDEGitCommitHooks)
 include(ECMQtDeclareLoggingCategory)
-include(ECMAddQch)
 include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
 include(KDEPackageAppTemplates)
 include(ECMQmlModule)
 include(ECMDeprecationSettings)
+include(ECMGenerateQDoc)
 
 set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF6Kirigami")
-
-option(BUILD_QCH "Build API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)" OFF)
-add_feature_info(QCH ${BUILD_QCH} "API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)")
 
 ecm_setup_version(PROJECT
     VARIABLE_PREFIX KIRIGAMI

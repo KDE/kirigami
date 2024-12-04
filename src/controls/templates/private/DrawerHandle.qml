@@ -18,7 +18,7 @@ MouseArea {
      */
     property bool displayToolTip: true
 
-    /**
+    /*
      * The drawer this handle will control
      */
     // Should be KT.OverlayDrawer, but can't due to "Cyclic dependency"

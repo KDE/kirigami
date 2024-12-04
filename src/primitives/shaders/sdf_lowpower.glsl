@@ -18,7 +18,7 @@
 // at least less than MAX_FRAGMENT_UNIFORM_COMPONENTS / 2 (since we need vec2).
 #define SDF_POLYGON_MAX_POINT_COUNT 400
 
-/*********************************
+/*!*******************************
     Shapes
 *********************************/
 
@@ -96,7 +96,7 @@ lowp float sdf_rounded_rectangle(in lowp vec2 point, in lowp vec2 rect, in lowp 
     return min(max(d.x, d.y), 0.0) + length(max(d, 0.0)) - radius.x;
 }
 
-/*********************
+/*!*******************
     Operators
 *********************/
 
@@ -182,7 +182,7 @@ lowp float sdf_outline(in lowp float sdf)
     return abs(sdf);
 }
 
-/********************
+/*!******************
     Convenience
 ********************/
 

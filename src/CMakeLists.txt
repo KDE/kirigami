@@ -320,3 +320,5 @@ ecm_qt_install_logging_categories(
     FILE kirigami.categories
     DESTINATION ${KDE_INSTALL_LOGGINGCATEGORIESDIR}
 )
+
+ecm_generate_qdoc(Kirigami kirigami.qdocconf)

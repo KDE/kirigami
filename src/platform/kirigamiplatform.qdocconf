@@ -1,0 +1,11 @@
+include($KDE_DOCS/global/qt-module-defaults.qdocconf)
+
+project = KirigamiPlatform
+description = Platform Integration Components
+
+documentationinheaders = true
+
+headerdirs += .
+sourcedirs += .
+
+depends = kde qtcore qtquick qtquickcontrols

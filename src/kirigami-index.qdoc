@@ -1,0 +1,28 @@
+/*!
+    \page kirigami-index.html
+    \title Kirigami
+
+    Kirigami is a set of \l {https://doc.qt.io/qt-6/qtquick-index.html} {QtQuick} components for building adaptable UIs based on \l {https://doc.qt.io/qt-6/qtquickcontrols-index.html} {QtQuick Controls 2}.
+
+    Its goal is to enable creation of convergent applications that look and feel great on mobile as well as desktop devices and follow the \l {https://develop.kde.org/hig} {KDE Human Interface Guidelines} while being easy to use and not adding many dependencies.
+
+    Kirigami works on a variety of platforms, such as \l {https://plasma-mobile.org/} {Plasma Mobile}, Desktop Linux, Android, MacOS, and Windows.
+
+    A tutorial for Kirigami is available on the \l {https://develop.kde.org/docs/getting-started/kirigami/} {KDE Developer platform}.
+
+    A list of additional QML learning resources is available in the \l {https://community.kde.org/Get_Involved/development/Learn#QtQuick/QML} {Community Wiki}. If you are not familiar with QML at all, the \l {https://www.qt.io/product/qt6/qml-book} {QML book} should be a good head start.
+
+    If you have any questions about Kirigami, feel free to drop by the \l {https://go.kde.org/matrix/#/#kirigami:kde.org} {Kirigami group on Matrix}.
+
+    \section1 API Reference
+
+    \list
+        \li \l{Kirigami QML Types}
+        \li \l{Kirigami Delegates QML Types}
+        \li \l{Kirigami Primitives QML Types}
+        \li \l{Kirigami Platform QML Types}
+        \li \l{Kirigami Platform C++ Classes}
+        \li \l{Kirigami Layouts QML Types}
+        \li \l{Kirigami Dialogs QML Types}
+    \endlist
+*/

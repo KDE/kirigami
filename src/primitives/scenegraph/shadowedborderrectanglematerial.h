@@ -8,7 +8,7 @@
 
 #include "shadowedrectanglematerial.h"
 
-/**
+/*
  * A material rendering a rectangle with a shadow and a border.
  *
  * This material uses a distance field shader to render a rectangle with a

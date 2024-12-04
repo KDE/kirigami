@@ -9,69 +9,70 @@ import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 
-/**
- * @brief Navigation buttons to be used for the NavigationTabBar component.
- *
- * It supplies its own padding, and also supports using the QQC2 AbstractButton ``display`` property to be used in column lists.
- *
- * Alternative way to the "actions" property on NavigationTabBar, as it can be used
- * with Repeater to generate buttons from models.
- *
- * Example usage:
- * @code{.qml}
- * Kirigami.NavigationTabBar {
- *      id: navTabBar
- *      Kirigami.NavigationTabButton {
- *          visible: true
- *          icon.name: "document-save"
- *          text: `test ${tabIndex + 1}`
- *          QQC2.ButtonGroup.group: navTabBar.tabGroup
- *      }
- *      Kirigami.NavigationTabButton {
- *          visible: false
- *          icon.name: "document-send"
- *          text: `test ${tabIndex + 1}`
- *          QQC2.ButtonGroup.group: navTabBar.tabGroup
- *      }
- *      actions: [
- *          Kirigami.Action {
- *              visible: true
- *              icon.name: "edit-copy"
- *              icon.height: 32
- *              icon.width: 32
- *              text: `test 3`
- *              checked: true
- *          },
- *          Kirigami.Action {
- *              visible: true
- *              icon.name: "edit-cut"
- *              text: `test 4`
- *              checkable: true
- *          },
- *          Kirigami.Action {
- *              visible: false
- *              icon.name: "edit-paste"
- *              text: `test 5`
- *          },
- *          Kirigami.Action {
- *              visible: true
- *              icon.source: "../logo.png"
- *              text: `test 6`
- *              checkable: true
- *          }
- *      ]
- *  }
- * @endcode
- *
- * @since 5.87
- * @since org.kde.kirigami 2.19
- * @inherit QtQuick.Templates.TabButton
+/*!
+  \qmltype NavigationTabButton
+  \inqmlmodule org.kde.kirigami
+
+  \brief Navigation buttons to be used for the NavigationTabBar component.
+
+  It supplies its own padding, and also supports using the AbstractButton::display property to be used in column lists.
+
+  Alternative way to the actions property on NavigationTabBar, as it can be used
+  with Repeater to generate buttons from models.
+
+  Example usage:
+  \code
+  Kirigami.NavigationTabBar {
+       id: navTabBar
+       Kirigami.NavigationTabButton {
+           visible: true
+           icon.name: "document-save"
+           text: `test ${tabIndex + 1}`
+           QQC2.ButtonGroup.group: navTabBar.tabGroup
+       }
+       Kirigami.NavigationTabButton {
+           visible: false
+           icon.name: "document-send"
+           text: `test ${tabIndex + 1}`
+           QQC2.ButtonGroup.group: navTabBar.tabGroup
+       }
+       actions: [
+           Kirigami.Action {
+               visible: true
+               icon.name: "edit-copy"
+               icon.height: 32
+               icon.width: 32
+               text: `test 3`
+               checked: true
+           },
+           Kirigami.Action {
+               visible: true
+               icon.name: "edit-cut"
+               text: `test 4`
+               checkable: true
+           },
+           Kirigami.Action {
+               visible: false
+               icon.name: "edit-paste"
+               text: `test 5`
+           },
+           Kirigami.Action {
+               visible: true
+               icon.source: "../logo.png"
+               text: `test 6`
+               checkable: true
+           }
+       ]
+   }
+  \endcode
+
+  \since 5.87
  */
 T.TabButton {
     id: control
 
-    /**
-     * @brief This property tells the index of this tab within the tab bar.
+    /*!
+      \brief This property tells the index of this tab within the tab bar.
      */
     readonly property int tabIndex: {
         let tabIdx = 0

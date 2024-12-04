@@ -9,7 +9,7 @@
 
 #include <QQuickPaintedItem>
 
-/**
+/*
  * A rectangle with a border and rounded corners, rendered through QPainter.
  *
  * This is a helper used by ShadowedRectangle as fallback for when software
