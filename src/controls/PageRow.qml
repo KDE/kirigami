@@ -25,6 +25,8 @@ import "templates" as KT
 QT.Control {
     id: root
 
+    objectName: "PageRow"
+
 //BEGIN PROPERTIES
     /**
      * @brief This property holds the number of pages currently pushed onto the view.
@@ -1085,6 +1087,9 @@ QT.Control {
                     }
                 }
             }
+
+            page.Kirigami.PageStack.pageStack = root;
+
             return page;
         }
 
