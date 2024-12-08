@@ -25,6 +25,8 @@ target_sources(KirigamiLayouts PRIVATE
     sizegroup.cpp
     toolbarlayout.cpp
     toolbarlayoutdelegate.cpp
+    pagestackattached.cpp
+    pagestackattached.h
 )
 
 ecm_target_qml_sources(KirigamiLayouts SOURCES
