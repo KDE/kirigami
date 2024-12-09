@@ -10,6 +10,7 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC2
+import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 
 /**
@@ -429,7 +430,18 @@ Item {
             }
             Shortcut {
                 sequence: labelItem.Kirigami.MnemonicData.sequence
-                onActivated: labelItem.item.Kirigami.FormData.buddyFor.forceActiveFocus()
+                onActivated: {
+                    const buddy = labelItem.item.Kirigami.FormData.buddyFor;
+
+                    const buttonBuddy = buddy as T.AbstractButton;
+                    // animateClick is only in Qt 6.8,
+                    // it also takes into account focus policy.
+                    if (buttonBuddy && buttonBuddy.animateClick) {
+                        buttonBuddy.animateClick();
+                    } else {
+                        buddy.forceActiveFocus();
+                    }
+                }
             }
         }
     }
