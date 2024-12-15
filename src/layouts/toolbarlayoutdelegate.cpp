@@ -141,7 +141,7 @@ void ToolBarLayoutDelegate::createItems(QQmlComponent *fullComponent, QQmlCompon
             m_ready = true;
         }
 
-        m_parent->relayout();
+        Q_EMIT created();
 
         QMetaObject::invokeMethod(this, &ToolBarLayoutDelegate::cleanupIncubators, Qt::QueuedConnection);
     });
@@ -167,7 +167,7 @@ void ToolBarLayoutDelegate::createItems(QQmlComponent *fullComponent, QQmlCompon
             m_ready = true;
         }
 
-        m_parent->relayout();
+        Q_EMIT created();
 
         QMetaObject::invokeMethod(this, &ToolBarLayoutDelegate::cleanupIncubators, Qt::QueuedConnection);
     });

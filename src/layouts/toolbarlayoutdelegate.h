@@ -81,6 +81,8 @@ public:
     qreal iconWidth() const;
     qreal fullWidth() const;
 
+    Q_SIGNAL void created();
+
 private:
     Q_SLOT void actionVisibleChanged();
     Q_SLOT void displayHintChanged();

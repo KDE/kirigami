@@ -6,6 +6,7 @@
 
 #include "toolbarlayout.h"
 
+#include <algorithm>
 #include <cmath>
 #include <unordered_map>
 
@@ -596,6 +597,15 @@ QList<ToolBarLayoutDelegate *> ToolBarLayoutPrivate::createDelegates()
             auto delegate = std::unique_ptr<ToolBarLayoutDelegate>(createDelegate(action));
             if (delegate) {
                 result.append(delegate.get());
+
+                QObject::connect(delegate.get(), &ToolBarLayoutDelegate::created, q, [this]() {
+                    if (std::all_of(delegates.begin(), delegates.end(), [](auto &delegate) {
+                            return delegate.second->isReady();
+                        })) {
+                        q->relayout();
+                    }
+                });
+
                 delegates.emplace(action, std::move(delegate));
             }
         }
