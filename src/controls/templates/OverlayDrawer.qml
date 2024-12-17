@@ -85,13 +85,14 @@ T.Drawer {
     property int collapsedSize: Kirigami.Units.iconSizes.medium
 
     /*!
-      \brief This property holds the options for handle's open icon.
+      \qmlproperty string icon.name
+      \qmlproperty var icon.source
+      \qmlproperty color icon.color
+      \qmlproperty real icon.width
+      \qmlproperty real icon.height
+      \qmlproperty function icon.fromControlsIcon
 
-      This is a grouped property with following components:
-      \list
-      \li source: var: The name of a freedesktop-compatible icon.
-      \li color: color: An optional tint color for the icon.
-      \endlist
+      This property holds the options for handle's open icon.
 
       If no custom icon is set, a menu icon is shown for the application globalDrawer
       and an overflow menu icon is shown for the contextDrawer.
@@ -101,19 +102,22 @@ T.Drawer {
       the drawer location
 
       \since 2.5
+
+      \include iconpropertiesgroup.qdocinc grouped-properties
      */
     readonly property KTP.IconPropertiesGroup handleOpenIcon: KTP.IconPropertiesGroup {
         source: root.edge === Qt.RightEdge ? "view-right-close" : "view-left-close"
     }
 
     /*!
-      \brief This property holds the options for the handle's close icon.
+      \qmlproperty string icon.name
+      \qmlproperty var icon.source
+      \qmlproperty color icon.color
+      \qmlproperty real icon.width
+      \qmlproperty real icon.height
+      \qmlproperty function icon.fromControlsIcon
 
-      This is a grouped property with the following components:
-      \list
-      \li source: var: The name of a freedesktop-compatible icon.
-      \li color: color: An optional tint color for the icon.
-      \endlist
+      This grouped property holds the description of an optional icon.
 
       If no custom icon is set, an X icon is shown,
       which will morph into the Menu or overflow icons.
@@ -122,6 +126,7 @@ T.Drawer {
       the drawer location.
 
       \since 2.5
+      \include iconpropertiesgroup.qdocinc grouped-properties
      */
     property KTP.IconPropertiesGroup handleClosedIcon: KTP.IconPropertiesGroup {
         source: root.edge === Qt.RightEdge ? "view-right-new" : "view-left-new"

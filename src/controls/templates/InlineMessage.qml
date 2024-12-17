@@ -135,10 +135,16 @@ T.Control {
     property int type: Kirigami.MessageType.Information
 
     /*!
-      \qmlproperty string icon.source
       \qmlproperty string icon.name
+      \qmlproperty var icon.source
+      \qmlproperty color icon.color
+      \qmlproperty real icon.width
+      \qmlproperty real icon.height
+      \qmlproperty function icon.fromControlsIcon
 
       This grouped property holds the description of an optional icon.
+
+      \include iconpropertiesgroup.qdocinc grouped-properties
      */
     property IconPropertiesGroup icon
 
@@ -155,6 +161,8 @@ T.Control {
     property bool showCloseButton: false
 
     /*!
+      \qmlproperty list<Action> actions
+
       This property holds the list of actions to show. Actions are added from left to
       right. If more actions are set than can fit, an overflow menu is
       provided.

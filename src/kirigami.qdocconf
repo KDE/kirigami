@@ -6,7 +6,7 @@ description = Stuff
 documentationinheaders = true
 
 headerdirs = .
-sourcedirs = .
+sourcedirs = . ../docs/includes
 
 depends = kde qtcore qtquick qtquickcontrols kcoreaddons kirigamiplatform
 
