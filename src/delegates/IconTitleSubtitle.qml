@@ -125,11 +125,19 @@ Item {
     property alias truncated: titleSubtitle.truncated
 
     /*!
-     * TODO qdoc
-     * Grouped property for icon properties.
-     *
-     * \note By default, IconTitleSubtitle will reserve the space for the icon,
-     * even if it is not set. To remove that space, set `icon.width` to 0.
+      \qmlproperty string icon.name
+      \qmlproperty var icon.source
+      \qmlproperty color icon.color
+      \qmlproperty real icon.width
+      \qmlproperty real icon.height
+      \qmlproperty function icon.fromControlsIcon
+
+      Grouped property for icon properties.
+
+      \note By default, IconTitleSubtitle will reserve the space for the icon,
+      even if it is not set. To remove that space, set `icon.width` to 0.
+
+      \include iconpropertiesgroup.qdocinc grouped-properties
      */
     property KTP.IconPropertiesGroup icon: KTP.IconPropertiesGroup {
         width: titleSubtitle.subtitleVisible ? Platform.Units.iconSizes.medium : Platform.Units.iconSizes.smallMedium
