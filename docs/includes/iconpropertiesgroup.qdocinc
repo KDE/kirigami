@@ -1,0 +1,46 @@
+//! [grouped-properties]
+\table
+\header
+    \li Name
+    \li Description
+\row
+    \li name
+    \li This property holds icon name.
+
+     The icon will be loaded from the platform theme. If the icon is found
+     in the theme, it will always be used; even if icon.source is also set.
+     If the icon is not found, icon.source will be used instead.
+\row
+    \li source
+    \li This property holds the icon source.
+
+     The icon will be loaded as a regular image.
+\row
+    \li width
+    \li This property holds the width of the icon.
+
+\row
+    \li height
+    \li This property holds the height of the icon.
+
+\row
+    \li color
+    \li This property holds the icon tint color.
+
+      The icon is tinted with the specified color, unless the color is set to "transparent".
+
+\row
+    \li fromControlsIcon
+    \li Bind this icon to all matching properties of a Controls icon group.
+
+      This function automatically binds all properties to matching properties
+      of a controls icon group, since we cannot just reuse the Controls icon
+      group.
+
+      To use it, you can assign the result to an IconPropertiesGroup, like so:
+      \qml
+      icon: icon.fromControlsIcon(control.icon).
+      \endqml
+
+\endtable
+//! [grouped-properties]
