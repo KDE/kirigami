@@ -940,8 +940,7 @@ QT.Control {
         }
         z: 100
         property QT.Control pageRow: root
-        active: (!leadingVisibleItem || leadingVisibleItem.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.None) &&
-                (globalToolBar.actualStyle !== Kirigami.ApplicationHeaderStyle.None || (leadingVisibleItem && leadingVisibleItem.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar))
+        active: globalToolBar.actualStyle !== Kirigami.ApplicationHeaderStyle.None || (leadingVisibleItem && leadingVisibleItem.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar)
         visible: active
         height: active ? implicitHeight : 0
         // If load is asynchronous, it will fail to compute the initial implicitHeight
