@@ -255,6 +255,8 @@ bool MnemonicAttached::removeEventFilterForWindow(QQuickWindow *wnd)
 
 void MnemonicAttached::updateSequence()
 {
+    const QKeySequence oldSequence = m_sequence;
+
     if (!m_sequence.isEmpty()) {
         s_sequenceToObject.remove(m_sequence);
         m_sequence = {};
@@ -272,6 +274,10 @@ void MnemonicAttached::updateSequence()
             m_mnemonicLabel = m_actualRichTextLabel;
             Q_EMIT mnemonicLabelChanged();
             Q_EMIT richTextLabelChanged();
+        }
+
+        if (m_sequence != oldSequence) {
+            Q_EMIT sequenceChanged();
         }
         return;
     }
@@ -319,7 +325,7 @@ void MnemonicAttached::updateSequence()
         } while (i != m_weights.constBegin());
     }
 
-    if (!m_sequence.isEmpty()) {
+    if (m_sequence != oldSequence) {
         Q_EMIT sequenceChanged();
     }
     m_actualRichTextLabel = removeAcceleratorMarker(text);
