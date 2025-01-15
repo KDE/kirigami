@@ -288,14 +288,6 @@ T.Dialog {
     padding: 0
     horizontalPadding: __borderWidth + padding
 
-    // determine parent so that popup knows which window to popup in
-    // we want to open the dialog in the center of the window, if possible
-    Component.onCompleted: {
-        if (typeof applicationWindow !== "undefined") {
-            parent = applicationWindow().overlay;
-        }
-    }
-
     // center dialog
     x: parent ? Math.round((parent.width - width) / 2) : 0
     y: parent ? Math.round((parent.height - height) / 2) + Kirigami.Units.gridUnit * 2 * (1 - opacity) : 0 // move animation
