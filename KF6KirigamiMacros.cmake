@@ -1,6 +1,10 @@
+# SPDX-FileCopyrightText: 2016 Marco Martin <notmart@gmail.com>
+# SPDX-FileCopyrightText: 2023 Volker Krause <vkrause@kde.org>
+# SPDX-FileCopyrightText: 2025 Carl Schwan <carl@carlschwan.eu>
+# SPDX-License-Identifier: BSD-2-Clause
+
 include(CMakeParseArguments)
 include(ExternalProject)
-
 
 function(kirigami_package_breeze_icons)
     set(_multiValueArgs ICONS)
@@ -8,6 +12,10 @@ function(kirigami_package_breeze_icons)
 
     if(NOT ARG_ICONS)
         message(FATAL_ERROR "No ICONS argument given to kirigami_package_breeze_icons")
+    endif()
+
+    if(NOT ANDROID)
+        return() # not needed on other platforms
     endif()
 
     #include icons used by Kirigami components themselves
@@ -50,36 +58,37 @@ function(kirigami_package_breeze_icons)
         view-right-close
     )
 
-    function(_find_breeze_icon icon varName)
-        #HACKY
-        SET(path "")
-        file(GLOB_RECURSE path ${_BREEZEICONS_DIR}/icons/*/48/${icon}.svg )
-
-        #search in other sizes as well
-        if (path STREQUAL "")
-            file(GLOB_RECURSE path ${_BREEZEICONS_DIR}/icons/*/32/${icon}.svg )
+    function(_find_breeze_icon icon)
+        foreach(_size 48 32 22 16 12)
+            SET(path "")
+            file(GLOB_RECURSE path ${_BREEZEICONS_DIR}/icons/*/${_size}/${icon}.svg)
             if (path STREQUAL "")
-                file(GLOB_RECURSE path ${_BREEZEICONS_DIR}/icons/*/22/${icon}.svg )
-                if (path STREQUAL "")
-                    file(GLOB_RECURSE path ${_BREEZEICONS_DIR}/icons/*/16/${icon}.svg )
-                endif()
+                continue()
             endif()
-        endif()
-        if (path STREQUAL "")
-            file(GLOB_RECURSE path ${_BREEZEICONS_DIR}/icons/*/symbolic/${icon}.svg )
-        endif()
-        if (path STREQUAL "")
-            return()
-        endif()
 
-        list(LENGTH path _count_paths)
-        if (_count_paths GREATER 1)
-            message(WARNING "Found more than one version of '${icon}': ${path}")
-        endif()
-        list(GET path 0 path)
-        get_filename_component(path "${path}" REALPATH)
+            list(LENGTH path _count_paths)
+            if (_count_paths GREATER 1)
+                message(WARNING "Found more than one version of '${icon}': ${path}")
+            endif()
+            list(GET path 0 path)
 
-        SET(${varName} ${path} PARENT_SCOPE)
+            get_filename_component(realpath "${path}" REALPATH)
+            if (EXISTS ${realpath})
+                install(FILES ${realpath} DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/kirigami/breeze-internal/icons/${_size})
+            endif()
+
+            # Create direct symlink if original icon was also a symlink
+            # We can't reuse the existing symlink because often it's a chain
+            # of symlink and we can only get the final destination.
+            if (NOT "${realpath}" MATCHES "${path}")
+                get_filename_component(filename "${realpath}" NAME)
+                file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/${_size}/")
+                file(CREATE_LINK ${filename} "${CMAKE_CURRENT_BINARY_DIR}/${_size}/${icon}.svg" SYMBOLIC)
+                install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${_size}/${icon}.svg"
+                    DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/kirigami/breeze-internal/icons/${_size})
+            endif()
+
+        endforeach()
     endfunction()
 
     if (BREEZEICONS_DIR AND NOT EXISTS ${BREEZEICONS_DIR})
@@ -98,34 +107,14 @@ function(kirigami_package_breeze_icons)
             find_package(Git)
             execute_process(COMMAND ${GIT_EXECUTABLE} clone --depth 1 https://invent.kde.org/frameworks/breeze-icons.git ${_BREEZEICONS_DIR})
         endif()
-
-        # external projects are only pulled at make time, not configure time
-        # so this is too late to work with the _find_breeze_icon() method
-        # _find_breeze_icon() would need to be turned into a target/command
-        if (FALSE)
-        ExternalProject_Add(
-            breeze-icons
-            PREFIX breeze-icons
-            GIT_REPOSITORY https://invent.kde.org/frameworks/breeze-icons.git
-            CONFIGURE_COMMAND ""
-            BUILD_COMMAND ""
-            INSTALL_COMMAND ""
-            LOG_DOWNLOAD ON
-        )
-        endif()
     endif()
 
     message (STATUS "Found external breeze icons:")
     foreach(_iconName ${ARG_ICONS})
-        set(_iconPath "")
-        _find_breeze_icon(${_iconName} _iconPath)
-        message (STATUS ${_iconPath})
-        if (EXISTS ${_iconPath})
-            install(FILES ${_iconPath} DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/kirigami/breeze-internal/icons/ RENAME ${_iconName}.svg)
-        endif()
+        _find_breeze_icon(${_iconName})
     endforeach()
 
     #generate an index.theme that qiconloader can understand
-    file(WRITE ${CMAKE_BINARY_DIR}/index.theme "[Icon Theme]\nName=Breeze\nDirectories=icons\nFollowsColorScheme=true\n[icons]\nSize=32\nType=Scalable")
+    file(WRITE ${CMAKE_BINARY_DIR}/index.theme "[Icon Theme]\nName=Breeze\nDirectories=icons/12,icons/22,icons/32/icons/48\nFollowsColorScheme=true\n[icons/12]\nSize=12\nType=Fixed\n[icons/12]\nSize=12\nType=Fixed\n[icons/16]\nSize=16\nType=Fixed\n[icons/22]\nSize=22\nType=Fixed\n[icons/48]\nSize=48\nType=Fixed")
     install(FILES ${CMAKE_BINARY_DIR}/index.theme DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/kirigami/breeze-internal/)
 endfunction()
