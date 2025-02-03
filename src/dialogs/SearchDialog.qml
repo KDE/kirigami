@@ -143,12 +143,12 @@ QQC2.Dialog {
     property alias emptyIcon: placeholder.icon
 
     /**
-     * @brief Helpful action when the list is empty
-     *
-     * This property holds an alias to the helpful action of the placeholder message
-     * when the internal list view is empty.
-     *
-     * @since 6.10
+       \brief Helpful action when the list is empty
+
+       This property holds an alias to the helpful action of the placeholder message
+       when the internal list view is empty.
+
+       \since 6.10
      */
     property alias emptyHelpfulAction: placeholder.helpfulAction
 
