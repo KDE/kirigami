@@ -14,9 +14,11 @@ import org.kde.kirigami as Kirigami
 
   \brief A handle to reorder items in a view.
 
-  Implements a drag handle supposed to be in items in ListViews to reorder items
+  Implements a drag handle supposed to be in items in ListViews to reorder items.
+
   The ListView must visualize a model which supports item reordering,
   such as ListModel.move() or QAbstractItemModel  instances with moveRows() correctly implemented.
+
   In order for ListItemDragHandle to work correctly, the listItem that is being dragged
   should not directly be the delegate of the ListView, but a child of it.
 
@@ -81,7 +83,7 @@ Item {
     /*!
       \brief This property holds the delegate that will be dragged around.
 
-      This item *must* be a child of the actual ListView's delegate.
+      \note This item must be a child of the actual ListView's delegate.
      */
     property Item listItem
 
@@ -91,12 +93,12 @@ Item {
     property ListView listView
 
     /*!
-      \brief This property holds the fact that we are doing incremental move requests or not
+      \brief This property holds the fact that we are doing incremental move requests or not.
      */
     property bool incrementalMoves: true
 
     /*!
-      \brief This property holds the fact that the handle is being dragged
+      \brief This property holds the fact that the handle is being dragged.
      */
     readonly property alias dragActive: mouseArea.drag.active
 
@@ -110,9 +112,9 @@ Item {
       }
       \endcode
 
-      \a oldIndex the index the item is currently at
+      \a oldIndex The index the item is currently at.
 
-      \a newIndex the index we want to move the item to
+      \a newIndex The index we want to move the item to.
      */
     signal moveRequested(int oldIndex, int newIndex)
 
@@ -120,9 +122,9 @@ Item {
       \brief This signal is emitted when the drag operation is complete and the item has been
       dropped in the new final position.
 
-      \a oldIndex the index the item is currently at
+      \a oldIndex The index the item is currently at.
 
-      \a newIndex the index we want to drop the item to
+      \a newIndex The index we want to drop the item to.
      */
     signal dropped(int oldIndex, int newIndex)
 
