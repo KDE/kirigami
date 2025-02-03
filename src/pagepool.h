@@ -13,7 +13,9 @@
  * \qmltype PagePool
  * \inqmlmodule org.kde.kirigami
  *
- * A Pool of Page items, pages will be unique per url and the items
+ * \brief A pool of Page items.
+ *
+ * Pages will be unique per url and the items
  * will be kept around unless explicitly deleted.
  * Instances are C++ owned and can be deleted only manually using deletePage()
  * Instance are unique per url: if you need 2 different instance for a page

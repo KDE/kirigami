@@ -95,7 +95,7 @@ struct ImageData {
  * \qmltype ImageColors
  * \inqmlmodule org.kde.kirigami
  *
- * Extracts the dominant colors from an element or an image and exports it to a color palette.
+ * \brief Extracts the dominant colors from an element or an image and exports it to a color palette.
  */
 class ImageColors : public QObject
 {

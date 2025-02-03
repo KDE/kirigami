@@ -17,7 +17,7 @@ class QQuickItem;
  * \qmltype FormData
  * \inqmlmodule org.kde.kirigami.layouts
  *
- * This attached property contains the information for decorating a FormLayout:
+ * \brief An attached property with information for decorating a FormLayout.
  *
  * It contains the text labels of fields and information about sections.
  *

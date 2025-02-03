@@ -32,7 +32,7 @@ class Units;
  * \qmltype Icon
  * \inqmlmodule org.kde.kirigami.primitives
  *
- * Class for rendering an icon in UI.
+ * \brief Class for rendering an icon in the UI.
  */
 class Icon : public QQuickItem
 {

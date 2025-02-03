@@ -25,7 +25,7 @@ class WheelHandler;
  * \qmltype WheelEvent
  * \inqmlmodule org.kde.kirigami
  *
- * Describes the mouse wheel event
+ * \brief Describes the mouse wheel event.
  */
 class KirigamiWheelEvent : public QObject
 {

@@ -20,8 +20,8 @@ namespace Platform
  * \qmltype Settings
  * \inqmlmodule org.kde.kirigami.platform
  *
- * This class contains global kirigami settings about the current device setup
- * It is exposed to QML as the singleton "Settings"
+ * \brief Provides global kirigami settings about
+ * the current device setup under the singleton "Settings".
  */
 class KIRIGAMIPLATFORM_EXPORT Settings : public QObject
 {

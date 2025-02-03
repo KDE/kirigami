@@ -23,7 +23,7 @@ namespace Platform
  * \inmodule KirigamiPlatform
  * \inheaderfile Kirigami/Platform/VirtualKeyboardWatcher
  *
- * This class reports on the status of KWin's VirtualKeyboard DBus interface.
+ * \brief This class reports on the status of KWin's VirtualKeyboard DBus interface.
  *
  * \since 5.91
  */

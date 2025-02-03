@@ -16,8 +16,9 @@ class QQuickItem;
  * \qmltype ScenePosition
  * \inqmlmodule org.kde.kirigami
  *
- * This attached property contains the information about the scene position of the item:
- * Its global x and y coordinates will update automatically and can be binded
+ * \brief An attached property that contains the information about the scene position of the item.
+ *
+ * Its global x and y coordinates will update automatically and can be binded.
  * \code
  * import org.kde.kirigami as Kirigami
  * Text {

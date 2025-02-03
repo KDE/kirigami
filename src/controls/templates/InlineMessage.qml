@@ -15,7 +15,7 @@ import org.kde.kirigami.templates.private as TP
   \qmltype InlineMessage
   \inqmlmodule org.kde.kirigami
 
-  An inline message item with support for informational, positive,
+  \brief An inline message item with support for informational, positive,
   warning and error types, and with support for associated actions.
 
   InlineMessage can be used to give information to the user or

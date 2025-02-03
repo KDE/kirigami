@@ -17,9 +17,10 @@ import "private" as KP
   \qmltype GlobalDrawer
   \inqmlmodule org.kde.kirigami
 
-  A specialized form of the Drawer intended for showing an application's
-  always-available global actions. Think of it like a mobile version of
-  a desktop application's menubar.
+  \brief A specialized form of the Drawer intended for showing an application's
+  always-available global actions.
+
+  Think of it like a mobile version of a desktop application's menubar.
 
   Example usage:
   \code

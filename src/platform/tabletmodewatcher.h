@@ -23,7 +23,7 @@ class TabletModeWatcherPrivate;
  * \inmodule KirigamiPlatform
  * \inheaderfile Kirigami/Platform/TabletModeWatcher
  *
- * Sent by TabletModeWatcher when the tablet mode changes.
+ * \brief Event sent by TabletModeWatcher when the tablet mode changes.
  *
  * \sa TabletModeWatcher
  */
@@ -46,9 +46,10 @@ public:
  * \inmodule KirigamiPlatform
  * \inheaderfile Kirigami/Platform/TabletModeWatcher
  *
- * This class reports on the status of certain transformable
+ * \brief This class reports on the status of certain transformable
  * devices which can be both tablets and laptops at the same time,
  * with a detachable keyboard.
+ *
  * It reports whether the device supports a tablet mode and if
  * the device is currently in such mode or not, emitting a signal
  * when the user switches.

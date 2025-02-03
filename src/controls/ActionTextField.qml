@@ -13,9 +13,8 @@ import org.kde.kirigami as Kirigami
   \qmltype ActionTextField
   \inqmlmodule org.kde.kirigami
 
-  This is advanced textfield. It is recommended to use this class when there
-  is a need to create a create a textfield with action buttons (e.g a clear
-  action).
+  \brief An advanced control to create custom textfields
+  with action buttons (for example, with a Clear button).
 
   Example usage for a search field:
   \code

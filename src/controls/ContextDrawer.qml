@@ -15,7 +15,7 @@ import "private" as KP
   \qmltype ContextDrawer
   \inqmlmodule org.kde.kirigami
 
-  A specialized type of drawer that will show a list of actions
+  \brief A specialized type of drawer that will show a list of actions
   relevant to the application's current page.
 
   Example usage:

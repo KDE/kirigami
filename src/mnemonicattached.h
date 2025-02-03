@@ -16,11 +16,13 @@
  * \qmltype MnemonicData
  * \inqmlmodule org.kde.kirigami
  *
- * This Attached property is used to calculate automated keyboard sequences
- * to trigger actions based upon their text: if an "&" mnemonic is
- * used (ie "&Ok"), the system will attempt to assign the desired letter giving
- * it priority, otherwise a letter among the ones in the label will be used if
- * possible and not conflicting.
+ * \brief An attached property used to calculate automated keyboard sequences
+ * to trigger actions based upon their text.
+ *
+ * If an "&" mnemonic is used (such as "&Ok"), the system will attempt to assign
+ * the desired letter giving it priority, otherwise a letter among the ones
+ * in the label will be used if possible and not conflicting.
+ *
  * Different kinds of controls will have different priorities in assigning the
  * shortcut: for instance the "Ok/Cancel" buttons in a dialog will have priority
  * over fields of a FormLayout.

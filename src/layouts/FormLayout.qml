@@ -17,9 +17,11 @@ import org.kde.kirigami as Kirigami
   \qmltype FormLayout
   \inqmlmodule org.kde.kirigami.layouts
 
-  This is the base class for Form layouts conforming to the
-  Kirigami Human Interface Guidelines. The layout consists
-  of two columns: the left column contains only right-aligned
+  \brief The base class for Form layouts conforming to the
+  Kirigami Human Interface Guidelines.
+
+  The layout consists of two columns:
+  the left column contains only right-aligned
   labels provided by a FormData attached property,
   the right column contains left-aligned child types.
 

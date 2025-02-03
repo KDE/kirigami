@@ -18,7 +18,7 @@ class QQuickItem;
  * \qmltype OverlayZStacking
  * \inqmlmodule org.kde.kirigami
  *
- * This attached property manages z-index for stacking overlays relative to each other.
+ * \brief An attached property that manages z-index for stacking overlays relative to each other.
  *
  * When a popup is about to show, OverlayZStacking object kicks in, searches for the
  * next nearest popup in the QtQuick hierarchy of items, and sets its z value to the

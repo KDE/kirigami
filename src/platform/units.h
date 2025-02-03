@@ -72,14 +72,14 @@ Q_SIGNALS:
  * \inqmlmodule org.kde.kirigami.platform
  * \nativetype Kirigami::Platform::Units
  *
- * A set of values to define semantically sizes and durations.
+ * \brief A set of values to define semantically sizes and durations.
  */
 /*!
  * \class Kirigami::Platform::Units
  * \inheaderfile Kirigami/Platform/Units
  * \inmodule KirigamiPlatform
  *
- * A set of values to define semantically sizes and durations.
+ * \brief A set of values to define semantically sizes and durations.
  */
 class KIRIGAMIPLATFORM_EXPORT Units : public QObject
 {

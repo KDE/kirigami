@@ -29,7 +29,9 @@ class PlatformThemePrivate;
  *
  * \nativetype Kirigami::Platform::PlatformTheme
  *
- * Theme
+ * \brief This class is the base for color management in Kirigami,
+ * different platforms can reimplement this class to integrate
+ * with system platform colors of a given platform.
  */
 
 /*!
@@ -37,9 +39,9 @@ class PlatformThemePrivate;
  * \inheaderfile Kirigami/Platform/PlatformTheme
  * \inmodule KirigamiPlatform
  *
- * This class is the base for color management in Kirigami,
+ * \brief This class is the base for color management in Kirigami,
  * different platforms can reimplement this class to integrate with
- * system platform colors of a given platform
+ * system platform colors of a given platform.
  */
 class KIRIGAMIPLATFORM_EXPORT PlatformTheme : public QObject
 {

@@ -13,7 +13,7 @@ import org.kde.kirigami as Kirigami
   \qmltype PagePoolAction
   \inqmlmodule org.kde.kirigami
 
-  An action used to load Pages coming from a common PagePool
+  \brief An action used to load Pages coming from a common PagePool
   in a PageRow or QtQuickControls2 StackView.
 
   \sa PagePool

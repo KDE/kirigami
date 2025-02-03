@@ -15,8 +15,9 @@ import "private" as P
   \qmltype Page
   \inqmlmodule org.kde.kirigami
 
-  Page is a container for all the app pages: everything pushed to the
-  ApplicationWindow's pageStack should be a Page.
+  \brief A container for all the app pages.
+
+  Everything pushed to the ApplicationWindow's pageStack should be a Page.
 
   \sa ScrollablePage
   For content that should be scrollable, such as ListViews, use ScrollablePage instead.

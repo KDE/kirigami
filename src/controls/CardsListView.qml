@@ -11,9 +11,10 @@ import org.kde.kirigami as Kirigami
   \qmltype CardsListView
   \inqmlmodule org.kde.kirigami
 
-  CardsListView is a ListView which can have AbstractCard as its delegate: it will
-  automatically assign the proper spacings and margins around the cards adhering
-  to the design guidelines.
+  \brief A ListView that can have AbstractCard as its delegate.
+
+  This control will automatically assign the proper spacings
+  and margins around the cards adhering to the design guidelines.
 
   CardsListView should be used only with cards which can look good at any
   horizontal size, so it is recommended to directly use AbstractCard with an

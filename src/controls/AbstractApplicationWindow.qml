@@ -15,7 +15,8 @@ import "templates/private" as TP
   \inqmlmodule org.kde.kirigami
   \inherits QQC2.ApplicationWindow
 
-  A window that provides some basic features needed for all apps
+  \brief A window that provides some basic features needed for all apps.
+
   Use this class only if you need a custom content for your application,
   different from the Page Row behavior recommended by the HIG and provided
   by ApplicationWindow.
