@@ -72,7 +72,7 @@ Kirigami.OverlayDrawer {
       \brief Arbitrary content to show above the list view.
 
       default: an Item containing a Kirigami.Heading that displays a title whose text is
-      controlled by the title property.`
+      controlled by the title property.
 
       \since 2.7
      */
