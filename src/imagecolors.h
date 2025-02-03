@@ -135,7 +135,7 @@ class ImageColors : public QObject
      * dominant color in the source image and the last element is the
      * least dominant color of the image.
      *
-     * \note K-means clustering is used to extract these colors; see https://en.wikipedia.org/wiki/K-means_clustering.
+     * \note K-means clustering is used to extract these colors; see \l {https://en.wikipedia.org/wiki/K-means_clustering} {K-Means Clustering (Wikipedia)}.
      */
     Q_PROPERTY(QList<PaletteSwatch> palette READ palette NOTIFY paletteChanged FINAL)
 
@@ -166,7 +166,7 @@ class ImageColors : public QObject
      * The dominant color of the image is the color of the largest
      * cluster in the image.
      *
-     * See https://en.wikipedia.org/wiki/K-means_clustering
+     * See \l {https://en.wikipedia.org/wiki/K-means_clustering} {K-Means Clustering (Wikipedia)}
      */
     Q_PROPERTY(QColor dominant READ dominant NOTIFY paletteChanged FINAL)
 
@@ -185,7 +185,7 @@ class ImageColors : public QObject
      * The accent color is the color cluster with the highest CIELAB
      * chroma in the source image.
      *
-     * See https://en.wikipedia.org/wiki/Colorfulness#Chroma
+     * See \l {https://en.wikipedia.org/wiki/Colorfulness#Chroma} {Chroma (Wikipedia)}
      */
     Q_PROPERTY(QColor highlight READ highlight NOTIFY paletteChanged FINAL)
 
