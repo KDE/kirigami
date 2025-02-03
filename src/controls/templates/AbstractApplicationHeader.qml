@@ -17,13 +17,13 @@ import org.kde.kirigami as Kirigami
 
   Scrolling the main page will make it taller or shorter (through the point of going away)
   It's a behavior similar to the typical mobile web browser addressbar
-  the minimum, preferred and maximum heights of the item can be controlled with
+  the minimum, preferred and maximum heights of the item can be controlled with:
   \list
   \li minimumHeight: default is 0, i.e. hidden
   \li preferredHeight: default is Units.gridUnit * 1.6
   \li maximumHeight: default is Units.gridUnit * 3
   \endlist
-  To achieve a titlebar that stays completely fixed just set the 3 sizes as the same
+  To achieve a titlebar that stays completely fixed just set the 3 sizes as the same.
  */
 Item {
     id: root
@@ -100,7 +100,7 @@ Item {
 
     /*!
       \brief This property holds the background item.
-      \note the background will be automatically sized to fill the whole control
+      \note The background will be automatically sized to fill the whole control.
      */
     property Item background
 
