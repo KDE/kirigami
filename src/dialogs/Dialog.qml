@@ -106,7 +106,7 @@ import org.kde.kirigami as Kirigami
   \endqml
 
   There are also sub-components of the Dialog that target specific usecases,
-  and can reduce boilerplate code if used:
+  and can reduce boilerplate code if used.
 
   \sa PromptDialog
   \sa MenuDialog
