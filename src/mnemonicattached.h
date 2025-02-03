@@ -51,7 +51,7 @@ class MnemonicAttached : public QObject
      * \qmlattachedproperty string MnemonicData::richTextLabel
      *
      * The user-visible final label, which will have the shortcut letter underlined,
-     * such as "<u>O</u>k"
+     * such as "<u>O</u>k".
      */
     Q_PROPERTY(QString richTextLabel READ richTextLabel NOTIFY richTextLabelChanged FINAL)
 
@@ -66,7 +66,8 @@ class MnemonicAttached : public QObject
     /*!
      * \qmlattachedproperty bool MnemonicData::enabled
      *
-     * Only if true this mnemonic will be considered for the global assignment
+     * Only if true this mnemonic will be considered for the global assignment.
+     *
      * default: true
      */
     Q_PROPERTY(bool enabled READ enabled WRITE setEnabled NOTIFY enabledChanged FINAL)
@@ -82,14 +83,14 @@ class MnemonicAttached : public QObject
     /*!
      * \qmlattachedproperty keysequence MnemonicData::sequence
      *
-     * The final key sequence assigned, if any: it will be Alt+alphanumeric char
+     * The final key sequence assigned, if any: it will be Alt+alphanumeric char.
      */
     Q_PROPERTY(QKeySequence sequence READ sequence NOTIFY sequenceChanged FINAL)
 
     /*!
      * \qmlattachedproperty bool MnemonicData::active
      *
-     * True when the user is pressing alt and the accelerators should be shown
+     * True when the user is pressing alt and the accelerators should be shown.
      *
      * \since 5.72
      * \since 2.15
