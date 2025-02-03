@@ -19,12 +19,13 @@ import org.kde.kirigami as Kirigami
 
   Designed to be set as the header: property of a ListView or GridView, this
   component provides a fancy inline header suitable for explaining the contents
-  of its view to the user in an attractive and standardized way. Actions globally
-  relevant to the view can be defined using the actions: property. They will
-  appear on the right side of the header as buttons, and collapse into an
+  of its view to the user in an attractive and standardized way.
+
+  Actions globally relevant to the view can be defined using the \l actions property.
+  They will appear on the right side of the header as buttons, and collapse into an
   overflow menu when there isn't room to show them all.
 
-  The width: property must be manually set to the parent view's width.
+  The \l width property must be manually set to the parent view's width.
 
   Example usage:
   \code
