@@ -20,7 +20,7 @@ import org.kde.kirigami.platform as Platform
 
   If you wish to customize the layout further, create your own RadioDelegate
   subclass with the contentItem property set to the content of your choice.
-  This can include IconTitleSubtitle` inside a Layout, for example.
+  This can include IconTitleSubtitle inside a Layout, for example.
 
   \note If you don't need a subtitle, use RadioDelegate directly.
 
