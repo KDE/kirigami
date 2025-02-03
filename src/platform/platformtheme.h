@@ -88,14 +88,16 @@ class KIRIGAMIPLATFORM_EXPORT PlatformTheme : public QObject
      * \qmlattachedproperty bool Theme::inherit
      *
      * If true, the colorSet will be inherited from the colorset of a theme of one
-     * of the ancestor items
+     * of the ancestor items.
+     *
      * default: true
      */
     /*!
      * \property Kirigami::Platform::PlatformTheme::inherit
      *
      * If true, the colorSet will be inherited from the colorset of a theme of one
-     * of the ancestor items
+     * of the ancestor items.
+     *
      * default: true
      */
     Q_PROPERTY(bool inherit READ inherit WRITE setInherit NOTIFY inheritChanged FINAL)
@@ -104,28 +106,28 @@ class KIRIGAMIPLATFORM_EXPORT PlatformTheme : public QObject
     /*!
      * \qmlattachedproperty color Theme::textColor
      * Color for normal foregrounds, usually text, but not limited to it,
-     * anything that should be painted with a clear contrast should use this color
+     * anything that should be painted with a clear contrast should use this color.
      */
     /*!
      * \property Kirigami::Platform::PlatformTheme::textColor
      * Color for normal foregrounds, usually text, but not limited to it,
-     * anything that should be painted with a clear contrast should use this color
+     * anything that should be painted with a clear contrast should use this color.
      */
     Q_PROPERTY(QColor textColor READ textColor WRITE setCustomTextColor RESET setCustomTextColor NOTIFY colorsChanged FINAL)
 
     /*!
      * \qmlattachedproperty color Theme::disabledTextColor
      *
-     * Foreground color for disabled areas, usually a mid-gray
-     * @note Depending on the implementation, the color used for this property may not be
+     * Foreground color for disabled areas, usually a mid-gray.
+     * \note Depending on the implementation, the color used for this property may not be
      *       based on the disabled palette. For example, for the Plasma implementation,
      *       "Inactive Text Color" of the active palette is used.
      */
     /*!
      * \property Kirigami::Platform::PlatformTheme::disabledTextColor
      *
-     * Foreground color for disabled areas, usually a mid-gray
-     * @note Depending on the implementation, the color used for this property may not be
+     * Foreground color for disabled areas, usually a mid-gray.
+     * \note Depending on the implementation, the color used for this property may not be
      *       based on the disabled palette. For example, for the Plasma implementation,
      *       "Inactive Text Color" of the active palette is used.
      */
@@ -134,12 +136,12 @@ class KIRIGAMIPLATFORM_EXPORT PlatformTheme : public QObject
     /*!
      * \qmlattachedproperty color Theme::highlightedTextColor
      *
-     * Color for text that has been highlighted, often is a light color while normal text is dark
+     * Color for text that has been highlighted, often is a light color while normal text is dark.
      */
     /*!
      * \property Kirigami::Platform::PlatformTheme::highlightedTextColor
      *
-     * Color for text that has been highlighted, often is a light color while normal text is dark
+     * Color for text that has been highlighted, often is a light color while normal text is dark.
      */
     Q_PROPERTY(
         QColor highlightedTextColor READ highlightedTextColor WRITE setCustomHighlightedTextColor RESET setCustomHighlightedTextColor NOTIFY colorsChanged)
@@ -147,72 +149,72 @@ class KIRIGAMIPLATFORM_EXPORT PlatformTheme : public QObject
     /*!
      * \qmlattachedproperty color Theme::activeTextColor
      *
-     * Foreground for areas that are active or requesting attention
+     * Foreground for areas that are active or requesting attention.
      */
     /*!
      * \property Kirigami::Platform::PlatformTheme::activeTextColor
      *
-     * Foreground for areas that are active or requesting attention
+     * Foreground for areas that are active or requesting attention.
      */
     Q_PROPERTY(QColor activeTextColor READ activeTextColor WRITE setCustomActiveTextColor RESET setCustomActiveTextColor NOTIFY colorsChanged FINAL)
 
     /*!
      * \qmlattachedproperty color Theme::linkColor
      *
-     * Color for links
+     * Color for links.
      */
     /*!
      * \property Kirigami::Platform::PlatformTheme::linkColor
      *
-     * Color for links
+     * Color for links.
      */
     Q_PROPERTY(QColor linkColor READ linkColor WRITE setCustomLinkColor RESET setCustomLinkColor NOTIFY colorsChanged FINAL)
 
     /*!
      * \qmlattachedproperty color Theme::visitedLinkColor
      *
-     * Color for visited links, usually a bit darker than linkColor
+     * Color for visited links, usually a bit darker than linkColor.
      */
     /*!
      * \property Kirigami::Platform::PlatformTheme::visitedLinkColor
      *
-     * Color for visited links, usually a bit darker than linkColor
+     * Color for visited links, usually a bit darker than linkColor.
      */
     Q_PROPERTY(QColor visitedLinkColor READ visitedLinkColor WRITE setCustomVisitedLinkColor RESET setCustomVisitedLinkColor NOTIFY colorsChanged FINAL)
 
     /*!
      * \qmlattachedproperty color Theme::negativeTextColor
      *
-     * Foreground color for negative areas, such as critical error text
+     * Foreground color for negative areas, such as critical error text.
      */
     /*!
      * \property Kirigami::Platform::PlatformTheme::negativeTextColor
      *
-     * Foreground color for negative areas, such as critical error text
+     * Foreground color for negative areas, such as critical error text.
      */
     Q_PROPERTY(QColor negativeTextColor READ negativeTextColor WRITE setCustomNegativeTextColor RESET setCustomNegativeTextColor NOTIFY colorsChanged FINAL)
 
     /*!
      * \qmlattachedproperty color Theme::neutralTextColor
      *
-     * Foreground color for neutral areas, such as warning texts (but not critical)
+     * Foreground color for neutral areas, such as warning texts (but not critical).
      */
     /*!
      * \property Kirigami::Platform::PlatformTheme::neutralTextColor
      *
-     * Foreground color for neutral areas, such as warning texts (but not critical)
+     * Foreground color for neutral areas, such as warning texts (but not critical).
      */
     Q_PROPERTY(QColor neutralTextColor READ neutralTextColor WRITE setCustomNeutralTextColor RESET setCustomNeutralTextColor NOTIFY colorsChanged FINAL)
 
     /*!
      * \qmlattachedproperty color Theme::positiveTextColor
      *
-     * Success messages, trusted content
+     * Success messages, trusted content.
      */
     /*!
      * \property Kirigami::Platform::PlatformTheme::positiveTextColor
      *
-     * Success messages, trusted content
+     * Success messages, trusted content.
      */
     Q_PROPERTY(QColor positiveTextColor READ positiveTextColor WRITE setCustomPositiveTextColor RESET setCustomPositiveTextColor NOTIFY colorsChanged FINAL)
 
@@ -220,28 +222,32 @@ class KIRIGAMIPLATFORM_EXPORT PlatformTheme : public QObject
     /*!
      * \qmlattachedproperty color Theme::backgroundColor
      *
-     * The generic background color
+     * The generic background color.
      */
     /*!
      * \property Kirigami::Platform::PlatformTheme::backgroundColor
      *
-     * The generic background color
+     * The generic background color.
      */
     Q_PROPERTY(QColor backgroundColor READ backgroundColor WRITE setCustomBackgroundColor RESET setCustomBackgroundColor NOTIFY colorsChanged FINAL)
 
     /*!
      * \qmlattachedproperty color Theme::alternateBackgroundColor
      *
-     * The generic background color
+     * The generic background color.
+     *
      * Alternate background; for example, for use in lists.
+     *
      * This color may be the same as BackgroundNormal,
      * especially in sets other than View and Window.
      */
     /*!
      * \property Kirigami::Platform::PlatformTheme::alternateBackgroundColor
      *
-     * The generic background color
+     * The generic background color.
+     *
      * Alternate background; for example, for use in lists.
+     *
      * This color may be the same as BackgroundNormal,
      * especially in sets other than View and Window.
      */
@@ -251,24 +257,24 @@ class KIRIGAMIPLATFORM_EXPORT PlatformTheme : public QObject
     /*!
      * \qmlattachedproperty color Theme::highlightColor
      *
-     * The background color for selected areas
+     * The background color for selected areas.
      */
     /*!
      * \property Kirigami::Platform::PlatformTheme::highlightColor
      *
-     * The background color for selected areas
+     * The background color for selected areas.
      */
     Q_PROPERTY(QColor highlightColor READ highlightColor WRITE setCustomHighlightColor RESET setCustomHighlightColor NOTIFY colorsChanged FINAL)
 
     /*!
      * \qmlattachedproperty color Theme::activeBackgroundColor
      *
-     * Background for areas that are active or requesting attention
+     * Background for areas that are active or requesting attention.
      */
     /*!
      * \property Kirigami::Platform::PlatformTheme::activeBackgroundColor
      *
-     * Background for areas that are active or requesting attention
+     * Background for areas that are active or requesting attention.
      */
     Q_PROPERTY(
         QColor activeBackgroundColor READ activeBackgroundColor WRITE setCustomActiveBackgroundColor RESET setCustomActiveBackgroundColor NOTIFY colorsChanged)
@@ -276,12 +282,12 @@ class KIRIGAMIPLATFORM_EXPORT PlatformTheme : public QObject
     /*!
      * \qmlattachedproperty color Theme::linkBackgroundColor
      *
-     * Background color for links
+     * Background color for links.
      */
     /*!
      * \property Kirigami::Platform::PlatformTheme::linkBackgroundColor
      *
-     * Background color for links
+     * Background color for links.
      */
     Q_PROPERTY(
         QColor linkBackgroundColor READ linkBackgroundColor WRITE setCustomLinkBackgroundColor RESET setCustomLinkBackgroundColor NOTIFY colorsChanged FINAL)
@@ -289,12 +295,12 @@ class KIRIGAMIPLATFORM_EXPORT PlatformTheme : public QObject
     /*!
      * \qmlattachedproperty color Theme::visitedLinkBackgroundColor
      *
-     * Background color for visited links, usually a bit darker than linkBackgroundColor
+     * Background color for visited links, usually a bit darker than linkBackgroundColor.
      */
     /*!
      * \property Kirigami::Platform::PlatformTheme::visitedLinkBackgroundColor
      *
-     * Background color for visited links, usually a bit darker than linkBackgroundColor
+     * Background color for visited links, usually a bit darker than linkBackgroundColor.
      */
     Q_PROPERTY(QColor visitedLinkBackgroundColor READ visitedLinkBackgroundColor WRITE setCustomVisitedLinkBackgroundColor RESET
                    setCustomVisitedLinkBackgroundColor NOTIFY colorsChanged)
@@ -302,12 +308,12 @@ class KIRIGAMIPLATFORM_EXPORT PlatformTheme : public QObject
     /*!
      * \qmlattachedproperty color Theme::negativeBackgroundColor
      *
-     * Background color for negative areas, such as critical errors and destructive actions
+     * Background color for negative areas, such as critical errors and destructive actions.
      */
     /*!
      * \property Kirigami::Platform::PlatformTheme::negativeBackgroundColor
      *
-     * Background color for negative areas, such as critical errors and destructive actions
+     * Background color for negative areas, such as critical errors and destructive actions.
      */
     Q_PROPERTY(QColor negativeBackgroundColor READ negativeBackgroundColor WRITE setCustomNegativeBackgroundColor RESET setCustomNegativeBackgroundColor NOTIFY
                    colorsChanged)
@@ -315,12 +321,12 @@ class KIRIGAMIPLATFORM_EXPORT PlatformTheme : public QObject
     /*!
      * \qmlattachedproperty color Theme::neutralBackgroundColor
      *
-     * Background color for neutral areas, such as warnings (but not critical)
+     * Background color for neutral areas, such as warnings (but not critical).
      */
     /*!
      * \property Kirigami::Platform::PlatformTheme::neutralBackgroundColor
      *
-     * Background color for neutral areas, such as warnings (but not critical)
+     * Background color for neutral areas, such as warnings (but not critical).
      */
     Q_PROPERTY(QColor neutralBackgroundColor READ neutralBackgroundColor WRITE setCustomNeutralBackgroundColor RESET setCustomNeutralBackgroundColor NOTIFY
                    colorsChanged)
@@ -328,12 +334,12 @@ class KIRIGAMIPLATFORM_EXPORT PlatformTheme : public QObject
     /*!
      * \qmlattachedproperty color Theme::positiveBackgroundColor
      *
-     * Background color for positive areas, such as success messages and trusted content
+     * Background color for positive areas, such as success messages and trusted content.
      */
     /*!
      * \property Kirigami::Platform::PlatformTheme::positiveBackgroundColor
      *
-     * Background color for positive areas, such as success messages and trusted content
+     * Background color for positive areas, such as success messages and trusted content.
      */
     Q_PROPERTY(QColor positiveBackgroundColor READ positiveBackgroundColor WRITE setCustomPositiveBackgroundColor RESET setCustomPositiveBackgroundColor NOTIFY
                    colorsChanged)
@@ -342,36 +348,36 @@ class KIRIGAMIPLATFORM_EXPORT PlatformTheme : public QObject
     /*!
      * \qmlattachedproperty color Theme::focusColor
      *
-     * A decoration color that indicates active focus
+     * A decoration color that indicates active focus.
      */
     /*!
      * \property Kirigami::Platform::PlatformTheme::focusColor
      *
-     * A decoration color that indicates active focus
+     * A decoration color that indicates active focus.
      */
     Q_PROPERTY(QColor focusColor READ focusColor WRITE setCustomFocusColor RESET setCustomFocusColor NOTIFY colorsChanged FINAL)
 
     /*!
      * \qmlattachedproperty color Theme::hoverColor
      *
-     * A decoration color that indicates mouse hovering
+     * A decoration color that indicates mouse hovering.
      */
     /*!
      * \property Kirigami::Platform::PlatformTheme::hoverColor
      *
-     * A decoration color that indicates mouse hovering
+     * A decoration color that indicates mouse hovering.
      */
     Q_PROPERTY(QColor hoverColor READ hoverColor WRITE setCustomHoverColor RESET setCustomHoverColor NOTIFY colorsChanged FINAL)
 
     /*!
      * \qmlattachedproperty color Theme::useAlternateBackgroundColor
      *
-     * Hint for item views to actually make use of the alternate background color feature
+     * Hint for item views to actually make use of the alternate background color feature.
      */
     /*!
      * \property Kirigami::Platform::PlatformTheme::useAlternateBackgroundColor
      *
-     * Hint for item views to actually make use of the alternate background color feature
+     * Hint for item views to actually make use of the alternate background color feature.
      */
     Q_PROPERTY(
         bool useAlternateBackgroundColor READ useAlternateBackgroundColor WRITE setUseAlternateBackgroundColor NOTIFY useAlternateBackgroundColorChanged FINAL)
@@ -379,36 +385,36 @@ class KIRIGAMIPLATFORM_EXPORT PlatformTheme : public QObject
     /*!
      * \qmlattachedproperty font Theme::defaultFont
      *
-     * The default font
+     * The default font.
      */
     /*!
      * \property Kirigami::Platform::PlatformTheme::defaultFont
      *
-     * The default font
+     * The default font.
      */
     Q_PROPERTY(QFont defaultFont READ defaultFont NOTIFY defaultFontChanged FINAL)
 
     /*!
      * \qmlattachedproperty font Theme::smallFont
      *
-     * Small font
+     * Small font.
      */
     /*!
      * \property Kirigami::Platform::PlatformTheme::smallFont
      *
-     * Small font
+     * Small font.
      */
     Q_PROPERTY(QFont smallFont READ smallFont NOTIFY smallFontChanged FINAL)
 
     /*!
      * \qmlattachedproperty QPalette Theme::palette
      *
-     * Palette
+     * Palette.
      */
     /*!
      * \property Kirigami::Platform::PlatformTheme::palette
      *
-     * Palette
+     * Palette.
      */
     Q_PROPERTY(QPalette palette READ palette NOTIFY paletteChanged FINAL)
 
@@ -416,13 +422,13 @@ class KIRIGAMIPLATFORM_EXPORT PlatformTheme : public QObject
      * \qmlattachedproperty real Theme::frameContrast
      *
      * Frame contrast value, usually used for separators and outlines
-     * Value is between 0.0 and 1.0
+     * Value is between 0.0 and 1.0.
      */
     /*!
      * \property Kirigami::Platform::PlatformTheme::frameContrast
      *
      * Frame contrast value, usually used for separators and outlines
-     * Value is between 0.0 and 1.0
+     * Value is between 0.0 and 1.0.
      */
     Q_PROPERTY(qreal frameContrast READ frameContrast CONSTANT FINAL)
 
@@ -430,13 +436,13 @@ class KIRIGAMIPLATFORM_EXPORT PlatformTheme : public QObject
      * \qmlattachedproperty real Theme::lightFrameContrast
      *
      * Returns half of the frameContrast value; used by Separator.Weight.Light
-     * Value is between 0.0 and 1.0
+     * Value is between 0.0 and 1.0.
      */
     /*!
      * \property Kirigami::Platform::PlatformTheme::lightFrameContrast
      *
      * Returns half of the frameContrast value; used by Separator.Weight.Light
-     * Value is between 0.0 and 1.0
+     * Value is between 0.0 and 1.0.
      */
     Q_PROPERTY(qreal lightFrameContrast READ lightFrameContrast CONSTANT FINAL)
 
@@ -529,7 +535,7 @@ public:
     qreal lightFrameContrast() const;
 
     /*!
-     * This will be used by desktopicon to fetch icons with KIconLoader
+     * This will be used by desktopicon to fetch icons with KIconLoader.
      */
     virtual Q_INVOKABLE QIcon iconFromTheme(const QString &name, const QColor &customColor = Qt::transparent);
 
