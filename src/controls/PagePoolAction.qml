@@ -31,14 +31,16 @@ Kirigami.Action {
       \brief This property holds the PagePool object used by this PagePoolAction.
 
       PagePool will make sure only one instance of the page identified by the page url will be created and reused.
+
       PagePool's lastLoaderUrl property will be used to control the mutual exclusivity of the checked
       state of the PagePoolAction instances sharing the same PagePool.
      */
     property Kirigami.PagePool pagePool
 
     /*!
-      The pageStack property accepts either a Kirigami.PageRow or a QtQuickControls2 StackView.
-      The component that will instantiate the pages, which has to work with a stack logic.
+      The pageStack property accepts either a Kirigami.PageRow or a QtQuickControls2 StackView;
+      the component that will instantiate the pages, which has to work with a stack logic.
+
       Kirigami.PageRow is recommended, but will work with QtQuicControls2 StackView as well.
 
       default: bound to ApplicationWindow's global pageStack, which is a PageRow by default
