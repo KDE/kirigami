@@ -8,6 +8,7 @@ documentationinheaders = true
 headerdirs = .
 sourcedirs = . ../docs/includes
 imagedirs = . ../docs/pics
+exampledirs = . ../examples primitives/examples
 
 depends = kde qtcore qtquick qtquickcontrols kcoreaddons kirigamiplatform
 
