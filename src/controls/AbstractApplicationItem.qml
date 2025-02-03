@@ -96,7 +96,7 @@ Item {
 
      It's a behavior similar to the typical mobile web browser addressbar.
 
-     The minimum, preferred and maximum heights of the item can be controlled with
+     The minimum, preferred and maximum heights of the item can be controlled with:
      \list
      \li Layout.minimumHeight: default is 0, i.e. hidden
      \li Layout.preferredHeight: default is Kirigami.Units.gridUnit * 1.6
@@ -148,7 +148,7 @@ Item {
       \note It is recommended to use the ContextDrawer type here.
 
       The contents of the context drawer should depend from what page is
-      loaded in the main pageStack
+      loaded in the main pageStack.
 
       Example usage:
 
@@ -220,7 +220,7 @@ Item {
       \a message The text message to be shown to the user.
 
       \a timeout How long to show the message:
-                 possible values: "short", "long" or the number of milliseconds
+                 possible values: "short", "long", or the number of milliseconds.
 
       \a actionText Text in the action button, if any.
 
