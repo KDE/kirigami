@@ -21,7 +21,7 @@ import "private" as P
   can be used to easily show the user what to do next to add content to the view.
 
   The explanatory text is selectable and can contain clickable links. In this latter
-  case, client code must implement an ``onLinkactivated:`` signal handler or the links
+  case, client code must implement an \c onLinkactivated: signal handler or the links
   will not work.
 
   The top-level component is a ColumnLayout, so additional components items can
@@ -29,7 +29,7 @@ import "private" as P
 
   Example usage:
 
-  used as a "this view is empty" message:
+  Used as a "this view is empty" message:
   \qml
   import org.kde.kirigami as Kirigami
 
@@ -78,7 +78,7 @@ import "private" as P
   }
   \endqml
 
-  Used as a "there was a problem here" message
+  Used as a "there was a problem here" message:
   \qml
   import org.kde.kirigami as Kirigami
 
@@ -101,7 +101,7 @@ import "private" as P
   }
   \endqml
 
-  Used as a "Here's what you do next" button
+  Used as a "Here's what you do next" button:
   \qml
   import org.kde.kirigami as Kirigami
 
