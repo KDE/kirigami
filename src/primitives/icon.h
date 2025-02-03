@@ -130,7 +130,7 @@ class Icon : public QQuickItem
      *
      * This is typically used to indicate when a list item is currently selected.
      *
-     * TODO qdoc @image html icon/selected.png
+     * \image icon/selected.png
      *
      * The color differences under the default KDE color palette, Breeze. Note
      * that a blue background is typically displayed behind selected elements.
