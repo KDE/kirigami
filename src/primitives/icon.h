@@ -73,8 +73,8 @@ class Icon : public QQuickItem
     /*!
      * \qmlproperty string Icon::fallback
      *
-     * The name of a fallback icon to load from the icon theme when the `source`
-     * cannot be found. The default fallback icon is `"unknown"`.
+     * The name of a fallback icon to load from the icon theme when the source
+     * cannot be found. The default fallback icon is \c "unknown".
      *
      * \quotefile icon/Fallback.qml
      *
@@ -85,9 +85,9 @@ class Icon : public QQuickItem
     /*!
      * \qmlproperty string Icon::placeholder
      *
-     * The name of an icon from the icon theme to show while the icon set in `source` is
+     * The name of an icon from the icon theme to show while the icon set in \l source is
      * being loaded. This is primarily relevant for remote sources, or those using slow-
-     * loading image providers. The default temporary icon is `"image-x-icon"`
+     * loading image providers. The default temporary icon is \c "image-x-icon"
      *
      * \note This will only be loaded if the source is a type which can be so long-loading
      * that a temporary image makes sense (e.g. a remote image, or from an ImageProvider
