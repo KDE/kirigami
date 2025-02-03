@@ -47,19 +47,18 @@ Kirigami.AbstractCard {
     /*!
       \brief This grouped property controls the banner image present in the header.
 
-      TODO qdoc
-
       This grouped property has the following sub-properties:
-      * ``source: url``: The source for the image. It understands any URL valid for an Image component.
-      * ``titleIcon: string``: The optional icon to put in the banner, either a freedesktop-compatible
+      \list
+      \li source: url: The source for the image. It understands any URL valid for an Image component.
+      \li titleIcon: string: The optional icon to put in the banner, either a freedesktop-compatible
       icon name (recommended) or any URL supported by QtQuick.Image.
-      * ``title: string``: The title for the banner, shown as contrasting text over the image.
-      * ``titleAlignment: Qt::Alignment``: The alignment of the title inside the image.
-      default: ``Qt.AlignTop | Qt.AlignLeft``
-      * ``titleLevel: int``: The Kirigami.Heading level for the title, which controls the font size.
-      default: ``1``, which is the largest size.
-      * ``titleWrapMode: QtQuick.Text::wrapMode``: Whether the header text should be able to wrap.
-      default: ``Text.NoWrap``
+      \li title: string: The title for the banner, shown as contrasting text over the image.
+      \li titleAlignment: Qt::Alignment: The alignment of the title inside the image.
+      default: \c {Qt.AlignTop | Qt.AlignLeft}
+      \li titleLevel: int: The Kirigami.Heading level for the title, which controls the font size.
+      default: \c 1, which is the largest size.
+      \li titleWrapMode: QtQuick.Text::wrapMode: Whether the header text should be able to wrap.
+      default: \c Text.NoWrap
 
       It also has the full set of properties that QtQuick.Image has, such as sourceSize and fillMode.
 
