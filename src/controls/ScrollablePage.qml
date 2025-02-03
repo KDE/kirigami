@@ -41,7 +41,7 @@ import "private"
   to make possible to scroll down the list to reach it with the thumb while using the
   phone with a single hand.
 
-  Implementations should handle the refresh themselves as follows
+  Implementations should handle the refresh themselves as follows.
 
   Example usage:
   \code
