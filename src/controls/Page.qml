@@ -130,10 +130,14 @@ QQC2.Page {
     readonly property Item globalToolBarItem: globalToolBar.item
 
     /*!
-      The style for the automatically generated global toolbar: by default the Page toolbar is the one set globally in the PageRow in its globalToolBar.style property.
+      The style for the automatically generated global toolbar.
+
+      By default the Page toolbar is the one set globally in the PageRow in its globalToolBar.style property.
+
       A single page can override the application toolbar style for itself.
       It is discouraged to use this, except very specific exceptions, like a chat
       application which can't have controls on the bottom except the text field.
+
       If the Page is not in a PageRow, by default the toolbar will be invisible,
       so has to be explicitly set to Kirigami.ApplicationHeaderStyle.ToolBar if
       desired to be used in that case.
