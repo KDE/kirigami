@@ -17,7 +17,7 @@ import org.kde.kirigami as Kirigami
   It uses the link color settings and triggers an action when clicked.
 
   Maps to the Command Link in the HIG:
-  https://develop.kde.org/hig/components/navigation/commandlink/
+  \l https://develop.kde.org/hig/components/navigation/commandlink/
 
   \since 5.52
  */
