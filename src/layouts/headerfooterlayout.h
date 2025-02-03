@@ -17,9 +17,11 @@
  * \brief Replicates a little part of what Page does.
  *
  * It's a container with 3 properties, header, contentItem and footer
- * which will be laid out oone on top of each other. It works better than a
- * ColumnLayout when the elements are to be defined by properties by the
- * user, which would require ugly reparenting dances and container items to
+ * which will be laid out oone on top of each other.
+ *
+ * It works better than a ColumnLayout when the elements are to be
+ * defined by properties by the user, which would require ugly
+ * reparenting dances and container items to
  * maintain the layout well behaving.
  */
 class HeaderFooterLayout : public QQuickItem
