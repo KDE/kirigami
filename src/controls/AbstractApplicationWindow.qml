@@ -121,7 +121,7 @@ QQC2.ApplicationWindow {
       \note It is recommended to use the ContextDrawer type here.
 
       The contents of the context drawer should depend from what page is
-      loaded in the main pageStack
+      loaded in the main pageStack.
 
       Example usage:
 
@@ -154,7 +154,7 @@ QQC2.ApplicationWindow {
     property OverlayDrawer contextDrawer
 
     /*!
-      Effectively the same as Overlay.overlay
+      The same as Overlay.overlay.
      */
     readonly property Item overlay: T.Overlay.overlay
 
@@ -190,7 +190,7 @@ QQC2.ApplicationWindow {
       \a message The text message to be shown to the user.
 
       \a timeout How long to show the message:
-                 possible values: "short", "long" or the number of milliseconds
+                 possible values: "short", "long", or the number of milliseconds.
 
       \a actionText Text in the action button, if any.
 
