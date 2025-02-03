@@ -65,9 +65,9 @@ QQC2.Label {
       \qmlproperty enumeration Heading::type
       \brief This property holds the heading type.
 
-      The type of the heading. This can be:
+      The type of heading. This can be:
       \list
-      \li Kirigami.Heading.Type.Normal: Create a normal heading (default)
+      \li Kirigami.Heading.Type.Normal: Create a normal heading (default).
       \li Kirigami.Heading.Type.Primary: Makes the heading more prominent. Useful
         when making the heading bigger is not enough.
       \li Kirigami.Heading.Type.Secondary: Makes the heading less prominent.
