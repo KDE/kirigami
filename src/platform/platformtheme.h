@@ -640,7 +640,8 @@ class KIRIGAMIPLATFORM_EXPORT PlatformThemeChangeTracker
 {
 public:
     /*!
-     * Flags used to indicate changes made to certain properties.
+     * \enum Kirigami::Platform::PlatformThemeChangeTracker::PropertyChange
+     * \brief Flags used to indicate changes made to certain properties.
      *
      * \value None
      * \value ColorSet
