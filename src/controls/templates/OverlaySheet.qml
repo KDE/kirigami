@@ -32,7 +32,7 @@ import org.kde.kirigami as Kirigami
   }
   \endqml
 
-  It needs a single element declared inside, do *not* override its contentItem
+  \note It needs a single element declared inside, do not override its contentItem.
 
  */
 T.Popup {
@@ -47,7 +47,7 @@ T.Popup {
 //BEGIN Own Properties
 
     /*!
-      \brief A title to be displayed in the header of this Sheet
+      \brief A title to be displayed in the header of this Sheet.
      */
     property string title
 
