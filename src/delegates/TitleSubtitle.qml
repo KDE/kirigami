@@ -57,8 +57,8 @@ Item {
     /*!
       The color to use for the title.
 
-      By default this is `Kirigami.Theme.textColor` unless `selected` is true
-      in which case this is `Kirigami.Theme.highlightedTextColor`.
+      By default this is Kirigami.Theme.textColor unless selected is true
+      in which case this is Kirigami.Theme.highlightedTextColor.
      */
     property color color: selected ? Platform.Theme.highlightedTextColor : Platform.Theme.textColor
     /*!
