@@ -106,7 +106,7 @@ class Icon : public QQuickItem
      *
      * This is typically used to indicate when an item is being hovered or pressed.
      *
-     * TODO qdoc @image html icon/active.png
+     * \image icon/active.png
      *
      * The color differences under the default KDE color palette, Breeze. Note
      * that a dull highlight background is typically displayed behind active icons and

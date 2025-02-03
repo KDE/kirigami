@@ -21,8 +21,7 @@ import org.kde.kirigami as Kirigami
   the UI, but the explanation is too long to fit in an inline label, and too
   important to put in a hover tooltip and risk the user missing it.
 
-  TODO qdoc
-  @image html ContextualHelpButton.png "Example of ContextualHelpButton usage"
+  \image ContextualHelpButton.png "Example of ContextualHelpButton usage"
 
   Example usage:
   \qml
