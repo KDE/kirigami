@@ -36,14 +36,14 @@ class KirigamiWheelEvent : public QObject
     /*!
      * \qmlproperty double WheelEvent::x
      *
-     * X coordinate of the mouse pointer
+     * X coordinate of the mouse pointer.
      */
     Q_PROPERTY(qreal x READ x CONSTANT FINAL)
 
     /*!
      * \qmlproperty double WheelEvent::y
      *
-     * Y coordinate of the mouse pointer
+     * Y coordinate of the mouse pointer.
      */
     Q_PROPERTY(qreal y READ y CONSTANT FINAL)
 
@@ -60,15 +60,19 @@ class KirigamiWheelEvent : public QObject
     /*!
      * \qmlproperty point WheelEvent::pixelDelta
      *
-     * provides the delta in screen pixels available on high resolution trackpads
+     * Provides the delta in screen pixels available on high resolution trackpads.
      */
     Q_PROPERTY(QPointF pixelDelta READ pixelDelta CONSTANT FINAL)
 
     /*!
      * \qmlproperty int WheelEvent::buttons
      *
-     * it contains an OR combination of the buttons that were pressed during the wheel, they can be:
-     * Qt.LeftButton, Qt.MiddleButton, Qt.RightButton
+     * It contains an OR combination of the buttons that were pressed during the wheel, they can be:
+     * \list
+     * \li Qt.LeftButton
+     * \li Qt.MiddleButton
+     * \li Qt.RightButton
+     * \endlist
      */
     Q_PROPERTY(int buttons READ buttons CONSTANT FINAL)
 
@@ -95,7 +99,7 @@ class KirigamiWheelEvent : public QObject
      * \qmlproperty bool WheelEvent::accepted
      *
      * If set, the event shouldn't be managed anymore,
-     * for instance it can be used to block the handler to manage the scroll of a view on some scenarios
+     * for instance it can be used to block the handler to manage the scroll of a view on some scenarios.
      * \code
      * // This handler handles automatically the scroll of
      * // flickableItem, unless Ctrl is pressed, in this case the
