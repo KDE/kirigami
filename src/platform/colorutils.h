@@ -210,8 +210,8 @@ public:
      *
      * CIELAB chroma may give a better quantification of how vibrant a color is compared to HSV saturation.
      *
-     * \sa https://en.wikipedia.org/wiki/Colorfulness
-     * \sa https://en.wikipedia.org/wiki/CIELAB_color_space
+     * \sa {https://en.wikipedia.org/wiki/Colorfulness} {Colorfulness (Wikipedia)}
+     * \sa {https://en.wikipedia.org/wiki/CIELAB_color_space} {CIELAB Color Space (Wikipedia)}
      */
     Q_INVOKABLE static qreal chroma(const QColor &color);
 
