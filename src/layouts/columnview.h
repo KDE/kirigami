@@ -165,8 +165,10 @@ private:
  * \brief A container that lays out items horizontally in a row.
  *
  * When not all items fit in the ColumnView, it will behave like a Flickable and will be a scrollable view which shows only a determined number of columns.
+ *
  * The columns can either all have the same fixed size (recommended),
  * size themselves with implicitWidth, or automatically expand to take all the available width: by default the last column will always be the expanding one.
+ *
  * Items inside the ColumnView can access info of the view and set layouting hints via the ColumnView attached property.
  *
  * This is the base for the implementation of PageRow.
