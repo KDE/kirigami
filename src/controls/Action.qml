@@ -47,14 +47,14 @@ QQC2.Action {
     property bool separator: false
 
     /*!
-     * \brief This property holds whether auto-exclusivity is enabled.
-     *
-     * If auto-exclusivity is enabled, checkable actions that belong to the
-     * same parent item behave as if they were part of the same ButtonGroup.
-     * Only one action can be checked at any time; checking another action
-     * automatically unchecks the previously checked one.
-     *
-     * default: \c false
+       \brief This property holds whether auto-exclusivity is enabled.
+
+       If auto-exclusivity is enabled, checkable actions that belong to the
+       same parent item behave as if they were part of the same ButtonGroup.
+       Only one action can be checked at any time; checking another action
+       automatically unchecks the previously checked one.
+
+       default: \c false
      */
     property bool autoExclusive: false
 
@@ -123,7 +123,7 @@ QQC2.Action {
     default property list<T.Action> children
 
     /*!
-      This property holds a QAction
+      This property holds a QAction.
 
       When provided Kirigami.Action will be initialized from the given QAction.
 
