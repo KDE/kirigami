@@ -110,7 +110,7 @@ class KIRIGAMIPLATFORM_EXPORT Units : public QObject
      * \qmlproperty int Units::iconSizes.huge
      * \qmlproperty int Units::iconSizes.enormous
      *
-     * units.iconSizes provides access to platform-dependent icon sizing
+     * The units.iconSizes group provides access to platform-dependent icon sizing.
      *
      * The icon sizes provided are normalized for different DPI, so icons
      * will scale depending on the DPI.
@@ -238,10 +238,12 @@ class KIRIGAMIPLATFORM_EXPORT Units : public QObject
      *
      * Some examples:
      *
-     * - When the user types text in a search field, wait no longer than this duration after
-     *   the user completes typing before starting the search
-     * - When loading data which would commonly arrive rapidly enough to not require interaction,
-     *   wait this long before showing a spinner
+     * \list
+     * \li When the user types text in a search field, wait no longer than this duration after
+     *     the user completes typing before starting the search.
+     * \li When loading data which would commonly arrive rapidly enough to not require interaction,
+     *     wait this long before showing a spinner.
+     * \endlist
      *
      * This might seem an arbitrary number, but given the psychological effect that three
      * seconds seems to be what humans consider a moment (and in the case of waiting for
@@ -251,10 +253,10 @@ class KIRIGAMIPLATFORM_EXPORT Units : public QObject
      * that the user would think that something has taken too long, for also not so fast as to
      * happen too soon.
      *
-     * See also
-     * https://www.psychologytoday.com/blog/all-about-addiction/201101/tick-tock-tick-hugs-and-life-in-3-second-intervals
+     * See \l {https://www.psychologytoday.com/blog/all-about-addiction/201101/tick-tock-tick-hugs-and-life-in-3-second-intervals}
+     * {Tick, tock, tick - Hugs and life in 3 second intervals (Psychology Today)}
      * (the actual paper is hidden behind an academic paywall and consequently not readily
-     * available to us, so the source will have to be the blog entry above)
+     * available to us, so the source will have to be the blog entry above).
      *
      * \note This should __not__ be used as an animation duration, as it is deliberately not scaled according
      * to the animation settings. This is specifically for determining when something has taken too long and
@@ -273,10 +275,12 @@ class KIRIGAMIPLATFORM_EXPORT Units : public QObject
      *
      * Some examples:
      *
-     * - When the user types text in a search field, wait no longer than this duration after
-     *   the user completes typing before starting the search
-     * - When loading data which would commonly arrive rapidly enough to not require interaction,
-     *   wait this long before showing a spinner
+     * \list
+     * \li When the user types text in a search field, wait no longer than this duration after
+     *     the user completes typing before starting the search.
+     * \li When loading data which would commonly arrive rapidly enough to not require interaction,
+     *     wait this long before showing a spinner.
+     * \endlist
      *
      * This might seem an arbitrary number, but given the psychological effect that three
      * seconds seems to be what humans consider a moment (and in the case of waiting for
@@ -286,10 +290,10 @@ class KIRIGAMIPLATFORM_EXPORT Units : public QObject
      * that the user would think that something has taken too long, for also not so fast as to
      * happen too soon.
      *
-     * See also
-     * https://www.psychologytoday.com/blog/all-about-addiction/201101/tick-tock-tick-hugs-and-life-in-3-second-intervals
+     * See \l {https://www.psychologytoday.com/blog/all-about-addiction/201101/tick-tock-tick-hugs-and-life-in-3-second-intervals}
+     * {Tick, tock, tick - Hugs and life in 3 second intervals (Psychology Today)}
      * (the actual paper is hidden behind an academic paywall and consequently not readily
-     * available to us, so the source will have to be the blog entry above)
+     * available to us, so the source will have to be the blog entry above).
      *
      * \note This should __not__ be used as an animation duration, as it is deliberately not scaled according
      * to the animation settings. This is specifically for determining when something has taken too long and
@@ -317,7 +321,7 @@ class KIRIGAMIPLATFORM_EXPORT Units : public QObject
     /*!
      * \qmlproperty qreal Units::cornerRadius
      *
-     * Corner radius value shared by buttons and other rectangle elements
+     * Corner radius value shared by buttons and other rectangle elements.
      *
      * \since 6.2
      */
