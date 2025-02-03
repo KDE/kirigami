@@ -23,6 +23,7 @@ class QQuickItem;
  * When a popup is about to show, OverlayZStacking object kicks in, searches for the
  * next nearest popup in the QtQuick hierarchy of items, and sets its z value to the
  * biggest of two: current stacking value for its layer, or parent's z index + 1.
+ *
  * This way OverlayZStacking algorithm ensures that a popup is always stacked higher
  * than its logical parent popup, but also no lower than its siblings on the same
  * logical layer.
