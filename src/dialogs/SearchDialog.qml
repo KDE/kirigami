@@ -51,7 +51,7 @@ import org.kde.kirigami as Kirigami
   }
   \endqml
 
-  \image searchdialog.html
+  \image searchdialog.png
 
   \note This component is unsuitable on mobile. Instead on mobile prefer to
   use a seperate page for the search.
