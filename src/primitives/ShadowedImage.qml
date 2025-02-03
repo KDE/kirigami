@@ -81,15 +81,15 @@ Item {
     /*!
      * TODO qdoc
       \brief This propery holds the border's properties of the image.
-      \sa org::kde::kirigami::ShadowedRectangle::border
+      \sa ShadowedRectangle::border
      */
     property alias border: shadowRectangle.border
 
     /*!
      * TODO qdoc
+      \qmlproperty ShadowedRectangle::CornersGroup corners
       \brief This propery holds the corner radius properties of the image.
-      \sa org::kde::kirigami::ShadowedRectangle::corners
-      @property ShadowedRectangle::CornersGroup corners
+      \sa ShadowedRectangle::corners
      */
     property alias corners: shadowRectangle.corners
 
@@ -101,6 +101,7 @@ Item {
     property alias source: image.source
 
     /*!
+      \qmlproperty bool asynchronous
       \brief This property sets whether this image should be loaded asynchronously.
 
       Set this to false if you want the main thread to load the image, which
@@ -109,23 +110,22 @@ Item {
       user interface is more desirable than having images immediately visible.
 
       \sa QtQuick.Image::asynchronous
-      @property bool asynchronous
      */
     property alias asynchronous: image.asynchronous
 
     /*!
+      \qmlproperty int fillMode
       \brief This property defines what happens when the source image has a different
       size than the item.
       \sa QtQuick.Image::fillMode
-      @property int fillMode
      */
     property alias fillMode: image.fillMode
 
     /*!
+      \qmlproperty bool mipmap
       \brief This property holds whether the image uses mipmap filtering when scaled
       or transformed.
       \sa QtQuick.Image::mipmap
-      @property bool mipmap
      */
     property alias mipmap: image.mipmap
 
@@ -136,9 +136,9 @@ Item {
     property alias sourceSize: image.sourceSize
 
     /**
-     * @brief This property holds the status of image loading.
-     * @see QtQuick.Image::status
-     * @since 6.5
+       \brief This property holds the status of image loading.
+       \sa QtQuick.Image::status
+       \since 6.5
      */
     readonly property alias status: image.status
 //END properties
