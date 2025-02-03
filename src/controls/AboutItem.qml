@@ -82,8 +82,8 @@ Item {
     property bool _usePageStack: false
 
     /*!
-     * \qmlproperty bool wideMode
-     * \sa FormLayout::wideMode
+       \qmlproperty bool wideMode
+       \sa FormLayout::wideMode
      */
     property alias wideMode: form.wideMode
 
