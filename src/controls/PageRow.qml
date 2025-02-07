@@ -25,7 +25,6 @@ import "templates" as KT
 QT.Control {
     id: root
 
-    property Item _stack: Kirigami.PageStack.pageStack
 //BEGIN PROPERTIES
     /**
      * @brief This property holds the number of pages currently pushed onto the view.
@@ -664,7 +663,7 @@ QT.Control {
         z: 100 // 100 is layersStack.z + 1
         height: currentItem?.implicitHeight ?? 0
         initialItem: Item {implicitHeight: 0}
-property Item _stack: Kirigami.PageStack.pageStack
+
         Component {
             id: emptyToolbar
             Item {
@@ -1100,6 +1099,9 @@ property Item _stack: Kirigami.PageStack.pageStack
         id: columnViewLayout
         spacing: 1
         readonly property alias columnView: columnView
+        // set the pagestack of this and all children to root, otherwise
+        // they would automatically resolve to the layer's stackview
+        Kirigami.PageStack.pageStack: root
         anchors {
             fill: parent
             topMargin: -layersStack.y

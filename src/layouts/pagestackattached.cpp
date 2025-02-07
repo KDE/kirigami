@@ -3,6 +3,7 @@
 
 #include "pagestackattached.h"
 
+#include "formlayoutattached.h"
 #include "loggingcategory.h"
 
 #include <QMetaObject>
@@ -83,8 +84,19 @@ PageStackAttached::PageStackAttached(QObject *parent)
     initialize();
 
     if (privateTypeEvalSingletonSelf->isStack(m_buddyFor)) {
+        // initialize();
         setPageStack(m_buddyFor);
-        m_parentIsStack = true;
+    } else if (!m_pageStack) {
+        QQuickItem *candidate = m_buddyFor->parentItem();
+        while (candidate) {
+            if (privateTypeEvalSingletonSelf->isStack(candidate)) {
+                qmlAttachedPropertiesObject<PageStackAttached>(candidate, true);
+
+                break;
+            }
+            candidate = candidate->parentItem();
+        }
+        initialize();
     }
 }
 
@@ -95,20 +107,35 @@ QQuickItem *PageStackAttached::pageStack() const
 
 void PageStackAttached::setPageStack(QQuickItem *pageStack)
 {
-    if (!pageStack || m_parentIsStack || m_pageStack == pageStack) {
+    if (!pageStack || m_pageStack == pageStack || !privateTypeEvalSingletonSelf->isStack(pageStack)) {
         return;
     }
 
+    m_customStack = true;
     m_pageStack = pageStack;
 
-    const auto styles = attachedChildren();
-    for (QQuickAttachedPropertyPropagator *child : styles) {
-        PageStackAttached *stackAttached = qobject_cast<PageStackAttached *>(child);
-        if (stackAttached)
-            stackAttached->setPageStack(m_pageStack);
-    }
+    propagatePageStack(pageStack);
 
     Q_EMIT pageStackChanged();
+}
+
+void PageStackAttached::propagatePageStack(QQuickItem *pageStack)
+{
+    if (!pageStack) {
+        return;
+    }
+
+    if (!m_customStack) {
+        m_pageStack = pageStack;
+    }
+
+    const auto stacks = attachedChildren();
+    for (QQuickAttachedPropertyPropagator *child : stacks) {
+        PageStackAttached *stackAttached = qobject_cast<PageStackAttached *>(child);
+        if (stackAttached) {
+            stackAttached->propagatePageStack(m_pageStack);
+        }
+    }
 }
 
 void PageStackAttached::push(const QVariant &page, const QVariant &properties)

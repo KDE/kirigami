@@ -30,7 +30,7 @@ class PageStackAttached : public QQuickAttachedPropertyPropagator
     QML_ATTACHED(PageStackAttached)
     QML_UNCREATABLE("")
 
-    Q_PROPERTY(QQuickItem *pageStack READ pageStack NOTIFY pageStackChanged)
+    Q_PROPERTY(QQuickItem *pageStack READ pageStack WRITE setPageStack NOTIFY pageStackChanged)
 
 public:
     explicit PageStackAttached(QObject *parent);
@@ -49,15 +49,16 @@ public:
     static PageStackAttached *qmlAttachedProperties(QObject *object);
 
 protected:
+    void propagatePageStack(QQuickItem *pageStack);
     void attachedParentChange(QQuickAttachedPropertyPropagator *newParent, QQuickAttachedPropertyPropagator *oldParent) override;
 
 Q_SIGNALS:
     void pageStackChanged();
 
 private:
-    QQuickItem *m_pageStack = nullptr;
-    QQuickItem *m_buddyFor = nullptr;
-    bool m_parentIsStack = false;
+    QPointer<QQuickItem> m_pageStack;
+    QPointer<QQuickItem> m_buddyFor;
+    bool m_customStack = false;
 
     static QObject *s_typeEval;
 };
