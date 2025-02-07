@@ -664,7 +664,7 @@ QT.Control {
         z: 100 // 100 is layersStack.z + 1
         height: currentItem?.implicitHeight ?? 0
         initialItem: Item {implicitHeight: 0}
-
+property Item _stack: Kirigami.PageStack.pageStack
         Component {
             id: emptyToolbar
             Item {

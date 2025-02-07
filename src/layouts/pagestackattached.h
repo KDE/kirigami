@@ -58,4 +58,6 @@ private:
     QQuickItem *m_pageStack = nullptr;
     QQuickItem *m_buddyFor = nullptr;
     bool m_parentIsStack = false;
+
+    static QObject *s_typeEval;
 };

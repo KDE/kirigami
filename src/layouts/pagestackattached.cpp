@@ -6,8 +6,69 @@
 #include "loggingcategory.h"
 
 #include <QMetaObject>
+#include <QQmlContext>
+#include <QQmlEngine>
 
 using namespace Qt::StringLiterals;
+
+QObject *PageStackAttached::s_typeEval = nullptr;
+
+class TypeEvalSingleton
+{
+public:
+    TypeEvalSingleton()
+    {
+    }
+    ~TypeEvalSingleton()
+    {
+        qDeleteAll(m_instances.values());
+    }
+    static bool isStack(QQuickItem *candidate);
+
+private:
+    QHash<QQmlEngine *, QObject *> m_instances;
+};
+
+Q_GLOBAL_STATIC(TypeEvalSingleton, privateTypeEvalSingletonSelf)
+
+bool TypeEvalSingleton::isStack(QQuickItem *candidate)
+{
+    if (!candidate) {
+        return false;
+    }
+    QQmlEngine *engine = qmlEngine(candidate);
+    if (!engine) {
+        return false;
+    }
+
+    QObject *typeEval = privateTypeEvalSingletonSelf->m_instances.value(engine);
+
+    if (!typeEval) {
+        QQmlComponent component(engine);
+        component.setData(QByteArrayLiteral(R"(
+import QtQuick
+import QtQuick.Controls
+import org.kde.kirigami as Kirigami
+
+QtObject {
+    function isStack(obj) {
+        return (obj instanceof Kirigami.PageRow) || (obj instanceof StackView);
+    }
+})"),
+                          QUrl(QStringLiteral("pagestackattached.cpp")));
+
+        typeEval = component.create();
+        if (!typeEval) {
+            return false;
+        }
+        privateTypeEvalSingletonSelf->m_instances[engine] = typeEval;
+    }
+
+    QVariant retVal = false;
+    QMetaObject::invokeMethod(typeEval, "isStack", Q_RETURN_ARG(QVariant, retVal), Q_ARG(QVariant, QVariant::fromValue(candidate)));
+
+    return retVal.toBool();
+}
 
 PageStackAttached::PageStackAttached(QObject *parent)
     : QQuickAttachedPropertyPropagator(parent)
@@ -15,16 +76,15 @@ PageStackAttached::PageStackAttached(QObject *parent)
     m_buddyFor = qobject_cast<QQuickItem *>(parent);
 
     if (!m_buddyFor) {
-        qWarning(KirigamiLayoutsLog) << "PageStack must be attached to an Item";
+        qCDebug(KirigamiLayoutsLog) << "PageStack must be attached to an Item" << parent;
         return;
     }
 
     initialize();
 
-    if (QByteArray(m_buddyFor->metaObject()->className()).startsWith("PageRow_QMLTYPE_")) {
-        qWarning() << "found";
-        m_parentIsStack = true;
+    if (privateTypeEvalSingletonSelf->isStack(m_buddyFor)) {
         setPageStack(m_buddyFor);
+        m_parentIsStack = true;
     }
 }
 
@@ -35,12 +95,7 @@ QQuickItem *PageStackAttached::pageStack() const
 
 void PageStackAttached::setPageStack(QQuickItem *pageStack)
 {
-    if (m_parentIsStack || m_pageStack == pageStack) {
-        return;
-    }
-
-    if (!pageStack) {
-        qCWarning(KirigamiLayoutsLog) << "Trying to assign anything aside of a PageRow to PageStackAttached is not authorized.";
+    if (!pageStack || m_parentIsStack || m_pageStack == pageStack) {
         return;
     }
 
@@ -96,7 +151,6 @@ PageStackAttached *PageStackAttached::qmlAttachedProperties(QObject *object)
 void PageStackAttached::attachedParentChange(QQuickAttachedPropertyPropagator *newParent, QQuickAttachedPropertyPropagator *oldParent)
 {
     Q_UNUSED(oldParent);
-    qWarning() << newParent << oldParent;
     PageStackAttached *stackAttached = qobject_cast<PageStackAttached *>(newParent);
     if (stackAttached) {
         setPageStack(stackAttached->pageStack());
