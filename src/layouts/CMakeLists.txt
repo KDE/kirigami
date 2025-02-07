@@ -41,7 +41,7 @@ set_target_properties(KirigamiLayouts PROPERTIES
 
 target_include_directories(KirigamiLayouts PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/..)
 
-target_link_libraries(KirigamiLayouts PRIVATE Qt6::Quick KirigamiPlatform)
+target_link_libraries(KirigamiLayouts PRIVATE Qt6::Quick Qt6::QuickControls2 KirigamiPlatform)
 
 if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
     set(_extra_options DEBUGINFO)

@@ -4,7 +4,7 @@
 #pragma once
 
 #include <QJSValue>
-#include <QObject>
+#include <QQuickAttachedPropertyPropagator>
 #include <QQuickItem>
 #include <qqmlregistration.h>
 
@@ -23,14 +23,14 @@
  *
  * @since 6.10
  */
-class PageStackAttached : public QObject
+class PageStackAttached : public QQuickAttachedPropertyPropagator
 {
     Q_OBJECT
     QML_NAMED_ELEMENT(PageStack)
     QML_ATTACHED(PageStackAttached)
     QML_UNCREATABLE("")
 
-    Q_PROPERTY(QQuickItem *pageStack READ pageStack WRITE setPageStack NOTIFY pageStackChanged)
+    Q_PROPERTY(QQuickItem *pageStack READ pageStack NOTIFY pageStackChanged)
 
 public:
     explicit PageStackAttached(QObject *parent);
@@ -48,10 +48,14 @@ public:
 
     static PageStackAttached *qmlAttachedProperties(QObject *object);
 
+protected:
+    void attachedParentChange(QQuickAttachedPropertyPropagator *newParent, QQuickAttachedPropertyPropagator *oldParent) override;
+
 Q_SIGNALS:
     void pageStackChanged();
 
 private:
     QQuickItem *m_pageStack = nullptr;
     QQuickItem *m_buddyFor = nullptr;
+    bool m_parentIsStack = false;
 };
