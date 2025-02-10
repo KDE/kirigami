@@ -46,6 +46,8 @@ TestCase {
             property alias subStack: stackView
             QQC.StackView {
                 id: stackView
+                // FIXME: need to find a more reliable way to auto create those
+                property var _fixme: Kirigami.PageStack.pageStack
                 anchors.fill: parent
             }
         }
