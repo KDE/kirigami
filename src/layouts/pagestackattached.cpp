@@ -81,23 +81,20 @@ PageStackAttached::PageStackAttached(QObject *parent)
         return;
     }
 
-    initialize();
-
     if (privateTypeEvalSingletonSelf->isStack(m_buddyFor)) {
-        // initialize();
         setPageStack(m_buddyFor);
     } else if (!m_pageStack) {
         QQuickItem *candidate = m_buddyFor->parentItem();
         while (candidate) {
             if (privateTypeEvalSingletonSelf->isStack(candidate)) {
                 qmlAttachedPropertiesObject<PageStackAttached>(candidate, true);
-
                 break;
             }
             candidate = candidate->parentItem();
         }
-        initialize();
     }
+
+    initialize();
 }
 
 QQuickItem *PageStackAttached::pageStack() const
@@ -127,6 +124,7 @@ void PageStackAttached::propagatePageStack(QQuickItem *pageStack)
 
     if (!m_customStack) {
         m_pageStack = pageStack;
+        Q_EMIT pageStackChanged();
     }
 
     const auto stacks = attachedChildren();
@@ -179,8 +177,9 @@ void PageStackAttached::attachedParentChange(QQuickAttachedPropertyPropagator *n
 {
     Q_UNUSED(oldParent);
     PageStackAttached *stackAttached = qobject_cast<PageStackAttached *>(newParent);
+
     if (stackAttached) {
-        setPageStack(stackAttached->pageStack());
+        propagatePageStack(stackAttached->pageStack());
     }
 }
 

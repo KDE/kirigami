@@ -53,6 +53,7 @@ kirigami_add_tests(
     tst_overlayzstacking.qml
     tst_padding.qml
     tst_pagerow.qml
+    tst_pageStackAttached.qml
     tst_placeholdermessage.qml
     tst_sceneposition.qml
     tst_scrollablepage.qml
