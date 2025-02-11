@@ -24,7 +24,10 @@ public:
     {
         qDeleteAll(m_instances.values());
     }
+    static QObject *ensureTypeEval(QQmlEngine *engine);
     static bool isStack(QQuickItem *candidate);
+    static void push(QQuickItem *stack, const QVariant &page, const QVariant &properties);
+    void pop(QQuickItem *stack, const QVariant &page);
 
 private:
     QHash<QQmlEngine *, QObject *> m_instances;
@@ -32,16 +35,8 @@ private:
 
 Q_GLOBAL_STATIC(TypeEvalSingleton, privateTypeEvalSingletonSelf)
 
-bool TypeEvalSingleton::isStack(QQuickItem *candidate)
+QObject *TypeEvalSingleton::ensureTypeEval(QQmlEngine *engine)
 {
-    if (!candidate) {
-        return false;
-    }
-    QQmlEngine *engine = qmlEngine(candidate);
-    if (!engine) {
-        return false;
-    }
-
     QObject *typeEval = privateTypeEvalSingletonSelf->m_instances.value(engine);
 
     if (!typeEval) {
@@ -55,20 +50,74 @@ QtObject {
     function isStack(obj) {
         return (obj instanceof Kirigami.PageRow) || (obj instanceof StackView);
     }
+    function pushOnStackView(stack, page, properties) {
+        if (!stack instanceof StackView) return;
+        stack.push(page, properties);
+    }
+    function popFromStackView(stack, page) {
+        if (!stack instanceof StackView) return;
+        stack.pop(page);
+    }
 })"),
                           QUrl(QStringLiteral("pagestackattached.cpp")));
 
         typeEval = component.create();
         if (!typeEval) {
-            return false;
+            return nullptr;
         }
         privateTypeEvalSingletonSelf->m_instances[engine] = typeEval;
+    }
+
+    return typeEval;
+}
+
+bool TypeEvalSingleton::isStack(QQuickItem *candidate)
+{
+    if (!candidate) {
+        return false;
+    }
+    QQmlEngine *engine = qmlEngine(candidate);
+    if (!engine) {
+        return false;
+    }
+
+    QObject *typeEval = ensureTypeEval(qmlEngine(candidate));
+    if (!typeEval) {
+        return false;
     }
 
     QVariant retVal = false;
     QMetaObject::invokeMethod(typeEval, "isStack", Q_RETURN_ARG(QVariant, retVal), Q_ARG(QVariant, QVariant::fromValue(candidate)));
 
     return retVal.toBool();
+}
+
+void TypeEvalSingleton::push(QQuickItem *stack, const QVariant &page, const QVariant &properties)
+{
+    if (!stack) {
+        return;
+    }
+
+    QObject *typeEval = ensureTypeEval(qmlEngine(stack));
+    if (!typeEval) {
+        return;
+    }
+
+    QMetaObject::invokeMethod(typeEval, "pushOnStackView", QVariant::fromValue(stack), QVariant::fromValue(page), QVariant::fromValue(properties));
+}
+
+void TypeEvalSingleton::pop(QQuickItem *stack, const QVariant &page)
+{
+    if (!stack) {
+        return;
+    }
+
+    QObject *typeEval = ensureTypeEval(qmlEngine(stack));
+    if (!typeEval) {
+        return;
+    }
+
+    QMetaObject::invokeMethod(typeEval, "popFromStackView", QVariant::fromValue(stack), QVariant::fromValue(page));
 }
 
 PageStackAttached::PageStackAttached(QObject *parent)
@@ -139,7 +188,7 @@ void PageStackAttached::propagatePageStack(QQuickItem *pageStack)
 void PageStackAttached::push(const QVariant &page, const QVariant &properties)
 {
     if (!m_pageStack) {
-        qCFatal(KirigamiLayoutsLog) << "Pushing in an empty PageStackAttached";
+        qCWarning(KirigamiLayoutsLog) << "Pushing in an empty PageStackAttached";
         return;
     }
 
@@ -147,15 +196,51 @@ void PageStackAttached::push(const QVariant &page, const QVariant &properties)
     Q_ASSERT(metaObject);
 
     auto push = metaObject->method(metaObject->indexOfMethod("push(QVariant,QVariant)"));
+
+    if (!push.isValid()) {
+        // It's a StackView instead
+        push = metaObject->method(metaObject->indexOfMethod("push(QQmlV4FunctionPtr)"));
+        if (push.isValid()) {
+            privateTypeEvalSingletonSelf->push(m_pageStack, page, properties);
+            return;
+        }
+    }
+
     Q_ASSERT(push.isValid());
 
     push.invoke(m_pageStack, page, properties);
 }
 
+void PageStackAttached::pop(const QVariant &page)
+{
+    if (!m_pageStack) {
+        qCWarning(KirigamiLayoutsLog) << "Pushing in an empty PageStackAttached";
+        return;
+    }
+
+    auto metaObject = m_pageStack->metaObject();
+    Q_ASSERT(metaObject);
+
+    auto pop = metaObject->method(metaObject->indexOfMethod("pop(QVariant)"));
+
+    if (!pop.isValid()) {
+        // It's a StackView instead
+        pop = metaObject->method(metaObject->indexOfMethod("pop(QQmlV4FunctionPtr)"));
+        if (pop.isValid()) {
+            privateTypeEvalSingletonSelf->pop(m_pageStack, page);
+            return;
+        }
+    }
+
+    Q_ASSERT(pop.isValid());
+
+    pop.invoke(m_pageStack, page);
+}
+
 void PageStackAttached::clear()
 {
     if (!m_pageStack) {
-        qCFatal(KirigamiLayoutsLog) << "Clearing in an empty PageStackAttached";
+        qCWarning(KirigamiLayoutsLog) << "Clearing in an empty PageStackAttached";
         return;
     }
 

@@ -19,7 +19,7 @@
  *
  *     Button {
  *         text: "Push Page"
- *         onClicked: Kirigami.PageStack.pageStack.push(Qt.resolvedurl("AnotherPage"));
+ *         onClicked: Kirigami.PageStack.push(Qt.resolvedurl("AnotherPage"));
  *     }
  * }
  *
@@ -49,6 +49,10 @@ public:
     */
     QQuickItem *pageStack() const;
     void setPageStack(QQuickItem *pageStack);
+
+    Q_INVOKABLE void push(const QVariant &page, const QVariant &properties = QVariant());
+    Q_INVOKABLE void pop(const QVariant &page = QVariant());
+    Q_INVOKABLE void clear();
 
     static PageStackAttached *qmlAttachedProperties(QObject *object);
 
