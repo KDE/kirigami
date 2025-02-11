@@ -176,8 +176,23 @@ PageStackAttached *PageStackAttached::qmlAttachedProperties(QObject *object)
 void PageStackAttached::attachedParentChange(QQuickAttachedPropertyPropagator *newParent, QQuickAttachedPropertyPropagator *oldParent)
 {
     Q_UNUSED(oldParent);
-    PageStackAttached *stackAttached = qobject_cast<PageStackAttached *>(newParent);
 
+    QQuickItem *candidate = m_buddyFor;
+    while (candidate) {
+        // It might be that we have been reparented inside a StackView which doesn't
+        // have an attached property yet, so in this case it will need a
+        // manual check by looking into the parent chain
+        auto *attach = qmlAttachedPropertiesObject<PageStackAttached>(candidate, false);
+        if (attach && static_cast<PageStackAttached *>(attach)->m_customStack) {
+            break;
+        } else if (privateTypeEvalSingletonSelf->isStack(candidate)) {
+            propagatePageStack(candidate);
+            return;
+        }
+        candidate = candidate->parentItem();
+    }
+
+    PageStackAttached *stackAttached = qobject_cast<PageStackAttached *>(newParent);
     if (stackAttached) {
         propagatePageStack(stackAttached->pageStack());
     }

@@ -46,8 +46,6 @@ TestCase {
             property alias subStack: stackView
             QQC.StackView {
                 id: stackView
-                // FIXME: need to find a more reliable way to auto create those
-                property var _fixme: Kirigami.PageStack.pageStack
                 anchors.fill: parent
             }
         }
@@ -151,7 +149,32 @@ TestCase {
 
         compare(pageRowSecondPage.stack, mainWindow.pageStack)
 
-        // FIXME: this is still failing
+        // First we make sure the internal stack has an attached property created
+        verify(pageRowSecondPage.subStack.Kirigami.PageStack.pageStack)
+        pageRowSecondPage.subStack.push(pageRowFirstPage.innerRect)
+        compare(pageRowFirstPage.innerRect.parent, pageRowSecondPage.subStack)
+        compare(pageRowFirstPage.innerRect.stackFromChild, pageRowSecondPage.subStack);
+    }
+
+    function test_changeParent_attachedNotExisting() {
+        // Here will reparent to a stackview in a page which
+        // doesn't have a stackattached created yet
+        compare(mainWindow.pageStack.depth, 0)
+        mainWindow.pageStack.push(samplePage)
+        compare(mainWindow.pageStack.depth, 1)
+
+        let pageRowFirstPage = mainWindow.pageStack.items[0]
+
+        compare(pageRowFirstPage.outerStack, mainWindow.pageStack)
+        compare(pageRowFirstPage.innerRect.stackFromChild, mainWindow.pageStack)
+
+        mainWindow.pageStack.push(pageWithInnerStack)
+        compare(mainWindow.pageStack.depth, 2)
+
+        let pageRowSecondPage = mainWindow.pageStack.items[1]
+
+        compare(pageRowSecondPage.stack, mainWindow.pageStack)
+
         pageRowSecondPage.subStack.push(pageRowFirstPage.innerRect)
         compare(pageRowFirstPage.innerRect.parent, pageRowSecondPage.subStack)
         compare(pageRowFirstPage.innerRect.stackFromChild, pageRowSecondPage.subStack);
