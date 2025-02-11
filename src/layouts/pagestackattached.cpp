@@ -136,38 +136,6 @@ void PageStackAttached::propagatePageStack(QQuickItem *pageStack)
     }
 }
 
-void PageStackAttached::push(const QVariant &page, const QVariant &properties)
-{
-    if (!m_pageStack) {
-        qCFatal(KirigamiLayoutsLog) << "Pushing in an empty PageStackAttached";
-        return;
-    }
-
-    auto metaObject = m_pageStack->metaObject();
-    Q_ASSERT(metaObject);
-
-    auto push = metaObject->method(metaObject->indexOfMethod("push(QVariant,QVariant)"));
-    Q_ASSERT(push.isValid());
-
-    push.invoke(m_pageStack, page, properties);
-}
-
-void PageStackAttached::clear()
-{
-    if (!m_pageStack) {
-        qCFatal(KirigamiLayoutsLog) << "Clearing in an empty PageStackAttached";
-        return;
-    }
-
-    auto metaObject = m_pageStack->metaObject();
-    Q_ASSERT(metaObject);
-
-    auto clear = metaObject->method(metaObject->indexOfMethod("clear()"));
-    Q_ASSERT(clear.isValid());
-
-    clear.invoke(m_pageStack);
-}
-
 PageStackAttached *PageStackAttached::qmlAttachedProperties(QObject *object)
 {
     return new PageStackAttached(object);
