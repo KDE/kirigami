@@ -122,7 +122,7 @@ void PageStackAttached::propagatePageStack(QQuickItem *pageStack)
         return;
     }
 
-    if (!m_customStack) {
+    if (!m_customStack && m_pageStack != pageStack) {
         m_pageStack = pageStack;
         Q_EMIT pageStackChanged();
     }
