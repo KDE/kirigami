@@ -66,16 +66,10 @@ TestCase {
     }
 
     SignalSpy {
-        id: spyCurrentIndex
-        target: mainWindow.pageStack
-        signalName: "currentIndexChanged"
+        id: spyStackChanged
+        signalName: "pageStackChanged"
     }
 
-    SignalSpy {
-        id: spyActive
-        target: mainWindow
-        signalName: "activeChanged"
-    }
 
     function initTestCase() {
         mainWindow.show()
@@ -87,8 +81,7 @@ TestCase {
 
     function init() {
         mainWindow.pageStack.clear()
-        spyActive.clear()
-        spyCurrentIndex.clear()
+        spyStackChanged.clear()
     }
 
     function test_accessPageRow() {
@@ -149,9 +142,11 @@ TestCase {
 
         compare(pageRowSecondPage.stack, mainWindow.pageStack)
 
+        spyStackChanged.target = pageRowFirstPage.innerRect.Kirigami.PageStack
         // First we make sure the internal stack has an attached property created
         verify(pageRowSecondPage.subStack.Kirigami.PageStack.pageStack)
         pageRowSecondPage.subStack.push(pageRowFirstPage.innerRect)
+        tryCompare(spyStackChanged, "count", 1)
         compare(pageRowFirstPage.innerRect.parent, pageRowSecondPage.subStack)
         compare(pageRowFirstPage.innerRect.stackFromChild, pageRowSecondPage.subStack);
     }
@@ -175,7 +170,10 @@ TestCase {
 
         compare(pageRowSecondPage.stack, mainWindow.pageStack)
 
+        spyStackChanged.target = pageRowFirstPage.innerRect.Kirigami.PageStack
         pageRowSecondPage.subStack.push(pageRowFirstPage.innerRect)
+        tryCompare(spyStackChanged, "count", 1)
+
         compare(pageRowFirstPage.innerRect.parent, pageRowSecondPage.subStack)
         compare(pageRowFirstPage.innerRect.stackFromChild, pageRowSecondPage.subStack);
     }
