@@ -9,15 +9,17 @@
 #include <qqmlregistration.h>
 
 /**
- * This attached property contains the information for decorating a org::kde::kirigami::Page and
- * accessing the current org::kde::kirigami::PageRow.
+ * This attached property makes possible to access from anywhere the
+ * page stack this page was pushed into.
+ * It can be an instance of org::kde::kirigami::PageRow or
+ * a StackView from QtQuickControls
  *
  * Kirigami.Page {
  *     id: root
  *
  *     Button {
  *         text: "Push Page"
- *         onClicked: root.Kirigami.PageStack.push(Qt.resolvedurl("AnotherPage"));
+ *         onClicked: Kirigami.PageStack.pageStack.push(Qt.resolvedurl("AnotherPage"));
  *     }
  * }
  *
@@ -39,12 +41,14 @@ public:
         \qmlattachedproperty PageRow PageStack::pageStack
 
         This property holds the pageStack where this page was pushed.
+        It will point to the proper instance in the parent hyerarchy
+        and normally is not necessary to explicitly write it.
+        Write on this property only if it's desired this attached
+        property and those of all the children to point to a different
+        PageRow or StackView
     */
     QQuickItem *pageStack() const;
     void setPageStack(QQuickItem *pageStack);
-
-    Q_INVOKABLE void push(const QVariant &page, const QVariant &properties = {});
-    Q_INVOKABLE void clear();
 
     static PageStackAttached *qmlAttachedProperties(QObject *object);
 
