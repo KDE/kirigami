@@ -177,4 +177,78 @@ TestCase {
         compare(pageRowFirstPage.innerRect.parent, pageRowSecondPage.subStack)
         compare(pageRowFirstPage.innerRect.stackFromChild, pageRowSecondPage.subStack);
     }
+
+    function test_attachedPushPopOnPageRow() {
+        compare(mainWindow.pageStack.depth, 0)
+        mainWindow.pageStack.push(samplePage)
+        compare(mainWindow.pageStack.depth, 1)
+
+        let pageRowFirstPage = mainWindow.pageStack.items[0]
+        pageRowFirstPage.Kirigami.PageStack.push(samplePage);
+        compare(mainWindow.pageStack.depth, 2)
+
+        let pageRowSecondPage = mainWindow.pageStack.items[1]
+        pageRowSecondPage.innerRect.Kirigami.PageStack.push(samplePage)
+        compare(mainWindow.pageStack.depth, 3)
+
+        pageRowFirstPage.Kirigami.PageStack.pop(pageRowFirstPage)
+        compare(mainWindow.pageStack.depth, 1)
+    }
+
+    function test_attachedPushPopOnStackView() {
+        compare(mainWindow.pageStack.depth, 0)
+        mainWindow.pageStack.push(pageWithInnerStack)
+        compare(mainWindow.pageStack.depth, 1)
+
+        let pageRowFirstPage = mainWindow.pageStack.items[0]
+        pageRowFirstPage.subStack.push(samplePage)
+        compare(pageRowFirstPage.subStack.depth, 1)
+
+        let subStackFirstPage = pageRowFirstPage.subStack.currentItem
+
+        subStackFirstPage.Kirigami.PageStack.push(samplePage)
+        compare(pageRowFirstPage.subStack.depth, 2)
+        subStackFirstPage.Kirigami.PageStack.push(samplePage)
+        compare(pageRowFirstPage.subStack.depth, 3)
+
+        subStackFirstPage.Kirigami.PageStack.pop(subStackFirstPage)
+        compare(pageRowFirstPage.subStack.depth, 1)
+    }
+
+    function test_attachedClearOnPageRow() {
+        compare(mainWindow.pageStack.depth, 0)
+        mainWindow.pageStack.push(samplePage)
+        compare(mainWindow.pageStack.depth, 1)
+
+        let pageRowFirstPage = mainWindow.pageStack.items[0]
+        pageRowFirstPage.Kirigami.PageStack.push(samplePage);
+        compare(mainWindow.pageStack.depth, 2)
+
+        let pageRowSecondPage = mainWindow.pageStack.items[1]
+        pageRowSecondPage.innerRect.Kirigami.PageStack.push(samplePage)
+        compare(mainWindow.pageStack.depth, 3)
+
+        pageRowFirstPage.Kirigami.PageStack.clear()
+        compare(mainWindow.pageStack.depth, 0)
+    }
+
+    function test_attachedClearOnStackView() {
+        compare(mainWindow.pageStack.depth, 0)
+        mainWindow.pageStack.push(pageWithInnerStack)
+        compare(mainWindow.pageStack.depth, 1)
+
+        let pageRowFirstPage = mainWindow.pageStack.items[0]
+        pageRowFirstPage.subStack.push(samplePage)
+        compare(pageRowFirstPage.subStack.depth, 1)
+
+        let subStackFirstPage = pageRowFirstPage.subStack.currentItem
+
+        subStackFirstPage.Kirigami.PageStack.push(samplePage)
+        compare(pageRowFirstPage.subStack.depth, 2)
+        subStackFirstPage.Kirigami.PageStack.push(samplePage)
+        compare(pageRowFirstPage.subStack.depth, 3)
+
+        subStackFirstPage.Kirigami.PageStack.clear()
+        compare(pageRowFirstPage.subStack.depth, 0)
+    }
 }
