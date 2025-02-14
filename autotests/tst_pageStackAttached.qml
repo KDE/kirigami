@@ -71,20 +71,20 @@ TestCase {
     }
 
 
-    function initTestCase() {
+    function initTestCase(): void {
         mainWindow.show()
     }
 
-    function cleanupTestCase() {
+    function cleanupTestCase(): void {
         mainWindow.close()
     }
 
-    function init() {
+    function init(): void {
         mainWindow.pageStack.clear()
         spyStackChanged.clear()
     }
 
-    function test_accessPageRow() {
+    function test_accessPageRow(): void {
         compare(mainWindow.pageStack.depth, 0)
         mainWindow.pageStack.push(samplePage)
         compare(mainWindow.pageStack.depth, 1)
@@ -95,7 +95,7 @@ TestCase {
         compare(pageRowFirstPage.innerRect.stackFromChild, mainWindow.pageStack)
     }
 
-    function test_accessInnerStack() {
+    function test_accessInnerStack(): void {
         compare(mainWindow.pageStack.depth, 0)
         mainWindow.pageStack.push(pageWithInnerStack)
         compare(mainWindow.pageStack.depth, 1)
@@ -109,7 +109,7 @@ TestCase {
         compare(pageRowFirstPage.subStack.currentItem.innerRect.stackFromChild, pageRowFirstPage.subStack)
     }
 
-    function test_accessLayersStack() {
+    function test_accessLayersStack(): void {
         compare(mainWindow.pageStack.depth, 0)
         mainWindow.pageStack.push(samplePage)
         compare(mainWindow.pageStack.depth, 1)
@@ -125,7 +125,7 @@ TestCase {
         compare(layer1Page.innerRect.stackFromChild, mainWindow.pageStack.layers)
     }
 
-    function test_changeParent() {
+    function test_changeParent(): void {
         compare(mainWindow.pageStack.depth, 0)
         mainWindow.pageStack.push(samplePage)
         compare(mainWindow.pageStack.depth, 1)
@@ -151,7 +151,7 @@ TestCase {
         compare(pageRowFirstPage.innerRect.stackFromChild, pageRowSecondPage.subStack);
     }
 
-    function test_changeParent_attachedNotExisting() {
+    function test_changeParent_attachedNotExisting(): void {
         // Here will reparent to a stackview in a page which
         // doesn't have a stackattached created yet
         compare(mainWindow.pageStack.depth, 0)
@@ -178,7 +178,7 @@ TestCase {
         compare(pageRowFirstPage.innerRect.stackFromChild, pageRowSecondPage.subStack);
     }
 
-    function test_attachedPushPopOnPageRow() {
+    function test_attachedPushPopOnPageRow(): void {
         compare(mainWindow.pageStack.depth, 0)
         mainWindow.pageStack.push(samplePage)
         compare(mainWindow.pageStack.depth, 1)
@@ -195,7 +195,7 @@ TestCase {
         compare(mainWindow.pageStack.depth, 1)
     }
 
-    function test_attachedPushPopOnStackView() {
+    function test_attachedPushPopOnStackView(): void {
         compare(mainWindow.pageStack.depth, 0)
         mainWindow.pageStack.push(pageWithInnerStack)
         compare(mainWindow.pageStack.depth, 1)
@@ -215,7 +215,7 @@ TestCase {
         compare(pageRowFirstPage.subStack.depth, 1)
     }
 
-    function test_attachedClearOnPageRow() {
+    function test_attachedClearOnPageRow(): void {
         compare(mainWindow.pageStack.depth, 0)
         mainWindow.pageStack.push(samplePage)
         compare(mainWindow.pageStack.depth, 1)
@@ -232,7 +232,7 @@ TestCase {
         compare(mainWindow.pageStack.depth, 0)
     }
 
-    function test_attachedClearOnStackView() {
+    function test_attachedClearOnStackView(): void {
         compare(mainWindow.pageStack.depth, 0)
         mainWindow.pageStack.push(pageWithInnerStack)
         compare(mainWindow.pageStack.depth, 1)
