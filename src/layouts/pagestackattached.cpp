@@ -47,14 +47,14 @@ import QtQuick.Controls
 import org.kde.kirigami as Kirigami
 
 QtObject {
-    function isStack(obj) {
+    function isStack(obj): bool {
         return (obj instanceof Kirigami.PageRow) || (obj instanceof StackView);
     }
-    function pushOnStackView(stack, page, properties) {
+    function pushOnStackView(stack, page, properties): void {
         if (!stack instanceof StackView) return;
         stack.push(page, properties);
     }
-    function popFromStackView(stack, page) {
+    function popFromStackView(stack, page): void {
         if (!stack instanceof StackView) return;
         stack.pop(page);
     }
