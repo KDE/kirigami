@@ -474,6 +474,11 @@ qreal ContentItem::childWidth(QQuickItem *child)
         return qRound(parentItem()->width());
 
     } else if (attached->fillWidth()) {
+        if (m_view->count() == 1) {
+            // single column
+            return qRound(parentItem()->width());
+        }
+
         return qRound(qBound(m_columnWidth, (parentItem()->width() - attached->reservedSpace()), std::max(m_columnWidth, parentItem()->width())));
 
     } else if (m_columnResizeMode == ColumnView::FixedColumns) {
