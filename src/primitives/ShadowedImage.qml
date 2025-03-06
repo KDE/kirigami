@@ -67,11 +67,10 @@ Item {
     property alias radius: shadowRectangle.radius
 
     /*!
-      TODO qdoc
-      \qmlproperty qreal ShadowedImage::shadow.size
-      \qmlproperty qreal ShadowedImage::shadow.size
-      \qmlproperty qreal ShadowedImage::shadow.size
-      \qmlproperty qreal ShadowedImage::shadow.size
+      \qmlproperty real ShadowedImage::shadow.size
+      \qmlproperty real ShadowedImage::shadow.xOffset
+      \qmlproperty real ShadowedImage::shadow.yOffset
+      \qmlproperty real ShadowedImage::shadow.color
 
       \brief This property holds shadow's properties group.
       \sa ShadowedRectangle::shadow
