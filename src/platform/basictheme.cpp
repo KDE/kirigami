@@ -46,20 +46,25 @@ BasicThemeDefinition &BasicThemeInstance::themeDefinition(QQmlEngine *engine)
         return *m_themeDefinition;
     }
 
-    auto themeUrl = StyleSelector::componentUrl(QStringLiteral("Theme.qml"));
-    QQmlComponent component(engine);
-    component.loadUrl(themeUrl);
-
-    if (auto themeDefinition = qobject_cast<BasicThemeDefinition *>(component.create())) {
-        m_themeDefinition.reset(themeDefinition);
-    } else {
-        const auto errors = component.errors();
-        for (auto error : errors) {
-            qCWarning(KirigamiPlatform) << error.toString();
-        }
-
-        qCWarning(KirigamiPlatform) << "Invalid Theme file, using default Basic theme.";
+    if (!engine) {
+        qCWarning(KirigamiPlatform) << "No QML engine found, using default Basic theme.";
         m_themeDefinition = std::make_unique<BasicThemeDefinition>();
+    } else {
+        auto themeUrl = StyleSelector::componentUrl(QStringLiteral("Theme.qml"));
+        QQmlComponent component(engine);
+        component.loadUrl(themeUrl);
+
+        if (auto themeDefinition = qobject_cast<BasicThemeDefinition *>(component.create())) {
+            m_themeDefinition.reset(themeDefinition);
+        } else {
+            const auto errors = component.errors();
+            for (auto error : errors) {
+                qCWarning(KirigamiPlatform) << error.toString();
+            }
+
+            qCWarning(KirigamiPlatform) << "Invalid Theme file, using default Basic theme.";
+            m_themeDefinition = std::make_unique<BasicThemeDefinition>();
+        }
     }
 
     connect(m_themeDefinition.get(), &BasicThemeDefinition::changed, this, &BasicThemeInstance::onDefinitionChanged);
