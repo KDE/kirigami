@@ -278,7 +278,7 @@ Kirigami.OverlayDrawer {
     }
 
     //BEGIN FUNCTIONS
-    /**
+    /*!
        \brief This method checks whether a particular drawer entry is in view, and scrolls
        the drawer to center the item if it is not.
 

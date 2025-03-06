@@ -27,7 +27,7 @@ Kirigami.LinkButton {
      */
     property string url
 
-    /**
+    /*!
        This property holds whether the url is an external link.
 
        External links will have a small icon on their right to show that the link goes to an external website.

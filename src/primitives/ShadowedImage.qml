@@ -135,7 +135,7 @@ Item {
      */
     property alias sourceSize: image.sourceSize
 
-    /**
+    /*!
        \brief This property holds the status of image loading.
        \sa QtQuick.Image::status
        \since 6.5
