@@ -45,22 +45,26 @@ Kirigami.AbstractCard {
     property list<T.Action> actions
 
     /*!
+      \qmlproperty url Card::banner.source
+      \qmlproperty string Card::banner.titleIcon
+      \qmlproperty string Card::banner.title
+      \qmlproperty Qt.Alignment Card::banner.titleAlignment
+      \qmlproperty int Card::banner.titleLevel
+      \qmlproperty QtQuick.Text.wrapMode Card::banner.titleWrapMode
+
       \brief This grouped property controls the banner image present in the header.
 
-      This grouped property has the following sub-properties:
-      \list
-      \li source: url: The source for the image. It understands any URL valid for an Image component.
-      \li titleIcon: string: The optional icon to put in the banner, either a freedesktop-compatible
-      icon name (recommended) or any URL supported by QtQuick.Image.
-      \li title: string: The title for the banner, shown as contrasting text over the image.
-      \li titleAlignment: Qt::Alignment: The alignment of the title inside the image.
-      default: \c {Qt.AlignTop | Qt.AlignLeft}
-      \li titleLevel: int: The Kirigami.Heading level for the title, which controls the font size.
-      default: \c 1, which is the largest size.
-      \li titleWrapMode: QtQuick.Text::wrapMode: Whether the header text should be able to wrap.
-      default: \c Text.NoWrap
-
       It also has the full set of properties that QtQuick.Image has, such as sourceSize and fillMode.
+
+      \list
+      \li source: The source for the image. It understands any URL valid for an Image component.
+      \li titleIcon: The optional icon to put in the banner, either a freedesktop-compatible
+      icon name (recommended) or any URL supported by QtQuick.Image.
+      \li title: The title for the banner, shown as contrasting text over the image.
+      \li titleAlignment: The alignment of the title inside the image. Default: \c {Qt.AlignTop | Qt.AlignLeft}.
+      \li titleLevel: The Kirigami.Heading level for the title, ranging from 1 (big) to 5 (small). Default: \c 1.
+      \li titleWrapMode: Whether the header text should be able to wrap. Default: \c Text.NoWrap.
+      \endlist
 
      */
     readonly property alias banner: bannerImage
