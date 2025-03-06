@@ -78,15 +78,18 @@ Item {
     property alias shadow: shadowRectangle.shadow
 
     /*!
-     * TODO qdoc
+      \qmlproperty real ShadowedImage::border.width
+      \qmlproperty real ShadowedImage::border.color
       \brief This propery holds the border's properties of the image.
       \sa ShadowedRectangle::border
      */
     property alias border: shadowRectangle.border
 
     /*!
-     * TODO qdoc
-      \qmlproperty ShadowedRectangle::CornersGroup corners
+      \qmlproperty real ShadowedImage::corners.topLeftRadius
+      \qmlproperty real ShadowedImage::corners.topRightRadius
+      \qmlproperty real ShadowedImage::corners.bottomLeftRadius
+      \qmlproperty real ShadowedImage::corners.bottomRightRadius
       \brief This propery holds the corner radius properties of the image.
       \sa ShadowedRectangle::corners
      */
