@@ -8,8 +8,6 @@
 
     Kirigami works on a variety of platforms, such as \l {https://plasma-mobile.org/} {Plasma Mobile}, Desktop Linux, Android, MacOS, and Windows.
 
-    It was introduced in \l {https://kde.org/announcements/frameworks/5/5.37.0/} {KDE Frameworks 5.37} as a \l {https://api.kde.org/frameworks/index.html} {Tier-1 KDE Framework}.
-
     A tutorial for Kirigami is available on the \l {https://develop.kde.org/docs/getting-started/kirigami/} {KDE Developer platform}.
 
     A list of additional QML learning resources is available in the \l {https://community.kde.org/Get_Involved/development/Learn#QtQuick/QML} {Community Wiki}. If you are not familiar with QML at all, the \l {https://www.qt.io/product/qt6/qml-book} {QML book} should be a good head start.
