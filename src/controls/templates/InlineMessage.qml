@@ -6,6 +6,7 @@
  */
 
 import QtQuick
+import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
@@ -190,13 +191,14 @@ T.Control {
         height = implicitHeight;
     }
 
-    contentItem: Item {
+    contentItem: GridLayout {
         id: contentLayout
+
+        readonly property bool multiLine: label.contentWidth > label.width || root.actions.length > 1 || actionsLayout.maximumContentWidth < actionsLayout.implicitWidth
 
         // Used to defer opacity animation until we know if InlineMessage was
         // initialized visible.
         property bool complete: false
-
         Behavior on opacity {
             enabled: root.visible && contentLayout.complete
 
@@ -206,59 +208,24 @@ T.Control {
             }
         }
 
-        implicitHeight: {
-            if (atBottom) {
-                return label.implicitHeight + actionsLayout.implicitHeight + actionsLayout.anchors.topMargin
-            } else {
-                return Math.max(icon.implicitHeight, label.implicitHeight, closeButton.implicitHeight, actionsLayout.implicitHeight)
-            }
-        }
-
         Accessible.ignored: true
 
-        readonly property real remainingWidth: width - (
-            icon.width
-            + label.anchors.leftMargin + label.implicitWidth + label.anchors.rightMargin
-            + (root.showCloseButton ? closeButton.width : 0)
-        )
-        readonly property bool multiline: remainingWidth <= 0 || atBottom
+        rows: contentLayout.multiLine ? 2 : 1
+        columns: contentLayout.multiLine ? (root.showCloseButton ? 3 : 2) : -1
 
-        readonly property bool atBottom: (root.actions.length > 0) && (label.lineCount > 1 || actionsLayout.implicitWidth > remainingWidth)
+        columnSpacing: Kirigami.Units.smallSpacing
+        rowSpacing: Kirigami.Units.largeSpacing
 
         Kirigami.Icon {
             id: icon
 
-            width: Kirigami.Units.iconSizes.smallMedium
-            height: Kirigami.Units.iconSizes.smallMedium
-
-            anchors {
-                left: parent.left
-                leftMargin: Kirigami.Units.smallSpacing
-                topMargin: Kirigami.Units.smallSpacing
-            }
-
-            states: [
-                State {
-                    name: "multi-line"
-                    when: contentLayout.atBottom || label.height > icon.height * 1.7
-                    AnchorChanges {
-                        target: icon
-                        anchors.top: icon.parent.top
-                        anchors.verticalCenter: undefined
-                    }
-                },
-                // States are evaluated in the order they are declared.
-                // This is a fallback state.
-                State {
-                    name: "single-line"
-                    when: true
-                    AnchorChanges {
-                        target: icon
-                        anchors.top: undefined
-                        anchors.verticalCenter: parent.verticalCenter
-                    }
-                }
-            ]
+            Layout.preferredWidth: Kirigami.Units.iconSizes.smallMedium
+            Layout.preferredHeight: Kirigami.Units.iconSizes.smallMedium
+            Layout.leftMargin: Kirigami.Units.smallSpacing
+            Layout.rightMargin: Kirigami.Units.smallSpacing
+            Layout.topMargin: contentLayout.multiLine ? 0 : Kirigami.Units.smallSpacing
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+            Layout.rowSpan: contentLayout.multiLine || label.height > icon.height * 1.7 ? 2 : 1
 
             source: {
                 if (root.icon.name) {
@@ -268,14 +235,14 @@ T.Control {
                 }
 
                 switch (root.type) {
-                case Kirigami.MessageType.Positive:
-                    return "emblem-success";
-                case Kirigami.MessageType.Warning:
-                    return "emblem-warning";
-                case Kirigami.MessageType.Error:
-                    return "emblem-error";
-                default:
-                    return "emblem-information";
+                    case Kirigami.MessageType.Positive:
+                        return "emblem-success";
+                    case Kirigami.MessageType.Warning:
+                        return "emblem-warning";
+                    case Kirigami.MessageType.Error:
+                        return "emblem-error";
+                    default:
+                        return "emblem-information";
                 }
             }
 
@@ -284,28 +251,23 @@ T.Control {
             Accessible.ignored: !root.visible
             Accessible.name: {
                 switch (root.type) {
-                case Kirigami.MessageType.Positive:
-                    return qsTr("Success");
-                case Kirigami.MessageType.Warning:
-                    return qsTr("Warning");
-                case Kirigami.MessageType.Error:
-                    return qsTr("Error");
-                default:
-                    return qsTr("Note");
+                    case Kirigami.MessageType.Positive:
+                        return qsTr("Success");
+                    case Kirigami.MessageType.Warning:
+                        return qsTr("Warning");
+                    case Kirigami.MessageType.Error:
+                        return qsTr("Error");
+                    default:
+                        return qsTr("Note");
                 }
-             }
+            }
         }
 
         Kirigami.SelectableLabel {
             id: label
 
-            anchors {
-                left: icon.right
-                leftMargin: Kirigami.Units.largeSpacing
-                right: root.showCloseButton ? closeButton.left : parent.right
-                rightMargin: root.showCloseButton ? Kirigami.Units.smallSpacing : 0
-                top: parent.top
-            }
+            Layout.fillWidth: true
+            Layout.maximumWidth: contentLayout.multiLine ? -1 : labelMetrics.width + contentLayout.columnSpacing
 
             color: Kirigami.Theme.textColor
             wrapMode: Text.WordWrap
@@ -313,34 +275,6 @@ T.Control {
             text: root.text
 
             verticalAlignment: Text.AlignVCenter
-
-            // QTBUG-117667 TextEdit (super-type of SelectableLabel) needs
-            // very specific state-management trick so it doesn't get stuck.
-            // State names serve purely as a description.
-            states: [
-                State {
-                    name: "multi-line"
-                    when: contentLayout.multiline
-                    AnchorChanges {
-                        target: label
-                        anchors.bottom: undefined
-                    }
-                    PropertyChanges {
-                        target: label
-                        height: label.implicitHeight
-                    }
-                },
-                // States are evaluated in the order they are declared.
-                // This is a fallback state.
-                State {
-                    name: "single-line"
-                    when: true
-                    AnchorChanges {
-                        target: label
-                        anchors.bottom: label.parent.bottom
-                    }
-                }
-            ]
 
             onLinkHovered: link => root.linkHovered(link)
             onLinkActivated: link => root.linkActivated(link)
@@ -351,19 +285,14 @@ T.Control {
         Kirigami.ActionToolBar {
             id: actionsLayout
 
+            Layout.fillWidth: true
+            Layout.alignment: Qt.AlignVCenter
+
             flat: false
             actions: root.actions
             visible: root.actions.length > 0
             Accessible.ignored: !visible || !root.visible
             alignment: Qt.AlignRight
-
-            anchors {
-                left: parent.left
-                top: contentLayout.atBottom ? label.bottom : parent.top
-                topMargin: contentLayout.atBottom ? Kirigami.Units.largeSpacing : 0
-                right: (!contentLayout.atBottom && root.showCloseButton) ? closeButton.left : parent.right
-                rightMargin: !contentLayout.atBottom && root.showCloseButton ? Kirigami.Units.smallSpacing : 0
-            }
         }
 
         QQC2.ToolButton {
@@ -371,31 +300,8 @@ T.Control {
 
             visible: root.showCloseButton
 
-            anchors.right: parent.right
-
-            // Incompatible anchors need to be evaluated in a given order,
-            // which simple declarative bindings cannot assure
-            states: [
-                State {
-                    name: "onTop"
-                    when: contentLayout.atBottom
-                    AnchorChanges {
-                        target: closeButton
-                        anchors.top: parent.top
-                        anchors.verticalCenter: undefined
-                    }
-                } ,
-                State {
-                    name: "centered"
-                    AnchorChanges {
-                        target: closeButton
-                        anchors.top: undefined
-                        anchors.verticalCenter: parent.verticalCenter
-                    }
-                }
-            ]
-
-            height: contentLayout.atBottom ? implicitHeight : implicitHeight
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+            Layout.rowSpan: contentLayout.multiLine || label.height > icon.height * 1.7 ? 2 : 1
 
             text: qsTr("Close")
             display: QQC2.ToolButton.IconOnly
@@ -407,5 +313,10 @@ T.Control {
         }
 
         Component.onCompleted: complete = true
+    }
+
+    TextMetrics {
+        id: labelMetrics
+        text: root.text
     }
 }
