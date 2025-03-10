@@ -296,25 +296,6 @@ T.Control {
              }
         }
 
-        // Has to be rendered first, underneath the label, so it doesn't steal hover events
-        Kirigami.ActionToolBar {
-            id: actionsLayout
-
-            flat: false
-            actions: root.actions
-            visible: root.actions.length > 0
-            Accessible.ignored: !visible || !root.visible
-            alignment: Qt.AlignRight
-
-            anchors {
-                left: parent.left
-                top: contentLayout.atBottom ? label.bottom : parent.top
-                topMargin: contentLayout.atBottom ? Kirigami.Units.largeSpacing : 0
-                right: (!contentLayout.atBottom && root.showCloseButton) ? closeButton.left : parent.right
-                rightMargin: !contentLayout.atBottom && root.showCloseButton ? Kirigami.Units.smallSpacing : 0
-            }
-        }
-
         Kirigami.SelectableLabel {
             id: label
 
@@ -365,6 +346,24 @@ T.Control {
             onLinkActivated: link => root.linkActivated(link)
 
             Accessible.ignored: !root.visible
+        }
+
+        Kirigami.ActionToolBar {
+            id: actionsLayout
+
+            flat: false
+            actions: root.actions
+            visible: root.actions.length > 0
+            Accessible.ignored: !visible || !root.visible
+            alignment: Qt.AlignRight
+
+            anchors {
+                left: parent.left
+                top: contentLayout.atBottom ? label.bottom : parent.top
+                topMargin: contentLayout.atBottom ? Kirigami.Units.largeSpacing : 0
+                right: (!contentLayout.atBottom && root.showCloseButton) ? closeButton.left : parent.right
+                rightMargin: !contentLayout.atBottom && root.showCloseButton ? Kirigami.Units.smallSpacing : 0
+            }
         }
 
         QQC2.ToolButton {
