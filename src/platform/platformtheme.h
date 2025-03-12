@@ -205,6 +205,8 @@ public:
     enum ColorSet {
         /** Color set for item views, usually the lightest of all */
         View = 0,
+        /** Color set for secondary view/sidebar */
+        Sidebar,
         /** Default Color set for windows and "chrome" areas */
         Window,
         /** Color set used by buttons */
