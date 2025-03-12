@@ -94,8 +94,8 @@ T.TabButton {
 
     readonly property color __pressedColor: Qt.alpha(Kirigami.Theme.highlightColor, 0.3)
     readonly property color __hoverSelectColor: Qt.alpha(Kirigami.Theme.highlightColor, 0.2)
-    readonly property color __checkedBorderColor: Qt.alpha(Kirigami.Theme.highlightColor, 0.7)
-    readonly property color __pressedBorderColor: Qt.alpha(Kirigami.Theme.highlightColor, 0.9)
+    readonly property color __borderColor: Kirigami.Theme.highlightColor
+    readonly property color __selectedOutlineBorderColor: Qt.alpha(__borderColor, 0.5)
 
     readonly property real __verticalMargins: (display === T.AbstractButton.TextBesideIcon) ? Kirigami.Units.largeSpacing : 0
 
@@ -133,7 +133,21 @@ T.TabButton {
 
         color: "transparent"
 
+        // Outline for keyboard navigation
         Rectangle {
+            id: outline
+            anchors.fill: buttonBackground
+            anchors.margins: -2 // Needs to lie outside of the button border, and not overlap into the button
+
+            radius: Kirigami.Units.cornerRadius
+            color: 'transparent'
+
+            border.color: control.visualFocus ? control.__selectedOutlineBorderColor : "transparent"
+            border.width: 3
+        }
+
+        Rectangle {
+            id: buttonBackground
             width: parent.width - Kirigami.Units.largeSpacing
             height: parent.height - Kirigami.Units.largeSpacing
             anchors.centerIn: parent
@@ -141,7 +155,7 @@ T.TabButton {
             radius: Kirigami.Units.cornerRadius
             color: control.down ? control.__pressedColor : (control.checked || control.hovered ? control.__hoverSelectColor : "transparent")
 
-            border.color: control.visualFocus ? control.__checkedBorderColor : (control.down ? control.__pressedBorderColor : color)
+            border.color: (control.checked || control.down) ? control.__borderColor : color
             border.width: 1
 
             Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration } }
