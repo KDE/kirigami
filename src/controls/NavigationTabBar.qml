@@ -215,7 +215,7 @@ QQC2.ToolBar {
     // Using Math.round() on horizontalPadding can cause the contentItem to jitter left and right when resizing the window.
     horizontalPadding: Math.floor(Math.max(0, width - root.maximumContentWidth) / 2)
 
-    contentWidth: Math.ceil(Math.min(root.availableWidth, root.maximumContentWidth))
+    contentWidth: root.maximumContentWidth
     implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset, contentWidth + leftPadding + rightPadding)
     implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset, contentHeight + topPadding + bottomPadding)
     position: {
