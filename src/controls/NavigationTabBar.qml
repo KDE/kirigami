@@ -216,7 +216,7 @@ QQC2.ToolBar {
     horizontalPadding: Math.floor(Math.max(0, width - root.maximumContentWidth) / 2)
 
     contentWidth: root.maximumContentWidth
-    implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset, contentWidth + leftPadding + rightPadding)
+    implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset, contentWidth)
     implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset, contentHeight + topPadding + bottomPadding)
     position: {
         if (QQC2.ApplicationWindow.window?.footer === root) {
