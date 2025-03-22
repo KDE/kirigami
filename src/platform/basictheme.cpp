@@ -110,6 +110,13 @@ void BasicTheme::sync()
         setHoverColor(tint(definition.viewHoverColor));
         setFocusColor(tint(definition.viewFocusColor));
         break;
+    case BasicTheme::Sidebar:
+        setTextColor(tint(definition.sidebarTextColor));
+        setBackgroundColor(tint(definition.sidebarBackgroundColor));
+        setAlternateBackgroundColor(tint(definition.sidebarAlternateBackgroundColor));
+        setHoverColor(tint(definition.sidebarHoverColor));
+        setFocusColor(tint(definition.sidebarFocusColor));
+        break;
     case BasicTheme::Selection:
         setTextColor(tint(definition.selectionTextColor));
         setBackgroundColor(tint(definition.selectionBackgroundColor));

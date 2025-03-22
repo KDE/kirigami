@@ -46,6 +46,12 @@ Kirigami.BasicThemeDefinition {
     viewHoverColor: Material.listHighlightColor
     viewFocusColor: Material.listHighlightColor
 
+    sidebarTextColor: Material.foreground
+    sidebarBackgroundColor: Material.background
+    sidebarAlternateBackgroundColor: Qt.darker(Material.background, 1.05)
+    sidebarHoverColor: Material.buttonColor(Material.theme, Material.background, Material.accent, true, false, true, false)
+    sidebarFocusColor: Material.buttonColor(Material.theme, Material.background, Material.accent, true, false, true, false)
+
     selectionTextColor: Material.primaryHighlightedTextColor
     selectionBackgroundColor: Material.textSelectionColor
     selectionAlternateBackgroundColor: Qt.darker(Material.textSelectionColor, 1.05)
@@ -83,14 +89,14 @@ Kirigami.BasicThemeDefinition {
     onSync: object => {
         //TODO: actually check if it's a dark or light color
         if (object.Kirigami.Theme.colorSet === Kirigami.Theme.Complementary) {
-            object.Material.theme = Material.Dark
+            object.Material.theme = Material.Dark;
         } else {
-            object.Material.theme = Material.Light
+            object.Material.theme = Material.Light;
         }
 
-        object.Material.foreground = object.Kirigami.Theme.textColor
-        object.Material.background = object.Kirigami.Theme.backgroundColor
-        object.Material.primary = object.Kirigami.Theme.highlightColor
-        object.Material.accent = object.Kirigami.Theme.highlightColor
+        object.Material.foreground = object.Kirigami.Theme.textColor;
+        object.Material.background = object.Kirigami.Theme.backgroundColor;
+        object.Material.primary = object.Kirigami.Theme.highlightColor;
+        object.Material.accent = object.Kirigami.Theme.highlightColor;
     }
 }

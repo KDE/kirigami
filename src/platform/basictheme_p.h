@@ -58,6 +58,12 @@ class KIRIGAMIPLATFORM_EXPORT BasicThemeDefinition : public QObject
     Q_PROPERTY(QColor viewHoverColor MEMBER viewHoverColor NOTIFY changed FINAL)
     Q_PROPERTY(QColor viewFocusColor MEMBER viewFocusColor NOTIFY changed FINAL)
 
+    Q_PROPERTY(QColor sidebarTextColor MEMBER sidebarTextColor NOTIFY changed FINAL)
+    Q_PROPERTY(QColor sidebarBackgroundColor MEMBER sidebarBackgroundColor NOTIFY changed FINAL)
+    Q_PROPERTY(QColor sidebarAlternateBackgroundColor MEMBER sidebarAlternateBackgroundColor NOTIFY changed FINAL)
+    Q_PROPERTY(QColor sidebarHoverColor MEMBER sidebarHoverColor NOTIFY changed FINAL)
+    Q_PROPERTY(QColor sidebarFocusColor MEMBER sidebarFocusColor NOTIFY changed FINAL)
+
     Q_PROPERTY(QColor selectionTextColor MEMBER selectionTextColor NOTIFY changed FINAL)
     Q_PROPERTY(QColor selectionBackgroundColor MEMBER selectionBackgroundColor NOTIFY changed FINAL)
     Q_PROPERTY(QColor selectionAlternateBackgroundColor MEMBER selectionAlternateBackgroundColor NOTIFY changed FINAL)
@@ -125,6 +131,12 @@ public:
     QColor viewAlternateBackgroundColor{0xeff0f1};
     QColor viewHoverColor{0x2196F3};
     QColor viewFocusColor{0x2196F3};
+
+    QColor sidebarTextColor{0x31363b};
+    QColor sidebarBackgroundColor{0xfcfcfc};
+    QColor sidebarAlternateBackgroundColor{0xeff0f1};
+    QColor sidebarHoverColor{0x2196F3};
+    QColor sidebarFocusColor{0x2196F3};
 
     QColor selectionTextColor{0xeff0fa};
     QColor selectionBackgroundColor{0x2196F3};

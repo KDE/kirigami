@@ -42,6 +42,12 @@ Kirigami.BasicThemeDefinition {
     viewHoverColor: palette.highlight
     viewFocusColor: palette.highlight
 
+    sidebarTextColor: palette.text
+    sidebarBackgroundColor: palette.window
+    sidebarAlternateBackgroundColor: Qt.darker(palette.window, 1.05)
+    sidebarHoverColor: palette.highlight
+    sidebarFocusColor: palette.highlight
+
     selectionTextColor: palette.highlightedText
     selectionBackgroundColor: palette.highlight
     selectionAlternateBackgroundColor: Qt.darker(palette.highlight, 1.05)
