@@ -219,7 +219,7 @@ QQC2.Page {
         asynchronous: false
 
         visible: active
-        active: (root.titleDelegate !== defaultTitleDelegate || root.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar || root.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.Titles)
+        active: root.parent && root.visible && (root.titleDelegate !== defaultTitleDelegate || root.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar || root.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.Titles)
         onActiveChanged: {
             if (active) {
                 syncSource();
