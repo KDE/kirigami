@@ -12,10 +12,12 @@ ecm_add_qml_module(KirigamiDialogs URI "org.kde.kirigami.dialogs"
 ecm_target_qml_sources(KirigamiDialogs SOURCES
     DialogHeader.qml
     DialogHeaderTopContent.qml
+    DialogFooter.qml
     Dialog.qml
     MenuDialog.qml
     PromptDialog.qml
     SearchDialog.qml
+    SingleSelectListView.qml
 )
 
 set_target_properties(KirigamiDialogs PROPERTIES
