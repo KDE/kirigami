@@ -8,7 +8,6 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQml
-import QtQuick.Layouts
 import QtQuick.Templates as T
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
@@ -25,6 +24,11 @@ import org.kde.kirigami.dialogs as KDialogs
  *
  * By default, the footer consists of a row of buttons specified by
  * the `standardButtons` and `customFooterActions` properties.
+ *
+ * @note The dialog footer is always a minimum height even when empty so that the
+ *       dialog corners can be rounded. It is recommended to use DialogFooter as the
+ *       base for any custom footer to retain this behavior, just replace the content.
+ *       See DialogFooter documentation for an example.
  *
  * The `implicitHeight` and `implicitWidth` of the dialog contentItem is
  * the primary hint used for the dialog size. The dialog will be the
@@ -193,26 +197,10 @@ T.Dialog {
      */
     property real preferredWidth: -1
 
-
-    /**
-     * @brief This property holds the component to the left of the footer buttons.
-     */
-    property Component footerLeadingComponent
-
-    /**
-     * @brief his property holds the component to the right of the footer buttons.
-     */
-    property Component footerTrailingComponent
-
     /**
      * @brief This property sets whether to show the close button in the header.
      */
     property bool showCloseButton: true
-
-    /**
-     * @brief This property sets whether the footer button style should be flat.
-     */
-    property bool flatFooterButtons: false
 
     /**
      * @brief This property holds the custom actions displayed in the footer.
@@ -252,26 +240,20 @@ T.Dialog {
 
     function standardButton(button): T.AbstractButton {
         // in case a footer is redefined
-        if (footer instanceof T.DialogButtonBox) {
+        if (footer.standardButton && typeof footer.standardButton === "function") {
             return footer.standardButton(button);
-        } else if (footer === footerToolBar) {
-            return dialogButtonBox.standardButton(button);
         } else {
             return null;
         }
     }
 
     function customFooterButton(action: T.Action): T.AbstractButton {
-        if (!action) {
-            // Even if there's a null object in the list of actions, we should
-            // not return a button for it.
+        // in case a footer is redefined
+        if (footer.customFooterButton && typeof footer.customFooterButton === "function") {
+            return footer.customFooterButton(action);
+        } else {
             return null;
         }
-        const index = __visibleCustomFooterActions.indexOf(action);
-        if (index < 0) {
-            return null;
-        }
-        return customFooterButtons.itemAt(index) as T.AbstractButton;
     }
 
     z: Kirigami.OverlayZStacking.z
@@ -410,84 +392,7 @@ T.Dialog {
         }
     }
 
-    // use top level control rather than toolbar, since toolbar causes button rendering glitches
-    footer: T.Control {
-        id: footerToolBar
-
-        // if there is nothing in the footer, still maintain a height so that we can create a rounded bottom buffer for the dialog
-        property bool bufferMode: !root.footerLeadingComponent && !dialogButtonBox.visible
-        implicitHeight: bufferMode ? Math.round(Kirigami.Units.smallSpacing / 2) : implicitContentHeight + topPadding + bottomPadding
-        implicitWidth: footerLayout.implicitWidth + leftPadding + rightPadding
-
-        padding: !bufferMode ? Kirigami.Units.largeSpacing : 0
-
-        contentItem: RowLayout {
-            id: footerLayout
-            spacing: footerToolBar.spacing
-            // Don't let user interact with footer during transitions
-            enabled: root.opened
-
-            Loader {
-                id: leadingLoader
-                sourceComponent: root.footerLeadingComponent
-            }
-
-            // footer buttons
-            QQC2.DialogButtonBox {
-                // we don't explicitly set padding, to let the style choose the padding
-                id: dialogButtonBox
-                standardButtons: root.standardButtons
-                visible: count > 0
-                padding: 0
-
-                Layout.fillWidth: true
-                Layout.alignment: dialogButtonBox.alignment
-
-                position: QQC2.DialogButtonBox.Footer
-
-                // ensure themes don't add a background, since it can lead to visual inconsistencies
-                // with the rest of the dialog
-                background: null
-
-                // we need to hook all of the buttonbox events to the dialog events
-                onAccepted: root.accept()
-                onRejected: root.reject()
-                onApplied: root.applied()
-                onDiscarded: root.discarded()
-                onHelpRequested: root.helpRequested()
-                onReset: root.reset()
-
-                // add custom footer buttons
-                Repeater {
-                    id: customFooterButtons
-                    model: root.__visibleCustomFooterActions
-                    // we have to use Button instead of ToolButton, because ToolButton has no visual distinction when disabled
-                    delegate: QQC2.Button {
-                        required property T.Action modelData
-
-                        flat: root.flatFooterButtons
-                        action: modelData
-                    }
-                }
-            }
-
-            Loader {
-                id: trailingLoader
-                sourceComponent: root.footerTrailingComponent
-            }
-        }
-
-        background: Item {
-            Kirigami.Separator {
-                id: footerSeparator
-                visible: if (root.contentItem instanceof T.Pane || root.contentItem instanceof Flickable) {
-                    return root.contentItem.contentHeight > root.implicitContentHeight;
-                } else {
-                    return false;
-                }
-                width: parent.width
-                anchors.top: parent.top
-            }
-        }
+    footer: KDialogs.DialogFooter {
+        dialog: root
     }
 }
