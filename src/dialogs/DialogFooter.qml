@@ -39,7 +39,7 @@ import org.kde.kirigami.dialogs as KDialogs
  *         dialog: myDialog
  *         contentItem: RowLayout {
  *             CustomItem {...}
- *             DialogFooterButtonContent {
+ *             DialogButtonContent {
  *                 dialog: myDialog
  *             }
  *         }
@@ -83,7 +83,7 @@ T.Control {
     implicitHeight: bufferMode ? Math.round(Kirigami.Units.smallSpacing / 2) : implicitContentHeight + topPadding + bottomPadding
     padding: !bufferMode ? Kirigami.Units.largeSpacing : 0
 
-    contentItem: KDialogs.DialogFooterButtonContent {
+    contentItem: KDialogs.DialogButtonContent {
         id: footerButtonContent
         dialog: root.dialog
     }

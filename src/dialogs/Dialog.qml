@@ -8,6 +8,7 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQml
+import QtQuick.Layouts
 import QtQuick.Templates as T
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
@@ -198,9 +199,26 @@ T.Dialog {
     property real preferredWidth: -1
 
     /**
+     * @brief This property holds the component to the left of the footer buttons.
+     */
+    property Component footerLeadingComponent
+
+    /**
+     * @brief his property holds the component to the right of the footer buttons.
+     */
+    property Component footerTrailingComponent
+
+
+    /**
      * @brief This property sets whether to show the close button in the header.
      */
     property bool showCloseButton: true
+
+    /**
+     * @brief This property sets whether the footer button style should be flat.
+     */
+    property bool flatFooterButtons: false
+
 
     /**
      * @brief This property holds the custom actions displayed in the footer.
@@ -393,6 +411,38 @@ T.Dialog {
     }
 
     footer: KDialogs.DialogFooter {
+        id: dialogFooter
         dialog: root
+
+        contentItem: RowLayout {
+            // To maintain standard dialog functionality and avoid API breakage.
+            function standardButton(button): T.AbstractButton {
+                return footerButtonContent.standardButton(button)
+            }
+            function customFooterButton(action: T.Action): T.AbstractButton {
+                return footerButtonContent.customFooterButton(action)
+            }
+
+            spacing: dialogFooter.spacing
+            // Don't let user interact with footer during transitions
+            enabled: root.opened
+
+            // The leadingLoader and trailingLoader the are intentionally outside
+            // DialogButtonContent as the plan in the long term is to remove
+            // them, do NOT try to add.
+            Loader {
+                id: leadingLoader
+                sourceComponent: root.footerLeadingComponent
+            }
+            KDialogs.DialogButtonContent {
+                id: footerButtonContent
+                dialog: root
+                flatButtons: root.flatFooterButtons
+            }
+            Loader {
+                id: trailingLoader
+                sourceComponent: root.footerTrailingComponent
+            }
+        }
     }
 }
