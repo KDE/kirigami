@@ -205,6 +205,17 @@ T.Dialog {
     property Component footerTrailingComponent
 
     /**
+     * @brief This property holds the component to the left of the footer buttons.
+     */
+    property Component footerLeadingComponent
+
+    /**
+     * @brief his property holds the component to the right of the footer buttons.
+     */
+    property Component footerTrailingComponent
+
+
+    /**
      * @brief This property sets whether to show the close button in the header.
      */
     property bool showCloseButton: true
@@ -410,83 +421,38 @@ T.Dialog {
         }
     }
 
-    // use top level control rather than toolbar, since toolbar causes button rendering glitches
-    footer: T.Control {
-        id: footerToolBar
-
-        // if there is nothing in the footer, still maintain a height so that we can create a rounded bottom buffer for the dialog
-        property bool bufferMode: !root.footerLeadingComponent && !dialogButtonBox.visible
-        implicitHeight: bufferMode ? Math.round(Kirigami.Units.smallSpacing / 2) : implicitContentHeight + topPadding + bottomPadding
-        implicitWidth: footerLayout.implicitWidth + leftPadding + rightPadding
-
-        padding: !bufferMode ? Kirigami.Units.largeSpacing : 0
+    footer: KDialogs.DialogFooter {
+        id: dialogFooter
+        dialog: root
 
         contentItem: RowLayout {
-            id: footerLayout
-            spacing: footerToolBar.spacing
+            // To maintain standard dialog functionality and avoid API breakage.
+            function standardButton(button): T.AbstractButton {
+                return footerButtonContent.standardButton(button)
+            }
+            function customFooterButton(action: T.Action): T.AbstractButton {
+                return footerButtonContent.customFooterButton(action)
+            }
+
+            spacing: dialogFooter.spacing
             // Don't let user interact with footer during transitions
             enabled: root.opened
 
+            // The leadingLoader and trailingLoader the are intentionally outside
+            // DialogButtonContent as the plan in the long term is to remove
+            // them, do NOT try to add.
             Loader {
                 id: leadingLoader
                 sourceComponent: root.footerLeadingComponent
             }
-
-            // footer buttons
-            QQC2.DialogButtonBox {
-                // we don't explicitly set padding, to let the style choose the padding
-                id: dialogButtonBox
-                standardButtons: root.standardButtons
-                visible: count > 0
-                padding: 0
-
-                Layout.fillWidth: true
-                Layout.alignment: dialogButtonBox.alignment
-
-                position: QQC2.DialogButtonBox.Footer
-
-                // ensure themes don't add a background, since it can lead to visual inconsistencies
-                // with the rest of the dialog
-                background: null
-
-                // we need to hook all of the buttonbox events to the dialog events
-                onAccepted: root.accept()
-                onRejected: root.reject()
-                onApplied: root.applied()
-                onDiscarded: root.discarded()
-                onHelpRequested: root.helpRequested()
-                onReset: root.reset()
-
-                // add custom footer buttons
-                Repeater {
-                    id: customFooterButtons
-                    model: root.__visibleCustomFooterActions
-                    // we have to use Button instead of ToolButton, because ToolButton has no visual distinction when disabled
-                    delegate: QQC2.Button {
-                        required property T.Action modelData
-
-                        flat: root.flatFooterButtons
-                        action: modelData
-                    }
-                }
+            KDialogs.DialogButtonContent {
+                id: footerButtonContent
+                dialog: root
+                flatButtons: root.flatFooterButtons
             }
-
             Loader {
                 id: trailingLoader
                 sourceComponent: root.footerTrailingComponent
-            }
-        }
-
-        background: Item {
-            Kirigami.Separator {
-                id: footerSeparator
-                visible: if (root.contentItem instanceof T.Pane || root.contentItem instanceof Flickable) {
-                    return root.contentItem.contentHeight > root.implicitContentHeight;
-                } else {
-                    return false;
-                }
-                width: parent.width
-                anchors.top: parent.top
             }
         }
     }
