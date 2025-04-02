@@ -577,6 +577,7 @@ void ContentItem::layoutItems()
                         QQuickItem *sep = ensureLeadingSeparator(header);
                         sep->setProperty("inToolBar", true);
                     }
+
                     headerHeight = header->isVisible() ? header->height() : .0;
                     header->setWidth(width);
                     header->setPosition(QPointF(partialWidth, .0));
@@ -718,6 +719,20 @@ void ContentItem::updateVisibleItems()
         } else {
             attached->setInViewport(false);
             item->setEnabled(false);
+        }
+
+        QQuickItem *header = attached->globalHeader();
+        if (header) {
+            qreal leftHeaderAdjust = 0.0;
+            qreal rightHeaderAdjust = 0.0;
+            if (qApp->layoutDirection() == Qt::RightToLeft) {
+                rightHeaderAdjust =
+                    std::clamp(item->x() + item->width() + x() - m_view->width() + m_leadingGlobalHeaderPadding, 0.0, m_leadingGlobalHeaderPadding);
+            } else {
+                leftHeaderAdjust = std::clamp(-item->x() + m_leadingGlobalHeaderPadding - x(), 0.0, m_leadingGlobalHeaderPadding);
+            }
+            header->setPosition(QPointF(item->x() + leftHeaderAdjust, 0));
+            header->setWidth(item->width() - leftHeaderAdjust - rightHeaderAdjust);
         }
     }
 
