@@ -21,7 +21,8 @@ Kirigami.AbstractApplicationHeader {
 
     Kirigami.Theme.colorSet: pageRow ? pageRow.globalToolBar.colorSet : Kirigami.Theme.Header
 
-    leftPadding: pageRow
+    leftPadding: pageRow.globalToolBar.titleLeftPadding
+   /* leftPadding: pageRow
         ? Math.min(
             width / 2,
             Math.max(
@@ -39,8 +40,8 @@ Kirigami.AbstractApplicationHeader {
                         + page.width
                         + pageRow.globalToolBar.leftReservedSpace)
                         + Kirigami.Units.smallSpacing))
-        : Kirigami.Units.smallSpacing
-    rightPadding: pageRow
+        : Kirigami.Units.smallSpacing*/
+   /* rightPadding: pageRow
         ? Math.max(0,
             Qt.application.layoutDirection === Qt.LeftToRight
             ? (-pageRow.width
@@ -51,5 +52,5 @@ Kirigami.AbstractApplicationHeader {
             : (pageRow.Kirigami.ScenePosition.x
                 - page.Kirigami.ScenePosition.x
                 + pageRow.globalToolBar.rightReservedSpace))
-        : 0
+        : 0*/
 }
