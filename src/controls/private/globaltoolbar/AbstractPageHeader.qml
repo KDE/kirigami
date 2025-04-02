@@ -52,15 +52,4 @@ Kirigami.AbstractApplicationHeader {
     }
 
     rightPadding: pageRow
-        ? Math.max(0,
-            Qt.application.layoutDirection === Qt.LeftToRight
-            ? (-pageRow.width
-                - pageRow.Kirigami.ScenePosition.x
-                + page.width
-                + page.Kirigami.ScenePosition.x
-                + pageRow.globalToolBar.rightReservedSpace)
-            : (pageRow.Kirigami.ScenePosition.x
-                - page.Kirigami.ScenePosition.x
-                + pageRow.globalToolBar.rightReservedSpace))
-        : 0
 }
