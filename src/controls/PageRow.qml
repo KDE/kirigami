@@ -830,7 +830,7 @@ QT.Control {
             top: parent.top
             right: parent.right
         }
-        z: 100
+        z: -1
         property QT.Control pageRow: root
         active: globalToolBar.actualStyle !== Kirigami.ApplicationHeaderStyle.None || (leadingVisibleItem && leadingVisibleItem.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar)
         visible: active
