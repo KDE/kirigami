@@ -79,9 +79,8 @@ T.Control {
         }
     }
 
-    readonly property bool bufferMode: contentItem == null || !contentItem.visible || contentItem.implicitHeight < Kirigami.Units.smallSpacing / 2
-    implicitHeight: bufferMode ? Math.round(Kirigami.Units.smallSpacing / 2) : implicitContentHeight + topPadding + bottomPadding
-    padding: !bufferMode ? Kirigami.Units.largeSpacing : 0
+    implicitHeight: _private.bufferMode ? Math.round(Kirigami.Units.smallSpacing / 2) : implicitContentHeight + topPadding + bottomPadding
+    padding: !_private.bufferMode ? Kirigami.Units.largeSpacing : 0
 
     contentItem: KDialogs.DialogButtonContent {
         id: footerButtonContent
@@ -99,5 +98,10 @@ T.Control {
             width: parent.width
             anchors.top: parent.top
         }
+    }
+
+    QtObject {
+        id: _private
+        readonly property bool bufferMode: root.contentItem == null || !root.contentItem.visible || root.contentItem.implicitHeight < Kirigami.Units.smallSpacing / 2
     }
 }
