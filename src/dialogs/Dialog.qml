@@ -252,26 +252,19 @@ T.Dialog {
 
     function standardButton(button): T.AbstractButton {
         // in case a footer is redefined
-        if (footer instanceof T.DialogButtonBox) {
+        if (footer.standardButton && typeof footer.standardButton === "function") {
             return footer.standardButton(button);
-        } else if (footer === footerToolBar) {
-            return dialogButtonBox.standardButton(button);
         } else {
             return null;
         }
     }
-
     function customFooterButton(action: T.Action): T.AbstractButton {
-        if (!action) {
-            // Even if there's a null object in the list of actions, we should
-            // not return a button for it.
+        // in case a footer is redefined
+        if (footer.customFooterButton && typeof footer.customFooterButton === "function") {
+            return footer.customFooterButton(action);
+        } else {
             return null;
         }
-        const index = __visibleCustomFooterActions.indexOf(action);
-        if (index < 0) {
-            return null;
-        }
-        return customFooterButtons.itemAt(index) as T.AbstractButton;
     }
 
     z: Kirigami.OverlayZStacking.z
