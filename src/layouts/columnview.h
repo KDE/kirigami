@@ -208,6 +208,19 @@ class ColumnView : public QQuickItem
     Q_PROPERTY(qreal contentWidth READ contentWidth NOTIFY contentWidthChanged FINAL)
 
     /**
+     * If columns have a global header, always reserve this space on the left
+     * (or on the right on RTL layouts)
+     */
+    Q_PROPERTY(qreal leadingGlobalHeaderPadding READ leadingGlobalHeaderPadding WRITE setLeadingGlobalHeaderPadding NOTIFY leadingGlobalHeaderPaddingChanged)
+
+    /**
+     * If columns have a global header, always reserve this space on the right
+     * (or on the left on RTL layouts)
+     */
+    Q_PROPERTY(
+        qreal trailingGlobalHeaderPadding READ trailingGlobalHeaderPadding WRITE setTrailingGlobalHeaderPadding NOTIFY trailingGlobalHeaderPaddingChanged)
+
+    /**
      * The padding this will have at the top
      */
     Q_PROPERTY(qreal topPadding READ topPadding WRITE setTopPadding NOTIFY topPaddingChanged FINAL)
@@ -302,6 +315,12 @@ public:
     void setSeparatorVisible(bool visible);
 
     int count() const;
+
+    qreal leadingGlobalHeaderPadding() const;
+    void setLeadingGlobalHeaderPadding(qreal padding);
+
+    qreal trailingGlobalHeaderPadding() const;
+    void setTrailingGlobalHeaderPadding(qreal padding);
 
     qreal topPadding() const;
     void setTopPadding(qreal padding);
@@ -517,6 +536,8 @@ Q_SIGNALS:
     void separatorVisibleChanged();
     void leadingVisibleItemChanged();
     void trailingVisibleItemChanged();
+    void leadingGlobalHeaderPaddingChanged();
+    void trailingGlobalHeaderPaddingChanged();
     void topPaddingChanged();
     void bottomPaddingChanged();
 
