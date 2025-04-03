@@ -505,6 +505,7 @@ void ContentItem::layoutItems()
     qreal implicitWidth = 0;
     qreal implicitHeight = 0;
     qreal partialWidth = 0;
+    qreal maxHeaderHeight = 0;
     int i = 0;
     m_leftPinnedSpace = 0;
     m_rightPinnedSpace = 0;
@@ -579,6 +580,7 @@ void ContentItem::layoutItems()
                     }
 
                     headerHeight = header->isVisible() ? header->height() : .0;
+                    maxHeaderHeight = std::max(maxHeaderHeight, headerHeight);
                     header->setWidth(width);
                     header->setPosition(QPointF(partialWidth, .0));
                     header->setZ(1);
@@ -1141,6 +1143,40 @@ QQuickItem *ColumnView::trailingVisibleItem() const
 int ColumnView::count() const
 {
     return m_contentItem->m_items.count();
+}
+
+qreal ColumnView::leadingGlobalHeaderPadding() const
+{
+    return m_contentItem->m_leadingGlobalHeaderPadding;
+}
+
+void ColumnView::setLeadingGlobalHeaderPadding(qreal padding)
+{
+    if (padding == m_contentItem->m_leadingGlobalHeaderPadding) {
+        return;
+    }
+
+    m_contentItem->m_leadingGlobalHeaderPadding = padding;
+    m_contentItem->updateVisibleItems();
+
+    Q_EMIT leadingGlobalHeaderPaddingChanged();
+}
+
+qreal ColumnView::trailingGlobalHeaderPadding() const
+{
+    return m_contentItem->m_trailingGlobalHeaderPadding;
+}
+
+void ColumnView::setTrailingGlobalHeaderPadding(qreal padding)
+{
+    if (padding == m_contentItem->m_trailingGlobalHeaderPadding) {
+        return;
+    }
+
+    m_contentItem->m_trailingGlobalHeaderPadding = padding;
+    m_contentItem->updateVisibleItems();
+
+    Q_EMIT trailingGlobalHeaderPaddingChanged();
 }
 
 qreal ColumnView::topPadding() const

@@ -939,7 +939,7 @@ QT.Control {
             top: parent.top
             right: parent.right
         }
-        z: -1
+        z: 100
         property QT.Control pageRow: root
         active: globalToolBar.actualStyle !== Kirigami.ApplicationHeaderStyle.None || (leadingVisibleItem && leadingVisibleItem.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar)
         visible: active
@@ -1122,6 +1122,8 @@ QT.Control {
 
             topPadding: globalToolBarUI.item && globalToolBarUI.item.breadcrumbVisible
                         ? globalToolBarUI.height : 0
+            leadingGlobalHeaderPadding: globalToolBarUI.item?.leadingControlsWidth ?? 0
+            trailingGlobalHeaderPadding: globalToolBarUI.item?.trailingControlsWidth ?? 0
 
             // Internal hidden api for Page
             readonly property Item __pageRow: root
