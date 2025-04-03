@@ -79,7 +79,7 @@ T.Control {
         }
     }
 
-    readonly property bool bufferMode: !footerButtonContent.visible || contentItem == null || contentItem.implicitHeight < Kirigami.Units.smallSpacing / 2
+    readonly property bool bufferMode: contentItem == null || !contentItem.visible || contentItem.implicitHeight < Kirigami.Units.smallSpacing / 2
     implicitHeight: bufferMode ? Math.round(Kirigami.Units.smallSpacing / 2) : implicitContentHeight + topPadding + bottomPadding
     padding: !bufferMode ? Kirigami.Units.largeSpacing : 0
 

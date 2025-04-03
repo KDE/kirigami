@@ -205,17 +205,6 @@ T.Dialog {
     property Component footerTrailingComponent
 
     /**
-     * @brief This property holds the component to the left of the footer buttons.
-     */
-    property Component footerLeadingComponent
-
-    /**
-     * @brief his property holds the component to the right of the footer buttons.
-     */
-    property Component footerTrailingComponent
-
-
-    /**
      * @brief This property sets whether to show the close button in the header.
      */
     property bool showCloseButton: true
@@ -447,8 +436,11 @@ T.Dialog {
             }
             KDialogs.DialogButtonContent {
                 id: footerButtonContent
+                Layout.fillWidth: true
                 dialog: root
-                flatButtons: root.flatFooterButtons
+                delegate: QQC2.Button {
+                    flat: root.flatFooterButtons
+                }
             }
             Loader {
                 id: trailingLoader

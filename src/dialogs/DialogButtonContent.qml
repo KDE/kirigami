@@ -45,6 +45,10 @@ import QtQuick.Controls as QQC2
  * }
  * @endcode
  *
+ * If the user wishes to have a custom button representation, e.g. flat buttons,
+ * overriding the `delegate` property will apply the new button style to both
+ * standard and custom actions.
+ *
  * @inherit T.Control
  */
 QQC2.DialogButtonBox {
@@ -56,11 +60,6 @@ QQC2.DialogButtonBox {
      * @property T.Dialog dialog
      */
     required property T.Dialog dialog
-
-    /**
-     * @brief This property sets whether the footer button style should be flat.
-     */
-    property bool flatButtons: false
 
     function customFooterButton(action: T.Action): T.AbstractButton {
         if (!action) {
@@ -81,10 +80,6 @@ QQC2.DialogButtonBox {
 
     position: QQC2.DialogButtonBox.Footer
 
-    // Required so that the standardButtons follow the flatButtons property.
-    delegate: QQC2.Button {
-        flat: root.flatButtons
-    }
     // ensure themes don't add a background, since it can lead to visual inconsistencies
     // with the rest of the dialog
     background: null
@@ -102,10 +97,9 @@ QQC2.DialogButtonBox {
         id: customFooterButtons
         model: root.dialog.__visibleCustomFooterActions
         // we have to use Button instead of ToolButton, because ToolButton has no visual distinction when disabled
-        delegate: QQC2.Button {
-            required property T.Action modelData
-            flat: root.flatButtons
-            action: modelData
+        delegate: root.delegate
+        onItemAdded: (index, item) => {
+            item.action = customFooterButtons.model[index];
         }
     }
 }
