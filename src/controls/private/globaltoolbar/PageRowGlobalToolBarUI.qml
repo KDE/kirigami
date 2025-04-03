@@ -26,6 +26,9 @@ Kirigami.AbstractApplicationHeader {
     readonly property bool layerIsMainRow: (root.layers.currentItem.hasOwnProperty("columnView")) ? root.layers.currentItem.columnView === root.columnView : false
     readonly property Item currentItem: layerIsMainRow ? root.columnView : root.layers.currentItem
 
+    property alias leadingControlsWidth: leadingControls.width
+    property alias trailingControlsWidth: rightHandleAnchor.width
+
     function __shouldHandleAnchorBeVisible(handleAnchor: Item, drawerProperty: string, itemProperty: string): bool {
         if (typeof applicationWindow === "undefined") {
             return false;
@@ -158,5 +161,5 @@ Kirigami.AbstractApplicationHeader {
             Layout.preferredWidth: height
         }
     }
-    background.opacity: 1//breadcrumbLoader.active ? 1 : 0
+    background.opacity: breadcrumbLoader.active ? 1 : 0
 }

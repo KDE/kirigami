@@ -830,7 +830,7 @@ QT.Control {
             top: parent.top
             right: parent.right
         }
-        z: -1
+        z: 100
         property QT.Control pageRow: root
         active: globalToolBar.actualStyle !== Kirigami.ApplicationHeaderStyle.None || (leadingVisibleItem && leadingVisibleItem.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar)
         visible: active
@@ -1009,6 +1009,11 @@ QT.Control {
                 rightPadding: root.leftSidebar ? root.leftSidebar.rightPadding : 0
                 bottomPadding: root.leftSidebar ? root.leftSidebar.bottomPadding : 0
             }
+
+            topPadding: globalToolBarUI.item && globalToolBarUI.item.breadcrumbVisible
+                        ? globalToolBarUI.height : 0
+            leadingGlobalHeaderPadding: globalToolBarUI.item?.leadingControlsWidth ?? 0
+            trailingGlobalHeaderPadding: globalToolBarUI.item?.trailingControlsWidth ?? 0
 
             Kirigami.ColumnView {
                 id: columnView

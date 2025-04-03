@@ -8,7 +8,7 @@ import QtQuick
 import QtQml
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
-
+/*
 AbstractPageHeader {
     id: root
 
@@ -26,13 +26,18 @@ AbstractPageHeader {
             mouse.accepted = false
         }
     }
-
+*/
     RowLayout {
         id: layout
         anchors.fill: parent
         anchors.rightMargin: Kirigami.Units.smallSpacing
         spacing: Kirigami.Units.smallSpacing
-
+        //TODO: remove those 2 properties
+        property Kirigami.PageRow pageRow: applicationWindow()?.pageStack ?? null
+        property Kirigami.Page page: pageRow?.currentItem as Kirigami.Page ?? null
+TapHandler {
+    onTapped: page.forceActiveFocus()
+}
         Loader {
             id: titleLoader
 
@@ -62,4 +67,4 @@ AbstractPageHeader {
             actions: page?.actions ?? []
         }
     }
-}
+//}
