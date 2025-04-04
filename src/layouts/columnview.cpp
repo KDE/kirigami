@@ -700,10 +700,15 @@ void ContentItem::updateVisibleItems()
             qreal leftHeaderAdjust = 0.0;
             qreal rightHeaderAdjust = 0.0;
             if (qApp->layoutDirection() == Qt::RightToLeft) {
+                leftHeaderAdjust = std::clamp(-item->x() + m_trailingGlobalHeaderPadding - x(), 0.0, m_trailingGlobalHeaderPadding);
+
                 rightHeaderAdjust =
                     std::clamp(item->x() + item->width() + x() - m_view->width() + m_leadingGlobalHeaderPadding, 0.0, m_leadingGlobalHeaderPadding);
             } else {
                 leftHeaderAdjust = std::clamp(-item->x() + m_leadingGlobalHeaderPadding - x(), 0.0, m_leadingGlobalHeaderPadding);
+
+                rightHeaderAdjust =
+                    std::clamp(item->x() + item->width() + x() - m_view->width() + m_trailingGlobalHeaderPadding, 0.0, m_trailingGlobalHeaderPadding);
             }
             header->setPosition(QPointF(item->x() + leftHeaderAdjust, 0));
             header->setWidth(item->width() - leftHeaderAdjust - rightHeaderAdjust);
