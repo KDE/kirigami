@@ -59,54 +59,13 @@ QmlComponentsPool *QmlComponentsPoolSingleton::instance(QQmlEngine *engine)
 QmlComponentsPool::QmlComponentsPool(QQmlEngine *engine)
     : QObject(engine)
 {
-    QQmlComponent component(engine);
-
-    /* clang-format off */
-    component.setData(QByteArrayLiteral(R"(
-import QtQuick
-import org.kde.kirigami as Kirigami
-
-QtObject {
-    readonly property Component leadingSeparator: Kirigami.Separator {
-        property Item column
-        property bool inToolBar
-        property Kirigami.ColumnView view
-
-        // positioning trick to hide the very first separator
-        visible: {
-            if (!view || !view.separatorVisible) {
-                return false;
-            }
-
-            return view && (LayoutMirroring.enabled
-                ? view.contentX + view.width > column.x + column.width
-                : view.contentX < column.x);
-        }
-
-        anchors.top: column.top
-        anchors.left: column.left
-        anchors.bottom: column.bottom
-        anchors.topMargin: inToolBar ? Kirigami.Units.largeSpacing : 0
-        anchors.bottomMargin: inToolBar ? Kirigami.Units.largeSpacing : 0
-        Kirigami.Theme.colorSet: Kirigami.Theme.Header
-        Kirigami.Theme.inherit: false
-    }
-
-    readonly property Component trailingSeparator: Kirigami.Separator {
-        property Item column
-
-        anchors.top: column.top
-        anchors.right: column.right
-        anchors.bottom: column.bottom
-        Kirigami.Theme.colorSet: Kirigami.Theme.Header
-        Kirigami.Theme.inherit: false
-    }
-}
-)"), QUrl(QStringLiteral("columnview.cpp")));
-    /* clang-format on */
+    QQmlComponent component(engine, QUrl(QStringLiteral("qrc:/ColumnViewSeparator.qml")));
 
     m_instance = component.create();
-    // qCWarning(KirigamiLayoutsLog)<<component.errors();
+
+    if (component.isError()) {
+        qCWarning(KirigamiLayoutsLog) << component.errors();
+    }
     Q_ASSERT(m_instance);
     m_instance->setParent(this);
 

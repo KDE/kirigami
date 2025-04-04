@@ -1,4 +1,6 @@
 
+qt_add_resources(LAYOUTRESOURCES layout-resources.qrc)
+
 add_library(KirigamiLayouts)
 ecm_add_qml_module(KirigamiLayouts URI "org.kde.kirigami.layouts"
     VERSION 2.0
@@ -27,9 +29,11 @@ target_sources(KirigamiLayouts PRIVATE
     toolbarlayoutdelegate.cpp
     pagestackattached.cpp
     pagestackattached.h
+    ${LAYOUTRESOURCES}
 )
 
 ecm_target_qml_sources(KirigamiLayouts SOURCES
+    # Don't add ColumnViewSeparator here as is private in a qrc
     FormLayout.qml
 )
 
