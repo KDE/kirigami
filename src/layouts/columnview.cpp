@@ -497,7 +497,8 @@ void ContentItem::layoutItems()
                 qreal headerHeight = .0;
                 qreal footerHeight = .0;
                 if (QQuickItem *header = attached->globalHeader()) {
-                    headerHeight = header->isVisible() ? header->height() : .0;
+                    headerHeight = header->isVisible() ? header->implicitHeight() : .0;
+                    maxHeaderHeight = std::max(maxHeaderHeight, headerHeight);
                     header->setWidth(width + sepWidth);
                     header->setPosition(QPointF(pageX, .0));
                     header->setZ(2);
@@ -539,7 +540,7 @@ void ContentItem::layoutItems()
                         sep->setProperty("inToolBar", true);
                     }
 
-                    headerHeight = header->isVisible() ? header->height() : .0;
+                    headerHeight = header->isVisible() ? header->implicitHeight() : .0;
                     maxHeaderHeight = std::max(maxHeaderHeight, headerHeight);
                     header->setWidth(width);
                     header->setPosition(QPointF(partialWidth, .0));
@@ -592,6 +593,7 @@ void ContentItem::layoutItems()
     }
 
     setWidth(partialWidth);
+    m_globalHeaderParent->setSize({partialWidth, maxHeaderHeight});
 
     setImplicitWidth(implicitWidth);
     setImplicitHeight(implicitHeight);
@@ -635,7 +637,7 @@ void ContentItem::layoutPinnedItems()
                 qreal headerHeight = .0;
                 qreal footerHeight = .0;
                 if (QQuickItem *header = attached->globalHeader()) {
-                    headerHeight = header->isVisible() ? header->height() : .0;
+                    headerHeight = header->isVisible() ? header->implicitHeight() : .0;
                     header->setPosition(QPointF(pageX, .0));
                     if (m_view->separatorVisible()) {
                         QQuickItem *sep = ensureTrailingSeparator(header);
@@ -967,7 +969,9 @@ ColumnView::ColumnView(QQuickItem *parent)
     , m_contentItem(nullptr)
 {
     // NOTE: this is to *not* trigger itemChange
+    m_globalHeader = new QQuickItem(this);
     m_contentItem = new ContentItem(this);
+
     // Prevent interactions outside of ColumnView bounds, and let it act as a viewport.
     setClip(true);
     setAcceptedMouseButtons(Qt::LeftButton | Qt::BackButton | Qt::ForwardButton);
@@ -1120,6 +1124,26 @@ QQuickItem *ColumnView::trailingVisibleItem() const
 int ColumnView::count() const
 {
     return m_contentItem->m_items.count();
+}
+
+QQuickItem *ColumnView::globalHeaderContainer() const
+{
+    return m_contentItem->m_globalHeaderContainer;
+}
+
+void ColumnView::setGlobalHeaderContainer(QQuickItem *item)
+{
+    if (item == m_contentItem->m_globalHeaderContainer) {
+        return;
+    }
+
+    m_contentItem->m_globalHeaderContainer = item;
+    item->setParentItem(m_globalHeader);
+    item->setSize({800, 45});
+    m_contentItem->m_globalHeaderParent->setParentItem(item);
+    item->setProperty("contentItem", QVariant::fromValue(m_contentItem->m_globalHeaderParent));
+
+    Q_EMIT globalHeaderContainerChanged();
 }
 
 qreal ColumnView::leadingGlobalHeaderPadding() const
