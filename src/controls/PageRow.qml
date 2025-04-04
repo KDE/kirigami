@@ -1014,6 +1014,7 @@ QT.Control {
                         ? globalToolBarUI.height : 0
             leadingGlobalHeaderPadding: globalToolBarUI.item?.leadingControlsWidth ?? 0
             trailingGlobalHeaderPadding: globalToolBarUI.item?.trailingControlsWidth ?? 0
+            globalHeaderContainer: QQC2.ToolBar{}
 
             Kirigami.ColumnView {
                 id: columnView

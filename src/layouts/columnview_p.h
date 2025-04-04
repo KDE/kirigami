@@ -77,6 +77,7 @@ private Q_SLOTS:
 
 private:
     ColumnView *m_view;
+    QQuickItem *m_globalHeaderContainer;
     QQuickItem *m_globalHeaderParent;
     QQuickItem *m_globalFooterParent;
     QPropertyAnimation *m_slideAnim;

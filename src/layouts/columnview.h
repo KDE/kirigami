@@ -9,6 +9,7 @@
 #include <QPointer>
 #include <QQuickItem>
 #include <QVariant>
+#include <qquickitem.h>
 
 class ContentItem;
 class ColumnView;
@@ -251,6 +252,7 @@ class ColumnView : public QQuickItem
      */
     Q_PROPERTY(qreal contentWidth READ contentWidth NOTIFY contentWidthChanged FINAL)
 
+    Q_PROPERTY(QQuickItem *globalHeaderContainer READ globalHeaderContainer WRITE setGlobalHeaderContainer NOTIFY globalHeaderContainerChanged)
     /**
      * If columns have a global header, always reserve this space on the left
      * (or on the right on RTL layouts)
@@ -394,6 +396,9 @@ public:
     void setSeparatorVisible(bool visible);
 
     int count() const;
+
+    QQuickItem *globalHeaderContainer() const;
+    void setGlobalHeaderContainer(QQuickItem *item);
 
     qreal leadingGlobalHeaderPadding() const;
     void setLeadingGlobalHeaderPadding(qreal padding);
@@ -636,6 +641,7 @@ Q_SIGNALS:
     void separatorVisibleChanged();
     void leadingVisibleItemChanged();
     void trailingVisibleItemChanged();
+    void globalHeaderContainerChanged();
     void leadingGlobalHeaderPaddingChanged();
     void trailingGlobalHeaderPaddingChanged();
     void topPaddingChanged();
@@ -654,6 +660,7 @@ private:
 
     QList<QObject *> m_contentData;
 
+    QQuickItem *m_globalHeader;
     ContentItem *m_contentItem;
     QPointer<QQuickItem> m_currentItem;
 
