@@ -190,6 +190,9 @@ class KIRIGAMIPLATFORM_EXPORT PlatformTheme : public QObject
     // small font
     Q_PROPERTY(QFont smallFont READ smallFont NOTIFY smallFontChanged FINAL)
 
+    // fixed width font
+    Q_PROPERTY(QFont fixedWidthFont READ fixedWidthFont NOTIFY fixedWidthFontChanged FINAL)
+
     // Active palette
     Q_PROPERTY(QPalette palette READ palette NOTIFY paletteChanged FINAL)
 
@@ -272,6 +275,7 @@ public:
 
     QFont defaultFont() const;
     QFont smallFont() const;
+    QFont fixedWidthFont() const;
 
     // this may is used by the desktop QQC2 to set the styleoption palettes
     QPalette palette() const;
@@ -318,6 +322,7 @@ Q_SIGNALS:
     void colorsChanged();
     void defaultFontChanged(const QFont &font);
     void smallFontChanged(const QFont &font);
+    void fixedWidthFontChanged(const QFont &font);
     void colorSetChanged(Kirigami::Platform::PlatformTheme::ColorSet colorSet);
     void colorGroupChanged(Kirigami::Platform::PlatformTheme::ColorGroup colorGroup);
     void paletteChanged(const QPalette &pal);
@@ -356,6 +361,7 @@ protected:
 
     void setDefaultFont(const QFont &defaultFont);
     void setSmallFont(const QFont &smallFont);
+    void setFixedWidthFont(const QFont &fixedWidthFont);
 
     bool event(QEvent *event) override;
 
