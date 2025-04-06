@@ -8,7 +8,9 @@
 pragma ComponentBehavior: Bound
 
 import QtQuick
+import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
+
 import org.kde.kirigami as Kirigami
 import org.kde.kirigami.dialogs as KDialogs
 
@@ -82,9 +84,11 @@ T.Control {
     implicitHeight: _private.bufferMode ? Math.round(Kirigami.Units.smallSpacing / 2) : implicitContentHeight + topPadding + bottomPadding
     padding: !_private.bufferMode ? Kirigami.Units.largeSpacing : 0
 
-    contentItem: KDialogs.DialogButtonContent {
-        id: footerButtonContent
-        dialog: root.dialog
+    contentItem: QQC2.DialogButtonBox {
+        id: footerButtons
+        standardButtons: root.dialog.standardButtons
+        visible: count > 0
+        padding: 0
     }
 
     background: Item {

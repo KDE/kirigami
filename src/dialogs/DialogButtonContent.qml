@@ -11,34 +11,43 @@ import QtQuick
 import QtQuick.Templates as T
 import QtQuick.Controls as QQC2
 
+import org.kde.kirigami as Kirigami
+
 /**
- * @brief Default button footer content for a Kirigami.Dialog.
+ * @brief Dialog button box with additional custom buttons.
  *
- * This provides both the standard and custom buttons for the given Kirigami.Dialog
- * item.
+ * This provides both the standard and custom buttons for the Dialog.
  *
  * This exists as a separate content item so that it can be used as part of a custom
  * footer if desired, see below:
  *
  * @code{.qml}
  * import QtQuick
+ * import QtQuick.Controls as QQC2
  * import org.kde.kirigami as Kirigami
- * import org.kde.kirigami.dialogs as KD
+ * import org.kde.kirigami.dialogs as KDialogs
  *
- * Kirigami.Dialog {
- *     id: myDialog
+ * QQC2.Dialog {
+ *     id: root
  *
  *     title: i18n("My Dialog")
  *
  *     standardButtons: Kirigami.Dialog.Ok | Kirigami.Dialog.Cancel
  *
  *     footer: KDialogs.DialogFooter {
- *         dialog: myDialog
- *         contentItem: RowLayout {
- *             CustomItem {...}
- *             DialogFooterButtonContent {
- *                 dialog: myDialog
- *             }
+ *         dialog: root
+ *         contentItem: KDialogs.DialogButtonContent {
+ *             dialog: root
+ *             customActions: [
+ *                 Kirigami.Action {
+ *                     text: i18n("Play")
+ *                     icon.name: "media-playback-start"
+ *                     onTriggered: {
+ *                         //...
+ *                         root.close();
+ *                     }
+ *                 }
+ *             ]
  *         }
  *     }
  *     [...]
@@ -60,6 +69,45 @@ QQC2.DialogButtonBox {
      * @property T.Dialog dialog
      */
     required property T.Dialog dialog
+
+    /**
+     * @brief This property holds the custom actions to be displayed.
+     *
+     * Example usage:
+     * @code{.qml}
+     * import QtQuick
+     * import QtQuick.Controls as QQC2
+     * import org.kde.kirigami as Kirigami
+     * import org.kde.kirigami.dialogs as KDialogs
+     *
+     * QQC2.Dialog {
+     *     id: root
+     *     title: i18n("Confirm Playback")
+     *
+     *     standardButtons: Kirigami.Dialog.Cancel
+     *
+     *     footer: KDialogs.DialogFooter {
+     *         dialog: root
+     *         contentItem: KDialogs.DialogButtonContent {
+     *             dialog: root
+     *             customActions: [
+     *                 Kirigami.Action {
+     *                     text: i18n("Play")
+     *                     icon.name: "media-playback-start"
+     *                     onTriggered: {
+     *                         //...
+     *                         root.close();
+     *                     }
+     *                 }
+     *             ]
+     *         }
+     *     }
+     * }
+     * @endcode
+     *
+     * @see org::kde::kirigami::Action
+     */
+    property list<T.Action> customActions
 
     function customFooterButton(action: T.Action): T.AbstractButton {
         if (!action) {
@@ -95,11 +143,19 @@ QQC2.DialogButtonBox {
     // add custom footer buttons
     Repeater {
         id: customFooterButtons
-        model: root.dialog.__visibleCustomFooterActions
+        model: _private.visiblecustomActions
         // we have to use Button instead of ToolButton, because ToolButton has no visual distinction when disabled
         delegate: root.delegate
         onItemAdded: (index, item) => {
             item.action = customFooterButtons.model[index];
         }
+    }
+
+    QtObject {
+        id: _private
+        // DialogButtonBox should NOT contain invisible buttons, because in Qt 6
+        // ListView preserves space even for invisible items.
+        readonly property list<T.Action> visiblecustomActions: root.customActions
+            .filter(action => !(action instanceof Kirigami.Action) || action?.visible)
     }
 }

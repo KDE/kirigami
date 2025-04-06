@@ -431,6 +431,7 @@ T.Dialog {
                 id: footerButtonContent
                 Layout.fillWidth: true
                 dialog: root
+                customActions: root.customFooterActions
                 delegate: QQC2.Button {
                     flat: root.flatFooterButtons
                 }
