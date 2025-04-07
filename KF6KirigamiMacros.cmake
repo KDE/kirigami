@@ -115,6 +115,6 @@ function(kirigami_package_breeze_icons)
     endforeach()
 
     #generate an index.theme that qiconloader can understand
-    file(WRITE ${CMAKE_BINARY_DIR}/index.theme "[Icon Theme]\nName=Breeze\nDirectories=icons/12,icons/16,icons/22,icons/32,icons/48\nFollowsColorScheme=true\n[icons/12]\nSize=12\nType=Fixed\n[icons/12]\nSize=12\nType=Fixed\n[icons/16]\nSize=16\nType=Fixed\n[icons/22]\nSize=22\nType=Fixed\n[icons/48]\nSize=48\nType=Fixed")
+    file(WRITE ${CMAKE_BINARY_DIR}/index.theme "[Icon Theme]\nName=Breeze\nDirectories=icons/12,icons/16,icons/22,icons/32,icons/48,icons\nFollowsColorScheme=true\n[icons/12]\nSize=12\nType=Fixed\n[icons/12]\nSize=12\nType=Fixed\n[icons/16]\nSize=16\nType=Fixed\n[icons/22]\nSize=22\nType=Fixed\n[icons/48]\nSize=48\nType=Fixed\n[icons]\nSize=32\nType=Scalable\n")
     install(FILES ${CMAKE_BINARY_DIR}/index.theme DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/kirigami/breeze-internal/)
 endfunction()
