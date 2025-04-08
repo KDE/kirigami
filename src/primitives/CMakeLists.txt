@@ -15,6 +15,10 @@ target_sources(KirigamiPrimitives PRIVATE
     shadowedtexture.cpp
     shadowedtexture.h
 
+    scenegraph/shadernode.cpp
+    scenegraph/shadernode.h
+    scenegraph/shadermaterial.cpp
+    scenegraph/shadermaterial.h
     scenegraph/texturecache.cpp
     scenegraph/texturecache.h
     scenegraph/managedtexturenode.cpp
