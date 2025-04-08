@@ -4,17 +4,23 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
+// Note: Due to alignment requirements of components, the order here is important.
+// float are aligned on 1 component boundaries.
+// vec2 on 2 component.
+// everything else on 4 component.
 layout(std140, binding = 0) uniform buf {
-    highp mat4 matrix; // offset 0
-    lowp vec2 aspect; // offset 64
+    highp mat4 matrix; // 16 components
+    mediump float opacity; // 17 components
 
-    lowp float opacity; // offset 72
-    lowp float size; // offset 76
-    lowp vec4 radius; // offset 80
-    lowp vec4 color; // offset 96
-    lowp vec4 shadowColor; // offset 112
-    lowp vec2 offset; // offset 128
+    mediump float size; // 18 components
+    mediump float borderWidth; // 19 components
 
-    lowp float borderWidth; // offset 136
-    lowp vec4 borderColor; // offset 144
-} ubuf; // size 160
+    mediump vec2 aspect; // 22 components, +1 due to alignment
+    mediump vec2 offset; // 24 components
+
+    mediump vec4 radius; // 28 components
+
+    mediump vec4 color; // 32 components
+    mediump vec4 shadowColor; // 36 components
+    mediump vec4 borderColor; // 40 components
+} ubuf;

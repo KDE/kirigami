@@ -17,10 +17,6 @@ QColor premultiply(const QColor &color)
 
 ShadowedRectangleNode::ShadowedRectangleNode()
 {
-    m_geometry = new QSGGeometry{QSGGeometry::defaultAttributes_TexturedPoint2D(), 4};
-    setGeometry(m_geometry);
-
-    setFlags(QSGNode::OwnsGeometry | QSGNode::OwnsMaterial);
 }
 
 void ShadowedRectangleNode::setBorderEnabled(bool enabled)
@@ -31,134 +27,60 @@ void ShadowedRectangleNode::setBorderEnabled(bool enabled)
     // switch to the with-border material. Otherwise use the no-border version.
 
     if (enabled) {
-        if (!m_material || m_material->type() == borderlessMaterialType()) {
-            auto newMaterial = createBorderMaterial();
-            newMaterial->shaderType = m_shaderType;
-            setMaterial(newMaterial);
-            m_material = newMaterial;
-            m_rect = QRectF{};
-            markDirty(QSGNode::DirtyMaterial);
-        }
+        setMaterialVariant(borderMaterialType());
     } else {
-        if (!m_material || m_material->type() == borderMaterialType()) {
-            auto newMaterial = createBorderlessMaterial();
-            newMaterial->shaderType = m_shaderType;
-            setMaterial(newMaterial);
-            m_material = newMaterial;
-            m_rect = QRectF{};
-            markDirty(QSGNode::DirtyMaterial);
-        }
+        setMaterialVariant(borderlessMaterialType());
     }
 }
 
-void ShadowedRectangleNode::setRect(const QRectF &rect)
+void ShadowedRectangleNode::setSize(float size)
 {
-    if (rect == m_rect) {
-        return;
-    }
-
-    m_rect = rect;
-
-    QVector2D newAspect{1.0, 1.0};
-    if (m_rect.width() >= m_rect.height()) {
-        newAspect.setX(m_rect.width() / m_rect.height());
-    } else {
-        newAspect.setY(m_rect.height() / m_rect.width());
-    }
-
-    if (m_material->aspect != newAspect) {
-        m_material->aspect = newAspect;
-        markDirty(QSGNode::DirtyMaterial);
-        m_aspect = newAspect;
-    }
-}
-
-void ShadowedRectangleNode::setSize(qreal size)
-{
-    auto minDimension = std::min(m_rect.width(), m_rect.height());
-    float uniformSize = (size / minDimension) * 2.0;
-
-    if (!qFuzzyCompare(m_material->size, uniformSize)) {
-        m_material->size = uniformSize;
-        markDirty(QSGNode::DirtyMaterial);
-        m_size = size;
-    }
+    m_size = size;
+    setMaterialProperty<ShadowedRectangleMaterial>(&ShadowedRectangleMaterial::size, toUniform(size) * 2.0f);
 }
 
 void ShadowedRectangleNode::setRadius(const QVector4D &radius)
 {
-    float minDimension = std::min(m_rect.width(), m_rect.height());
-    auto uniformRadius = QVector4D{std::min(radius.x() * 2.0f / minDimension, 1.0f),
-                                   std::min(radius.y() * 2.0f / minDimension, 1.0f),
-                                   std::min(radius.z() * 2.0f / minDimension, 1.0f),
-                                   std::min(radius.w() * 2.0f / minDimension, 1.0f)};
-
-    if (m_material->radius != uniformRadius) {
-        m_material->radius = uniformRadius;
-        markDirty(QSGNode::DirtyMaterial);
-        m_radius = radius;
-    }
+    auto uniformRadius = toUniform(radius * 2.0f);
+    uniformRadius = QVector4D{std::clamp(uniformRadius.x(), 0.0f, 1.0f),
+                              std::clamp(uniformRadius.y(), 0.0f, 1.0f),
+                              std::clamp(uniformRadius.z(), 0.0f, 1.0f),
+                              std::clamp(uniformRadius.w(), 0.0f, 1.0f)};
+    setMaterialProperty<ShadowedRectangleMaterial>(&ShadowedRectangleMaterial::radius, uniformRadius);
 }
 
 void ShadowedRectangleNode::setColor(const QColor &color)
 {
-    auto premultiplied = premultiply(color);
-    if (m_material->color != premultiplied) {
-        m_material->color = premultiplied;
-        markDirty(QSGNode::DirtyMaterial);
-    }
+    setMaterialProperty<ShadowedRectangleMaterial>(&ShadowedRectangleMaterial::color, toPremultiplied(color));
 }
 
 void ShadowedRectangleNode::setShadowColor(const QColor &color)
 {
-    auto premultiplied = premultiply(color);
-    if (m_material->shadowColor != premultiplied) {
-        m_material->shadowColor = premultiplied;
-        markDirty(QSGNode::DirtyMaterial);
-    }
+    setMaterialProperty<ShadowedRectangleMaterial>(&ShadowedRectangleMaterial::shadowColor, toPremultiplied(color));
 }
 
 void ShadowedRectangleNode::setOffset(const QVector2D &offset)
 {
-    auto minDimension = std::min(m_rect.width(), m_rect.height());
-    auto uniformOffset = offset / minDimension;
-
-    if (m_material->offset != uniformOffset) {
-        m_material->offset = uniformOffset;
-        markDirty(QSGNode::DirtyMaterial);
-        m_offset = offset;
-    }
+    m_offset = offset;
+    setMaterialProperty<ShadowedRectangleMaterial>(&ShadowedRectangleMaterial::offset, toUniform(offset));
 }
 
-void ShadowedRectangleNode::setBorderWidth(qreal width)
+void ShadowedRectangleNode::setBorderWidth(float width)
 {
-    if (m_material->type() != borderMaterialType()) {
+    if (materialVariant() != borderMaterialType()) {
         return;
     }
 
-    auto minDimension = std::min(m_rect.width(), m_rect.height());
-    float uniformBorderWidth = width / minDimension;
-
-    auto borderMaterial = static_cast<ShadowedBorderRectangleMaterial *>(m_material);
-    if (!qFuzzyCompare(borderMaterial->borderWidth, uniformBorderWidth)) {
-        borderMaterial->borderWidth = uniformBorderWidth;
-        markDirty(QSGNode::DirtyMaterial);
-        m_borderWidth = width;
-    }
+    setMaterialProperty<ShadowedBorderRectangleMaterial>(&ShadowedBorderRectangleMaterial::borderWidth, toUniform(width));
 }
 
 void ShadowedRectangleNode::setBorderColor(const QColor &color)
 {
-    if (m_material->type() != borderMaterialType()) {
+    if (materialVariant() != borderMaterialType()) {
         return;
     }
 
-    auto borderMaterial = static_cast<ShadowedBorderRectangleMaterial *>(m_material);
-    auto premultiplied = premultiply(color);
-    if (borderMaterial->borderColor != premultiplied) {
-        borderMaterial->borderColor = premultiplied;
-        markDirty(QSGNode::DirtyMaterial);
-    }
+    setMaterialProperty<ShadowedBorderRectangleMaterial>(&ShadowedBorderRectangleMaterial::borderColor, toPremultiplied(color));
 }
 
 void ShadowedRectangleNode::setShaderType(ShadowedRectangleMaterial::ShaderType type)
@@ -166,34 +88,45 @@ void ShadowedRectangleNode::setShaderType(ShadowedRectangleMaterial::ShaderType 
     m_shaderType = type;
 }
 
-void ShadowedRectangleNode::updateGeometry()
+void ShadowedRectangleNode::update()
 {
-    auto rect = m_rect;
-    if (m_shaderType == ShadowedRectangleMaterial::ShaderType::Standard) {
-        rect = rect.adjusted(-m_size * m_aspect.x(), //
-                             -m_size * m_aspect.y(),
-                             m_size * m_aspect.x(),
-                             m_size * m_aspect.y());
+    auto r = rect();
 
-        auto offsetLength = m_offset.length();
-        rect = rect.adjusted(-offsetLength * m_aspect.x(), //
-                             -offsetLength * m_aspect.y(),
-                             offsetLength * m_aspect.x(),
-                             offsetLength * m_aspect.y());
+    auto aspect = QVector2D{1.0, 1.0};
+    if (r.width() >= r.height()) {
+        aspect.setX(r.width() / r.height());
+    } else {
+        aspect.setY(r.height() / r.width());
     }
 
-    QSGGeometry::updateTexturedRectGeometry(m_geometry, rect, QRectF{0.0, 0.0, 1.0, 1.0});
+    setMaterialProperty<ShadowedRectangleMaterial>(&ShadowedRectangleMaterial::aspect, aspect);
+
+    if (m_shaderType == ShadowedRectangleMaterial::ShaderType::Standard) {
+        r = r.adjusted(-m_size * aspect.x(), //
+                       -m_size * aspect.y(),
+                       m_size * aspect.x(),
+                       m_size * aspect.y());
+
+        auto offsetLength = m_offset.length();
+        r = r.adjusted(-offsetLength * aspect.x(), //
+                       -offsetLength * aspect.y(),
+                       offsetLength * aspect.x(),
+                       offsetLength * aspect.y());
+    }
+
+    QSGGeometry::updateTexturedRectGeometry(geometry(), r, uvs());
     markDirty(QSGNode::DirtyGeometry);
 }
 
-ShadowedRectangleMaterial *ShadowedRectangleNode::createBorderlessMaterial()
+QSGMaterial *ShadowedRectangleNode::createMaterialVariant(QSGMaterialType *variant)
 {
-    return new ShadowedRectangleMaterial{};
-}
+    if (variant == &ShadowedRectangleMaterial::staticType) {
+        return new ShadowedRectangleMaterial{};
+    } else if (variant == &ShadowedBorderRectangleMaterial::staticType) {
+        return new ShadowedBorderRectangleMaterial{};
+    }
 
-ShadowedBorderRectangleMaterial *ShadowedRectangleNode::createBorderMaterial()
-{
-    return new ShadowedBorderRectangleMaterial{};
+    return nullptr;
 }
 
 QSGMaterialType *ShadowedRectangleNode::borderlessMaterialType()

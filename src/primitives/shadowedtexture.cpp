@@ -10,7 +10,9 @@
 #include <QSGRectangleNode>
 #include <QSGRendererInterface>
 
-#include "scenegraph/shadowedtexturenode.h"
+#include "scenegraph/shadernode.h"
+
+using namespace Qt::StringLiterals;
 
 ShadowedTexture::ShadowedTexture(QQuickItem *parentItem)
     : ShadowedRectangle(parentItem)
@@ -53,38 +55,38 @@ QSGNode *ShadowedTexture::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaint
         return nullptr;
     }
 
-    auto shadowNode = static_cast<ShadowedRectangleNode *>(node);
-
-    if (!shadowNode || m_sourceChanged) {
-        m_sourceChanged = false;
-        delete shadowNode;
-        if (m_source) {
-            shadowNode = new ShadowedTextureNode{};
-        } else {
-            shadowNode = new ShadowedRectangleNode{};
-        }
-
-        if (qEnvironmentVariableIsSet("KIRIGAMI_LOWPOWER_HARDWARE")) {
-            shadowNode->setShaderType(ShadowedRectangleMaterial::ShaderType::LowPower);
-        }
+    auto shaderNode = static_cast<ShaderNode *>(node);
+    if (!shaderNode) {
+        shaderNode = new ShaderNode{};
     }
 
-    shadowNode->setBorderEnabled(border()->isEnabled());
-    shadowNode->setRect(boundingRect());
-    shadowNode->setSize(shadow()->size());
-    shadowNode->setRadius(corners()->toVector4D(radius()));
-    shadowNode->setOffset(QVector2D{float(shadow()->xOffset()), float(shadow()->yOffset())});
-    shadowNode->setColor(color());
-    shadowNode->setShadowColor(shadow()->color());
-    shadowNode->setBorderWidth(border()->width());
-    shadowNode->setBorderColor(border()->color());
+    QString shader = u"shadowed"_s;
+    if (border()->isEnabled()) {
+        shader += u"border"_s;
+    }
 
     if (m_source) {
-        static_cast<ShadowedTextureNode *>(shadowNode)->setTextureSource(m_source->textureProvider());
+        shader += u"texture"_s;
+    } else {
+        shader += u"rectangle"_s;
     }
 
-    shadowNode->updateGeometry();
-    return shadowNode;
+    if (isLowPowerRendering()) {
+        shader += u"_lowpower"_s;
+    }
+
+    shaderNode->setShader(shader);
+    shaderNode->setUniformBufferSize(sizeof(float) * 40);
+
+    updateShaderNode(shaderNode);
+
+    if (m_source) {
+        shaderNode->setTexture(1, m_source->textureProvider());
+    }
+
+    shaderNode->update();
+
+    return shaderNode;
 }
 
 #include "moc_shadowedtexture.cpp"

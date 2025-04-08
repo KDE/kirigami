@@ -34,8 +34,8 @@ public:
     void preprocess() override;
 
 private:
-    ShadowedRectangleMaterial *createBorderlessMaterial() override;
-    ShadowedBorderRectangleMaterial *createBorderMaterial() override;
+    QSGMaterial *createMaterialVariant(QSGMaterialType *variant) override;
+
     QSGMaterialType *borderlessMaterialType() override;
     QSGMaterialType *borderMaterialType() override;
 

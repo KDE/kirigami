@@ -7,10 +7,11 @@
 #pragma once
 
 #include <QColor>
-#include <QSGGeometryNode>
+// #include <QSGGeometryNode>
 #include <QVector2D>
 #include <QVector4D>
 
+#include "shadernode.h"
 #include "shadowedrectanglematerial.h"
 
 struct QSGMaterialType;
@@ -27,7 +28,7 @@ class ShadowedBorderRectangleMaterial;
  *
  * \sa ShadowedRectangle
  */
-class ShadowedRectangleNode : public QSGGeometryNode
+class ShadowedRectangleNode : public ShaderNode
 {
 public:
     ShadowedRectangleNode();
@@ -40,40 +41,26 @@ public:
      */
     void setBorderEnabled(bool enabled);
 
-    void setRect(const QRectF &rect);
-    void setSize(qreal size);
+    void setSize(float size);
     void setRadius(const QVector4D &radius);
     void setColor(const QColor &color);
     void setShadowColor(const QColor &color);
     void setOffset(const QVector2D &offset);
-    void setBorderWidth(qreal width);
+    void setBorderWidth(float width);
     void setBorderColor(const QColor &color);
     void setShaderType(ShadowedRectangleMaterial::ShaderType type);
 
-    /**
-     * Update the geometry for this node.
-     *
-     * This is done as an explicit step to avoid the geometry being recreated
-     * multiple times while updating properties.
-     */
-    void updateGeometry();
+    void update() override;
 
 protected:
-    virtual ShadowedRectangleMaterial *createBorderlessMaterial();
-    virtual ShadowedBorderRectangleMaterial *createBorderMaterial();
+    QSGMaterial *createMaterialVariant(QSGMaterialType *variant) override;
+
     virtual QSGMaterialType *borderMaterialType();
     virtual QSGMaterialType *borderlessMaterialType();
 
-    QSGGeometry *m_geometry;
-    ShadowedRectangleMaterial *m_material = nullptr;
     ShadowedRectangleMaterial::ShaderType m_shaderType = ShadowedRectangleMaterial::ShaderType::Standard;
 
 private:
-    QRectF m_rect;
-    qreal m_size = 0.0;
-    QVector4D m_radius = QVector4D{0.0, 0.0, 0.0, 0.0};
+    float m_size = 0.0;
     QVector2D m_offset = QVector2D{0.0, 0.0};
-    QVector2D m_aspect = QVector2D{1.0, 1.0};
-    qreal m_borderWidth = 0.0;
-    QColor m_borderColor;
 };
