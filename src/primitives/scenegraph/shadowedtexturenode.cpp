@@ -56,23 +56,24 @@ void ShadowedTextureNode::setTextureSource(QSGTextureProvider *source)
 
 void ShadowedTextureNode::preprocess()
 {
-    if (m_textureSource && m_material && m_textureSource->texture()) {
-        if (m_material->type() == borderlessMaterialType()) {
-            preprocessTexture<ShadowedTextureMaterial>(m_material, m_textureSource);
+    if (m_textureSource && m_textureSource->texture() && material()) {
+        if (materialVariant() == borderlessMaterialType()) {
+            preprocessTexture<ShadowedTextureMaterial>(material(), m_textureSource);
         } else {
-            preprocessTexture<ShadowedBorderTextureMaterial>(m_material, m_textureSource);
+            preprocessTexture<ShadowedBorderTextureMaterial>(material(), m_textureSource);
         }
     }
 }
 
-ShadowedRectangleMaterial *ShadowedTextureNode::createBorderlessMaterial()
+QSGMaterial *ShadowedTextureNode::createMaterialVariant(QSGMaterialType *variant)
 {
-    return new ShadowedTextureMaterial{};
-}
+    if (variant == &ShadowedTextureMaterial::staticType) {
+        return new ShadowedTextureMaterial{};
+    } else if (variant == &ShadowedBorderTextureMaterial::staticType) {
+        return new ShadowedBorderTextureMaterial{};
+    }
 
-ShadowedBorderRectangleMaterial *ShadowedTextureNode::createBorderMaterial()
-{
-    return new ShadowedBorderTextureMaterial{};
+    return nullptr;
 }
 
 QSGMaterialType *ShadowedTextureNode::borderlessMaterialType()

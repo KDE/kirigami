@@ -5,16 +5,18 @@
  */
 
 layout(std140, binding = 0) uniform buf {
-    highp mat4 matrix; // offset 0
-    lowp vec2 aspect; // offset 64
+    highp mat4 matrix;
+    mediump float opacity;
 
-    lowp float opacity; // offset 72
-    lowp float size; // offset 76
-    lowp vec4 radius; // offset 80
-    lowp vec4 color; // offset 96
-    lowp vec4 shadowColor; // offset 112
-    lowp vec2 offset; // offset 128
+    mediump vec2 aspect;
 
-    lowp float borderWidth; // offset 136
-    lowp vec4 borderColor; // offset 144
+    mediump float size;
+    mediump vec4 radius;
+    mediump vec2 offset;
+
+    mediump vec4 color;
+    mediump vec4 shadowColor;
+
+    mediump float borderWidth;
+    mediump vec4 borderColor;
 } ubuf; // size 160

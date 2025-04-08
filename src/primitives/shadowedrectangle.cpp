@@ -11,7 +11,9 @@
 #include <QSGRendererInterface>
 
 #include "scenegraph/paintedrectangleitem.h"
-#include "scenegraph/shadowedrectanglenode.h"
+#include "scenegraph/shadernode.h"
+
+using namespace Qt::StringLiterals;
 
 BorderGroup::BorderGroup(QObject *parent)
     : QObject(parent)
@@ -306,29 +308,55 @@ QSGNode *ShadowedRectangle::updatePaintNode(QSGNode *node, QQuickItem::UpdatePai
         return nullptr;
     }
 
-    auto shadowNode = static_cast<ShadowedRectangleNode *>(node);
-
-    if (!shadowNode) {
-        shadowNode = new ShadowedRectangleNode{};
-
-        // Cache lowPower state so we only execute the full check once.
-        static bool lowPower = QByteArrayList{"1", "true"}.contains(qgetenv("KIRIGAMI_LOWPOWER_HARDWARE").toLower());
-        if (m_renderType == RenderType::LowQuality || (m_renderType == RenderType::Auto && lowPower)) {
-            shadowNode->setShaderType(ShadowedRectangleMaterial::ShaderType::LowPower);
-        }
+    auto shaderNode = static_cast<ShaderNode *>(node);
+    if (!shaderNode) {
+        shaderNode = new ShaderNode{};
     }
 
-    shadowNode->setBorderEnabled(m_border->isEnabled());
-    shadowNode->setRect(boundingRect());
-    shadowNode->setSize(m_shadow->size());
-    shadowNode->setRadius(m_corners->toVector4D(m_radius));
-    shadowNode->setOffset(QVector2D{float(m_shadow->xOffset()), float(m_shadow->yOffset())});
-    shadowNode->setColor(m_color);
-    shadowNode->setShadowColor(m_shadow->color());
-    shadowNode->setBorderWidth(m_border->width());
-    shadowNode->setBorderColor(m_border->color());
-    shadowNode->updateGeometry();
-    return shadowNode;
+    if (m_border->isEnabled()) {
+        shaderNode->setShader(u"shadowedborderrectangle"_s);
+    } else {
+        shaderNode->setShader(u"shadowedrectangle"_s);
+    }
+
+    auto rect = boundingRect();
+    auto aspect = calculateAspect(rect);
+    auto minDimension = std::min(rect.width(), rect.height());
+    auto shadowSize = m_shadow->size();
+    auto offset = QVector2D{float(m_shadow->xOffset()), float(m_shadow->yOffset())};
+
+    shaderNode->setRect(adjustRectForShadow(rect, shadowSize, offset, aspect));
+    shaderNode->setUniform("aspect", aspect);
+    shaderNode->setUniform("size", float(shadowSize / minDimension) * 2.0f);
+    shaderNode->setUniform("radius", m_corners->toVector4D(m_radius) / minDimension);
+    shaderNode->setUniform("offset", offset / minDimension);
+    shaderNode->setUniformColorPremultiplied("color", m_color);
+    shaderNode->setUniformColorPremultiplied("shadowColor", m_shadow->color());
+    shaderNode->setUniform("borderWidth", float(m_border->width() / minDimension));
+    shaderNode->setUniformColorPremultiplied("borderColor", m_border->color());
+
+    shaderNode->update();
+
+    return shaderNode;
+}
+
+QVector2D ShadowedRectangle::calculateAspect(const QRectF &rect) const
+{
+    auto aspect = QVector2D{1.0, 1.0};
+    if (rect.width() >= rect.height()) {
+        aspect.setX(rect.width() / rect.height());
+    } else {
+        aspect.setY(rect.height() / rect.width());
+    }
+    return aspect;
+}
+
+QRectF ShadowedRectangle::adjustRectForShadow(const QRectF &rect, float shadowSize, const QVector2D &offsets, const QVector2D &aspect)
+{
+    auto adjusted = rect.adjusted(-shadowSize * aspect.x(), -shadowSize * aspect.y(), shadowSize * aspect.x(), shadowSize * aspect.y());
+    auto offsetLength = offsets.length();
+    adjusted.adjust(-offsetLength * aspect.x(), -offsetLength * aspect.y(), offsetLength * aspect.x(), offsetLength * aspect.y());
+    return adjusted;
 }
 
 void ShadowedRectangle::checkSoftwareItem()

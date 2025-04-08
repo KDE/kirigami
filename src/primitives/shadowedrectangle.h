@@ -358,6 +358,9 @@ protected:
     void itemChange(QQuickItem::ItemChange change, const QQuickItem::ItemChangeData &value) override;
     QSGNode *updatePaintNode(QSGNode *node, QQuickItem::UpdatePaintNodeData *data) override;
 
+    QVector2D calculateAspect(const QRectF &rect) const;
+    QRectF adjustRectForShadow(const QRectF &rect, float shadowSize, const QVector2D &offsets, const QVector2D &aspect);
+
 private:
     void checkSoftwareItem();
     const std::unique_ptr<BorderGroup> m_border;
