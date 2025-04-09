@@ -15,6 +15,7 @@
 #include <QQmlContext>
 #include <QQmlEngine>
 #include <QStyleHints>
+#include <qquickitem.h>
 
 #include "platform/units.h"
 
@@ -519,7 +520,7 @@ void ContentItem::layoutItems()
                 }
 
                 child->setSize(QSizeF(width + sepWidth, height() - headerHeight - footerHeight));
-                child->setPosition(QPointF(pageX, headerHeight));
+                child->setPosition(QPointF(pageX, 0));
                 child->setZ(1);
 
                 if (partialWidth <= -x()) {
@@ -567,14 +568,14 @@ void ContentItem::layoutItems()
                     }
                 }
 
-                child->setSize(QSizeF(width, height() - headerHeight - footerHeight));
+                child->setSize(QSizeF(width, height()));
 
                 auto it = m_trailingSeparators.find(child);
                 if (it != m_trailingSeparators.end()) {
                     it.value()->deleteLater();
                     m_trailingSeparators.erase(it);
                 }
-                child->setPosition(QPointF(partialWidth, headerHeight));
+                child->setPosition(QPointF(partialWidth, 0));
                 child->setZ(0);
 
                 partialWidth += child->width();
@@ -594,6 +595,9 @@ void ContentItem::layoutItems()
 
     setWidth(partialWidth);
     m_globalHeaderParent->setSize({partialWidth, maxHeaderHeight});
+    m_globalHeaderParent->setImplicitHeight(maxHeaderHeight);
+    m_view->globalHeaderContainer()->slidingItem()->setImplicitHeight(maxHeaderHeight);
+    m_view->globalHeaderContainer()->contentItem()->setImplicitHeight(maxHeaderHeight);
 
     setImplicitWidth(implicitWidth);
     setImplicitHeight(implicitHeight);
@@ -895,6 +899,7 @@ void ContentItem::itemChange(QQuickItem::ItemChange change, const QQuickItem::It
 void ContentItem::geometryChange(const QRectF &newGeometry, const QRectF &oldGeometry)
 {
     updateVisibleItems();
+    m_view->globalHeaderContainer()->setContentX(-newGeometry.x());
     QQuickItem::geometryChange(newGeometry, oldGeometry);
 }
 
@@ -947,7 +952,7 @@ void ContentItem::connectHeader(QQuickItem *oldHeader, QQuickItem *newHeader)
     if (newHeader) {
         connect(newHeader, &QQuickItem::heightChanged, this, &ContentItem::layoutItems);
         connect(newHeader, &QQuickItem::visibleChanged, this, &ContentItem::layoutItems);
-        newHeader->setParentItem(m_globalHeaderParent);
+        newHeader->setParentItem(m_view->globalHeaderContainer()->slidingItem());
     }
 }
 
@@ -964,12 +969,44 @@ void ContentItem::connectFooter(QQuickItem *oldFooter, QQuickItem *newFooter)
     }
 }
 
+/////// GlobalToolBar
+
+GlobalToolBar::GlobalToolBar(QQuickItem *parent)
+    : Padding(parent)
+{
+    m_contentRoot = new QQuickItem(this);
+    m_contentRoot->setClip(true);
+    setContentItem(m_contentRoot);
+    m_slidingItem = new QQuickItem(m_contentRoot);
+}
+
+GlobalToolBar::~GlobalToolBar()
+{
+}
+
+QQuickItem *GlobalToolBar::slidingItem() const
+{
+    return m_slidingItem;
+}
+
+qreal GlobalToolBar::contentX() const
+{
+    return -m_slidingItem->x() - leftPadding();
+}
+
+void GlobalToolBar::setContentX(qreal contentX)
+{
+    m_slidingItem->setX(-contentX - leftPadding());
+}
+
+/////// ColumnView
+
 ColumnView::ColumnView(QQuickItem *parent)
     : QQuickItem(parent)
     , m_contentItem(nullptr)
 {
     // NOTE: this is to *not* trigger itemChange
-    m_globalHeader = new QQuickItem(this);
+    m_globalHeader = new GlobalToolBar(this);
     m_contentItem = new ContentItem(this);
 
     // Prevent interactions outside of ColumnView bounds, and let it act as a viewport.
@@ -1126,24 +1163,9 @@ int ColumnView::count() const
     return m_contentItem->m_items.count();
 }
 
-QQuickItem *ColumnView::globalHeaderContainer() const
+GlobalToolBar *ColumnView::globalHeaderContainer() const
 {
-    return m_contentItem->m_globalHeaderContainer;
-}
-
-void ColumnView::setGlobalHeaderContainer(QQuickItem *item)
-{
-    if (item == m_contentItem->m_globalHeaderContainer) {
-        return;
-    }
-
-    m_contentItem->m_globalHeaderContainer = item;
-    item->setParentItem(m_globalHeader);
-    item->setSize({800, 45});
-    m_contentItem->m_globalHeaderParent->setParentItem(item);
-    item->setProperty("contentItem", QVariant::fromValue(m_contentItem->m_globalHeaderParent));
-
-    Q_EMIT globalHeaderContainerChanged();
+    return m_globalHeader;
 }
 
 qreal ColumnView::leadingGlobalHeaderPadding() const
@@ -1585,6 +1607,8 @@ ColumnViewAttached *ColumnView::qmlAttachedProperties(QObject *object)
 
 void ColumnView::geometryChange(const QRectF &newGeometry, const QRectF &oldGeometry)
 {
+    m_globalHeader->setWidth(newGeometry.width());
+
     m_contentItem->setY(m_topPadding);
     m_contentItem->setHeight(newGeometry.height() - m_topPadding - m_bottomPadding);
     m_contentItem->m_shouldAnimate = false;

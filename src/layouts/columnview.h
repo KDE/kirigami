@@ -13,6 +13,7 @@
 
 class ContentItem;
 class ColumnView;
+class GlobalToolBar;
 
 class ScrollIntentionEvent : public QObject
 {
@@ -252,7 +253,7 @@ class ColumnView : public QQuickItem
      */
     Q_PROPERTY(qreal contentWidth READ contentWidth NOTIFY contentWidthChanged FINAL)
 
-    Q_PROPERTY(QQuickItem *globalHeaderContainer READ globalHeaderContainer WRITE setGlobalHeaderContainer NOTIFY globalHeaderContainerChanged)
+    Q_PROPERTY(GlobalToolBar *globalHeaderContainer READ globalHeaderContainer CONSTANT)
     /**
      * If columns have a global header, always reserve this space on the left
      * (or on the right on RTL layouts)
@@ -397,8 +398,7 @@ public:
 
     int count() const;
 
-    QQuickItem *globalHeaderContainer() const;
-    void setGlobalHeaderContainer(QQuickItem *item);
+    GlobalToolBar *globalHeaderContainer() const;
 
     qreal leadingGlobalHeaderPadding() const;
     void setLeadingGlobalHeaderPadding(qreal padding);
@@ -641,7 +641,6 @@ Q_SIGNALS:
     void separatorVisibleChanged();
     void leadingVisibleItemChanged();
     void trailingVisibleItemChanged();
-    void globalHeaderContainerChanged();
     void leadingGlobalHeaderPaddingChanged();
     void trailingGlobalHeaderPaddingChanged();
     void topPaddingChanged();
@@ -660,7 +659,7 @@ private:
 
     QList<QObject *> m_contentData;
 
-    QQuickItem *m_globalHeader;
+    GlobalToolBar *m_globalHeader;
     ContentItem *m_contentItem;
     QPointer<QQuickItem> m_currentItem;
 
