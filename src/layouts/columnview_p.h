@@ -7,6 +7,7 @@
 #pragma once
 
 #include "columnview.h"
+#include "padding.h"
 
 #include <QPointer>
 #include <QQuickItem>
@@ -77,7 +78,6 @@ private Q_SLOTS:
 
 private:
     ColumnView *m_view;
-    QQuickItem *m_globalHeaderContainer;
     QQuickItem *m_globalHeaderParent;
     QQuickItem *m_globalFooterParent;
     QPropertyAnimation *m_slideAnim;
@@ -100,4 +100,21 @@ private:
     bool m_shouldAnimate = false;
     bool m_creationInProgress = true;
     friend class ColumnView;
+};
+
+class GlobalToolBar : public Padding
+{
+    Q_OBJECT
+public:
+    GlobalToolBar(QQuickItem *parent = nullptr);
+    ~GlobalToolBar();
+
+    QQuickItem *slidingItem() const;
+
+    qreal contentX() const;
+    void setContentX(qreal contentX);
+
+private:
+    QQuickItem *m_contentRoot;
+    QQuickItem *m_slidingItem;
 };

@@ -1115,16 +1115,28 @@ QT.Control {
             rightPadding: root.leftSidebar ? root.leftSidebar.rightPadding : 0
             bottomPadding: root.leftSidebar ? root.leftSidebar.bottomPadding : 0
         }
+
+        QQC2.ToolBar {
+            parent: columnView.globalHeaderContainer
+            z: -1
+            anchors.fill:parent
+        }
         Kirigami.ColumnView {
             id: columnView
             Layout.fillWidth: true
             Layout.fillHeight: true
 
-            topPadding: globalToolBarUI.item && globalToolBarUI.item.breadcrumbVisible
+            /*topPadding: globalToolBarUI.item && globalToolBarUI.item.breadcrumbVisible
                         ? globalToolBarUI.height : 0
+                        */
+            topPadding: globalHeaderContainer.implicitHeight
             leadingGlobalHeaderPadding: globalToolBarUI.item?.leadingControlsWidth ?? 0
             trailingGlobalHeaderPadding: globalToolBarUI.item?.trailingControlsWidth ?? 0
-            globalHeaderContainer: QQC2.ToolBar{}
+            globalHeaderContainer {
+                padding: Kirigami.Units.smallSpacing
+                leftPadding: 110
+
+            }
 
             // Internal hidden api for Page
             readonly property Item __pageRow: root
