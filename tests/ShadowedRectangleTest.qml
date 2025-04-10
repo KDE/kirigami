@@ -47,17 +47,17 @@ Kirigami.ApplicationWindow {
             Kirigami.FormLayout {
                 Item { Kirigami.FormData.isSection: true }
 
-                Slider { id: radiusSlider; from: 0; to: 200; Kirigami.FormData.label: "Overall Radius" }
-                Slider { id: topLeftSlider; from: -1; to: 200; value: -1; Kirigami.FormData.label: "Top Left Radius" }
-                Slider { id: topRightSlider; from: -1; to: 200; value: -1; Kirigami.FormData.label: "Top Right Radius" }
-                Slider { id: bottomLeftSlider; from: -1; to: 200; value: -1; Kirigami.FormData.label: "Bottom Left Radius" }
-                Slider { id: bottomRightSlider; from: -1; to: 200; value: -1; Kirigami.FormData.label: "Bottom Right Radius" }
+                Slider { id: radiusSlider; from: 0; to: 200; stepSize: 1; Kirigami.FormData.label: `Overall Radius (${parseInt(value)})` }
+                Slider { id: topLeftSlider; from: -1; to: 200; stepSize: 1; value: -1; Kirigami.FormData.label: `Top Left Radius (${parseInt(value)})` }
+                Slider { id: topRightSlider; from: -1; to: 200; stepSize: 1; value: -1; Kirigami.FormData.label: `Top Right Radius (${parseInt(value)})` }
+                Slider { id: bottomLeftSlider; from: -1; to: 200; stepSize: 1; value: -1; Kirigami.FormData.label: `Bottom Left Radius (${parseInt(value)})` }
+                Slider { id: bottomRightSlider; from: -1; to: 200; stepSize: 1; value: -1; Kirigami.FormData.label: `Bottom Right Radius (${parseInt(value)})` }
 
-                Slider { id: sizeSlider; from: 0; to: 100; Kirigami.FormData.label: "Shadow Size" }
-                Slider { id: xOffsetSlider; from: -100; to: 100; Kirigami.FormData.label: "Shadow X-Offset" }
-                Slider { id: yOffsetSlider; from: -100; to: 100; Kirigami.FormData.label: "Shadow Y-Offset" }
+                Slider { id: sizeSlider; from: 0; to: 100; stepSize: 1; Kirigami.FormData.label: `Shadow Size (${parseInt(value)})` }
+                Slider { id: xOffsetSlider; from: -100; to: 100; stepSize: 1; Kirigami.FormData.label: `Shadow X-Offset (${parseInt(value)})` }
+                Slider { id: yOffsetSlider; from: -100; to: 100; stepSize: 1; Kirigami.FormData.label: `Shadow Y-Offset (${parseInt(value)})` }
 
-                Slider { id: borderWidthSlider; from: 0; to: 50; Kirigami.FormData.label: "Border Width" }
+                Slider { id: borderWidthSlider; from: 0; to: 50; stepSize: 1; Kirigami.FormData.label: `Border Width (${parseInt(value)})` }
             }
         }
     }
