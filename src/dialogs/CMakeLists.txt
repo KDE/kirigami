@@ -13,7 +13,7 @@ ecm_target_qml_sources(KirigamiDialogs SOURCES
     DialogHeader.qml
     DialogHeaderTopContent.qml
     DialogFooter.qml
-    DialogButtonContent.qml
+    DialogCustomButtonBox.qml
     Dialog.qml
     MenuDialog.qml
     PromptDialog.qml

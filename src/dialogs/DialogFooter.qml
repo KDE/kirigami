@@ -41,7 +41,7 @@ import org.kde.kirigami.dialogs as KDialogs
  *         dialog: myDialog
  *         contentItem: RowLayout {
  *             CustomItem {...}
- *             DialogButtonContent {
+ *             DialogCustomButtonBox {
  *                 dialog: myDialog
  *             }
  *         }
@@ -72,10 +72,10 @@ T.Control {
         }
     }
 
-    function customFooterButton(action: T.Action): T.AbstractButton {
+    function customButton(action: T.Action): T.AbstractButton {
         // in case a footer is redefined
-        if (contentItem.customFooterButton && typeof contentItem.customFooterButton === "function") {
-            return contentItem.customFooterButton(action);
+        if (contentItem.customButton && typeof contentItem.customButton === "function") {
+            return contentItem.customButton(action);
         } else {
             return null;
         }

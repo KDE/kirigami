@@ -261,7 +261,7 @@ T.Dialog {
     function customFooterButton(action: T.Action): T.AbstractButton {
         // in case a footer is redefined
         if (footer.customFooterButton && typeof footer.customFooterButton === "function") {
-            return footer.customFooterButton(action);
+            return footer.customButton(action);
         } else {
             return null;
         }
@@ -412,8 +412,8 @@ T.Dialog {
             function standardButton(button): T.AbstractButton {
                 return footerButtonContent.standardButton(button)
             }
-            function customFooterButton(action: T.Action): T.AbstractButton {
-                return footerButtonContent.customFooterButton(action)
+            function customButton(action: T.Action): T.AbstractButton {
+                return footerButtonContent.customButton(action)
             }
 
             spacing: dialogFooter.spacing
@@ -421,13 +421,13 @@ T.Dialog {
             enabled: root.opened
 
             // The leadingLoader and trailingLoader the are intentionally outside
-            // DialogButtonContent as the plan in the long term is to remove
+            // DialogCustomButtonBox as the plan in the long term is to remove
             // them, do NOT try to add.
             Loader {
                 id: leadingLoader
                 sourceComponent: root.footerLeadingComponent
             }
-            KDialogs.DialogButtonContent {
+            KDialogs.DialogCustomButtonBox {
                 id: footerButtonContent
                 Layout.fillWidth: true
                 dialog: root

@@ -109,7 +109,7 @@ QQC2.DialogButtonBox {
      */
     property list<T.Action> customActions
 
-    function customFooterButton(action: T.Action): T.AbstractButton {
+    function customButton(action: T.Action): T.AbstractButton {
         if (!action) {
             // Even if there's a null object in the list of actions, we should
             // not return a button for it.
