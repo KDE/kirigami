@@ -25,18 +25,6 @@ target_sources(KirigamiPrimitives PRIVATE
     scenegraph/managedtexturenode.h
     scenegraph/paintedrectangleitem.cpp
     scenegraph/paintedrectangleitem.h
-    scenegraph/shadowedborderrectanglematerial.cpp
-    scenegraph/shadowedborderrectanglematerial.h
-    scenegraph/shadowedbordertexturematerial.cpp
-    scenegraph/shadowedbordertexturematerial.h
-    scenegraph/shadowedrectanglematerial.cpp
-    scenegraph/shadowedrectanglematerial.h
-    scenegraph/shadowedrectanglenode.cpp
-    scenegraph/shadowedrectanglenode.h
-    scenegraph/shadowedtexturematerial.cpp
-    scenegraph/shadowedtexturematerial.h
-    scenegraph/shadowedtexturenode.cpp
-    scenegraph/shadowedtexturenode.h
 )
 
 ecm_target_qml_sources(KirigamiPrimitives SOURCES
