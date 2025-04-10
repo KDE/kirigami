@@ -105,16 +105,33 @@ private:
 class GlobalToolBar : public Padding
 {
     Q_OBJECT
+    Q_PROPERTY(QQuickItem *leadingItem READ leadingItem WRITE setLeadingItem NOTIFY leadingItemChanged)
+    Q_PROPERTY(QQuickItem *trailingItem READ trailingItem WRITE setTrailingItem NOTIFY trailingItemChanged)
 public:
     GlobalToolBar(QQuickItem *parent = nullptr);
     ~GlobalToolBar();
+
+    QQuickItem *leadingItem() const;
+    void setLeadingItem(QQuickItem *leadingItem);
+
+    QQuickItem *trailingItem() const;
+    void setTrailingItem(QQuickItem *trailingItem);
 
     QQuickItem *slidingItem() const;
 
     qreal contentX() const;
     void setContentX(qreal contentX);
 
+protected:
+    void geometryChange(const QRectF &newGeometry, const QRectF &oldGeometry) override;
+
+Q_SIGNALS:
+    void leadingItemChanged();
+    void trailingItemChanged();
+
 private:
     QQuickItem *m_contentRoot;
     QQuickItem *m_slidingItem;
+    QQuickItem *m_leadingItem = nullptr;
+    QQuickItem *m_trailingItem = nullptr;
 };
