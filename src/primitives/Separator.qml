@@ -51,4 +51,5 @@ Rectangle {
         Platform.Theme.textColor,
         weight === Separator.Weight.Light ? Platform.Theme.lightFrameContrast : Platform.Theme.frameContrast
     )
+    antialiasing: true
 }
