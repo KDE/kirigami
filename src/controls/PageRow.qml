@@ -1017,6 +1017,10 @@ QT.Control {
             leadingGlobalHeaderPadding: globalToolBarUI.item?.leadingControlsWidth ?? 0
             trailingGlobalHeaderPadding: globalToolBarUI.item?.trailingControlsWidth ?? 0
             globalHeaderContainer {
+                leadingItem: Rectangle {
+                    width: 30
+                    height: 30
+                }
                 //padding: Kirigami.Units.smallSpacing
                 leftPadding: 110
 

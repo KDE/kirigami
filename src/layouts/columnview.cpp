@@ -17,6 +17,7 @@
 #include <QStyleHints>
 #include <qquickitem.h>
 
+#include "padding.h"
 #include "platform/units.h"
 
 class QmlComponentsPoolSingleton
@@ -978,7 +979,8 @@ void ContentItem::connectFooter(QQuickItem *oldFooter, QQuickItem *newFooter)
 GlobalToolBar::GlobalToolBar(QQuickItem *parent)
     : Padding(parent)
 {
-    m_contentRoot = new QQuickItem(this);
+    setContentItem(new QQuickItem(this));
+    m_contentRoot = new QQuickItem(contentItem());
     m_contentRoot->setClip(true);
     setContentItem(m_contentRoot);
     m_slidingItem = new QQuickItem(m_contentRoot);
@@ -986,6 +988,40 @@ GlobalToolBar::GlobalToolBar(QQuickItem *parent)
 
 GlobalToolBar::~GlobalToolBar()
 {
+}
+
+QQuickItem *GlobalToolBar::leadingItem() const
+{
+    return m_leadingItem;
+}
+
+void GlobalToolBar::setLeadingItem(QQuickItem *leadingItem)
+{
+    if (leadingItem == m_leadingItem) {
+        return;
+    }
+
+    m_leadingItem = leadingItem;
+    m_leadingItem->setParentItem(contentItem());
+
+    Q_EMIT leadingItemChanged();
+}
+
+QQuickItem *GlobalToolBar::trailingItem() const
+{
+    return m_trailingItem;
+}
+
+void GlobalToolBar::setTrailingItem(QQuickItem *trailingItem)
+{
+    if (trailingItem == m_trailingItem) {
+        return;
+    }
+
+    m_trailingItem = trailingItem;
+    m_trailingItem->setParentItem(contentItem());
+
+    Q_EMIT trailingItemChanged();
 }
 
 QQuickItem *GlobalToolBar::slidingItem() const
@@ -1001,6 +1037,26 @@ qreal GlobalToolBar::contentX() const
 void GlobalToolBar::setContentX(qreal contentX)
 {
     m_slidingItem->setX(-contentX - leftPadding());
+}
+
+void GlobalToolBar::geometryChange(const QRectF &newGeometry, const QRectF &oldGeometry)
+{
+    qreal leadingWidth = 0;
+    qreal trailingWidth = 0;
+    // TODO: move in polish()
+    if (m_leadingItem && m_leadingItem->isVisible()) {
+        leadingWidth = m_leadingItem->width();
+        m_leadingItem->setPosition({0, 0});
+        m_leadingItem->setHeight(contentItem()->height());
+    }
+    if (m_trailingItem && m_trailingItem->isVisible()) {
+        trailingWidth = m_trailingItem->width();
+        m_trailingItem->setPosition({contentItem()->width() - trailingWidth, 0});
+        m_trailingItem->setHeight(contentItem()->height());
+    }
+    m_contentRoot->setPosition({leadingWidth, 0});
+    m_contentRoot->setSize({contentItem()->width() - leadingWidth - trailingWidth, contentItem()->height()});
+    Padding::geometryChange(newGeometry, oldGeometry);
 }
 
 /////// ColumnView
