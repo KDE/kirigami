@@ -130,8 +130,11 @@ Kirigami.AbstractApplicationHeader {
                 }
             }
 
-            QQC2.ToolSeparator {
-                visible: (menuButton.visible || (buttonsLayout.visible && buttonsLayout.visibleChildren.length > 0)) && breadcrumbVisible && pageRow.depth > 1
+            Kirigami.Separator {
+                Layout.fillHeight: true
+                Layout.topMargin: Kirigami.Units.largeSpacing
+                Layout.bottomMargin: Kirigami.Units.largeSpacing
+                //visible: (menuButton.visible || (buttonsLayout.visible && buttonsLayout.visibleChildren.length > 0)) && breadcrumbVisible && pageRow.depth > 1
             }
         }
 
