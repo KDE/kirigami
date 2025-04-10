@@ -1126,14 +1126,13 @@ QT.Control {
             Layout.fillWidth: true
             Layout.fillHeight: true
 
-            /*topPadding: globalToolBarUI.item && globalToolBarUI.item.breadcrumbVisible
+            topPadding: globalToolBarUI.item && globalToolBarUI.item.breadcrumbVisible
                         ? globalToolBarUI.height : 0
-                        */
-            topPadding: globalHeaderContainer.implicitHeight
+
             leadingGlobalHeaderPadding: globalToolBarUI.item?.leadingControlsWidth ?? 0
             trailingGlobalHeaderPadding: globalToolBarUI.item?.trailingControlsWidth ?? 0
             globalHeaderContainer {
-                padding: Kirigami.Units.smallSpacing
+                //padding: Kirigami.Units.smallSpacing
                 leftPadding: 110
 
             }

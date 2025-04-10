@@ -460,7 +460,7 @@ qreal ContentItem::childWidth(QQuickItem *child)
 
 void ContentItem::layoutItems()
 {
-    setY(m_view->topPadding());
+    setY(m_view->topPadding() + m_view->globalHeaderContainer()->height());
     setHeight(m_view->height() - m_view->topPadding() - m_view->bottomPadding());
 
     qreal implicitWidth = 0;
@@ -953,6 +953,8 @@ void ContentItem::connectHeader(QQuickItem *oldHeader, QQuickItem *newHeader)
         connect(newHeader, &QQuickItem::heightChanged, this, &ContentItem::layoutItems);
         connect(newHeader, &QQuickItem::visibleChanged, this, &ContentItem::layoutItems);
         newHeader->setParentItem(m_view->globalHeaderContainer()->slidingItem());
+        newHeader->setVisible(true);
+        layoutItems();
     }
 }
 
@@ -966,6 +968,8 @@ void ContentItem::connectFooter(QQuickItem *oldFooter, QQuickItem *newFooter)
         connect(newFooter, &QQuickItem::heightChanged, this, &ContentItem::layoutItems);
         connect(newFooter, &QQuickItem::visibleChanged, this, &ContentItem::layoutItems);
         newFooter->setParentItem(m_globalFooterParent);
+        newFooter->setVisible(true);
+        layoutItems();
     }
 }
 
@@ -1008,6 +1012,8 @@ ColumnView::ColumnView(QQuickItem *parent)
     // NOTE: this is to *not* trigger itemChange
     m_globalHeader = new GlobalToolBar(this);
     m_contentItem = new ContentItem(this);
+
+    connect(m_globalHeader, &GlobalToolBar::heightChanged, m_contentItem, &ContentItem::layoutItems);
 
     // Prevent interactions outside of ColumnView bounds, and let it act as a viewport.
     setClip(true);
@@ -1214,6 +1220,7 @@ void ColumnView::setTopPadding(qreal padding)
     }
 
     m_topPadding = padding;
+    m_globalHeader->setY(m_topPadding);
     polish();
     Q_EMIT topPaddingChanged();
 }
@@ -1607,9 +1614,10 @@ ColumnViewAttached *ColumnView::qmlAttachedProperties(QObject *object)
 
 void ColumnView::geometryChange(const QRectF &newGeometry, const QRectF &oldGeometry)
 {
+    m_globalHeader->setY(m_topPadding);
     m_globalHeader->setWidth(newGeometry.width());
 
-    m_contentItem->setY(m_topPadding);
+    m_contentItem->setY(m_topPadding + m_globalHeader->height());
     m_contentItem->setHeight(newGeometry.height() - m_topPadding - m_bottomPadding);
     m_contentItem->m_shouldAnimate = false;
     polish();
