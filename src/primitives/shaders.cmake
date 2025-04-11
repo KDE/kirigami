@@ -42,3 +42,23 @@ add_shaders("shadowed_border_texture"
         ENABLE_TEXTURE=1
 )
 
+add_shaders("icon_default"
+    INPUT icon
+)
+
+add_shaders("icon_mix"
+    INPUT icon
+    DEFINES ENABLE_MIX=1
+)
+
+add_shaders("icon_mask_default"
+    INPUT icon
+    DEFINES ENABLE_MASK=1
+)
+
+add_shaders("icon_mask_mix"
+    INPUT icon
+    DEFINES
+        ENABLE_MASK=1
+        ENABLE_MIX=1
+)
