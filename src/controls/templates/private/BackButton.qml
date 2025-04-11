@@ -5,6 +5,7 @@
  */
 
 import QtQuick
+import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 
@@ -37,11 +38,19 @@ QQC2.ToolButton {
     }
 
     // The gridUnit wiggle room is used to not flicker the button visibility during an animated resize for instance due to a sidebar collapse
-    visible: {
+    opacity: {
         const pageStack = applicationWindow().pageStack;
         const showNavButtons = globalToolBar?.showNavigationButtons ?? Kirigami.ApplicationHeaderStyle.NoNavigationButtons;
         return pageStack.layers.depth > 1 || (pageStack.contentItem.contentWidth > pageStack.width + Kirigami.Units.gridUnit && (showNavButtons & Kirigami.ApplicationHeaderStyle.ShowBackButton));
     }
+    Behavior on opacity {
+        NumberAnimation {
+            duration: Kirigami.Units.longDuration
+            easing.type: Easing.InOutQuad
+        }
+    }
+    Layout.rightMargin: -width * (1 - opacity)
+
 
     onClicked: {
         applicationWindow().pageStack.goBack();

@@ -662,9 +662,22 @@ QT.Control {
             right: parent.right
         }
         z: 100 // 100 is layersStack.z + 1
-        height: currentItem?.implicitHeight ?? 0
-        initialItem: Item {implicitHeight: 0}
+        opacity: depth > 1
+        height: currentItem?.implicitHeight ?? globalToolBarUI.implicitHeight
+        initialItem: Item {implicitHeight: globalToolBarUI.implicitHeight}
 
+        Behavior on height {
+            NumberAnimation {
+                duration: Kirigami.Units.longDuration
+                easing.type: Easing.InOutQuad
+            }
+        }
+        Behavior on opacity {
+            OpacityAnimator {
+                duration: Kirigami.Units.longDuration
+                easing.type: Easing.InOutQuad
+            }
+        }
         Component {
             id: emptyToolbar
             Item {
