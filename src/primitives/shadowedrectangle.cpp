@@ -314,9 +314,9 @@ QSGNode *ShadowedRectangle::updatePaintNode(QSGNode *node, QQuickItem::UpdatePai
     }
 
     if (m_border->isEnabled()) {
-        shaderNode->setShader(u"shadowedborderrectangle"_s);
+        shaderNode->setShader(u"shadowed_border_rectangle"_s);
     } else {
-        shaderNode->setShader(u"shadowedrectangle"_s);
+        shaderNode->setShader(u"shadowed_rectangle"_s);
     }
 
     auto rect = boundingRect();

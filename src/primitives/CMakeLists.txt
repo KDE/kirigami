@@ -48,72 +48,8 @@ else()
     set(_extra_options PRECOMPILE OPTIMIZED)
 endif()
 
-qt6_add_shaders(KirigamiPrimitives "shadowed_rectangle"
-    BATCHABLE
-    PREFIX "/qt/qml/org/kde/kirigami/primitives/shaders"
-    FILES
-        shaders/shadowedrectangle.vert
-        shaders/shadowedrectangle.frag
-    OUTPUTS
-        shadowedrectangle.vert.qsb
-        shadowedrectangle.frag.qsb
-    ${_extra_options}
-    OUTPUT_TARGETS _shadowed_rectangle_targets
-)
-
-qt6_add_shaders(KirigamiPrimitives "shadowed_border_rectangle"
-    BATCHABLE
-    PREFIX "/qt/qml/org/kde/kirigami/primitives/shaders"
-    FILES
-        shaders/shadowedrectangle.vert
-        shaders/shadowedrectangle.frag
-    OUTPUTS
-        shadowedborderrectangle.vert.qsb
-        shadowedborderrectangle.frag.qsb
-    DEFINES
-        ENABLE_BORDER=1
-    ${_extra_options}
-    OUTPUT_TARGETS _shadowed_border_rectangle_targets
-)
-
-qt6_add_shaders(KirigamiPrimitives "shadowed_texture"
-    BATCHABLE
-    PREFIX "/qt/qml/org/kde/kirigami/primitives/shaders"
-    FILES
-        shaders/shadowedrectangle.vert
-        shaders/shadowedrectangle.frag
-    OUTPUTS
-        shadowedtexture.vert.qsb
-        shadowedtexture.frag.qsb
-    DEFINES
-        ENABLE_TEXTURE=1
-    ${_extra_options}
-    OUTPUT_TARGETS _shadowed_texture_targets
-)
-
-qt6_add_shaders(KirigamiPrimitives "shadowed_border_texture"
-    BATCHABLE
-    PREFIX "/qt/qml/org/kde/kirigami/primitives/shaders"
-    FILES
-        shaders/shadowedrectangle.vert
-        shaders/shadowedrectangle.frag
-    OUTPUTS
-        shadowedbordertexture.vert.qsb
-        shadowedbordertexture.frag.qsb
-    DEFINES
-        ENABLE_BORDER=1
-        ENABLE_TEXTURE=1
-    ${_extra_options}
-    OUTPUT_TARGETS _shadowed_border_texture_targets
-)
+include(shaders.cmake)
 
 ecm_finalize_qml_module(KirigamiPrimitives EXPORT KirigamiTargets)
 
-install(TARGETS
-    KirigamiPrimitives
-    ${_shadowed_rectangle_targets}
-    ${_shadowed_border_rectangle_targets}
-    ${_shadowed_texture_targets}
-    ${_shadowed_border_texture_targets}
-    EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS}
-)
+install(TARGETS KirigamiPrimitives EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})

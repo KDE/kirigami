@@ -62,15 +62,15 @@ QSGNode *ShadowedTexture::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaint
 
     if (m_source) {
         if (border()->isEnabled()) {
-            shaderNode->setShader(u"shadowedbordertexture"_s);
+            shaderNode->setShader(u"shadowed_border_texture"_s);
         } else {
-            shaderNode->setShader(u"shadowedtexture"_s);
+            shaderNode->setShader(u"shadowed_texture"_s);
         }
     } else {
         if (border()->isEnabled()) {
-            shaderNode->setShader(u"shadowedborderrectangle"_s);
+            shaderNode->setShader(u"shadowed_border_rectangle"_s);
         } else {
-            shaderNode->setShader(u"shadowedrectangle"_s);
+            shaderNode->setShader(u"shadowed_rectangle"_s);
         }
     }
 
@@ -91,7 +91,7 @@ QSGNode *ShadowedTexture::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaint
     shaderNode->setUniformColorPremultiplied("borderColor", border()->color());
 
     if (m_source) {
-        shaderNode->setTexture(1, m_source->textureProvider());
+        shaderNode->setTexture(0, m_source->textureProvider());
     }
 
     shaderNode->update();
