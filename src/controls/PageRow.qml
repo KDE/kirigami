@@ -810,6 +810,14 @@ QT.Control {
         onDepthChanged: {
             let item = layersStack.get(depth - 1)
 
+            if (depth > 1) {
+                const toolBar = item.Kirigami.ColumnView.globalHeader
+                toolBar.parent = item
+                toolBar.anchors.bottom = item.top
+                toolBar.anchors.left = item.left
+                toolBar.anchors.right = item.right
+            }
+            return
             if (layerToolbarStack.depth > depth) {
                 while (layerToolbarStack.depth > depth) {
                     layerToolbarStack.pop();
@@ -856,14 +864,19 @@ QT.Control {
             }
         }
 
-        popEnter: Transition {
+        /*popEnter: Transition {
             OpacityAnimator {
                 from: 0
                 to: 1
                 duration: Kirigami.Units.longDuration
                 easing.type: Easing.InOutCubic
             }
+        }*/
+        popEnter: Transition {
+          PauseAnimation {
+              duration: Kirigami.Units.longDuration
         }
+      }
         popExit: Transition {
             ParallelAnimation {
                 OpacityAnimator {
@@ -901,14 +914,19 @@ QT.Control {
         }
 
 
-        pushExit: Transition {
+      /*  pushExit: Transition {
             OpacityAnimator {
                 from: 1
                 to: 0
                 duration: Kirigami.Units.longDuration
                 easing.type: Easing.InOutCubic
             }
+        }*/
+      pushExit: Transition {
+          PauseAnimation {
+              duration: Kirigami.Units.longDuration
         }
+      }
 
         replaceEnter: Transition {
             ParallelAnimation {
