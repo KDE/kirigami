@@ -655,76 +655,22 @@ QT.Control {
     }
 
     QQC2.StackView {
-        id: layerFooterStack
-        anchors {
-            left: parent.left
-            bottom: parent.bottom
-            right: parent.right
-        }
-        z: 100 // 100 is layersStack.z + 1
-        height: currentItem?.implicitHeight ?? 0
-        initialItem: Item {implicitHeight: 0}
-
-        popEnter: Transition {
-            OpacityAnimator {
-                from: 0
-                to: 1
-                duration: Kirigami.Units.longDuration
-                easing.type: Easing.InOutCubic
-            }
-        }
-        popExit: Transition {
-            OpacityAnimator {
-                from: 1
-                to: 0
-                duration: Kirigami.Units.longDuration
-                easing.type: Easing.InOutCubic
-            }
-        }
-        pushEnter: Transition {
-            OpacityAnimator {
-                from: 0
-                to: 1
-                duration: Kirigami.Units.longDuration
-                easing.type: Easing.InOutCubic
-            }
-        }
-        pushExit: Transition {
-            OpacityAnimator {
-                from: 1
-                to: 0
-                duration: Kirigami.Units.longDuration
-                easing.type: Easing.InOutCubic
-            }
-        }
-        replaceEnter: Transition {
-            OpacityAnimator {
-                from: 0
-                to: 1
-                duration: Kirigami.Units.longDuration
-                easing.type: Easing.InOutCubic
-            }
-        }
-        replaceExit: Transition {
-            OpacityAnimator {
-                from: 1
-                to: 0
-                duration: Kirigami.Units.longDuration
-                easing.type: Easing.InOutCubic
-            }
-        }
-    }
-
-    QQC2.StackView {
         id: layersStack
         z: 99
         anchors {
             left: parent.left
             top: parent.top
             right: parent.right
-            bottom: layerFooterStack.top
+            bottom: parent.bottom
             topMargin: currentItem.Kirigami.ColumnView.globalHeader?.height ?? 0
             Behavior on topMargin {
+                NumberAnimation {
+                    duration: Kirigami.Units.longDuration
+                    easing.type: Easing.InOutCubic
+                }
+            }
+            bottomMargin: currentItem.Kirigami.ColumnView.globalFooter?.height ?? 0
+            Behavior on bottomMargin {
                 NumberAnimation {
                     duration: Kirigami.Units.longDuration
                     easing.type: Easing.InOutCubic
@@ -735,52 +681,23 @@ QT.Control {
         initialItem: columnViewLayout
 
         onDepthChanged: {
+            if (depth < 2) {
+                return;
+            }
             let item = layersStack.get(depth - 1)
 
-            if (depth > 1) {
-                const toolBar = item.Kirigami.ColumnView.globalHeader
-                toolBar.parent = item
-                toolBar.anchors.bottom = item.top
-                toolBar.anchors.left = item.left
-                toolBar.anchors.right = item.right
-            }
-            return
-            if (layerToolbarStack.depth > depth) {
-                while (layerToolbarStack.depth > depth) {
-                    layerToolbarStack.pop();
-                }
-            } else if (layerToolbarStack.depth < depth) {
-                for (let i = layerToolbarStack.depth; i < depth; ++i) {
-                    const toolBar = layersStack.get(i).Kirigami.ColumnView.globalHeader;
-                    layerToolbarStack.push(toolBar || emptyToolbar);
-                }
-            }
-            let toolBarItem = layerToolbarStack.get(layerToolbarStack.depth - 1)
-            if (item.Kirigami.ColumnView.globalHeader != toolBarItem) {
-                const toolBar = item.Kirigami.ColumnView.globalHeader;
-                layerToolbarStack.replace(toolBar ?? emptyToolbar);
-            }
-            // WORKAROUND: the second time the transition on opacity doesn't seem to be executed
-            toolBarItem = layerToolbarStack.get(layerToolbarStack.depth - 1)
-            toolBarItem.opacity = 1;
+            // For layers reparent the global header to the page
+            const header = item.Kirigami.ColumnView.globalHeader
+            header.parent = item
+            header.anchors.bottom = item.top
+            header.anchors.left = item.left
+            header.anchors.right = item.right
 
-            if (layerFooterStack.depth > depth) {
-                while (layerFooterStack.depth > depth) {
-                    layerFooterStack.pop();
-                }
-            } else if (layerFooterStack.depth < depth) {
-                for (let i = layerFooterStack.depth; i < depth; ++i) {
-                    const footer = layersStack.get(i).Kirigami.ColumnView.globalFooter;
-                    layerFooterStack.push(footer ?? emptyToolbar);
-                }
-            }
-            let footerItem = layerFooterStack.get(layerFooterStack.depth - 1)
-            if (item.Kirigami.ColumnView.globalHeader != footerItem) {
-                const footer = item.Kirigami.ColumnView.globalFooter;
-                layerFooterStack.replace(footer ?? emptyToolbar);
-            }
-            footerItem = layerFooterStack.get(layerFooterStack.depth - 1)
-            footerItem.opacity = 1;
+            const footer = item.Kirigami.ColumnView.globalFooter
+            footer.parent = item
+            footer.anchors.top = item.bottom
+            footer.anchors.left = item.left
+            footer.anchors.right = item.right
         }
 
         function clear(): void {
@@ -791,19 +708,11 @@ QT.Control {
             }
         }
 
-        /*popEnter: Transition {
-            OpacityAnimator {
-                from: 0
-                to: 1
-                duration: Kirigami.Units.longDuration
-                easing.type: Easing.InOutCubic
-            }
-        }*/
         popEnter: Transition {
-          PauseAnimation {
-              duration: Kirigami.Units.longDuration
+            PauseAnimation {
+                duration: Kirigami.Units.longDuration
+            }
         }
-      }
         popExit: Transition {
             ParallelAnimation {
                 OpacityAnimator {
@@ -841,19 +750,12 @@ QT.Control {
         }
 
 
-      /*  pushExit: Transition {
-            OpacityAnimator {
-                from: 1
-                to: 0
+
+        pushExit: Transition {
+            PauseAnimation {
                 duration: Kirigami.Units.longDuration
-                easing.type: Easing.InOutCubic
             }
-        }*/
-      pushExit: Transition {
-          PauseAnimation {
-              duration: Kirigami.Units.longDuration
         }
-      }
 
         replaceEnter: Transition {
             ParallelAnimation {
