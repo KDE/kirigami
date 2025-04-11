@@ -7,6 +7,7 @@
 
 #include "icon.h"
 #include "scenegraph/managedtexturenode.h"
+#include "scenegraph/shadernode.h"
 
 #include "platform/platformtheme.h"
 #include "platform/units.h"
@@ -24,7 +25,7 @@
 #include <QSGTexture>
 #include <QScreen>
 
-Q_GLOBAL_STATIC(ImageTexturesCache, s_iconImageCache)
+using namespace Qt::StringLiterals;
 
 Icon::Icon(QQuickItem *parent)
     : QQuickItem(parent)
@@ -174,30 +175,6 @@ QColor Icon::color() const
     return m_color;
 }
 
-QSGNode *Icon::createSubtree(qreal initialOpacity)
-{
-    auto opacityNode = new QSGOpacityNode{};
-    opacityNode->setFlag(QSGNode::OwnedByParent, true);
-    opacityNode->setOpacity(initialOpacity);
-
-    auto *mNode = new ManagedTextureNode;
-
-    mNode->setTexture(s_iconImageCache->loadTexture(window(), m_icon, QQuickWindow::TextureCanUseAtlas));
-
-    opacityNode->appendChildNode(mNode);
-
-    return opacityNode;
-}
-
-void Icon::updateSubtree(QSGNode *node, qreal opacity)
-{
-    auto opacityNode = static_cast<QSGOpacityNode *>(node);
-    opacityNode->setOpacity(opacity);
-
-    auto textureNode = static_cast<ManagedTextureNode *>(opacityNode->firstChild());
-    textureNode->setFiltering(smooth() ? QSGTexture::Linear : QSGTexture::Nearest);
-}
-
 QSGNode *Icon::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaintNodeData * /*data*/)
 {
     if (m_source.isNull() || qFuzzyIsNull(width()) || qFuzzyIsNull(height())) {
@@ -205,45 +182,50 @@ QSGNode *Icon::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaintNodeData * 
         return nullptr;
     }
 
-    if (!node) {
-        node = new QSGNode{};
+    auto shaderNode = static_cast<ShaderNode *>(node);
+    bool updateRect = m_sizeChanged;
+    if (!shaderNode) {
+        shaderNode = new ShaderNode{};
+        // We may end up in a situation where this Icon has not changed but our
+        // scene node needs to be recreated, in that case we need to make sure
+        // to set the geometry of the node.
+        updateRect = true;
     }
 
-    if (m_animation && m_animation->state() == QAbstractAnimation::Running) {
-        if (node->childCount() < 2) {
-            node->appendChildNode(createSubtree(0.0));
-            m_textureChanged = true;
-        }
-
-        // Rather than doing a perfect crossfade, first fade in the new texture
-        // then fade out the old texture. This is done to avoid the underlying
-        // color bleeding through when both textures are at ~0.5 opacity, which
-        // causes flickering if the two textures are very similar.
-        updateSubtree(node->firstChild(), 2.0 - m_animValue * 2.0);
-        updateSubtree(node->lastChild(), m_animValue * 2.0);
+    QString shaderName = u"icon_"_s;
+    if (isMask()) {
+        shaderName += u"mask_"_s;
+    }
+    if (m_animated) {
+        shaderName += u"mix"_s;
     } else {
-        if (node->childCount() == 0) {
-            node->appendChildNode(createSubtree(1.0));
-            m_textureChanged = true;
-        }
+        shaderName += u"default"_s;
+    }
+    shaderNode->setShader(shaderName);
+    shaderNode->setUniformBufferSize(sizeof(float) * 24);
 
-        if (node->childCount() > 1) {
-            auto toRemove = node->firstChild();
-            node->removeChildNode(toRemove);
-            delete toRemove;
-        }
-
-        updateSubtree(node->firstChild(), 1.0);
+    if (m_animated) {
+        shaderNode->setTextureChannels(2);
+    } else {
+        shaderNode->setTextureChannels(1);
     }
 
-    if (m_textureChanged) {
-        auto mNode = static_cast<ManagedTextureNode *>(node->lastChild()->firstChild());
-        mNode->setTexture(s_iconImageCache->loadTexture(window(), m_icon, QQuickWindow::TextureCanUseAtlas));
-        m_textureChanged = false;
-        m_sizeChanged = true;
+    auto maskColor = !m_color.isValid() || m_color == Qt::transparent ? (m_selected ? m_theme->highlightedTextColor() : m_theme->textColor()) : m_color;
+
+    UniformDataStream stream(shaderNode->uniformData());
+    stream.skipMatrixOpacity();
+    stream << float(m_animValue) // mix_amount
+           << (m_active ? 0.7f : 0.0f) // highlight_amount
+           << (isEnabled() ? 0.0f : 1.0f) // desaturate_amount
+           << ShaderNode::toPremultiplied(maskColor); // mask_color
+
+    shaderNode->setTexture(0, m_icon, window(), QQuickWindow::TextureCanUseAtlas);
+
+    if (!m_oldIcon.isNull() && m_animated) {
+        shaderNode->setTexture(1, m_oldIcon, window(), QQuickWindow::TextureCanUseAtlas);
     }
 
-    if (m_sizeChanged) {
+    if (updateRect) {
         const QSizeF iconPixSize(m_icon.width() / m_devicePixelRatio, m_icon.height() / m_devicePixelRatio);
         const QSizeF itemPixSize = QSizeF((size() * m_devicePixelRatio).toSize()) / m_devicePixelRatio;
         QRectF nodeRect(QPoint(0, 0), itemPixSize);
@@ -259,15 +241,13 @@ QSGNode *Icon::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaintNodeData * 
             }
         }
 
-        for (int i = 0; i < node->childCount(); ++i) {
-            auto mNode = static_cast<ManagedTextureNode *>(node->childAtIndex(i)->firstChild());
-            mNode->setRect(nodeRect);
-        }
-
+        shaderNode->setRect(nodeRect);
         m_sizeChanged = false;
     }
 
-    return node;
+    shaderNode->update();
+
+    return shaderNode;
 }
 
 void Icon::geometryChange(const QRectF &newGeometry, const QRectF &oldGeometry)
@@ -382,19 +362,6 @@ void Icon::updatePolish()
         if (m_icon.isNull()) {
             m_icon = QImage(size, QImage::Format_Alpha8);
             m_icon.fill(Qt::transparent);
-        }
-
-        const QColor tintColor = //
-            !m_color.isValid() || m_color == Qt::transparent //
-            ? (m_selected ? m_theme->highlightedTextColor() : m_theme->textColor())
-            : m_color;
-
-        // TODO: initialize m_isMask with icon.isMask()
-        if (tintColor.alpha() > 0 && isMask()) {
-            QPainter p(&m_icon);
-            p.setCompositionMode(QPainter::CompositionMode_SourceIn);
-            p.fillRect(m_icon.rect(), tintColor);
-            p.end();
         }
     }
 
@@ -539,18 +506,6 @@ QImage Icon::findIcon(const QSize &size)
     return img;
 }
 
-QIcon::Mode Icon::iconMode() const
-{
-    if (!isEnabled()) {
-        return QIcon::Disabled;
-    } else if (m_selected) {
-        return QIcon::Selected;
-    } else if (m_active) {
-        return QIcon::Active;
-    }
-    return QIcon::Normal;
-}
-
 QString Icon::fallback() const
 {
     return m_fallback;
@@ -628,7 +583,7 @@ QImage Icon::iconPixmap(const QIcon &icon) const
         }
     }
 
-    return sourceIcon.pixmap(actualSize, m_devicePixelRatio, iconMode(), QIcon::On).toImage();
+    return sourceIcon.pixmap(actualSize, m_devicePixelRatio, QIcon::Mode::Normal, QIcon::On).toImage();
 }
 
 QIcon Icon::loadFromTheme(const QString &iconName) const
