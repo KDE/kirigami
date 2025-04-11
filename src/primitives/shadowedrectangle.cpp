@@ -340,9 +340,9 @@ QSGNode *ShadowedRectangle::updatePaintNode(QSGNode *node, QQuickItem::UpdatePai
 
     QString shader;
     if (m_border->isEnabled()) {
-        shader = u"shadowedborderrectangle"_s;
+        shader = u"shadowed_border_rectangle"_s;
     } else {
-        shader = u"shadowedrectangle"_s;
+        shader = u"shadowed_rectangle"_s;
     }
 
     if (isLowPowerRendering()) {
