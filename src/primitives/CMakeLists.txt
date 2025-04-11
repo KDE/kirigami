@@ -21,8 +21,6 @@ target_sources(KirigamiPrimitives PRIVATE
     scenegraph/shadermaterial.h
     scenegraph/texturecache.cpp
     scenegraph/texturecache.h
-    scenegraph/managedtexturenode.cpp
-    scenegraph/managedtexturenode.h
     scenegraph/paintedrectangleitem.cpp
     scenegraph/paintedrectangleitem.h
 )

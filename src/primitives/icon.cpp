@@ -6,7 +6,6 @@
  */
 
 #include "icon.h"
-#include "scenegraph/managedtexturenode.h"
 #include "scenegraph/shadernode.h"
 
 #include "platform/platformtheme.h"
