@@ -655,86 +655,6 @@ QT.Control {
     }
 
     QQC2.StackView {
-        id: layerToolbarStack
-        anchors {
-            left: parent.left
-            top: parent.top
-            right: parent.right
-        }
-        z: 100 // 100 is layersStack.z + 1
-        opacity: depth > 1
-        height: currentItem?.implicitHeight ?? globalToolBarUI.implicitHeight
-        initialItem: Item {implicitHeight: globalToolBarUI.implicitHeight}
-
-        Behavior on height {
-            NumberAnimation {
-                duration: Kirigami.Units.longDuration
-                easing.type: Easing.InOutQuad
-            }
-        }
-        Behavior on opacity {
-            OpacityAnimator {
-                duration: Kirigami.Units.longDuration
-                easing.type: Easing.InOutQuad
-            }
-        }
-        Component {
-            id: emptyToolbar
-            Item {
-                implicitHeight: 0
-            }
-        }
-        popEnter: Transition {
-            OpacityAnimator {
-                from: 0
-                to: 1
-                duration: Kirigami.Units.longDuration
-                easing.type: Easing.InOutCubic
-            }
-        }
-        popExit: Transition {
-            OpacityAnimator {
-                from: 1
-                to: 0
-                duration: Kirigami.Units.longDuration
-                easing.type: Easing.InOutCubic
-            }
-        }
-        pushEnter: Transition {
-            OpacityAnimator {
-                from: 0
-                to: 1
-                duration: Kirigami.Units.longDuration
-                easing.type: Easing.InOutCubic
-            }
-        }
-        pushExit: Transition {
-            OpacityAnimator {
-                from: 1
-                to: 0
-                duration: Kirigami.Units.longDuration
-                easing.type: Easing.InOutCubic
-            }
-        }
-        replaceEnter: Transition {
-            OpacityAnimator {
-                from: 0
-                to: 1
-                duration: Kirigami.Units.longDuration
-                easing.type: Easing.InOutCubic
-            }
-        }
-        replaceExit: Transition {
-            OpacityAnimator {
-                from: 1
-                to: 0
-                duration: Kirigami.Units.longDuration
-                easing.type: Easing.InOutCubic
-            }
-        }
-    }
-
-    QQC2.StackView {
         id: layerFooterStack
         anchors {
             left: parent.left
@@ -800,9 +720,16 @@ QT.Control {
         z: 99
         anchors {
             left: parent.left
-            top: layerToolbarStack.bottom
+            top: parent.top
             right: parent.right
             bottom: layerFooterStack.top
+            topMargin: currentItem.Kirigami.ColumnView.globalHeader?.height ?? 0
+            Behavior on topMargin {
+                NumberAnimation {
+                    duration: Kirigami.Units.longDuration
+                    easing.type: Easing.InOutCubic
+                }
+            }
         }
         // placeholder as initial item
         initialItem: columnViewLayout
@@ -1133,13 +1060,11 @@ QT.Control {
         // set the pagestack of this and all children to root, otherwise
         // they would automatically resolve to the layer's stackview
         Kirigami.PageStack.pageStack: root
-        anchors {
-            fill: parent
-            topMargin: -layersStack.y
-        }
+
         QQC2.Control {
             id: sidebarControl
             Layout.fillHeight: true
+            Layout.topMargin: -layersStack.y
             visible: contentItem !== null
             leftPadding: root.leftSidebar ? root.leftSidebar.leftPadding : 0
             topPadding: root.leftSidebar ? root.leftSidebar.topPadding : 0
@@ -1150,6 +1075,7 @@ QT.Control {
             id: columnView
             Layout.fillWidth: true
             Layout.fillHeight: true
+            Layout.topMargin: -layersStack.y
 
             topPadding: globalToolBarUI.item && globalToolBarUI.item.breadcrumbVisible
                         ? globalToolBarUI.height : 0
