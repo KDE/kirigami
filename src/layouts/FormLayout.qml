@@ -117,7 +117,7 @@ Item {
     }
 
     Component.onCompleted: {
-        relayoutTimer.triggered();
+        relayout();
     }
 
     Component.onDestruction: {
@@ -299,40 +299,36 @@ Item {
         }
     }
 
-    Timer {
-        id: relayoutTimer
-        interval: 0
-        onTriggered: {
-            const __items = root.children;
-            // exclude the layout and temp
-            for (let i = 2; i < __items.length; ++i) {
-                const item = __items[i];
+    function relayout() {
+        const __items = root.children;
+        // exclude the layout and temp
+        for (let i = 2; i < __items.length; ++i) {
+            const item = __items[i];
 
-                // skip items that are already there
-                if (lay.knownItems.indexOf(item) !== -1 || item instanceof Repeater) {
-                    continue;
-                }
-                lay.knownItems.push(item);
-
-                const itemContainer = itemComponent.createObject(temp, { item });
-
-                // if it's a labeled section header, add extra spacing before it
-                if (item.Kirigami.FormData.label.length > 0 && item.Kirigami.FormData.isSection) {
-                    placeHolderComponent.createObject(lay, { item });
-                }
-
-                const buddy = buddyComponent.createObject(lay, { item, index: i - 2 });
-
-                itemContainer.parent = lay;
-                lay.buddies.push(buddy);
+            // skip items that are already there
+            if (lay.knownItems.indexOf(item) !== -1 || item instanceof Repeater) {
+                continue;
             }
-            lay.knownItemsChanged();
-            lay.buddiesChanged();
-            hintCompression.triggered();
+            lay.knownItems.push(item);
+
+            const itemContainer = itemComponent.createObject(temp, { item });
+
+            // if it's a labeled section header, add extra spacing before it
+            if (item.Kirigami.FormData.label.length > 0 && item.Kirigami.FormData.isSection) {
+                placeHolderComponent.createObject(lay, { item });
+            }
+
+            const buddy = buddyComponent.createObject(lay, { item, index: i - 2 });
+
+            itemContainer.parent = lay;
+            lay.buddies.push(buddy);
         }
+        lay.knownItemsChanged();
+        lay.buddiesChanged();
+        hintCompression.triggered();
     }
 
-    onChildrenChanged: relayoutTimer.restart();
+    onChildrenChanged: relayout();
 
     Component {
         id: itemComponent
