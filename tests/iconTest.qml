@@ -152,6 +152,47 @@ Kirigami.ApplicationWindow {
                     color: "red"
                 }
             }
+
+            Row {
+                Kirigami.Icon {
+                    width: app.iconSize
+                    height: width
+                    source: "audio-volume-medium-symbolic"
+                    enabled: app.iconEnabled
+                    animated: app.iconAnimated
+                }
+
+                Kirigami.Icon {
+                    width: app.iconSize
+                    height: width
+                    source: "audio-volume-medium-symbolic"
+                    enabled: app.iconEnabled
+                    animated: app.iconAnimated
+
+                    active: handler3.hovered
+                    HoverHandler { id: handler3 }
+                }
+
+                Kirigami.Icon {
+                    width: app.iconSize
+                    height: width
+                    source: "audio-volume-medium-symbolic"
+                    enabled: app.iconEnabled
+                    animated: app.iconAnimated
+
+                    selected: true
+                }
+
+                Kirigami.Icon {
+                    width: app.iconSize
+                    height: width
+                    source: "audio-volume-medium-symbolic"
+                    enabled: app.iconEnabled
+                    animated: app.iconAnimated
+
+                    color: "red"
+                }
+            }
         }
 
     }
