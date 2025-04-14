@@ -88,11 +88,15 @@ class KIRIGAMIPLATFORM_EXPORT PlatformTheme : public QObject
 
     /**
      * Color for links
+     *
+     * @deprecated since 6.14, use link color from Palette
      */
     Q_PROPERTY(QColor linkColor READ linkColor WRITE setCustomLinkColor RESET setCustomLinkColor NOTIFY colorsChanged FINAL)
 
     /**
      * Color for visited links, usually a bit darker than linkColor
+     *
+     * @deprecated since 6.14, use linkVisited color from Palette
      */
     Q_PROPERTY(QColor visitedLinkColor READ visitedLinkColor WRITE setCustomVisitedLinkColor RESET setCustomVisitedLinkColor NOTIFY colorsChanged FINAL)
 
@@ -139,12 +143,16 @@ class KIRIGAMIPLATFORM_EXPORT PlatformTheme : public QObject
 
     /**
      * Background color for links
+     *
+     * @deprecated since 6.14, use regular background color tinted with link color from Palette
      */
     Q_PROPERTY(
         QColor linkBackgroundColor READ linkBackgroundColor WRITE setCustomLinkBackgroundColor RESET setCustomLinkBackgroundColor NOTIFY colorsChanged FINAL)
 
     /**
      * Background color for visited links, usually a bit darker than linkBackgroundColor
+     *
+     * @deprecated since 6.14, use regular background color tinted with linkVisited color from Palette
      */
     Q_PROPERTY(QColor visitedLinkBackgroundColor READ visitedLinkBackgroundColor WRITE setCustomVisitedLinkBackgroundColor RESET
                    setCustomVisitedLinkBackgroundColor NOTIFY colorsChanged)
