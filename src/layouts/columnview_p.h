@@ -91,9 +91,6 @@ private:
     qreal m_leftPinnedSpace = 361;
     qreal m_rightPinnedSpace = 0;
 
-    qreal m_leadingGlobalHeaderPadding = 0;
-    qreal m_trailingGlobalHeaderPadding = 0;
-
     qreal m_columnWidth = 0;
     qreal m_lastDragDelta = 0;
     ColumnView::ColumnResizeMode m_columnResizeMode = ColumnView::FixedColumns;

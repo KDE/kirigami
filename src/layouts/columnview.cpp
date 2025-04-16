@@ -706,16 +706,20 @@ void ContentItem::updateVisibleItems()
         if (header) {
             qreal leftHeaderAdjust = 0.0;
             qreal rightHeaderAdjust = 0.0;
+            const qreal leadingGlobalHeaderPadding =
+                m_view->globalHeaderContainer()->leadingItem() ? m_view->globalHeaderContainer()->leadingItem()->width() : 0;
+            const qreal trailingGlobalHeaderPadding =
+                m_view->globalHeaderContainer()->trailingItem() ? m_view->globalHeaderContainer()->trailingItem()->width() : 0;
+
             if (qApp->layoutDirection() == Qt::RightToLeft) {
-                leftHeaderAdjust = std::clamp(-item->x() + m_trailingGlobalHeaderPadding - x(), 0.0, m_trailingGlobalHeaderPadding);
+                leftHeaderAdjust = std::clamp(-item->x() + trailingGlobalHeaderPadding - x(), 0.0, trailingGlobalHeaderPadding);
 
-                rightHeaderAdjust =
-                    std::clamp(item->x() + item->width() + x() - m_view->width() + m_leadingGlobalHeaderPadding, 0.0, m_leadingGlobalHeaderPadding);
+                rightHeaderAdjust = std::clamp(item->x() + item->width() + x() - m_view->width() + leadingGlobalHeaderPadding, 0.0, leadingGlobalHeaderPadding);
             } else {
-                leftHeaderAdjust = std::clamp(-item->x() + m_leadingGlobalHeaderPadding - x(), 0.0, m_leadingGlobalHeaderPadding);
+                leftHeaderAdjust = std::clamp(-item->x() + leadingGlobalHeaderPadding - x(), 0.0, leadingGlobalHeaderPadding);
 
                 rightHeaderAdjust =
-                    std::clamp(item->x() + item->width() + x() - m_view->width() + m_trailingGlobalHeaderPadding, 0.0, m_trailingGlobalHeaderPadding);
+                    std::clamp(item->x() + item->width() + x() - m_view->width() + trailingGlobalHeaderPadding, 0.0, trailingGlobalHeaderPadding);
             }
             header->setPosition(QPointF(item->x() + leftHeaderAdjust, 0));
             header->setWidth(item->width() - leftHeaderAdjust - rightHeaderAdjust);
@@ -1228,40 +1232,6 @@ int ColumnView::count() const
 GlobalToolBar *ColumnView::globalHeaderContainer() const
 {
     return m_globalHeader;
-}
-
-qreal ColumnView::leadingGlobalHeaderPadding() const
-{
-    return m_contentItem->m_leadingGlobalHeaderPadding;
-}
-
-void ColumnView::setLeadingGlobalHeaderPadding(qreal padding)
-{
-    if (padding == m_contentItem->m_leadingGlobalHeaderPadding) {
-        return;
-    }
-
-    m_contentItem->m_leadingGlobalHeaderPadding = padding;
-    m_contentItem->updateVisibleItems();
-
-    Q_EMIT leadingGlobalHeaderPaddingChanged();
-}
-
-qreal ColumnView::trailingGlobalHeaderPadding() const
-{
-    return m_contentItem->m_trailingGlobalHeaderPadding;
-}
-
-void ColumnView::setTrailingGlobalHeaderPadding(qreal padding)
-{
-    if (padding == m_contentItem->m_trailingGlobalHeaderPadding) {
-        return;
-    }
-
-    m_contentItem->m_trailingGlobalHeaderPadding = padding;
-    m_contentItem->updateVisibleItems();
-
-    Q_EMIT trailingGlobalHeaderPaddingChanged();
 }
 
 qreal ColumnView::topPadding() const

@@ -1018,15 +1018,14 @@ QT.Control {
                 topPadding: globalToolBarUI.item && globalToolBarUI.item.breadcrumbVisible
                             ? globalToolBarUI.height : 0
 
-                leadingGlobalHeaderPadding: globalToolBarUI.item?.leadingControlsWidth ?? 0
-                trailingGlobalHeaderPadding: globalToolBarUI.item?.trailingControlsWidth ?? 0
                 globalHeaderContainer {
-                    leadingItem: Rectangle {
-                        width: 30
-                        height: 30
+                    leadingItem: Item {
+                        // TODO: this must become globalToolBarUI itself
+                        width: globalToolBarUI.item.leadingControlsWidth - 1
+                        height: globalToolBarUI.height
                     }
                     //padding: Kirigami.Units.smallSpacing
-                    leftPadding: 110
+                    //leftPadding: 110
                 }
 
                 // Internal hidden api for Page

@@ -22,12 +22,13 @@ Kirigami.AbstractApplicationHeader {
 
     Kirigami.Theme.colorSet: pageRow ? pageRow.globalToolBar.colorSet : Kirigami.Theme.Header
 
+    leftPadding: pageRow.globalToolBar.titleLeftPadding
     readonly property Item __stackPage: pageRow?.items.indexOf(page) > -1 ? pageRow.columnView.parent : page
     Binding {
         target: root
         property: "leftPadding"
 
-        when: false//__stackPage.QQC.StackView.status !== QQC.StackView.Deactivating
+        when: false && __stackPage.QQC.StackView.status !== QQC.StackView.Deactivating
 
         restoreMode: Binding.RestoreNone
         value: {
