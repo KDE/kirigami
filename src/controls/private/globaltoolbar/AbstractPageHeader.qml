@@ -27,7 +27,7 @@ Kirigami.AbstractApplicationHeader {
         target: root
         property: "leftPadding"
 
-        when: __stackPage.QQC.StackView.status !== QQC.StackView.Deactivating
+        when: false//__stackPage.QQC.StackView.status !== QQC.StackView.Deactivating
 
         restoreMode: Binding.RestoreNone
         value: {

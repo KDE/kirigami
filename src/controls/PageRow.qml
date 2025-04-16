@@ -1010,22 +1010,6 @@ QT.Control {
                 bottomPadding: root.leftSidebar ? root.leftSidebar.bottomPadding : 0
             }
 
-
-            topPadding: globalToolBarUI.item && globalToolBarUI.item.breadcrumbVisible
-                        ? globalToolBarUI.height : 0
-
-            leadingGlobalHeaderPadding: globalToolBarUI.item?.leadingControlsWidth ?? 0
-            trailingGlobalHeaderPadding: globalToolBarUI.item?.trailingControlsWidth ?? 0
-            globalHeaderContainer {
-                leadingItem: Rectangle {
-                    width: 30
-                    height: 30
-                }
-                //padding: Kirigami.Units.smallSpacing
-                leftPadding: 110
-
-            }
-
             Kirigami.ColumnView {
                 id: columnView
                 Layout.fillWidth: true
@@ -1033,6 +1017,17 @@ QT.Control {
 
                 topPadding: globalToolBarUI.item && globalToolBarUI.item.breadcrumbVisible
                             ? globalToolBarUI.height : 0
+
+                leadingGlobalHeaderPadding: globalToolBarUI.item?.leadingControlsWidth ?? 0
+                trailingGlobalHeaderPadding: globalToolBarUI.item?.trailingControlsWidth ?? 0
+                globalHeaderContainer {
+                    leadingItem: Rectangle {
+                        width: 30
+                        height: 30
+                    }
+                    //padding: Kirigami.Units.smallSpacing
+                    leftPadding: 110
+                }
 
                 // Internal hidden api for Page
                 readonly property Item __pageRow: root
