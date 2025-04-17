@@ -256,6 +256,8 @@ private:
     QSize iconSizeHint() const;
     inline QImage iconPixmap(const QIcon &icon) const;
     QIcon loadFromTheme(const QString &iconName) const;
+    QRectF calculateNodeRect();
+    bool isSoftwareRendering() const;
 
     Kirigami::Platform::PlatformTheme *m_theme = nullptr;
     Kirigami::Platform::Units *m_units = nullptr;

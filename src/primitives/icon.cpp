@@ -7,6 +7,7 @@
 
 #include "icon.h"
 #include "scenegraph/shadernode.h"
+#include "scenegraph/softwarerectanglenode.h"
 
 #include "platform/platformtheme.h"
 #include "platform/units.h"
@@ -20,7 +21,6 @@
 #include <QPropertyAnimation>
 #include <QQuickImageProvider>
 #include <QQuickWindow>
-#include <QSGSimpleTextureNode>
 #include <QSGTexture>
 #include <QScreen>
 
@@ -181,6 +181,18 @@ QSGNode *Icon::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaintNodeData * 
         return nullptr;
     }
 
+    if (isSoftwareRendering()) {
+        auto rectangleNode = static_cast<SoftwareRectangleNode *>(node);
+        if (!rectangleNode) {
+            rectangleNode = new SoftwareRectangleNode{};
+        }
+
+        rectangleNode->setWindow(window());
+        rectangleNode->setRect(calculateNodeRect());
+        rectangleNode->setImage(m_icon);
+        return rectangleNode;
+    }
+
     auto shaderNode = static_cast<ShaderNode *>(node);
     bool updateRect = m_sizeChanged;
     if (!shaderNode) {
@@ -225,22 +237,7 @@ QSGNode *Icon::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaintNodeData * 
     }
 
     if (updateRect) {
-        const QSizeF iconPixSize(m_icon.width() / m_devicePixelRatio, m_icon.height() / m_devicePixelRatio);
-        const QSizeF itemPixSize = QSizeF((size() * m_devicePixelRatio).toSize()) / m_devicePixelRatio;
-        QRectF nodeRect(QPoint(0, 0), itemPixSize);
-
-        if (itemPixSize.width() != 0 && itemPixSize.height() != 0) {
-            if (iconPixSize != itemPixSize) {
-                // At this point, the image will already be scaled, but we need to output it in
-                // the correct aspect ratio, painted centered in the viewport. So:
-                QRectF destination(QPointF(0, 0), QSizeF(m_icon.size()).scaled(m_paintedSize, Qt::KeepAspectRatio));
-                destination.moveCenter(nodeRect.center());
-                destination.moveTopLeft(QPointF(destination.topLeft().toPoint() * m_devicePixelRatio) / m_devicePixelRatio);
-                nodeRect = destination;
-            }
-        }
-
-        shaderNode->setRect(nodeRect);
+        shaderNode->setRect(calculateNodeRect());
         m_sizeChanged = false;
     }
 
@@ -365,7 +362,7 @@ void Icon::updatePolish()
     }
 
     // don't animate initial setting
-    bool animated = m_animated && !m_oldIcon.isNull() && !m_sizeChanged && !m_blockNextAnimation;
+    bool animated = m_animated && !m_oldIcon.isNull() && !m_sizeChanged && !m_blockNextAnimation && !isSoftwareRendering();
 
     if (animated && m_animation) {
         m_animValue = 0.0;
@@ -582,7 +579,15 @@ QImage Icon::iconPixmap(const QIcon &icon) const
         }
     }
 
-    return sourceIcon.pixmap(actualSize, m_devicePixelRatio, QIcon::Mode::Normal, QIcon::On).toImage();
+    auto mode = QIcon::Mode::Normal;
+    if (isSoftwareRendering()) {
+        if (!isEnabled()) {
+            mode = QIcon::Mode::Disabled;
+        } else if (m_active) {
+            mode = QIcon::Mode::Active;
+        }
+    }
+    return sourceIcon.pixmap(actualSize, m_devicePixelRatio, mode, QIcon::On).toImage();
 }
 
 QIcon Icon::loadFromTheme(const QString &iconName) const
@@ -709,6 +714,31 @@ void Icon::windowVisibleChanged(bool visible)
     if (visible) {
         m_blockNextAnimation = true;
     }
+}
+
+QRectF Icon::calculateNodeRect()
+{
+    const QSizeF iconPixSize(m_icon.width() / m_devicePixelRatio, m_icon.height() / m_devicePixelRatio);
+    const QSizeF itemPixSize = QSizeF((size() * m_devicePixelRatio).toSize()) / m_devicePixelRatio;
+    QRectF nodeRect(QPoint(0, 0), itemPixSize);
+
+    if (itemPixSize.width() != 0 && itemPixSize.height() != 0) {
+        if (iconPixSize != itemPixSize) {
+            // At this point, the image will already be scaled, but we need to output it in
+            // the correct aspect ratio, painted centered in the viewport. So:
+            QRectF destination(QPointF(0, 0), QSizeF(m_icon.size()).scaled(m_paintedSize, Qt::KeepAspectRatio));
+            destination.moveCenter(nodeRect.center());
+            destination.moveTopLeft(QPointF(destination.topLeft().toPoint() * m_devicePixelRatio) / m_devicePixelRatio);
+            nodeRect = destination;
+        }
+    }
+
+    return nodeRect;
+}
+
+bool Icon::isSoftwareRendering() const
+{
+    return window() && window()->rendererInterface()->graphicsApi() == QSGRendererInterface::Software;
 }
 
 #include "moc_icon.cpp"
