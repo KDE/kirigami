@@ -11,6 +11,7 @@
 #include <QSGRendererInterface>
 
 #include "scenegraph/shadernode.h"
+#include "scenegraph/softwarerectanglenode.h"
 
 using namespace Qt::StringLiterals;
 
@@ -53,6 +54,26 @@ QSGNode *ShadowedTexture::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaint
     if (boundingRect().isEmpty()) {
         delete node;
         return nullptr;
+    }
+
+    if (isSoftwareRendering()) {
+        auto rectangleNode = static_cast<SoftwareRectangleNode *>(node);
+        if (!rectangleNode) {
+            rectangleNode = new SoftwareRectangleNode{};
+        }
+
+        rectangleNode->setRect(boundingRect());
+        rectangleNode->setWindow(window());
+        rectangleNode->setColor(color());
+        rectangleNode->setRadius(radius());
+        rectangleNode->setBorderWidth(border()->width());
+        rectangleNode->setBorderColor(border()->color());
+
+        if (m_source) {
+            rectangleNode->setTextureProvider(m_source->textureProvider());
+        }
+
+        return rectangleNode;
     }
 
     auto shaderNode = static_cast<ShaderNode *>(node);

@@ -142,13 +142,12 @@ Item {
     ShaderEffectSource {
         id: textureSource
         sourceItem: image
-        hideSource: !shadowRectangle.softwareRendering
+        hideSource: true
     }
 
     Kirigami.ShadowedTexture {
         id: shadowRectangle
         anchors.fill: parent
-        source: (image.status === Image.Ready && !softwareRendering) ? textureSource : null
-        visible: !softwareRendering
+        source: image.status === Image.Ready ? textureSource : null
     }
 }

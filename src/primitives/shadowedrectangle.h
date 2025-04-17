@@ -11,7 +11,6 @@
 
 #include <QQmlEngine>
 
-class PaintedRectangleItem;
 class ShaderNode;
 
 /**
@@ -349,26 +348,21 @@ public:
 
     void componentComplete() override;
 
-    bool isSoftwareRendering() const;
-
 Q_SIGNALS:
     void softwareRenderingChanged();
 
 protected:
-    PaintedRectangleItem *softwareItem() const;
-    void itemChange(QQuickItem::ItemChange change, const QQuickItem::ItemChangeData &value) override;
+    bool isSoftwareRendering() const;
     bool isLowPowerRendering() const;
 
     QSGNode *updatePaintNode(QSGNode *node, QQuickItem::UpdatePaintNodeData *data) override;
     void updateShaderNode(ShaderNode *shaderNode);
 
 private:
-    void checkSoftwareItem();
     const std::unique_ptr<BorderGroup> m_border;
     const std::unique_ptr<ShadowGroup> m_shadow;
     const std::unique_ptr<CornersGroup> m_corners;
     qreal m_radius = 0.0;
     QColor m_color = Qt::white;
     RenderType m_renderType = RenderType::Auto;
-    PaintedRectangleItem *m_softwareItem = nullptr;
 };

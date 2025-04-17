@@ -10,8 +10,8 @@
 #include <QSGRectangleNode>
 #include <QSGRendererInterface>
 
-#include "scenegraph/paintedrectangleitem.h"
 #include "scenegraph/shadernode.h"
+#include "scenegraph/softwarerectanglenode.h"
 
 using namespace Qt::StringLiterals;
 
@@ -251,9 +251,7 @@ void ShadowedRectangle::setRadius(qreal newRadius)
     }
 
     m_radius = newRadius;
-    if (!isSoftwareRendering()) {
-        update();
-    }
+    update();
     Q_EMIT radiusChanged();
 }
 
@@ -269,9 +267,7 @@ void ShadowedRectangle::setColor(const QColor &newColor)
     }
 
     m_color = newColor;
-    if (!isSoftwareRendering()) {
-        update();
-    }
+    update();
     Q_EMIT colorChanged();
 }
 
@@ -293,8 +289,6 @@ void ShadowedRectangle::setRenderType(RenderType renderType)
 void ShadowedRectangle::componentComplete()
 {
     QQuickItem::componentComplete();
-
-    checkSoftwareItem();
 }
 
 bool ShadowedRectangle::isSoftwareRendering() const
@@ -308,22 +302,6 @@ bool ShadowedRectangle::isLowPowerRendering() const
     return (m_renderType == ShadowedRectangle::RenderType::Auto && lowPower) || m_renderType == ShadowedRectangle::RenderType::LowQuality;
 }
 
-PaintedRectangleItem *ShadowedRectangle::softwareItem() const
-{
-    return m_softwareItem;
-}
-
-void ShadowedRectangle::itemChange(QQuickItem::ItemChange change, const QQuickItem::ItemChangeData &value)
-{
-    if (change == QQuickItem::ItemSceneChange && value.window) {
-        checkSoftwareItem();
-        // TODO: only conditionally emit?
-        Q_EMIT softwareRenderingChanged();
-    }
-
-    QQuickItem::itemChange(change, value);
-}
-
 QSGNode *ShadowedRectangle::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaintNodeData *data)
 {
     Q_UNUSED(data);
@@ -331,6 +309,21 @@ QSGNode *ShadowedRectangle::updatePaintNode(QSGNode *node, QQuickItem::UpdatePai
     if (boundingRect().isEmpty()) {
         delete node;
         return nullptr;
+    }
+
+    if (isSoftwareRendering()) {
+        auto rectangleNode = static_cast<SoftwareRectangleNode *>(node);
+        if (!rectangleNode) {
+            rectangleNode = new SoftwareRectangleNode{};
+        }
+
+        rectangleNode->setRect(boundingRect());
+        rectangleNode->setWindow(window());
+        rectangleNode->setColor(m_color);
+        rectangleNode->setRadius(m_radius);
+        rectangleNode->setBorderWidth(m_border->width());
+        rectangleNode->setBorderColor(m_border->color());
+        return rectangleNode;
     }
 
     auto shaderNode = static_cast<ShaderNode *>(node);
@@ -384,37 +377,6 @@ void ShadowedRectangle::updateShaderNode(ShaderNode *shaderNode)
            << ShaderNode::toPremultiplied(m_shadow->color()) // shadow_color
            << ShaderNode::toPremultiplied(m_border->color()); // border_color
     shaderNode->markDirty(QSGNode::DirtyMaterial);
-}
-
-void ShadowedRectangle::checkSoftwareItem()
-{
-    if (!m_softwareItem && isSoftwareRendering()) {
-        m_softwareItem = new PaintedRectangleItem{this};
-        // The software item is added as a "normal" child item, this means it
-        // will be part of the normal item sort order. Since there is no way to
-        // control the ordering of children, just make sure to have a very low Z
-        // value for the child, to force it to be the lowest item.
-        m_softwareItem->setZ(-99.0);
-
-        auto updateItem = [this]() {
-            auto borderWidth = m_border->width();
-            auto rect = boundingRect();
-            m_softwareItem->setSize(rect.size());
-            m_softwareItem->setColor(m_color);
-            m_softwareItem->setRadius(m_radius);
-            m_softwareItem->setBorderWidth(borderWidth);
-            m_softwareItem->setBorderColor(m_border->color());
-        };
-
-        updateItem();
-
-        connect(this, &ShadowedRectangle::widthChanged, m_softwareItem, updateItem);
-        connect(this, &ShadowedRectangle::heightChanged, m_softwareItem, updateItem);
-        connect(this, &ShadowedRectangle::colorChanged, m_softwareItem, updateItem);
-        connect(this, &ShadowedRectangle::radiusChanged, m_softwareItem, updateItem);
-        connect(m_border.get(), &BorderGroup::changed, m_softwareItem, updateItem);
-        setFlag(QQuickItem::ItemHasContents, false);
-    }
 }
 
 #include "moc_shadowedrectangle.cpp"
