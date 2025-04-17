@@ -19,10 +19,10 @@ target_sources(KirigamiPrimitives PRIVATE
     scenegraph/shadernode.h
     scenegraph/shadermaterial.cpp
     scenegraph/shadermaterial.h
+    scenegraph/softwarerectanglenode.cpp
+    scenegraph/softwarerectanglenode.h
     scenegraph/texturecache.cpp
     scenegraph/texturecache.h
-    scenegraph/paintedrectangleitem.cpp
-    scenegraph/paintedrectangleitem.h
 )
 
 ecm_target_qml_sources(KirigamiPrimitives SOURCES
