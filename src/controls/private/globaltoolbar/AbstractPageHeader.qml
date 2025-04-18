@@ -58,11 +58,21 @@ Kirigami.AbstractApplicationHeader {
                 return pageRow.globalToolBar.leftReservedSpace
             }
 
+            let displacement = 0
+
             if (Qt.application.layoutDirection === Qt.RightToLeft) {
-                return 0;
+                displacement = (page.Kirigami.ScenePosition.x + page.width)
+                                - (pageRow.Kirigami.ScenePosition.x + pageRow.width - pageRow.globalToolBar.leftReservedSpace)
+                                //- pageRow.globalToolBar.leftReservedSpace
+            } else {
+                displacement = pageRow.Kirigami.ScenePosition.x
+                                - page.Kirigami.ScenePosition.x
+                                + pageRow.globalToolBar.leftReservedSpace
             }
 
-            return Math.max(pageRow.globalToolBar.titleLeftPadding, pageRow.Kirigami.ScenePosition.x - page.Kirigami.ScenePosition.x + pageRow.globalToolBar.leftReservedSpace)
+            return Math.min(pageRow.globalToolBar.leftReservedSpace,
+                        Math.max(pageRow.globalToolBar.titleLeftPadding,
+                                 displacement))
         }
     }
 
