@@ -30,7 +30,7 @@ Kirigami.AbstractApplicationHeader {
         when: __stackPage.QQC.StackView.status !== QQC.StackView.Deactivating
 
         restoreMode: Binding.RestoreNone
-        value: pageRow
+        property real oldvalue: pageRow
             ? Math.min(
                 width / 2,
                 Math.max(
@@ -49,6 +49,21 @@ Kirigami.AbstractApplicationHeader {
                             + pageRow.globalToolBar.leftReservedSpace)
                             + Kirigami.Units.smallSpacing))
             : Kirigami.Units.smallSpacing
+        value: {
+            if (!pageRow) {
+                return Kirigami.Units.smallSpacing
+            }
+
+            if (!pageRow.wideMode) {
+                return pageRow.globalToolBar.leftReservedSpace
+            }
+
+            if (Qt.application.layoutDirection === Qt.RightToLeft) {
+                return 0;
+            }
+
+            return Math.max(pageRow.globalToolBar.titleLeftPadding, pageRow.Kirigami.ScenePosition.x - page.Kirigami.ScenePosition.x + pageRow.globalToolBar.leftReservedSpace)
+        }
     }
 
     rightPadding: pageRow
