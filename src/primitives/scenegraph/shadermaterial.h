@@ -6,6 +6,8 @@
 
 #pragma once
 
+#include <span>
+
 #include <QColor>
 #include <QSGMaterial>
 #include <QSGMaterialShader>
