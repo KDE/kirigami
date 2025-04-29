@@ -52,7 +52,7 @@ Kirigami.AbstractApplicationHeader {
 
             return Math.min(pageRow.globalToolBar.leftReservedSpace,
                     Math.max(pageRow.globalToolBar.titleLeftPadding,
-                            displacement))
+                            displacement)) + Kirigami.Units.smallSpacing
         }
     }
 
