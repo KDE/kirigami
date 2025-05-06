@@ -7,42 +7,49 @@
 import QtQuick
 import org.kde.kirigami as Kirigami
 
-QtObject {
-    readonly property Component leadingSeparator: Kirigami.Separator {
-        property Item column
-        property bool inToolBar
-        property Kirigami.ColumnView view
+Kirigami.Separator {
+    id: separator
+    property Item column
+    readonly property bool inToolBar: parent !== column
 
-        // positioning trick to hide the very first separator
-        visible: {
-            if (!view || !view.separatorVisible) {
-                return false;
+    anchors {
+        topMargin: inToolBar ? Kirigami.Units.largeSpacing : 0
+        bottomMargin: inToolBar ? Kirigami.Units.largeSpacing : 0
+    }
+
+    Kirigami.Theme.colorSet: Kirigami.Theme.Header
+    Kirigami.Theme.inherit: false
+
+    states: [
+        State {
+            name: "leading"
+            AnchorChanges {
+                target: separator
+                anchors {
+                    top: parent.top
+                    right: parent.left
+                    bottom: parent.bottom
+                }
             }
-
-            return view && (LayoutMirroring.enabled
-                ? view.contentX + view.width > column.x + column.width
-                : view.contentX < column.x);
+            PropertyChanges {
+                target: separator
+                visible: column.Kirigami.ColumnView.pinned
+            }
+        },
+        State {
+            name: "trailing"
+            AnchorChanges {
+                target: separator
+                anchors {
+                    top: parent.top
+                    right: parent.right
+                    bottom: parent.bottom
+                }
+            }
+            PropertyChanges {
+                target: separator
+                visible: column.Kirigami.ColumnView.pinned || (column.Kirigami.ColumnView.index < column.Kirigami.ColumnView.view?.count - 1 ?? false)
+            }
         }
-
-        anchors.top: column.top
-        anchors.left: column.left
-        anchors.bottom: column.bottom
-        anchors.topMargin: inToolBar ? Kirigami.Units.largeSpacing : 0
-        anchors.bottomMargin: inToolBar ? Kirigami.Units.largeSpacing : 0
-        Kirigami.Theme.colorSet: Kirigami.Theme.Header
-        Kirigami.Theme.inherit: false
-    }
-
-    readonly property Component trailingSeparator: Kirigami.Separator {
-        property Item column
-        property bool inToolBar
-
-        anchors.top: column.top
-        anchors.right: column.right
-        anchors.bottom: column.bottom
-        anchors.topMargin: inToolBar ? Kirigami.Units.largeSpacing : 0
-        anchors.bottomMargin: inToolBar ? Kirigami.Units.largeSpacing : 0
-        Kirigami.Theme.colorSet: Kirigami.Theme.Header
-        Kirigami.Theme.inherit: false
-    }
+    ]
 }
