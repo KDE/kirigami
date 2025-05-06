@@ -2,18 +2,19 @@
 # Frederik Schwarzer <schwarzer@kde.org>, 2016, 2018, 2020, 2021, 2022, 2023.
 # Burkhard Lück <lueck@hube-lueck.de>, 2017, 2018, 2019, 2020, 2021.
 # Alois Spitzbart <spitz234@hotmail.com>, 2021.
+# SPDX-FileCopyrightText: 2025 Flori G <Renner03@protonmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: libkirigami6_qt\n"
-"PO-Revision-Date: 2023-06-25 17:03+0200\n"
-"Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
+"PO-Revision-Date: 2025-02-22 02:17+0100\n"
+"Last-Translator: Flori G <Renner03@protonmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.03.70\n"
+"X-Generator: Lokalize 24.12.2\n"
 "X-Qt-Contexts: true\n"
 
 #: controls/AboutItem.qml:133
@@ -47,7 +48,7 @@ msgstr "Spenden"
 #: controls/AboutItem.qml:224
 msgctxt "AboutItem|"
 msgid "Report a Bug"
-msgstr "Probleme oder Wünsche berichten"
+msgstr "Ein Problem melden"
 
 #: controls/AboutItem.qml:237
 msgctxt "AboutItem|"
