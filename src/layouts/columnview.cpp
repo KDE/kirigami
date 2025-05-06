@@ -58,23 +58,13 @@ QmlComponentsPool *QmlComponentsPoolSingleton::instance(QQmlEngine *engine)
 
 QmlComponentsPool::QmlComponentsPool(QQmlEngine *engine)
     : QObject(engine)
+    , m_separatorComponent(engine)
 {
-    QQmlComponent component(engine);
-    component.loadFromModule("org.kde.kirigami.layouts.private", "ColumnViewSeparator");
+    m_separatorComponent.loadFromModule("org.kde.kirigami.layouts.private", "ColumnViewSeparator");
 
-    m_instance = component.create();
-
-    if (component.isError()) {
-        qCWarning(KirigamiLayoutsLog) << component.errors();
+    if (m_separatorComponent.isError()) {
+        qCFatal(KirigamiLayoutsLog) << m_separatorComponent.errors();
     }
-    Q_ASSERT(m_instance);
-    m_instance->setParent(this);
-
-    m_leadingSeparatorComponent = m_instance->property("leadingSeparator").value<QQmlComponent *>();
-    Q_ASSERT(m_leadingSeparatorComponent);
-
-    m_trailingSeparatorComponent = m_instance->property("trailingSeparator").value<QQmlComponent *>();
-    Q_ASSERT(m_trailingSeparatorComponent);
 
     m_units = engine->singletonInstance<Kirigami::Platform::Units *>("org.kde.kirigami.platform", "Units");
     Q_ASSERT(m_units);
@@ -487,7 +477,7 @@ void ContentItem::layoutItems()
                 QQuickItem *sep = nullptr;
                 int sepWidth = 0;
                 if (m_view->separatorVisible()) {
-                    sep = ensureTrailingSeparator(child);
+                    sep = ensureSeparator(child, child, true);
                     sepWidth = (sep ? sep->width() : 0);
                 }
                 const qreal width = childWidth(child);
@@ -501,8 +491,7 @@ void ContentItem::layoutItems()
                     header->setPosition(QPointF(pageX, .0));
                     header->setZ(2);
                     if (m_view->separatorVisible()) {
-                        QQuickItem *sep = ensureTrailingSeparator(header);
-                        sep->setProperty("inToolBar", true);
+                        ensureSeparator(header, child, false);
                     }
                 }
                 if (QQuickItem *footer = attached->globalFooter()) {
@@ -511,8 +500,7 @@ void ContentItem::layoutItems()
                     footer->setPosition(QPointF(pageX, height() - footerHeight));
                     footer->setZ(2);
                     if (m_view->separatorVisible()) {
-                        QQuickItem *sep = ensureTrailingSeparator(footer);
-                        sep->setProperty("inToolBar", true);
+                        ensureSeparator(footer, child, false);
                     }
                 }
 
@@ -534,41 +522,39 @@ void ContentItem::layoutItems()
                 qreal footerHeight = .0;
                 if (QQuickItem *header = attached->globalHeader(); header && qmlEngine(header)) {
                     if (m_view->separatorVisible()) {
-                        QQuickItem *sep = ensureLeadingSeparator(header);
-                        sep->setProperty("inToolBar", true);
+                        ensureSeparator(header, child, true);
                     }
                     headerHeight = header->isVisible() ? header->height() : .0;
                     header->setWidth(width);
                     header->setPosition(QPointF(partialWidth, .0));
                     header->setZ(1);
-                    auto it = m_trailingSeparators.find(header);
-                    if (it != m_trailingSeparators.end()) {
+                    auto it = m_leadingSeparators.find(header);
+                    if (it != m_leadingSeparators.end()) {
                         it.value()->deleteLater();
-                        m_trailingSeparators.erase(it);
+                        m_leadingSeparators.erase(it);
                     }
                 }
                 if (QQuickItem *footer = attached->globalFooter(); footer && qmlEngine(footer)) {
                     if (m_view->separatorVisible()) {
-                        QQuickItem *sep = ensureLeadingSeparator(footer);
-                        sep->setProperty("inToolBar", true);
+                        ensureSeparator(footer, child, true);
                     }
                     footerHeight = footer->isVisible() ? footer->height() : .0;
                     footer->setWidth(width);
                     footer->setPosition(QPointF(partialWidth, height() - footerHeight));
                     footer->setZ(1);
-                    auto it = m_trailingSeparators.find(footer);
-                    if (it != m_trailingSeparators.end()) {
+                    auto it = m_leadingSeparators.find(footer);
+                    if (it != m_leadingSeparators.end()) {
                         it.value()->deleteLater();
-                        m_trailingSeparators.erase(it);
+                        m_leadingSeparators.erase(it);
                     }
                 }
 
                 child->setSize(QSizeF(width, height() - headerHeight - footerHeight));
 
-                auto it = m_trailingSeparators.find(child);
-                if (it != m_trailingSeparators.end()) {
+                auto it = m_leadingSeparators.find(child);
+                if (it != m_leadingSeparators.end()) {
                     it.value()->deleteLater();
-                    m_trailingSeparators.erase(it);
+                    m_leadingSeparators.erase(it);
                 }
                 child->setPosition(QPointF(partialWidth, headerHeight));
                 child->setZ(0);
@@ -624,7 +610,7 @@ void ContentItem::layoutPinnedItems()
                 QQuickItem *sep = nullptr;
                 int sepWidth = 0;
                 if (m_view->separatorVisible()) {
-                    sep = ensureTrailingSeparator(child);
+                    sep = ensureSeparator(child, child, false);
                     sepWidth = (sep ? sep->width() : 0);
                 }
 
@@ -635,16 +621,14 @@ void ContentItem::layoutPinnedItems()
                     headerHeight = header->isVisible() ? header->height() : .0;
                     header->setPosition(QPointF(pageX, .0));
                     if (m_view->separatorVisible()) {
-                        QQuickItem *sep = ensureTrailingSeparator(header);
-                        sep->setProperty("inToolBar", true);
+                        ensureSeparator(header, child, false);
                     }
                 }
                 if (QQuickItem *footer = attached->globalFooter()) {
                     footerHeight = footer->isVisible() ? footer->height() : .0;
                     footer->setPosition(QPointF(pageX, height() - footerHeight));
                     if (m_view->separatorVisible()) {
-                        QQuickItem *sep = ensureTrailingSeparator(footer);
-                        sep->setProperty("inToolBar", true);
+                        ensureSeparator(footer, child, false);
                     }
                 }
                 child->setPosition(QPointF(pageX, headerHeight));
@@ -774,41 +758,34 @@ void ContentItem::forgetItem(QQuickItem *item)
     Q_EMIT m_view->countChanged();
 }
 
-QQuickItem *ContentItem::ensureLeadingSeparator(QQuickItem *item)
+QQuickItem *ContentItem::ensureSeparator(QQuickItem *parentItem, QQuickItem *column, bool trailing)
 {
-    QQuickItem *separatorItem = m_leadingSeparators.value(item);
-
-    if (!separatorItem) {
-        separatorItem = qobject_cast<QQuickItem *>(
-            QmlComponentsPoolSingleton::instance(qmlEngine(item))->m_leadingSeparatorComponent->beginCreate(QQmlEngine::contextForObject(item)));
-        if (separatorItem) {
-            separatorItem->setParent(this);
-            separatorItem->setParentItem(item);
-            separatorItem->setZ(9999);
-            separatorItem->setProperty("column", QVariant::fromValue(item));
-            separatorItem->setProperty("view", QVariant::fromValue(m_view));
-            QmlComponentsPoolSingleton::instance(qmlEngine(item))->m_leadingSeparatorComponent->completeCreate();
-            m_leadingSeparators[item] = separatorItem;
-        }
+    QQuickItem *separatorItem;
+    if (trailing) {
+        separatorItem = m_trailingSeparators.value(parentItem);
+    } else {
+        separatorItem = m_leadingSeparators.value(parentItem);
     }
 
-    return separatorItem;
-}
-
-QQuickItem *ContentItem::ensureTrailingSeparator(QQuickItem *item)
-{
-    QQuickItem *separatorItem = m_trailingSeparators.value(item);
-
     if (!separatorItem) {
         separatorItem = qobject_cast<QQuickItem *>(
-            QmlComponentsPoolSingleton::instance(qmlEngine(item))->m_trailingSeparatorComponent->beginCreate(QQmlEngine::contextForObject(item)));
+            QmlComponentsPoolSingleton::instance(qmlEngine(parentItem))->m_separatorComponent.beginCreate(QQmlEngine::contextForObject(parentItem)));
         if (separatorItem) {
             separatorItem->setParent(this);
-            separatorItem->setParentItem(item);
+            separatorItem->setParentItem(parentItem);
             separatorItem->setZ(9999);
-            separatorItem->setProperty("column", QVariant::fromValue(item));
-            QmlComponentsPoolSingleton::instance(qmlEngine(item))->m_trailingSeparatorComponent->completeCreate();
-            m_trailingSeparators[item] = separatorItem;
+            separatorItem->setProperty("column", QVariant::fromValue(column));
+            if (trailing) {
+                separatorItem->setProperty("state", QStringLiteral("trailing"));
+            } else {
+                separatorItem->setProperty("state", QStringLiteral("leading"));
+            }
+            QmlComponentsPoolSingleton::instance(qmlEngine(parentItem))->m_separatorComponent.completeCreate();
+            if (trailing) {
+                m_trailingSeparators[parentItem] = separatorItem;
+            } else {
+                m_leadingSeparators[parentItem] = separatorItem;
+            }
         }
     }
 
@@ -844,7 +821,7 @@ void ContentItem::itemChange(QQuickItem::ItemChange change, const QQuickItem::It
         }
 
         if (m_view->separatorVisible()) {
-            ensureLeadingSeparator(value.item);
+            ensureSeparator(value.item, value.item, true);
         }
 
         m_shouldAnimate = true;
