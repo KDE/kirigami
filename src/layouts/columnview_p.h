@@ -29,16 +29,12 @@ public:
     QmlComponentsPool(QQmlEngine *engine);
     ~QmlComponentsPool() override;
 
-    QQmlComponent *m_leadingSeparatorComponent = nullptr;
-    QQmlComponent *m_trailingSeparatorComponent = nullptr;
+    QQmlComponent m_separatorComponent;
     Kirigami::Platform::Units *m_units = nullptr;
 
 Q_SIGNALS:
     void gridUnitChanged();
     void longDurationChanged();
-
-private:
-    QObject *m_instance = nullptr;
 };
 
 class ContentItem : public QQuickItem
@@ -54,8 +50,7 @@ public:
     qreal childWidth(QQuickItem *child);
     void updateVisibleItems();
     void forgetItem(QQuickItem *item);
-    QQuickItem *ensureLeadingSeparator(QQuickItem *item);
-    QQuickItem *ensureTrailingSeparator(QQuickItem *item);
+    QQuickItem *ensureSeparator(QQuickItem *parentItem, QQuickItem *column, bool trailing);
 
     void setBoundedX(qreal x);
     void animateX(qreal x);
