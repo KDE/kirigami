@@ -15,6 +15,7 @@
 #include <QQmlContext>
 #include <QQmlEngine>
 #include <QStyleHints>
+#include <algorithm>
 
 #include "platform/units.h"
 
@@ -159,6 +160,46 @@ void ColumnViewAttached::setReservedSpace(qreal space)
     }
 }
 
+qreal ColumnViewAttached::minimumWidth() const
+{
+    return m_minimumWidth;
+}
+
+void ColumnViewAttached::setMinimumWidth(qreal width)
+{
+    if (qFuzzyCompare(width, m_minimumWidth)) {
+        return;
+    }
+
+    m_minimumWidth = width;
+
+    Q_EMIT minimumWidthChanged();
+
+    if (m_view) {
+        m_view->polish();
+    }
+}
+
+qreal ColumnViewAttached::maximumWidth() const
+{
+    return m_maximumWidth;
+}
+
+void ColumnViewAttached::setMaximumWidth(qreal width)
+{
+    if (qFuzzyCompare(width, m_maximumWidth)) {
+        return;
+    }
+
+    m_maximumWidth = width;
+
+    Q_EMIT maximumWidthChanged();
+
+    if (m_view) {
+        m_view->polish();
+    }
+}
+
 ColumnView *ColumnViewAttached::view()
 {
     return m_view;
@@ -262,6 +303,22 @@ void ColumnViewAttached::setInViewport(bool inViewport)
     m_inViewport = inViewport;
 
     Q_EMIT inViewportChanged();
+}
+
+bool ColumnViewAttached::interactiveResize() const
+{
+    return m_interactiveResize;
+}
+
+void ColumnViewAttached::setInteractiveResize(bool interactive)
+{
+    if (interactive == m_interactiveResize) {
+        return;
+    }
+
+    m_interactiveResize = interactive;
+
+    Q_EMIT interactiveResizeChanged();
 }
 
 QQuickItem *ColumnViewAttached::globalHeader() const
@@ -441,6 +498,14 @@ qreal ContentItem::childWidth(QQuickItem *child)
 
         if (width < 1.0) {
             width = m_columnWidth;
+        }
+
+        if (attached->minimumWidth() >= 0 && attached->maximumWidth() >= 0) {
+            width = std::clamp(width, attached->minimumWidth(), attached->maximumWidth());
+        } else if (attached->minimumWidth() >= 0) {
+            width = std::max(width, attached->minimumWidth());
+        } else if (attached->maximumWidth() >= 0) {
+            width = std::min(width, attached->maximumWidth());
         }
 
         return qRound(qMin(m_view->width(), width));
