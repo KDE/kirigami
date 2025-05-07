@@ -50,7 +50,7 @@ public:
     qreal childWidth(QQuickItem *child);
     void updateVisibleItems();
     void forgetItem(QQuickItem *item);
-    QQuickItem *ensureSeparator(QQuickItem *parentItem, QQuickItem *column, bool trailing);
+    QQuickItem *ensureSeparator(QQuickItem *previousColumn, QQuickItem *column, QQuickItem *nextColumn);
 
     void setBoundedX(qreal x);
     void animateX(qreal x);
@@ -74,12 +74,12 @@ private:
     ColumnView *m_view;
     QQuickItem *m_globalHeaderParent;
     QQuickItem *m_globalFooterParent;
+
     QPropertyAnimation *m_slideAnim;
     QList<QQuickItem *> m_items;
     QList<QQuickItem *> m_visibleItems;
     QPointer<QQuickItem> m_viewAnchorItem;
-    QHash<QQuickItem *, QQuickItem *> m_leadingSeparators;
-    QHash<QQuickItem *, QQuickItem *> m_trailingSeparators;
+    QHash<QQuickItem *, QQuickItem *> m_separators;
     QHash<QObject *, QObject *> m_models;
 
     qreal m_leftPinnedSpace = 361;
