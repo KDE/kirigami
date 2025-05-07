@@ -56,6 +56,26 @@ class ColumnViewAttached : public QObject
     Q_PROPERTY(qreal reservedSpace READ reservedSpace WRITE setReservedSpace NOTIFY reservedSpaceChanged FINAL)
 
     /*!
+     * \qmlattachedproperty real ColumnView::minimumWidth
+     *
+     * When a column is interactiveResizeEnabled, when resizing manually it will bound
+     * the column size between minimumWidth and maximumWidth
+     *
+     * \since 6.16
+     */
+    Q_PROPERTY(qreal minimumWidth READ minimumWidth WRITE setMinimumWidth NOTIFY minimumWidthChanged FINAL)
+
+    /*!
+     * \qmlattachedproperty real ColumnView::maximumWidth
+     *
+     * When a column is interactiveResizeEnabled, when resizing manually it will bound
+     * the column size between minimumWidth and maximumWidth
+     *
+     * \since 6.16
+     */
+    Q_PROPERTY(qreal maximumWidth READ maximumWidth WRITE setMaximumWidth NOTIFY maximumWidthChanged FINAL)
+
+    /*!
      * \qmlattachedproperty bool ColumnView::preventStealing
      *
      * Like the same property of MouseArea, when this is true, the column view won't
@@ -90,6 +110,40 @@ class ColumnViewAttached : public QObject
     Q_PROPERTY(bool inViewport READ inViewport NOTIFY inViewportChanged FINAL)
 
     /*!
+     * \qmlattachedproperty bool ColumnView::interactiveResizeEnabled
+     *
+     * True if this column supports interactive resize with mouse.
+     *
+     * If the sizes should be saved and restored on application startup,
+     * it is the application responsibility to implement this, for instance exposing
+     * and object with properties for the desired column widths which
+     * reads and writes to the config. at the main Component.onCompleted of the
+     * ApplicationWindow root Item it will apply the preferred sizes of the desired pages.
+     *
+     * The property will be written at interactiveResizingChanged signal handler.
+     *
+     * \since 6.16
+     */
+    Q_PROPERTY(bool interactiveResizeEnabled READ interactiveResizeEnabled WRITE setInteractiveResizeEnabled NOTIFY interactiveResizeEnabledChanged)
+
+    /*!
+     * \qmlattachedproperty bool ColumnView::interactiveResizing
+     *
+     * True when the user is actively resizing a column with the mouse.
+     * If the application wants to write the column sizes to config,
+     * it can sync to some global object property at interactiveResizingChanged:
+     * \qml
+     *      Kirigami.ColumnView.onInteractiveResizingChanged: {
+     *          if (!Kirigami.ColumnView.interactiveResizing) {
+     *              myAppObject.leftColumnWidth = page.implicitWidth;
+     *          }
+     *      }
+     * \endqml
+     * \since 6.16
+     */
+    Q_PROPERTY(bool interactiveResizing READ interactiveResizing WRITE setInteractiveResizing NOTIFY interactiveResizingChanged)
+
+    /*!
      * \qmlattachedproperty Item ColumnView::globalHeader
      */
     Q_PROPERTY(QQuickItem *globalHeader READ globalHeader WRITE setGlobalHeader NOTIFY globalHeaderChanged FINAL)
@@ -112,6 +166,12 @@ public:
     qreal reservedSpace() const;
     void setReservedSpace(qreal space);
 
+    qreal minimumWidth() const;
+    void setMinimumWidth(qreal space);
+
+    qreal maximumWidth() const;
+    void setMaximumWidth(qreal space);
+
     ColumnView *view();
     void setView(ColumnView *view);
 
@@ -131,6 +191,12 @@ public:
     bool inViewport() const;
     void setInViewport(bool inViewport);
 
+    bool interactiveResizeEnabled() const;
+    void setInteractiveResizeEnabled(bool interactive);
+
+    bool interactiveResizing() const;
+    void setInteractiveResizing(bool interactive);
+
     QQuickItem *globalHeader() const;
     void setGlobalHeader(QQuickItem *header);
 
@@ -141,11 +207,15 @@ Q_SIGNALS:
     void indexChanged();
     void fillWidthChanged();
     void reservedSpaceChanged();
+    void minimumWidthChanged();
+    void maximumWidthChanged();
     void viewChanged();
     void preventStealingChanged();
     void pinnedChanged();
     void scrollIntention(ScrollIntentionEvent *event);
     void inViewportChanged();
+    void interactiveResizeEnabledChanged();
+    void interactiveResizingChanged();
     void globalHeaderChanged(QQuickItem *oldHeader, QQuickItem *newHeader);
     void globalFooterChanged(QQuickItem *oldFooter, QQuickItem *newFooter);
 
@@ -153,6 +223,8 @@ private:
     int m_index = -1;
     bool m_fillWidth = false;
     qreal m_reservedSpace = 0;
+    qreal m_minimumWidth = -1;
+    qreal m_maximumWidth = -1;
     QPointer<ColumnView> m_view;
     QPointer<QQuickItem> m_originalParent;
     bool m_customFillWidth = false;
@@ -161,6 +233,8 @@ private:
     bool m_preventStealing = false;
     bool m_pinned = false;
     bool m_inViewport = false;
+    bool m_interactiveResizeEnabled = false;
+    bool m_interactiveResizing = false;
     QPointer<QQuickItem> m_globalHeader;
     QPointer<QQuickItem> m_globalFooter;
 };
@@ -413,6 +487,19 @@ public:
 
     bool acceptsMouse() const;
     void setAcceptsMouse(bool accepts);
+
+    /*!
+     * \qmlmethod Item ColumnView::get(int index)
+     *
+     * \brief This method gets the item at index, if available
+     *
+     * Note that if an invalid index is passed (either negative or greater
+     * then depth - 1) nullptr will be returned
+     *
+     * \a index The index of the item to get.
+     * \since 6.16
+     */
+    Q_INVOKABLE QQuickItem *get(int index);
 
     /*!
      * \qmlmethod Item ColumnView::pop(var item)
