@@ -3,6 +3,7 @@ add_subdirectory(primitives)
 add_subdirectory(delegates)
 add_subdirectory(dialogs)
 add_subdirectory(layouts)
+add_subdirectory(polyfill)
 
 add_library(Kirigami)
 add_library(KF6::Kirigami ALIAS Kirigami)
