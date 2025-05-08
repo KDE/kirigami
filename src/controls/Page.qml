@@ -273,6 +273,7 @@ QQC2.Page {
         property bool pageComplete: false
 
         visible: active
+        height: visible ? bottomToolBar.item.implicitHeight : 0
 
         active: {
             // Important! Do not do anything until the page has been
