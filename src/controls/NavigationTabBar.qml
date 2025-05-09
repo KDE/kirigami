@@ -12,6 +12,7 @@ import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
+import org.kde.kirigami.private.polyfill
 
 /*!
   \qmltype NavigationTabBar
@@ -210,14 +211,11 @@ QQC2.ToolBar {
 
     // ensure that by default, we do not have unintended padding and spacing from the style
     spacing: 0
-    padding: 0
-    topPadding: undefined
-    leftPadding: undefined
-    rightPadding: undefined
-    bottomPadding: undefined
-    verticalPadding: undefined
+    topPadding: root.position === QQC2.ToolBar.Header ? parent.SafeArea.margins.top : 0
+    bottomPadding: root.position === QQC2.ToolBar.Footer ? parent.SafeArea.margins.bottom : 0
     // Using Math.round() on horizontalPadding can cause the contentItem to jitter left and right when resizing the window.
-    horizontalPadding: Math.floor(Math.max(0, width - root.maximumContentWidth) / 2)
+    leftPadding: Math.floor(Math.max(0, width - root.maximumContentWidth) / 2) + parent.SafeArea.margins.left
+    rightPadding: Math.floor(Math.max(0, width - root.maximumContentWidth) / 2) + parent.SafeArea.margins.right
 
     contentWidth: root.maximumContentWidth
     implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset, contentWidth)
