@@ -9,6 +9,7 @@ import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
+import org.kde.kirigami.private.polyfill
 import "private" as KP
 
 /*!
@@ -108,10 +109,10 @@ Kirigami.OverlayDrawer {
     drawerOpen: false
 
     // list items go to edges, have their own padding
-    topPadding: 0
-    leftPadding: 0
-    rightPadding: 0
-    bottomPadding: 0
+    topPadding: parent.SafeArea.margins.top
+    leftPadding: root.edge === Qt.LeftEdge ? parent.SafeArea.margins.left : 0
+    rightPadding: root.edge === Qt.RightEdge ? parent.SafeArea.margins.right : 0
+    bottomPadding: parent.SafeArea.margins.bottom
 
     property bool handleVisible: {
         if (typeof applicationWindow === "function") {

@@ -11,6 +11,7 @@ import QtQuick.Controls as QQC2
 import QtQuick.Layouts
 import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
+import org.kde.kirigami.private.polyfill
 import "private" as KP
 
 /*!
@@ -59,7 +60,10 @@ Kirigami.OverlayDrawer {
     handleClosedIcon.source: null
     handleOpenIcon.source: null
 
-    padding: 0
+    leftPadding: root.edge === Qt.LeftEdge ? parent.SafeArea.margins.left : 0
+    topPadding: parent.SafeArea.margins.top
+    rightPadding: root.edge === Qt.RightEdge ? parent.SafeArea.margins.right : 0
+    bottomPadding: parent.SafeArea.margins.bottom
 
     handleVisible: {
         // When drawer is inline with content and opened, there is no point is showing handle.
