@@ -601,6 +601,12 @@ bool WheelHandler::eventFilter(QObject *watched, QEvent *event)
         return false;
     }
 
+    // We only process keyboard events for QQuickScrollView.
+    const auto eventType = event->type();
+    if (item == m_scrollView && eventType != QEvent::KeyPress && eventType != QEvent::KeyRelease) {
+        return false;
+    }
+
     qreal contentWidth = 0;
     qreal contentHeight = 0;
     qreal pageWidth = 0;
@@ -613,7 +619,7 @@ bool WheelHandler::eventFilter(QObject *watched, QEvent *event)
     }
 
     // The code handling touch, mouse and hover events is mostly copied/adapted from QQuickScrollView::childMouseEventFilter()
-    switch (event->type()) {
+    switch (eventType) {
     case QEvent::Wheel: {
         // QQuickScrollBar::interactive handling Matches behavior in QQuickScrollView::eventFilter()
         if (m_filterMouseEvents) {
