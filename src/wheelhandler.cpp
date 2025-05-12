@@ -481,9 +481,9 @@ bool WheelHandler::scrollFlickable(QPointF pixelDelta, QPointF angleDelta, Qt::K
 
         qreal minExtent = leadingMargin - originPos;
         qreal maxExtent = size - (contentSize + trailingMargin + originPos);
-
-        qreal newContentPos =
-            std::clamp((animation.state() == QPropertyAnimation::Running ? animation.endValue().toReal() : contentPos) - change, -minExtent, -maxExtent);
+        qreal newContentPos = (animation.state() == QPropertyAnimation::Running ? animation.endValue().toReal() : contentPos) - change;
+        // bound the values without asserts
+        newContentPos = qMax(-minExtent, qMin(newContentPos, -maxExtent));
 
         // Flickable::pixelAligned rounds the position, so round to mimic that behavior.
         // Rounding prevents fractional positioning from causing text to be
