@@ -133,7 +133,7 @@ Item {
         id: lay
         property int wideImplicitWidth
         columns: root.wideMode ? 2 : 1
-        rowSpacing: Kirigami.Units.smallSpacing
+        rowSpacing: 0
         columnSpacing: Kirigami.Units.largeSpacing
 
         //TODO: use state machine
@@ -215,8 +215,8 @@ Item {
             }
         }
         onImplicitWidthChanged: hintCompression.restart();
-        //This invisible row is used to sync alignment between multiple layouts
 
+        //This invisible row is used to sync alignment between multiple layouts
         Item {
             Layout.preferredWidth: {
                 let hint = lay.buddiesImplicitWidth;
@@ -227,7 +227,7 @@ Item {
                 }
                 return hint;
             }
-            Layout.preferredHeight: 2
+            Layout.preferredHeight: 0
         }
         Item {
             Layout.preferredWidth: {
@@ -239,7 +239,7 @@ Item {
                 }
                 return hint;
             }
-            Layout.preferredHeight: 2
+            Layout.preferredHeight: 0
         }
     }
 
@@ -310,6 +310,14 @@ Item {
                 }
                 lay.knownItems.push(item);
 
+                // We have to manage spacing ourselves, because twinFormLayouts requires items
+                // in lay to sync the alignment of other layouts, but these items would still
+                // contribute an amount of rowSpacing themselves. As such, we have to have
+                // lay.rowSpacing set to 0 and insert items to create spacing ourselves.
+                if (i != 2) {
+                    spacingComponent.createObject(lay)
+                }
+
                 const itemContainer = itemComponent.createObject(temp, { item });
 
                 // if it's a labeled section header, add extra spacing before it
@@ -329,6 +337,16 @@ Item {
     }
 
     onChildrenChanged: relayoutTimer.restart();
+
+    Component{
+        id: spacingComponent
+        Item {
+            implicitWidth: 0
+            Layout.preferredHeight: Kirigami.Units.smallSpacing
+            Layout.columnSpan: lay.columns
+            visible: true // TODO: We should be visible only if the item after us is
+        }
+    }
 
     Component {
         id: itemComponent
