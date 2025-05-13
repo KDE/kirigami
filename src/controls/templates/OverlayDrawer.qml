@@ -188,7 +188,7 @@ T.Drawer {
 
     height: parent && (root.edge === Qt.LeftEdge || root.edge === Qt.RightEdge) ? (modal ? parent.height : (parent.height - y - (T.ApplicationWindow.footer ? T.ApplicationWindow.footer.height : 0))) : implicitHeight
 
-    parent: modal || edge === Qt.LeftEdge || edge === Qt.RightEdge ? T.ApplicationWindow.overlay : T.ApplicationWindow.contentItem
+    parent: modal || edge === Qt.LeftEdge || edge === Qt.RightEdge ? T.Overlay.overlay : T.ApplicationWindow.contentItem
 
     edge: Qt.LeftEdge
     modal: true
@@ -222,7 +222,7 @@ T.Drawer {
                     enterAnimation.animating = true
                     // on non modal dialog we don't want drawers in the overlay
                     if (!root.modal) {
-                        root.background.parent.parent = applicationWindow().overlay.parent
+                        root.background.parent.parent = root.T.Overlay.overlay.parent
                     }
                 }
             }
@@ -375,18 +375,18 @@ T.Drawer {
                     when: root.collapsed
                     PropertyChanges {
                         target: root
-                        implicitWidth: edge === Qt.TopEdge || edge === Qt.BottomEdge ? applicationWindow().width : Math.min(collapsedSize + leftPadding + rightPadding, Math.round(applicationWindow().width*0.8))
+                        implicitWidth: edge === Qt.TopEdge || edge === Qt.BottomEdge ? root.T.ApplicationWindow.window.width : Math.min(collapsedSize + leftPadding + rightPadding, Math.round(root.T.ApplicationWindow.window.width*0.8))
 
-                        implicitHeight: edge === Qt.LeftEdge || edge === Qt.RightEdge ? applicationWindow().height : Math.min(collapsedSize + topPadding + bottomPadding, Math.round(applicationWindow().height*0.8))
+                        implicitHeight: edge === Qt.LeftEdge || edge === Qt.RightEdge ? root.T.ApplicationWindow.window.height : Math.min(collapsedSize + topPadding + bottomPadding, Math.round(root.T.ApplicationWindow.window.height*0.8))
                     }
                 },
                 State {
                     when: !root.collapsed
                     PropertyChanges {
                         target: root
-                        implicitWidth: edge === Qt.TopEdge || edge === Qt.BottomEdge ? applicationWindow().width : Math.min(contentItem.implicitWidth, Math.round(applicationWindow().width*0.8))
+                        implicitWidth: edge === Qt.TopEdge || edge === Qt.BottomEdge ? root.T.ApplicationWindow.window.width : Math.min(contentItem.implicitWidth, Math.round(root.T.ApplicationWindow.window.width*0.8))
 
-                        implicitHeight: edge === Qt.LeftEdge || edge === Qt.RightEdge ? applicationWindow().height : Math.min(contentHeight + topPadding + bottomPadding, Math.round(applicationWindow().height*0.4))
+                        implicitHeight: edge === Qt.LeftEdge || edge === Qt.RightEdge ? root.T.ApplicationWindow.window.height : Math.min(contentHeight + topPadding + bottomPadding, Math.round(root.T.ApplicationWindow.window.height*0.4))
 
                         contentWidth: contentItem.implicitWidth || (contentChildren.length === 1 ? contentChildren[0].implicitWidth : 0)
                         contentHeight: contentItem.implicitHeight || (contentChildren.length === 1 ? contentChildren[0].implicitHeight : 0)
