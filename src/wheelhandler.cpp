@@ -525,7 +525,7 @@ bool WheelHandler::scrollFlickable(QPointF pixelDelta, QPointF angleDelta, Qt::K
 
         qreal absPixelDelta = std::abs(newPos - oldPos);
         int duration = absPixelDelta * devicePixelRatio > 2 //
-            ? std::clamp(qRound(absPixelDelta * m_units->longDuration() / stepSize), qCeil(1000.0 / 60.0 * 3), m_units->longDuration())
+            ? qMax(qCeil(1000.0 / 60.0 * 3), qMin(qRound(absPixelDelta * m_units->longDuration() / stepSize), m_units->longDuration()))
             : 0;
         animation.setDuration(duration <= qCeil(1000.0 / refreshRate * 2) ? 0 : duration);
         if (animation.duration() > 0) {
