@@ -19,99 +19,9 @@ import org.kde.kirigami.dialogs as KDialogs
   \inqmlmodule org.kde.kirigami.dialogs
   \inherits Dialog
 
-  \brief Popup dialog that is used for short tasks and user interaction.
+  This component is deprecated, use QQC2.Dialog instead.
 
-  Dialog consists of three components: the header, the content,
-  and the footer.
-
-  By default, the header is a heading with text specified by the
-  title property.
-
-  By default, the footer consists of a row of buttons specified by
-  the standardButtons and customFooterActions properties.
-
-  The implicitHeight and implicitWidth of the dialog contentItem is
-  the primary hint used for the dialog size. The dialog will be the
-  minimum size required for the header, footer and content unless
-  it is larger than maximumHeight and maximumWidth. Use
-  preferredHeight and preferredWidth in order to manually specify
-  a size for the dialog.
-
-  If the content height exceeds the maximum height of the dialog, the
-  dialog's contents will become scrollable.
-
-  If the contentItem is a ListView, the dialog will take care of the
-  necessary scrollbars and scrolling behaviour. Do not attempt
-  to nest ListViews (it must be the top level item), as the scrolling
-  behaviour will not be handled. Use ListView's header and footer instead.
-
-  Example for a selection dialog:
-
-  \qml
-  import QtQuick
-  import QtQuick.Layouts
-  import QtQuick.Controls as QQC2
-  import org.kde.kirigami as Kirigami
-
-  Kirigami.Dialog {
-      title: i18n("Dialog")
-      padding: 0
-      preferredWidth: Kirigami.Units.gridUnit * 16
-
-      standardButtons: Kirigami.Dialog.Ok | Kirigami.Dialog.Cancel
-
-      onAccepted: console.log("OK button pressed")
-      onRejected: console.log("Rejected")
-
-      ColumnLayout {
-          spacing: 0
-          Repeater {
-              model: 5
-              delegate: QQC2.CheckDelegate {
-                  topPadding: Kirigami.Units.smallSpacing * 2
-                  bottomPadding: Kirigami.Units.smallSpacing * 2
-                  Layout.fillWidth: true
-                  text: modelData
-              }
-          }
-      }
-  }
-  \endqml
-
-  Example with scrolling (ListView scrolling behaviour is handled by the Dialog):
-
-  \qml
-  import QtQuick
-  import QtQuick.Layouts
-  import QtQuick.Controls as QQC2
-  import org.kde.kirigami as Kirigami
-
-  Kirigami.Dialog {
-      id: scrollableDialog
-      title: i18n("Select Number")
-
-      ListView {
-          id: listView
-          // hints for the dialog dimensions
-          implicitWidth: Kirigami.Units.gridUnit * 16
-          implicitHeight: Kirigami.Units.gridUnit * 16
-
-          model: 100
-          delegate: QQC2.RadioDelegate {
-              topPadding: Kirigami.Units.smallSpacing * 2
-              bottomPadding: Kirigami.Units.smallSpacing * 2
-              implicitWidth: listView.width
-              text: modelData
-          }
-      }
-  }
-  \endqml
-
-  There are also sub-components of the Dialog that target specific usecases,
-  and can reduce boilerplate code if used.
-
-  \sa PromptDialog
-  \sa MenuDialog
+  \deprecated
 
  */
 T.Dialog {
@@ -275,6 +185,8 @@ T.Dialog {
         }
         return customFooterButtons.itemAt(index) as T.AbstractButton;
     }
+
+    Component.onCompleted: console.warn("Warning: Kirigami.Dialog is deprecated, use QQC2.Dialog instead.");
 
     z: Kirigami.OverlayZStacking.z
 

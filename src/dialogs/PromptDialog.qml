@@ -9,7 +9,6 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
-import org.kde.kirigami.dialogs as KirigamiDialogs
 
 /*!
   \qmltype PromptDialog
@@ -72,7 +71,7 @@ import org.kde.kirigami.dialogs as KirigamiDialogs
   }
   \endqml
  */
-KirigamiDialogs.Dialog {
+QQC2.Dialog {
     id: root
 
     default property alias mainItem: mainLayout.data

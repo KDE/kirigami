@@ -11,7 +11,6 @@ import QtQuick.Controls as QQC2
 import QtQuick.Layouts
 import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
-import org.kde.kirigami.dialogs as KirigamiDialogs
 
 /*!
   \qmltype MenuDialog
@@ -59,7 +58,7 @@ import org.kde.kirigami.dialogs as KirigamiDialogs
   \sa Dialog
   \sa PromptDialog
  */
-KirigamiDialogs.Dialog {
+QQC2.Dialog {
     id: root
 
     /*!
@@ -85,6 +84,17 @@ KirigamiDialogs.Dialog {
       contentHeaderControl.topPadding
      */
     property alias contentHeaderControl: columnHeader
+
+    /*!
+      \qmlproperty bool showCloseButton
+
+      \brief This property sets whether to show the close button in the header.
+
+      \warning This property is kept for API compatibility during the KF6 cycle.
+      It is recommended to port away from it.
+     */
+    // TODO KF7: remove.
+    property bool showCloseButton: true
 
     preferredWidth: Kirigami.Units.gridUnit * 20
     padding: 0
@@ -132,5 +142,4 @@ KirigamiDialogs.Dialog {
     }
 
     standardButtons: QQC2.DialogButtonBox.NoButton
-    showCloseButton: true
 }
