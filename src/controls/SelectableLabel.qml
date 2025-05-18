@@ -6,6 +6,8 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import org.kde.kirigami as Kirigami
 import QtQuick.Controls as QQC2
@@ -261,17 +263,12 @@ QQC2.Control {
 
         HoverHandler {
             id: hoverHandler
-            // By default HoverHandler accepts the left button while it shouldn't accept anything,
-            // causing https://bugreports.qt.io/browse/QTBUG-106489.
-            // Qt.NoButton unfortunately is not a valid value for acceptedButtons.
-            // Disabling masks the problem, but
-            // there is no proper workaround other than an upstream fix
-            // See qqc2-desktop-style Label.qml
-            enabled: false
             cursorShape: root.cursorShape ? root.cursorShape : (textEdit.hoveredLink ? Qt.PointingHandCursor : Qt.IBeamCursor)
         }
 
         TapHandler {
+            id: leftClickAndPressTapHandler
+
             // For custom click actions we want selection to be turned off
             enabled: !textEdit.selectByMouse
 
@@ -316,6 +313,33 @@ QQC2.Control {
                 }
                 onTriggered: {
                     textEdit.selectAll();
+                }
+            }
+        }
+
+        Loader {
+            // From https://stackoverflow.com/questions/1500260/detect-urls-in-text-with-javascript
+            active: textEdit.text.match(/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig)
+            sourceComponent: QQC2.ToolTip {
+                visible: {
+                    if (textEdit.text.length === 0 || !textEdit.hoveredLink) {
+                        return false;
+                    }
+                    if (Kirigami.Settings.tabletMode) {
+                        return leftClickAndPressTapHandler.pressed;
+                    }
+                    return true;
+                }
+
+                // Set this stuff imperatively because:
+                // - We don't want the text to get unset before the tooltip disappears
+                // - We want the position to stay fixed, not jump around as the pointer moves
+                onVisibleChanged: {
+                    if (visible) {
+                        text = textEdit.hoveredLink;
+                        x = hoverHandler.point.position.x - Math.round(implicitWidth / 2);
+                        y = hoverHandler.point.position.y - implicitHeight - Kirigami.Units.largeSpacing
+                    }
                 }
             }
         }
