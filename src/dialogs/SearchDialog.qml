@@ -158,6 +158,9 @@ QQC2.Dialog {
 
     padding: 0
 
+    header: null
+    footer: null
+
     anchors.centerIn: parent
 
     modal: true
