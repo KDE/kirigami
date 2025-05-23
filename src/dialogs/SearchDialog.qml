@@ -56,6 +56,7 @@ import org.kde.kirigami as Kirigami
   \note This component is unsuitable on mobile. Instead on mobile prefer to
   use a seperate page for the search.
 
+    \note By default, the title and standardButtons property are ignored.
   \since 6.3
  */
 QQC2.Dialog {
@@ -160,6 +161,7 @@ QQC2.Dialog {
 
     header: null
     footer: null
+    standardButtons: QQC2.Dialog.NoButton
 
     anchors.centerIn: parent
 
