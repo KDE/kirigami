@@ -21,9 +21,10 @@ import org.kde.kirigami.dialogs as KDialogs
 
   This component is deprecated, use QQC2.Dialog instead.
 
-  \deprecated
+  \deprecated[6.15]
 
  */
+@Deprecated { reason: "Use QQC2.Dialog instead" }
 T.Dialog {
     id: root
 
@@ -185,8 +186,6 @@ T.Dialog {
         }
         return customFooterButtons.itemAt(index) as T.AbstractButton;
     }
-
-    Component.onCompleted: console.warn("Warning: Kirigami.Dialog is deprecated, use QQC2.Dialog instead.");
 
     z: Kirigami.OverlayZStacking.z
 

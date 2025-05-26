@@ -9,6 +9,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
+import org.kde.kirigami.dialogs as KirigamiDialogs
 
 /*!
   \qmltype PromptDialog
@@ -69,9 +70,14 @@ import org.kde.kirigami as Kirigami
           placeholderText: qsTr("Folder name…")
       }
   }
+
+  \warning While this component is not deprecated (nor expected to be later) the
+  intention is for it to inherit from QQC2.Dialog, as such any API unique to
+  Kirigami.Dialog should be avoided.
+
   \endqml
  */
-QQC2.Dialog {
+KirigamiDialogs.Dialog {
     id: root
 
     default property alias mainItem: mainLayout.data
