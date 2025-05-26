@@ -11,54 +11,24 @@ import QtQuick.Controls as QQC2
 import QtQuick.Layouts
 import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
+import org.kde.kirigami.dialogs as KirigamiDialogs
 
 /*!
   \qmltype MenuDialog
   \inqmlmodule org.kde.kirigami.dialogs
 
-  \brief A dialog that prompts users with a context menu, with
-  list items that perform actions.
+  This component is deprecated, use QQC2.Dialog with the contentItem set as here
+  instead.
 
-  Example usage:
-  \qml
-  Kirigami.MenuDialog {
-      title: i18n("Track Options")
+  \note The intention is to create a common action list content component to make
+  porting easier so feel free to wait for that before porting. This will be updated
+  with details when available.
 
-      actions: [
-          Kirigami.Action {
-              icon.name: "media-playback-start"
-              text: i18nc("Start playback of the selected track", "Play")
-              tooltip: i18n("Start playback of the selected track")
-          },
-          Kirigami.Action {
-              enabled: false
-              icon.name: "document-open-folder"
-              text: i18nc("Show the file for this song in the file manager", "Show in folder")
-              tooltip: i18n("Show the file for this song in the file manager")
-          },
-          Kirigami.Action {
-              icon.name: "documentinfo"
-              text: i18nc("Show track metadata", "View details")
-              tooltip: i18n("Show track metadata")
-          },
-          Kirigami.Action {
-              icon.name: "list-add"
-              text: i18nc("Add the track to the queue, right after the current track", "Play next")
-              tooltip: i18n("Add the track to the queue, right after the current track")
-          },
-          Kirigami.Action {
-              icon.name: "list-add"
-              text: i18nc("Enqueue current track", "Add to queue")
-              tooltip: i18n("Enqueue current track")
-          }
-      ]
-  }
-  \endqml
+  \deprecated[6.15]
 
-  \sa Dialog
-  \sa PromptDialog
  */
-QQC2.Dialog {
+@Deprecated { reason: "Use QQC2.Dialog with the contentItem set as here instead" }
+KirigamiDialogs.Dialog {
     id: root
 
     /*!
@@ -84,17 +54,6 @@ QQC2.Dialog {
       contentHeaderControl.topPadding
      */
     property alias contentHeaderControl: columnHeader
-
-    /*!
-      \qmlproperty bool showCloseButton
-
-      \brief This property sets whether to show the close button in the header.
-
-      \warning This property is kept for API compatibility during the KF6 cycle.
-      It is recommended to port away from it.
-     */
-    // TODO KF7: remove.
-    property bool showCloseButton: true
 
     preferredWidth: Kirigami.Units.gridUnit * 20
     padding: 0
@@ -142,4 +101,5 @@ QQC2.Dialog {
     }
 
     standardButtons: QQC2.DialogButtonBox.NoButton
+    showCloseButton: true
 }
