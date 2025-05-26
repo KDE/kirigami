@@ -13,7 +13,7 @@ import QtQuick.Templates as T
 
 /*!
   \qmltype SelectableLabel
-   \inqmlmodule org.kde.kirigami
+   \inqmlmodule org.kde.kirigami.contentitems
 
   \brief This is a label which supports text selection.
 
@@ -22,7 +22,7 @@ import QtQuick.Templates as T
 
   Example usage:
   \code
-      Kirigami.SelectableLabel {
+      SelectableLabel {
           text: "Label"
       }
   \endcode

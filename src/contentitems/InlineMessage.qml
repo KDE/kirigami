@@ -8,7 +8,7 @@
 
 import QtQuick
 import org.kde.kirigami as Kirigami
-import org.kde.kirigami.templates as KT
+import "templates" as KT
 
 KT.InlineMessage {
     id: root

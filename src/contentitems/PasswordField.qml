@@ -9,15 +9,15 @@ import org.kde.kirigami as Kirigami
 
 /*!
   \qmltype PasswordField
-  \inqmlmodule org.kde.kirigami
+  \inqmlmodule org.kde.kirigami.contentItems
 
   \brief This is a standard password text field.
 
   Example usage:
   \code
-  import org.kde.kirigami as Kirigami
+  import org.kde.kirigami.contentItems as KirigamiContent
 
-  Kirigami.PasswordField {
+  KirigamiContent.PasswordField {
       id: passwordField
       onAccepted: {
           // check if passwordField.text is valid

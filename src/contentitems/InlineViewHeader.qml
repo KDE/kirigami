@@ -13,7 +13,7 @@ import org.kde.kirigami as Kirigami
 
 /*!
   \qmltype InlineViewHeader
-  \inqmlmodule org.kde.kirigami
+  \inqmlmodule org.kde.kirigami.contentitems
 
   \brief A fancy inline view header showing a title and optional actions.
 

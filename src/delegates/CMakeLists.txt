@@ -3,13 +3,14 @@ add_library(KirigamiDelegates)
 ecm_add_qml_module(KirigamiDelegates URI "org.kde.kirigami.delegates"
     GENERATE_PLUGIN_SOURCE
     INSTALLED_PLUGIN_TARGET KF6KirigamiDelegates
-    DEPENDENCIES QtQuick org.kde.kirigami.platform org.kde.kirigami.primitives
+    IMPORTS
+        org.kde.kirigami.contentitems
+    DEPENDENCIES
+        QtQuick
+        org.kde.kirigami.platform
 )
 
 ecm_target_qml_sources(KirigamiDelegates SOURCES
-    IconTitleSubtitle.qml
-    TitleSubtitle.qml
-
     SubtitleDelegate.qml
     CheckSubtitleDelegate.qml
     RadioSubtitleDelegate.qml

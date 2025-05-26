@@ -11,7 +11,7 @@ import org.kde.kirigami as Kirigami
 
 /*!
   \qmltype ListSectionHeader
-  \inqmlmodule org.kde.kirigami
+  \inqmlmodule org.kde.kirigami.contentitems
 
   \brief A section delegate for the primitive ListView component.
 

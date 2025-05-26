@@ -10,7 +10,7 @@ import org.kde.kirigami as Kirigami
 
 /*!
   \qmltype Heading
-  \inqmlmodule org.kde.kirigami
+  \inqmlmodule org.kde.kirigami.contentitems
 
   \brief A heading label used for subsections of texts.
 
@@ -34,7 +34,6 @@ import org.kde.kirigami as Kirigami
   The most important property is text, which applies to the text property of
   Label. See the Label component from QtQuick.Controls 2 and primitive QML Text
   element API for additional properties, methods and signals.
-
  */
 QQC2.Label {
     id: heading

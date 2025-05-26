@@ -10,7 +10,7 @@ import org.kde.kirigami as Kirigami
 
 /*!
   \qmltype ListItemDragHandle
-  \inqmlmodule org.kde.kirigami
+  \inqmlmodule org.kde.kirigami.contentitems
 
   \brief A handle to reorder items in a view.
 

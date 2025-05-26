@@ -3,6 +3,7 @@ add_subdirectory(primitives)
 add_subdirectory(delegates)
 add_subdirectory(dialogs)
 add_subdirectory(layouts)
+add_subdirectory(contentitems)
 
 add_library(Kirigami)
 add_library(KF6::Kirigami ALIAS Kirigami)
@@ -29,6 +30,8 @@ ecm_add_qml_module(KirigamiPrivate
     URI "org.kde.kirigami.private"
     GENERATE_PLUGIN_SOURCE
     INSTALLED_PLUGIN_TARGET KF6KirigamiPrivateplugin
+    QML_FILES
+        controls/private/ActionIconGroup.qml
 )
 
 set_target_properties(KirigamiPrivate PROPERTIES
@@ -62,6 +65,7 @@ ecm_add_qml_module(Kirigami URI "org.kde.kirigami" VERSION 2.0
     "org.kde.kirigami.platform"
     "org.kde.kirigami.primitives"
     "org.kde.kirigami.delegates"
+    "org.kde.kirigami.contentitems"
     "org.kde.kirigami.dialogs"
     "org.kde.kirigami.layouts"
     ${_extra_options}
@@ -121,7 +125,6 @@ ecm_target_qml_sources(Kirigami SOURCES
     controls/OverlayDrawer.qml
     controls/ContextDrawer.qml
     controls/GlobalDrawer.qml
-    controls/Heading.qml
     controls/PageRow.qml
     controls/OverlaySheet.qml
     controls/Page.qml
@@ -139,39 +142,18 @@ ecm_target_qml_sources(Kirigami VERSION 2.4 SOURCES
     controls/Card.qml
     controls/CardsListView.qml
     controls/CardsLayout.qml
-    controls/InlineMessage.qml
 )
 
 ecm_target_qml_sources(Kirigami VERSION 2.5 SOURCES
-    controls/ListItemDragHandle.qml
     controls/ActionToolBar.qml
 )
 
 ecm_target_qml_sources(Kirigami VERSION 2.6 SOURCES
     controls/AboutPage.qml
-    controls/LinkButton.qml
-    controls/UrlButton.qml
-)
-
-ecm_target_qml_sources(Kirigami VERSION 2.7 SOURCES
-    controls/ActionTextField.qml
-)
-
-ecm_target_qml_sources(Kirigami VERSION 2.8 SOURCES
-    controls/SearchField.qml
-    controls/PasswordField.qml
-)
-
-ecm_target_qml_sources(Kirigami VERSION 2.10 SOURCES
-    controls/ListSectionHeader.qml
 )
 
 ecm_target_qml_sources(Kirigami VERSION 2.11 SOURCES
     controls/PagePoolAction.qml
-)
-
-ecm_target_qml_sources(Kirigami VERSION 2.12 SOURCES
-    controls/PlaceholderMessage.qml
 )
 
 ecm_target_qml_sources(Kirigami VERSION 2.14 SOURCES
@@ -183,12 +165,9 @@ ecm_target_qml_sources(Kirigami VERSION 2.19 SOURCES
     controls/NavigationTabBar.qml
     controls/NavigationTabButton.qml
     controls/Chip.qml
-    controls/LoadingPlaceholder.qml
 )
 
 ecm_target_qml_sources(Kirigami VERSION 2.20 SOURCES
-    controls/SelectableLabel.qml
-    controls/InlineViewHeader.qml
     controls/ContextualHelpButton.qml
 )
 
@@ -223,7 +202,6 @@ ecm_target_qml_sources(Kirigami PRIVATE PATH templates SOURCES
     controls/templates/AbstractApplicationHeader.qml
     controls/templates/AbstractCard.qml
     controls/templates/Chip.qml
-    controls/templates/InlineMessage.qml
     controls/templates/OverlayDrawer.qml
     controls/templates/OverlaySheet.qml
     controls/templates/SingletonHeaderSizeGroup.qml
@@ -281,6 +259,7 @@ if (NOT BUILD_SHARED_LIBS)
             KirigamiPlatformplugin
             KirigamiDelegatesplugin
             KirigamiPrimitivesplugin
+            KirigamiContentItemsplugin
             KirigamiDialogsplugin
             KirigamiLayoutsplugin
             KirigamiLayoutsPrivateplugin
@@ -295,6 +274,7 @@ else()
         PRIVATE
             KirigamiDelegates
             KirigamiPrimitives
+            KirigamiContentItems
             KirigamiDialogs
             KirigamiLayouts
             KirigamiPrivate

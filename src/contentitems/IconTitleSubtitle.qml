@@ -13,7 +13,7 @@ import org.kde.kirigami.templates.private as KTP
 
 /*!
   \qmltype IconTitleSubtitle
-  \inqmlmodule org.kde.kirigami.delegates
+  \inqmlmodule org.kde.kirigami.contentitems
 
   \brief A simple item containing an icon, title and subtitle.
 

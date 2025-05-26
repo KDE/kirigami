@@ -4,6 +4,5 @@ AbstractApplicationHeader 2.2 AbstractApplicationHeader.qml
 AbstractCard 2.4 AbstractCard.qml
 singleton AppHeaderSizeGroup 2.2 SingletonHeaderSizeGroup.qml
 Chip 2.19 Chip.qml
-InlineMessage 2.4 InlineMessage.qml
 OverlayDrawer 2.2 OverlayDrawer.qml
 OverlaySheet 2.2 OverlaySheet.qml

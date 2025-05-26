@@ -11,7 +11,7 @@ import org.kde.kirigami as Kirigami
 
 /*!
   \qmltype ActionTextField
-  \inqmlmodule org.kde.kirigami
+  \inqmlmodule org.kde.kirigami.contentItems
 
   \brief An advanced control to create custom textfields
   with action buttons (for example, with a Clear button).
@@ -19,8 +19,9 @@ import org.kde.kirigami as Kirigami
   Example usage for a search field:
   \code
   import org.kde.kirigami as Kirigami
+  import org.kde.kirigami.contentItems as KirigamiContent
 
-  Kirigami.ActionTextField {
+  KirigamiContent.ActionTextField {
       id: searchField
 
       placeholderText: i18n("Search…")

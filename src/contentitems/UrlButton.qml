@@ -11,7 +11,8 @@ import QtQuick.Controls as QQC2
 
 /*!
   \qmltype UrlButton
-  \inqmlmodule org.kde.kirigami
+  \inqmlmodule org.kde.kirigami.contentitems
+
   \brief A link button that contains a URL.
 
   It will open the url by default, allow to copy it if triggered with the

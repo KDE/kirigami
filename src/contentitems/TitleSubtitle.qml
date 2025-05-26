@@ -11,7 +11,7 @@ import org.kde.kirigami.platform as Platform
 
 /*!
   \qmltype TitleSubtitle
-  \inqmlmodule org.kde.kirigami.delegates
+  \inqmlmodule org.kde.kirigami.contentitems
 
   \brief A simple item containing a title and subtitle label.
 
@@ -31,7 +31,7 @@ import org.kde.kirigami.platform as Platform
 
       text: "Example"
 
-      contentItem: Kirigami.TitleSubtitle {
+      contentItem: TitleSubtitle {
           title: delegate.text
           subtitle: "This is an example."
           font: delegate.font

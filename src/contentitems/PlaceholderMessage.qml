@@ -8,11 +8,11 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
-import "private" as P
+import org.kde.kirigami.private as P
 
 /*!
   \qmltype PlaceholderMessage
-  \inqmlmodule org.kde.kirigami
+  \inqmlmodule org.kde.kirigami.contentitems
 
   \brief A placeholder message indicating that a view is empty.
 
@@ -32,13 +32,14 @@ import "private" as P
   Used as a "this view is empty" message:
   \qml
   import org.kde.kirigami as Kirigami
+  import org.kde.kirigami.contentItems as KirigamiContent
 
   ListView {
       id: listView
       model: [...]
       delegate: [...]
 
-      Kirigami.PlaceholderMessage {
+      KirigamiContent.PlaceholderMessage {
           anchors.centerIn: parent
           width: parent.width - (Kirigami.Units.largeSpacing * 4)
 
@@ -52,13 +53,14 @@ import "private" as P
   Used as a "here's how to proceed" message:
   \qml
   import org.kde.kirigami as Kirigami
+  import org.kde.kirigami.contentItems as KirigamiContent
 
   ListView {
       id: listView
       model: [...]
       delegate: [...]
 
-      Kirigami.PlaceholderMessage {
+      KirigamiContent.PlaceholderMessage {
           anchors.centerIn: parent
           width: parent.width - (Kirigami.Units.largeSpacing * 4)
 
@@ -81,12 +83,13 @@ import "private" as P
   Used as a "there was a problem here" message:
   \qml
   import org.kde.kirigami as Kirigami
+  import org.kde.kirigami.contentItems as KirigamiContent
 
   Kirigami.Page {
       id: root
       readonly property bool networkConnected: [...]
 
-      Kirigami.PlaceholderMessage {
+      KirigamiContent.PlaceholderMessage {
           anchors.centerIn: parent
           width: parent.width - (Kirigami.Units.largeSpacing * 4)
 
@@ -104,11 +107,12 @@ import "private" as P
   Used as a "Here's what you do next" button:
   \qml
   import org.kde.kirigami as Kirigami
+  import org.kde.kirigami.contentItems as KirigamiContent
 
   Kirigami.Page {
       id: root
 
-      Kirigami.PlaceholderMessage {
+      KirigamiContent.PlaceholderMessage {
           anchors.centerIn: parent
           width: parent.width - (Kirigami.Units.largeSpacing * 4)
 

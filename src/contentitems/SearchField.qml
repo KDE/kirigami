@@ -10,7 +10,7 @@ import org.kde.kirigami as Kirigami
 
 /*!
   \qmltype SearchField
-  \inqmlmodule org.kde.kirigami
+  \inqmlmodule org.kde.kirigami.contentItems
 
   \brief Standard TextField following the KDE HIG.
 
@@ -18,9 +18,9 @@ import org.kde.kirigami as Kirigami
 
   Example usage for the search field component:
   \code
-  import org.kde.kirigami as Kirigami
+  import org.kde.kirigami.contentItems as KirigamiContent
 
-  Kirigami.SearchField {
+  KirigamiContent.SearchField {
       id: searchField
       onAccepted: console.log("Search text is " + searchField.text)
   }

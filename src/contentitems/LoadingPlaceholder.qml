@@ -8,7 +8,7 @@ import org.kde.kirigami as Kirigami
 
 /*!
   \qmltype PlaceholderMessage
-  \inqmlmodule org.kde.kirigami
+  \inqmlmodule org.kde.kirigami.contentitems
 
   \brief A placeholder for loading pages.
 

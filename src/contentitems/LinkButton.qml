@@ -11,7 +11,8 @@ import org.kde.kirigami as Kirigami
 
 /*!
   \qmltype LinkButton
-  \inqmlmodule org.kde.kirigami
+  \inqmlmodule org.kde.kirigami.contentitems
+
   \brief A button that looks like a link.
 
   It uses the link color settings and triggers an action when clicked.
