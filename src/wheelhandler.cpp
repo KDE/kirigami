@@ -102,6 +102,8 @@ WheelHandler::WheelHandler(QObject *parent)
 
     m_xScrollAnimation.setEasingCurve(QEasingCurve::OutCubic);
     m_yScrollAnimation.setEasingCurve(QEasingCurve::OutCubic);
+    m_xInertiaScrollAnimation.setEasingCurve(QEasingCurve::OutQuad);
+    m_yInertiaScrollAnimation.setEasingCurve(QEasingCurve::OutQuad);
 
     connect(QGuiApplication::styleHints(), &QStyleHints::wheelScrollLinesChanged, this, [this](int scrollLines) {
         m_defaultPixelStepSize = 20 * scrollLines;
@@ -153,6 +155,14 @@ void WheelHandler::setTarget(QQuickItem *target)
         m_yScrollAnimation.stop();
     }
     m_yScrollAnimation.setTargetObject(target);
+    if (m_yInertiaScrollAnimation.targetObject()) {
+        m_yInertiaScrollAnimation.stop();
+    }
+    m_yInertiaScrollAnimation.setTargetObject(target);
+    if (m_xInertiaScrollAnimation.targetObject()) {
+        m_xInertiaScrollAnimation.stop();
+    }
+    m_xInertiaScrollAnimation.setTargetObject(target);
 
     if (target) {
         target->installEventFilter(this);
@@ -418,6 +428,84 @@ void WheelHandler::setScrolling(bool scrolling)
     m_filterItem->setEnabled(m_wheelScrolling);
 }
 
+void WheelHandler::startInertiaScrolling()
+{
+    const qreal width = m_flickable->width();
+    const qreal height = m_flickable->height();
+    const qreal contentWidth = m_flickable->property("contentWidth").toReal();
+    const qreal contentHeight = m_flickable->property("contentHeight").toReal();
+    const qreal topMargin = m_flickable->property("topMargin").toReal();
+    const qreal bottomMargin = m_flickable->property("bottomMargin").toReal();
+    const qreal leftMargin = m_flickable->property("leftMargin").toReal();
+    const qreal rightMargin = m_flickable->property("rightMargin").toReal();
+    const qreal originX = m_flickable->property("originX").toReal();
+    const qreal originY = m_flickable->property("originY").toReal();
+    const qreal contentX = m_flickable->property("contentX").toReal();
+    const qreal contentY = m_flickable->property("contentY").toReal();
+
+    QPointF minExtent = QPointF(leftMargin, topMargin) - QPointF(originX, originY);
+    QPointF maxExtent = QPointF(width, height) - (QPointF(contentWidth, contentHeight) + QPointF(rightMargin, bottomMargin) + QPointF(originX, originY));
+
+    QPointF totalDelta(0, 0);
+    for (const QPoint delta : m_wheelEvents) {
+        totalDelta += delta;
+    }
+    qint64 elapsed = m_timestamps.first() - m_timestamps.last();
+
+    // The inertia is more natural if we multiply
+    // the actual scrolling speed by some factor,
+    // chosen manually here to be 2.5. Otherwise, the
+    // scrolling will appear to be too slow.
+    const qreal speedFactor = 2.5;
+
+    // We get the velocity in px/s by calculating
+    // displacement / elapsed time; we multiply by
+    // 1000 since the elapsed time is in ms.
+    QPointF vel = totalDelta * 1000 / elapsed * speedFactor;
+    QPointF startValue = QPointF(contentX, contentY);
+
+    // We decelerate at 1250px/s^2, chosen by manual test
+    // to be natural.
+    const qreal deceleration = 1250 * speedFactor;
+
+    // We use constant deceleration formulas to find:
+    // time = |velocity / deceleration|
+    // distance_traveled = time * velocity / 2
+    QPointF time = QPointF(qAbs(vel.x() / deceleration), qAbs(vel.y() / deceleration));
+    QPointF endValue = QPointF(startValue.x() + time.x() * vel.x() / 2, startValue.y() + time.y() * vel.y() / 2);
+
+    // We bound the end value so that we don't animate
+    // beyond the scrollable amount.
+    QPointF boundedEndValue =
+        QPointF(std::max(std::min(endValue.x(), -maxExtent.x()), -minExtent.x()), std::max(std::min(endValue.y(), -maxExtent.y()), -minExtent.y()));
+
+    // If we did bound the end value, we check how much
+    // (from 0 to 1) of the animation is actually played,
+    // and we adjust the time required for it accordingly.
+    QPointF progressFactor = QPointF((boundedEndValue.x() - startValue.x()) / (endValue.x() - startValue.x()),
+                                     (boundedEndValue.y() - startValue.y()) / (endValue.y() - startValue.y()));
+    // The formula here is:
+    // partial_time = complete_time * (1 - sqrt(1 - partial_progress_factor)),
+    // with partial_progress_factor being between 0 and 1.
+    // It can be obtained by inverting the OutQad easing formula,
+    // which is f(t) = t(2 - t).
+    // We also convert back from seconds to milliseconds.
+    QPointF realTime = QPointF(time.x() * (1 - std::sqrt(1 - progressFactor.x())), time.y() * (1 - std::sqrt(1 - progressFactor.y()))) * 1000;
+    m_wheelEvents.clear();
+    m_timestamps.clear();
+
+    m_xScrollAnimation.stop();
+    m_yScrollAnimation.stop();
+    m_xInertiaScrollAnimation.setStartValue(startValue.x());
+    m_xInertiaScrollAnimation.setEndValue(boundedEndValue.x());
+    m_xInertiaScrollAnimation.setDuration(realTime.x());
+    m_xInertiaScrollAnimation.start(QAbstractAnimation::KeepWhenStopped);
+    m_yInertiaScrollAnimation.setStartValue(startValue.y());
+    m_yInertiaScrollAnimation.setEndValue(boundedEndValue.y());
+    m_yInertiaScrollAnimation.setDuration(realTime.y());
+    m_yInertiaScrollAnimation.start(QAbstractAnimation::KeepWhenStopped);
+}
+
 bool WheelHandler::scrollFlickable(QPointF pixelDelta, QPointF angleDelta, Qt::KeyboardModifiers modifiers)
 {
     if (!m_flickable || (pixelDelta.isNull() && angleDelta.isNull())) {
@@ -529,6 +617,7 @@ bool WheelHandler::scrollFlickable(QPointF pixelDelta, QPointF angleDelta, Qt::K
             : 0;
         animation.setDuration(duration <= qCeil(1000.0 / refreshRate * 2) ? 0 : duration);
         if (animation.duration() > 0) {
+            animation.setStartValue(oldPos);
             animation.setEndValue(newPos);
             animation.start(QAbstractAnimation::KeepWhenStopped);
         } else {
@@ -651,6 +740,17 @@ bool WheelHandler::eventFilter(QObject *watched, QEvent *event)
         }
 
         Q_EMIT wheel(&m_kirigamiWheelEvent);
+
+        if (m_wheelEvents.count() > 6) {
+            m_wheelEvents.dequeue();
+            m_timestamps.dequeue();
+        }
+        if (m_wheelEvents.count() > 2 && wheelEvent->isEndEvent()) {
+            startInertiaScrolling();
+        } else {
+            m_wheelEvents.enqueue(wheelEvent->pixelDelta());
+            m_timestamps.enqueue(wheelEvent->timestamp());
+        }
 
         if (m_kirigamiWheelEvent.isAccepted()) {
             return true;
