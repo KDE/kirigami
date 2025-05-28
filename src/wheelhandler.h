@@ -10,6 +10,7 @@
 #include <QPoint>
 #include <QPropertyAnimation>
 #include <QQmlParserStatus>
+#include <QQueue>
 #include <QQuickItem>
 #include <QStyleHints>
 #include <QTimer>
@@ -401,6 +402,7 @@ private:
     void componentComplete() override;
 
     void setScrolling(bool scrolling);
+    void startInertiaScrolling();
     bool scrollFlickable(QPointF pixelDelta, QPointF angleDelta = {}, Qt::KeyboardModifiers modifiers = Qt::NoModifier);
 
     Kirigami::Platform::Units *m_units = nullptr;
@@ -431,10 +433,14 @@ private:
     Qt::KeyboardModifiers m_pageScrollModifiers = m_defaultPageScrollModifiers;
     QTimer m_wheelScrollingTimer;
     KirigamiWheelEvent m_kirigamiWheelEvent;
+    QQueue<QPoint> m_wheelEvents;
+    QQueue<uint64_t> m_timestamps;
 
     // Smooth scrolling
     QQmlEngine *m_engine = nullptr;
     QPropertyAnimation m_xScrollAnimation{nullptr, "contentX"};
     QPropertyAnimation m_yScrollAnimation{nullptr, "contentY"};
+    QPropertyAnimation m_xInertiaScrollAnimation{nullptr, "contentX"};
+    QPropertyAnimation m_yInertiaScrollAnimation{nullptr, "contentY"};
     bool m_wasTouched = false;
 };
