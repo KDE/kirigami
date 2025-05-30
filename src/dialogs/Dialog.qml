@@ -396,7 +396,7 @@ T.Dialog {
         property var widthHint: Binding {
             target: contentControl.contentChildren[0] || null
             property: "width"
-            value: contentControl.width + contentControl.leftPadding + contentControl.rightPadding
+            value: contentControl.width + contentControl.leftPadding + contentControl.rightPadding - QQC2.ScrollBar.vertical.visible ? QQC2.ScrollBar.vertical.width : 0
             restoreMode: Binding.RestoreBinding
         }
     }
