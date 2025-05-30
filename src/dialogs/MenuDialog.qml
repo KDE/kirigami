@@ -8,7 +8,7 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Controls as QQC2
-import QtQuick.Layouts
+
 import QtQuick.Templates as T
 import org.kde.kirigami.controls as KirigamiControls
 import org.kde.kirigami.platform as Platform
@@ -85,51 +85,24 @@ KirigamiDialogs.Dialog {
       This makes it possible to access its internal properties to, for example, change its padding:
       contentHeaderControl.topPadding
      */
-    property alias contentHeaderControl: columnHeader
+    property Item contentHeaderControl: QQC2.Control {
+        id: columnHeader
+        topPadding: 0
+        leftPadding: 0
+        rightPadding: 0
+        bottomPadding: 0
+    }
 
     preferredWidth: Platform.Units.gridUnit * 20
     padding: 0
 
-    ColumnLayout {
-        id: column
+    Kirigami.ActionList {
+        id: content
+        actions: root.actions
 
-        spacing: 0
+        onClicked: index => root.close()
 
-        QQC2.Control {
-            id: columnHeader
-
-            topPadding: 0
-            leftPadding: 0
-            rightPadding: 0
-            bottomPadding: 0
-        }
-
-        Repeater {
-            model: root.actions
-
-            delegate: QQC2.ItemDelegate {
-                required property T.Action modelData
-
-                Layout.fillWidth: true
-                Layout.preferredHeight: Platform.Units.gridUnit * 2
-
-                action: modelData
-                visible: (modelData as KirigamiControls.Action)?.visible ?? true
-
-                icon.width: Platform.Units.gridUnit
-                icon.height: Platform.Units.gridUnit
-
-                horizontalPadding: Platform.Units.largeSpacing + Platform.Units.smallSpacing
-                leftPadding: undefined
-                rightPadding: undefined
-
-                QQC2.ToolTip.text: (modelData as KirigamiControls.Action)?.tooltip ?? ""
-                QQC2.ToolTip.visible: QQC2.ToolTip.text.length > 0 && (Platform.Settings.tabletMode ? pressed : hovered)
-                QQC2.ToolTip.delay: Platform.Settings.tabletMode ? Application.styleHints.mousePressAndHoldInterval : Platform.Units.toolTipDelay
-
-                onClicked: root.close()
-            }
-        }
+        header: columnHeader
     }
 
     standardButtons: QQC2.DialogButtonBox.NoButton
