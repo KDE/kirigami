@@ -193,6 +193,7 @@ ecm_target_qml_sources(Kirigami VERSION 2.20 SOURCES
     controls/SelectableLabel.qml
     controls/InlineViewHeader.qml
     controls/ContextualHelpButton.qml
+    controls/ActionList.qml
 )
 
 ecm_target_qml_sources(Kirigami PRIVATE PATH private SOURCES
