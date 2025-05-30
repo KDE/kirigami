@@ -17,6 +17,12 @@
 */
 
 /*!
+ *  \qmlmodule org.kde.kirigami.contentitems
+ *  \title Kirigami Content Items QML Types
+ *  \brief Kirigami Content Items
+ */
+
+/*!
     \qmlmodule org.kde.kirigami.dialogs
     \title Kirigami Dialogs QML Types
     \brief Kirigami Dialogs

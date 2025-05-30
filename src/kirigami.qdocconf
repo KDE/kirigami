@@ -51,4 +51,9 @@ qhp.Kirigami.subprojects.primitives.indexTitle = Kirigami Primitives QML Types
 qhp.Kirigami.subprojects.primitives.selectors = qmlmodule:org.kde.kirigami.primitives
 qhp.Kirigami.subprojects.primitives.sortPages = true
 
+qhp.Kirigami.subprojects.contentitems.title = Kirigami Content Items QML Types
+qhp.Kirigami.subprojects.contentitems.indexTitle = Kirigami Content Items QML Types
+qhp.Kirigami.subprojects.contentitems.selectors = qmlmodule:org.kde.kirigami.contentItems
+qhp.Kirigami.subprojects.contentitems.sortPages = true
+
 tagfile = kirigami.tags
