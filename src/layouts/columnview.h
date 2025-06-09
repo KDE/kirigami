@@ -6,6 +6,8 @@
 
 #pragma once
 
+#include <QCborMap>
+#include <QObject>
 #include <QPointer>
 #include <QQuickItem>
 #include <QVariant>
@@ -580,6 +582,9 @@ public:
      */
     QQuickItem *removeItem(int index);
 
+    Q_INVOKABLE QVariant saveState();
+    Q_INVOKABLE bool restoreState(const QVariant &state);
+
     // QML attached property
     static ColumnViewAttached *qmlAttachedProperties(QObject *object);
 
@@ -723,6 +728,7 @@ private:
 
     ContentItem *m_contentItem;
     QPointer<QQuickItem> m_currentItem;
+    QCborMap m_cborSavedState;
 
     int m_currentIndex = -1;
     qreal m_topPadding = 0;

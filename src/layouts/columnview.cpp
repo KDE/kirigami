@@ -16,6 +16,8 @@
 #include <QQmlEngine>
 #include <QStyleHints>
 #include <algorithm>
+#include <qcborcommon.h>
+#include <qquickitem.h>
 
 #include "platform/units.h"
 
@@ -1327,6 +1329,13 @@ void ColumnView::insertItem(int pos, QQuickItem *item)
     connect(attached, &ColumnViewAttached::globalHeaderChanged, m_contentItem, &ContentItem::connectHeader);
     connect(attached, &ColumnViewAttached::globalFooterChanged, m_contentItem, &ContentItem::connectFooter);
 
+    if (attached->interactiveResizeEnabled() && m_cborSavedState.contains(pos)) {
+        QCborMap cborMap = m_cborSavedState[pos].toMap();
+        const qreal preferredWidth = cborMap.value(QLatin1String("preferredWidth")).toDouble();
+        if (preferredWidth > 0) {
+            item->setImplicitWidth(preferredWidth);
+        }
+    }
     // Animate shift to new item.
     m_contentItem->m_shouldAnimate = true;
     m_contentItem->layoutItems();
@@ -1462,6 +1471,70 @@ QQuickItem *ColumnView::removeItem(QQuickItem *item)
     Q_EMIT itemRemoved(item);
 
     return item;
+}
+
+QVariant ColumnView::saveState()
+{
+    int i = 0;
+    for (QQuickItem *item : std::as_const(m_contentItem->m_items)) {
+        ColumnViewAttached *attached = qobject_cast<ColumnViewAttached *>(qmlAttachedPropertiesObject<ColumnView>(item, true));
+        if (!attached->interactiveResizeEnabled()) {
+            ++i;
+            continue;
+        }
+        QCborMap cborMap;
+        cborMap[QLatin1String("preferredWidth")] = item->implicitWidth();
+        m_cborSavedState[i] = cborMap;
+        ++i;
+    }
+
+    return m_cborSavedState.toCborValue().toCbor();
+}
+
+bool ColumnView::restoreState(const QVariant &state)
+{
+    const QByteArray cborByteArray = state.toByteArray();
+    if (cborByteArray.isEmpty()) {
+        return false;
+    }
+
+    QCborParserError parserError;
+    const QCborValue cborValue(QCborValue::fromCbor(cborByteArray, &parserError));
+    if (parserError.error != QCborError::NoError) {
+        qCWarning(KirigamiLayoutsLog) << "Error reading state:" << parserError.errorString();
+        return false;
+    }
+
+    const QCborMap newStateMap(cborValue.toMap());
+    if (newStateMap.isEmpty()) {
+        return false;
+    }
+
+    for (auto it = newStateMap.constBegin(); it != newStateMap.constEnd(); ++it) {
+        QCborMap cborMap(it->toMap());
+        const int index = it.key().toInteger();
+        m_cborSavedState[index] = cborMap;
+        if (index >= m_contentItem->m_items.count()) {
+            break;
+        }
+        QQuickItem *item = m_contentItem->m_items[index];
+        ColumnViewAttached *attached = qobject_cast<ColumnViewAttached *>(qmlAttachedPropertiesObject<ColumnView>(item, true));
+        if (!attached->interactiveResizeEnabled()) {
+            continue;
+        }
+
+        const qreal preferredWidth = cborMap.value(QLatin1String("preferredWidth")).toDouble();
+
+        if (index < 0 || preferredWidth <= 0) {
+            continue;
+        }
+
+        item->setImplicitWidth(preferredWidth);
+    }
+
+    polish();
+
+    return true;
 }
 
 QQuickItem *ColumnView::removeItem(const int index)
