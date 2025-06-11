@@ -6,7 +6,6 @@
 
 #pragma once
 
-#include <QCborMap>
 #include <QObject>
 #include <QPointer>
 #include <QQuickItem>
@@ -424,6 +423,26 @@ class ColumnView : public QQuickItem
      * every item declared inside the view, both visual and non-visual items
      */
     Q_PROPERTY(QQmlListProperty<QObject> contentData READ contentData FINAL)
+
+    /*!
+     * \qmlproperty string ColumnView::savedState
+     *
+     * A JSon serialization of the columns widths.
+     * When columnResizeMode is DynamicColumns, columns can be resized via mouse.
+     * When this is the case, the sizes should be saved and restored on application startup.
+     *
+     * Example code for saving and restore, assuming that the application exposes a singleton
+     * called App that has a "columnViewState" property that reads and writes to the config file:
+     *
+     * \qml
+     *      Component.onCompleted: pageStack.columnView.savedState = App.columnViewState;
+     *      columnView.onSavedStateChanged: {
+     *          App.columnViewState = pageStack.columnView.savedState;
+     *      }
+     * \endqml
+     */
+    Q_PROPERTY(QString savedState READ savedState WRITE setSavedState NOTIFY savedStateChanged)
+
     Q_CLASSINFO("DefaultProperty", "contentData")
 
 public:
@@ -582,8 +601,8 @@ public:
      */
     QQuickItem *removeItem(int index);
 
-    Q_INVOKABLE QVariant saveState();
-    Q_INVOKABLE bool restoreState(const QVariant &state);
+    QString savedState();
+    void setSavedState(const QString &state);
 
     // QML attached property
     static ColumnViewAttached *qmlAttachedProperties(QObject *object);
@@ -712,6 +731,7 @@ Q_SIGNALS:
     void trailingVisibleItemChanged();
     void topPaddingChanged();
     void bottomPaddingChanged();
+    void savedStateChanged();
 
 private:
     static void contentChildren_append(QQmlListProperty<QQuickItem> *prop, QQuickItem *object);
@@ -728,7 +748,7 @@ private:
 
     ContentItem *m_contentItem;
     QPointer<QQuickItem> m_currentItem;
-    QCborMap m_cborSavedState;
+    QHash<int, qreal> m_state;
 
     int m_currentIndex = -1;
     qreal m_topPadding = 0;

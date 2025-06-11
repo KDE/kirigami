@@ -26,8 +26,8 @@ Item {
             top: parent.top
             bottom: parent.bottom
         }
-        leadingColumn: previousColumn
-        trailingColumn: column
+        leadingColumn: LayoutMirroring.enabled ? column : previousColumn
+        trailingColumn: LayoutMirroring.enabled ? nextColumn : column
     }
 
     Kirigami.Separator {
@@ -50,8 +50,8 @@ Item {
             bottom: parent.bottom
             rightMargin: -1
         }
-        leadingColumn: column
-        trailingColumn: nextColumn
+        leadingColumn: LayoutMirroring.enabled ? previousColumn : column
+        trailingColumn: LayoutMirroring.enabled ? column : nextColumn
     }
 
     Kirigami.Separator {
@@ -126,19 +126,13 @@ Item {
                 const trailingX = trailingColumn?.mapToItem(null, 0, 0).x ?? 0;
                 const view = column.Kirigami.ColumnView.view;
 
-                let leadingWidth = leadingColumn.implicitWidth;
-                if (leadingWidth <= 0) {
-                    leadingWidth = leadingColumn.width;
-                }
-                let trailingWidth = trailingColumn.implicitWidth;
-                if (trailingWidth <= 0) {
-                    trailingWidth = trailingColumn.width;
-                }
+                let leadingWidth = leadingColumn.width;
+                let trailingWidth = trailingColumn.width;
 
                 // Minimum and maximum widths for the leading column
                 let leadingMinimumWidth = leadingColumn.Kirigami.ColumnView.minimumWidth;
                 if (leadingColumn.Kirigami.ColumnView.fillWidth) {
-                    leadingMinimumWidth = leadingColumn.Kirigami.ColumnView.view.columnWidth;
+                    leadingMinimumWidth = view.columnWidth;
                 } else if (leadingMinimumWidth < 0) {
                     leadingMinimumWidth = Kirigami.Units.gridUnit * 8;
                 }
@@ -146,7 +140,7 @@ Item {
                 // Minimum and maximum widths for the trailing column
                 let trailingMinimumWidth = trailingColumn.Kirigami.ColumnView.minimumWidth;
                 if (trailingColumn.Kirigami.ColumnView.fillWidth) {
-                    trailingMinimumWidth = trailingColumn.Kirigami.ColumnView.view.columnWidth;
+                    trailingMinimumWidth = view.columnWidth;
                 } else if (trailingMinimumWidth < 0) {
                     trailingMinimumWidth = Kirigami.Units.gridUnit * 8;
                 }

@@ -10,14 +10,15 @@
 #include "loggingcategory.h"
 #include <QAbstractItemModel>
 #include <QGuiApplication>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonParseError>
 #include <QPropertyAnimation>
 #include <QQmlComponent>
 #include <QQmlContext>
 #include <QQmlEngine>
 #include <QStyleHints>
 #include <algorithm>
-#include <qcborcommon.h>
-#include <qquickitem.h>
 
 #include "platform/units.h"
 
@@ -356,6 +357,9 @@ void ColumnViewAttached::setInteractiveResizing(bool interactive)
     m_interactiveResizing = interactive;
 
     Q_EMIT interactiveResizingChanged();
+    if (!m_interactiveResizing && m_view) {
+        Q_EMIT m_view->savedStateChanged();
+    }
 }
 
 QQuickItem *ColumnViewAttached::globalHeader() const
@@ -562,22 +566,22 @@ void ContentItem::layoutItems()
     m_rightPinnedSpace = 0;
 
     bool reverse = qApp->layoutDirection() == Qt::RightToLeft;
-    auto it = !reverse ? m_items.begin() : m_items.end();
+    auto it = !reverse ? m_items.begin() : m_items.end() - 1;
     int increment = reverse ? -1 : +1;
-    auto lastPos = reverse ? m_items.begin() : m_items.end();
+    auto lastPos = reverse ? m_items.begin() - 1 : m_items.end();
 
     QQuickItem *previousChild = nullptr;
 
     for (; it != lastPos; it += increment) {
         // for (QQuickItem *child : std::as_const(m_items)) {
-        QQuickItem *child = reverse ? *(it - 1) : *it;
+        QQuickItem *child = *it;
         QQuickItem *nextChild = nullptr;
         if (reverse) {
-            if (it != lastPos) {
-                nextChild = *it;
+            if (it != m_items.begin()) {
+                nextChild = *(it - 1);
             }
         } else {
-            if ((it + 1) != lastPos) {
+            if ((it + 1) != m_items.end()) {
                 nextChild = *(it + 1);
             }
         }
@@ -657,7 +661,6 @@ void ContentItem::layoutItems()
                 }
 
                 child->setSize(QSizeF(width, height() - headerHeight - footerHeight));
-
                 child->setPosition(QPointF(partialWidth, headerHeight));
                 child->setZ(0);
 
@@ -701,7 +704,7 @@ void ContentItem::layoutPinnedItems()
     if (m_view->columnResizeMode() == ColumnView::SingleColumn) {
         return;
     }
-    return;
+
     qreal partialWidth = 0;
     m_leftPinnedSpace = 0;
     m_rightPinnedSpace = 0;
@@ -1329,9 +1332,8 @@ void ColumnView::insertItem(int pos, QQuickItem *item)
     connect(attached, &ColumnViewAttached::globalHeaderChanged, m_contentItem, &ContentItem::connectHeader);
     connect(attached, &ColumnViewAttached::globalFooterChanged, m_contentItem, &ContentItem::connectFooter);
 
-    if (attached->interactiveResizeEnabled() && m_cborSavedState.contains(pos)) {
-        QCborMap cborMap = m_cborSavedState[pos].toMap();
-        const qreal preferredWidth = cborMap.value(QLatin1String("preferredWidth")).toDouble();
+    if (attached->interactiveResizeEnabled()) {
+        const qreal preferredWidth = m_state.value(pos);
         if (preferredWidth > 0) {
             item->setImplicitWidth(preferredWidth);
         }
@@ -1473,68 +1475,82 @@ QQuickItem *ColumnView::removeItem(QQuickItem *item)
     return item;
 }
 
-QVariant ColumnView::saveState()
+QString ColumnView::savedState()
 {
     int i = 0;
+    QJsonObject obj;
+    for (auto it = m_state.constBegin(); it != m_state.constEnd(); it++) {
+        obj.insert(QString::number(it.key()), it.value());
+    }
     for (QQuickItem *item : std::as_const(m_contentItem->m_items)) {
         ColumnViewAttached *attached = qobject_cast<ColumnViewAttached *>(qmlAttachedPropertiesObject<ColumnView>(item, true));
         if (!attached->interactiveResizeEnabled()) {
             ++i;
             continue;
         }
-        QCborMap cborMap;
-        cborMap[QLatin1String("preferredWidth")] = item->implicitWidth();
-        m_cborSavedState[i] = cborMap;
+
+        obj.insert(QString::number(i), item->implicitWidth());
+        m_state[i] = item->implicitWidth();
         ++i;
     }
 
-    return m_cborSavedState.toCborValue().toCbor();
+    QJsonDocument doc(obj);
+
+    return QString::fromUtf8(doc.toJson(QJsonDocument::Compact));
 }
 
-bool ColumnView::restoreState(const QVariant &state)
+void ColumnView::setSavedState(const QString &state)
 {
-    const QByteArray cborByteArray = state.toByteArray();
-    if (cborByteArray.isEmpty()) {
-        return false;
+    QJsonParseError parseError;
+    QJsonDocument doc = QJsonDocument::fromJson(state.toUtf8(), &parseError);
+    if (parseError.error != QJsonParseError::NoError) {
+        qCWarning(KirigamiLayoutsLog) << "Error reading state:" << parseError.errorString();
+        return;
     }
 
-    QCborParserError parserError;
-    const QCborValue cborValue(QCborValue::fromCbor(cborByteArray, &parserError));
-    if (parserError.error != QCborError::NoError) {
-        qCWarning(KirigamiLayoutsLog) << "Error reading state:" << parserError.errorString();
-        return false;
+    if (!doc.isObject()) {
+        qCWarning(KirigamiLayoutsLog) << "Error reading state: Not a JSon Object";
+        return;
     }
 
-    const QCborMap newStateMap(cborValue.toMap());
-    if (newStateMap.isEmpty()) {
-        return false;
+    QJsonObject obj = doc.object();
+
+    if (obj.size() == 0) {
+        qCWarning(KirigamiLayoutsLog) << "Error reading state: Empty JSon Object";
+        return;
     }
 
-    for (auto it = newStateMap.constBegin(); it != newStateMap.constEnd(); ++it) {
-        QCborMap cborMap(it->toMap());
-        const int index = it.key().toInteger();
-        m_cborSavedState[index] = cborMap;
-        if (index >= m_contentItem->m_items.count()) {
-            break;
+    for (auto it = obj.constBegin(); it != obj.constEnd(); it++) {
+        bool ok;
+        int index = it.key().toInt(&ok);
+        if (!ok || index < 0) {
+            qCWarning(KirigamiLayoutsLog) << "Key" << it.key() << "is not a positive integer";
+            continue;
         }
+        qreal value = it.value().toDouble();
+        if (!it.value().isDouble() || value <= 0) {
+            qCWarning(KirigamiLayoutsLog) << "Value for key" << it.key() << "is not a positive number:" << it.value();
+            continue;
+        }
+
+        m_state[index] = value;
+
+        if (index >= m_contentItem->m_items.count()) {
+            continue;
+        }
+
         QQuickItem *item = m_contentItem->m_items[index];
         ColumnViewAttached *attached = qobject_cast<ColumnViewAttached *>(qmlAttachedPropertiesObject<ColumnView>(item, true));
         if (!attached->interactiveResizeEnabled()) {
             continue;
         }
 
-        const qreal preferredWidth = cborMap.value(QLatin1String("preferredWidth")).toDouble();
-
-        if (index < 0 || preferredWidth <= 0) {
-            continue;
-        }
-
-        item->setImplicitWidth(preferredWidth);
+        item->setImplicitWidth(value);
     }
 
     polish();
 
-    return true;
+    Q_EMIT savedStateChanged();
 }
 
 QQuickItem *ColumnView::removeItem(const int index)
