@@ -240,11 +240,6 @@ QQC2.ApplicationWindow {
     contentItem.anchors.rightMargin: root.contextDrawer && root.contextDrawer.modal === false ? root.contextDrawer.width * root.contextDrawer.position : 0
 
     Binding {
-        target: root.menuBar
-        property: "x"
-        value: -contentItem.x
-    }
-    Binding {
         target: root.header
         property: "x"
         value: -contentItem.x
