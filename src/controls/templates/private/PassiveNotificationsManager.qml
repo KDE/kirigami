@@ -135,7 +135,7 @@ Item {
                 }
                 NumberAnimation {
                     property: "opacity"
-                    duration: 0
+                    duration: Kirigami.Units.longDuration
                     to: 1
                 }
             }
@@ -173,6 +173,11 @@ Item {
             id: delegate
 
             hoverEnabled: true
+            // We force the delegate to be not visible when
+            // created, as this could cause some flickering
+            // otherwise; instead, we rely on `add` and
+            // `displaced` animations to change the opacity.
+            opacity: Kirigami.Units.longDuration > 0 ? 0 : 1
 
             anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
             width: Math.min(implicitWidth, maximumNotificationWidth)
