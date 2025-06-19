@@ -12,10 +12,10 @@ import QtQuick.Controls as QQC2
 /*!
   \qmltype UrlButton
   \inqmlmodule org.kde.kirigami
-  \brief A link button that contains a URL.
+  \brief A link to a URL or other remote resource.
 
-  It will open the url by default, allow to copy it if triggered with the
-  secondary mouse button.
+  UrlButton will open the URL when left-clicked, tapped, or activated with the
+  keyboard. It will show a context menu with a "Copy" action when right-clicked.
 
   \since 5.63
  */
@@ -23,16 +23,19 @@ Kirigami.LinkButton {
     id: button
 
     /*!
-      This property holds the url used by the link button.
+      This property holds the URL to open when clicked or tapped.
+
+      default: empty string; set a URL to make it work.
      */
     property string url
 
     /*!
-       This property holds whether the url is an external link.
+       This property holds whether the URL is an external link.
 
-       External links will have a small icon on their right to show that the link goes to an external website.
+       External links will have a small icon on their right to show that the
+       link goes to an external website.
 
-       default: true
+       default: \c true
        \since 6.11
      */
     property bool externalLink: true

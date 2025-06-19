@@ -14,10 +14,12 @@ import org.kde.kirigami as Kirigami
   \inqmlmodule org.kde.kirigami
   \brief A button that looks like a link.
 
-  It uses the link color settings and triggers an action when clicked.
+  It uses the color scheme's link color, and triggers an action when clicked.
 
-  Maps to the Command Link in the HIG:
-  \l https://develop.kde.org/hig/components/navigation/commandlink/
+  This component should not be used directly; prefer an actual button to
+  navigate within the app or trigger actions, and prefer a \l UrlButton to
+  display a link to a web site or other remote resource. See also
+  \l https://develop.kde.org/hig/getting_input/#signaling-interactivity
 
   \since 5.52
  */
@@ -27,6 +29,8 @@ QQC2.Label {
     /*!
       \qmlproperty Action action
       An action that will be triggered when the button is clicked
+
+      default: \c null; set an action to make it work.
      */
     property T.Action action
 
@@ -34,6 +38,8 @@ QQC2.Label {
       \qmlproperty Qt::MouseButtons LinkButton::acceptedButtons
       \brief This property holds the mouse buttons that the mouse area reacts to.
       \sa MouseArea::acceptedButtons
+
+      default: \c Qt.LeftButton
      */
     property alias acceptedButtons: area.acceptedButtons
 
@@ -47,21 +53,21 @@ QQC2.Label {
       This property holds the normal color of the link when not pressed
       or disabled.
 
-      default: Kirigami.Theme.linkColor
+      default: \c Kirigami.Theme.linkColor
      */
     property color normalColor: Kirigami.Theme.linkColor
 
     /*!
       This property holds the color of the link while pressed.
 
-      default: Whatever the normal color is set to, but 200% darker
+      default: Whatever the normal color is set to, but 200% darker.
      */
     property color pressedColor: Qt.darker(normalColor)
 
     /*!
       This property holds the color of the link when disabled.
 
-      default: Kirigami.Theme.textColor
+      default: \c Kirigami.Theme.textColor
      */
     property color disabledColor: Kirigami.Theme.textColor
 
