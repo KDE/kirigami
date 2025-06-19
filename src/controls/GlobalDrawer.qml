@@ -329,6 +329,8 @@ Kirigami.OverlayDrawer {
 
     onIsMenuChanged: drawerOpen = false
 
+    collapsedSize: collapsedSizeHint.implicitWidth
+
     Component {
         id: menuComponent
 
@@ -550,6 +552,15 @@ Kirigami.OverlayDrawer {
                     width: mainFlickable.width
                     spacing: 0
                     height: Math.max(scrollView.height, Layout.minimumHeight)
+
+                    // This item exists only as size hint for the collapsed size
+                    // In order to be sure on the collapsed width we want,
+                    // we need an actual dummy item that can be referenced to get a size hint
+                    QQC2.ItemDelegate {
+                        id: collapsedSizeHint
+                        icon.name: "sidebar-expand-left"
+                        visible: false
+                    }
 
                     ColumnLayout {
                         id: topContent
