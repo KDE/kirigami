@@ -227,9 +227,13 @@ QQC2.ApplicationWindow {
 
     TP.PassiveNotificationsManager {
         id: notificationsObject
+
         anchors.bottom: parent.bottom
         anchors.horizontalCenter: parent.horizontalCenter
-        z: 1
+
+        parent: T.Overlay.overlay
+        Kirigami.OverlayZStacking.layer: Kirigami.OverlayZStacking.Notification
+        z: Kirigami.OverlayZStacking.z
     }
 
     contentItem.z: 1
