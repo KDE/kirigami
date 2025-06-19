@@ -560,6 +560,7 @@ Kirigami.OverlayDrawer {
                         id: collapsedSizeHint
                         icon.name: "sidebar-expand-left"
                         visible: false
+                        Accessible.ignored: true
                     }
 
                     ColumnLayout {
