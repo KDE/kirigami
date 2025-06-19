@@ -16,7 +16,12 @@ KT.Chip {
     implicitHeight: toolButton.implicitHeight
 
     checkable: !closable
-    hoverEnabled: true
+    hoverEnabled: chip.interactive
+
+    MouseArea {
+        anchors.fill: parent
+        enabled: !chip.interactive
+    }
 
     property alias labelItem: label
 

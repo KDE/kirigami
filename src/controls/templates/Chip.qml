@@ -61,6 +61,13 @@ T.AbstractButton {
     property bool iconMask: false
 
     /*!
+     \brief This property holds whether the Chip should react to input or not. If set to false, click and hover events will be ignored.
+
+      default: \c true
+     */
+    property bool interactive: true
+
+    /*!
       \brief This signal is emitted when the close button has been clicked.
      */
     signal removed()
