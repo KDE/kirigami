@@ -32,7 +32,13 @@ class Units;
  * \qmltype Icon
  * \inqmlmodule org.kde.kirigami.primitives
  *
- * \brief Class for rendering an icon in the UI.
+ * \brief Class for rendering an icon supporting many different sources.
+ *
+ * \l source is the most important property, and determines where to get the
+ * icon from. It can be a FreeDesktop-compatible icon name, a URL, a local
+ * image file, or a bundled resource. Use \l fallback to specify the name of an
+ * icon from the current icon theme to display if the requested icon is not
+ * found.
  */
 class Icon : public QQuickItem
 {
@@ -60,7 +66,7 @@ class Icon : public QQuickItem
      * bundle icon themes in your application to refer to them by name instead of
      * by resource URL.
      *
-     * \note Use fallback to provide a fallback theme name for icons.
+     * \note Use fallback to provide a fallback icon from the current icon theme.
      *
      * \note Cuttlefish is a KDE application that lets you view all the icons that
      * you can use for your application. It offers a number of useful features such
@@ -111,6 +117,8 @@ class Icon : public QQuickItem
      * The color differences under the default KDE color palette, Breeze. Note
      * that a dull highlight background is typically displayed behind active icons and
      * it is recommended to add one if you are creating a custom component.
+     *
+     * The default is \c false.
      */
     Q_PROPERTY(bool active READ active WRITE setActive NOTIFY activeChanged FINAL)
 
@@ -134,6 +142,8 @@ class Icon : public QQuickItem
      *
      * The color differences under the default KDE color palette, Breeze. Note
      * that a blue background is typically displayed behind selected elements.
+     *
+     * The default is \c false.
      */
     Q_PROPERTY(bool selected READ selected WRITE setSelected NOTIFY selectedChanged FINAL)
 
@@ -144,6 +154,8 @@ class Icon : public QQuickItem
      * as a mask, all non-transparent colors are replaced with the color provided in the Icon's
      * color property.
      *
+     * The default is \c false.
+     *
      * \sa color
      */
     Q_PROPERTY(bool isMask READ isMask WRITE setIsMask NOTIFY isMaskChanged FINAL)
@@ -151,10 +163,10 @@ class Icon : public QQuickItem
     /*!
      * \qmlproperty color Icon::color
      *
-     * The color to use when drawing this icon when isMask is enabled.
+     * The color to draw this icon in when \l isMask is true.
      * If this property is not set or is \c Qt::transparent, the icon will use
      * the text or the selected text color, depending on if selected is set to
-     * true.
+     * true. This property has no effect if \l isMask is \c false.
      */
     Q_PROPERTY(QColor color READ color WRITE setColor NOTIFY colorChanged FINAL)
 
@@ -163,7 +175,7 @@ class Icon : public QQuickItem
      *
      * \qmlenumeratorsfrom Icon::Status
      *
-     * Whether the icon is correctly loaded, is asynchronously loading or there was an error.
+     * Whether the icon is correctly loaded, is asynchronously loading, or there was an error.
      * Note that image loading will not be initiated until the item is shown, so if the Icon is not visible,
      * it can only have Null or Loading states.
      * \since 5.15
@@ -193,14 +205,16 @@ class Icon : public QQuickItem
     /*!
      * \qmlproperty bool Icon::animated
      *
-     * If set, icon will blend when the source is changed
+     * If set, icon will blend when the source is changed.
      */
     Q_PROPERTY(bool animated READ isAnimated WRITE setAnimated NOTIFY animatedChanged FINAL)
 
     /*!
      * \qmlproperty bool Icon::roundToIconSize
      *
-     * If set, icon will round the painted size to defined icon sizes. Default is true.
+     * If set, icon will round the painted size to the nearest standard icon size.
+     *
+     * The default is \c true.
      */
     Q_PROPERTY(bool roundToIconSize READ roundToIconSize WRITE setRoundToIconSize NOTIFY roundToIconSizeChanged FINAL)
 
