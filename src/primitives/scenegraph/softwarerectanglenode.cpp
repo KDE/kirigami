@@ -127,6 +127,7 @@ void SoftwareRectangleNode::preprocess()
     if (texture) {
         if (!m_imageNode) {
             m_imageNode = m_window->createImageNode();
+            m_imageNode->setFlag(OwnedByParent);
         }
 
         // The rect will be set in render().
