@@ -53,18 +53,6 @@ void SoftwareRectangleNode::setImage(const QImage &image)
         return;
     }
 
-    if (m_imageNode) {
-        removeChildNode(m_imageNode);
-        delete m_imageNode;
-    }
-
-    m_imageNode = m_window->createImageNode();
-    if (!m_imageNode) {
-        return;
-    }
-
-    m_imageNode->setFiltering(QSGTexture::Filtering::Linear);
-
     m_textureInfo = ShaderNode::TextureInfo{
         .channel = 0,
         .options = {},
@@ -72,9 +60,6 @@ void SoftwareRectangleNode::setImage(const QImage &image)
         .provider = nullptr,
         .providerConnection = {},
     };
-
-    m_imageNode->setTexture(m_textureInfo.texture.get());
-    appendChildNode(m_imageNode);
 }
 
 void SoftwareRectangleNode::setTextureProvider(QSGTextureProvider *provider)
@@ -83,18 +68,6 @@ void SoftwareRectangleNode::setTextureProvider(QSGTextureProvider *provider)
         return;
     }
 
-    if (m_imageNode) {
-        removeChildNode(m_imageNode);
-        delete m_imageNode;
-    }
-
-    m_imageNode = m_window->createImageNode();
-    if (!m_imageNode) {
-        return;
-    }
-
-    m_imageNode->setFiltering(QSGTexture::Filtering::Linear);
-
     m_textureInfo = ShaderNode::TextureInfo{
         .channel = 0,
         .options = {},
@@ -102,9 +75,6 @@ void SoftwareRectangleNode::setTextureProvider(QSGTextureProvider *provider)
         .provider = provider,
         .providerConnection = {},
     };
-
-    m_imageNode->setTexture(m_textureInfo.provider->texture());
-    appendChildNode(m_imageNode);
 }
 
 void SoftwareRectangleNode::setRadius(qreal radius)
@@ -144,12 +114,32 @@ QSGRenderNode::RenderingFlags SoftwareRectangleNode::flags() const
 
 void SoftwareRectangleNode::preprocess()
 {
-    auto provider = m_textureInfo.provider;
-    if (provider && m_imageNode) {
-        m_imageNode->setTexture(provider->texture());
+    QSGTexture *texture = nullptr;
+    if (QSGTextureProvider *provider = m_textureInfo.provider) {
+        texture = provider->texture();
         if (QSGDynamicTexture *dynamic_texture = qobject_cast<QSGDynamicTexture *>(provider->texture())) {
             dynamic_texture->updateTexture();
         }
+    } else if (m_textureInfo.texture) {
+        texture = m_textureInfo.texture.get();
+    }
+
+    if (texture) {
+        if (!m_imageNode) {
+            m_imageNode = m_window->createImageNode();
+        }
+
+        // The rect will be set in render().
+        m_imageNode->setFiltering(QSGTexture::Filtering::Linear);
+        m_imageNode->setTexture(texture);
+
+        if (!m_imageNode->parent()) {
+            appendChildNode(m_imageNode);
+        }
+    } else if (m_imageNode) {
+        removeChildNode(m_imageNode);
+        delete m_imageNode;
+        m_imageNode = nullptr;
     }
 }
 
