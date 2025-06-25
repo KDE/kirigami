@@ -80,15 +80,36 @@ ListView {
 
     model: root.actions
 
-    delegate: QQC2.ItemDelegate {
-        required property int index
-        required property QQC2.Action modelData
+    delegate: DelegateChooser {
+        role: "checkable"
 
-        width: ListView.view.width - ListView.view.leftMargin - ListView.view.rightMargin
+        DelegateChoice {
+            roleValue: "true"
+            QQC2.CheckDelegate {
+                required property int index
+                required property QQC2.Action modelData
 
-        action: modelData
-        visible: modelData instanceof Kirigami.Action ? modelData.visible : true
+                width: ListView.view.width - ListView.view.leftMargin - ListView.view.rightMargin
 
-        onClicked: root.clicked(index)
+                action: modelData
+                visible: modelData instanceof Kirigami.Action ? modelData.visible : true
+
+                onClicked: root.clicked(index)
+            }
+        }
+        DelegateChoice {
+            roleValue: "false"
+            QQC2.ItemDelegate {
+                required property int index
+                required property QQC2.Action modelData
+
+                width: ListView.view.width - ListView.view.leftMargin - ListView.view.rightMargin
+
+                action: modelData
+                visible: modelData instanceof Kirigami.Action ? modelData.visible : true
+
+                onClicked: root.clicked(index)
+            }
+        }
     }
 }
