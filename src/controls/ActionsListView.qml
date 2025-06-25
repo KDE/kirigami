@@ -9,7 +9,7 @@ import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 
 /*!
-  \qmltype ActionList
+  \qmltype ActionsListView
   \inqmlmodule org.kde.kirigami
 
   \brief A control to visualize an array of actions as a list.
@@ -23,7 +23,7 @@ import org.kde.kirigami as Kirigami
       padding:0
 
       contentItem: QQC2.ScrollView {
-          Kirigami.ActionList {
+          Kirigami.ActionsListView {
               actions: [
                   Kirigami.Action {
                       icon.name: "media-playback-start"
