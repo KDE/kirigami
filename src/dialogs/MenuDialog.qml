@@ -96,7 +96,7 @@ KirigamiDialogs.Dialog {
     preferredWidth: Platform.Units.gridUnit * 20
     padding: 0
 
-    Kirigami.ActionList {
+    Kirigami.ActionsListView {
         id: content
         actions: root.actions
 
