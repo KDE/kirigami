@@ -99,7 +99,7 @@ KirigamiDialogs.Dialog {
         id: content
         actions: root.actions
 
-        onClicked: index => root.close()
+        onClicked: index => root.accept()
 
         header: columnHeader
     }
