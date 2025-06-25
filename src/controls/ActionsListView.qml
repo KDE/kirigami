@@ -20,7 +20,7 @@ import org.kde.kirigami as Kirigami
       id: root
       title: i18n("Track Options")
 
-      padding:0
+      padding: 0
 
       contentItem: QQC2.ScrollView {
           Kirigami.ActionsListView {
@@ -84,7 +84,7 @@ ListView {
         required property int index
         required property QQC2.Action modelData
 
-        width: ListView.view.width
+        width: ListView.view.width - ListView.view.leftMargin - ListView.view.rightMargin
 
         action: modelData
         visible: modelData instanceof Kirigami.Action ? modelData.visible : true
