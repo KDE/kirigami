@@ -36,12 +36,13 @@ NavigationButton {
         return false;
     }
 
+    visible: false
+
     onClicked: {
         applicationWindow().pageStack.goBack();
     }
 
-    // The gridUnit wiggle room is used to not flicker the button visibility during an animated resize for instance due to a sidebar collapse
-    state: {
+    function syncVisibility() {
         const pageStack = applicationWindow().pageStack;
         const globalToolBar = pageStack.globalToolBar;
         let showNavButtons = Kirigami.ApplicationHeaderStyle.NoNavigationButtons;
@@ -53,10 +54,24 @@ NavigationButton {
         }
 
         if (pageStack.layers.depth > 1
-            || (pageStack.contentItem.contentWidth > pageStack.width + Kirigami.Units.gridUnit
+            || (pageStack.columnView.contentWidth > pageStack.width + Kirigami.Units.gridUnit
                 && (showNavButtons & Kirigami.ApplicationHeaderStyle.ShowBackButton))) {
-            return ""
+            button.state = "";
+            return;
         }
-        return "invisible"
+        button.state = "invisible";
+    }
+    Connections {
+        target: pageStack.layers
+        function onDepthChanged() {
+            syncVisibility();
+        }
+    }
+    // The gridUnit wiggle room is used to not flicker the button visibility during an animated resize for instance due to a sidebar collapse
+    Connections {
+        target: pageStack.columnView
+        function onContentWidthChanged() {
+            syncVisibility();
+        }
     }
 }

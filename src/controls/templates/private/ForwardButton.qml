@@ -17,7 +17,9 @@ NavigationButton {
 
     onClicked: applicationWindow().pageStack.goForward();
 
-    state: {
+    visible: false
+
+    function syncVisibility() {
         const pageStack = applicationWindow().pageStack;
         const globalToolBar = pageStack.globalToolBar;
         let showNavButtons = Kirigami.ApplicationHeaderStyle.NoNavigationButtons;
@@ -30,8 +32,22 @@ NavigationButton {
         if (pageStack.layers.depth === 1
             && pageStack.contentItem.contentWidth > pageStack.width + Kirigami.Units.gridUnit
             && (showNavButtons & Kirigami.ApplicationHeaderStyle.ShowForwardButton)) {
-            return ""
+            button.state =  "";
+            return;
         }
-        return "invisible"
+        button.state = "invisible";
+    }
+
+    Connections {
+        target: pageStack.layers
+        function onDepthChanged() {
+            syncVisibility();
+        }
+    }
+    Connections {
+        target: pageStack.columnView
+        function onContentWidthChanged() {
+            syncVisibility();
+        }
     }
 }
