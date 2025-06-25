@@ -9,8 +9,8 @@ import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 
 /*!
-  \qmltype ActionListContent
-  \inqmlmodule org.kde.kirigami.dialogs
+  \qmltype ActionList
+  \inqmlmodule org.kde.kirigami
 
   \brief A control to visualize an array of actions as a list.
 
@@ -20,8 +20,10 @@ import org.kde.kirigami as Kirigami
       id: root
       title: i18n("Track Options")
 
-      QQC2.ScrollView {
-          KirigamiDialogs.ActionListContent {
+      padding:0
+
+      contentItem: QQC2.ScrollView {
+          Kirigami.ActionList {
               actions: [
                   Kirigami.Action {
                       icon.name: "media-playback-start"
@@ -51,7 +53,7 @@ import org.kde.kirigami as Kirigami
                   }
               ]
 
-              onClicked: index => root.close()
+              onClicked: index => root.accept()
           }
       }
   }
@@ -74,6 +76,8 @@ ListView {
      */
     signal clicked(int index)
 
+    clip: true
+
     model: root.actions
 
     delegate: QQC2.ItemDelegate {
@@ -83,9 +87,7 @@ ListView {
         width: ListView.view.width
 
         action: modelData
-        visible: !(modelData instanceof Kirigami.Action) || modelData.visible
-
-        horizontalPadding: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
+        visible: modelData instanceof Kirigami.Action ? modelData.visible : true
 
         onClicked: root.clicked(index)
     }
