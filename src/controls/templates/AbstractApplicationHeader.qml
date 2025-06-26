@@ -134,7 +134,7 @@ Item {
 
         function onControlsVisibleChanged() {
             heightAnim.from = root.implicitHeight;
-            heightAnim.to = root.__appWindow.controlsVisible ? root.preferredHeight : 0;
+            heightAnim.to = root.__appWindow.controlsVisible ? root.preferredHeight : 1;
             heightAnim.restart();
         }
     }
@@ -228,9 +228,12 @@ Item {
                 }
             }
 
+            height: root.preferredHeight
             anchors {
-                fill: parent
-                topMargin: root.topPadding
+                left: parent.left
+                right: parent.right
+                bottom: parent.bottom
+
                 leftMargin: root.leftPadding
                 rightMargin: root.rightPadding
                 bottomMargin: root.bottomPadding
