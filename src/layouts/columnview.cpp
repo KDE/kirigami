@@ -886,7 +886,7 @@ QQuickItem *ContentItem::ensureSeparator(QQuickItem *previousColumn, QQuickItem 
         separatorItem = qobject_cast<QQuickItem *>(
             QmlComponentsPoolSingleton::instance(qmlEngine(column))->m_separatorComponent.beginCreate(QQmlEngine::contextForObject(column)));
         if (separatorItem) {
-            separatorItem->setParent(this);
+            separatorItem->setParent(column);
             separatorItem->setParentItem(column);
             separatorItem->setZ(9999);
             separatorItem->setProperty("column", QVariant::fromValue(column));
