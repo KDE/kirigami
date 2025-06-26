@@ -20,7 +20,8 @@ import org.kde.kirigami as Kirigami
       id: root
       title: i18n("Track Options")
 
-      padding: 0
+      width: Kirigami.Units.gridUnit * 24
+      padding: 1 // To avoid covering the border
 
       contentItem: QQC2.ScrollView {
           Kirigami.ActionsListView {
