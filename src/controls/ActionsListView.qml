@@ -6,6 +6,9 @@
 import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
+import QtQml.Models
+// HACK: QtQml.Models stabilised in 6.9, this can go when support is not longer needed
+import Qt.labs.qmlmodels
 
 import org.kde.kirigami as Kirigami
 
@@ -60,6 +63,8 @@ import org.kde.kirigami as Kirigami
       }
   }
   \endqml
+
+  \since 6.17
  */
 ListView {
     id: root
@@ -67,6 +72,8 @@ ListView {
     /*!
       \qmlproperty list<Action> actions
       \brief This property holds the actions displayed in the context menu.
+
+      \since 6.17
      */
     property list<T.Action> actions
 
@@ -75,6 +82,8 @@ ListView {
       \brief Signal emitted when one of the action items is clicked.
 
       The index value is the index of the clicked item.
+
+      \since 6.17
      */
     signal clicked(int index)
 
