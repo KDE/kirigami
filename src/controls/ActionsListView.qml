@@ -6,6 +6,9 @@
 import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
+import QtQml.Models
+// HACK: QtQml.Models stabilised in 6.9, this can go when support is not longer needed
+import Qt.labs.qmlmodels
 
 import org.kde.kirigami as Kirigami
 
