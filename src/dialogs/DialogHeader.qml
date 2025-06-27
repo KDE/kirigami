@@ -74,7 +74,7 @@ T.Control {
                 return root.dialog.contentItem.height < itemContentHeight;
             } else {
                 return false;
-            }}
+            }
         }
     }
 
