@@ -5,6 +5,7 @@
 
 import QtQuick
 import QtQuick.Controls as QQC2
+import QtQuick.Templates as T
 
 import org.kde.kirigami as Kirigami
 
@@ -67,7 +68,7 @@ ListView {
       \qmlproperty list<Action> actions
       \brief This property holds the actions displayed in the context menu.
      */
-    property list<QQC2.Action> actions
+    property list<T.Action> actions
 
     /*!
       \qmlsignal clicked(int index)
@@ -88,7 +89,7 @@ ListView {
             roleValue: "true"
             QQC2.CheckDelegate {
                 required property int index
-                required property QQC2.Action modelData
+                required property T.Action modelData
 
                 width: ListView.view.width - ListView.view.leftMargin - ListView.view.rightMargin
 
@@ -102,7 +103,7 @@ ListView {
             roleValue: "false"
             QQC2.ItemDelegate {
                 required property int index
-                required property QQC2.Action modelData
+                required property T.Action modelData
 
                 width: ListView.view.width - ListView.view.leftMargin - ListView.view.rightMargin
 
