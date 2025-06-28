@@ -121,6 +121,7 @@ ecm_target_qml_sources(Kirigami SOURCES
     controls/AbstractApplicationHeader.qml
     controls/AbstractApplicationWindow.qml
     controls/ApplicationWindow.qml
+    controls/Badge.qml
     controls/OverlayDrawer.qml
     controls/ContextDrawer.qml
     controls/GlobalDrawer.qml
