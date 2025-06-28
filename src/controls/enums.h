@@ -47,4 +47,18 @@ enum Type {
 Q_ENUM_NS(Type)
 };
 
+namespace BadgeType
+{
+Q_NAMESPACE
+QML_ELEMENT
+
+enum Type {
+    Information = 0,
+    Positive,
+    Warning,
+    Error,
+};
+Q_ENUM_NS(Type)
+};
+
 #endif // ENUMS_H
