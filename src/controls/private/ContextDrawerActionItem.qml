@@ -24,6 +24,7 @@ QQC2.ItemDelegate {
     checked: tAction.checked || (actionsMenu && actionsMenu.visible)
     highlighted: checked
     icon.name: tAction.icon.name
+    icon.source: tAction.icon.source
 
     text: tAction.text ? tAction.text : tAction.tooltip
     hoverEnabled: (!isExpandable || root.collapsed) && !Kirigami.Settings.tabletMode && !isSeparator
