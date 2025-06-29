@@ -50,6 +50,7 @@ function(kirigami_package_breeze_icons)
         overflow-menu
         password-show-off
         password-show-on
+        process-working-symbolic
         tools-report-bug
         user
         view-left-new
