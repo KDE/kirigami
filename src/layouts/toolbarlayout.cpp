@@ -502,8 +502,13 @@ void ToolBarLayoutPrivate::performLayout()
         return entry.second->isReady();
     });
     if (!ready || !moreButtonInstance) {
+        // Hide toolbar actions if delegates are still being
+        // loaded (otherwise they visibly glitch in one-by-one as they load)
+        q->setVisible(false);
         return;
     }
+    // Set visibility to true once all delegates have loaded
+    q->setVisible(true);
 
     qreal width = q->width();
     qreal height = q->height();
