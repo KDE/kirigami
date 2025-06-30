@@ -143,7 +143,13 @@ qreal ColumnViewAttached::reservedSpace() const
 {
     if (m_customReservedSpace) {
         return m_reservedSpace;
-    } else if (m_view->columnResizeMode() == ColumnView::FixedColumns) {
+    }
+
+    if (!m_view) {
+        return 0;
+    }
+
+    if (m_view->columnResizeMode() == ColumnView::FixedColumns) {
         return m_view->columnWidth();
     } else {
         QQuickItem *prevItem = m_view->get(m_index - 1);
