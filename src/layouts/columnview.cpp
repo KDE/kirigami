@@ -1005,9 +1005,9 @@ void ContentItem::connectHeader(QQuickItem *oldHeader, QQuickItem *newHeader)
         oldHeader->setParentItem(nullptr);
     }
     if (newHeader) {
+        newHeader->setParentItem(m_globalHeaderParent);
         connect(newHeader, &QQuickItem::heightChanged, this, &ContentItem::layoutItems);
         connect(newHeader, &QQuickItem::visibleChanged, this, &ContentItem::layoutItems);
-        newHeader->setParentItem(m_globalHeaderParent);
     }
 }
 
@@ -1018,9 +1018,9 @@ void ContentItem::connectFooter(QQuickItem *oldFooter, QQuickItem *newFooter)
         oldFooter->setParentItem(nullptr);
     }
     if (newFooter) {
+        newFooter->setParentItem(m_globalFooterParent);
         connect(newFooter, &QQuickItem::heightChanged, this, &ContentItem::layoutItems);
         connect(newFooter, &QQuickItem::visibleChanged, this, &ContentItem::layoutItems);
-        newFooter->setParentItem(m_globalFooterParent);
     }
 }
 
