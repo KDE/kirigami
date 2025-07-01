@@ -89,7 +89,7 @@ KirigamiDialogs.Dialog {
     preferredWidth: Kirigami.Units.gridUnit * 20
     padding: 0
 
-    ColumnLayout {
+    contentItem: ColumnLayout {
         id: column
 
         spacing: 0

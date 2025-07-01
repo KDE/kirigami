@@ -68,7 +68,7 @@ T.Control {
             width: parent.width
             anchors.bottom: parent.bottom
             visible: if (root.dialog.contentItem instanceof T.Pane || root.dialog.contentItem instanceof Flickable) {
-                return root.dialog.contentItem.contentHeight > root.dialog.implicitContentHeight;
+                return root.dialog.contentItem.height < root.dialog.contentItem.contentHeight;
             } else {
                 return false;
             }

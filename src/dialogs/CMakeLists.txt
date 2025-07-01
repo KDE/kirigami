@@ -16,6 +16,7 @@ ecm_target_qml_sources(KirigamiDialogs SOURCES
     MenuDialog.qml
     PromptDialog.qml
     SearchDialog.qml
+    DialogFooter.qml
 )
 
 set_target_properties(KirigamiDialogs PROPERTIES

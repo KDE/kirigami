@@ -151,7 +151,7 @@ KirigamiDialogs.Dialog {
 
     header: null
 
-    Kirigami.Padding {
+    contentItem: Kirigami.Padding {
         id: wrapper
 
         topPadding: root.contentTopPadding
