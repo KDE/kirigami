@@ -245,9 +245,7 @@ QQC2.Page {
                 root.titleDelegate !== defaultTitleDelegate) {
                 sourceComponent = root.titleDelegate;
             } else if (active) {
-                const url = root.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar
-                    ? "private/globaltoolbar/ToolBarPageHeader.qml"
-                    : "private/globaltoolbar/TitlesPageHeader.qml";
+                const url = "private/globaltoolbar/ToolBarPageHeader.qml";
                 // TODO: find container reliably, remove assumption
                 setSource(Qt.resolvedUrl(url), {
                     pageRow: Qt.binding(() => row),

@@ -22,62 +22,42 @@ Kirigami.AbstractApplicationHeader {
 
     Kirigami.Theme.colorSet: pageRow ? pageRow.globalToolBar.colorSet : Kirigami.Theme.Header
 
-    readonly property Item __stackPage: pageRow?.items.indexOf(page) > -1 ? pageRow.columnView.parent : page
-    Binding {
-        target: root
-        property: "leftPadding"
-
-        when: __stackPage.QQC.StackView.status !== QQC.StackView.Deactivating
-
-        restoreMode: Binding.RestoreNone
-        value: {
-            if (!pageRow) {
-                return Kirigami.Units.smallSpacing
-            }
-
-            if (!pageRow.wideMode) {
-                return Math.max(pageRow.globalToolBar.leftReservedSpace, pageRow.globalToolBar.titleLeftPadding)
-            }
-
-            let displacement = 0
-
-            if (Qt.application.layoutDirection === Qt.RightToLeft) {
-                displacement = (page.Kirigami.ScenePosition.x + page.width)
-                                - (pageRow.Kirigami.ScenePosition.x + pageRow.width - pageRow.globalToolBar.leftReservedSpace)
-            } else {
-                displacement = pageRow.Kirigami.ScenePosition.x
-                                - page.Kirigami.ScenePosition.x
-                                + pageRow.globalToolBar.leftReservedSpace
-            }
-
-            return Math.max(pageRow.globalToolBar.titleLeftPadding,
-                            Math.min(displacement,
-                                     pageRow.globalToolBar.leftReservedSpace))
+    leftPadding: {
+        // We are in a layer, show buttons
+        // page can be null when the nav buttons are in the breadcrumbs header
+        if (page.QQC.StackView.view ||
+            // If we are in single page mode, always show if depth > 1
+            pageStack.columnView.columnResizeMode === Kirigami.ColumnView.SingleColumn ||
+            // First page in the row
+            page.Kirigami.ColumnView.index <= 0) {
+            return pageRow.globalToolBar.leftReservedSpace;
         }
+
+        // Condition: the page previous of this one is at least half scrolled away
+        const previousPage = pageStack.get(page.Kirigami.ColumnView.index - 1);
+        if (Qt.application.layoutDirection === Qt.RightToLeft) {
+            if (pageStack.width - (page.x + page.width - pageStack.columnView.contentX) < previousPage.width / 2) {
+                return pageRow.globalToolBar.leftReservedSpace;
+            }
+        } else {
+            if (previousPage.x - pageStack.columnView.contentX < -previousPage.width / 2) {
+                return pageRow.globalToolBar.leftReservedSpace;
+            }
+        }
+
+        return 0;
     }
 
     rightPadding: {
-        if (!pageRow) {
-            return 0
-        }
-
-        if (!pageRow.wideMode) {
-            return pageRow.globalToolBar.rightReservedSpace
-        }
-
-        let displacement = 0
         if (Qt.application.layoutDirection === Qt.RightToLeft) {
-            displacement = pageRow.Kirigami.ScenePosition.x
-                            - page.Kirigami.ScenePosition.x
-                            + pageRow.globalToolBar.rightReservedSpace
+            if (page.x - pageStack.columnView.contentX < pageRow.globalToolBar.rightReservedSpace) {
+                return pageRow.globalToolBar.rightReservedSpace;
+            }
         } else {
-            displacement = -pageRow.width
-                - pageRow.Kirigami.ScenePosition.x
-                + page.width
-                + page.Kirigami.ScenePosition.x
-                + pageRow.globalToolBar.rightReservedSpace
+            if (pageStack.width - (page.x + page.width - pageStack.columnView.contentX) < pageRow.globalToolBar.rightReservedSpace) {
+                return pageRow.globalToolBar.rightReservedSpace;
+            }
         }
-
-        return Math.max(0, displacement)
+        return 0;
     }
 }

@@ -9,7 +9,7 @@ import QtQuick
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
-ListView {
+RowLayout {
     id: root
 
     readonly property Kirigami.PageRow pageRow: {
@@ -18,156 +18,167 @@ ListView {
         return pr as Kirigami.PageRow;
     }
 
-    currentIndex: {
-        if (!pageRow) {
-            return -1;
-        }
-        // This ListView is eventually consistent with PageRow, so it has to
-        // force-refresh currentIndex when its count finally catches up,
-        // otherwise currentIndex might get reset and stuck at -1.
-        void count;
-        // TODO: This "eventual consistency" causes Behavior on contentX to
-        // scroll from the start each time a page is added. Besides, simple
-        // number is not the most efficient model, because ListView
-        // recreates all delegates when number changes.
-
-        if (pageRow.layers.depth > 1) {
-            // First layer (index 0) is the main columnView.
-            // Since it is ignored, depth has to be adjusted by 1.
-            // In case of layers, current index is always the last one,
-            // which is one less than their count, thus minus another 1.
-            return pageRow.layers.depth - 2;
-        } else {
-            return pageRow.currentIndex;
-        }
+    NavigationButtons {
+        page: null
+        pageStack: root.pageRow
     }
 
-    // This function exists outside of delegate, so that when popping layers
-    // the JavaScript execution context won't be destroyed along with delegate.
-    function selectIndex(index: int) {
-        if (!pageRow) {
-            return;
-        }
-        if (pageRow.layers.depth > 1) {
-            // First layer (index 0) is the main columnView.
-            // Since it is ignored, index has to be adjusted by 1.
-            // We want to pop anything after selected index,
-            // turning selected layer into current one, thus plus another 1.
-            while (pageRow.layers.depth > index + 2) {
-                pageRow.layers.pop();
+    ListView {
+        id: list
+        Layout.fillWidth: true
+        Layout.fillHeight: true
+
+        currentIndex: {
+            if (!pageRow) {
+                return -1;
             }
-        } else {
-            pageRow.currentIndex = index;
+            // This ListView is eventually consistent with PageRow, so it has to
+            // force-refresh currentIndex when its count finally catches up,
+            // otherwise currentIndex might get reset and stuck at -1.
+            void count;
+            // TODO: This "eventual consistency" causes Behavior on contentX to
+            // scroll from the start each time a page is added. Besides, simple
+            // number is not the most efficient model, because ListView
+            // recreates all delegates when number changes.
+
+            if (pageRow.layers.depth > 1) {
+                // First layer (index 0) is the main columnView.
+                // Since it is ignored, depth has to be adjusted by 1.
+                // In case of layers, current index is always the last one,
+                // which is one less than their count, thus minus another 1.
+                return pageRow.layers.depth - 2;
+            } else {
+                return pageRow.currentIndex;
+            }
         }
-    }
 
-    contentHeight: height
-    clip: true
-    orientation: ListView.Horizontal
-    boundsBehavior: Flickable.StopAtBounds
-    interactive: Kirigami.Settings.hasTransientTouchInput
-
-    contentX: {
-        if (!currentItem) {
-            return 0;
+        // This function exists outside of delegate, so that when popping layers
+        // the JavaScript execution context won't be destroyed along with delegate.
+        function selectIndex(index: int) {
+            if (!pageRow) {
+                return;
+            }
+            if (pageRow.layers.depth > 1) {
+                // First layer (index 0) is the main columnView.
+                // Since it is ignored, index has to be adjusted by 1.
+                // We want to pop anything after selected index,
+                // turning selected layer into current one, thus plus another 1.
+                while (pageRow.layers.depth > index + 2) {
+                    pageRow.layers.pop();
+                }
+            } else {
+                pageRow.currentIndex = index;
+            }
         }
-        // preferred position: current item is centered within viewport
-        const preferredPosition = currentItem.x + (currentItem.width - width) / 2;
 
-        // Note: Order of min/max is important. Make sure to test on all sorts
-        // and sizes before committing changes to this formula.
-        if (LayoutMirroring.enabled) {
-            // In a mirrored ListView contentX starts from left edge and increases to the left.
-            const maxLeftPosition = -contentWidth;
-            const minRightPosition = -width;
-            return Math.round(Math.min(minRightPosition, Math.max(preferredPosition, maxLeftPosition)));
-        } else {
-            const minLeftPosition = 0;
-            const maxRightPosition = contentWidth - width;
-            return Math.round(Math.max(minLeftPosition, Math.min(preferredPosition, maxRightPosition)));
+        contentHeight: height
+        clip: true
+        orientation: ListView.Horizontal
+        boundsBehavior: Flickable.StopAtBounds
+        interactive: Kirigami.Settings.hasTransientTouchInput
+
+        contentX: {
+            if (!currentItem) {
+                return 0;
+            }
+            // preferred position: current item is centered within viewport
+            const preferredPosition = currentItem.x + (currentItem.width - width) / 2;
+
+            // Note: Order of min/max is important. Make sure to test on all sorts
+            // and sizes before committing changes to this formula.
+            if (LayoutMirroring.enabled) {
+                // In a mirrored ListView contentX starts from left edge and increases to the left.
+                const maxLeftPosition = -contentWidth;
+                const minRightPosition = -width;
+                return Math.round(Math.min(minRightPosition, Math.max(preferredPosition, maxLeftPosition)));
+            } else {
+                const minLeftPosition = 0;
+                const maxRightPosition = contentWidth - width;
+                return Math.round(Math.max(minLeftPosition, Math.min(preferredPosition, maxRightPosition)));
+            }
         }
-    }
 
-    Behavior on contentX {
-        NumberAnimation {
-            duration: Kirigami.Units.longDuration
-            easing.type: Easing.InOutQuad
+        Behavior on contentX {
+            NumberAnimation {
+                duration: Kirigami.Units.longDuration
+                easing.type: Easing.InOutQuad
+            }
         }
-    }
 
-    model: {
-        if (!root.pageRow) {
-            return null;
-        }
-        if (root.pageRow.layers.depth > 1) {
-            // First layer (index 0) is the main columnView; ignore it.
-            return root.pageRow.layers.depth - 1;
-        } else {
-            return root.pageRow.depth;
-        }
-    }
-
-    delegate: MouseArea {
-        id: delegate
-
-        required property int index
-
-        // We can't use Kirigami.Page here instead of Item since we now accept
-        // pushing PageRow to a new layer.
-        readonly property Item page: {
+        model: {
             if (!root.pageRow) {
                 return null;
             }
             if (root.pageRow.layers.depth > 1) {
-                // First layer (index 0) is the main columnView.
-                // Since it is ignored, index has to be adjusted by 1.
-                return pageRow.layers.get(index + 1);
+                // First layer (index 0) is the main columnView; ignore it.
+                return root.pageRow.layers.depth - 1;
             } else {
-                return pageRow.get(index);
+                return root.pageRow.depth;
             }
         }
 
+        delegate: MouseArea {
+            id: delegate
 
-        width: Math.ceil(layout.implicitWidth)
-        height: ListView.view?.height ?? 0
+            required property int index
 
-        hoverEnabled: !Kirigami.Settings.tabletMode
-
-        onClicked: mouse => {
-            root.selectIndex(index);
-        }
-
-        // background
-        Rectangle {
-            color: Kirigami.Theme.highlightColor
-            anchors.fill: parent
-            radius: Kirigami.Units.cornerRadius
-            opacity: root.count > 1 && parent.containsMouse ? 0.1 : 0
-        }
-
-        // content
-        RowLayout {
-            id: layout
-            anchors.fill: parent
-            spacing: 0
-
-            Kirigami.Icon {
-                visible: delegate.index > 0
-                Layout.alignment: Qt.AlignVCenter
-                Layout.preferredHeight: Kirigami.Units.iconSizes.small
-                Layout.preferredWidth: Kirigami.Units.iconSizes.small
-                isMask: true
-                color: Kirigami.Theme.textColor
-                source: LayoutMirroring.enabled ? "go-next-symbolic-rtl" : "go-next-symbolic"
+            // We can't use Kirigami.Page here instead of Item since we now accept
+            // pushing PageRow to a new layer.
+            readonly property Item page: {
+                if (!root.pageRow) {
+                    return null;
+                }
+                if (root.pageRow.layers.depth > 1) {
+                    // First layer (index 0) is the main columnView.
+                    // Since it is ignored, index has to be adjusted by 1.
+                    return pageRow.layers.get(index + 1);
+                } else {
+                    return pageRow.get(index);
+                }
             }
-            Kirigami.Heading {
-                Layout.leftMargin: Kirigami.Units.largeSpacing
-                Layout.rightMargin: Kirigami.Units.largeSpacing
-                color: Kirigami.Theme.textColor
-                verticalAlignment: Text.AlignVCenter
-                wrapMode: Text.NoWrap
-                text: delegate.page?.title ?? ""
-                opacity: delegate.ListView.isCurrentItem ? 1 : 0.4
+
+
+            width: Math.ceil(layout.implicitWidth)
+            height: ListView.view?.height ?? 0
+
+            hoverEnabled: !Kirigami.Settings.tabletMode
+
+            onClicked: mouse => {
+                list.selectIndex(index);
+            }
+
+            // background
+            Rectangle {
+                color: Kirigami.Theme.highlightColor
+                anchors.fill: parent
+                radius: Kirigami.Units.cornerRadius
+                opacity: list.count > 1 && parent.containsMouse ? 0.1 : 0
+            }
+
+            // content
+            RowLayout {
+                id: layout
+                anchors.fill: parent
+                spacing: 0
+
+                Kirigami.Icon {
+                    visible: delegate.index > 0
+                    Layout.alignment: Qt.AlignVCenter
+                    Layout.preferredHeight: Kirigami.Units.iconSizes.small
+                    Layout.preferredWidth: Kirigami.Units.iconSizes.small
+                    isMask: true
+                    color: Kirigami.Theme.textColor
+                    source: LayoutMirroring.enabled ? "go-next-symbolic-rtl" : "go-next-symbolic"
+                }
+                Kirigami.Heading {
+                    Layout.leftMargin: Kirigami.Units.largeSpacing
+                    Layout.rightMargin: Kirigami.Units.largeSpacing
+                    color: Kirigami.Theme.textColor
+                    verticalAlignment: Text.AlignVCenter
+                    wrapMode: Text.NoWrap
+                    text: delegate.page?.title ?? ""
+                    opacity: delegate.ListView.isCurrentItem ? 1 : 0.4
+                }
             }
         }
     }

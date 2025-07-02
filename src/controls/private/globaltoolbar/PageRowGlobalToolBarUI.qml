@@ -15,22 +15,12 @@ import "../" as P
 Kirigami.AbstractApplicationHeader {
     id: header
     readonly property int leftReservedSpace: {
-        let space = 0;
-        let populated = false;
-        if (buttonsLayout.visible && buttonsLayout.visibleChildren.length > 0) {
-            space += buttonsLayout.width;
-            populated = true;
-        }
+        let space = Kirigami.Units.smallSpacing;
         if (leftHandleAnchor.visible) {
             space += leftHandleAnchor.width;
-            populated = true;
         }
         if (menuButton.visible) {
             space += menuButton.width;
-            populated = true;
-        }
-        if (populated) {
-            space += Kirigami.Units.mediumSpacing;
         }
         return space
     }
@@ -81,7 +71,7 @@ Kirigami.AbstractApplicationHeader {
             id: leftHandleAnchor
             visible: header.__shouldHandleAnchorBeVisible(leftHandleAnchor, "globalDrawer", "leadingVisibleItem")
 
-            Layout.preferredHeight: Math.max(backButton.implicitHeight, parent.height)
+            Layout.preferredHeight: Math.max(menuButton.implicitHeight, parent.height)
             Layout.preferredWidth: height
         }
 
@@ -91,8 +81,7 @@ Kirigami.AbstractApplicationHeader {
             icon.name: "open-menu-symbolic"
             showMenuArrow: false
 
-            Layout.preferredHeight: Math.min(backButton.implicitHeight, parent.height)
-            Layout.preferredWidth: height
+          //  Layout.preferredWidth: height
             Layout.leftMargin: Kirigami.Units.smallSpacing
 
             action: Kirigami.Action {
@@ -112,37 +101,6 @@ Kirigami.AbstractApplicationHeader {
                     }
                 }
             }
-        }
-
-        RowLayout {
-            id: buttonsLayout
-            Layout.fillHeight: true
-            Layout.preferredHeight: Math.max(backButton.visible ? backButton.implicitHeight : 0, forwardButton.visible ? forwardButton.implicitHeight : 0)
-
-            Layout.leftMargin: leftHandleAnchor.visible ? Kirigami.Units.smallSpacing : 0
-
-            visible: (globalToolBar.showNavigationButtons !== Kirigami.ApplicationHeaderStyle.NoNavigationButtons || applicationWindow().pageStack.layers.depth > 1 && !(applicationWindow().pageStack.layers.currentItem instanceof Kirigami.PageRow || header.layerIsMainRow))
-                && globalToolBar.actualStyle !== Kirigami.ApplicationHeaderStyle.None
-
-            Layout.maximumWidth: visibleChildren.length > 0 ? Layout.preferredWidth : 0
-
-            TP.BackButton {
-                id: backButton
-                Layout.leftMargin: leftHandleAnchor.visible ? 0 : Kirigami.Units.smallSpacing
-                Layout.minimumWidth: implicitHeight
-                Layout.minimumHeight: implicitHeight
-                Layout.maximumHeight: buttonsLayout.height
-            }
-            TP.ForwardButton {
-                id: forwardButton
-                Layout.minimumWidth: implicitHeight
-                Layout.minimumHeight: implicitHeight
-                Layout.maximumHeight: buttonsLayout.height
-            }
-        }
-
-        QQC2.ToolSeparator {
-            visible: (menuButton.visible || (buttonsLayout.visible && buttonsLayout.visibleChildren.length > 0)) && breadcrumbVisible && pageRow.depth > 1
         }
 
         Loader {
@@ -167,7 +125,7 @@ Kirigami.AbstractApplicationHeader {
             id: rightHandleAnchor
             visible: header.__shouldHandleAnchorBeVisible(rightHandleAnchor, "contextDrawer", "trailingVisibleItem")
 
-            Layout.preferredHeight: Math.max(backButton.implicitHeight, parent.height)
+            Layout.preferredHeight: Math.max(menuButton.implicitHeight, parent.height)
             Layout.preferredWidth: height
         }
     }

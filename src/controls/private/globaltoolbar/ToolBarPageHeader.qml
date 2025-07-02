@@ -5,6 +5,7 @@
  */
 
 import QtQuick
+import QtQuick.Controls as QQC
 import QtQml
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
@@ -33,6 +34,12 @@ AbstractPageHeader {
         anchors.rightMargin: Kirigami.Units.smallSpacing
         spacing: Kirigami.Units.smallSpacing
 
+        NavigationButtons {
+            id: navButtons
+            page: root.page
+            pageStack: root.pageRow
+        }
+
         Loader {
             id: titleLoader
 
@@ -41,6 +48,7 @@ AbstractPageHeader {
             Layout.minimumWidth: item?.Layout.minimumWidth ?? -1
             Layout.preferredWidth: item?.Layout.preferredWidth ?? -1
             Layout.maximumWidth: item?.Layout.maximumWidth ?? -1
+            Layout.leftMargin: navButtons.visible || root.leftPadding > pageRow.globalToolBar.titleLeftPadding ? 0 : pageRow.globalToolBar.titleLeftPadding
 
             // Don't load async to prevent jumpy behaviour on slower devices as it loads in.
             // If the title delegate really needs to load async, it should be its responsibility to do it itself.
@@ -55,11 +63,12 @@ AbstractPageHeader {
             Layout.fillWidth: true
             Layout.fillHeight: true
 
-            visible: actions.length > 0
             alignment: pageRow?.globalToolBar.toolbarActionAlignment ?? Qt.AlignRight
             heightMode: pageRow?.globalToolBar.toolbarActionHeightMode ?? Kirigami.ToolBarLayout.ConstrainIfLarger
 
-            actions: page?.actions ?? []
+            actions: page.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar
+                     ? (page?.actions ?? [])
+                     : []
         }
     }
 }

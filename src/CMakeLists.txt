@@ -214,9 +214,9 @@ ecm_target_qml_sources(Kirigami PRIVATE PATH private SOURCES
 ecm_target_qml_sources(Kirigami PRIVATE PATH private/globaltoolbar SOURCES
     controls/private/globaltoolbar/AbstractPageHeader.qml
     controls/private/globaltoolbar/BreadcrumbControl.qml
+    controls/private/globaltoolbar/NavigationButtons.qml
     controls/private/globaltoolbar/PageRowGlobalToolBarStyleGroup.qml
     controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml
-    controls/private/globaltoolbar/TitlesPageHeader.qml
     controls/private/globaltoolbar/ToolBarPageHeader.qml
     controls/private/globaltoolbar/ToolBarPageFooter.qml
 )
@@ -233,15 +233,12 @@ ecm_target_qml_sources(Kirigami PRIVATE PATH templates SOURCES
 )
 
 ecm_target_qml_sources(Kirigami PRIVATE PATH templates/private SOURCES
-    controls/templates/private/BackButton.qml
     controls/templates/private/BorderPropertiesGroup.qml
     controls/templates/private/ContextIcon.qml
     controls/templates/private/DrawerHandle.qml
-    controls/templates/private/ForwardButton.qml
     controls/templates/private/GenericDrawerIcon.qml
     controls/templates/private/IconPropertiesGroup.qml
     controls/templates/private/MenuIcon.qml
-    controls/templates/private/NavigationButton.qml
     controls/templates/private/PassiveNotificationsManager.qml
     controls/templates/private/qmldir
 )
