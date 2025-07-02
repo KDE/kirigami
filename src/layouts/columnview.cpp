@@ -1683,12 +1683,10 @@ void ColumnView::geometryChange(const QRectF &newGeometry, const QRectF &oldGeom
     m_contentItem->setY(m_topPadding);
     m_contentItem->setHeight(newGeometry.height() - m_topPadding - m_bottomPadding);
     m_contentItem->m_shouldAnimate = false;
-    // polish();
 
     m_contentItem->layoutItems();
-    qWarning() << "AAAA" << newGeometry.width() << m_contentItem->width();
     m_contentItem->updateVisibleItems();
-    qWarning() << "BBBB" << newGeometry.width() << m_contentItem->width();
+
     QQuickItem::geometryChange(newGeometry, oldGeometry);
 }
 
