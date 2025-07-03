@@ -246,19 +246,9 @@ QQC2.Page {
                 sourceComponent = root.titleDelegate;
             } else if (active) {
                 const url = "private/globaltoolbar/ToolBarPageHeader.qml";
-                // TODO: find container reliably, remove assumption
                 setSource(Qt.resolvedUrl(url), {
                     pageRow: Qt.binding(() => row),
-                    page: root,
-                    current: Qt.binding(() => {
-                        if (!row && !stack) {
-                            return true;
-                        } else if (stack) {
-                            return stack;
-                        } else {
-                            return row.currentIndex === root.Kirigami.ColumnView.level;
-                        }
-                    }),
+                    page: root
                 });
             }
         }
