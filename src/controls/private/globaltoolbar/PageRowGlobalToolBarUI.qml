@@ -71,7 +71,7 @@ Kirigami.AbstractApplicationHeader {
             id: leftHandleAnchor
             visible: header.__shouldHandleAnchorBeVisible(leftHandleAnchor, "globalDrawer", "leadingVisibleItem")
 
-            Layout.preferredHeight: Math.max(menuButton.implicitHeight, parent.height)
+            Layout.preferredHeight: menuButton.implicitHeight
             Layout.preferredWidth: height
         }
 
@@ -81,7 +81,6 @@ Kirigami.AbstractApplicationHeader {
             icon.name: "open-menu-symbolic"
             showMenuArrow: false
 
-          //  Layout.preferredWidth: height
             Layout.leftMargin: Kirigami.Units.smallSpacing
 
             action: Kirigami.Action {
@@ -125,7 +124,7 @@ Kirigami.AbstractApplicationHeader {
             id: rightHandleAnchor
             visible: header.__shouldHandleAnchorBeVisible(rightHandleAnchor, "contextDrawer", "trailingVisibleItem")
 
-            Layout.preferredHeight: Math.max(menuButton.implicitHeight, parent.height)
+            Layout.preferredHeight: menuButton.implicitHeight
             Layout.preferredWidth: height
         }
     }
