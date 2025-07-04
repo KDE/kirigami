@@ -28,6 +28,7 @@ Item {
         }
         leadingColumn: LayoutMirroring.enabled ? column : previousColumn
         trailingColumn: LayoutMirroring.enabled ? nextColumn : column
+        // If this handle touched the left ColumnView edge, hide it
         visible: leadingColumn && trailingColumn && column.Kirigami.ColumnView.view.leadingVisibleItem !== column
     }
 
