@@ -246,7 +246,7 @@ Item {
                 }
             }
 
-            height: root.preferredHeight
+            height: Math.max(root.preferredHeight, root.height)
             anchors {
                 left: parent.left
                 right: parent.right
