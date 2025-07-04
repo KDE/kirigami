@@ -56,13 +56,9 @@ Kirigami.AbstractApplicationHeader {
 
     rightPadding: {
         if (Qt.application.layoutDirection === Qt.RightToLeft) {
-            if (page.x - pageStack.columnView.contentX < pageRow.globalToolBar.rightReservedSpace) {
-                return pageRow.globalToolBar.rightReservedSpace;
-            }
+            return Math.max(0, (pageRow.Kirigami.ScenePosition.x + pageRow.globalToolBar.rightReservedSpace) - page.Kirigami.ScenePosition.x);
         } else {
-            if (pageStack.width - (page.x + page.width - pageStack.columnView.contentX) < pageRow.globalToolBar.rightReservedSpace) {
-                return pageRow.globalToolBar.rightReservedSpace;
-            }
+            return Math.max(0, (page.Kirigami.ScenePosition.x + page.width) - (pageRow.Kirigami.ScenePosition.x + pageRow.width - pageRow.globalToolBar.rightReservedSpace));
         }
         return 0;
     }
