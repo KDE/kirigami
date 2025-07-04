@@ -28,6 +28,7 @@ Item {
         }
         leadingColumn: LayoutMirroring.enabled ? column : previousColumn
         trailingColumn: LayoutMirroring.enabled ? nextColumn : column
+        visible: leadingColumn && trailingColumn && column.Kirigami.ColumnView.view.leadingVisibleItem !== column
     }
 
     Kirigami.Separator {
@@ -52,6 +53,7 @@ Item {
         }
         leadingColumn: LayoutMirroring.enabled ? previousColumn : column
         trailingColumn: LayoutMirroring.enabled ? column : nextColumn
+        visible: leadingColumn && trailingColumn && column.Kirigami.ColumnView.view.leadingVisibleItem !== previousColumn
     }
 
     Kirigami.Separator {
