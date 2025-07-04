@@ -119,7 +119,7 @@ Item {
     onMinimumHeightChanged: implicitHeight = preferredHeight;
     onPreferredHeightChanged: implicitHeight = preferredHeight;
 
-    opacity: height > 0 ? 1 : 0
+   // opacity: height > 0 ? 1 : 0
 
     NumberAnimation {
         id: heightAnim
@@ -147,6 +147,23 @@ Item {
         }
     }
 
+    Kirigami.Separator {
+        anchors {
+            left: parent.left
+            top: parent.top
+            right: parent.right
+        }
+        // Ideally also not visible when 'No Titlebar and Frame', but window flags are not bindable
+        visible: Window.window?.visibility !== Window.FullScreen ?? true
+        opacity: root.__appWindow.controlsVisible ? 0 : 1
+        Behavior on opacity {
+            NumberAnimation {
+                duration: Kirigami.Units.longDuration
+                easing.type: Easing.InOutQuad
+            }
+        }
+    }
+
     Item {
         id: headerItem
         anchors {
@@ -157,6 +174,7 @@ Item {
         }
 
         height: Math.max(root.height, root.minimumHeight > 0 ? root.minimumHeight : root.preferredHeight)
+        visible: root.height > 0
 
         function scrollIntentHandler(event) {
             if (!root.hideWhenTouchScrolling) {
@@ -228,9 +246,12 @@ Item {
                 }
             }
 
+            height: root.preferredHeight
             anchors {
-                fill: parent
-                topMargin: root.topPadding
+                left: parent.left
+                right: parent.right
+                bottom: parent.bottom
+
                 leftMargin: root.leftPadding
                 rightMargin: root.rightPadding
                 bottomMargin: root.bottomPadding
