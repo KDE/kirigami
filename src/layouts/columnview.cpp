@@ -596,7 +596,6 @@ void ContentItem::layoutItems()
     auto it = !reverse ? m_items.begin() : m_items.end() - 1;
     int increment = reverse ? -1 : +1;
     auto lastPos = reverse ? m_items.begin() - 1 : m_items.end();
-    bool foundPinned = false;
 
     QQuickItem *previousChild = nullptr;
 
@@ -621,7 +620,6 @@ void ContentItem::layoutItems()
 
         if (child->isVisible()) {
             if (attached->isPinned() && m_view->columnResizeMode() != ColumnView::SingleColumn) {
-                foundPinned = true;
                 const qreal width = childWidth(child);
                 const qreal widthDiff = std::max(0.0, m_view->width() - child->width()); // it's possible for the view width to be smaller than the child width
                 const qreal pageX = std::clamp(partialWidth, -x(), -x() + widthDiff);
@@ -702,13 +700,6 @@ void ContentItem::layoutItems()
         implicitHeight = qMax(implicitHeight, child->implicitHeight());
 
         previousChild = child;
-    }
-
-    if (foundPinned) {
-        // This will make the headers hide the unwanted separators
-        m_globalHeaderParent->setZ(1);
-    } else {
-        m_globalHeaderParent->setZ(0);
     }
 
     setWidth(partialWidth);
