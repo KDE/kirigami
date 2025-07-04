@@ -147,6 +147,8 @@ TestCase {
         pushD()
         compare(layerSpy.count, 2)
         compare(stackSpy.count, 1)
+        // The back button is being slided in with the push animation, so wait for it to be done
+        tryCompare(mainWindow.pageStack.layers, "busy", false)
         tapBack()
         compare(layerSpy.count, 3)
         pushD()
@@ -304,6 +306,8 @@ TestCase {
         layerPageC.trigger()
         compare(stackPageA.checked, false)
         compare(layerPageC.checked, true)
+        // The back button is being slided in with the push animation, so wait for it to be done
+        tryCompare(mainWindow.pageStack.layers, "busy", false)
         tapBack()
         compare(stackPageA.checked, true)
         compare(layerPageC.checked, false)

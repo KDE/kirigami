@@ -240,6 +240,9 @@ QQC2.Page {
         }
 
         function syncSource() {
+            if (!row) {
+                return;
+            }
             if (root.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.ToolBar &&
                 root.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.Titles &&
                 root.titleDelegate !== defaultTitleDelegate) {
