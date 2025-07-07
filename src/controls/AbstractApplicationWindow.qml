@@ -227,9 +227,12 @@ QQC2.ApplicationWindow {
 
     TP.PassiveNotificationsManager {
         id: notificationsObject
+
         anchors.bottom: parent.bottom
         anchors.horizontalCenter: parent.horizontalCenter
-        z: 1
+
+        parent: T.Overlay.overlay || root
+        z: 99999
     }
 
     // This is to make ApplicationWindow actually assign pageStack, as it replaces the property

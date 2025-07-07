@@ -305,9 +305,12 @@ Item {
 
     TP.PassiveNotificationsManager {
         id: notificationsObject
+
         anchors.bottom: parent.bottom
         anchors.horizontalCenter: parent.horizontalCenter
-        z: 1
+
+        parent: T.Overlay.overlay || root
+        z: 99999
     }
 
     Item {
