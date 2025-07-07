@@ -479,6 +479,11 @@ void WheelHandler::startInertiaScrolling()
     QPointF boundedEndValue =
         QPointF(std::max(std::min(endValue.x(), -maxExtent.x()), -minExtent.x()), std::max(std::min(endValue.y(), -maxExtent.y()), -minExtent.y()));
 
+    if (boundedEndValue == startValue) {
+        // We are not scrolling anywhere which means we'll divide by 0 right below
+        return;
+    }
+
     // If we did bound the end value, we check how much
     // (from 0 to 1) of the animation is actually played,
     // and we adjust the time required for it accordingly.
