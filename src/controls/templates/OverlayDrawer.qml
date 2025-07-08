@@ -162,6 +162,59 @@ T.Drawer {
     }
 
     /*!
+      \brief When true it will be possible to resize the drawer by dragging its edge with the mouse
+     */
+    property bool interactiveResizeEnabled: false
+
+    /*!
+      \brief True when the user is resizing the drawer with the mouse
+     */
+    property alias interactiveResizing: resizeHandle.pressed
+
+    /*!
+      \brief The minimum width this drawer is allowed to be resized
+     */
+    property real minimumWidth: Kirigami.Units.gridUnit * 5
+
+    /*!
+      \brief The width the drawer wants to have when on left or right edges and not collapsed.
+
+      Wnen interactiveResizing is true and the app wants to restore its saved custom drawer width, it should write to this property, width and implicitWidth should not be touched
+     */
+    property real preferredWidth: -1
+
+    /*!
+      \brief The maximum width this drawer is allowed to be resized
+
+      The default is the minimum between Kirigami.Units.gridUnit * 25
+      and 80% of the window width
+    */
+    property real maximumWidth: Math.round(Math.min(T.ApplicationWindow.window.width * 0.8, Kirigami.Units.gridUnit * 25))
+
+    /*!
+      \brief The minimum height this drawer is allowed to be resized
+
+      The default is Kirigami.Units.gridUnit * 3
+     */
+    property real minimumHeight:  Kirigami.Units.gridUnit * 3
+
+    /*!
+      \brief The height the drawer wants to have when on top or bottom edges.
+
+      Wnen interactiveResizing is true and the app wants to restore its saved custom drawer height, it should write to this property, height and implicitHeight should not be touched
+     */
+    property real preferredHeight: -1
+
+    /*!
+      \brief The maximum height this drawer is allowed to be resized
+
+      The default is the minimum between Kirigami.Units.gridUnit * 15 and half of
+      the window height
+    */
+    property real maximumHeight: Math.round(Math.min(T.ApplicationWindow.window.height * 0.5, Kirigami.Units.gridUnit * 15))
+
+
+    /*!
       \brief Readonly property that points to the item that will act as a physical
       handle for the Drawer.
      */
@@ -386,9 +439,23 @@ T.Drawer {
                     when: !root.collapsed
                     PropertyChanges {
                         target: root
-                        implicitWidth: edge === Qt.TopEdge || edge === Qt.BottomEdge ? root.T.ApplicationWindow.window.width : Math.min(contentItem.implicitWidth, Math.round(root.T.ApplicationWindow.window.width*0.8))
+                        implicitWidth: {
+                            if (edge === Qt.TopEdge || edge === Qt.BottomEdge) {
+                                return root.T.ApplicationWindow.window?.width ?? Kirigami.Units.gridUnit * 30;
+                            } else {
+                                const implicitWidth = root.preferredWidth > 0 ? root.preferredWidth : contentItem.implicitWidth;
+                                return Math.max(root.minimumWidth, Math.min(implicitWidth + leftPadding + rightPadding, root.maximumWidth))
+                            }
+                        }
 
-                        implicitHeight: edge === Qt.LeftEdge || edge === Qt.RightEdge ? root.T.ApplicationWindow.window.height : Math.min(contentHeight + topPadding + bottomPadding, Math.round(root.T.ApplicationWindow.window.height*0.4))
+                        implicitHeight: {
+                            if (edge === Qt.LeftEdge || edge === Qt.RightEdge) {
+                                return root.T.ApplicationWindow.window?.height ?? Kirigami.Units.gridUnit * 5;
+                            } else {
+                                const implicitHeight = root.preferredHeight > 0 ? root.preferredHeight : contentItem.implicitHeight;
+                                return Math.max(root.minimumHeight, Math.min(implicitHeight + topPadding + bottomPadding, root.maximumHeight))
+                            }
+                        }
 
                         contentWidth: contentItem.implicitWidth || (contentChildren.length === 1 ? contentChildren[0].implicitWidth : 0)
                         contentHeight: contentItem.implicitHeight || (contentChildren.length === 1 ? contentChildren[0].implicitHeight : 0)
@@ -397,12 +464,101 @@ T.Drawer {
             ]
             transitions: Transition {
                 reversible: true
+                enabled: root.collapsible === true
                 NumberAnimation {
                     properties: root.edge === Qt.TopEdge || root.edge === Qt.BottomEdge ? "implicitHeight" : "implicitWidth"
                     duration: Kirigami.Units.longDuration
                     easing.type: Easing.InOutQuad
                 }
             }
+        }
+        readonly property MouseArea resizeHandle: MouseArea {
+            id: resizeHandle
+            anchors.margins: -Kirigami.Units.smallSpacing
+            parent: root.background.parent
+            z: 999
+            visible: root.interactiveResizeEnabled && !root.collapsed
+            width: Kirigami.Units.smallSpacing * 2
+            height: Kirigami.Units.smallSpacing * 2
+            cursorShape: {
+                switch (root.edge) {
+                case Qt.TopEdge:
+                case Qt.BottomEdge:
+                    return Qt.SplitVCursor;
+                default:
+                    return Qt.SplitHCursor;
+                }
+            }
+            preventStealing: true
+            property real startX
+            property real startY
+            property real startWidth;
+            property real startHeight;
+
+            onPressed: mouse => {
+                const pos = mapToItem(null, mouse.x, mouse.y);
+                startX = pos.x;
+                startY = pos.y;
+                startWidth = root.width;
+                startHeight = root.height;
+            }
+            onPositionChanged: mouse => {
+                const pos = mapToItem(null, mouse.x, mouse.y);
+                switch (root.edge) {
+                case Qt.TopEdge:
+                    root.preferredHeight = startHeight + pos.y - startY;
+                    break;
+                case Qt.BottomEdge:
+                    root.preferredHeight = startHeight - pos.y + startY;
+                    break;
+                case Qt.RightEdge:
+                    root.preferredWidth = startWidth - pos.x + startX;
+                    break;
+                case Qt.LeftEdge:
+                default:
+                    root.preferredWidth = startWidth + pos.x - startX;
+                }
+            }
+
+            states: [
+                State {
+                    when: root.edge === Qt.LeftEdge && resizeHandle.parent === root.background.parent
+                    AnchorChanges {
+                        target: resizeHandle
+                        anchors.top: root.background.top
+                        anchors.right: root.background.right
+                        anchors.bottom: root.background.bottom
+                    }
+                },
+                State {
+                    when: root.edge === Qt.RightEdge && resizeHandle.parent === root.background.parent
+                    AnchorChanges {
+                        target: resizeHandle
+                        anchors.top: root.background.top
+                        anchors.left: root.background.left
+                        anchors.bottom: root.background.bottom
+                    }
+                },
+                State {
+                    when: root.edge === Qt.TopEdge && resizeHandle.parent === root.background.parent
+                    AnchorChanges {
+                        target: resizeHandle
+                        anchors.left: root.background.left
+                        anchors.right: root.background.right
+                        anchors.bottom: root.background.bottom
+                    }
+                }
+                ,
+                State {
+                    when: root.edge === Qt.BottomEdge && resizeHandle.parent === root.background.parent
+                    AnchorChanges {
+                        target: resizeHandle
+                        anchors.left: root.background.left
+                        anchors.right: root.background.right
+                        anchors.top: root.background.top
+                    }
+                }
+            ]
         }
     }
 }
