@@ -450,7 +450,7 @@ void WheelHandler::startInertiaScrolling()
     for (const QPoint delta : m_wheelEvents) {
         totalDelta += delta;
     }
-    const uint64_t elapsed = std::max<uint64_t>(m_timestamps.first() - m_timestamps.last(), 1);
+    const uint64_t elapsed = std::max<uint64_t>(m_timestamps.last() - m_timestamps.first(), 1);
 
     // The inertia is more natural if we multiply
     // the actual scrolling speed by some factor,
@@ -461,7 +461,7 @@ void WheelHandler::startInertiaScrolling()
     // We get the velocity in px/s by calculating
     // displacement / elapsed time; we multiply by
     // 1000 since the elapsed time is in ms.
-    QPointF vel = totalDelta * 1000 / elapsed * speedFactor;
+    QPointF vel = -totalDelta * 1000 / elapsed * speedFactor;
     QPointF startValue = QPointF(contentX, contentY);
 
     // We decelerate at 4000px/s^2, chosen by manual test
@@ -496,14 +496,18 @@ void WheelHandler::startInertiaScrolling()
 
     m_xScrollAnimation.stop();
     m_yScrollAnimation.stop();
-    m_xInertiaScrollAnimation.setStartValue(startValue.x());
-    m_xInertiaScrollAnimation.setEndValue(boundedEndValue.x());
-    m_xInertiaScrollAnimation.setDuration(realTime.x());
-    m_xInertiaScrollAnimation.start(QAbstractAnimation::KeepWhenStopped);
-    m_yInertiaScrollAnimation.setStartValue(startValue.y());
-    m_yInertiaScrollAnimation.setEndValue(boundedEndValue.y());
-    m_yInertiaScrollAnimation.setDuration(realTime.y());
-    m_yInertiaScrollAnimation.start(QAbstractAnimation::KeepWhenStopped);
+    if (realTime.x() > 0) {
+        m_xInertiaScrollAnimation.setStartValue(startValue.x());
+        m_xInertiaScrollAnimation.setEndValue(boundedEndValue.x());
+        m_xInertiaScrollAnimation.setDuration(realTime.x());
+        m_xInertiaScrollAnimation.start(QAbstractAnimation::KeepWhenStopped);
+    }
+    if (realTime.y() > 0) {
+        m_yInertiaScrollAnimation.setStartValue(startValue.y());
+        m_yInertiaScrollAnimation.setEndValue(boundedEndValue.y());
+        m_yInertiaScrollAnimation.setDuration(realTime.y());
+        m_yInertiaScrollAnimation.start(QAbstractAnimation::KeepWhenStopped);
+    }
 }
 
 bool WheelHandler::scrollFlickable(QPointF pixelDelta, QPointF angleDelta, Qt::KeyboardModifiers modifiers)
