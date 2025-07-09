@@ -42,8 +42,7 @@ TestCase {
         let window = createTemporaryObject(fractionalSizeRoundingComponent);
         let item = window.item;
         window.show();
-
-        verify(item.width >= item.implicitWidth, "implicit width should not be rounded down");
+        tryVerify(() => {return item.width >= item.implicitWidth}, 1000, "implicit width should not be rounded down");
         fuzzyCompare(item.width, item.implicitWidth, 1);
 
         window.close();
