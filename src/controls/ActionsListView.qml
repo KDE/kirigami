@@ -3,12 +3,12 @@
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
-import QtQml.Models
-// HACK: QtQml.Models stabilised in 6.9, this can go when support is not longer needed
-import Qt.labs.qmlmodels
+import QtQuick.Layouts
 
 import org.kde.kirigami as Kirigami
 
@@ -27,42 +27,87 @@ import org.kde.kirigami as Kirigami
       width: Kirigami.Units.gridUnit * 24
       padding: 1 // To avoid covering the border
 
-      contentItem: QQC2.ScrollView {
-          Kirigami.ActionsListView {
-              actions: [
-                  Kirigami.Action {
-                      icon.name: "media-playback-start"
-                      text: i18nc("Start playback of the selected track", "Play")
-                      tooltip: i18n("Start playback of the selected track")
-                  },
-                  Kirigami.Action {
-                      enabled: false
-                      icon.name: "document-open-folder"
-                      text: i18nc("Show the file for this song in the file manager", "Show in folder")
-                      tooltip: i18n("Show the file for this song in the file manager")
-                  },
-                  Kirigami.Action {
-                      icon.name: "documentinfo"
-                      text: i18nc("Show track metadata", "View details")
-                      tooltip: i18n("Show track metadata")
-                  },
-                  Kirigami.Action {
-                      icon.name: "list-add"
-                      text: i18nc("Add the track to the queue, right after the current track", "Play next")
-                      tooltip: i18n("Add the track to the queue, right after the current track")
-                  },
-                  Kirigami.Action {
-                      icon.name: "list-add"
-                      text: i18nc("Enqueue current track", "Add to queue")
-                      tooltip: i18n("Enqueue current track")
-                  }
-              ]
+      QQC2.ButtonGroup {
+          id: radioGroup
+      }
 
-              onClicked: index => root.accept()
-          }
+      Kirigami.ActionsListView {
+          actions: [
+              Kirigami.Action {
+                  icon.name: "checkmark"
+                  text: qsTr("A normal action")
+                  tooltip: qsTr("A normal action")
+              },
+              Kirigami.Action {
+                  enabled: false
+                  icon.name: "action-unavailable-symbolic"
+                  text: qsTr("A disabled action")
+                  tooltip: qsTr("A disabled action")
+              },
+              Kirigami.Action {
+                  separator: true
+              },
+              Kirigami.Action {
+                  QQC2.ButtonGroup.group: radioGroup
+                  checked: true
+                  checkable: true
+                  autoExclusive: true
+                  text: qsTr("Radio 1", "The first radio button")
+                  tooltip: qsTr("Radio 1")
+              },
+              Kirigami.Action {
+                  QQC2.ButtonGroup.group: radioGroup
+                  checkable: true
+                  autoExclusive: true
+                  text: qsTr("Radio 2", "The second radio button")
+                  tooltip: qsTr("Radio 2")
+              },
+              Kirigami.Action {
+                  QQC2.ButtonGroup.group: radioGroup
+                  checkable: true
+                  autoExclusive: true
+                  text: qsTr("Radio 3", "The third radio button")
+                  tooltip: qsTr("Radio 3")
+              },
+              Kirigami.Action {
+                  checkable: true
+                  text: qsTr("Check button", "An example checkable button")
+                  tooltip: qsTr("Check button")
+              },
+              Kirigami.Action {
+                  separator: true
+              },
+              Kirigami.Action {
+                  icon.name: "list-add"
+                  text: qsTr("With Children", "I.e. an example where the item has child items")
+                  tooltip: qsTr("With Children")
+                  children: [
+                      Kirigami.Action {
+                          icon.name: "user"
+                          text: qsTr("Child 1")
+                          tooltip: qsTr("Child 1")
+                      },
+                      Kirigami.Action {
+                          icon.name: "user"
+                          text: qsTr("Child 2")
+                          tooltip: qsTr("Child 2")
+                      }
+                  ]
+              }
+          ]
+
+          onClicked: index => root.accept()
       }
   }
   \endqml
+
+  \note Only 1 level of child actions are supported, if you want more you need to
+  implement a custome delegate.
+
+  \note It is not recommended to assign an onTriggered to an action with children.
+  Instead it is expected that the children have the effects to be triggered.
+
+  \warning Children are not supported on separator or checkable actions.
 
   \since 6.17
  */
@@ -70,57 +115,137 @@ ListView {
     id: root
 
     /*!
-      \qmlproperty list<Action> actions
-      \brief This property holds the actions displayed in the context menu.
+      \qmlproperty list<Action> actionsviewcontext menu.
 
       \since 6.17
      */
     property list<T.Action> actions
 
     /*!
-      \qmlsignal clicked(int index)
+      \qmlsignal clicked(T.Action action)
       \brief Signal emitted when one of the action items is clicked.
 
-      The index value is the index of the clicked item.
+      The action value is the action of the clicked item.
 
       \since 6.17
      */
-    signal clicked(int index)
+    signal clicked(T.Action action)
 
+    implicitWidth: contentWidth
+    implicitHeight: contentHeight
     clip: true
 
     model: root.actions
 
-    delegate: DelegateChooser {
-        role: "checkable"
+    delegate: ColumnLayout {
+        id: delegateColumn
+        required property T.Action modelData
 
-        DelegateChoice {
-            roleValue: "true"
-            QQC2.CheckDelegate {
-                required property int index
-                required property T.Action modelData
+        property bool expanded: false
 
-                width: ListView.view.width - ListView.view.leftMargin - ListView.view.rightMargin
+        width: ListView.view.width - ListView.view.leftMargin - ListView.view.rightMargin
+        Loader {
+            Layout.fillWidth: true
 
-                action: modelData
-                visible: modelData instanceof Kirigami.Action ? modelData.visible : true
-
-                onClicked: root.clicked(index)
+            sourceComponent: _private.delegateForAction(delegateColumn.modelData)
+            onItemChanged: if (item) {
+                item.delegate = delegateColumn;
+                item.modelData = delegateColumn.modelData;
             }
         }
-        DelegateChoice {
-            roleValue: "false"
-            QQC2.ItemDelegate {
-                required property int index
+        Repeater {
+            model: delegateColumn.modelData instanceof Kirigami.Action ? (delegateColumn.modelData as Kirigami.Action).children : []
+            delegate: Loader {
+                id: childLoader
                 required property T.Action modelData
+                Layout.fillWidth: true
+                Layout.leftMargin: Kirigami.Units.gridUnit
+                Layout.preferredHeight: active ? (item as Item).implicitHeight : 0
 
-                width: ListView.view.width - ListView.view.leftMargin - ListView.view.rightMargin
-
-                action: modelData
-                visible: modelData instanceof Kirigami.Action ? modelData.visible : true
-
-                onClicked: root.clicked(index)
+                active: delegateColumn.expanded
+                sourceComponent: _private.delegateForAction(childLoader.modelData)
+                onItemChanged: if (item) {
+                    item.delegate = delegateColumn;
+                    item.modelData = childLoader.modelData;
+                }
             }
+        }
+    }
+
+    Component {
+        id: itemDelegate
+        QQC2.ItemDelegate {
+            id: item
+            property Item delegate
+            property T.Action modelData
+
+            action: modelData
+            visible: modelData instanceof Kirigami.Action ? (modelData as Kirigami.Action).visible : true
+
+            Component.onCompleted: (contentItem as GridLayout).columns = (contentItem as GridLayout).columns + 1
+            contentItem.children: Kirigami.Icon {
+                visible: (item.modelData as Kirigami.Action).children.length > 0
+                implicitWidth: Kirigami.Units.iconSizes.small
+                implicitHeight: Kirigami.Units.iconSizes.small
+                source: item.delegate.expanded ? "go-up" : "go-down"
+            }
+
+            onClicked: item.delegate.expanded = !item.delegate.expanded
+        }
+    }
+    Component {
+        id: checkDelegate
+        QQC2.CheckDelegate {
+            id: check
+            property Item delegate
+            property T.Action modelData
+
+            action: modelData
+            visible: modelData instanceof Kirigami.Action ? (modelData as Kirigami.Action).visible : true
+
+            onClicked: root.clicked(modelData)
+        }
+    }
+    Component {
+        id: radioDelegate
+        QQC2.RadioDelegate {
+            property Item delegate
+            property T.Action modelData
+
+            QQC2.ButtonGroup.group: modelData.QQC2.ButtonGroup.group
+
+            action: modelData
+            visible: modelData instanceof Kirigami.Action ? (modelData as Kirigami.Action).visible : true
+
+            onClicked: root.clicked(modelData)
+        }
+    }
+    Component {
+        id: separatorDelegate
+        QQC2.Control {
+            id: separatorControl
+            property Item delegate
+            property T.Action modelData
+            padding: Kirigami.Units.largeSpacing
+            contentItem: Kirigami.Separator {
+                visible: separatorControl.modelData instanceof Kirigami.Action ? (separatorControl.modelData as Kirigami.Action).visible : true
+            }
+        }
+    }
+
+    QtObject {
+        id: _private
+
+        function delegateForAction(action: T.Action) : Component {
+            const isKirigamiAction = action instanceof Kirigami.Action;
+            if (isKirigamiAction && (action as Kirigami.Action).separator) {
+                return separatorDelegate;
+            } else if (isKirigamiAction && (action as Kirigami.Action).displayComponent) {
+                return (action as Kirigami.Action).displayComponent;
+            } else if (action.checkable) {
+                return isKirigamiAction && (action as Kirigami.Action).autoExclusive ? radioDelegate : checkDelegate;
+            }
+            return itemDelegate
         }
     }
 }
