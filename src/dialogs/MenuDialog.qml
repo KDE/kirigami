@@ -100,9 +100,13 @@ KirigamiDialogs.Dialog {
         id: content
         actions: root.actions
 
-        onClicked: index => root.accept()
+        onClicked: action => root.accept()
 
         header: columnHeader
+
+        footer: Item {
+            height: Kirigami.Units.cornerRadius
+        }
     }
 
     standardButtons: QQC2.DialogButtonBox.NoButton
