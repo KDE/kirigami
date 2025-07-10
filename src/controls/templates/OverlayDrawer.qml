@@ -522,7 +522,7 @@ T.Drawer {
 
             states: [
                 State {
-                    when: root.edge === Qt.LeftEdge && resizeHandle.parent === root.background.parent
+                    when: root.edge === Qt.LeftEdge
                     AnchorChanges {
                         target: resizeHandle
                         anchors.top: root.background.top
@@ -531,7 +531,7 @@ T.Drawer {
                     }
                 },
                 State {
-                    when: root.edge === Qt.RightEdge && resizeHandle.parent === root.background.parent
+                    when: root.edge === Qt.RightEdge
                     AnchorChanges {
                         target: resizeHandle
                         anchors.top: root.background.top
@@ -540,7 +540,7 @@ T.Drawer {
                     }
                 },
                 State {
-                    when: root.edge === Qt.TopEdge && resizeHandle.parent === root.background.parent
+                    when: root.edge === Qt.TopEdge
                     AnchorChanges {
                         target: resizeHandle
                         anchors.left: root.background.left
@@ -550,7 +550,7 @@ T.Drawer {
                 }
                 ,
                 State {
-                    when: root.edge === Qt.BottomEdge && resizeHandle.parent === root.background.parent
+                    when: root.edge === Qt.BottomEdge
                     AnchorChanges {
                         target: resizeHandle
                         anchors.left: root.background.left
