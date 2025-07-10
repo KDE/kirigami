@@ -3,12 +3,11 @@
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
-import QtQml.Models
-// HACK: QtQml.Models stabilised in 6.9, this can go when support is not longer needed
-import Qt.labs.qmlmodels
 
 import org.kde.kirigami as Kirigami
 
@@ -70,57 +69,106 @@ ListView {
     id: root
 
     /*!
-      \qmlproperty list<Action> actions
-      \brief This property holds the actions displayed in the context menu.
+      \qmlproperty list<Action> actionsviewcontext menu.
 
       \since 6.17
      */
     property list<T.Action> actions
 
     /*!
-      \qmlsignal clicked(int index)
+      \qmlsignal clicked(T.Action action)
       \brief Signal emitted when one of the action items is clicked.
 
-      The index value is the index of the clicked item.
+      The action value is the action of the clicked item.
 
       \since 6.17
      */
-    signal clicked(int index)
+    signal clicked(T.Action action)
 
+    implicitWidth: contentWidth
+    implicitHeight: contentHeight
     clip: true
 
     model: root.actions
 
-    delegate: DelegateChooser {
-        role: "checkable"
+    delegate: Loader {
+        id: loader
+        required property T.Action modelData
+        width: ListView.view.width - ListView.view.leftMargin - ListView.view.rightMargin
+        sourceComponent: {
+            const isKirigamiAction = modelData instanceof Kirigami.Action;
+            if (isKirigamiAction && modelData.separator) {
+                return separatorDelegate;
+            } else if (isKirigamiAction && modelData.displayComponent) {
+                return modelData.displayComponent;
+            } else if (isKirigamiAction && modelData.checkable) {
+                return modelData.autoExclusive ? radioDelegate : checkDelegate;
+            }
+            return itemDelegate
+        }
+        onSourceComponentChanged: if (item) {
+            item.modelData = modelData;
+        }
+    }
 
-        DelegateChoice {
-            roleValue: "true"
-            QQC2.CheckDelegate {
-                required property int index
-                required property T.Action modelData
+    Component {
+        id: itemDelegate
+        QQC2.ItemDelegate {
+            property T.Action modelData
 
-                width: ListView.view.width - ListView.view.leftMargin - ListView.view.rightMargin
+            action: modelData
+            visible: modelData instanceof Kirigami.Action ? modelData.visible : true
 
-                action: modelData
+            onClicked: _private.click(modelData)
+        }
+    }
+    Component {
+        id: checkDelegate
+        QQC2.CheckDelegate {
+            property T.Action modelData
+
+            action: modelData
+            visible: modelData instanceof Kirigami.Action ? modelData.visible : true
+
+            onClicked: _private.click(modelData)
+        }
+    }
+    Component {
+        id: radioDelegate
+        QQC2.RadioDelegate {
+            property T.Action modelData
+
+            action: modelData
+            visible: modelData instanceof Kirigami.Action ? modelData.visible : true
+
+            onClicked: _private.click(modelData)
+        }
+    }
+    Component {
+        id: separatorDelegate
+        QQC2.Control {
+            property T.Action modelData
+            padding: Kirigami.Units.largeSpacing
+            contentItem: Kirigami.Separator {
                 visible: modelData instanceof Kirigami.Action ? modelData.visible : true
-
-                onClicked: root.clicked(index)
             }
         }
-        DelegateChoice {
-            roleValue: "false"
-            QQC2.ItemDelegate {
-                required property int index
-                required property T.Action modelData
+    }
 
-                width: ListView.view.width - ListView.view.leftMargin - ListView.view.rightMargin
+    QtObject {
+        id: _private
 
-                action: modelData
-                visible: modelData instanceof Kirigami.Action ? modelData.visible : true
-
-                onClicked: root.clicked(index)
+        function click(action: T.Action) {
+            if (action instanceof Kirigami.Action && action.children.length > 0) {
+                let dialog = Qt.createComponent(Qt.resolvedUrl("private/ChildrenDialog.qml")).createObject(root, {
+                    title: action.text,
+                    actions: action.children
+                });
+                dialog.clicked.connect(action => root.clicked(action));
+                dialog.open();
+                return;
             }
+            root.clicked(action)
         }
     }
 }
