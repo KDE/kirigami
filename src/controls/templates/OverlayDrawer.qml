@@ -172,47 +172,47 @@ T.Drawer {
     property alias interactiveResizing: resizeHandle.pressed
 
     /*!
-      \brief The minimum width this drawer is allowed to be resized
+      \brief The minimum size (width or height, depending on the edge) this drawer is allowed to be resized
+
+      For left and right drawers the default is Kirigami.Units.gridUnit * 8
+      For top and bottom drawers the default is Kirigami.Units.gridUnit * 4
      */
-    property real minimumWidth: Kirigami.Units.gridUnit * 5
+    property real minimumSize: {
+        switch (edge) {
+        case Qt.TopEdge:
+        case Qt.BottomEdge:
+            return Kirigami.Units.gridUnit * 4;
+        default:
+            return Kirigami.Units.gridUnit * 8;
+        }
+    }
 
     /*!
-      \brief The width the drawer wants to have when on left or right edges and not collapsed.
+      \brief The size (width or height, depending on the edge) the drawer wants to have when on left or right edges and not collapsed.
 
-      Wnen interactiveResizing is true and the app wants to restore its saved custom drawer width, it should write to this property, width and implicitWidth should not be touched
+      Wnen interactiveResizing is true and the app wants to restore its saved custom drawer size, it should write to this property, width, height, implicitWidth and implicitHeight should not be touched.
+
+      Default value is -1, which means the drawer will be sized following its contents size hints
      */
-    property real preferredWidth: -1
+    property real preferredSize: -1
 
     /*!
-      \brief The maximum width this drawer is allowed to be resized
+      \brief The maximum size (width or height, depending on the edge) this drawer is allowed to be resized
 
-      The default is the minimum between Kirigami.Units.gridUnit * 25
+      For left and right drawers the default is the minimum between Kirigami.Units.gridUnit * 25
       and 80% of the window width
-    */
-    property real maximumWidth: Math.round(Math.min(T.ApplicationWindow.window.width * 0.8, Kirigami.Units.gridUnit * 25))
-
-    /*!
-      \brief The minimum height this drawer is allowed to be resized
-
-      The default is Kirigami.Units.gridUnit * 3
-     */
-    property real minimumHeight:  Kirigami.Units.gridUnit * 3
-
-    /*!
-      \brief The height the drawer wants to have when on top or bottom edges.
-
-      Wnen interactiveResizing is true and the app wants to restore its saved custom drawer height, it should write to this property, height and implicitHeight should not be touched
-     */
-    property real preferredHeight: -1
-
-    /*!
-      \brief The maximum height this drawer is allowed to be resized
-
-      The default is the minimum between Kirigami.Units.gridUnit * 15 and half of
+      For Top and bottom drawers the default is the minimum between Kirigami.Units.gridUnit * 15 and half of
       the window height
     */
-    property real maximumHeight: Math.round(Math.min(T.ApplicationWindow.window.height * 0.5, Kirigami.Units.gridUnit * 15))
-
+    property real maximumSize: {
+        switch (edge) {
+        case Qt.TopEdge:
+        case Qt.BottomEdge:
+            return Math.round(Math.min(T.ApplicationWindow.window.height * 0.5, Kirigami.Units.gridUnit * 15));
+        default:
+            return Math.round(Math.min(T.ApplicationWindow.window.width * 0.8, Kirigami.Units.gridUnit * 25));
+        }
+    }
 
     /*!
       \brief Readonly property that points to the item that will act as a physical
@@ -443,8 +443,8 @@ T.Drawer {
                             if (edge === Qt.TopEdge || edge === Qt.BottomEdge) {
                                 return root.T.ApplicationWindow.window?.width ?? Kirigami.Units.gridUnit * 30;
                             } else {
-                                const implicitWidth = root.preferredWidth > 0 ? root.preferredWidth : contentItem.implicitWidth;
-                                return Math.max(root.minimumWidth, Math.min(implicitWidth + leftPadding + rightPadding, root.maximumWidth))
+                                const implicitWidth = root.preferredSize > 0 ? root.preferredSize : contentItem.implicitWidth;
+                                return Math.max(root.minimumSize, Math.min(implicitWidth + leftPadding + rightPadding, root.maximumSize))
                             }
                         }
 
@@ -452,8 +452,8 @@ T.Drawer {
                             if (edge === Qt.LeftEdge || edge === Qt.RightEdge) {
                                 return root.T.ApplicationWindow.window?.height ?? Kirigami.Units.gridUnit * 5;
                             } else {
-                                const implicitHeight = root.preferredHeight > 0 ? root.preferredHeight : contentItem.implicitHeight;
-                                return Math.max(root.minimumHeight, Math.min(implicitHeight + topPadding + bottomPadding, root.maximumHeight))
+                                const implicitHeight = root.preferredSize > 0 ? root.preferredSize : contentItem.implicitHeight;
+                                return Math.max(root.minimumSize, Math.min(implicitHeight + topPadding + bottomPadding, root.maximumSize))
                             }
                         }
 
@@ -506,17 +506,17 @@ T.Drawer {
                 const pos = mapToItem(null, mouse.x, mouse.y);
                 switch (root.edge) {
                 case Qt.TopEdge:
-                    root.preferredHeight = startHeight + pos.y - startY;
+                    root.preferredSize = startHeight + pos.y - startY;
                     break;
                 case Qt.BottomEdge:
-                    root.preferredHeight = startHeight - pos.y + startY;
+                    root.preferredSize = startHeight - pos.y + startY;
                     break;
                 case Qt.RightEdge:
-                    root.preferredWidth = startWidth - pos.x + startX;
+                    root.preferredSize = startWidth - pos.x + startX;
                     break;
                 case Qt.LeftEdge:
                 default:
-                    root.preferredWidth = startWidth + pos.x - startX;
+                    root.preferredSize = startWidth + pos.x - startX;
                 }
             }
 
