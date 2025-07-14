@@ -131,8 +131,8 @@ void SoftwareRectangleNode::preprocess()
         }
 
         // The rect will be set in render().
-        m_imageNode->setFiltering(QSGTexture::Filtering::Linear);
         m_imageNode->setTexture(texture);
+        m_imageNode->setFiltering(QSGTexture::Filtering::Linear);
 
         if (!m_imageNode->parent()) {
             appendChildNode(m_imageNode);
