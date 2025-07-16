@@ -9,11 +9,12 @@ ecm_add_qml_module(KirigamiTemplates URI "org.kde.kirigami.templates"
 ecm_target_qml_sources(KirigamiTemplates SOURCES
     AbstractApplicationHeader.qml
     AbstractCard.qml
+    AppHeaderSizeGroup.qml
     Chip.qml
     InlineMessage.qml
     OverlayDrawer.qml
     OverlaySheet.qml
-    SingletonHeaderSizeGroup.qml
+    qmldir
 )
 
 ecm_target_qml_sources(KirigamiTemplates PRIVATE PATH private SOURCES
