@@ -4,6 +4,7 @@ add_subdirectory(delegates)
 add_subdirectory(dialogs)
 add_subdirectory(layouts)
 add_subdirectory(polyfill)
+add_subdirectory(templates)
 
 add_library(Kirigami)
 add_library(KF6::Kirigami ALIAS Kirigami)
@@ -218,28 +219,6 @@ ecm_target_qml_sources(Kirigami PRIVATE PATH private/globaltoolbar SOURCES
     controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml
     controls/private/globaltoolbar/ToolBarPageHeader.qml
     controls/private/globaltoolbar/ToolBarPageFooter.qml
-)
-
-ecm_target_qml_sources(Kirigami PRIVATE PATH templates SOURCES
-    controls/templates/AbstractApplicationHeader.qml
-    controls/templates/AbstractCard.qml
-    controls/templates/Chip.qml
-    controls/templates/InlineMessage.qml
-    controls/templates/OverlayDrawer.qml
-    controls/templates/OverlaySheet.qml
-    controls/templates/SingletonHeaderSizeGroup.qml
-    controls/templates/qmldir
-)
-
-ecm_target_qml_sources(Kirigami PRIVATE PATH templates/private SOURCES
-    controls/templates/private/BorderPropertiesGroup.qml
-    controls/templates/private/ContextIcon.qml
-    controls/templates/private/DrawerHandle.qml
-    controls/templates/private/GenericDrawerIcon.qml
-    controls/templates/private/IconPropertiesGroup.qml
-    controls/templates/private/MenuIcon.qml
-    controls/templates/private/PassiveNotificationsManager.qml
-    controls/templates/private/qmldir
 )
 
 qt_target_qml_sources(Kirigami RESOURCES

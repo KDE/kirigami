@@ -6,7 +6,7 @@
 
 import org.kde.kirigami as Kirigami
 import "private" as P
-import "templates" as T
+import org.kde.kirigami.templates as T
 
 T.OverlaySheet {
     id: root

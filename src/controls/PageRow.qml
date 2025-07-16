@@ -10,7 +10,7 @@ import QtQuick.Templates as QT
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 import "private/globaltoolbar" as GlobalToolBar
-import "templates" as KT
+import org.kde.kirigami.templates as KT
 
 /*!
   \qmltype PageRow

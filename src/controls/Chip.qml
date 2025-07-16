@@ -6,7 +6,7 @@ import QtQuick.Controls as QQC2
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
-import "templates" as KT
+import org.kde.kirigami.templates as KT
 import "private" as P
 
 KT.Chip {

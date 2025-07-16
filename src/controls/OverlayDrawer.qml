@@ -9,7 +9,7 @@ import QtQuick.Layouts
 import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 import "private" as KP
-import "templates" as KT
+import org.kde.kirigami.templates as KT
 
 KT.OverlayDrawer {
     id: root

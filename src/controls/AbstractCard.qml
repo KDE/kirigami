@@ -4,7 +4,7 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import "templates" as T
+import org.kde.kirigami.templates as T
 import "private" as P
 
 T.AbstractCard {

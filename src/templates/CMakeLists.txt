@@ -1,0 +1,47 @@
+
+add_library(KirigamiTemplates)
+ecm_add_qml_module(KirigamiTemplates URI "org.kde.kirigami.templates"
+    VERSION 2.0
+    GENERATE_PLUGIN_SOURCE
+    INSTALLED_PLUGIN_TARGET KF6KirigamiTemplates
+)
+
+ecm_target_qml_sources(KirigamiTemplates SOURCES
+    AbstractApplicationHeader.qml
+    AbstractCard.qml
+    Chip.qml
+    InlineMessage.qml
+    OverlayDrawer.qml
+    OverlaySheet.qml
+    SingletonHeaderSizeGroup.qml
+)
+
+ecm_target_qml_sources(KirigamiTemplates PRIVATE PATH private SOURCES
+    private/BorderPropertiesGroup.qml
+    private/ContextIcon.qml
+    private/DrawerHandle.qml
+    private/GenericDrawerIcon.qml
+    private/IconPropertiesGroup.qml
+    private/MenuIcon.qml
+    private/PassiveNotificationsManager.qml
+    private/qmldir
+)
+
+set_target_properties(KirigamiTemplates PROPERTIES
+    VERSION     ${PROJECT_VERSION}
+    SOVERSION   6
+    EXPORT_NAME "KirigamiTemplates"
+)
+
+target_include_directories(KirigamiTemplates PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/..)
+
+
+if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
+    set(_extra_options DEBUGINFO)
+else()
+    set(_extra_options PRECOMPILE OPTIMIZED)
+endif()
+
+ecm_finalize_qml_module(KirigamiTemplates EXPORT KirigamiTargets)
+
+install(TARGETS KirigamiTemplates EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
