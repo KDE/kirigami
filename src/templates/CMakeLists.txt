@@ -6,6 +6,10 @@ ecm_add_qml_module(KirigamiTemplates URI "org.kde.kirigami.templates"
     INSTALLED_PLUGIN_TARGET KF6KirigamiTemplates
 )
 
+set_source_files_properties(AppHeaderSizeGroup.qml PROPERTIES
+    QT_QML_SINGLETON_TYPE TRUE
+)
+
 ecm_target_qml_sources(KirigamiTemplates SOURCES
     AbstractApplicationHeader.qml
     AbstractCard.qml
@@ -14,7 +18,6 @@ ecm_target_qml_sources(KirigamiTemplates SOURCES
     InlineMessage.qml
     OverlayDrawer.qml
     OverlaySheet.qml
-    qmldir
 )
 
 ecm_target_qml_sources(KirigamiTemplates PRIVATE PATH private SOURCES
@@ -25,7 +28,6 @@ ecm_target_qml_sources(KirigamiTemplates PRIVATE PATH private SOURCES
     private/IconPropertiesGroup.qml
     private/MenuIcon.qml
     private/PassiveNotificationsManager.qml
-    private/qmldir
 )
 
 set_target_properties(KirigamiTemplates PROPERTIES
