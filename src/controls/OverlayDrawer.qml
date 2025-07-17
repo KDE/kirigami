@@ -90,6 +90,9 @@ KT.OverlayDrawer {
                         }
                     }
 
+                    // TODO: those 3 still resolve because templates files are installed on
+                    // the same place, but we should probably eventually just use normal icons
+                    // and drop that custom morphing animation
                     if ((root.handleClosedIcon.source || root.handleClosedIcon.name)
                         && (root.handleOpenIcon.source || root.handleOpenIcon.name)) {
                         return Qt.resolvedUrl("templates/private/GenericDrawerIcon.qml");

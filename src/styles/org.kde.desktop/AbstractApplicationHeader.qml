@@ -6,7 +6,7 @@
 
 import QtQuick
 import org.kde.kirigami as Kirigami
-import "../../templates" as T
+import org.kde.kirigami.templates as T
 
 T.AbstractApplicationHeader {
     id: root
