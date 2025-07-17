@@ -39,12 +39,6 @@ set_target_properties(KirigamiTemplates PROPERTIES
 target_include_directories(KirigamiTemplates PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/..)
 
 
-if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
-    set(_extra_options DEBUGINFO)
-else()
-    set(_extra_options PRECOMPILE OPTIMIZED)
-endif()
-
 ecm_finalize_qml_module(KirigamiTemplates EXPORT KirigamiTargets)
 
 install(TARGETS KirigamiTemplates EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
