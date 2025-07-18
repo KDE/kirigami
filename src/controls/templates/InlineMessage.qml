@@ -9,7 +9,7 @@ import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
-import org.kde.kirigami.templates.private as TP
+import org.kde.kirigami.primitives as Primitives
 
 /*!
   \qmltype InlineMessage
@@ -183,7 +183,7 @@ T.Control {
 
       \include iconpropertiesgroup.qdocinc grouped-properties
      */
-    property TP.IconPropertiesGroup icon: TP.IconPropertiesGroup {}
+    property Primitives.IconPropertiesGroup icon: Primitives.IconPropertiesGroup {}
 
     /*!
       This property holds the message text.

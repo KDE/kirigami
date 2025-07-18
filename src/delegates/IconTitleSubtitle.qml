@@ -9,7 +9,6 @@
 import QtQuick
 import org.kde.kirigami.platform as Platform
 import org.kde.kirigami.primitives as Primitives
-import org.kde.kirigami.templates.private as KTP
 
 /*!
   \qmltype IconTitleSubtitle
@@ -139,7 +138,7 @@ Item {
 
       \include iconpropertiesgroup.qdocinc grouped-properties
      */
-    property KTP.IconPropertiesGroup icon: KTP.IconPropertiesGroup {
+    property Primitives.IconPropertiesGroup icon: Primitives.IconPropertiesGroup {
         width: titleSubtitle.subtitleVisible ? Platform.Units.iconSizes.medium : Platform.Units.iconSizes.smallMedium
         height: width
     }

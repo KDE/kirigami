@@ -26,6 +26,7 @@ target_sources(KirigamiPrimitives PRIVATE
 )
 
 ecm_target_qml_sources(KirigamiPrimitives SOURCES
+    IconPropertiesGroup.qml
     Separator.qml
     ShadowedImage.qml
 )

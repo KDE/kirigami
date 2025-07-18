@@ -8,6 +8,7 @@ import QtQuick
 import QtQuick.Templates as T
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
+import org.kde.kirigami.primitives as Primitives
 import "private" as KTP
 
 /*!
@@ -109,7 +110,7 @@ T.Drawer {
 
       \include iconpropertiesgroup.qdocinc grouped-properties
      */
-    readonly property KTP.IconPropertiesGroup handleOpenIcon: KTP.IconPropertiesGroup {
+    readonly property Primitives.IconPropertiesGroup handleOpenIcon: Primitives.IconPropertiesGroup {
         source: root.edge === Qt.RightEdge ? "view-right-close" : "view-left-close"
     }
 
@@ -131,7 +132,7 @@ T.Drawer {
 
       \since 2.5
      */
-    property KTP.IconPropertiesGroup handleClosedIcon: KTP.IconPropertiesGroup {
+    property Primitives.IconPropertiesGroup handleClosedIcon: Primitives.IconPropertiesGroup {
         source: root.edge === Qt.RightEdge ? "view-right-new" : "view-left-new"
     }
 

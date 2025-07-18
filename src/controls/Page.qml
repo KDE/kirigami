@@ -9,6 +9,7 @@ import QtQuick.Layouts
 import QtQuick.Templates as T
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
+import org.kde.kirigami.primitives as Primitives
 import "private" as P
 
 /*!
@@ -98,7 +99,7 @@ QQC2.Page {
 
       \brief This holds the icon that represents this page.
      */
-    property P.ActionIconGroup icon: P.ActionIconGroup {}
+    property Primitives.IconPropertiesGroup icon: Primitives.IconPropertiesGroup {}
 
     /*!
       \brief Progress of a task this page is doing.

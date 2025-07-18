@@ -195,7 +195,6 @@ ecm_target_qml_sources(Kirigami VERSION 2.20 SOURCES
 )
 
 ecm_target_qml_sources(Kirigami PRIVATE PATH private SOURCES
-    controls/private/ActionIconGroup.qml
     controls/private/ActionMenuItem.qml
     controls/private/ActionsMenu.qml
     controls/private/BannerImage.qml
@@ -236,7 +235,6 @@ ecm_target_qml_sources(Kirigami PRIVATE PATH templates/private SOURCES
     controls/templates/private/ContextIcon.qml
     controls/templates/private/DrawerHandle.qml
     controls/templates/private/GenericDrawerIcon.qml
-    controls/templates/private/IconPropertiesGroup.qml
     controls/templates/private/MenuIcon.qml
     controls/templates/private/PassiveNotificationsManager.qml
     controls/templates/private/qmldir

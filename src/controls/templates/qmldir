@@ -1,5 +1,6 @@
 module org.kde.kirigami.templates
 
+depends org.kde.kirigami.primitives
 AbstractApplicationHeader 2.2 AbstractApplicationHeader.qml
 AbstractCard 2.4 AbstractCard.qml
 singleton AppHeaderSizeGroup 2.2 SingletonHeaderSizeGroup.qml

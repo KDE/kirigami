@@ -8,7 +8,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
-import "private" as P
+import org.kde.kirigami.primitives as Primitives
 
 /*!
   \qmltype PlaceholderMessage
@@ -193,7 +193,7 @@ ColumnLayout {
 
       \since 5.70
      */
-    readonly property P.ActionIconGroup icon: P.ActionIconGroup {
+    readonly property Primitives.IconPropertiesGroup icon: Primitives.IconPropertiesGroup {
         width: Math.round(Kirigami.Units.iconSizes.huge * 1.5)
         height: Math.round(Kirigami.Units.iconSizes.huge * 1.5)
         color: Kirigami.Theme.textColor
@@ -266,7 +266,7 @@ ColumnLayout {
         color: root.icon.color
 
         source: {
-            if (root.icon.source.length > 0) {
+            if (root.icon.source?.length > 0) {
                 return root.icon.source
             } else if (root.icon.name.length > 0) {
                 return root.icon.name
