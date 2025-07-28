@@ -15,10 +15,11 @@ import org.kde.kirigami as Kirigami
 
   \brief An advanced control to create custom textfields with inline buttons
 
-
   ActionTextField can display inline action buttons on the leading or trailing
   sides, and is used as the base class for other kinds of specialized text
   fields, including \l SearchField and \l PasswordField.
+
+  Each action's \c {text} property will be displayed in a tooltip on hover.
 
   Example usage:
   \code
