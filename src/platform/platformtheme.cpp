@@ -382,6 +382,7 @@ public:
     bool pendingColorChange : 1;
     bool pendingChildUpdate : 1;
     bool useAlternateBackgroundColor : 1;
+    bool isConstructing : 1 = false;
 
     // Note: We use these to store local values of PlatformTheme::ColorSet and
     // PlatformTheme::ColorGroup. While these are standard enums and thus 32
@@ -402,6 +403,7 @@ PlatformTheme::PlatformTheme(QObject *parent)
     : QObject(parent)
     , d(new PlatformThemePrivate)
 {
+    setConstructing(true);
     if (QQuickItem *item = qobject_cast<QQuickItem *>(parent)) {
         connect(item, &QQuickItem::windowChanged, this, [this](QQuickWindow *window) {
             if (window) {
@@ -417,6 +419,7 @@ PlatformTheme::PlatformTheme(QObject *parent)
     }
 
     update();
+    setConstructing(false);
 }
 
 PlatformTheme::~PlatformTheme()
@@ -873,6 +876,11 @@ bool PlatformTheme::supportsIconColoring() const
     return d->supportsIconColoring;
 }
 
+void PlatformTheme::setConstructing(bool isConstructing)
+{
+    d->isConstructing = isConstructing;
+}
+
 void PlatformTheme::setSupportsIconColoring(bool support)
 {
     d->supportsIconColoring = support;
@@ -1105,7 +1113,9 @@ PlatformThemeChangeTracker::~PlatformThemeChangeTracker() noexcept
     m_data.reset();
 
     if (dataWatcher.use_count() <= 0) {
-        m_theme->emitSignalsForChanges(changes);
+        if (!m_theme->d->isConstructing) {
+            m_theme->emitSignalsForChanges(changes);
+        }
         s_blockedChanges.remove(m_theme);
     }
 }

@@ -597,6 +597,9 @@ Q_SIGNALS:
     void useAlternateBackgroundColorChanged(bool alternate);
 
 protected:
+    /// To set in the constructors so the changes trackers can avoid emitting
+    void setConstructing(bool isConstructing);
+
     // Setters, not accessible from QML but from implementations
     void setSupportsIconColoring(bool support);
 
