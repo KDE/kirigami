@@ -298,8 +298,15 @@ Item {
     function relayout() {
         const __items = root.children;
         // exclude the layout and temp
+        let row = 0;
         for (let i = 2; i < __items.length; ++i) {
             const item = __items[i];
+
+            if (!(item instanceof Repeater)) {
+                item.Layout.row = row;
+                item.Layout.column = 1;
+                row += root.wideMode ? 1 : 2;
+            }
 
             // skip items that are already there
             if (lay.knownItems.indexOf(item) !== -1 || item instanceof Repeater) {
@@ -307,16 +314,15 @@ Item {
             }
             lay.knownItems.push(item);
 
-            const itemContainer = itemComponent.createObject(temp, { item });
+            const itemContainer = itemComponent.createObject(lay, { item });
 
             // if it's a labeled section header, add extra spacing before it
-            if (item.Kirigami.FormData.label.length > 0 && item.Kirigami.FormData.isSection) {
+            /*if (item.Kirigami.FormData.label.length > 0 && item.Kirigami.FormData.isSection) {
                 placeHolderComponent.createObject(lay, { item });
-            }
+            }*/
 
             const buddy = buddyComponent.createObject(lay, { item, index: i - 2 });
 
-            itemContainer.parent = lay;
             lay.buddies.push(buddy);
         }
         lay.knownItemsChanged();
@@ -324,8 +330,9 @@ Item {
         hintCompression.triggered();
     }
 
-    onChildrenChanged: relayout();
-    Component.onCompleted: relayout();
+    onChildrenChanged: relayout()
+    Component.onCompleted: relayout()
+    onWideModeChanged: relayout()
 
     Component {
         id: itemComponent
@@ -333,6 +340,9 @@ Item {
             id: container
 
             property Item item
+
+            Layout.row: item?.Layout?.row + (root.wideMode ? 0 : 1)
+            Layout.column: root.wideMode ? 1 : 0
 
             enabled: item?.enabled ?? false
             visible: item?.visible ?? false
@@ -397,6 +407,9 @@ Item {
 
             property Item item
             property int index
+
+            Layout.row: item?.Layout?.row
+            Layout.column: 0
 
             enabled: {
                 const buddy = item?.Kirigami.FormData.buddyFor;
