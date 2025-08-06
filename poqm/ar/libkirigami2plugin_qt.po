@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2023-07-06 10:20+0400\n"
+"PO-Revision-Date: 2025-07-14 20:26+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -144,17 +144,17 @@ msgstr "يحمّل..."
 #: controls/PasswordField.qml:41
 msgctxt "PasswordField|"
 msgid "Password"
-msgstr "كلمة السّرّ"
+msgstr "كلمة السر"
 
 #: controls/PasswordField.qml:44
 msgctxt "PasswordField|"
 msgid "Hide Password"
-msgstr "أخف كلمة السّرّ"
+msgstr "أخف كلمة السر"
 
 #: controls/PasswordField.qml:44
 msgctxt "PasswordField|"
 msgid "Show Password"
-msgstr "أظهر كلمة السّرّ"
+msgstr "أظهر كلمة السر"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
 msgctxt "PageRowGlobalToolBarUI|"
