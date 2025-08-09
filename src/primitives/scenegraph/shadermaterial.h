@@ -46,7 +46,7 @@ private:
     QByteArray m_uniformData;
     QHash<int, QSGTexture *> m_textures;
 
-    inline static QHash<QString, QSGMaterialType *> s_materialTypes;
+    inline static std::unordered_map<QString, std::unique_ptr<QSGMaterialType>> s_materialTypes;
 };
 
 class ShaderMaterialShader : public QSGMaterialShader
