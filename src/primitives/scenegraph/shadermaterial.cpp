@@ -78,18 +78,20 @@ void ShaderMaterial::setTexture(int binding, QSGTexture *texture)
 
 QString ShaderMaterial::nameForType(QSGMaterialType *type)
 {
-    return s_materialTypes.key(type, QString{});
+    for (auto &[key, value] : s_materialTypes) {
+        if (value.get() == type) {
+            return key;
+        }
+    }
+    return QString();
 }
 
 QSGMaterialType *ShaderMaterial::typeForName(const QString &name)
 {
-    if (s_materialTypes.contains(name)) {
-        return s_materialTypes.value(name);
-    } else {
-        auto type = new QSGMaterialType{};
-        s_materialTypes.insert(name, type);
-        return type;
+    if (!s_materialTypes.contains(name)) {
+        s_materialTypes[name] = std::make_unique<QSGMaterialType>();
     }
+    return s_materialTypes[name].get();
 }
 
 ShaderMaterialShader::ShaderMaterialShader(const QString &shaderName)
