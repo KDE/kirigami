@@ -32,10 +32,21 @@ Loader {
             return false
         }
 
+        //Don't show back button on pinned pages
+        if (page.Kirigami.ColumnView.pinned && pageStack.columnView.columnResizeMode !== Kirigami.ColumnView.SingleColumn) {
+            return false;
+        }
+
+        const leadingPinned = page.Kirigami.ColumnView.view.leadingVisibleItem.Kirigami.ColumnView.pinned && pageStack.columnView.columnResizeMode !== Kirigami.ColumnView.SingleColumn
+                            ? page.Kirigami.ColumnView.view.leadingVisibleItem
+                            : null;
+        const leadingPinnedWidth = leadingPinned?.width ?? 0
+        const firstIndex = leadingPinned ? leadingPinned.Kirigami.ColumnView.index + 1 : 0
+
         // If we are on the first page and we don't want to show the forward button, don't
         // show the back button either
         if (!(pageStack.globalToolBar.showNavigationButtons & Kirigami.ApplicationHeaderStyle.ShowForwardButton) &&
-            page.Kirigami.ColumnView.index === 0) {
+            page.Kirigami.ColumnView.index === firstIndex) {
             return false;
         }
 
@@ -49,7 +60,7 @@ Loader {
         const overflows = pageStack.columnView.contentWidth > pageStack.columnView.width + Kirigami.Units.gridUnit;
 
         // Index will be 0 at the first page in the row, -1 in a page belonging to a layer
-        if (!page || page.Kirigami.ColumnView.index <= 0) {
+        if (!page || page.Kirigami.ColumnView.index <= firstIndex) {
             return overflows;
         }
 
@@ -57,9 +68,9 @@ Loader {
         const previousPage = pageStack.get(page.Kirigami.ColumnView.index - 1);
         let firstVisible = false;
         if (LayoutMirroring.enabled) {
-            firstVisible = pageStack.width - (page.x + page.width - pageStack.columnView.contentX) < previousPage.width / 2;
+            firstVisible = pageStack.width - (page.x + page.width - pageStack.columnView.contentX - leadingPinnedWidth) < previousPage.width / 2;
         } else {
-            firstVisible = previousPage.x - pageStack.columnView.contentX < -previousPage.width / 2;
+            firstVisible = previousPage.x - pageStack.columnView.contentX - leadingPinnedWidth < -previousPage.width / 2;
         }
 
         return overflows && firstVisible;

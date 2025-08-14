@@ -710,7 +710,7 @@ void ContentItem::layoutItems()
     m_view->setImplicitWidth(implicitWidth);
     m_view->setImplicitHeight(implicitHeight + m_view->topPadding() + m_view->bottomPadding());
 
-    const qreal newContentX = m_viewAnchorItem ? -m_viewAnchorItem->x() : 0.0;
+    const qreal newContentX = (m_viewAnchorItem ? -m_viewAnchorItem->x() : 0.0) + m_leftPinnedSpace;
     if (m_shouldAnimate) {
         animateX(newContentX);
     } else {
