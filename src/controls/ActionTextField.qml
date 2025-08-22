@@ -58,6 +58,15 @@ QQC2.TextField {
     property alias focusSequence: focusShortcut.sequence
 
     /*!
+      \qmlproperty list<keysequence> ActionTextField::focusSequences
+      This property holds multiple shortcut sequences that will focus the text field.
+      \since 6.18
+
+      By default no shortcut is set.
+    */
+    property alias focusSequences: focusShortcut.sequences
+
+    /*!
       \qmlproperty list<Action> leftActions
 
       This property holds a list of actions that will be displayed on the

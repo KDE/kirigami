@@ -88,7 +88,7 @@ Kirigami.ActionTextField {
     Accessible.name: qsTr("Search")
     Accessible.searchEdit: true
 
-    focusSequence: StandardKey.Find
+    focusSequences: [StandardKey.Find]
     inputMethodHints: Qt.ImhNoPredictiveText
     EnterKey.type: Qt.EnterKeySearch
     rightActions: [
