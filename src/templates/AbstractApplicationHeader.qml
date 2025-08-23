@@ -8,6 +8,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
+import org.kde.kirigami.private.polyfill
 
 /*!
   \qmltype AbstractApplicationHeader
@@ -72,7 +73,7 @@ Item {
 
     /*!
      */
-    property int topPadding: 0
+    property int topPadding: pageRow ? pageRow.SafeArea.margins.top : 0
 
     /*!
      */
