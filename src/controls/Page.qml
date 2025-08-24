@@ -10,6 +10,7 @@ import QtQuick.Templates as T
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 import org.kde.kirigami.primitives as Primitives
+import org.kde.kirigami.private.polyfill
 import "private" as P
 
 /*!
@@ -28,6 +29,10 @@ QQC2.Page {
 
 //BEGIN properties
     padding: Kirigami.Units.gridUnit
+    topPadding: padding + SafeArea.margins.top
+    bottomPadding: padding + SafeArea.margins.bottom
+    leftPadding: padding + SafeArea.margins.left
+    rightPadding: padding + SafeArea.margins.right
 
     /*!
       \brief If the central element of the page is a Flickable
