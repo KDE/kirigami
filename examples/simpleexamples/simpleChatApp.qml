@@ -41,7 +41,7 @@ Kirigami.ApplicationWindow {
     contextDrawer: Kirigami.OverlayDrawer {
         id: contextDrawer
         //they can depend on the page like that or be defined directly here
-        edge: Qt.application.layoutDirection === Qt.RightToLeft ? Qt.LeftEdge : Qt.RightEdge
+        edge: Application.layoutDirection === Qt.RightToLeft ? Qt.LeftEdge : Qt.RightEdge
         modal: !root.wideScreen
         onModalChanged: drawerOpen = !modal
         handleVisible: root.controlsVisible

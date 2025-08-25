@@ -212,8 +212,8 @@ QQC2.SwipeDelegate {
     }
 
     Keys.onPressed: (event) => {
-        if ((actionsLayout.hasVisibleActions && activeFocus && event.key == Qt.Key_Right && Qt.application.layoutDirection == Qt.LeftToRight) ||
-            (actionsLayout.hasVisibleActions && activeFocus && event.key == Qt.Key_Left && Qt.application.layoutDirection == Qt.RightToLeft)) {
+        if ((actionsLayout.hasVisibleActions && activeFocus && event.key == Qt.Key_Right && Application.layoutDirection == Qt.LeftToRight) ||
+            (actionsLayout.hasVisibleActions && activeFocus && event.key == Qt.Key_Left && Application.layoutDirection == Qt.RightToLeft)) {
             for (var target = 0; target < actionsRep.count; target ++) {
                 if (actionsLayout.children[target].visible) {
                     break
@@ -567,8 +567,8 @@ QQC2.SwipeDelegate {
                 }
 
                 Keys.onPressed: (event) => {
-                    if ((Qt.application.layoutDirection == Qt.LeftToRight && event.key == Qt.Key_Left) ||
-                        (Qt.application.layoutDirection == Qt.RightToLeft && event.key == Qt.Key_Right)) {
+                    if ((Application.layoutDirection == Qt.LeftToRight && event.key == Qt.Key_Left) ||
+                        (Application.layoutDirection == Qt.RightToLeft && event.key == Qt.Key_Right)) {
                         for (var target = index -1; target>=0; target--) {
                             if (target == -1 || actionsLayout.children[target].visible) {
                                 break
@@ -581,8 +581,8 @@ QQC2.SwipeDelegate {
                             actionsLayout.children[target].forceActiveFocus(Qt.TabFocusReason)
                         }
                         event.accepted = true
-                    } else if ((Qt.application.layoutDirection == Qt.LeftToRight && event.key == Qt.Key_Right) ||
-                               (Qt.application.layoutDirection == Qt.RightToLeft && event.key == Qt.Key_Left)) {
+                    } else if ((Application.layoutDirection == Qt.LeftToRight && event.key == Qt.Key_Right) ||
+                               (Application.layoutDirection == Qt.RightToLeft && event.key == Qt.Key_Left)) {
                         var found=false
                         for (var target = index +1; target<actionsRep.count; target++) {
                             if (actionsLayout.children[target].visible) {

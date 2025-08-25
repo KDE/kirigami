@@ -55,7 +55,7 @@ import "private" as KP
 Kirigami.OverlayDrawer {
     id: root
 
-    edge: Qt.application.layoutDirection === Qt.RightToLeft ? Qt.RightEdge : Qt.LeftEdge
+    edge: Application.layoutDirection === Qt.RightToLeft ? Qt.RightEdge : Qt.LeftEdge
 
     handleClosedIcon.source: null
     handleOpenIcon.source: null

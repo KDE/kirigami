@@ -59,12 +59,12 @@ Kirigami.ActionTextField {
     property bool delaySearch: false
 
     // padding to accommodate search icon nicely
-    leftPadding: if (Qt.application.layoutDirection === Qt.RightToLeft) {
+    leftPadding: if (Application.layoutDirection === Qt.RightToLeft) {
         return _rightActionsRow.width + Kirigami.Units.smallSpacing
     } else {
         return searchIcon.width + Kirigami.Units.smallSpacing * 3
     }
-    rightPadding: if (Qt.application.layoutDirection === Qt.RightToLeft) {
+    rightPadding: if (Application.layoutDirection === Qt.RightToLeft) {
         return searchIcon.width + Kirigami.Units.smallSpacing * 3
     } else {
         return _rightActionsRow.width + Kirigami.Units.smallSpacing

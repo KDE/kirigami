@@ -96,7 +96,7 @@ QQC2.TextField {
     hoverEnabled: true
 
     horizontalAlignment: Qt.AlignLeft
-    LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
+    LayoutMirroring.enabled: Application.layoutDirection === Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
 
     leftPadding: Kirigami.Units.smallSpacing + (LayoutMirroring.enabled ? rightActionsRow : leftActionsRow).width

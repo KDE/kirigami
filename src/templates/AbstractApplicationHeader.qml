@@ -92,7 +92,7 @@ Item {
      */
     property bool hideWhenTouchScrolling: root.pageRow?.globalToolBar.hideWhenTouchScrolling ?? false
 
-    LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
+    LayoutMirroring.enabled: Application.layoutDirection === Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
 
     Kirigami.Theme.inherit: true

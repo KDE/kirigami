@@ -115,7 +115,7 @@ QQC2.ItemDelegate {
     }
 
     property ActionsMenu actionsMenu: ActionsMenu {
-        x: Qt.application.layoutDirection === Qt.RightToLeft ? -width : listItem.width
+        x: Application.layoutDirection === Qt.RightToLeft ? -width : listItem.width
         actions: listItem.kAction?.children ?? []
         submenuComponent: ActionsMenu {}
 
@@ -155,7 +155,7 @@ QQC2.ItemDelegate {
         text: (listItem.kAction?.tooltip || listItem.tAction?.text) ?? ""
         delay: Kirigami.Units.toolTipDelay
         y: (listItem.height - height) / 2
-        x: Qt.application.layoutDirection === Qt.RightToLeft ? -width : listItem.width
+        x: Application.layoutDirection === Qt.RightToLeft ? -width : listItem.width
     }
 
     onHoveredChanged: {

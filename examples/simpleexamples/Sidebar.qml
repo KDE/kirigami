@@ -48,7 +48,7 @@ Kirigami.ApplicationWindow {
     contextDrawer: Kirigami.OverlayDrawer {
         id: contextDrawer
         drawerOpen: true
-        edge: Qt.application.layoutDirection === Qt.RightToLeft ? Qt.LeftEdge : Qt.RightEdge
+        edge: Application.layoutDirection === Qt.RightToLeft ? Qt.LeftEdge : Qt.RightEdge
         modal: false
         leftPadding: Kirigami.Units.largeSpacing
         rightPadding: Kirigami.Units.largeSpacing

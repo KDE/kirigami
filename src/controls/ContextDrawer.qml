@@ -105,7 +105,7 @@ Kirigami.OverlayDrawer {
                 || itemExistsButStyleIsNotToolBar(pageStack.trailingVisibleItem));
     }
 
-    edge: Qt.application.layoutDirection === Qt.RightToLeft ? Qt.LeftEdge : Qt.RightEdge
+    edge: Application.layoutDirection === Qt.RightToLeft ? Qt.LeftEdge : Qt.RightEdge
     drawerOpen: false
 
     // list items go to edges, have their own padding

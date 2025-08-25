@@ -220,7 +220,7 @@ QQC2.ApplicationWindow {
     }
 //END functions
 
-    LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
+    LayoutMirroring.enabled: Application.layoutDirection === Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
 
     color: Kirigami.Theme.backgroundColor

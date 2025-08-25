@@ -300,7 +300,7 @@ Item {
     onPageStackChanged: pageStack.parent = root.contentItem;
 //END signals handlers
 
-    LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
+    LayoutMirroring.enabled: Application.layoutDirection === Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
 
     TP.PassiveNotificationsManager {
