@@ -31,7 +31,10 @@ Kirigami.AbstractApplicationHeader {
     }
 
     rightPadding: {
-        if (page?.Kirigami.ColumnView.view?.columnResizeMode === Kirigami.ColumnView.SingleColumn) {
+        if (!pageRow || !page) {
+            return 0
+        }
+        if (page.Kirigami.ColumnView.view?.columnResizeMode === Kirigami.ColumnView.SingleColumn) {
             return pageRow.globalToolBar.rightReservedSpace
         }
         if (LayoutMirroring.enabled) {
@@ -113,7 +116,7 @@ Kirigami.AbstractApplicationHeader {
             Layout.preferredWidth: item?.Layout.preferredWidth ?? -1
             Layout.maximumWidth: item?.Layout.maximumWidth ?? -1
             Layout.leftMargin: {
-                if (navButtons.visible || leftHandleSpacer.visible) {
+                if (!pageRow || navButtons.visible || leftHandleSpacer.visible) {
                     return 0;
                 } else if (separator.visible) {
                     return pageRow.globalToolBar.titleLeftPadding - layout.spacing;

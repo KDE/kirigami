@@ -37,7 +37,7 @@ Loader {
             return false;
         }
 
-        const leadingPinned = page.Kirigami.ColumnView.view.leadingVisibleItem.Kirigami.ColumnView.pinned && pageStack.columnView.columnResizeMode !== Kirigami.ColumnView.SingleColumn
+        const leadingPinned = page?.Kirigami.ColumnView.view.leadingVisibleItem.Kirigami.ColumnView.pinned && pageStack.columnView.columnResizeMode !== Kirigami.ColumnView.SingleColumn
                             ? page.Kirigami.ColumnView.view.leadingVisibleItem
                             : null;
         const leadingPinnedWidth = leadingPinned?.width ?? 0
