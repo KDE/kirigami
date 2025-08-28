@@ -205,15 +205,18 @@ Item {
             return list;
         }
 
-        function syncImplicitWidth() {
-            if (root.wideMode) {
-                lay.wideImplicitWidth = lay.implicitWidth;
+        Timer {
+            id: hintCompression
+            interval: 0
+            onTriggered: {
+                if (root.wideMode) {
+                    lay.wideImplicitWidth = lay.implicitWidth;
+                }
             }
         }
-
-        onImplicitWidthChanged: syncImplicitWidth()
-
+        onImplicitWidthChanged: hintCompression.restart();
         //This invisible row is used to sync alignment between multiple layouts
+
         Item {
             id: leadingPlaceholder
             Layout.preferredWidth: {
@@ -326,7 +329,7 @@ Item {
 
         lay.knownItemsChanged();
         lay.buddiesChanged();
-        lay.syncImplicitWidth();
+        hintCompression.triggered();
     }
 
     onChildrenChanged: relayout()
