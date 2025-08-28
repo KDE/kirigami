@@ -1006,7 +1006,7 @@ QT.Control {
                 z: 1
                 width: visible ? leftSidebar.width : 0
                 // Using leftSidebar.position instead of visible because leftSidebar.visible depends from its main item visibility which is our child so would be a loop
-                visible: leftSidebar && leftSidebar.position > 0 && children.length > 0
+                visible: leftSidebar && children.length > 0
             }
 
             Kirigami.ColumnView {
