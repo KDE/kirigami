@@ -84,6 +84,13 @@ TestCase {
     }
 
     Component {
+        id: pageComponent
+        Kirigami.Page {
+            title: "Layer 1"
+        }
+    }
+
+    Component {
         id: appItemComponent
         AppItemComponent {}
     }
@@ -188,5 +195,40 @@ TestCase {
         app.globalDrawer.collapsed = true;
         tryVerify(() => {return app.globalDrawer.width == app.sidebarSizeItem.implicitWidth + app.globalDrawer.leftPadding + app.globalDrawer.rightPadding});
         verify(app.globalDrawer.width  > 0);
+    }
+
+    function test_pageRowSidebar() {
+        const app = createTemporaryObject(appItemComponent, this);
+        verify(app)
+        compare(app.pageStack.columnView.x, 0);
+        app.pageStack.leftSidebar = app.globalDrawer
+        app.globalDrawer.modal = false;
+        compare(app.pageStack.columnView.x, app.globalDrawer.width);
+        verify(app.globalDrawer.visible);
+        // Test basic show/hide
+        app.globalDrawer.close();
+        tryVerify(() => {return !app.globalDrawer.visible});
+        app.globalDrawer.open();
+        tryVerify(() => {return app.globalDrawer.visible});
+
+        // When we push a new layer, the drawer must become invisible
+        app.pageStack.layers.push(pageComponent);
+        tryVerify(() => {return !app.globalDrawer.visible});
+        // And get back visible on pop
+        app.pageStack.layers.pop()
+        tryVerify(() => {return app.globalDrawer.visible});
+
+        // Push a layer with the drawer closed
+        app.globalDrawer.close();
+        tryVerify(() => {return !app.globalDrawer.visible});
+        app.pageStack.layers.push(pageComponent);
+        tryVerify(() => {return !app.globalDrawer.visible});
+
+        // Opening it should stay invisible
+        app.globalDrawer.open()
+        tryVerify(() => {return !app.globalDrawer.visible});
+        // But when popping it will become visible again as we asked for it
+        app.pageStack.layers.pop()
+        tryVerify(() => {return app.globalDrawer.visible});
     }
 }
