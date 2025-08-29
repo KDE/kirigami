@@ -849,7 +849,7 @@ void ContentItem::forgetItem(QQuickItem *item)
         }
     }
     if (QQuickItem *footer = attached->globalFooter()) {
-        connect(footer, nullptr, this, nullptr);
+        disconnect(footer, nullptr, this, nullptr);
         footer->setVisible(false);
         footer->setParentItem(item);
         separatorItem = m_separators.take(footer);
