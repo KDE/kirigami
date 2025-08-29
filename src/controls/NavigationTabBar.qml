@@ -246,6 +246,10 @@ QQC.ToolBar {
             }
         }
 
+        if (visibleButtonCount == 0) {
+            return 0;
+        }
+
         return Math.round(contentItem.width / visibleButtonCount);
     }
 //END properties
