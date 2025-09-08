@@ -33,7 +33,6 @@ Name[sl]=Aplikacija Kirigami
 Name[sv]=Kirigami-program
 Name[tr]=Kirigami Uygulaması
 Name[uk]=Програма на Kirigami
-Name[x-test]=xxKirigami Applicationxx
 Name[zh_CN]=Kirigami 应用程序
 Name[zh_TW]=Kirigami 應用程式
 Comment=Convergent application using Qt Quick Controls 2 and Kirigami
@@ -67,7 +66,6 @@ Comment[sl]=Konvergentna aplikacija, ki uporablja kontrole Qt Quick in Kirigami
 Comment[sv]=Konvergent program som använder Qt Quick Controls 2 och Kirigami
 Comment[tr]=Qt Quick Controls 2 ve Kirigami kullanan yakınsak uygulama
 Comment[uk]=Зручна програма з використанням засобів керування Qt Quick 2 та Kirigami
-Comment[x-test]=xxConvergent application using Qt Quick Controls 2 and Kirigamixx
 Comment[zh_CN]=基于 Qt Quick Controls 2 和 Kirigami 构建的桌面与移动平台通用应用程序
 Comment[zh_TW]=使用 Qt Quick Controls 2 和 Kirigami 的跨平台應用程式
 
