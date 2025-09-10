@@ -195,6 +195,10 @@ ecm_target_qml_sources(Kirigami VERSION 2.20 SOURCES
     controls/ContextualHelpButton.qml
 )
 
+ecm_target_qml_sources(Kirigami VERSION 2.21 SOURCES
+    controls/HybridPageStack.qml
+)
+
 ecm_target_qml_sources(Kirigami PRIVATE PATH private SOURCES
     controls/private/ActionMenuItem.qml
     controls/private/ActionsMenu.qml
@@ -218,6 +222,11 @@ ecm_target_qml_sources(Kirigami PRIVATE PATH private/globaltoolbar SOURCES
     controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml
     controls/private/globaltoolbar/ToolBarPageHeader.qml
     controls/private/globaltoolbar/ToolBarPageFooter.qml
+)
+
+ecm_target_qml_sources(Kirigami PRIVATE PATH private/hybridpagestack SOURCES
+    controls/private/hybridpagestack/PageContainer.qml
+    controls/private/hybridpagestack/PageHeader.qml
 )
 
 qt_target_qml_sources(Kirigami RESOURCES
