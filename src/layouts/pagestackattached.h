@@ -88,6 +88,11 @@ protected:
 Q_SIGNALS:
     void pageStackChanged();
 
+    /**
+     * Close the currently opened dialog, which was opened with PageRow::pushDialogLayer.
+     */
+    void closeDialog();
+
 private:
     QPointer<QQuickItem> m_pageStack;
     QPointer<QQuickItem> m_parentItem;

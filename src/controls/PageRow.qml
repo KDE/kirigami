@@ -245,10 +245,12 @@ QT.Control {
       \brief Pushes a page as a new dialog on desktop and as a layer on mobile.
 
       \a page A single page defined as either a string url, a component or
-      an object (which will be reparented). The following page gains
-      closeDialog() method allowing to make it indistinguishable to
-      close/hide it when in desktop or mobile mode. Note that Kiriami supports
-      calling closeDialog() only once.
+      an object (which will be reparented). The following page can then be closed
+      by calling `Kirigami.PageStack.closeDialog()` at most once to close/hide
+      it when in desktop or mobile mode.
+
+      \note: You can also call a closeDialog() method directly on the page to close/hide
+      it but this behavior is deprecated since 6.18 and replaced with the attached property.
 
       \a properties The properties given when initializing the page.
 
@@ -300,9 +302,11 @@ QT.Control {
                 }
                 Object.defineProperty(item, 'closeDialog', {
                     value: function() {
+                        console.warn("Calling closeDialog is deprecated. Use Kirigami.PageStack.closeDialog instead.");
                         dialog.close();
                     }
                 });
+                item.Kirigami.PageStack.closeDialog.connect(() => dialog.close());
                 dialog.open();
             } else {
                 // open as a layer
@@ -310,8 +314,10 @@ QT.Control {
                     properties.globalToolBarStyle = root.globalToolBar.style
                 }
                 item = layers.push(page, properties);
+                item.Kirigami.PageStack.closeDialog.connect(() => layers.pop());
                 Object.defineProperty(item, 'closeDialog', {
                     value: function() {
+                        console.warn("Calling closeDialog is deprecated. Use Kirigami.PageStack.closeDialog instead.");
                         layers.pop();
                     }
                 });
@@ -340,8 +346,10 @@ QT.Control {
             const window = windowComponent.createObject(root, windowProperties);
             windowComponent.destroy();
             item = window.pageStack.push(page, properties);
+            item.Kirigami.PageStack.closeDialog.connect(() => window.close());
             Object.defineProperty(item, 'closeDialog', {
                 value: function() {
+                    console.warn("Calling closeDialog is deprecated. Use Kirigami.PageStack.closeDialog instead.");
                     window.close();
                 }
             });
