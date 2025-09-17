@@ -19,6 +19,7 @@
 #include <QQmlEngine>
 #include <QStyleHints>
 #include <algorithm>
+#include <qvariant.h>
 
 #include "platform/units.h"
 
@@ -1037,10 +1038,16 @@ ColumnView::ColumnView(QQuickItem *parent)
     setAcceptTouchEvents(true);
     setFiltersChildMouseEvents(true);
 
-    connect(m_contentItem->m_slideAnim, &QPropertyAnimation::finished, this, [this]() {
-        m_moving = false;
-        Q_EMIT movingChanged();
-    });
+    connect(m_contentItem->m_slideAnim,
+            &QPropertyAnimation::stateChanged,
+            this,
+            [this](QAbstractAnimation::State newState, QAbstractAnimation::State oldState) {
+                if ((newState == QAbstractAnimation::Running) == (oldState == QAbstractAnimation::Running)) {
+                    return;
+                }
+                m_moving = newState == QAbstractAnimation::Running;
+                Q_EMIT movingChanged();
+            });
     connect(m_contentItem, &ContentItem::widthChanged, this, &ColumnView::contentWidthChanged);
     connect(m_contentItem, &ContentItem::xChanged, this, &ColumnView::contentXChanged);
 
@@ -1743,6 +1750,13 @@ bool ColumnView::childMouseEventFilter(QQuickItem *item, QEvent *event)
         const QPointF pressPos = mapFromItem(item, te->points().first().pressPosition());
         const QPointF lastPos = mapFromItem(item, te->points().first().lastPosition());
         const QPointF pos = mapFromItem(item, te->points().first().position());
+
+        if (QQuickItem *mask = qobject_cast<QQuickItem *>(containmentMask())) {
+            QRectF maskGeom = {mask->position(), mask->size()};
+            if (!maskGeom.contains(pressPos)) {
+                return false;
+            }
+        }
 
         m_verticalScrollIntercepted = m_verticalScrollIntercepted || std::abs(pos.y() - pressPos.y()) > qApp->styleHints()->startDragDistance() * 3;
 
