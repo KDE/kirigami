@@ -1009,6 +1009,16 @@ QT.Control {
                 visible: leftSidebar && children.length > 0
             }
 
+            Item {
+                id: columnViewInputMask
+                anchors {
+                    left: columnView.left
+                    top: columnView.top
+                    bottom: columnView.bottom
+                }
+                width: Kirigami.Units.gridUnit * 2
+            }
+
             Kirigami.ColumnView {
                 id: columnView
                 anchors {
@@ -1021,6 +1031,72 @@ QT.Control {
                 topPadding: globalToolBarUI.item && globalToolBarUI.item.breadcrumbVisible
                             ? globalToolBarUI.height : 0
 
+                containmentMask: columnViewInputMask
+
+                Component {
+                    id: pageTranslation
+                    Translate {
+                        id: transitionTransform
+                        required property Item page
+                        property bool wasDragging
+                        readonly property bool active: columnView.moving
+                                    && columnView.columnResizeMode === Kirigami.ColumnView.SingleColumn
+                                    && page.background
+                                    && (page.background?.color.a === 1 ?? true)
+                                    // FIXME: hack for pop() immediate behavior
+                                    && columnView.contentX < columnView.contentWidth - columnView.width
+                                    && (columnView.trailingVisibleItem?.background ?? false)
+                                    && (columnView.trailingVisibleItem?.background?.color.a === 1 ?? true)
+                        readonly property real progress: Math.max(-1, Math.min(1, (page.x - columnView.contentX) / columnView.width))
+                        x: {
+                            if (!active) {
+                                return 0;
+                            }
+
+                            const animDistance = Kirigami.Units.gridUnit * 4;
+                            if (progress < 0) {
+                                return columnView.contentX - page.x;
+                            } else if (!wasDragging && progress > 1e-9) {
+                                return - (columnView.width - animDistance) * Math.min(1,  progress);
+                            }
+                            return 0;
+                        }
+                        component OpacityBinding: Binding {
+                            target: transitionTransform.page
+                            property: "opacity"
+                            value: {
+                                if (transitionTransform.wasDragging || !transitionTransform.active) {
+                                    return 1;
+                                }
+                                return Math.min(1, 1 - transitionTransform.progress);
+                            }
+                        }
+                        readonly property list<OpacityBinding> __opacityBindings: [
+                            OpacityBinding {
+                                target: transitionTransform.page
+                            },
+                            OpacityBinding {
+                                target: transitionTransform.page.ColumnView.globalHeader
+                            },
+                            OpacityBinding {
+                                target: transitionTransform.page.ColumnView.globalFooter
+                            }
+                        ]
+                        readonly property Connections __draggingConnection: Connections {
+                            target: columnView
+                            function onMovingChanged() {
+                                if (columnView.moving) {
+                                    if (columnView.dragging) {
+                                        transitionTransform.wasDragging = true;
+                                    }
+                                } else {
+                                    transitionTransform.wasDragging = false;
+                                }
+                            }
+                        }
+                    }
+                }
+
                 // Internal hidden api for Page
                 readonly property Item __pageRow: root
                 acceptsMouse: Kirigami.Settings.isMobile
@@ -1028,8 +1104,18 @@ QT.Control {
                 columnWidth: root.defaultColumnWidth
                 interactive: Qt.platform.os !== 'android'
 
-                onItemInserted: (position, item) => root.pageInserted(position, item);
-                onItemRemoved: item => root.pageRemoved(item);
+                onItemInserted: (position, item) => {
+                    item.transform = pageTranslation.createObject(item, {page: item});
+                    item.ColumnView.globalHeader.transform = item.transform;
+                    item.ColumnView.globalFooter.transform = item.transform;
+                    root.pageInserted(position, item);
+                }
+                onItemRemoved: item => {
+                    item.transform = null;
+                    item.ColumnView.globalHeader.transform = null;
+                    item.ColumnView.globalFooter.transform = null;
+                    root.pageRemoved(item);
+                }
 
                 onVisibleItemsChanged: {
                     // implementation of `popHiddenPages` option
