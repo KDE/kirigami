@@ -1043,8 +1043,6 @@ QT.Control {
                                     && columnView.columnResizeMode === Kirigami.ColumnView.SingleColumn
                                     && page.background
                                     && (page.background?.color.a === 1 ?? true)
-                                    // FIXME: hack for pop() immediate behavior
-                                    && columnView.contentX < columnView.contentWidth - columnView.width
                                     && (columnView.trailingVisibleItem?.background ?? false)
                                     && (columnView.trailingVisibleItem?.background?.color.a === 1 ?? true)
                         readonly property real progress: Math.max(-1, Math.min(1, (page.x - columnView.contentX) / columnView.width))
