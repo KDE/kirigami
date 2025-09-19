@@ -19,6 +19,8 @@
 #include <QQmlEngine>
 #include <QStyleHints>
 #include <algorithm>
+#include <qnamespace.h>
+#include <qpropertyanimation.h>
 #include <qvariant.h>
 
 #include "platform/units.h"
@@ -1624,12 +1626,30 @@ QQuickItem *ColumnView::pop(const QVariant &item)
 }
 QQuickItem *ColumnView::pop(QQuickItem *item)
 {
-    QQuickItem *removed = nullptr;
-
-    while (!m_contentItem->m_items.isEmpty() && m_contentItem->m_items.last() != item) {
-        removed = removeItem(m_contentItem->m_items.last());
+    if (count() == 0) {
+        return nullptr;
     }
-    return removed;
+
+    QList<QQuickItem *> items;
+    // Take all the items that are in the list after the item parameter
+    for (auto it = m_contentItem->m_items.crbegin(); it != m_contentItem->m_items.crend(); ++it) {
+        if ((*it) == item) {
+            break;
+        }
+        items << *it;
+    }
+    // Remove immediately all but one
+    while (items.count() > 1) {
+        removeItem(items.last());
+        items.pop_back();
+    }
+
+    Q_ASSERT(items.count() <= 1);
+    if (items.count() == 1) {
+        // call pop() which will do the transition if needed
+        return pop();
+    }
+    return nullptr;
 }
 
 QQuickItem *ColumnView::pop(const int index)
@@ -1644,10 +1664,25 @@ QQuickItem *ColumnView::pop(const int index)
 
 QQuickItem *ColumnView::pop()
 {
-    if (count() > 0) {
+    if (count() == 0) {
+        return nullptr;
+    }
+
+    if (m_contentItem->m_columnResizeMode != ColumnView::SingleColumn || currentIndex() < count() - 1) {
         return removeItem(count() - 1);
     }
-    return nullptr;
+
+    // Here currentIndex() == count() - 1
+    connect(
+        m_contentItem->m_slideAnim,
+        &QPropertyAnimation::finished,
+        this,
+        [this]() {
+            removeItem(count() - 1);
+        },
+        Qt::SingleShotConnection);
+    setCurrentIndex(count() - 2);
+    return get(count() - 1);
 }
 
 void ColumnView::clear()
