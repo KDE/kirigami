@@ -305,7 +305,8 @@ QT.Control {
                     value: function() {
                         console.warn("Calling closeDialog is deprecated. Use Kirigami.PageStack.closeDialog instead.");
                         dialog.close();
-                    }
+                    },
+                    configurable: true
                 });
                 item.Kirigami.PageStack.closeDialog.connect(() => dialog.close());
                 dialog.open();
@@ -320,7 +321,8 @@ QT.Control {
                     value: function() {
                         console.warn("Calling closeDialog is deprecated. Use Kirigami.PageStack.closeDialog instead.");
                         layers.pop();
-                    }
+                    },
+                    configurable: true
                 });
             }
         } else {
@@ -352,7 +354,8 @@ QT.Control {
                 value: function() {
                     console.warn("Calling closeDialog is deprecated. Use Kirigami.PageStack.closeDialog instead.");
                     window.close();
-                }
+                },
+                configurable: true
             });
         }
         // Escape is considered a shortcut, so we need to override it. Or else we don't get any events!
