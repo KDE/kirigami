@@ -301,7 +301,8 @@ QT.Control {
                 Object.defineProperty(item, 'closeDialog', {
                     value: function() {
                         dialog.close();
-                    }
+                    },
+                    configurable: true
                 });
                 dialog.open();
             } else {
@@ -313,7 +314,8 @@ QT.Control {
                 Object.defineProperty(item, 'closeDialog', {
                     value: function() {
                         layers.pop();
-                    }
+                    },
+                    configurable: true
                 });
             }
         } else {
@@ -343,7 +345,8 @@ QT.Control {
             Object.defineProperty(item, 'closeDialog', {
                 value: function() {
                     window.close();
-                }
+                },
+                configurable: true
             });
         }
         item.Keys.escapePressed.connect(event => item.closeDialog());
