@@ -473,6 +473,10 @@ Item {
             }
             Shortcut {
                 sequence: labelItem.Kirigami.MnemonicData.sequence
+                // Workaround to mitigate BUG 440255
+                // We don't have a way to ckeck for clashing shortcuts
+                // except using private Qt API QShortcutMap
+                onActivatedAmbiguously: enabled = false;
                 onActivated: {
                     const buddy = labelItem.item.Kirigami.FormData.buddyFor;
 
