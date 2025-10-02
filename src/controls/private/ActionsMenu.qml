@@ -52,6 +52,7 @@ QQC2.Menu {
                 } else if (root.submenuComponent) {
                     item = root.submenuComponent.createObject(null, {
                         parentAction: action,
+                        icon: action.icon,
                         title: action.text,
                         actions: action.children,
                         submenuComponent: root.submenuComponent,
