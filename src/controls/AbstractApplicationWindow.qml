@@ -8,6 +8,7 @@ import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
+import org.kde.kirigami.private.polyfill
 import "templates/private" as TP
 
 /*!
@@ -229,6 +230,7 @@ QQC2.ApplicationWindow {
         id: notificationsObject
 
         anchors.bottom: parent.bottom
+        anchors.bottomMargin: parent.SafeArea.margins.bottom
         anchors.horizontalCenter: parent.horizontalCenter
 
         parent: T.Overlay.overlay || root
