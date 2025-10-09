@@ -446,7 +446,10 @@ ContentItem::ContentItem(ColumnView *parent)
     , m_view(parent)
 {
     m_globalHeaderParent = new QQuickItem(this);
+    // Move above the pages
+    m_globalHeaderParent->setZ(1);
     m_globalFooterParent = new QQuickItem(this);
+    m_globalFooterParent->setZ(1);
 
     setFlags(flags() | ItemIsFocusScope);
     m_slideAnim = new QPropertyAnimation(this);

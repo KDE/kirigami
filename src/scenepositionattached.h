@@ -9,6 +9,7 @@
 
 #include <QObject>
 #include <QQmlEngine>
+#include <QQuickWindow>
 
 class QQuickItem;
 
@@ -48,6 +49,7 @@ class ScenePositionAttached : public QObject
      */
     Q_PROPERTY(qreal y READ y NOTIFY yChanged FINAL)
 
+    Q_PROPERTY(qreal devicePixelRatio READ devicePixelRatio NOTIFY devicePixelRatioChanged FINAL)
 public:
     explicit ScenePositionAttached(QObject *parent = nullptr);
     ~ScenePositionAttached() override;
@@ -55,17 +57,23 @@ public:
     qreal x() const;
     qreal y() const;
 
+    qreal devicePixelRatio() const;
     // QML attached property
     static ScenePositionAttached *qmlAttachedProperties(QObject *object);
+
+    bool eventFilter(QObject *watched, QEvent *event) override;
 
 Q_SIGNALS:
     void xChanged();
     void yChanged();
 
+    void devicePixelRatioChanged();
+
 private:
     void connectAncestors(QQuickItem *item);
 
     QQuickItem *m_item = nullptr;
+    QPointer<QQuickWindow> m_itemWindow;
     QList<QQuickItem *> m_ancestors;
 };
 

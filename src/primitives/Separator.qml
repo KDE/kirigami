@@ -8,6 +8,7 @@
 import QtQuick
 
 import org.kde.kirigami.platform as Platform
+import org.kde.kirigami as Kirigami
 
 /*!
   \qmltype Separator
@@ -18,7 +19,7 @@ import org.kde.kirigami.platform as Platform
   Useful for splitting one set of items from another.
 
  */
-Rectangle {
+Item {
     id: root
     implicitHeight: 1
     implicitWidth: 1
@@ -45,14 +46,67 @@ Rectangle {
      */
     property int weight: Separator.Weight.Normal
 
-    /* TODO: If we get a separator color role, change this to
-     * mix weights lower than Normal with the background color
-     * and mix weights higher than Normal with the text color.
-     */
-    color: Platform.ColorUtils.linearInterpolation(
-        Platform.Theme.backgroundColor,
-        Platform.Theme.textColor,
-        weight === Separator.Weight.Light ? Platform.Theme.lightFrameContrast : Platform.Theme.frameContrast
-    )
-    antialiasing: true
+    // The separator is drawn by an internal rectangle, which gets moved and resized
+    // in a way to align exactly to the pixel grid in fractional scaling
+    Rectangle {
+        width: Math.round(root.width * root.Kirigami.ScenePosition.devicePixelRatio) /root.Kirigami.ScenePosition.devicePixelRatio
+        height: Math.round(root.height * root.Kirigami.ScenePosition.devicePixelRatio) /root.Kirigami.ScenePosition.devicePixelRatio
+
+        /* TODO: If we get a separator color role, change this to
+         * mix weights lower than Normal with the background color
+         * and mix weights higher than Normal with the text color.
+         */
+        color: Platform.ColorUtils.linearInterpolation(
+                Platform.Theme.backgroundColor,
+                Platform.Theme.textColor,
+                weight === Separator.Weight.Light ? Platform.Theme.lightFrameContrast : Platform.Theme.frameContrast
+        )
+
+        x: {
+            if (!root.Window.contentItem) {
+                return 0;
+            }
+
+            const dpr = root.Kirigami.ScenePosition.devicePixelRatio;
+
+            if (root.anchors.left !== undefined && root.anchors.right !== undefined) {
+                // If is aligned to both left and rightuse the internal
+                // Rectangle pixel snapping as in this case we don't care for it to be exactly 1 pixel wide
+                return 0;
+            } else if ((LayoutMirroring.enabled && root.anchors.left !== undefined) ||
+                       (!LayoutMirroring.enabled && root.anchors.right !== undefined)) {
+                // If is right-anchored, we want the visual line to be drawn exactly on the pixel edge
+                // of the parent or what's is anchored to
+                const xStart = root.Kirigami.ScenePosition.x + root.width - width;
+                const xAdjusted = Math.floor(xStart * dpr) / dpr;
+                const delta = xStart - xAdjusted
+                return root.width - width + delta
+            }
+
+            const xAdjusted = Math.floor(root.Kirigami.ScenePosition.x * dpr) / dpr;
+            const delta = root.Kirigami.ScenePosition.x - xAdjusted
+            return -delta
+        }
+
+        y: {
+            if (!root.Window.contentItem) {
+                return 0;
+            }
+
+            const dpr = root.Kirigami.ScenePosition.devicePixelRatio;
+
+            if (root.anchors.top !== undefined && root.anchors.bottom !== undefined) {
+                return 0;
+            } else if (root.anchors.bottom !== undefined) {
+                const yStart = root.Kirigami.ScenePosition.y + root.height - height;
+                const yAdjusted = Math.floor(yStart * dpr) / dpr;
+                const delta = yStart - yAdjusted
+                return root.height - height + delta
+            }
+
+            const yAdjusted = Math.floor(root.Kirigami.ScenePosition.y * dpr) / dpr;
+            const delta = root.Kirigami.ScenePosition.y - yAdjusted
+            return -delta
+        }
+    }
 }

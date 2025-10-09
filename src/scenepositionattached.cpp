@@ -14,6 +14,7 @@ ScenePositionAttached::ScenePositionAttached(QObject *parent)
 {
     m_item = qobject_cast<QQuickItem *>(parent);
     connectAncestors(m_item);
+    m_item->installEventFilter(this);
 }
 
 ScenePositionAttached::~ScenePositionAttached()
@@ -44,6 +45,18 @@ qreal ScenePositionAttached::y() const
     }
 
     return y;
+}
+
+qreal ScenePositionAttached::devicePixelRatio() const
+{
+    if (!m_item) {
+        return 1;
+    }
+    QQuickWindow *win = qobject_cast<QQuickWindow *>(m_item->window());
+    if (!win) {
+        return 1;
+    }
+    return win->effectiveDevicePixelRatio();
 }
 
 void ScenePositionAttached::connectAncestors(QQuickItem *item)
@@ -77,6 +90,31 @@ void ScenePositionAttached::connectAncestors(QQuickItem *item)
 
         ancestor = ancestor->parentItem();
     }
+
+    connect(item, &QQuickItem::windowChanged, this, [this](QQuickWindow *window) {
+        if (m_itemWindow) {
+            m_itemWindow->removeEventFilter(this);
+        }
+        m_itemWindow = qobject_cast<QQuickWindow *>(m_item->window());
+        if (!m_itemWindow) {
+            return;
+        }
+        m_itemWindow->installEventFilter(this);
+        Q_EMIT devicePixelRatioChanged();
+    });
+    m_itemWindow = qobject_cast<QQuickWindow *>(m_item->window());
+    if (!m_itemWindow) {
+        return;
+    }
+    m_itemWindow->installEventFilter(this);
+}
+
+bool ScenePositionAttached::eventFilter(QObject *watched, QEvent *event)
+{
+    if (event->type() == QEvent::DevicePixelRatioChange) {
+        Q_EMIT devicePixelRatioChanged();
+    }
+    return QObject::eventFilter(watched, event);
 }
 
 ScenePositionAttached *ScenePositionAttached::qmlAttachedProperties(QObject *object)
