@@ -8,6 +8,7 @@
 #include "platformtheme.h"
 #include "basictheme_p.h"
 #include "platformpluginfactory.h"
+#include "settings.h"
 #include <QDebug>
 #include <QDir>
 #include <QFontDatabase>
@@ -39,6 +40,8 @@ template<>
 KIRIGAMIPLATFORM_EXPORT QEvent::Type PlatformThemeEvents::ColorChangedEvent::type = QEvent::None;
 template<>
 KIRIGAMIPLATFORM_EXPORT QEvent::Type PlatformThemeEvents::FontChangedEvent::type = QEvent::None;
+template<>
+KIRIGAMIPLATFORM_EXPORT QEvent::Type PlatformThemeEvents::FrameContrastChangedEvent::type = QEvent::None;
 
 // Initialize event types.
 // We want to avoid collisions with application event types so we should use
@@ -53,6 +56,7 @@ struct TypeInitializer {
         PlatformThemeEvents::ColorGroupChangedEvent::type = QEvent::Type(QEvent::registerEventType());
         PlatformThemeEvents::ColorChangedEvent::type = QEvent::Type(QEvent::registerEventType());
         PlatformThemeEvents::FontChangedEvent::type = QEvent::Type(QEvent::registerEventType());
+        PlatformThemeEvents::FrameContrastChangedEvent::type = QEvent::Type(QEvent::registerEventType());
     }
 };
 static TypeInitializer initializer;
@@ -119,6 +123,8 @@ public:
     // signal/slots turn out to have a pretty large memory overhead per instance.
     using Watcher = PlatformTheme *;
     QList<Watcher> watchers;
+
+    qreal frameContrast = 0.2;
 
     inline void setColorSet(PlatformTheme *sender, PlatformTheme::ColorSet set)
     {
@@ -268,6 +274,19 @@ public:
         default:
             break;
         }
+    }
+
+    inline void setFrameContrast(PlatformTheme *sender, const qreal &contrast)
+    {
+        if (sender != owner || contrast == frameContrast) {
+            return;
+        }
+
+        auto oldValue = frameContrast;
+
+        frameContrast = contrast;
+
+        notifyWatchers<qreal>(sender, oldValue, frameContrast);
     }
 };
 
@@ -714,12 +733,21 @@ void PlatformTheme::setFixedWidthFont(const QFont &font)
     }
 }
 
+void PlatformTheme::setFrameContrast(qreal contrast)
+{
+    PlatformThemeChangeTracker tracker(this, PlatformThemeChangeTracker::PropertyChange::FrameContrast);
+    if (d->data) {
+        d->data->setFrameContrast(this, contrast);
+    }
+}
+
 qreal PlatformTheme::frameContrast() const
 {
     // This value must be kept in sync with
     // the value from Breeze Qt Widget theme.
     // See: https://invent.kde.org/plasma/breeze/-/blob/master/kstyle/breezemetrics.h?ref_type=heads#L162
-    return 0.20;
+
+    return d->data ? d->data->frameContrast : 0.2;
 }
 
 qreal PlatformTheme::lightFrameContrast() const
@@ -935,6 +963,10 @@ void PlatformTheme::emitSignalsForChanges(int changes)
         Q_EMIT fixedWidthFontChanged(d->data->fixedWidthFont);
     }
 
+    if (propertyChanges & PlatformThemeChangeTracker::PropertyChange::FrameContrast) {
+        Q_EMIT frameContrastChanged(d->data->frameContrast);
+    }
+
     if (propertyChanges & PlatformThemeChangeTracker::PropertyChange::Data) {
         updateChildren(parent());
     }
@@ -981,6 +1013,11 @@ bool PlatformTheme::event(QEvent *event)
 
     if (event->type() == PlatformThemeEvents::FontChangedEvent::type) {
         tracker.markDirty(PlatformThemeChangeTracker::PropertyChange::Font);
+        return true;
+    }
+
+    if (event->type() == PlatformThemeEvents::FrameContrastChangedEvent::type) {
+        tracker.markDirty(PlatformThemeChangeTracker::PropertyChange::FrameContrast);
         return true;
     }
 

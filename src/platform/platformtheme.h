@@ -585,6 +585,8 @@ public:
     // QML attached property
     static PlatformTheme *qmlAttachedProperties(QObject *object);
 
+    void setFrameContrast(qreal contrast);
+
 Q_SIGNALS:
     void colorsChanged();
     void defaultFontChanged(const QFont &font);
@@ -595,6 +597,7 @@ Q_SIGNALS:
     void paletteChanged(const QPalette &pal);
     void inheritChanged(bool inherit);
     void useAlternateBackgroundColorChanged(bool alternate);
+    void frameContrastChanged(qreal contrast);
 
 protected:
     /// To set in the constructors so the changes trackers can avoid emitting
@@ -684,8 +687,9 @@ public:
         Color = 1 << 2,
         Palette = 1 << 3,
         Font = 1 << 4,
-        Data = 1 << 5,
-        All = ColorSet | ColorGroup | Color | Palette | Font | Data,
+        FrameContrast = 1 << 5,
+        Data = 1 << 6,
+        All = ColorSet | ColorGroup | Color | Palette | Font | FrameContrast | Data,
     };
     Q_DECLARE_FLAGS(PropertyChanges, PropertyChange)
 
@@ -748,7 +752,7 @@ using ColorSetChangedEvent = PropertyChangedEvent<PlatformTheme::ColorSet>;
 using ColorGroupChangedEvent = PropertyChangedEvent<PlatformTheme::ColorGroup>;
 using ColorChangedEvent = PropertyChangedEvent<QColor>;
 using FontChangedEvent = PropertyChangedEvent<QFont>;
-
+using FrameContrastChangedEvent = PropertyChangedEvent<qreal>;
 }
 
 }
