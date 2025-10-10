@@ -91,9 +91,13 @@ Settings::Settings(QObject *parent)
         globals.beginGroup(QStringLiteral("KDE"));
         m_scrollLines = qMax(1, globals.value(QStringLiteral("WheelScrollLines"), 3).toInt());
         m_smoothScroll = globals.value(QStringLiteral("SmoothScroll"), true).toBool();
+        globals.endGroup();
+        globals.beginGroup(QStringLiteral("WM"));
+        m_separatorContrast = globals.value(QStringLiteral("separatorContrast"), 0.2).toReal();
     } else {
         m_scrollLines = 3;
         m_smoothScroll = true;
+        m_separatorContrast = 0.2;
     }
 
     connect(SmoothScrollWatcher::self(), &SmoothScrollWatcher::enabledChanged, this, [this](bool enabled) {
@@ -236,6 +240,10 @@ bool Settings::hasPlatformMenuBar() const
     return m_hasPlatformMenuBar;
 }
 
+qreal Settings::separatorContrast() const
+{
+    return m_separatorContrast;
+}
 }
 }
 

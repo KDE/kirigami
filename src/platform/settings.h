@@ -151,6 +151,8 @@ public:
 
     QVariant applicationWindowIcon() const;
 
+    qreal separatorContrast() const;
+
 protected:
     bool eventFilter(QObject *watched, QEvent *event) override;
 
@@ -171,6 +173,7 @@ private:
     bool m_hasTouchScreen : 1;
     bool m_hasTransientTouchInput : 1;
     bool m_hasPlatformMenuBar : 1;
+    qreal m_separatorContrast = 0.2;
 };
 
 }

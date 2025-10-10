@@ -8,6 +8,7 @@
 #include "platformtheme.h"
 #include "basictheme_p.h"
 #include "platformpluginfactory.h"
+#include "settings.h"
 #include <QDebug>
 #include <QDir>
 #include <QFontDatabase>
@@ -719,7 +720,7 @@ qreal PlatformTheme::frameContrast() const
     // This value must be kept in sync with
     // the value from Breeze Qt Widget theme.
     // See: https://invent.kde.org/plasma/breeze/-/blob/master/kstyle/breezemetrics.h?ref_type=heads#L162
-    return 0.20;
+    return Settings().separatorContrast();
 }
 
 qreal PlatformTheme::lightFrameContrast() const
