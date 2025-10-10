@@ -62,7 +62,7 @@ Item {
                 weight === Separator.Weight.Light ? Platform.Theme.lightFrameContrast : Platform.Theme.frameContrast
         )
 
-        x: {
+        x: {return 0
             if (!root.Window.contentItem) {
                 return 0;
             }
@@ -88,16 +88,18 @@ Item {
             return -delta
         }
 
-        y: {
+        y: {return 0
             if (!root.Window.contentItem) {
                 return 0;
             }
 
             const dpr = root.Kirigami.ScenePosition.devicePixelRatio;
+            const atTop = root.y <= root.anchors.topMargin;
+            const atBottom = root.y + root.height >= root.parent.height - root.anchors.bottomMargin;
 
-            if (root.anchors.top !== undefined && root.anchors.bottom !== undefined) {
+            if (atTop && atBottom) {
                 return 0;
-            } else if (root.anchors.bottom !== undefined) {
+            } else if (atBottom) {
                 const yStart = root.Kirigami.ScenePosition.y + root.height - height;
                 const yAdjusted = Math.floor(yStart * dpr) / dpr;
                 const delta = yStart - yAdjusted

@@ -101,7 +101,7 @@ Item {
     // FIXME: remove
     property QtObject __appWindow: typeof applicationWindow !== "undefined" ? applicationWindow() : null
     implicitHeight: preferredHeight
-    height: Layout.preferredHeight
+    height: Math.round(Layout.preferredHeight * Kirigami.ScenePosition.devicePixelRatio) /Kirigami.ScenePosition.devicePixelRatio
 
     /*!
       \brief This property holds the background item.
