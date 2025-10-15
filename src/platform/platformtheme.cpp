@@ -19,6 +19,8 @@
 #include <QQmlEngine>
 #include <QQuickStyle>
 #include <QQuickWindow>
+#include <QSettings>
+#include <QStandardPaths>
 
 #include <array>
 #include <cinttypes>
@@ -276,7 +278,7 @@ public:
         }
     }
 
-    inline void setFrameContrast(PlatformTheme *sender, const qreal &contrast)
+    inline void setFrameContrast(PlatformTheme *sender, qreal contrast)
     {
         if (sender != owner || contrast == frameContrast) {
             return;
@@ -965,6 +967,7 @@ void PlatformTheme::emitSignalsForChanges(int changes)
 
     if (propertyChanges & PlatformThemeChangeTracker::PropertyChange::FrameContrast) {
         Q_EMIT frameContrastChanged(d->data->frameContrast);
+        Q_EMIT colorsChanged();
     }
 
     if (propertyChanges & PlatformThemeChangeTracker::PropertyChange::Data) {
@@ -1075,6 +1078,16 @@ void PlatformTheme::update()
     if (!d->data) {
         d->data = std::make_shared<PlatformThemeData>();
         d->data->owner = this;
+
+        // Initialize framecontrast value from kdeglobals file
+        const QString configPath = QStandardPaths::locate(QStandardPaths::ConfigLocation, QStringLiteral("kdeglobals"));
+        if (QFile::exists(configPath)) {
+            QSettings globals(configPath, QSettings::IniFormat);
+            globals.beginGroup(QStringLiteral("WM"));
+            d->data->setFrameContrast(this, globals.value(QStringLiteral("frameContrast"), 0.2).toReal());
+        } else {
+            d->data->setFrameContrast(this, 0.2);
+        }
 
         d->data->setColorSet(this, static_cast<ColorSet>(d->colorSet));
         d->data->setColorGroup(this, static_cast<ColorGroup>(d->colorGroup));

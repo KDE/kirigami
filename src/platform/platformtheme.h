@@ -585,8 +585,6 @@ public:
     // QML attached property
     static PlatformTheme *qmlAttachedProperties(QObject *object);
 
-    void setFrameContrast(qreal contrast);
-
 Q_SIGNALS:
     void colorsChanged();
     void defaultFontChanged(const QFont &font);
@@ -635,6 +633,7 @@ protected:
     void setDefaultFont(const QFont &defaultFont);
     void setSmallFont(const QFont &smallFont);
     void setFixedWidthFont(const QFont &fixedWidthFont);
+    void setFrameContrast(qreal contrast);
 
     bool event(QEvent *event) override;
 
