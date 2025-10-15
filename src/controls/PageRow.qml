@@ -1009,6 +1009,16 @@ QT.Control {
                 visible: leftSidebar && children.length > 0
             }
 
+            Item {
+                id: columnViewInputMask
+                anchors {
+                    left: columnView.left
+                    top: columnView.top
+                    bottom: columnView.bottom
+                }
+                width: Kirigami.Units.gridUnit * 2
+            }
+
             Kirigami.ColumnView {
                 id: columnView
                 anchors {
@@ -1020,6 +1030,8 @@ QT.Control {
 
                 topPadding: globalToolBarUI.item && globalToolBarUI.item.breadcrumbVisible
                             ? globalToolBarUI.height : 0
+
+                containmentMask: columnViewInputMask
 
                 // Internal hidden api for Page
                 readonly property Item __pageRow: root
