@@ -21,7 +21,6 @@
 #include <algorithm>
 #include <qnamespace.h>
 #include <qpropertyanimation.h>
-#include <qvariant.h>
 
 #include "platform/units.h"
 
@@ -1785,13 +1784,6 @@ bool ColumnView::childMouseEventFilter(QQuickItem *item, QEvent *event)
         const QPointF pressPos = mapFromItem(item, te->points().first().pressPosition());
         const QPointF lastPos = mapFromItem(item, te->points().first().lastPosition());
         const QPointF pos = mapFromItem(item, te->points().first().position());
-
-        if (QQuickItem *mask = qobject_cast<QQuickItem *>(containmentMask())) {
-            QRectF maskGeom = {mask->position(), mask->size()};
-            if (!maskGeom.contains(pressPos)) {
-                return false;
-            }
-        }
 
         m_verticalScrollIntercepted = m_verticalScrollIntercepted || std::abs(pos.y() - pressPos.y()) > qApp->styleHints()->startDragDistance() * 3;
 
