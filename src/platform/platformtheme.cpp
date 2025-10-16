@@ -8,7 +8,6 @@
 #include "platformtheme.h"
 #include "basictheme_p.h"
 #include "platformpluginfactory.h"
-#include "settings.h"
 #include <QDebug>
 #include <QDir>
 #include <QFontDatabase>
