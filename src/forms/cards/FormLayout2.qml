@@ -15,5 +15,6 @@ Item {
         id: layout
         anchors.centerIn: parent
         spacing: Kirigami.Units.largeSpacing
+        width: Math.min(implicitWidth, parent.width, Kirigami.Units.gridUnit * 32)
     }
 }
