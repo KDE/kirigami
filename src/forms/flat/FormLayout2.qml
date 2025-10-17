@@ -26,11 +26,9 @@ Item {
                 }
             }
         }
-        anchors {
-            centerIn: parent
-            //horizontalCenterOffset: labelWidth/2
-        }
-        width: Math.min(implicitWidth, parent.width)// - labelWidth
-        spacing: Kirigami.Units.mediumSpacing
+        anchors.centerIn: parent
+
+        width: Math.min(implicitWidth, parent.width, Kirigami.Units.gridUnit * 32)
+        spacing: Kirigami.Units.largeSpacing * 4 + Kirigami.Units.smallSpacing
     }
 }

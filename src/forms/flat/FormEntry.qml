@@ -24,6 +24,7 @@ Item {
     implicitHeight: impl.implicitHeight
 
     Layout.fillWidth: true
+    Layout.maximumWidth: implicitWidth
 
     signal clicked
 
@@ -35,7 +36,7 @@ Item {
         anchors {
             top: parent.top
             right: parent.left
-            topMargin: root.contentItem.Kirigami.FormData.buddyFor.height/2 - label.height/2 + impl.padding
+            topMargin: root.contentItem.Kirigami.FormData.buddyFor.height/2 - label.height/2 + impl.topPadding
         }
         visible: text.length > 0
         Kirigami.MnemonicData.enabled: {
@@ -78,36 +79,41 @@ Item {
     T.Control {
         id: impl
         anchors.fill: parent
-        implicitWidth: layout.implicitWidth + padding * 2
-        implicitHeight: layout.implicitHeight + padding * 2
-        padding: Kirigami.Units.mediumSpacing
+        implicitWidth: layout.implicitWidth + leftPadding + rightPadding
+        implicitHeight: layout.implicitHeight + topPadding + bottomPadding
+        leftPadding: Kirigami.Units.largeSpacing
+        rightPadding: leftPadding
+        topPadding: 0
+        bottomPadding: 0
 
-        contentItem: Item {
-            implicitWidth: layout.implicitWidth
-            implicitHeight: layout.implicitHeight
-            Kirigami.HeaderFooterLayout {
-                id: layout
-                spacing: Kirigami.Units.smallSpacing
-                width: contentItem?.Layout.preferredWidth > 0 ? Math.min(parent.width, contentItem.Layout.preferredWidth) : parent.width
+        contentItem: Kirigami.HeaderFooterLayout {
+            id: layout
+            width: contentItem?.Layout.preferredWidth > 0 ? Math.min(parent.width, contentItem.Layout.preferredWidth) : parent.width
 
-                footer: QQC.Label {
-                    visible: text.length > 0
-                    text: root.subtitle
-                    opacity: 0.6
-                }
+            footer: QQC.Label {
+                font: Kirigami.Theme.smallFont
+                wrapMode: Text.WordWrap
+                elide: Text.ElideRight
+                visible: text.length > 0
+                text: root.subtitle
+                leftPadding: Application.layoutDirection === Qt.LeftToRight
+                    ? root.contentItem.Kirigami.FormData.buddyFor?.indicator?.width + root.contentItem.Kirigami.FormData.buddyFor?.spacing
+                    : padding
+                rightPadding: Application.layoutDirection === Qt.RightToLeft
+                    ? root.contentItem.Kirigami.FormData.buddyFor?.indicator?.width + root.contentItem.Kirigami.FormData.buddyFor?.spacing
+                    : padding
             }
         }
     }
 
-        // TODO: this should be a property in the template
+    // TODO: this should be a property in the template
     Kirigami.Separator {
         id: separator
-        opacity: 0.5
-        visible: false
+        visible: false//root.Kirigami.FormData.isSection
         anchors {
             left: parent.left
             right: parent.right
-            bottom: parent.bottom
+            top: parent.top
             leftMargin: Kirigami.Units.largeSpacing
             rightMargin: Kirigami.Units.largeSpacing
         }

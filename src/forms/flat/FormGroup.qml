@@ -34,7 +34,7 @@ Item {
         spacing: Kirigami.Units.smallSpacing
 
         header: Kirigami.Heading {
-            level: 5
+            level: 4
             horizontalAlignment: Text.AlignHCenter
             font.weight: Font.DemiBold
             visible: text.length > 0
@@ -57,7 +57,7 @@ Item {
                     }
                     labelWidth = w;
                 }
-                spacing: 0
+                spacing: Kirigami.Units.smallSpacing
             }
         }
     }
