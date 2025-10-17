@@ -11,7 +11,7 @@ Item {
     property string title
     default property alias entries: innerLayout.data
     implicitWidth: layout.implicitWidth
-    implicitHeight: layout.implicitHeight
+    implicitHeight: layout.implicitHeight + layout.y
 
     readonly property real __maxTextLabelWidth: innerLayout.labelWidth
     property real __assignedWidthForLabels: 0
@@ -30,24 +30,27 @@ Item {
 
     Kirigami.HeaderFooterLayout {
         id: layout
-        anchors.fill: parent
+        anchors {
+            fill: parent
+            topMargin: separator.visible ? Kirigami.Units.largeSpacing : 0
+        }
         spacing: Kirigami.Units.smallSpacing
 
         header: Kirigami.Heading {
-            level: 5
+            level: 4
             horizontalAlignment: Text.AlignHCenter
             font.weight: Font.DemiBold
             visible: text.length > 0
             text: root.title
         }
         contentItem: Item {
-            implicitWidth: innerLayout.implicitWidth + innerLayout.labelWidth
+            implicitWidth: innerLayout.implicitWidth + __assignedWidthForLabels//+ innerLayout.labelWidth
             implicitHeight: innerLayout.implicitHeight
             ColumnLayout {
                 id: innerLayout
                 anchors {
                     fill: parent
-                    leftMargin: root.__assignedWidthForLabels
+                    leftMargin: root.parent.parent.__collapsed ? 0 : root.__assignedWidthForLabels
                 }
                 property real labelWidth: 0
                 onImplicitWidthChanged: {
@@ -57,7 +60,7 @@ Item {
                     }
                     labelWidth = w;
                 }
-                spacing: 0
+                spacing: Kirigami.Units.smallSpacing
             }
         }
     }
