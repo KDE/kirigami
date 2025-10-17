@@ -156,6 +156,15 @@ void KirigamiPlugin::registerTypes(const char *uri)
     qmlRegisterType(componentUrl(QStringLiteral("SelectableLabel.qml")), uri, 2, 20, "SelectableLabel");
     qmlRegisterType(componentUrl(QStringLiteral("InlineViewHeader.qml")), uri, 2, 20, "InlineViewHeader");
     qmlRegisterType(componentUrl(QStringLiteral("ContextualHelpButton.qml")), uri, 2, 20, "ContextualHelpButton");
+
+    // Forms
+    QString formsChoice = QString::fromLocal8Bit(qgetenv("KDE_KIRIGAMI_FORMS_STYLE"));
+    if (formsChoice.isEmpty() || formsChoice != QStringLiteral("flat")) {
+        formsChoice = QStringLiteral("cards");
+    }
+    qmlRegisterType(componentUrl(QStringLiteral("forms/") % formsChoice % QStringLiteral("/FormLayout2.qml")), uri, 2, 20, "FormLayout2");
+    qmlRegisterType(componentUrl(QStringLiteral("forms/") % formsChoice % QStringLiteral("/FormGroup.qml")), uri, 2, 20, "FormGroup");
+    qmlRegisterType(componentUrl(QStringLiteral("forms/") % formsChoice % QStringLiteral("/FormEntry.qml")), uri, 2, 20, "FormEntry");
 }
 
 void KirigamiPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
