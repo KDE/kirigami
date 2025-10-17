@@ -11,10 +11,15 @@ Item {
     implicitWidth: layout.implicitWidth + Kirigami.Units.smallSpacing * 2
     implicitHeight: layout.implicitHeight + Kirigami.Units.smallSpacing * 2
 
+    property bool __collapsed: false
+
+    onWidthChanged: layout.relayoutLabels()
+
     ColumnLayout {
         id: layout
         property real labelWidth: 0
-        onImplicitWidthChanged: {
+        onImplicitWidthChanged: relayoutLabels()
+        function relayoutLabels() {
             let w = 0;
             for (let entry of children) {
                 w = Math.max(w, entry?.__maxTextLabelWidth ?? 0);
@@ -25,12 +30,14 @@ Item {
                     entry.__assignedWidthForLabels = w;
                 }
             }
+
+            __collapsed = implicitWidth > root.width;
         }
-        anchors {
-            centerIn: parent
-            //horizontalCenterOffset: labelWidth/2
-        }
-        width: Math.min(implicitWidth, parent.width)// - labelWidth
-        spacing: Kirigami.Units.mediumSpacing
+        anchors.centerIn: parent
+
+        width: __collapsed
+                ? Math.min(implicitWidth, parent.width, Kirigami.Units.gridUnit * 28)
+                : Math.min(implicitWidth, parent.width)
+        spacing: Kirigami.Units.largeSpacing * 4 + Kirigami.Units.smallSpacing
     }
 }

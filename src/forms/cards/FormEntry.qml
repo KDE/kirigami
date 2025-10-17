@@ -7,7 +7,6 @@ import QtQuick.Layouts
 import QtQuick.Controls as QQC
 import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
-import org.kde.kirigamiaddons.formcard as FC
 
 Item {
     id: root
@@ -31,8 +30,17 @@ Item {
         id: impl
         anchors.fill: parent
         implicitWidth: layout.implicitWidth + padding * 2
-        implicitHeight: layout.implicitHeight + padding * 2
+        implicitHeight: layout.implicitHeight + topPadding + bottomPadding
         padding: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
+
+        readonly property bool isRadio: (root.contentItem?.Kirigami.FormData.buddyFor) instanceof QQC.RadioButton
+        readonly property bool nextIsRadio: root.parent.visibleChildren[root.parent.visibleChildren.indexOf(root) + 1]?.contentItem?.Kirigami.FormData.buddyFor instanceof QQC.RadioButton
+        readonly property bool prevIsRadio: root.parent.visibleChildren[root.parent.visibleChildren.indexOf(root) - 1]?.contentItem?.Kirigami.FormData.buddyFor instanceof QQC.RadioButton
+
+        topPadding: isRadio && prevIsRadio ? Kirigami.Units.smallSpacing : Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
+        bottomPadding: isRadio && nextIsRadio ? Kirigami.Units.smallSpacing : Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
+
+        hoverEnabled: true
 
         onClicked: {
             const buddy = root.contentItem?.Kirigami.FormData.buddyFor;
@@ -81,9 +89,18 @@ Item {
                 }
             }
             footer: QQC.Label {
+                font: Kirigami.Theme.smallFont
                 visible: text.length > 0
                 text: root.subtitle
-                opacity: 0.6
+                wrapMode: Text.WordWrap
+                elide: Text.ElideRight
+
+                leftPadding: Application.layoutDirection === Qt.LeftToRight
+                        ? root.contentItem.Kirigami.FormData.buddyFor?.indicator?.width + root.contentItem.Kirigami.FormData.buddyFor?.spacing
+                        : padding
+                rightPadding: Application.layoutDirection === Qt.RightToLeft
+                        ? root.contentItem.Kirigami.FormData.buddyFor?.indicator?.width + root.contentItem.Kirigami.FormData.buddyFor?.spacing
+                        : padding
             }
         }
 
@@ -109,7 +126,7 @@ Item {
     Kirigami.Separator {
         id: separator
         opacity: 0.5
-        visible: !(root.contentItem?.Kirigami.FormData.buddyFor instanceof QQC.RadioButton) || !(root.parent.children[root.parent.children.indexOf(root) + 1].contentItem?.Kirigami.FormData.buddyFor instanceof QQC.RadioButton)
+        visible: !impl.isRadio || !impl.nextIsRadio
         anchors {
             left: parent.left
             right: parent.right

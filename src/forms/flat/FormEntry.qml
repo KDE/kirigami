@@ -7,7 +7,6 @@ import QtQuick.Layouts
 import QtQuick.Controls as QQC
 import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
-import org.kde.kirigamiaddons.formcard as FC
 
 Item {
     id: root
@@ -20,7 +19,7 @@ Item {
     property alias background: impl.background
     property alias footer: layout.footer
 
-    implicitWidth: impl.implicitWidth
+    implicitWidth: Math.max(contentItem.implicitWidth + impl.leftPadding * 2, Math.min(impl.implicitWidth, Kirigami.Units.gridUnit * 20 + impl.leftPadding * 2))
     implicitHeight: impl.implicitHeight
 
     Layout.fillWidth: true
@@ -35,9 +34,9 @@ Item {
         anchors {
             top: parent.top
             right: parent.left
-            topMargin: root.contentItem.Kirigami.FormData.buddyFor.height/2 - label.height/2 + impl.padding
+            topMargin: root.contentItem.Kirigami.FormData.buddyFor.height/2 - label.height/2 + impl.topPadding
         }
-        visible: text.length > 0
+        visible: text.length > 0 && !impl.formLayout.__collapsed
         Kirigami.MnemonicData.enabled: {
                 const buddy = root.contentItem?.Kirigami.FormData.buddyFor;
                 if (buddy && buddy.enabled && buddy.visible && buddy.activeFocusOnTab) {
@@ -77,37 +76,62 @@ Item {
 
     T.Control {
         id: impl
-        anchors.fill: parent
-        implicitWidth: layout.implicitWidth + padding * 2
-        implicitHeight: layout.implicitHeight + padding * 2
-        padding: Kirigami.Units.mediumSpacing
-
-        contentItem: Item {
-            implicitWidth: layout.implicitWidth
-            implicitHeight: layout.implicitHeight
-            Kirigami.HeaderFooterLayout {
-                id: layout
-                spacing: Kirigami.Units.smallSpacing
-                width: contentItem?.Layout.preferredWidth > 0 ? Math.min(parent.width, contentItem.Layout.preferredWidth) : parent.width
-
-                footer: QQC.Label {
-                    visible: text.length > 0
-                    text: root.subtitle
-                    opacity: 0.6
+        anchors {
+            left: parent.left
+            top: parent.top
+            bottom: parent.bottom
+        }
+        width: layout.contentItem.Layout.fillWidth ? parent.width : Math.min(implicitWidth, parent.width)
+        implicitWidth: layout.implicitWidth + leftPadding + rightPadding
+        implicitHeight: layout.implicitHeight + topPadding + bottomPadding
+        leftPadding: Kirigami.Units.largeSpacing
+        rightPadding: leftPadding
+        topPadding: 0
+        bottomPadding: 0
+        readonly property Item formLayout: {
+            let candidate = root.parent
+            while (candidate) {
+                if (candidate instanceof FormLayout2) {
+                    return candidate;
                 }
+                candidate = candidate.parent
+            }
+            return null
+        }
+
+        contentItem: Kirigami.HeaderFooterLayout {
+            id: layout
+
+            header: QQC.Label {
+                topPadding: root.y > 0 ? Kirigami.Units.largeSpacing : 0
+                visible: impl.formLayout.__collapsed && text.length > 0
+                text: label.Kirigami.MnemonicData.richTextLabel
+            }
+
+            footer: QQC.Label {
+                font: Kirigami.Theme.smallFont
+                wrapMode: Text.WordWrap
+                elide: Text.ElideRight
+                visible: text.length > 0
+                text: root.subtitle
+                leftPadding: Application.layoutDirection === Qt.LeftToRight
+                    ? root.contentItem.Kirigami.FormData.buddyFor?.indicator?.width + root.contentItem.Kirigami.FormData.buddyFor?.spacing
+                    : padding
+                rightPadding: Application.layoutDirection === Qt.RightToLeft
+                    ? root.contentItem.Kirigami.FormData.buddyFor?.indicator?.width + root.contentItem.Kirigami.FormData.buddyFor?.spacing
+                    : padding
             }
         }
     }
 
-        // TODO: this should be a property in the template
+    // TODO: this should be a property in the template
     Kirigami.Separator {
         id: separator
-        opacity: 0.5
-        visible: false
+        visible: false//root.Kirigami.FormData.isSection
         anchors {
             left: parent.left
             right: parent.right
-            bottom: parent.bottom
+            top: parent.top
             leftMargin: Kirigami.Units.largeSpacing
             rightMargin: Kirigami.Units.largeSpacing
         }
