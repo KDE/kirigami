@@ -159,7 +159,7 @@ void KirigamiPlugin::registerTypes(const char *uri)
 
     // Forms
     QString formsChoice = QString::fromLocal8Bit(qgetenv("KDE_KIRIGAMI_FORMS_STYLE"));
-    if (formsChoice.isEmpty() || formsChoice != QStringLiteral("flat")) {
+    if (formsChoice.isEmpty() || (formsChoice != QStringLiteral("flat") && formsChoice != QStringLiteral("hybrid"))) {
         formsChoice = QStringLiteral("cards");
     }
     qmlRegisterType(componentUrl(QStringLiteral("forms/") % formsChoice % QStringLiteral("/FormLayout2.qml")), uri, 2, 20, "FormLayout2");
