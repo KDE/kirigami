@@ -1,0 +1,195 @@
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
+
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls as QQC
+import QtQuick.Templates as T
+import org.kde.kirigami as Kirigami
+
+Item {
+    id: root
+
+    property string title: contentItem?.Kirigami.FormData.label
+    property string subtitle
+    property alias contentItem: layout.contentItem
+    //property alias background: impl.background
+
+    implicitWidth: impl.implicitWidth
+    implicitHeight: impl.implicitHeight
+
+    Layout.fillWidth: true
+
+    //Internal: never rely on this
+    readonly property real __textLabelWidth: label.implicitWidth
+
+    QQC.Label {
+        id: label
+        anchors {
+            top: parent.top
+            right: parent.left
+            rightMargin: -impl.leftPadding + Kirigami.Units.smallSpacing
+            topMargin: root.contentItem.Kirigami.FormData.buddyFor.y + root.contentItem.Kirigami.FormData.buddyFor.height/2 - label.height/2 + impl.topPadding
+        }
+        visible: text.length > 0 && !impl.formLayout.__collapsed
+        Kirigami.MnemonicData.enabled: {
+                const buddy = root.contentItem?.Kirigami.FormData.buddyFor;
+                if (buddy && buddy.enabled && buddy.visible && buddy.activeFocusOnTab) {
+                    // Only set mnemonic if the buddy doesn't already have one.
+                    const buddyMnemonic = buddy.Kirigami.MnemonicData;
+                    return !buddyMnemonic.label || !buddyMnemonic.enabled;
+                } else {
+                    return false;
+                }
+            }
+        Kirigami.MnemonicData.controlType: Kirigami.MnemonicData.FormLabel
+        Kirigami.MnemonicData.label: root.title
+        text: Kirigami.MnemonicData.richTextLabel
+        Accessible.name: Kirigami.MnemonicData.plainTextLabel
+        Shortcut {
+            sequence: label.Kirigami.MnemonicData.sequence
+            onActivated: {
+                const buddy = root.contentItem?.Kirigami.FormData.buddyFor;
+
+                const buttonBuddy = buddy as T.AbstractButton;
+                // animateClick is only in Qt 6.8,
+                // it also takes into account focus policy.
+                if (buttonBuddy && buttonBuddy.animateClick) {
+                    buttonBuddy.animateClick();
+                } else {
+                    buddy.forceActiveFocus(Qt.ShortcutFocusReason);
+                }
+            }
+        }
+        TapHandler {
+            onTapped: {
+                const buddy = root.contentItem?.Kirigami.FormData.buddyFor;
+                buddy.forceActiveFocus(Qt.ShortcutFocusReason);
+            }
+        }
+    }
+
+    T.ItemDelegate {
+        id: impl
+        anchors.fill: parent
+        implicitWidth: layout.implicitWidth + leftPadding + rightPadding + (impl.formLayout.__collapsed ? root.parent?.__assignedWidthForLabels + Kirigami.Units.smallSpacing : 0)
+        implicitHeight: layout.implicitHeight + topPadding + bottomPadding
+        padding: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
+
+        readonly property bool nextIsFormEntry: root.parent.visibleChildren[root.parent.visibleChildren.indexOf(root) + 1] instanceof FormEntry
+        readonly property bool prevIsFormEntry: root.parent.visibleChildren[root.parent.visibleChildren.indexOf(root) - 1] instanceof FormEntry
+
+        leftPadding: impl.formLayout.__collapsed
+                        ? padding
+                        : root.parent?.__assignedWidthForLabels + padding + Kirigami.Units.smallSpacing ?? padding
+        topPadding: prevIsFormEntry ? Kirigami.Units.smallSpacing : Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
+        bottomPadding: nextIsFormEntry ? Kirigami.Units.smallSpacing : Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
+
+        readonly property Item formLayout: {
+            let candidate = root.parent
+            while (candidate) {
+                if (candidate instanceof FormLayout2) {
+                    return candidate;
+                }
+                candidate = candidate.parent
+            }
+            return null
+        }
+
+        hoverEnabled: true
+
+        onClicked: {
+            const buddy = root.contentItem?.Kirigami.FormData.buddyFor;
+            buddy.forceActiveFocus(Qt.ShortcutFocusReason);
+            if (buddy instanceof T.AbstractButton) {
+                buddy.animateClick();
+            } else if (buddy instanceof T.ComboBox) {
+                buddy.popup.open();
+            }
+        }
+
+        contentItem: Kirigami.HeaderFooterLayout {
+            id: layout
+            spacing: Kirigami.Units.smallSpacing
+
+            header: QQC.Label {
+                visible: text.length > 0 && impl.formLayout.__collapsed
+                Kirigami.MnemonicData.enabled: {
+                    const buddy = root.contentItem?.Kirigami.FormData.buddyFor;
+                    if (buddy && buddy.enabled && buddy.visible && buddy.activeFocusOnTab) {
+                        // Only set mnemonic if the buddy doesn't already have one.
+                        const buddyMnemonic = buddy.Kirigami.MnemonicData;
+                        return !buddyMnemonic.label || !buddyMnemonic.enabled;
+                    } else {
+                        return false;
+                    }
+                }
+                Kirigami.MnemonicData.controlType: Kirigami.MnemonicData.FormLabel
+                Kirigami.MnemonicData.label: root.title
+                text: Kirigami.MnemonicData.richTextLabel
+                Accessible.name: Kirigami.MnemonicData.plainTextLabel
+                Shortcut {
+                    sequence: layout.header.Kirigami.MnemonicData.sequence
+                    onActivated: {
+                        const buddy = root.contentItem?.Kirigami.FormData.buddyFor;
+
+                        const buttonBuddy = buddy as T.AbstractButton;
+                        // animateClick is only in Qt 6.8,
+                        // it also takes into account focus policy.
+                        if (buttonBuddy && buttonBuddy.animateClick) {
+                            buttonBuddy.animateClick();
+                        } else {
+                            buddy.forceActiveFocus(Qt.ShortcutFocusReason);
+                        }
+                    }
+                }
+            }
+            footer: QQC.Label {
+                font: Kirigami.Theme.smallFont
+                visible: text.length > 0
+                text: root.subtitle
+                wrapMode: Text.WordWrap
+                elide: Text.ElideRight
+
+                leftPadding: Application.layoutDirection === Qt.LeftToRight
+                        ? root.contentItem.Kirigami.FormData.buddyFor?.indicator?.width + root.contentItem.Kirigami.FormData.buddyFor?.spacing
+                        : padding
+                rightPadding: Application.layoutDirection === Qt.RightToLeft
+                        ? root.contentItem.Kirigami.FormData.buddyFor?.indicator?.width + root.contentItem.Kirigami.FormData.buddyFor?.spacing
+                        : padding
+            }
+        }
+
+        background: Rectangle {
+            color: Kirigami.Theme.textColor
+            opacity: impl.hovered && root.contentItem?.Kirigami.FormData.buddyFor instanceof T.AbstractButton? 0.05 : 0
+            readonly property bool first: root.parent.children[0] === root
+            readonly property bool last: root.parent.children[root.parent.children.length - 1] === root
+            topLeftRadius: first ? Kirigami.Units.cornerRadius : 0
+            topRightRadius: topLeftRadius
+            bottomLeftRadius: last ? Kirigami.Units.cornerRadius : 0
+            bottomRightRadius: bottomLeftRadius
+            Behavior on opacity {
+                OpacityAnimator {
+                    duration: Kirigami.Units.longDuration
+                    easing.type: Easing.InOutQuad
+                }
+            }
+        }
+    }
+
+    // TODO: this should be a property in the template
+    Kirigami.Separator {
+        id: separator
+        opacity: 0.5
+        visible: !impl.nextIsFormEntry
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+            leftMargin: Kirigami.Units.largeSpacing
+            rightMargin: Kirigami.Units.largeSpacing
+        }
+    }
+}

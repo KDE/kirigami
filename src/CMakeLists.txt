@@ -138,6 +138,11 @@ ecm_target_qml_sources(Kirigami PRIVATE PATH forms/flat SOURCES
     forms/flat/FormGroup.qml
     forms/flat/FormLayout2.qml
 )
+ecm_target_qml_sources(Kirigami PRIVATE PATH forms/hybrid SOURCES
+    forms/hybrid/FormEntry.qml
+    forms/hybrid/FormGroup.qml
+    forms/hybrid/FormLayout2.qml
+)
 
 if (DESKTOP_ENABLED)
     qt_target_qml_sources(Kirigami RESOURCES
