@@ -28,12 +28,11 @@ Item {
         implicitHeight: layout.implicitHeight + topPadding + bottomPadding
         padding: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
 
-        readonly property bool isRadio: (root.contentItem?.Kirigami.FormData.buddyFor) instanceof QQC.RadioButton
-        readonly property bool nextIsRadio: root.parent.visibleChildren[root.parent.visibleChildren.indexOf(root) + 1]?.contentItem?.Kirigami.FormData.buddyFor instanceof QQC.RadioButton
-        readonly property bool prevIsRadio: root.parent.visibleChildren[root.parent.visibleChildren.indexOf(root) - 1]?.contentItem?.Kirigami.FormData.buddyFor instanceof QQC.RadioButton
+        readonly property bool nextIsFormEntry: root.parent.visibleChildren[root.parent.visibleChildren.indexOf(root) + 1] instanceof FormEntry
+        readonly property bool prevIsFormEntry: root.parent.visibleChildren[root.parent.visibleChildren.indexOf(root) - 1] instanceof FormEntry
 
-        topPadding: isRadio && prevIsRadio ? Kirigami.Units.smallSpacing : Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
-        bottomPadding: isRadio && nextIsRadio ? Kirigami.Units.smallSpacing : Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
+        topPadding: prevIsFormEntry ? Kirigami.Units.smallSpacing : Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
+        bottomPadding: nextIsFormEntry ? Kirigami.Units.smallSpacing : Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
 
         hoverEnabled: true
 
@@ -121,7 +120,7 @@ Item {
     Kirigami.Separator {
         id: separator
         opacity: 0.5
-        visible: !impl.isRadio || !impl.nextIsRadio
+        visible: !impl.nextIsFormEntry
         anchors {
             left: parent.left
             right: parent.right
