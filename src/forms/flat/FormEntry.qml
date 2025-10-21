@@ -13,17 +13,13 @@ Item {
 
     property string title: contentItem?.Kirigami.FormData.label
     property string subtitle
-    property alias separatorVisible: separator.visible
-
     property alias contentItem: layout.contentItem
-    property alias background: impl.background
+    //property alias background: impl.background
 
     implicitWidth: Math.max(contentItem.implicitWidth + impl.leftPadding * 2, Math.min(impl.implicitWidth, Kirigami.Units.gridUnit * 20 + impl.leftPadding * 2))
     implicitHeight: impl.implicitHeight
 
     Layout.fillWidth: true
-
-    signal clicked
 
     //Internal: never rely on this
     readonly property real __textLabelWidth: label.implicitWidth
@@ -120,19 +116,6 @@ Item {
                     ? root.contentItem.Kirigami.FormData.buddyFor?.indicator?.width + root.contentItem.Kirigami.FormData.buddyFor?.spacing
                     : padding
             }
-        }
-    }
-
-    // TODO: this should be a property in the template
-    Kirigami.Separator {
-        id: separator
-        visible: false//root.Kirigami.FormData.isSection
-        anchors {
-            left: parent.left
-            right: parent.right
-            top: parent.top
-            leftMargin: Kirigami.Units.largeSpacing
-            rightMargin: Kirigami.Units.largeSpacing
         }
     }
 }
