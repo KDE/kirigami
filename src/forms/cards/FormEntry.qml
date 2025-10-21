@@ -13,17 +13,13 @@ Item {
 
     property string title: contentItem?.Kirigami.FormData.label
     property string subtitle
-    property alias separatorVisible: separator.visible
-
     property alias contentItem: layout.contentItem
-    property alias background: impl.background
+    //property alias background: impl.background
 
     implicitWidth: impl.implicitWidth
     implicitHeight: impl.implicitHeight
 
     Layout.fillWidth: true
-
-    signal clicked
 
     T.ItemDelegate {
         id: impl
