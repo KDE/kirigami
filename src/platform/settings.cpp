@@ -235,6 +235,7 @@ bool Settings::hasPlatformMenuBar() const
 {
     return m_hasPlatformMenuBar;
 }
+
 }
 }
 

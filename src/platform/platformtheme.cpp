@@ -1082,7 +1082,7 @@ void PlatformTheme::update()
         const QString configPath = QStandardPaths::locate(QStandardPaths::ConfigLocation, QStringLiteral("kdeglobals"));
         if (QFile::exists(configPath)) {
             QSettings globals(configPath, QSettings::IniFormat);
-            globals.beginGroup(QStringLiteral("WM"));
+            globals.beginGroup(QStringLiteral("KDE"));
             d->data->setFrameContrast(this, globals.value(QStringLiteral("frameContrast"), 0.2).toReal());
         } else {
             d->data->setFrameContrast(this, 0.2);
