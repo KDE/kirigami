@@ -17,7 +17,6 @@ Item {
 
     property alias contentItem: layout.contentItem
     property alias background: impl.background
-    property alias footer: layout.footer
 
     implicitWidth: impl.implicitWidth
     implicitHeight: impl.implicitHeight

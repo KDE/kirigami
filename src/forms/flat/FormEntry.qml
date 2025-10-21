@@ -17,7 +17,6 @@ Item {
 
     property alias contentItem: layout.contentItem
     property alias background: impl.background
-    property alias footer: layout.footer
 
     implicitWidth: Math.max(contentItem.implicitWidth + impl.leftPadding * 2, Math.min(impl.implicitWidth, Kirigami.Units.gridUnit * 20 + impl.leftPadding * 2))
     implicitHeight: impl.implicitHeight
@@ -34,7 +33,7 @@ Item {
         anchors {
             top: parent.top
             right: parent.left
-            topMargin: root.contentItem.Kirigami.FormData.buddyFor.height/2 - label.height/2 + impl.topPadding
+            topMargin: root.contentItem.Kirigami.FormData.buddyFor.y + root.contentItem.Kirigami.FormData.buddyFor.height/2 - label.height/2 + impl.topPadding
         }
         visible: text.length > 0 && !impl.formLayout.__collapsed
         Kirigami.MnemonicData.enabled: {
