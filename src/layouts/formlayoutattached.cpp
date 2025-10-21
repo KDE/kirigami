@@ -88,12 +88,6 @@ void FormLayoutAttached::setBuddyFor(QQuickItem *aBuddyFor)
     // TODO: Use ScenePosition or introduce new type for optimized relative
     // position calculation to support more nested buddy.
 
-    if (aBuddyFor && aBuddyFor != attachee && aBuddyFor->parentItem() != attachee) {
-        qWarning(KirigamiLayoutsLog).nospace() << "FormData.buddyFor must be a direct child of the attachee. Attachee: " << attachee
-                                               << ", buddyFor: " << aBuddyFor;
-        return;
-    }
-
     if (m_buddyFor) {
         disconnect(m_buddyFor, &QObject::destroyed, this, &FormLayoutAttached::resetBuddyFor);
     }
