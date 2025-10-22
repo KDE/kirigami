@@ -25,6 +25,7 @@ Item {
             top: parent.top
             leftMargin: Kirigami.Units.largeSpacing
             rightMargin: Kirigami.Units.largeSpacing
+            topMargin: -Kirigami.Units.largeSpacing - Kirigami.Units.smallSpacing
         }
     }
 
