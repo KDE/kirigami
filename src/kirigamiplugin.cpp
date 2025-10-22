@@ -165,6 +165,7 @@ void KirigamiPlugin::registerTypes(const char *uri)
     qmlRegisterType(componentUrl(QStringLiteral("forms/") % formsChoice % QStringLiteral("/FormLayout2.qml")), uri, 2, 20, "FormLayout2");
     qmlRegisterType(componentUrl(QStringLiteral("forms/") % formsChoice % QStringLiteral("/FormGroup.qml")), uri, 2, 20, "FormGroup");
     qmlRegisterType(componentUrl(QStringLiteral("forms/") % formsChoice % QStringLiteral("/FormEntry.qml")), uri, 2, 20, "FormEntry");
+    qmlRegisterType(componentUrl(QStringLiteral("forms/") % formsChoice % QStringLiteral("/FormSeparator.qml")), uri, 2, 20, "FormSeparator");
 }
 
 void KirigamiPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
