@@ -115,18 +115,4 @@ Item {
             }
         }
     }
-
-    // TODO: this should be a property in the template
-    Kirigami.Separator {
-        id: separator
-        opacity: 0.5
-        visible: !impl.nextIsFormEntry
-        anchors {
-            left: parent.left
-            right: parent.right
-            bottom: parent.bottom
-            leftMargin: Kirigami.Units.largeSpacing
-            rightMargin: Kirigami.Units.largeSpacing
-        }
-    }
 }

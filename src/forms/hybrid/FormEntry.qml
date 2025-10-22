@@ -16,7 +16,7 @@ Item {
     property alias contentItem: layout.contentItem
     //property alias background: impl.background
 
-    implicitWidth: impl.implicitWidth
+    implicitWidth: Math.max(contentItem.implicitWidth + impl.padding * 2, Math.min(layout.implicitWidth, Kirigami.Units.gridUnit * 20 + impl.padding * 2))
     implicitHeight: impl.implicitHeight
 
     Layout.fillWidth: true
@@ -29,7 +29,7 @@ Item {
         anchors {
             top: parent.top
             right: parent.left
-            rightMargin: -impl.leftPadding + Kirigami.Units.smallSpacing
+            rightMargin: -impl.leftPadding + Kirigami.Units.smallSpacing - impl.anchors.leftMargin
             topMargin: root.contentItem.Kirigami.FormData.buddyFor.y + root.contentItem.Kirigami.FormData.buddyFor.height/2 - label.height/2 + impl.topPadding
         }
         visible: text.length > 0 && !impl.formLayout.__collapsed
@@ -62,27 +62,23 @@ Item {
                 }
             }
         }
-        TapHandler {
-            onTapped: {
-                const buddy = root.contentItem?.Kirigami.FormData.buddyFor;
-                buddy.forceActiveFocus(Qt.ShortcutFocusReason);
-            }
-        }
     }
 
     T.ItemDelegate {
         id: impl
         anchors.fill: parent
-        implicitWidth: layout.implicitWidth + leftPadding + rightPadding + (impl.formLayout.__collapsed ? root.parent?.__assignedWidthForLabels + Kirigami.Units.smallSpacing : 0)
+        implicitWidth: layout.implicitWidth + leftPadding + rightPadding
         implicitHeight: layout.implicitHeight + topPadding + bottomPadding
         padding: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
+
+        leftPadding: impl.formLayout.__collapsed ? padding : root.parent?.__assignedWidthForLabels + padding
 
         readonly property bool nextIsFormEntry: root.parent.visibleChildren[root.parent.visibleChildren.indexOf(root) + 1] instanceof FormEntry
         readonly property bool prevIsFormEntry: root.parent.visibleChildren[root.parent.visibleChildren.indexOf(root) - 1] instanceof FormEntry
 
-        leftPadding: impl.formLayout.__collapsed
-                        ? padding
-                        : root.parent?.__assignedWidthForLabels + padding + Kirigami.Units.smallSpacing ?? padding
+        //leftInset: impl.formLayout.__collapsed
+        //                ? 0
+        //                : -root.parent?.__assignedWidthForLabels
         topPadding: prevIsFormEntry ? Kirigami.Units.smallSpacing : Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
         bottomPadding: nextIsFormEntry ? Kirigami.Units.smallSpacing : Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
 
@@ -115,36 +111,10 @@ Item {
 
             header: QQC.Label {
                 visible: text.length > 0 && impl.formLayout.__collapsed
-                Kirigami.MnemonicData.enabled: {
-                    const buddy = root.contentItem?.Kirigami.FormData.buddyFor;
-                    if (buddy && buddy.enabled && buddy.visible && buddy.activeFocusOnTab) {
-                        // Only set mnemonic if the buddy doesn't already have one.
-                        const buddyMnemonic = buddy.Kirigami.MnemonicData;
-                        return !buddyMnemonic.label || !buddyMnemonic.enabled;
-                    } else {
-                        return false;
-                    }
-                }
-                Kirigami.MnemonicData.controlType: Kirigami.MnemonicData.FormLabel
-                Kirigami.MnemonicData.label: root.title
-                text: Kirigami.MnemonicData.richTextLabel
-                Accessible.name: Kirigami.MnemonicData.plainTextLabel
-                Shortcut {
-                    sequence: layout.header.Kirigami.MnemonicData.sequence
-                    onActivated: {
-                        const buddy = root.contentItem?.Kirigami.FormData.buddyFor;
-
-                        const buttonBuddy = buddy as T.AbstractButton;
-                        // animateClick is only in Qt 6.8,
-                        // it also takes into account focus policy.
-                        if (buttonBuddy && buttonBuddy.animateClick) {
-                            buttonBuddy.animateClick();
-                        } else {
-                            buddy.forceActiveFocus(Qt.ShortcutFocusReason);
-                        }
-                    }
-                }
+                text: label.Kirigami.MnemonicData.richTextLabel
+                Accessible.name: label.Kirigami.MnemonicData.plainTextLabel
             }
+
             footer: QQC.Label {
                 font: Kirigami.Theme.smallFont
                 visible: text.length > 0
@@ -176,20 +146,6 @@ Item {
                     easing.type: Easing.InOutQuad
                 }
             }
-        }
-    }
-
-    // TODO: this should be a property in the template
-    Kirigami.Separator {
-        id: separator
-        opacity: 0.5
-        visible: !impl.nextIsFormEntry
-        anchors {
-            left: parent.left
-            right: parent.right
-            bottom: parent.bottom
-            leftMargin: Kirigami.Units.largeSpacing
-            rightMargin: Kirigami.Units.largeSpacing
         }
     }
 }
