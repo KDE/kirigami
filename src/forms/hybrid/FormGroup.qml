@@ -29,8 +29,8 @@ Item {
         }
         contentItem: Kirigami.AbstractCard {
             padding: 0
-            implicitWidth: innerLayout.implicitWidth //+ __assignedWidthForLabels//+ innerLayout.labelWidth
-            //leftPadding: root.parent.parent.__collapsed ? padding : root.__assignedWidthForLabels + padding
+            implicitWidth: innerLayout.implicitWidth + __assignedWidthForLabels//+ innerLayout.labelWidth
+           // leftPadding: root.parent.parent.__collapsed ? padding : root.__assignedWidthForLabels + padding
             contentItem: ColumnLayout {
                 id: innerLayout
                 property real labelWidth: 0
