@@ -744,10 +744,6 @@ void PlatformTheme::setFrameContrast(qreal contrast)
 
 qreal PlatformTheme::frameContrast() const
 {
-    // This value must be kept in sync with
-    // the value from Breeze Qt Widget theme.
-    // See: https://invent.kde.org/plasma/breeze/-/blob/master/kstyle/breezemetrics.h?ref_type=heads#L162
-
     return d->data ? d->data->frameContrast : 0.2;
 }
 
