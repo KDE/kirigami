@@ -11,7 +11,7 @@ Item {
     property string title
     default property alias entries: innerLayout.data
     implicitWidth: layout.implicitWidth
-    implicitHeight: layout.implicitHeight //+ layout.y
+    implicitHeight: layout.implicitHeight
 
     readonly property real __maxTextLabelWidth: innerLayout.labelWidth
     property alias __assignedWidthForLabels: innerLayout.__assignedWidthForLabels
@@ -29,8 +29,7 @@ Item {
         }
         contentItem: Kirigami.AbstractCard {
             padding: 0
-            implicitWidth: innerLayout.implicitWidth + __assignedWidthForLabels//+ innerLayout.labelWidth
-           // leftPadding: root.parent.parent.__collapsed ? padding : root.__assignedWidthForLabels + padding
+            implicitWidth: innerLayout.implicitWidth + __assignedWidthForLabels
             contentItem: ColumnLayout {
                 id: innerLayout
                 property real labelWidth: 0

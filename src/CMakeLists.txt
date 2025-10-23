@@ -141,6 +141,7 @@ ecm_target_qml_sources(Kirigami PRIVATE PATH forms/flat SOURCES
     forms/flat/FormSeparator.qml
 )
 ecm_target_qml_sources(Kirigami PRIVATE PATH forms/hybrid SOURCES
+    forms/hybrid/FormAction.qml
     forms/hybrid/FormEntry.qml
     forms/hybrid/FormGroup.qml
     forms/hybrid/FormLayout2.qml

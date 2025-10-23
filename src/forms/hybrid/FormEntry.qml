@@ -14,7 +14,11 @@ Item {
     property string title: contentItem?.Kirigami.FormData.label
     property string subtitle
     property alias contentItem: layout.contentItem
+    property alias leadingItems: leadingItems.children
+    property alias trailingItems: trailingItems.children
     //property alias background: impl.background
+
+    signal clicked
 
     implicitWidth: Math.max(contentItem.implicitWidth + impl.padding * 2, Math.min(layout.implicitWidth, Kirigami.Units.gridUnit * 20 + impl.padding * 2))
     implicitHeight: impl.implicitHeight
@@ -29,7 +33,7 @@ Item {
         anchors {
             top: parent.top
             right: parent.left
-            rightMargin: -impl.leftPadding + Kirigami.Units.smallSpacing - impl.anchors.leftMargin
+            rightMargin: -impl.leftPadding + Kirigami.Units.largeSpacing
             topMargin: root.contentItem.Kirigami.FormData.buddyFor.y + root.contentItem.Kirigami.FormData.buddyFor.height/2 - label.height/2 + impl.topPadding
         }
         visible: text.length > 0 && !impl.formLayout.__collapsed
@@ -67,18 +71,15 @@ Item {
     T.ItemDelegate {
         id: impl
         anchors.fill: parent
-        implicitWidth: layout.implicitWidth + leftPadding + rightPadding
-        implicitHeight: layout.implicitHeight + topPadding + bottomPadding
+        implicitWidth: mainLayout.implicitWidth + leftPadding + rightPadding
+        implicitHeight: mainLayout.implicitHeight + topPadding + bottomPadding
         padding: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
 
-        leftPadding: impl.formLayout.__collapsed ? padding : root.parent?.__assignedWidthForLabels + padding
+        leftPadding: impl.formLayout.__collapsed ? padding : root.parent?.__assignedWidthForLabels + Kirigami.Units.largeSpacing * 2
 
         readonly property bool nextIsFormEntry: root.parent.visibleChildren[root.parent.visibleChildren.indexOf(root) + 1] instanceof FormEntry
         readonly property bool prevIsFormEntry: root.parent.visibleChildren[root.parent.visibleChildren.indexOf(root) - 1] instanceof FormEntry
 
-        //leftInset: impl.formLayout.__collapsed
-        //                ? 0
-        //                : -root.parent?.__assignedWidthForLabels
         topPadding: prevIsFormEntry ? Kirigami.Units.smallSpacing : Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
         bottomPadding: nextIsFormEntry ? Kirigami.Units.smallSpacing : Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
 
@@ -93,7 +94,7 @@ Item {
             return null
         }
 
-        hoverEnabled: true
+        hoverEnabled: root.contentItem?.Kirigami.FormData.buddyFor instanceof T.AbstractButton || root instanceof FormAction
 
         onClicked: {
             const buddy = root.contentItem?.Kirigami.FormData.buddyFor;
@@ -102,20 +103,41 @@ Item {
                 buddy.animateClick();
             } else if (buddy instanceof T.ComboBox) {
                 buddy.popup.open();
+            } else {
+                root.clicked();
             }
         }
 
-        contentItem: Kirigami.HeaderFooterLayout {
-            id: layout
-            spacing: Kirigami.Units.smallSpacing
-
-            header: QQC.Label {
+        contentItem: GridLayout {
+            id: mainLayout
+            columnSpacing: Kirigami.Units.largeSpacing
+            rowSpacing: Kirigami.Units.smallSpacing
+            columns: 1 + leadingItems.visible + trailingItems.visible
+            QQC.Label {
+                Layout.columnSpan: mainLayout.columns
                 visible: text.length > 0 && impl.formLayout.__collapsed
                 text: label.Kirigami.MnemonicData.richTextLabel
                 Accessible.name: label.Kirigami.MnemonicData.plainTextLabel
             }
+            RowLayout {
+                id: leadingItems
+                Layout.rowSpan: 2
+                visible: children.length > 0
+                spacing: Kirigami.Units.smallSpacing
+            }
+            Kirigami.Padding {
+                id: layout
+                Layout.fillWidth: true
+            }
 
-            footer: QQC.Label {
+            RowLayout {
+                id: trailingItems
+                Layout.rowSpan: 2
+                visible: children.length > 0
+                spacing: Kirigami.Units.smallSpacing
+            }
+
+            QQC.Label {
                 font: Kirigami.Theme.smallFont
                 visible: text.length > 0
                 text: root.subtitle
@@ -123,7 +145,7 @@ Item {
                 elide: Text.ElideRight
 
                 leftPadding: Application.layoutDirection === Qt.LeftToRight
-                        ? root.contentItem.Kirigami.FormData.buddyFor?.indicator?.width + root.contentItem.Kirigami.FormData.buddyFor?.spacing
+                        ? (root.contentItem.Kirigami.FormData.buddyFor?.indicator?.width ?? 0) + (root.contentItem.Kirigami.FormData.buddyFor?.spacing ?? 0)
                         : padding
                 rightPadding: Application.layoutDirection === Qt.RightToLeft
                         ? root.contentItem.Kirigami.FormData.buddyFor?.indicator?.width + root.contentItem.Kirigami.FormData.buddyFor?.spacing
@@ -133,7 +155,7 @@ Item {
 
         background: Rectangle {
             color: Kirigami.Theme.textColor
-            opacity: impl.hovered && root.contentItem?.Kirigami.FormData.buddyFor instanceof T.AbstractButton? 0.05 : 0
+            opacity: impl.hovered ? (impl.down || root.contentItem?.Kirigami.FormData.buddyFor?.down ? 0.1 : 0.05) : 0
             readonly property bool first: root.parent.children[0] === root
             readonly property bool last: root.parent.children[root.parent.children.length - 1] === root
             topLeftRadius: first ? Kirigami.Units.cornerRadius : 0
