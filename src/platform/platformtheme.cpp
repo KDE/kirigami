@@ -62,6 +62,9 @@ struct TypeInitializer {
 };
 static TypeInitializer initializer;
 
+// This value has to be kept in sync with the value in KColorScheme kcolorscheme.cpp
+static constexpr qreal default_frame_contrast = 0.2;
+
 // This class encapsulates the actual data of the Theme object. It may be shared
 // among several instances of PlatformTheme, to ensure that the memory usage of
 // PlatformTheme stays low.
@@ -125,7 +128,7 @@ public:
     using Watcher = PlatformTheme *;
     QList<Watcher> watchers;
 
-    qreal frameContrast = 0.2;
+    qreal frameContrast = default_frame_contrast;
 
     inline void setColorSet(PlatformTheme *sender, PlatformTheme::ColorSet set)
     {
@@ -744,7 +747,7 @@ void PlatformTheme::setFrameContrast(qreal contrast)
 
 qreal PlatformTheme::frameContrast() const
 {
-    return d->data ? d->data->frameContrast : 0.2;
+    return d->data ? d->data->frameContrast : default_frame_contrast;
 }
 
 qreal PlatformTheme::lightFrameContrast() const
@@ -1079,9 +1082,9 @@ void PlatformTheme::update()
         if (QFile::exists(configPath)) {
             QSettings globals(configPath, QSettings::IniFormat);
             globals.beginGroup(QStringLiteral("KDE"));
-            d->data->setFrameContrast(this, globals.value(QStringLiteral("frameContrast"), 0.2).toReal());
+            d->data->setFrameContrast(this, globals.value(QStringLiteral("frameContrast"), default_frame_contrast).toReal());
         } else {
-            d->data->setFrameContrast(this, 0.2);
+            d->data->setFrameContrast(this, default_frame_contrast);
         }
 
         d->data->setColorSet(this, static_cast<ColorSet>(d->colorSet));
