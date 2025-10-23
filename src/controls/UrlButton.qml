@@ -69,7 +69,7 @@ Kirigami.LinkButton {
 
         visible: button.externalLink && button.url.length > 0
 
-        source: "open-link-symbolic"
+        source: Application.layoutDirection === Qt.RightToLeft ? "open-link-symbolic-rtl" : "open-link-symbolic"
         fallback: "link-symbolic"
         color: button.color
 
