@@ -36,7 +36,7 @@ Item {
         anchors.centerIn: parent
 
         width: __collapsed
-                ? Math.min(implicitWidth, parent.width, Kirigami.Units.gridUnit * 28)
+                ? Math.min(implicitWidth, parent.width, Kirigami.Units.gridUnit * 30)
                 : Math.min(implicitWidth, parent.width)
         spacing: Kirigami.Units.largeSpacing
     }
