@@ -20,7 +20,7 @@ Item {
 
     signal clicked
 
-    implicitWidth: Math.max(contentItem.implicitWidth + impl.padding * 2, Math.min(layout.implicitWidth, Kirigami.Units.gridUnit * 20 + impl.padding * 2))
+    implicitWidth: Math.max(mainLayout.implicitWidth + impl.padding * 2, Math.min(layout.implicitWidth, Kirigami.Units.gridUnit * 20 + impl.padding * 2))
     implicitHeight: impl.implicitHeight
 
     Layout.fillWidth: true
@@ -34,7 +34,7 @@ Item {
             top: parent.top
             right: parent.left
             rightMargin: -impl.leftPadding + Kirigami.Units.largeSpacing
-            topMargin: root.contentItem.Kirigami.FormData.buddyFor.y + root.contentItem.Kirigami.FormData.buddyFor.height/2 - label.height/2 + impl.topPadding
+            topMargin: root.contentItem.Kirigami.FormData.buddyFor.y + root.contentItem.Kirigami.FormData.buddyFor.height/2 - label.height/2 + layout.y + impl.topPadding
         }
         visible: text.length > 0 && !impl.formLayout.__collapsed
         Kirigami.MnemonicData.enabled: {
@@ -73,7 +73,7 @@ Item {
         anchors.fill: parent
         implicitWidth: mainLayout.implicitWidth + leftPadding + rightPadding
         implicitHeight: mainLayout.implicitHeight + topPadding + bottomPadding
-        padding: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
+        padding: Kirigami.Units.largeSpacing// + Kirigami.Units.smallSpacing
 
         leftPadding: impl.formLayout.__collapsed ? padding : root.parent?.__assignedWidthForLabels + Kirigami.Units.largeSpacing * 2
 
@@ -121,23 +121,26 @@ Item {
             }
             RowLayout {
                 id: leadingItems
-                Layout.rowSpan: 2
+                Layout.rowSpan: subtitleLabel.visible ? 2 : 1
                 visible: children.length > 0
                 spacing: Kirigami.Units.smallSpacing
             }
             Kirigami.Padding {
                 id: layout
                 Layout.fillWidth: true
+                Layout.alignment: Qt.AlignVCenter
             }
 
             RowLayout {
                 id: trailingItems
-                Layout.rowSpan: 2
+                Layout.rowSpan: subtitleLabel.visible ? 2 : 1
                 visible: children.length > 0
                 spacing: Kirigami.Units.smallSpacing
             }
 
             QQC.Label {
+                id: subtitleLabel
+                Layout.fillWidth: true
                 font: Kirigami.Theme.smallFont
                 visible: text.length > 0
                 text: root.subtitle
