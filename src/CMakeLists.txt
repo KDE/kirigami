@@ -127,14 +127,14 @@ qt_target_qml_sources(Kirigami RESOURCES
 )
 
 ecm_target_qml_sources(Kirigami PRIVATE PATH forms/cards SOURCES
-    forms/cards/FormArrow.qml
-    forms/cards/FormComboBox.qml
+    forms/cards/FormAction.qml
     forms/cards/FormEntry.qml
     forms/cards/FormGroup.qml
     forms/cards/FormLayout2.qml
     forms/cards/FormSeparator.qml
 )
 ecm_target_qml_sources(Kirigami PRIVATE PATH forms/flat SOURCES
+    forms/flat/FormAction.qml
     forms/flat/FormEntry.qml
     forms/flat/FormGroup.qml
     forms/flat/FormLayout2.qml
