@@ -13,14 +13,14 @@ Item {
 
     property string title: contentItem?.Kirigami.FormData.label
     property string subtitle
-    property alias contentItem: layout.contentItem
+    property alias contentItem: contentItemWrapper.contentItem
     property alias leadingItems: leadingItems.children
     property alias trailingItems: trailingItems.children
     //property alias background: impl.background
 
     signal clicked
 
-    implicitWidth: Math.max(mainLayout.implicitWidth + impl.padding * 2, Math.min(layout.implicitWidth, Kirigami.Units.gridUnit * 20 + impl.padding * 2))
+    implicitWidth: Math.max(mainLayout.implicitWidth + impl.padding * 2, Math.min(contentItemWrapper.implicitWidth, Kirigami.Units.gridUnit * 20 + impl.padding * 2))
     implicitHeight: impl.implicitHeight
 
     Layout.fillWidth: true
@@ -34,7 +34,7 @@ Item {
             top: parent.top
             right: parent.left
             rightMargin: -impl.leftPadding + Kirigami.Units.largeSpacing
-            topMargin: root.contentItem.Kirigami.FormData.buddyFor.y + root.contentItem.Kirigami.FormData.buddyFor.height/2 - label.height/2 + layout.y + impl.topPadding
+            topMargin: root.contentItem.Kirigami.FormData.buddyFor.y + root.contentItem.Kirigami.FormData.buddyFor.height/2 - label.height/2 + contentItemWrapper.y + impl.topPadding
         }
         visible: text.length > 0 && !impl.formLayout.__collapsed
         Kirigami.MnemonicData.enabled: {
@@ -126,7 +126,7 @@ Item {
                 spacing: Kirigami.Units.smallSpacing
             }
             Kirigami.Padding {
-                id: layout
+                id: contentItemWrapper
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignVCenter
             }
