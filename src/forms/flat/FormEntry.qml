@@ -14,7 +14,11 @@ Item {
     property string title: contentItem?.Kirigami.FormData.label
     property string subtitle
     property alias contentItem: layout.contentItem
+    property alias leadingItems: leadingItems.children
+    property alias trailingItems: trailingItems.children
     //property alias background: impl.background
+
+    signal clicked
 
     implicitWidth: Math.max(contentItem.implicitWidth + impl.leftPadding * 2, Math.min(impl.implicitWidth, Kirigami.Units.gridUnit * 20 + impl.leftPadding * 2))
     implicitHeight: impl.implicitHeight
@@ -76,9 +80,9 @@ Item {
             top: parent.top
             bottom: parent.bottom
         }
-        width: layout.contentItem.Layout.fillWidth ? parent.width : Math.min(implicitWidth, parent.width)
-        implicitWidth: layout.implicitWidth + leftPadding + rightPadding
-        implicitHeight: layout.implicitHeight + topPadding + bottomPadding
+        width: layout.contentItem?.Layout.fillWidth ? parent.width : Math.min(implicitWidth, parent.width)
+        implicitWidth: mainLayout.implicitWidth + leftPadding + rightPadding
+        implicitHeight: mainLayout.implicitHeight + topPadding + bottomPadding
         leftPadding: Kirigami.Units.largeSpacing
         rightPadding: leftPadding
         topPadding: 0
@@ -94,27 +98,44 @@ Item {
             return null
         }
 
-        contentItem: Kirigami.HeaderFooterLayout {
-            id: layout
-
-            header: QQC.Label {
-                topPadding: root.y > 0 ? Kirigami.Units.largeSpacing : 0
-                visible: impl.formLayout.__collapsed && text.length > 0
-                text: label.Kirigami.MnemonicData.richTextLabel
+        contentItem: RowLayout {
+            id: mainLayout
+            spacing: Kirigami.Units.smallSpacing
+            RowLayout {
+                id: leadingItems
+                visible: children.length > 0
+                spacing: Kirigami.Units.smallSpacing
             }
+            Kirigami.HeaderFooterLayout {
+                id: layout
+                Layout.fillWidth: true
+                //Layout.fillWidth: contentItem?.Layout.fillWidth
 
-            footer: QQC.Label {
-                font: Kirigami.Theme.smallFont
-                wrapMode: Text.WordWrap
-                elide: Text.ElideRight
-                visible: text.length > 0
-                text: root.subtitle
-                leftPadding: Application.layoutDirection === Qt.LeftToRight
-                    ? root.contentItem.Kirigami.FormData.buddyFor?.indicator?.width + root.contentItem.Kirigami.FormData.buddyFor?.spacing
-                    : padding
-                rightPadding: Application.layoutDirection === Qt.RightToLeft
-                    ? root.contentItem.Kirigami.FormData.buddyFor?.indicator?.width + root.contentItem.Kirigami.FormData.buddyFor?.spacing
-                    : padding
+                header: QQC.Label {
+                    topPadding: root.y > 0 ? Kirigami.Units.largeSpacing : 0
+                    visible: impl.formLayout.__collapsed && text.length > 0
+                    text: label.Kirigami.MnemonicData.richTextLabel
+                }
+
+                footer: QQC.Label {
+                    font: Kirigami.Theme.smallFont
+                    wrapMode: Text.WordWrap
+                    elide: Text.ElideRight
+                    visible: text.length > 0
+                    text: root.subtitle
+                    leftPadding: Application.layoutDirection === Qt.LeftToRight
+                        ? root.contentItem.Kirigami.FormData.buddyFor?.indicator?.width + root.contentItem.Kirigami.FormData.buddyFor?.spacing
+                        : padding
+                    rightPadding: Application.layoutDirection === Qt.RightToLeft
+                        ? root.contentItem.Kirigami.FormData.buddyFor?.indicator?.width + root.contentItem.Kirigami.FormData.buddyFor?.spacing
+                        : padding
+
+                }
+            }
+            RowLayout {
+                id: trailingItems
+                visible: children.length > 0
+                spacing: Kirigami.Units.smallSpacing
             }
         }
     }
