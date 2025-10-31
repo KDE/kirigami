@@ -162,7 +162,7 @@ void KirigamiPlugin::registerTypes(const char *uri)
     if (formsChoice.isEmpty() || (formsChoice != QStringLiteral("flat") && formsChoice != QStringLiteral("hybrid"))) {
         formsChoice = QStringLiteral("cards");
     }
-    qmlRegisterType(componentUrl(QStringLiteral("forms/") % formsChoice % QStringLiteral("/FormLayout2.qml")), uri, 2, 20, "FormLayout2");
+    qmlRegisterType(componentUrl(QStringLiteral("forms/") % formsChoice % QStringLiteral("/Form.qml")), uri, 2, 20, "Form");
     qmlRegisterType(componentUrl(QStringLiteral("forms/") % formsChoice % QStringLiteral("/FormGroup.qml")), uri, 2, 20, "FormGroup");
     qmlRegisterType(componentUrl(QStringLiteral("forms/") % formsChoice % QStringLiteral("/FormEntry.qml")), uri, 2, 20, "FormEntry");
     qmlRegisterType(componentUrl(QStringLiteral("forms/") % formsChoice % QStringLiteral("/FormSeparator.qml")), uri, 2, 20, "FormSeparator");
