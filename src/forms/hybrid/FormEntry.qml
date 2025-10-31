@@ -89,7 +89,7 @@ Item {
         readonly property Item formLayout: {
             let candidate = root.parent
             while (candidate) {
-                if (candidate instanceof FormLayout2) {
+                if (candidate instanceof Form) {
                     return candidate;
                 }
                 candidate = candidate.parent
