@@ -9,10 +9,32 @@ import QtQuick.Layouts
 import QtQuick.Controls as QQC
 import org.kde.kirigami as Kirigami
 
+
+/*!
+    \qmltype FormGroup
+    \inqmlmodule org.kde.kirigami.forms
+
+    \brief A group of items in a form.
+
+    In a Form, items are gruped semantically in categories represented
+    by the FormGroup Item, which can have a title and is a container
+    of FormEntry items, each one representing a single configuration
+    option or entry field.
+
+    It has to be exclusively used as a child of a Form item, as
+    it semantically represents a category within a Form.
+
+    \sa FormEntry
+ */
 Item {
     id: root
 
+    /*!
+        A title for this FormGroup. If set the title will be presented to the user
+        above the group contents.
+     */
     property string title
+
     default property alias entries: innerLayout.data
     implicitWidth: layout.implicitWidth
     implicitHeight: layout.implicitHeight
