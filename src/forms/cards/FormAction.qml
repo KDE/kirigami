@@ -23,6 +23,29 @@ import org.kde.kirigami as Kirigami
     optional extra action icon to represent the kind of action that will be
     positioned after the main text (by default a right pointing arrow).
 
+    Example usage:
+
+    \qml
+    import QtQuick.Controls as QQC
+    import org.kde.kirigami.forms as KF
+
+    KF.Form {
+        KF.FormGroup {
+            title: i18n("Section1")
+            KF.FormEntry {
+                title: i18n("Name:")
+                contentItem: QQC.TextField {}
+            }
+            KF.FormAction {
+                title: i18n("Save Changes:")
+                icon.name: "user-identity"
+                triggerIcon.name: "document-send"
+                text: i18n("Submit")
+            }
+        }
+    }
+    \endqml
+
     \sa FormEntry
  */
 FormEntry {

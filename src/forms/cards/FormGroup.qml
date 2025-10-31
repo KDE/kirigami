@@ -24,6 +24,37 @@ import org.kde.kirigami as Kirigami
     It has to be exclusively used as a child of a Form item, as
     it semantically represents a category within a Form.
 
+    Example usage:
+
+    \qml
+    import QtQuick.Controls as QQC
+    import org.kde.kirigami.forms as KF
+
+    KF.Form {
+        KF.FormGroup {
+            title: i18n("Section1")
+            KF.FormEntry {
+                title: i18n("Name:")
+                contentItem: QQC.TextField {}
+            }
+            KF.FormEntry {
+                title: i18n("Notifications:")
+                subtitle: i18n("Notifications will pop up when a message arrives.")
+                contentItem: QQC.CheckBox {
+                    text: i18n("Enabled")
+                }
+            }
+        }
+        KF.FormGroup {
+            title: i18n("Other settings")
+            KF.FormEntry {
+                contentItem: QQC.CheckBox {
+                    text: i18n("Double Click")
+                }
+            }
+        }
+    }
+    \endqml
     \sa FormEntry
  */
 Item {

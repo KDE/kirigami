@@ -27,6 +27,38 @@ import org.kde.kirigami as Kirigami
     It is to be used exclusively as a child of FormGroup as it represents a single
     semantic entry of a category in a Form.
 
+    Example usage:
+
+    \qml
+    import QtQuick.Controls as QQC
+    import org.kde.kirigami.forms as KF
+
+    KF.Form {
+        KF.FormGroup {
+            title: i18n("Section1")
+            KF.FormEntry {
+                title: i18n("Name:")
+                contentItem: QQC.TextField {}
+            }
+            KF.FormEntry {
+                title: i18n("Notifications:")
+                subtitle: i18n("Notifications will pop up when a message arrives.")
+                contentItem: QQC.CheckBox {
+                    text: i18n("Enabled")
+                }
+            }
+        }
+        KF.FormGroup {
+            title: i18n("Other settings")
+            KF.FormEntry {
+                contentItem: QQC.CheckBox {
+                    text: i18n("Double Click")
+                }
+            }
+        }
+    }
+    \endqml
+
     \sa FormGroup
   */
 Item {
