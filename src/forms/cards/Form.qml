@@ -11,7 +11,7 @@ import org.kde.kirigami as Kirigami
 
 
 /*!
-    \qmltype FormLayout2
+    \qmltype Form
     \inqmlmodule org.kde.kirigami.forms
 
     \brief The base class for Form layouts conforming to the
@@ -33,8 +33,7 @@ import org.kde.kirigami as Kirigami
     import QtQuick.Controls as QQC
     import org.kde.kirigami.forms as KF
 
-    TODO: call it just Form?
-    KF.FormLayout2 {
+    KF.Form {
         KF.FormGroup {
             title: i18n("Section1")
             KF.FormEntry {
