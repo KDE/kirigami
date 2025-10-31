@@ -37,7 +37,7 @@ import org.kde.kirigami as Kirigami
         KF.FormGroup {
             title: i18n("Section1")
             KF.FormEntry {
-                title: i18n{"Name:"}
+                title: i18n("Name:")
                 contentItem: QQC.TextField {}
             }
             KF.FormEntry {
@@ -49,7 +49,12 @@ import org.kde.kirigami as Kirigami
             }
         }
         KF.FormGroup {
-            ...
+            title: i18n("Other settings")
+            KF.FormEntry {
+                contentItem: QQC.CheckBox {
+                    text: i18n("Double Click")
+                }
+            }
         }
     }
     \endqml
