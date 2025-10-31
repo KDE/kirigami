@@ -7,28 +7,35 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC
+import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 
 FormEntry {
     id: root
-    property alias icon: mainButton.icon
-    property alias text: mainButton.text
-    readonly property alias triggerIcon: triggerIconProps
 
-    signal clicked
+    required property T.Action action
+    readonly property alias triggerIcon: triggerIconProps
 
     Kirigami.IconPropertiesGroup {
         id: triggerIconProps
     }
     contentItem: QQC.Button {
-        id: mainButton
-        onClicked: root.clicked()
+        icon {
+            name: root.action.icon.name
+            source: root.action.icon.source
+            color: root.action.icon.color
+            width: root.action.icon.width
+            height: root.action.icon.height
+        }
+        text: root.action.text
+        onClicked: root.action.trigger()
     }
     trailingItems: Kirigami.Icon {
         Layout.fillHeight: true
-        Layout.maximumHeight: Kirigami.Units.iconSizes.smallMedium
+        Layout.maximumHeight: triggerIconProps.height <= 0 ? Kirigami.Units.iconSizes.smallMedium : Infinity
         source: root.triggerIcon.name || root.triggerIcon.source
         color: root.triggerIcon.color
-        visible: valid
+        Layout.preferredWidth: triggerIconProps.width > 0 ? triggerIconProps.width : -1
+        Layout.preferredHeight: triggerIconProps.height > 0 ? triggerIconProps.height : -1
     }
 }

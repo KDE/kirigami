@@ -154,7 +154,7 @@ Item {
             } else if (buddy instanceof T.ComboBox) {
                 buddy.popup.open();
             } else if (root instanceof FormAction) {
-                root.clicked();
+                root.action.trigger();
             }
         }
 
