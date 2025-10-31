@@ -14,17 +14,71 @@ import QtQuick.Controls as QQC
 import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 
+/*!
+    \qmltype FormEntry
+    \inqmlmodule org.kde.kirigami.forms
+
+    \brief An entry in a FormGroup
+
+    This item represents a single configuration option or a single entry field in a
+    form. It tipically contains a single Control (such as a TextField, a CheckBox or
+    any other Control that makes sense in the particular context.
+
+    It is to be used exclusively as a child of FormGroup as it represents a single
+    semantic entry of a category in a Form.
+
+    \sa FormGroup
+  */
 Item {
     id: root
 
-    property string title: contentItem?.Kirigami.FormData.label
-    property string subtitle
-    property alias contentItem: contentItemWrapper.contentItem
-    property alias leadingItems: leadingItems.children
-    property alias trailingItems: trailingItems.children
-    //property alias background: impl.background
+    /*!
+        \brief An user visible title for this entry.
 
-    signal clicked
+        If a title is set, will be visualized as an extra description near this entry.
+        It's useful as a soft subcategory title, or if the Control needs
+        some extra description to be fully clear.
+     */
+    property string title: contentItem?.Kirigami.FormData.label
+
+    /*!
+        \brief An user visible subtitle for this entry.
+
+        If set the subtitle will be displayed under the main Control, with less emphasis,
+        such as a smaller font or a toned down color. It can contain a longer text than the title
+        and is useful for an extra explanation of the functionality of this form field.
+     */
+    property string subtitle
+
+    /*!
+        \brief The main Control of this entry.
+
+        This item will contain the main functionality of this field.
+        It is usually preferred to use a single Control there,
+        such as a CheckBox, a TextFileld and so on.
+        It is also possible to set a layout of multiple controls as
+        contentItem. In this case is recommended to set to it
+        the attached property Kirigami.FormLayout.buddyFor, to indicate which
+        sub control will be triggered or focused when this entry is activated
+        via a click or a shortcut.
+     */
+    property alias contentItem: contentItemWrapper.contentItem
+
+    /*!
+        \brief Extra items that can be put before the main contentItem.
+
+        It's possible to have extra items such as icons at the left of contentItem
+        (or on the right on RTL layouts) to have a more decorated entries
+     */
+    property alias leadingItems: leadingItems.children
+
+    /*!
+        \brief Extra items that can be put after the main contentItem.
+
+        It's possible to have extra items such as action buttons at the right of contentItem
+        (or on the left on RTL layouts) to have extra triggereable actions
+     */
+    property alias trailingItems: trailingItems.children
 
     implicitWidth: Math.max(mainLayout.implicitWidth + impl.padding * 2, Math.min(contentItemWrapper.implicitWidth, Kirigami.Units.gridUnit * 20 + impl.padding * 2))
     implicitHeight: impl.implicitHeight
@@ -67,7 +121,7 @@ Item {
                 buddy.animateClick();
             } else if (buddy instanceof T.ComboBox) {
                 buddy.popup.open();
-            } else {
+            } else if (root instanceof FormAction) {
                 root.clicked();
             }
         }

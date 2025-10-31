@@ -22,9 +22,6 @@ Item {
     property alias contentItem: contentItemWrapper.contentItem
     property alias leadingItems: leadingItems.children
     property alias trailingItems: trailingItems.children
-    //property alias background: impl.background
-
-    signal clicked
 
     implicitWidth: Math.max(mainLayout.implicitWidth + impl.padding * 2, Math.min(contentItemWrapper.implicitWidth, Kirigami.Units.gridUnit * 20 + impl.padding * 2))
     implicitHeight: impl.implicitHeight
@@ -109,7 +106,7 @@ Item {
                 buddy.animateClick();
             } else if (buddy instanceof T.ComboBox) {
                 buddy.popup.open();
-            } else {
+            } else if (root instanceof FormAction) {
                 root.clicked();
             }
         }

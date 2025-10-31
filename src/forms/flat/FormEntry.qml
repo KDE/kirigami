@@ -22,9 +22,6 @@ Item {
     property alias contentItem: layout.contentItem
     property alias leadingItems: leadingItems.children
     property alias trailingItems: trailingItems.children
-    //property alias background: impl.background
-
-    signal clicked
 
     implicitWidth: Math.max(contentItem.implicitWidth + impl.leftPadding * 2, Math.min(impl.implicitWidth, Kirigami.Units.gridUnit * 20 + impl.leftPadding * 2))
     implicitHeight: impl.implicitHeight
@@ -101,6 +98,7 @@ Item {
                 }
                 candidate = candidate.parent
             }
+            console.warn("Warning: FormEntry not inside a Form")
             return null
         }
 

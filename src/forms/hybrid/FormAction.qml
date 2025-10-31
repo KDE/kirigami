@@ -15,6 +15,8 @@ FormEntry {
     property alias text: mainLabel.text
     readonly property alias triggerIcon: triggerIconProps
 
+    signal clicked
+
     Kirigami.IconPropertiesGroup {
         id: iconProps
     }
