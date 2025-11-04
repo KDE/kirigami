@@ -133,7 +133,7 @@ T.Drawer {
       \since 2.5
      */
     property Primitives.IconPropertiesGroup handleClosedIcon: Primitives.IconPropertiesGroup {
-        source: root.edge === Qt.RightEdge ? "view-right-new" : "view-left-new"
+        name: root.edge === Qt.RightEdge ? "view-right-new" : "view-left-new"
     }
 
     /*!

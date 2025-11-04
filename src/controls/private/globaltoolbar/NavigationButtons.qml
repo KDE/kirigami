@@ -93,6 +93,7 @@ Loader {
                 y: parent.height
             }
         }
+
         NavButton {
             icon.name: (LayoutMirroring.enabled ? "go-previous-symbolic-rtl" : "go-previous-symbolic")
             text: qsTr("Navigate Back")

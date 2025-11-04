@@ -100,6 +100,23 @@ Kirigami.AbstractApplicationHeader {
             Layout.fillHeight: true
         }
 
+        QQC.ToolButton {
+            icon.name: QQC.ApplicationWindow.window?.globalDrawer.handleClosedIcon.name
+            visible: pageStack.columnView.columnResizeMode === Kirigami.ColumnView.SingleColumn ||
+                     page.Kirigami.ColumnView.view.leadingVisibleItem === page
+            QQC.ToolTip {
+                visible: parent.hovered
+                text: QQC.ApplicationWindow.window?.globalDrawer.handleClosedToolTip
+                delay: Kirigami.Units.toolTipDelay
+                y: parent.height
+            }
+            onClicked: {
+                if (QQC.ApplicationWindow.window?.globalDrawer) {
+                    QQC.ApplicationWindow.window?.globalDrawer.open()
+                }
+            }
+        }
+
         NavigationButtons {
             id: navButtons
             page: root.page
@@ -141,6 +158,21 @@ Kirigami.AbstractApplicationHeader {
             heightMode: pageRow?.globalToolBar.toolbarActionHeightMode ?? Kirigami.ToolBarLayout.ConstrainIfLarger
 
             actions: page && page.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar ? page?.actions : []
+        }
+
+        QQC.ToolButton {
+            icon.name: QQC.ApplicationWindow.window?.contextDrawer?.handleClosedIcon.name
+            QQC.ToolTip {
+                visible: parent.hovered
+                text: QQC.ApplicationWindow.window?.contextDrawer?.handleClosedToolTip
+                delay: Kirigami.Units.toolTipDelay
+                y: parent.height
+            }
+            onClicked: {
+                if (QQC.ApplicationWindow.window?.contextDrawer) {
+                    QQC.ApplicationWindow.window?.contextDrawer.open()
+                }
+            }
         }
     }
 }
