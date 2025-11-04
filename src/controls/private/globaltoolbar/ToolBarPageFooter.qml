@@ -12,6 +12,8 @@ QQC2.ToolBar {
     id: root
     position: QQC2.ToolBar.Footer
 
+    bottomPadding: SafeArea.margins.bottom + padding
+
     NumberAnimation {
         id: appearAnim
         target: root
