@@ -185,14 +185,15 @@ MouseArea {
     visible: drawer.enabled && (drawer.edge === Qt.LeftEdge || drawer.edge === Qt.RightEdge) && opacity > 0
     width: handleAnchor?.visible ? handleAnchor.width : Kirigami.Units.iconSizes.smallMedium + Kirigami.Units.smallSpacing * 2
     height: handleAnchor?.visible ? handleAnchor.height : width
-    opacity: drawer.handleVisible ? 1 : 0
+    //opacity: drawer.handleVisible ? 1 : 0
+    opacity: drawer.position
 
-    Behavior on opacity {
+  /*  Behavior on opacity {
         NumberAnimation {
             duration: Kirigami.Units.longDuration
             easing.type: Easing.InOutQuad
         }
-    }
+    }*/
 
     transform: Translate {
         x: root.drawer.handleVisible ? 0 : (root.drawer.edge === Qt.LeftEdge ? -root.width : root.width)

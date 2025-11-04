@@ -68,7 +68,7 @@ Kirigami.AbstractApplicationHeader {
 
         Item {
             id: leftHandleAnchor
-            visible: header.__shouldHandleAnchorBeVisible(leftHandleAnchor, "globalDrawer", "leadingVisibleItem")
+            visible: false//header.__shouldHandleAnchorBeVisible(leftHandleAnchor, "globalDrawer", "leadingVisibleItem")
 
             Layout.preferredHeight: menuButton.implicitHeight
             Layout.preferredWidth: height
@@ -122,6 +122,7 @@ Kirigami.AbstractApplicationHeader {
         Item {
             id: rightHandleAnchor
             visible: header.__shouldHandleAnchorBeVisible(rightHandleAnchor, "contextDrawer", "trailingVisibleItem")
+            visible: false
 
             Layout.preferredHeight: menuButton.implicitHeight
             Layout.preferredWidth: height
