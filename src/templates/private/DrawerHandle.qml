@@ -186,7 +186,7 @@ MouseArea {
     width: handleAnchor?.visible ? handleAnchor.width : Kirigami.Units.iconSizes.smallMedium + Kirigami.Units.smallSpacing * 2
     height: handleAnchor?.visible ? handleAnchor.height : width
     //opacity: drawer.handleVisible ? 1 : 0
-    opacity: drawer.position
+    opacity: drawer.position+0.2
 
   /*  Behavior on opacity {
         NumberAnimation {

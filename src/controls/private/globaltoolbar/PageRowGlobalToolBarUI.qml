@@ -13,7 +13,7 @@ import "../" as P
 
 Kirigami.AbstractApplicationHeader {
     id: header
-    readonly property int leftReservedSpace: {
+    readonly property int leftReservedSpace: {return 0
         let space = Kirigami.Units.smallSpacing;
         if (leftHandleAnchor.visible) {
             space += leftHandleAnchor.width;
@@ -57,22 +57,35 @@ Kirigami.AbstractApplicationHeader {
 
     Kirigami.Theme.colorSet: globalToolBar.colorSet
 
+    Item {
+        id: leftHandleAnchor
+        anchors {
+            left: parent.left
+            top: parent.top
+            bottom: parent.bottom
+            //leftMargin: applicationWindow().pageStack !== root ? applicationWindow().pageStack.globalToolBar.leftReservedSpace : 0
+        }
+        visible: header.__shouldHandleAnchorBeVisible(leftHandleAnchor, "globalDrawer", "leadingVisibleItem")
+
+        implicitHeight: menuButton.implicitHeight
+        implicitWidth: height
+    }
+    Item {
+        id: rightHandleAnchor
+        anchors {
+            right: parent.right
+            top: parent.top
+            bottom: parent.bottom
+        }
+        visible: header.__shouldHandleAnchorBeVisible(rightHandleAnchor, "contextDrawer", "trailingVisibleItem")
+
+        implicitHeight: menuButton.implicitHeight
+        implicitWidth: height
+    }
     RowLayout {
         anchors.fill: parent
         spacing: 0
 
-        Item {
-            Layout.preferredWidth: applicationWindow().pageStack.globalToolBar.leftReservedSpace
-            visible: applicationWindow().pageStack !== root
-        }
-
-        Item {
-            id: leftHandleAnchor
-            visible: false//header.__shouldHandleAnchorBeVisible(leftHandleAnchor, "globalDrawer", "leadingVisibleItem")
-
-            Layout.preferredHeight: menuButton.implicitHeight
-            Layout.preferredWidth: height
-        }
 
         P.PrivateActionToolButton {
             id: menuButton
@@ -119,14 +132,6 @@ Kirigami.AbstractApplicationHeader {
             source: Qt.resolvedUrl("BreadcrumbControl.qml")
         }
 
-        Item {
-            id: rightHandleAnchor
-            visible: header.__shouldHandleAnchorBeVisible(rightHandleAnchor, "contextDrawer", "trailingVisibleItem")
-            visible: false
-
-            Layout.preferredHeight: menuButton.implicitHeight
-            Layout.preferredWidth: height
-        }
     }
     background.opacity: breadcrumbLoader.active ? 1 : 0
 }
