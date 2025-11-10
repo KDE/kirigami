@@ -57,29 +57,10 @@ Kirigami.AbstractApplicationHeader {
             visible: pageRow?.separatorVisible && !navButtons.visible && page?.Kirigami.ColumnView.view?.leadingVisibleItem !== page
         }
 
-        QQC.ToolButton {
-            readonly property KT.OverlayDrawer drawer: QQC.ApplicationWindow.window?.globalDrawer
-            icon.name: (drawer?.visible) ? (drawer?.handleOpenIcon.name) : (drawer?.handleClosedIcon.name)
-            icon.source: (drawer?.visible) ? (drawer?.handleOpenIcon.source) : (drawer?.handleClosedIcon.source)
-            visible: pageStack.columnView.columnResizeMode === Kirigami.ColumnView.SingleColumn ||
-                     page.Kirigami.ColumnView.view.leadingVisibleItem === page
-            QQC.ToolTip {
-                visible: parent.hovered
-                text: QQC.ApplicationWindow.window?.globalDrawer.handleClosedToolTip
-                delay: Kirigami.Units.toolTipDelay
-                y: parent.height
-            }
-            onClicked: {
-                if (!drawer) {
-                    return;
-                }
-                if (drawer.visible) {
-                    drawer.close();
-                } else {
-                    drawer.open();
-                }
-                print(width," ",height)
-            }
+        HandleButton {
+            drawer: QQC.ApplicationWindow.window?.globalDrawer
+            visible: pageStack.columnView.columnResizeMode === Kirigami.ColumnView.SingleColumn
+                    || page.Kirigami.ColumnView.view.leadingVisibleItem === page
         }
 
         NavigationButtons {
@@ -116,29 +97,10 @@ Kirigami.AbstractApplicationHeader {
             actions: page && page.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar ? page?.actions : []
         }
 
-        QQC.ToolButton {
-            readonly property KT.OverlayDrawer drawer: QQC.ApplicationWindow.window?.contextDrawer
-            icon.name: (drawer?.visible) ? (drawer?.handleOpenIcon.name) : (drawer?.handleClosedIcon.name)
-            icon.source: (drawer?.visible) ? (drawer?.handleOpenIcon.source) : (drawer?.handleClosedIcon.source)
-            visible: pageStack.columnView.columnResizeMode === Kirigami.ColumnView.SingleColumn ||
-                     page.Kirigami.ColumnView.view.trailingVisibleItem === page
-            QQC.ToolTip {
-                visible: parent.hovered
-                text: parent.drawer?.handleClosedToolTip
-                delay: Kirigami.Units.toolTipDelay
-                y: parent.height
-            }
-            onClicked: {
-                if (!drawer) {
-                    return;
-                }
-                if (drawer.visible) {
-                    drawer.close();
-                } else {
-                    drawer.open();
-                }
-                print(width," ",height, " ",implicitHeight," ",layout.implicitHeight)
-            }
+        HandleButton {
+            drawer: QQC.ApplicationWindow.window?.contextDrawer
+            visible: pageStack.columnView.columnResizeMode === Kirigami.ColumnView.SingleColumn
+                    || page.Kirigami.ColumnView.view.trailingVisibleItem === page
         }
     }
 }
