@@ -51,8 +51,8 @@ import "private" as KP
 Kirigami.OverlayDrawer {
     id: root
 
-    handleClosedIcon.source: null
-    handleOpenIcon.source: null
+    handleOpenIcon.name: "window-close-symbolic"
+    handleClosedIcon.name: "overflow-menu-symbolic"
 
     /*!
       \brief A title for the action list that will be shown to the user when opens the drawer

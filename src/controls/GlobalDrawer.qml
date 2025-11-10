@@ -331,6 +331,9 @@ Kirigami.OverlayDrawer {
 
     collapsedSize: collapsedSizeHint.implicitWidth
 
+    handleOpenIcon.name: "window-close-symbolic"
+    handleClosedIcon.name: "application-menu-symbolic"
+
     Component {
         id: menuComponent
 

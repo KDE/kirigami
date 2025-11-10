@@ -111,7 +111,9 @@ T.Drawer {
       \include iconpropertiesgroup.qdocinc grouped-properties
      */
     readonly property Primitives.IconPropertiesGroup handleOpenIcon: Primitives.IconPropertiesGroup {
-        source: root.edge === Qt.RightEdge ? "view-right-close" : "view-left-close"
+        name: root.edge === Qt.RightEdge ? "view-right-close" : "view-left-close"
+        width: Kirigami.Units.iconSizes.smallMedium
+        height: width
     }
 
     /*!
@@ -134,6 +136,8 @@ T.Drawer {
      */
     property Primitives.IconPropertiesGroup handleClosedIcon: Primitives.IconPropertiesGroup {
         name: root.edge === Qt.RightEdge ? "view-right-new" : "view-left-new"
+        width: Kirigami.Units.iconSizes.smallMedium
+        height: width
     }
 
     /*!

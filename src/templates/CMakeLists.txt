@@ -22,10 +22,7 @@ ecm_target_qml_sources(KirigamiTemplates SOURCES
 
 ecm_target_qml_sources(KirigamiTemplates PRIVATE PATH private SOURCES
     private/BorderPropertiesGroup.qml
-    private/ContextIcon.qml
     private/DrawerHandle.qml
-    private/GenericDrawerIcon.qml
-    private/MenuIcon.qml
     private/PassiveNotificationsManager.qml
 )
 

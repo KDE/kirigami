@@ -2,10 +2,7 @@ module org.kde.kirigami.templates.private
 
 BackButton 1.0 BackButton.qml
 BorderPropertiesGroup 1.0 BorderPropertiesGroup.qml
-ContextIcon 1.0 ContextIcon.qml
 DrawerHandle 1.0 DrawerHandle.qml
 ForwardButton 1.0 ForwardButton.qml
-GenericDrawerIcon 1.0 GenericDrawerIcon.qml
-MenuIcon 1.0 MenuIcon.qml
 NavigationButton 1.0 NavigationButton.qml
 PassiveNotificationsManager 1.0 PassiveNotificationsManager.qml

@@ -35,9 +35,13 @@ MouseArea {
     hoverEnabled: handleAnchor?.visible ?? false
 
     QQC2.ToolButton {
-        anchors.fill: parent
-        visible: !Kirigami.Settings.tabletMode && !Kirigami.Settings.hasTransientTouchInput
+        anchors.centerIn: parent
+        flat: false
 
+        icon.name: drawer.handleOpenIcon.name
+        icon.source: drawer.handleOpenIcon.source
+        icon.width: drawer.handleOpenIcon.width
+        icon.height: drawer.handleOpenIcon.height
         Accessible.name: root.drawer.drawerOpen ? root.drawer.handleOpenToolTip : root.drawer.handleClosedToolTip
 
         onClicked: {
@@ -182,18 +186,10 @@ MouseArea {
         }
     }
 
-    visible: drawer.enabled && (drawer.edge === Qt.LeftEdge || drawer.edge === Qt.RightEdge) && opacity > 0
+    visible: drawer.enabled && drawer.modal && (drawer.edge === Qt.LeftEdge || drawer.edge === Qt.RightEdge) && opacity > 0
     width: handleAnchor?.visible ? handleAnchor.width : Kirigami.Units.iconSizes.smallMedium + Kirigami.Units.smallSpacing * 2
     height: handleAnchor?.visible ? handleAnchor.height : width
-    //opacity: drawer.handleVisible ? 1 : 0
-    opacity: drawer.position+0.2
-
-  /*  Behavior on opacity {
-        NumberAnimation {
-            duration: Kirigami.Units.longDuration
-            easing.type: Easing.InOutQuad
-        }
-    }*/
+    opacity: drawer.position
 
     transform: Translate {
         x: root.drawer.handleVisible ? 0 : (root.drawer.edge === Qt.LeftEdge ? -root.width : root.width)
