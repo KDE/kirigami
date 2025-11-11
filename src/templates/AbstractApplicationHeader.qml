@@ -95,19 +95,19 @@ Item {
 
     /*!
      */
-    property int leftPadding: 0
+    property int leftPadding: Kirigami.Units.mediumSpacing
 
     /*!
      */
-    property int topPadding: Kirigami.Units.smallSpacing + (pageRow ? pageRow.SafeArea.margins.top : 0)
+    property int topPadding: Kirigami.Units.mediumSpacing + (pageRow ? pageRow.SafeArea.margins.top : 0)
 
     /*!
      */
-    property int rightPadding: 0
+    property int rightPadding: Kirigami.Units.mediumSpacing
 
     /*!
      */
-    property int bottomPadding: Kirigami.Units.smallSpacing
+    property int bottomPadding: Kirigami.Units.mediumSpacing
 
     /*!
      */

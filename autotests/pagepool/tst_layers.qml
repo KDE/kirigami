@@ -116,7 +116,7 @@ TestCase {
     }
 
     function tapBack () {
-        mouseClick(mainWindow, 10, 10)
+        mouseClick(mainWindow, 15, 15)
     }
 
     function test_pushLayerBackButtonPushAgain() {
