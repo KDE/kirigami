@@ -43,10 +43,8 @@ QtObject {
     property int toolbarActionHeightMode: Kirigami.ToolBarLayout.ConstrainIfLarger
 
     property real minimumHeight: 0
-    // FIXME: Figure out the exact standard size of a Toolbar
-    property real preferredHeight: (actualStyle === Kirigami.ApplicationHeaderStyle.ToolBar
-                    ? Kirigami.Units.iconSizes.medium
-                    : Kirigami.Units.gridUnit * 1.8) + Kirigami.Units.smallSpacing * 2
+    // NOTE: This 40 comes from Breeze but there aren't not magic units to get it from for now
+    property real preferredHeight: 40 + Kirigami.Units.smallSpacing * 2
     property real maximumHeight: preferredHeight
 
     // Sets the minimum leading padding for the title in a page header

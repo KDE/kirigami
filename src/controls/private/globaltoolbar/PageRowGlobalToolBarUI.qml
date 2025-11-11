@@ -50,14 +50,15 @@ Kirigami.AbstractApplicationHeader {
     }
 
     Kirigami.AlignedSize.height: visible ? implicitHeight : 0
-    minimumHeight: globalToolBar.minimumHeight + header.topPadding + header.bottomPadding
-    preferredHeight: globalToolBar.preferredHeight + header.topPadding + header.bottomPadding
-    maximumHeight: globalToolBar.maximumHeight + header.topPadding + header.bottomPadding
+    minimumHeight: globalToolBar.minimumHeight
+    preferredHeight: globalToolBar.preferredHeight
+    maximumHeight: globalToolBar.maximumHeight
     separatorVisible: globalToolBar.separatorVisible
 
     Kirigami.Theme.colorSet: globalToolBar.colorSet
 
     RowLayout {
+        id: layout
         anchors.fill: parent
         spacing: 0
 

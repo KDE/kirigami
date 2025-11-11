@@ -15,9 +15,10 @@ import org.kde.kirigami.templates as KT
 Kirigami.AbstractApplicationHeader {
     id: root
 
+    // pageRow.globalToolBar.*Height already include the paddings
     minimumHeight: pageRow ? pageRow.globalToolBar.minimumHeight : Kirigami.Units.iconSizes.medium + Kirigami.Units.smallSpacing * 2
-    maximumHeight: (pageRow ? pageRow.globalToolBar.maximumHeight : minimumHeight) + root.topPadding + root.bottomPadding
-    preferredHeight: (pageRow ? pageRow.globalToolBar.preferredHeight : minimumHeight) + root.topPadding + root.bottomPadding
+    maximumHeight: (pageRow ? pageRow.globalToolBar.maximumHeight : minimumHeight)
+    preferredHeight: (pageRow ? pageRow.globalToolBar.preferredHeight : minimumHeight)
 
     separatorVisible: pageRow ? pageRow.globalToolBar.separatorVisible : true
 
@@ -32,17 +33,17 @@ Kirigami.AbstractApplicationHeader {
 
     rightPadding: {
         if (!pageRow || !page) {
-            return 0
+            return Kirigami.Units.smallSpacing
         }
         if (page.Kirigami.ColumnView.view?.columnResizeMode === Kirigami.ColumnView.SingleColumn) {
-            return pageRow.globalToolBar.rightReservedSpace
+            return pageRow.globalToolBar.rightReservedSpace + Kirigami.Units.smallSpacing
         }
         if (LayoutMirroring.enabled) {
-            return Math.max(0, (pageRow.Kirigami.ScenePosition.x + pageRow.globalToolBar.rightReservedSpace) - page.Kirigami.ScenePosition.x);
+            return Math.max(0, (pageRow.Kirigami.ScenePosition.x + pageRow.globalToolBar.rightReservedSpace) - page.Kirigami.ScenePosition.x) + Kirigami.Units.smallSpacing;
         } else {
-            return Math.max(0, (page.Kirigami.ScenePosition.x + page.width) - (pageRow.Kirigami.ScenePosition.x + pageRow.width - pageRow.globalToolBar.rightReservedSpace));
+            return Math.max(0, (page.Kirigami.ScenePosition.x + page.width) - (pageRow.Kirigami.ScenePosition.x + pageRow.width - pageRow.globalToolBar.rightReservedSpace)) + Kirigami.Units.smallSpacing;
         }
-        return 0;
+        return Kirigami.Units.smallSpacing;
     }
 
 
@@ -57,7 +58,6 @@ Kirigami.AbstractApplicationHeader {
     RowLayout {
         id: layout
         anchors.fill: parent
-        anchors.rightMargin: Kirigami.Units.smallSpacing
         spacing: Kirigami.Units.smallSpacing
 
         Kirigami.Separator {
@@ -65,6 +65,8 @@ Kirigami.AbstractApplicationHeader {
             Layout.fillHeight: true
             Layout.topMargin: Kirigami.Units.largeSpacing
             Layout.bottomMargin: Kirigami.Units.largeSpacing
+            // This must appear at the control edges, disregarding the padding
+            Layout.leftMargin: -root.leftPadding
             Kirigami.Theme.colorSet: Kirigami.Theme.Header
             Kirigami.Theme.inherit: false
             visible: pageRow?.separatorVisible && !navButtons.visible && page?.Kirigami.ColumnView.view?.leadingVisibleItem !== page
@@ -117,11 +119,11 @@ Kirigami.AbstractApplicationHeader {
             Layout.maximumWidth: item?.Layout.maximumWidth ?? -1
             Layout.leftMargin: {
                 if (!pageRow || navButtons.visible || leftHandleSpacer.visible) {
-                    return 0;
+                    return  - root.leftPadding;
                 } else if (separator.visible) {
-                    return pageRow.globalToolBar.titleLeftPadding - layout.spacing;
+                    return pageRow.globalToolBar.titleLeftPadding - layout.spacing - root.leftPadding;
                 }
-                return pageRow.globalToolBar.titleLeftPadding;
+                return pageRow.globalToolBar.titleLeftPadding - root.leftPadding;
             }
 
             // Don't load async to prevent jumpy behaviour on slower devices as it loads in.
