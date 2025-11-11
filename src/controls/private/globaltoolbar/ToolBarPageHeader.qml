@@ -59,8 +59,10 @@ Kirigami.AbstractApplicationHeader {
 
         HandleButton {
             drawer: QQC.ApplicationWindow.window?.globalDrawer
-            visible: pageStack.columnView.columnResizeMode === Kirigami.ColumnView.SingleColumn
-                    || page.Kirigami.ColumnView.view.leadingVisibleItem === page
+            visible: drawer !== null
+                    && ((drawer.handleVisible && drawer.enabled) || drawer.isMenu)
+                    && (pageStack.columnView.columnResizeMode === Kirigami.ColumnView.SingleColumn
+                    || page.Kirigami.ColumnView.view.leadingVisibleItem === page)
         }
 
         NavigationButtons {
@@ -99,8 +101,10 @@ Kirigami.AbstractApplicationHeader {
 
         HandleButton {
             drawer: QQC.ApplicationWindow.window?.contextDrawer
-            visible: pageStack.columnView.columnResizeMode === Kirigami.ColumnView.SingleColumn
-                    || page.Kirigami.ColumnView.view.trailingVisibleItem === page
+            visible: drawer !== null
+                    && drawer.handleVisible && drawer.enabled
+                    && (pageStack.columnView.columnResizeMode === Kirigami.ColumnView.SingleColumn
+                    || page.Kirigami.ColumnView.view.trailingVisibleItem === page)
         }
     }
 }

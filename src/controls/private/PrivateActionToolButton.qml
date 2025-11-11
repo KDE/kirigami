@@ -102,7 +102,7 @@ QQC2.ToolButton {
     }
 
     QQC2.ToolTip {
-        visible: control.hovered && text.length > 0 && !(control.menu && control.menu.visible) && !control.pressed
+        visible: control.hovered && text.length > 0 && !(control.menu && control.menu.visible) && !control.pressed && !Kirigami.Settings.hasTransientTouchInput
         text: {
             const a = control.action;
             if (a) {

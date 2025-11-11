@@ -59,79 +59,36 @@ Kirigami.AbstractApplicationHeader {
 
     Item {
         id: leftHandleAnchor
-        anchors {
-            left: parent.left
-            top: parent.top
-            bottom: parent.bottom
-            //leftMargin: applicationWindow().pageStack !== root ? applicationWindow().pageStack.globalToolBar.leftReservedSpace : 0
-        }
+        anchors.left: parent.left
         visible: header.__shouldHandleAnchorBeVisible(leftHandleAnchor, "globalDrawer", "leadingVisibleItem")
 
-        implicitHeight: menuButton.implicitHeight
-        implicitWidth: height
+        width: height
+        height: parent.height
     }
+
     Item {
         id: rightHandleAnchor
-        anchors {
-            right: parent.right
-            top: parent.top
-            bottom: parent.bottom
-        }
         visible: header.__shouldHandleAnchorBeVisible(rightHandleAnchor, "contextDrawer", "trailingVisibleItem")
 
-        implicitHeight: menuButton.implicitHeight
-        implicitWidth: height
+        width: height
+        height: parent.height
     }
-    RowLayout {
+
+    Loader {
+        id: breadcrumbLoader
         anchors.fill: parent
-        spacing: 0
 
+        property Kirigami.PageRow pageRow: root
 
-        P.PrivateActionToolButton {
-            id: menuButton
-            visible: !Kirigami.Settings.isMobile && applicationWindow().globalDrawer && "isMenu" in applicationWindow().globalDrawer && applicationWindow().globalDrawer.isMenu
-            icon.name: "open-menu-symbolic"
-            showMenuArrow: false
+        asynchronous: true
 
-            Layout.leftMargin: Kirigami.Units.smallSpacing
+        active: layerIsMainRow
+            && globalToolBar.actualStyle === Kirigami.ApplicationHeaderStyle.Breadcrumb
+            && header.currentItem
+            && header.currentItem.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.None
 
-            action: Kirigami.Action {
-                children: applicationWindow().globalDrawer && applicationWindow().globalDrawer.actions ? applicationWindow().globalDrawer.actions : []
-                tooltip: checked ? qsTr("Close menu") : qsTr("Open menu")
-            }
-            Accessible.name: action.tooltip
-
-            Connections {
-                // Only target the GlobalDrawer when it *is* a GlobalDrawer, since
-                // it can be something else, and that something else probably
-                // doesn't have an isMenuChanged() signal.
-                target: applicationWindow().globalDrawer as Kirigami.GlobalDrawer
-                function onIsMenuChanged() {
-                    if (!applicationWindow().globalDrawer.isMenu && menuButton.menu) {
-                        menuButton.menu.dismiss()
-                    }
-                }
-            }
-        }
-
-        Loader {
-            id: breadcrumbLoader
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            Layout.minimumHeight: -1
-            Layout.preferredHeight: -1
-            property Kirigami.PageRow pageRow: root
-
-            asynchronous: true
-
-            active: layerIsMainRow
-                && globalToolBar.actualStyle === Kirigami.ApplicationHeaderStyle.Breadcrumb
-                && header.currentItem
-                && header.currentItem.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.None
-
-            source: Qt.resolvedUrl("BreadcrumbControl.qml")
-        }
-
+        source: Qt.resolvedUrl("BreadcrumbControl.qml")
     }
+
     background.opacity: breadcrumbLoader.active ? 1 : 0
 }

@@ -6,6 +6,7 @@
  */
 
 import QtQuick
+import QtQuick.Controls as QQC
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
@@ -20,6 +21,11 @@ RowLayout {
 
     // No spacing as the separator will be the thing that visually clips the ListView
     spacing: 0
+
+    HandleButton {
+        drawer: QQC.ApplicationWindow.window?.globalDrawer
+        visible: drawer !== null
+    }
 
     NavigationButtons {
         id: navButtons
@@ -194,5 +200,10 @@ RowLayout {
                 }
             }
         }
+    }
+
+    HandleButton {
+        drawer: QQC.ApplicationWindow.window?.contextDrawer
+        visible: drawer !== null
     }
 }
