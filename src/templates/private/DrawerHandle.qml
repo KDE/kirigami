@@ -32,11 +32,12 @@ Item {
     z: overlay ? overlay.z  + (drawer?.modal && drawer?.drawerOpen ? 1 : - 1) : 0
 
     QQC2.ToolButton {
+        id: button
         anchors.centerIn: parent
         flat: false
 
-        icon.name: drawer.handleOpenIcon.name
-        icon.source: drawer.handleOpenIcon.source ?? ""
+        icon.name: root.drawer.drawerOpen ? drawer.handleOpenIcon.name : drawer.handleClosedIcon.name
+        icon.source: root.drawer.drawerOpen ? drawer.handleOpenIcon.source ?? "" : drawer.handleClosedIcon.source ?? ""
         icon.width: drawer.handleOpenIcon.width
         icon.height: drawer.handleOpenIcon.height
         Accessible.name: root.drawer.drawerOpen ? root.drawer.handleOpenToolTip : root.drawer.handleClosedToolTip
@@ -181,10 +182,11 @@ Item {
     visible: drawer.enabled && drawer.modal && (drawer.edge === Qt.LeftEdge || drawer.edge === Qt.RightEdge) && opacity > 0
     width: handleAnchor?.visible ? handleAnchor.width : Kirigami.Units.iconSizes.smallMedium + Kirigami.Units.smallSpacing * 2
     height: handleAnchor?.visible ? handleAnchor.height : width
-    opacity: handleAnchor ? drawer.position : 1
+    // NOTE: check on pageStack.depth is to keep and hack elisa is doing working
+    opacity: handleAnchor && applicationWindow()?.pageStack.depth > 0 ? drawer.position : 1
 
     transform: Translate {
-        x: root.drawer.handleVisible ? 0 : (root.drawer.edge === Qt.LeftEdge ? -root.width : root.width)
+        x: root.drawer.handleVisible ? 0 : (root.drawer.edge === Qt.LeftEdge ? -Math.max(root.width, button.width) : Math.max(root.width, button.width))
         Behavior on x {
             NumberAnimation {
                 duration: Kirigami.Units.longDuration
