@@ -7,6 +7,8 @@
  */
 
 import QtQuick
+import QtQuick.Layouts
+import org.kde.kirigami as Kirigami
 import org.kde.kirigami.platform as Platform
 
 /*!
@@ -93,6 +95,12 @@ Item {
       Should this item be displayed in a selected style?
      */
     property bool selected: false
+
+    /*!
+      Alias for layout that holds items such as buttons and switches, which will trail the title.
+    */
+    property alias items: actionLayout.data
+
     /*!
       Is the subtitle visible?
      */
@@ -115,7 +123,7 @@ Item {
      */
     signal linkHovered(string link)
 
-    implicitWidth: Math.max(labelItem.implicitWidth, subtitleItem.implicitWidth)
+    implicitWidth: Math.max(labelItem.implicitWidth, subtitleItem.implicitWidth) + actionLayout.implicitWidth
     implicitHeight: labelItem.implicitHeight + (subtitleVisible ? subtitleItem.implicitHeight : 0)
 
     Text {
@@ -184,5 +192,18 @@ Item {
         horizontalAlignment: Text.AlignLeft
 
         renderType: Text.NativeRendering
+    }
+
+
+    RowLayout {
+        id: actionLayout
+
+        anchors {
+            right: parent.right
+            bottom: parent.bottom
+        }
+
+        visible: root.items.length > 0
+        spacing: Kirigami.Units.smallSpacing
     }
 }

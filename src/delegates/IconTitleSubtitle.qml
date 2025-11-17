@@ -144,6 +144,11 @@ Item {
     }
 
     /*!
+     * Alias for layout that holds items such as buttons and switches, which will trail the title.
+     */
+    property alias items: titleSubtitle.items
+
+    /*!
       \brief Emitted when the user clicks on a link embedded in the text of the title or subtitle.
      */
     signal linkActivated(string link)
