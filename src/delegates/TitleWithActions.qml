@@ -14,7 +14,7 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
 /*!
- \ *qmltype TitleWithActionsDelegate
+ \ *qmltype TitleWithActions
  \inqmlmodule org.kde.kirigami.delegates
 
  \brief A simple title delegate that has trailing actions
@@ -26,7 +26,7 @@ such as rename and delete actions.
 Example usage as contentItem of an ItemDelegate:
 
 \qml
-Kirigami.TitleWithActionsDelegate {
+Kirigami.TitleWithActions {
     title: "This is item title"
     subtitle: "This is subtitle"
     elide: Text.ElideRight
