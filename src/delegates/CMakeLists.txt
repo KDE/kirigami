@@ -9,7 +9,7 @@ ecm_add_qml_module(KirigamiDelegates URI "org.kde.kirigami.delegates"
 ecm_target_qml_sources(KirigamiDelegates SOURCES
     IconTitleSubtitle.qml
     TitleSubtitle.qml
-    TitleWithActionsDelegate.qml
+    TitleWithActions.qml
 
     SubtitleDelegate.qml
     CheckSubtitleDelegate.qml
