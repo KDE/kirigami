@@ -13,6 +13,49 @@ import QtQuick.Controls as QQC2
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
+/*!
+ \ *qmltype TitleWithActionsDelegate
+ \inqmlmodule org.kde.kirigami.delegates
+
+ \brief A simple title delegate that has trailing actions
+
+ This is meant to be used in lists for items that have actions.
+For example lists of usernames, with any related actions after them,
+such as rename and delete actions.
+
+Example usage as contentItem of an ItemDelegate:
+
+\qml
+Kirigami.TitleWithActionsDelegate {
+    title: "This is item title"
+    subtitle: "This is subtitle"
+    elide: Text.ElideRight
+    selected: parent.highlighted
+    actions: [
+        Kirigami.Action {
+            text: i18n("Copy")
+            icon.name: "edit-copy"
+            shortcut: StandardKey.Copy
+            onTriggered: {
+                console.warn("Copy!")
+            }
+        },
+        Kirigami.Action {
+            text: i18n("Delete")
+            icon.name: "delete-symbolic"
+            shortcut: StandardKey.Copy
+            onTriggered: {
+                console.warn("Delete!")
+            }
+        }
+    ]
+}
+\endqml
+
+\sa IconTitleSubtitle
+\sa TitleSubtitle
+*/
+
 Item {
     id: root
 
@@ -46,6 +89,7 @@ Item {
     RowLayout {
         id: layout
         anchors.fill: root
+        spacing: Kirigami.Units.smallSpacing
 
         Kirigami.TitleSubtitle {
             Layout.alignment: Qt.AlignLeft
@@ -57,6 +101,7 @@ Item {
 
         RowLayout {
             Layout.alignment: Qt.AlignRight
+            spacing: Kirigami.Units.smallSpacing
 
             Repeater {
                 model: root.actions
