@@ -27,6 +27,13 @@ Kirigami.ShadowedImage {
     property alias titleIcon: headingIcon.source
 
     /*!
+      \brief This property holds the minimum size of the icon displayed alongside the title.
+
+      \default Kirigami.Units.iconSizes.large
+     */
+    property real titleIconSize: Kirigami.Units.iconSizes.large
+
+    /*!
       \brief This property holds the title's text which is to be displayed on top.
       of the image.
      */
@@ -178,7 +185,7 @@ Kirigami.ShadowedImage {
         height: Math.min(implicitHeight, parent.height -root.topPadding -root.bottomPadding)
         Kirigami.Icon {
             id: headingIcon
-            Layout.minimumWidth: Kirigami.Units.iconSizes.large
+            Layout.minimumWidth: root.titleIconSize
             Layout.minimumHeight: width
             visible: valid
             isMask: false
