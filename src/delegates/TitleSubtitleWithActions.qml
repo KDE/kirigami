@@ -9,7 +9,6 @@
 
 import QtQuick
 import QtQuick.Templates as T
-import QtQuick.Controls as QQC2
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
@@ -85,6 +84,11 @@ Item {
      */
     property var elide: Text.ElideRight
 
+    /*!
+        The display mode for all actions.
+     */
+    property alias displayMode: actionToolBar.display
+
     RowLayout {
         id: layout
         anchors.fill: root
@@ -99,6 +103,7 @@ Item {
         }
 
         Kirigami.ActionToolBar {
+            id: actionToolBar
             Layout.fillHeight: true
             actions: root.actions
             alignment: Qt.AlignRight
