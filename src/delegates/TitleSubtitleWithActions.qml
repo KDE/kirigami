@@ -85,7 +85,6 @@ Item {
      */
     property var elide: Text.ElideRight
 
-
     RowLayout {
         id: layout
         anchors.fill: root
@@ -102,6 +101,7 @@ Item {
         }
 
         Kirigami.ActionToolBar {
+            Layout.fillHeight: true
             actions: root.actions
             alignment: Qt.AlignRight
         }
