@@ -17,13 +17,13 @@ import org.kde.kirigami as Kirigami
  \ *qmltype TitleSubtitleWithActions
  \inqmlmodule org.kde.kirigami.delegates
 
- \brief A simple title delegate that has trailing actions
+ \brief A simple title delegate that has trailing actions.
 
  This is meant to be used in lists for items that have actions.
-For example lists of usernames, with any related actions after them,
-such as rename and delete actions.
+ For example lists of usernames, with any related actions after them,
+ such as rename and delete actions.
 
-Example usage as contentItem of an ItemDelegate:
+ Example usage as contentItem of an ItemDelegate:
 
 \qml
 Kirigami.TitleSubtitleWithActions {
