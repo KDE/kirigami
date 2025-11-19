@@ -101,16 +101,9 @@ Item {
             selected: root.selected
         }
 
-        Repeater {
-            model: root.actions
-
-            Layout.alignment: Qt.AlignRight
-            delegate: QQC2.Button {
-                Layout.alignment: Qt.AlignRight
-                required property T.Action modelData
-                action: modelData
-                display: QQC2.Button.IconOnly
-            }
+        Kirigami.ActionToolBar {
+            actions: root.actions
+            alignment: Qt.AlignRight
         }
     }
 }
