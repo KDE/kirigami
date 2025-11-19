@@ -27,26 +27,27 @@ Example usage as contentItem of an ItemDelegate:
 
 \qml
 Kirigami.TitleSubtitleWithActions {
-    title: "This is item title"
-    subtitle: "This is subtitle"
+    Layout.fillHeight: true
+    Layout.fillWidth: true
+    title: itemDelegate.text
     elide: Text.ElideRight
-    selected: parent.highlighted
+    selected: itemDelegate.highlighted
     actions: [
         Kirigami.Action {
-            text: i18n("Copy")
-            icon.name: "edit-copy"
-            shortcut: StandardKey.Copy
+            icon.name: "edit-entry-symbolic"
+            text: i18nc("@action:button", "Modify user…")
             onTriggered: {
-                console.warn("Copy!")
+                root.modifyUser(itemDelegate.text);
             }
+            tooltip: text
         },
         Kirigami.Action {
-            text: i18n("Delete")
-            icon.name: "delete-symbolic"
-            shortcut: StandardKey.Copy
+            icon.name: "edit-delete-remove-symbolic"
+            text: i18nc("@action:button", "Remove user…")
             onTriggered: {
-                console.warn("Delete!")
+                root.deleteUser(itemDelegate.text);
             }
+            tooltip: text
         }
     ]
 }
