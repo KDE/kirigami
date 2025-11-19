@@ -27,9 +27,9 @@ import org.kde.kirigami as Kirigami
 
 \qml
 Kirigami.TitleSubtitleWithActions {
-    Layout.fillHeight: true
-    Layout.fillWidth: true
-    title: itemDelegate.text
+    anchors.fill: parent
+    anchors.margins: Kirigami.Units.largeSpacing
+    title: model.userName
     elide: Text.ElideRight
     selected: itemDelegate.highlighted
     actions: [
@@ -37,7 +37,7 @@ Kirigami.TitleSubtitleWithActions {
             icon.name: "edit-entry-symbolic"
             text: i18nc("@action:button", "Modify user…")
             onTriggered: {
-                root.modifyUser(itemDelegate.text);
+                root.modifyUser(model.userName);
             }
             tooltip: text
         },
@@ -45,7 +45,7 @@ Kirigami.TitleSubtitleWithActions {
             icon.name: "edit-delete-remove-symbolic"
             text: i18nc("@action:button", "Remove user…")
             onTriggered: {
-                root.deleteUser(itemDelegate.text);
+                root.deleteUser(model.userName);
             }
             tooltip: text
         }
