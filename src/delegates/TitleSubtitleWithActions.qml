@@ -84,7 +84,6 @@ Item {
      */
     property var elide: Text.ElideRight
 
-    implicitHeight: layout.implicitHeight
 
     RowLayout {
         id: layout
@@ -93,25 +92,23 @@ Item {
 
         Kirigami.TitleSubtitle {
             Layout.alignment: Qt.AlignLeft
+            Layout.fillWidth: true
+
             title: root.title
             subtitle: root.subtitle
             elide: root.elide
             selected: root.selected
         }
 
-        RowLayout {
+        Repeater {
+            model: root.actions
+
             Layout.alignment: Qt.AlignRight
-            spacing: Kirigami.Units.smallSpacing
-
-            Repeater {
-                model: root.actions
-
-                delegate: QQC2.Button {
-                    Layout.alignment: Qt.AlignRight
-                    required property T.Action modelData
-                    action: modelData
-                    display: QQC2.Button.IconOnly
-                }
+            delegate: QQC2.Button {
+                Layout.alignment: Qt.AlignRight
+                required property T.Action modelData
+                action: modelData
+                display: QQC2.Button.IconOnly
             }
         }
     }
