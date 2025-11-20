@@ -25,42 +25,62 @@ import org.kde.kirigami as Kirigami
  Example usage as contentItem of an ItemDelegate:
 
 \qml
-Kirigami.TitleSubtitleWithActions {
-    anchors.fill: parent
-    anchors.margins: Kirigami.Units.largeSpacing
-    title: model.userName
-    elide: Text.ElideRight
-    selected: itemDelegate.highlighted
-    actions: [
-        Kirigami.Action {
-            icon.name: "edit-entry-symbolic"
-            text: i18nc("@action:button", "Modify user…")
-            onTriggered: {
-                root.modifyUser(model.userName);
+ItemDelegate {
+    icon: "edit-bomb"
+    text: "title"
+    accessible.description: "subtitle"
+
+    highlighted: pressed || down
+
+    Kirigami.Theme.useAlternateBackgroundColor: true
+
+    onClicked: root.modifyUser(model.userName)
+
+    contentItem: Kirigami.TitleSubtitleWithActions {
+        anchors.fill: parent
+        anchors.margins: Kirigami.Units.largeSpacing
+        title: model.userName
+        elide: Text.ElideRight
+        selected: itemDelegate.highlighted
+        actions: [
+            Kirigami.Action {
+                icon.name: "edit-entry-symbolic"
+                text: i18nc("@action:button", "Modify user…")
+                onTriggered: {
+                    root.modifyUser(model.userName);
+                }
+                tooltip: text
+            },
+            Kirigami.Action {
+                icon.name: "edit-delete-remove-symbolic"
+                text: i18nc("@action:button", "Remove user…")
+                onTriggered: {
+                    root.deleteUser(model.userName);
+                }
+                tooltip: text
+                displayHint: Kirigami.DisplayHint.IconOnly
             }
-            tooltip: text
-        },
-        Kirigami.Action {
-            icon.name: "edit-delete-remove-symbolic"
-            text: i18nc("@action:button", "Remove user…")
-            onTriggered: {
-                root.deleteUser(model.userName);
-            }
-            tooltip: text
-        }
-    ]
+        ]
+    }
 }
 \endqml
 
 \sa IconTitleSubtitle
 \sa TitleSubtitle
+\sa ActionToolBar
 */
 
 Item {
     id: root
 
     /*!
-     * List of actions to show as icons-only buttons.
+     \ *qmlproperty list<Action> ActionToolBar::actions
+
+     \brief This property holds a list of visible actions.
+
+     These actions will be given to ActionToolBar.
+
+         \sa ActionToolBar
      */
     property list<T.Action> actions
 
@@ -76,17 +96,34 @@ Item {
 
     /*!
         Should this item be displayed in a selected style?
+
+        default: \c false
      */
-    property bool selected
+    property bool selected: false
 
     /*!
         The text elision mode used for both the title and subtitle.
+
+        default: \c Text.ElideRight
      */
     property var elide: Text.ElideRight
 
     /*!
-        The display hint for all actions.
-     */
+     This property determines how the icon and text are displayed within the button.
+
+     Permitted values are:
+     \list
+     \li Button.IconOnly
+     \li Button.TextOnly
+     \li Button.TextBesideIcon
+     \li Button.TextUnderIcon
+     \endlist
+
+     default: \c Controls.Button.TextBesideIcon
+
+         \sa ActionToolBar
+         \sa AbstractButton
+    */
     property alias displayHint: actionToolBar.display
 
     RowLayout {
