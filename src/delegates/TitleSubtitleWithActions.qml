@@ -85,9 +85,9 @@ Item {
     property var elide: Text.ElideRight
 
     /*!
-        The display mode for all actions.
+        The display hint for all actions.
      */
-    property alias displayMode: actionToolBar.display
+    property alias displayHint: actionToolBar.display
 
     RowLayout {
         id: layout
