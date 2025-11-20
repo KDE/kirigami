@@ -26,9 +26,12 @@ import org.kde.kirigami as Kirigami
 
 \qml
 ItemDelegate {
-    icon: "edit-bomb"
-    text: "title"
-    accessible.description: "subtitle"
+    id: itemDelegate
+
+    icon: "user"
+    text: i18nc("@title:row", "Konqi")
+    readonly property string subtitle: i18nc("@label", "The Konqueror")
+    Accessible.description: subtitle
 
     highlighted: pressed || down
 
@@ -37,9 +40,8 @@ ItemDelegate {
     onClicked: root.modifyUser(model.userName)
 
     contentItem: Kirigami.TitleSubtitleWithActions {
-        anchors.fill: parent
-        anchors.margins: Kirigami.Units.largeSpacing
-        title: model.userName
+        title: itemDelegate.title
+        subtitle: itemDelegate.subtitle
         elide: Text.ElideRight
         selected: itemDelegate.highlighted
         actions: [
