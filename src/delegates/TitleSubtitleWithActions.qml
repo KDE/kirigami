@@ -107,6 +107,7 @@ Item {
             Layout.fillHeight: true
             actions: root.actions
             alignment: Qt.AlignRight
+            flat: false
         }
     }
 }
