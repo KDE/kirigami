@@ -131,5 +131,35 @@ Kirigami.AbstractApplicationHeader {
                     && (pageStack.columnView.columnResizeMode === Kirigami.ColumnView.SingleColumn
                     || page.Kirigami.ColumnView.view.trailingVisibleItem === page)
         }
+        QQC.ToolButton {
+            icon.name: "window-minimize-symbolic"
+            icon.width: Kirigami.Units.iconSizes.small
+            implicitHeight: Kirigami.Units.iconSizes.smallMedium
+            implicitWidth: implicitHeight
+            onClicked: Window.window.visibility = Window.Minimized
+        }
+        QQC.ToolButton {
+            icon.name: Window.window.visibility === Window.Maximized ? "window-restore-symbolic" : "window-maximize-symbolic"
+            icon.width: Kirigami.Units.iconSizes.small
+            implicitHeight: Kirigami.Units.iconSizes.smallMedium
+            implicitWidth: implicitHeight
+            onClicked: {
+                if (Window.window.visibility === Window.Maximized) {
+                    Window.window.visibility = Window.Windowed;
+                } else {
+                    Window.window.visibility = Window.Maximized;
+                }
+            }
+        }
+        QQC.ToolButton {
+            icon.name: "window-close-symbolic"
+            icon.width: Kirigami.Units.iconSizes.small
+            implicitHeight: Kirigami.Units.iconSizes.smallMedium
+            implicitWidth: implicitHeight
+            onClicked: Window.window.close()
+        }
+        Item {
+            implicitWidth: 2
+        }
     }
 }
