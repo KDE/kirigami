@@ -27,17 +27,13 @@ import org.kde.kirigami as Kirigami
 \qml
 ItemDelegate {
     id: itemDelegate
-
     icon: "user"
     text: i18nc("@title:row", "Konqi")
     readonly property string subtitle: i18nc("@label", "The Konqueror")
     Accessible.description: subtitle
-
-    highlighted: pressed || down
-
     Kirigami.Theme.useAlternateBackgroundColor: true
 
-    onClicked: root.modifyUser(model.userName)
+    onClicked: [...]
 
     contentItem: Kirigami.TitleSubtitleWithActions {
         title: itemDelegate.title
@@ -48,17 +44,13 @@ ItemDelegate {
             Kirigami.Action {
                 icon.name: "edit-entry-symbolic"
                 text: i18nc("@action:button", "Modify user…")
-                onTriggered: {
-                    root.modifyUser(model.userName);
-                }
+                onTriggered: [...]
                 tooltip: text
             },
             Kirigami.Action {
                 icon.name: "edit-delete-remove-symbolic"
                 text: i18nc("@action:button", "Remove user…")
-                onTriggered: {
-                    root.deleteUser(model.userName);
-                }
+                onTriggered: [...]
                 tooltip: text
                 displayHint: Kirigami.DisplayHint.IconOnly
             }
