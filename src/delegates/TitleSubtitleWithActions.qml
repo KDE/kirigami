@@ -120,6 +120,9 @@ Item {
     */
     property alias displayHint: actionToolBar.display
 
+    implicitWidth: layout.implicitWidth
+    implicitHeight: layout.implicitHeight
+
     RowLayout {
         id: layout
         anchors.fill: root
@@ -135,6 +138,7 @@ Item {
 
         Kirigami.ActionToolBar {
             id: actionToolBar
+            padding: Kirigami.Units.smallSpacing
             Layout.fillHeight: true
             actions: root.actions
             alignment: Qt.AlignRight
