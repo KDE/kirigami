@@ -39,7 +39,7 @@ ItemDelegate {
         title: itemDelegate.title
         subtitle: itemDelegate.subtitle
         elide: Text.ElideRight
-        selected: itemDelegate.highlighted
+        selected: itemDelegate.pressed || itemDelegate.highlighted
         actions: [
             Kirigami.Action {
                 icon.name: "edit-entry-symbolic"
