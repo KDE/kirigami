@@ -136,8 +136,10 @@ Item {
         spacing: Kirigami.Units.smallSpacing
 
         Kirigami.TitleSubtitle {
+            id: titleSubtitle
+            Layout.fillWidth: true
+            Layout.maximumWidth: parent.implicitWidth
             Layout.alignment: Qt.AlignLeft
-            Layout.maximumWidth: implicitWidth
             title: root.title
             subtitle: root.subtitle
             elide: root.elide
@@ -146,7 +148,7 @@ Item {
 
         Kirigami.ActionToolBar {
             id: actionToolBar
-            padding: Kirigami.Units.smallSpacing
+            Layout.fillWidth: true
             Layout.fillHeight: true
             actions: root.actions
             alignment: Qt.AlignRight
