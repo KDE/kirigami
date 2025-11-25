@@ -73,10 +73,10 @@ Item {
      \brief This property holds a list of visible actions.
 
      These actions will be given to ActionToolBar.
-     If you want some of the actions to be icons-only, you will
-     have to set them individually.
+     To make an action be icons-only, set
+     \c displayHint: Kirigami.DisplayHint.IconOnly on it.
 
-     List of actions is empty by default.
+     Empty by default, so no actions will be present.
 
          \sa ActionToolBar
      */
@@ -89,9 +89,8 @@ Item {
 
     /*!
         The subtitle to display.
-        Empty by default, so subtitle is not shown.
 
-        default: Empty \c string
+        default: Empty \c string, so no subtitle is shown
      */
     property string subtitle
 
@@ -120,7 +119,7 @@ Item {
      \li Button.TextUnderIcon
      \endlist
 
-     default: \c Controls.Button.TextBesideIcon
+     default: \c Button.TextBesideIcon
 
          \sa ActionToolBar
          \sa AbstractButton
