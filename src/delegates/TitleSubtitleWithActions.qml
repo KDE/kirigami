@@ -85,6 +85,9 @@ Item {
 
     /*!
         The subtitle to display.
+        Empty by default, so subtitle is not shown.
+
+        default: Empty \c string
      */
     property string subtitle
 
