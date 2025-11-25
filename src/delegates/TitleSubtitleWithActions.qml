@@ -73,6 +73,8 @@ Item {
      \brief This property holds a list of visible actions.
 
      These actions will be given to ActionToolBar.
+     If you want some of the actions to be icons-only, you will
+     have to set them individually.
 
      List of actions is empty by default.
 
