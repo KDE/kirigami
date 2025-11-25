@@ -6,6 +6,7 @@ add_subdirectory(dialogs)
 add_subdirectory(layouts)
 add_subdirectory(polyfill)
 add_subdirectory(templates)
+add_subdirectory(forms)
 
 add_library(Kirigami)
 add_library(KF6::Kirigami ALIAS Kirigami)
