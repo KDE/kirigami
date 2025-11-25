@@ -74,6 +74,8 @@ Item {
 
      These actions will be given to ActionToolBar.
 
+     List of actions is empty by default.
+
          \sa ActionToolBar
      */
     property list<T.Action> actions
