@@ -13,7 +13,7 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
 /*!
- \ *qmltype TitleSubtitleWithActions
+ \qmltype TitleSubtitleWithActions
  \inqmlmodule org.kde.kirigami.delegates
 
  \brief A simple title delegate that has trailing actions.
@@ -62,13 +62,14 @@ ItemDelegate {
 \sa IconTitleSubtitle
 \sa TitleSubtitle
 \sa ActionToolBar
+\since 6.21
 */
 
 Item {
     id: root
 
     /*!
-     \ *qmlproperty list<Action> ActionToolBar::actions
+     \qmlproperty list<Action> ActionToolBar::actions
 
      \brief This property holds a list of visible actions.
 
