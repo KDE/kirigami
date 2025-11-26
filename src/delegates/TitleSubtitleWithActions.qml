@@ -137,7 +137,7 @@ Item {
         Kirigami.TitleSubtitle {
             id: titleSubtitle
             Layout.fillWidth: true
-            Layout.maximumWidth: parent.implicitWidth
+            Layout.maximumWidth: Math.ceil(implicitWidth)
             Layout.alignment: Qt.AlignLeft
             title: root.title
             subtitle: root.subtitle
