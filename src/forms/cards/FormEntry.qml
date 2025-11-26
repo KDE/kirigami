@@ -14,102 +14,13 @@ import QtQuick.Controls as QQC
 import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
 
-/*!
-    \qmltype FormEntry
-    \inqmlmodule org.kde.kirigami.forms
-
-    \brief An entry in a FormGroup
-
-    This item represents a single configuration option or a single entry field in a
-    form. It tipically contains a single Control (such as a TextField, a CheckBox or
-    any other Control that makes sense in the particular context.
-
-    It is to be used exclusively as a child of FormGroup as it represents a single
-    semantic entry of a category in a Form.
-
-    Example usage:
-
-    \qml
-    import QtQuick.Controls as QQC
-    import org.kde.kirigami.forms as KF
-
-    KF.Form {
-        KF.FormGroup {
-            title: i18n("Section1")
-            KF.FormEntry {
-                title: i18n("Name:")
-                contentItem: QQC.TextField {}
-            }
-            KF.FormEntry {
-                title: i18n("Notifications:")
-                subtitle: i18n("Notifications will pop up when a message arrives.")
-                contentItem: QQC.CheckBox {
-                    text: i18n("Enabled")
-                }
-            }
-        }
-        KF.FormGroup {
-            title: i18n("Other settings")
-            KF.FormEntry {
-                contentItem: QQC.CheckBox {
-                    text: i18n("Double Click")
-                }
-            }
-        }
-    }
-    \endqml
-
-    \sa FormGroup
-  */
 Item {
     id: root
 
-    /*!
-        \brief An user visible title for this entry.
-
-        If a title is set, will be visualized as an extra description near this entry.
-        It's useful as a soft subcategory title, or if the Control needs
-        some extra description to be fully clear.
-     */
     property string title: contentItem?.Kirigami.FormData.label
-
-    /*!
-        \brief An user visible subtitle for this entry.
-
-        If set the subtitle will be displayed under the main Control, with less emphasis,
-        such as a smaller font or a toned down color. It can contain a longer text than the title
-        and is useful for an extra explanation of the functionality of this form field.
-     */
     property string subtitle
-
-    /*!
-        \brief The main Control of this entry.
-
-        This item will contain the main functionality of this field.
-        It is usually preferred to use a single Control there,
-        such as a CheckBox, a TextFileld and so on.
-        It is also possible to set a layout of multiple controls as
-        contentItem. In this case is recommended to set to it
-        the attached property Kirigami.FormLayout.buddyFor, to indicate which
-        sub control will be triggered or focused when this entry is activated
-        via a click or a shortcut.
-     */
     property alias contentItem: contentItemWrapper.contentItem
-
-    /*!
-        \brief Extra items that can be put before the main contentItem.
-
-        It's possible to have extra items such as icons at the left of contentItem
-        (or on the right on RTL layouts) to have a more decorated entries
-     */
     property alias leadingItems: leadingItems.children
-
-    /*!
-        \brief Extra items that can be put after the main contentItem.
-
-        It's possible to have extra items such as action buttons at the right of contentItem
-        (or on the left on RTL layouts) to have extra triggereable actions
-     */
     property alias trailingItems: trailingItems.children
 
     implicitWidth: Math.max(mainLayout.implicitWidth + impl.padding * 2, Math.min(contentItemWrapper.implicitWidth, Kirigami.Units.gridUnit * 20 + impl.padding * 2))
@@ -120,12 +31,54 @@ Item {
     //Internal: never rely on this
     readonly property real __textLabelWidth: label.implicitWidth
 
+    QQC.Label {
+        id: label
+        anchors {
+            top: parent.top
+            right: parent.left
+            rightMargin: -impl.leftPadding + Kirigami.Units.largeSpacing
+            topMargin: root.contentItem.Kirigami.FormData.buddyFor.y + root.contentItem.Kirigami.FormData.buddyFor.height/2 - label.height/2 + contentItemWrapper.y + impl.topPadding
+        }
+        visible: text.length > 0 && !impl.formLayout.__collapsed
+        Kirigami.MnemonicData.enabled: {
+                const buddy = root.contentItem?.Kirigami.FormData.buddyFor;
+                if (buddy && buddy.enabled && buddy.visible && buddy.activeFocusOnTab) {
+                    // Only set mnemonic if the buddy doesn't already have one.
+                    const buddyMnemonic = buddy.Kirigami.MnemonicData;
+                    return !buddyMnemonic.label || !buddyMnemonic.enabled;
+                } else {
+                    return false;
+                }
+            }
+        Kirigami.MnemonicData.controlType: Kirigami.MnemonicData.FormLabel
+        Kirigami.MnemonicData.label: root.title
+        text: Kirigami.MnemonicData.richTextLabel
+        Accessible.name: Kirigami.MnemonicData.plainTextLabel
+        Shortcut {
+            sequence: label.Kirigami.MnemonicData.sequence
+            onActivated: {
+                const buddy = root.contentItem?.Kirigami.FormData.buddyFor;
+
+                const buttonBuddy = buddy as T.AbstractButton;
+                // animateClick is only in Qt 6.8,
+                // it also takes into account focus policy.
+                if (buttonBuddy && buttonBuddy.animateClick) {
+                    buttonBuddy.animateClick();
+                } else {
+                    buddy.forceActiveFocus(Qt.ShortcutFocusReason);
+                }
+            }
+        }
+    }
+
     T.ItemDelegate {
         id: impl
         anchors.fill: parent
         implicitWidth: mainLayout.implicitWidth + leftPadding + rightPadding
         implicitHeight: mainLayout.implicitHeight + topPadding + bottomPadding
         padding: Kirigami.Units.largeSpacing// + Kirigami.Units.smallSpacing
+
+        leftPadding: impl.formLayout.__collapsed ? padding : root.parent?.__assignedWidthForLabels + Kirigami.Units.largeSpacing * 2
 
         readonly property bool nextIsFormEntry: root.parent.visibleChildren[root.parent.visibleChildren.indexOf(root) + 1] instanceof FormEntry
         readonly property bool prevIsFormEntry: root.parent.visibleChildren[root.parent.visibleChildren.indexOf(root) - 1] instanceof FormEntry
@@ -154,7 +107,7 @@ Item {
             } else if (buddy instanceof T.ComboBox) {
                 buddy.popup.open();
             } else if (root instanceof FormAction) {
-                root.action.trigger();
+                root.action.triggered();
             }
         }
 
@@ -164,38 +117,10 @@ Item {
             rowSpacing: Kirigami.Units.smallSpacing
             columns: 1 + leadingItems.visible + trailingItems.visible
             QQC.Label {
-                id: label
                 Layout.columnSpan: mainLayout.columns
-                visible: text.length > 0
-                Kirigami.MnemonicData.enabled: {
-                        const buddy = root.contentItem?.Kirigami.FormData.buddyFor;
-                        if (buddy && buddy.enabled && buddy.visible && buddy.activeFocusOnTab) {
-                            // Only set mnemonic if the buddy doesn't already have one.
-                            const buddyMnemonic = buddy.Kirigami.MnemonicData;
-                            return !buddyMnemonic.label || !buddyMnemonic.enabled;
-                        } else {
-                            return false;
-                        }
-                    }
-                Kirigami.MnemonicData.controlType: Kirigami.MnemonicData.FormLabel
-                Kirigami.MnemonicData.label: root.title
-                text: Kirigami.MnemonicData.richTextLabel
-                Accessible.name: Kirigami.MnemonicData.plainTextLabel
-                Shortcut {
-                    sequence: label.Kirigami.MnemonicData.sequence
-                    onActivated: {
-                        const buddy = root.contentItem?.Kirigami.FormData.buddyFor;
-
-                        const buttonBuddy = buddy as T.AbstractButton;
-                        // animateClick is only in Qt 6.8,
-                        // it also takes into account focus policy.
-                        if (buttonBuddy && buttonBuddy.animateClick) {
-                            buttonBuddy.animateClick();
-                        } else {
-                            buddy.forceActiveFocus(Qt.ShortcutFocusReason);
-                        }
-                    }
-                }
+                visible: text.length > 0 && impl.formLayout.__collapsed
+                text: label.Kirigami.MnemonicData.richTextLabel
+                Accessible.name: label.Kirigami.MnemonicData.plainTextLabel
             }
             RowLayout {
                 id: leadingItems

@@ -33,7 +33,7 @@ void KirigamiFormsPlugin::registerTypes(const char *uri)
 
     qmlRegisterModuleImport(uri,
                             QQmlModuleImportModuleAny,
-                            (QLatin1String("org.kde.kirigami.forms.") % formsChoice).toUtf8().constData(),
+                            (QLatin1String("org.kde.kirigami.forms.private.") % formsChoice).toUtf8().constData(),
                             QQmlModuleImportLatest,
                             QQmlModuleImportAuto);
 }
