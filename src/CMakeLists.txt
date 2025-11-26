@@ -70,6 +70,7 @@ ecm_add_qml_module(Kirigami URI "org.kde.kirigami" VERSION 2.0
     "org.kde.kirigami.delegates"
     "org.kde.kirigami.dialogs"
     "org.kde.kirigami.layouts"
+    "org.kde.kirigami.forms"
     ${_extra_options}
 )
 
@@ -125,28 +126,6 @@ qt_target_qml_sources(Kirigami RESOURCES
     styles/Material/InlineMessage.qml
     styles/Material/Theme.qml
     OUTPUT_TARGETS _out_targets_1
-)
-
-ecm_target_qml_sources(Kirigami PRIVATE PATH forms/cards SOURCES
-    forms/cards/Form.qml
-    forms/cards/FormAction.qml
-    forms/cards/FormEntry.qml
-    forms/cards/FormGroup.qml
-    forms/cards/FormSeparator.qml
-)
-ecm_target_qml_sources(Kirigami PRIVATE PATH forms/flat SOURCES
-    forms/flat/Form.qml
-    forms/flat/FormAction.qml
-    forms/flat/FormEntry.qml
-    forms/flat/FormGroup.qml
-    forms/flat/FormSeparator.qml
-)
-ecm_target_qml_sources(Kirigami PRIVATE PATH forms/hybrid SOURCES
-    forms/hybrid/Form.qml
-    forms/hybrid/FormAction.qml
-    forms/hybrid/FormEntry.qml
-    forms/hybrid/FormGroup.qml
-    forms/hybrid/FormSeparator.qml
 )
 
 if (DESKTOP_ENABLED)
