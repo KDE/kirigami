@@ -9,74 +9,23 @@ import QtQuick.Layouts
 import QtQuick.Controls as QQC
 import org.kde.kirigami as Kirigami
 
-
-/*!
-    \qmltype FormGroup
-    \inqmlmodule org.kde.kirigami.forms
-
-    \brief A group of items in a form.
-
-    In a Form, items are gruped semantically in categories represented
-    by the FormGroup Item, which can have a title and is a container
-    of FormEntry items, each one representing a single configuration
-    option or entry field.
-
-    It has to be exclusively used as a child of a Form item, as
-    it semantically represents a category within a Form.
-
-    Example usage:
-
-    \qml
-    import QtQuick.Controls as QQC
-    import org.kde.kirigami.forms as KF
-
-    KF.Form {
-        KF.FormGroup {
-            title: i18n("Section1")
-            KF.FormEntry {
-                title: i18n("Name:")
-                contentItem: QQC.TextField {}
-            }
-            KF.FormEntry {
-                title: i18n("Notifications:")
-                subtitle: i18n("Notifications will pop up when a message arrives.")
-                contentItem: QQC.CheckBox {
-                    text: i18n("Enabled")
-                }
-            }
-        }
-        KF.FormGroup {
-            title: i18n("Other settings")
-            KF.FormEntry {
-                contentItem: QQC.CheckBox {
-                    text: i18n("Double Click")
-                }
-            }
-        }
-    }
-    \endqml
-    \sa FormEntry
- */
 Item {
     id: root
 
-    /*!
-        A title for this FormGroup. If set the title will be presented to the user
-        above the group contents.
-     */
-    property string title
+    Layout.fillWidth: true
 
+    property string title
     default property alias entries: innerLayout.data
     implicitWidth: layout.implicitWidth
     implicitHeight: layout.implicitHeight
 
-    Layout.fillWidth: true
+    readonly property real __maxTextLabelWidth: innerLayout.labelWidth
+    property alias __assignedWidthForLabels: innerLayout.__assignedWidthForLabels
 
     Kirigami.HeaderFooterLayout {
         id: layout
         anchors.fill: parent
         spacing: Kirigami.Units.smallSpacing
-        // TODO: HeaderFooterLayout needs headerMargin/footerMargin
 
         header: Kirigami.Heading {
             level: 5
@@ -86,8 +35,18 @@ Item {
         }
         contentItem: Kirigami.AbstractCard {
             padding: 0
+            implicitWidth: innerLayout.implicitWidth + __assignedWidthForLabels
             contentItem: ColumnLayout {
                 id: innerLayout
+                property real labelWidth: 0
+                property real __assignedWidthForLabels: 0
+                onImplicitWidthChanged: {
+                    let w = 0;
+                    for (let entry of children) {
+                        w = Math.max(w, entry?.__textLabelWidth ?? 0);
+                    }
+                    labelWidth = w;
+                }
                 spacing: 0
             }
         }
