@@ -89,3 +89,14 @@ cmake --build build/ --target create-apk-$yourapp
 ```
 
 Note: `-DCMAKE_INSTALL_PREFIX` directory should be the same as where Kirigami was installed, since you need to create an apk package that contains both the Kirigami build and the build of your application.
+
+# Adding new components
+
+When adding new components to Kirigami the following requirements must be fulfilled:
+
+- Must fit the vision of Kirigami
+- Must be documented with appropriate API documentation
+- Must come with an autotest
+- Must come with a corresponding change that adds it to kirigami-gallery
+- Must come with one or more changes that makes use of it in an application
+- Must be reviewed so that it does not expose unnecessary API and implementation details (e.g. the base component)
