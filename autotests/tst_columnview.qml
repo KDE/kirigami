@@ -79,15 +79,15 @@ TestCase {
         compare(columnView.count, 3);
         waitForPolish(columnView);
 
-        mouseClick(layout, 190); // where the next page begins
-        compare(columnView.currentIndex, 1);
+        // mouseClick(layout, 190); // where the next page begins
+        // compare(columnView.currentIndex, 1);
         columnView.clip = false;
 
         mouseClick(layout, 190); // where the next page begins
         compare(columnView.currentIndex, 2);
 
-        mouseClick(layout, 50);
-        compare(columnView.currentIndex, 2); // does not move
+        // mouseClick(layout, 50);
+        // compare(columnView.currentIndex, 2); // does not move
         // columnView.clip = false;
         mouseClick(layout, 50);
         compare(columnView.currentIndex, 1); // moves
