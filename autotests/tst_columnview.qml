@@ -81,14 +81,11 @@ TestCase {
 
         mouseClick(layout, 190); // where the next page begins
         compare(columnView.currentIndex, 1);
-        columnView.clip = false;
 
         mouseClick(layout, 190); // where the next page begins
         compare(columnView.currentIndex, 2);
 
-        // mouseClick(layout, 50);
-        // compare(columnView.currentIndex, 2); // does not move
-        // columnView.clip = false;
+        columnView.clip = false;
         mouseClick(layout, 50);
         compare(columnView.currentIndex, 1); // moves
     }
