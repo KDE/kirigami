@@ -79,8 +79,8 @@ TestCase {
         compare(columnView.count, 3);
         waitForPolish(columnView);
 
-        // mouseClick(layout, 190); // where the next page begins
-        // compare(columnView.currentIndex, 1);
+        mouseClick(layout, 190); // where the next page begins
+        compare(columnView.currentIndex, 1);
         columnView.clip = false;
 
         mouseClick(layout, 190); // where the next page begins
