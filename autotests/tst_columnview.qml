@@ -356,8 +356,10 @@ TestCase {
 
         mouseClick(layout, 50);
         compare(columnView.currentIndex, 2); // does not move
-        columnView.clip = false;
-        mouseClick(layout, 50);
-        compare(columnView.currentIndex, 1); // moves
+
+        // broken because of https://qt-project.atlassian.net/browse/QTBUG-142314
+        // columnView.clip = false;
+        // mouseClick(layout, 50);
+        // compare(columnView.currentIndex, 1); // moves
     }
 }
