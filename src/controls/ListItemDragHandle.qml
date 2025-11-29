@@ -139,7 +139,7 @@ Item {
         drag {
             target: listItem
             axis: Drag.YAxis
-            minimumY: 0
+            minimumY: listView.topMargin + (listView.headerItem?.height ?? 0)
         }
 
         cursorShape: pressed ? Qt.ClosedHandCursor : Qt.OpenHandCursor
@@ -199,7 +199,7 @@ Item {
             internal.mouseDownY = mouse.y;
             // while dragging listItem's height could change
             // we want a const maximumY during the dragging time
-            mouseArea.drag.maximumY = listView.height - listItem.height;
+            mouseArea.drag.maximumY = listView.height - listItem.height - (listView.footerItem?.height ?? 0) - listView.bottomMargin;
         }
 
         onPositionChanged: mouse => {
