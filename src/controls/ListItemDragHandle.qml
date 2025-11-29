@@ -22,7 +22,6 @@ import org.kde.kirigami as Kirigami
   In order for ListItemDragHandle to work correctly, the listItem that is being dragged
   should not directly be the delegate of the ListView, but a child of it.
 
-  It is recommended to use DelagateRecycler as base delegate like the following code:
   \code
   import QtQuick
   import QtQuick.Layouts
