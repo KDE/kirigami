@@ -13,16 +13,16 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
 /*!
- \qmltype TitleSubtitleWithActions
- \inqmlmodule org.kde.kirigami.delegates
+\qmltype TitleSubtitleWithActions
+\inqmlmodule org.kde.kirigami.delegates
 
- \brief A simple title delegate that has trailing actions.
+\brief A simple title delegate that has trailing actions.
 
- This is meant to be used in lists for items that have actions.
- For example lists of usernames, with any related actions after them,
- such as rename and delete actions.
+This is meant to be used in lists for items that have actions.
+For example lists of usernames, with any related actions after them,
+such as rename and delete actions.
 
- Example usage as contentItem of an ItemDelegate:
+Example usage as contentItem of an ItemDelegate:
 
 \qml
 ItemDelegate {
@@ -69,17 +69,17 @@ Item {
     id: root
 
     /*!
-     \qmlproperty list<Action> TitleSubtitleWithActions::actions
+        \qmlproperty list<Action> TitleSubtitleWithActions::actions
 
-     \brief This property holds a list of visible actions.
+        \brief This property holds a list of visible actions.
 
-     These actions will be given to ActionToolBar.
-     To make an action be icons-only, set
-     \c displayHint: Kirigami.DisplayHint.IconOnly on it.
+        These actions will be given to ActionToolBar.
+        To make an action be icons-only, set
+        \c displayHint: Kirigami.DisplayHint.IconOnly on it.
 
-     Empty by default, so no actions will be present.
+        Empty by default, so no actions will be present.
 
-         \sa ActionToolBar
+        \sa ActionToolBar
      */
     property list<T.Action> actions
 
@@ -110,20 +110,20 @@ Item {
     property int elide: Text.ElideRight
 
     /*!
-     This property determines how the icon and text are displayed within the button.
+        This property determines how the icon and text are displayed within the button.
 
-     Permitted values are:
-     \list
-     \li Button.IconOnly
-     \li Button.TextOnly
-     \li Button.TextBesideIcon
-     \li Button.TextUnderIcon
-     \endlist
+        Permitted values are:
+        \list
+        \li Button.IconOnly
+        \li Button.TextOnly
+        \li Button.TextBesideIcon
+        \li Button.TextUnderIcon
+        \endlist
 
-     default: \c Button.TextBesideIcon
+        default: \c Button.TextBesideIcon
 
-         \sa ActionToolBar
-         \sa AbstractButton
+        \sa ActionToolBar
+        \sa AbstractButton
     */
     property alias displayHint: actionToolBar.display
 
