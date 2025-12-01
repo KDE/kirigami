@@ -60,6 +60,7 @@ kirigami_add_tests(
     tst_scrollablepage.qml
     tst_spellcheck.qml
     tst_theme.qml
+    tst_titleSubtitleWithActions.qml
 
     mobile/tst_pagerow.qml
 
