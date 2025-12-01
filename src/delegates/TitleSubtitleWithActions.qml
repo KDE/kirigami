@@ -69,7 +69,7 @@ Item {
     id: root
 
     /*!
-     \qmlproperty list<Action> ActionToolBar::actions
+     \qmlproperty list<Action> TitleSubtitleWithActions::actions
 
      \brief This property holds a list of visible actions.
 
@@ -107,7 +107,7 @@ Item {
 
         default: \c Text.ElideRight
      */
-    property var elide: Text.ElideRight
+    property int elide: Text.ElideRight
 
     /*!
      This property determines how the icon and text are displayed within the button.
