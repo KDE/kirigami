@@ -112,6 +112,7 @@ Item {
 
     /*!
         This property determines how the icon and text are displayed within the button.
+        \qmlproperty enumeration TitleSubtitleWithActions::displayHint
 
         Permitted values are:
         \list
