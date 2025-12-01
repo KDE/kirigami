@@ -104,6 +104,7 @@ Item {
 
     /*!
         The text elision mode used for both the title and subtitle.
+        \qmlproperty enumeration TitleSubtitleWithActions::elide
 
         default: \c Text.ElideRight
      */
