@@ -62,7 +62,7 @@ ItemDelegate {
 \sa IconTitleSubtitle
 \sa TitleSubtitle
 \sa ActionToolBar
-\since 6.21
+\since 6.22
 */
 
 Item {
