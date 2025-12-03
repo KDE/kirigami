@@ -1,16 +1,16 @@
 # Translation of libkirigami2plugin_qt.po to Catalan
-# Copyright (C) 2016-2024 This_file_is_part_of_KDE
+# Copyright (C) 2016-2025 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
 # SPDX-FileCopyrightText: 2016, 2020, 2021 Antoni Bella Pérez <antonibella5@yahoo.com>
-# SPDX-FileCopyrightText: 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 Josep M. Ferrer <txemaq@gmail.com>
+# SPDX-FileCopyrightText: 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025 Josep M. Ferrer <txemaq@gmail.com>
 # SPDX-FileCopyrightText: 2019 Empar Montoro Martín <montoro_mde@gva.es>
 msgid ""
 msgstr ""
 "Project-Id-Version: kirigami\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"PO-Revision-Date: 2024-07-05 19:16+0200\n"
+"PO-Revision-Date: 2025-12-02 09:52+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -20,7 +20,7 @@ msgstr ""
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #: controls/AboutItem.qml:133
 #, qt-format
@@ -48,7 +48,7 @@ msgstr "Col·laboreu-hi"
 #: controls/AboutItem.qml:207
 msgctxt "AboutItem|"
 msgid "Donate"
-msgstr "Donatius"
+msgstr "Donació"
 
 #: controls/AboutItem.qml:224
 msgctxt "AboutItem|"
