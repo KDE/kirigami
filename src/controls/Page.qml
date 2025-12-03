@@ -118,7 +118,19 @@ QQC2.Page {
     /*!
       \brief The delegate which will be used to draw the page title.
 
-      It can be customized to put any kind of Item in there.
+      It can be customized to use any kind of Item as the title.
+
+      For ideal sizing, where the delegate will fill the header up to the implicit size,
+      and shrink when it would otherwise push actions off-screen, it is recommended to
+      use the same approach as the default title delegate:
+
+      \code
+      titleDelegate: Item {
+          Layout.fillWidth: true
+          Layout.minimumWidth: 0
+          Layout.maximumWidth: implicitWidth
+      }
+      \endcode
 
       \since 2.7
      */
