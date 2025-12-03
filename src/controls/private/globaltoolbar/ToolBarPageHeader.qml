@@ -11,6 +11,7 @@ import QtQml
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import org.kde.kirigami.templates as KT
+import ".." as KP
 
 Kirigami.AbstractApplicationHeader {
     id: root
@@ -96,10 +97,11 @@ Kirigami.AbstractApplicationHeader {
             Layout.preferredWidth: item?.Layout.preferredWidth ?? -1
             Layout.maximumWidth: item?.Layout.maximumWidth ?? -1
             Layout.leftMargin: {
-                if (!pageRow || navButtons.visible) {
-                    return  -root.leftPadding;
-                } else if (leadingHandle.visible) {
-                    return  -root.leftPadding + Kirigami.Units.smallSpacing;
+                if (!(item instanceof KP.DefaultPageTitleDelegate)) {
+                    return 0;
+                }
+                if (!pageRow || navButtons.visible || leadingHandle.visible) {
+                    return  0;
                 } else if (separator.visible) {
                     return pageRow.globalToolBar.titleLeftPadding - layout.spacing - root.leftPadding;
                 }
