@@ -191,6 +191,8 @@ QQC2.SwipeDelegate {
 
     hoverEnabled: true
     implicitHeight: Math.max(actionsLayout.implicitHeight, contentItem.implicitHeight) + topPadding + bottomPadding
+    implicitWidth: Math.max(actionsLayout.implicitWidth, contentItem.implicitWidth) + leftPadding + rightPadding
+    width: parent ? parent.width : implicitWidth
 
     Keys.onTabPressed: (event) => {
         if (actionsLayout.hasVisibleActions) {
