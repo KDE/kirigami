@@ -190,8 +190,8 @@ QQC2.SwipeDelegate {
     LayoutMirroring.childrenInherit: true
 
     hoverEnabled: true
-    implicitHeight: Math.max(actionsLayout.implicitHeight, contentItem.implicitHeight) + topPadding + bottomPadding
-    implicitWidth: Math.max(actionsLayout.implicitWidth, contentItem.implicitWidth) + leftPadding + rightPadding
+    implicitHeight: Math.max(actionsLayout.implicitHeight, implicitContentHeight) + topPadding + bottomPadding
+    implicitWidth: Math.max(actionsLayout.implicitWidth, implicitContentWidth) + leftPadding + rightPadding
     width: parent ? parent.width : implicitWidth
 
     Keys.onTabPressed: (event) => {
