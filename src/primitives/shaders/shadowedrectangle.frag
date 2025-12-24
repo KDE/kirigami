@@ -61,15 +61,19 @@ void main()
 #else
     lowp float inner_rect = sdf_rounded_rectangle(uv, ubuf.aspect * inverse_scale, corner_radius);
 #endif
-    // Finally, render the inner rectangle.
-    col = sdf_render(inner_rect, col, ubuf.color);
 
 #ifdef ENABLE_TEXTURE
-    // Sample the texture, then blend it on top of the background color.
+    // Sample the texture.
     lowp vec2 texture_uv = ((uv / ubuf.aspect) + (1.0 * inverse_scale)) / (2.0 * inverse_scale);
-    lowp vec4 texture_color = sdf_render(inner_rect, vec4(0.0), texture(textureSource, texture_uv));
-    // Use premultiplied blending for blending the texture on top of the rect color.
-    col = texture_color + (1.0 - texture_color.a) * col;
+    lowp vec4 texture_color = texture(textureSource, texture_uv);
+
+    // Blend the texture on top of the background color and render the inner rectangle.
+    vec4 shape_color = mix(ubuf.color, texture_color, texture_color.a);
+    // ...and then render the inner rectangle.
+    col = sdf_render(inner_rect, col, shape_color);
+#else
+    // Finally, render the inner rectangle.
+    col = sdf_render(inner_rect, col, ubuf.color);
 #endif
 
     out_color = col * ubuf.opacity;
