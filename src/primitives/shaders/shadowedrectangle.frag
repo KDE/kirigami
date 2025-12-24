@@ -67,9 +67,9 @@ void main()
 #ifdef ENABLE_TEXTURE
     // Sample the texture, then blend it on top of the background color.
     lowp vec2 texture_uv = ((uv / ubuf.aspect) + (1.0 * inverse_scale)) / (2.0 * inverse_scale);
-    lowp vec4 texture_color = sdf_render(inner_rect, vec4(0.0), texture(textureSource, texture_uv));
+    lowp vec4 texture_color = texture(textureSource, texture_uv);
     // Use premultiplied blending for blending the texture on top of the rect color.
-    col = texture_color + (1.0 - texture_color.a) * col;
+    col = texture_color * col.a + col * (1.0 - texture_color.a);
 #endif
 
     out_color = col * ubuf.opacity;
