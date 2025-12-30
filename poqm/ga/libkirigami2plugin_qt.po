@@ -1,0 +1,266 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Qt-Contexts: true\n"
+
+#: controls/AboutItem.qml:133
+#, qt-format
+msgctxt "AboutItem|"
+msgid "%1 (%2)"
+msgstr ""
+
+#: controls/AboutItem.qml:142
+#, qt-format
+msgctxt "AboutItem|"
+msgid "Visit %1's KDE Store page"
+msgstr ""
+
+#: controls/AboutItem.qml:151
+#, qt-format
+msgctxt "AboutItem|"
+msgid "Send an email to %1"
+msgstr ""
+
+#: controls/AboutItem.qml:201
+msgctxt "AboutItem|"
+msgid "Get Involved"
+msgstr ""
+
+#: controls/AboutItem.qml:207
+msgctxt "AboutItem|"
+msgid "Donate"
+msgstr ""
+
+#: controls/AboutItem.qml:224
+msgctxt "AboutItem|"
+msgid "Report a Bug"
+msgstr ""
+
+#: controls/AboutItem.qml:237
+msgctxt "AboutItem|"
+msgid "Copyright"
+msgstr ""
+
+#: controls/AboutItem.qml:281
+msgctxt "AboutItem|"
+msgid "License:"
+msgstr ""
+
+#: controls/AboutItem.qml:303
+#, qt-format
+msgctxt "AboutItem|"
+msgid "License: %1"
+msgstr ""
+
+#: controls/AboutItem.qml:314
+msgctxt "AboutItem|"
+msgid "Libraries in use"
+msgstr ""
+
+#: controls/AboutItem.qml:344
+msgctxt "AboutItem|"
+msgid "Authors"
+msgstr ""
+
+#: controls/AboutItem.qml:353
+msgctxt "AboutItem|"
+msgid "Show author photos"
+msgstr ""
+
+#: controls/AboutItem.qml:384
+msgctxt "AboutItem|"
+msgid "Credits"
+msgstr ""
+
+#: controls/AboutItem.qml:397
+msgctxt "AboutItem|"
+msgid "Translators"
+msgstr ""
+
+#: controls/AboutPage.qml:101
+#, qt-format
+msgctxt "AboutPage|"
+msgid "About %1"
+msgstr ""
+
+#: controls/AbstractApplicationWindow.qml:201
+msgctxt "AbstractApplicationWindow|"
+msgid "Quit"
+msgstr ""
+
+#: controls/ActionToolBar.qml:208
+msgctxt "ActionToolBar|"
+msgid "More Actions"
+msgstr ""
+
+#: controls/Avatar.qml:171
+#, qt-format
+msgctxt "Avatar|"
+msgid "%1 — %2"
+msgstr ""
+
+#: controls/Chip.qml:82
+msgctxt "Chip|"
+msgid "Remove Tag"
+msgstr ""
+
+#: controls/ContextDrawer.qml:67
+msgctxt "ContextDrawer|"
+msgid "Actions"
+msgstr ""
+
+#: controls/GlobalDrawer.qml:506
+msgctxt "GlobalDrawer|"
+msgid "Back"
+msgstr ""
+
+#: controls/GlobalDrawer.qml:599
+msgctxt "GlobalDrawer|"
+msgid "Close Sidebar"
+msgstr ""
+
+#: controls/GlobalDrawer.qml:602
+msgctxt "GlobalDrawer|"
+msgid "Open Sidebar"
+msgstr ""
+
+#: controls/LoadingPlaceholder.qml:55
+msgctxt "LoadingPlaceholder|"
+msgid "Loading…"
+msgstr ""
+
+#: controls/PasswordField.qml:41
+msgctxt "PasswordField|"
+msgid "Password"
+msgstr ""
+
+#: controls/PasswordField.qml:44
+msgctxt "PasswordField|"
+msgid "Hide Password"
+msgstr ""
+
+#: controls/PasswordField.qml:44
+msgctxt "PasswordField|"
+msgid "Show Password"
+msgstr ""
+
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+msgctxt "PageRowGlobalToolBarUI|"
+msgid "Close menu"
+msgstr ""
+
+#: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
+msgctxt "PageRowGlobalToolBarUI|"
+msgid "Open menu"
+msgstr ""
+
+#: controls/SearchField.qml:94
+msgctxt "SearchField|"
+msgid "Search…"
+msgstr ""
+
+#: controls/SearchField.qml:96
+msgctxt "SearchField|"
+msgid "Search"
+msgstr ""
+
+#: controls/SearchField.qml:107
+msgctxt "SearchField|"
+msgid "Clear search"
+msgstr ""
+
+#: controls/settingscomponents/CategorizedSettings.qml:41
+#: controls/settingscomponents/CategorizedSettings.qml:105
+msgctxt "CategorizedSettings|"
+msgid "Settings"
+msgstr ""
+
+#: controls/settingscomponents/CategorizedSettings.qml:41
+#, qt-format
+msgctxt "CategorizedSettings|"
+msgid "Settings — %1"
+msgstr ""
+
+#. Accessibility text for a page tab. Keep the text as concise as possible and don't use a percent sign.
+#: controls/swipenavigator/templates/PageTab.qml:38
+#, qt-format
+msgctxt "PageTab|"
+msgid "Current page. Progress: %1 percent."
+msgstr ""
+
+#. Accessibility text for a page tab. Keep the text as concise as possible.
+#: controls/swipenavigator/templates/PageTab.qml:41
+#, qt-format
+msgctxt "PageTab|"
+msgid "Navigate to %1. Progress: %2 percent."
+msgstr ""
+
+#. Accessibility text for a page tab. Keep the text as concise as possible.
+#: controls/swipenavigator/templates/PageTab.qml:46
+msgctxt "PageTab|"
+msgid "Current page."
+msgstr ""
+
+#. Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
+#: controls/swipenavigator/templates/PageTab.qml:49
+#, qt-format
+msgctxt "PageTab|"
+msgid "Navigate to %1. Demanding attention."
+msgstr ""
+
+#. Accessibility text for a page tab that's requesting the user's attention. Keep the text as concise as possible.
+#: controls/swipenavigator/templates/PageTab.qml:52
+#, qt-format
+msgctxt "PageTab|"
+msgid "Navigate to %1."
+msgstr ""
+
+#: controls/templates/OverlayDrawer.qml:141
+msgctxt "OverlayDrawer|"
+msgid "Close drawer"
+msgstr ""
+
+#: controls/templates/OverlayDrawer.qml:147
+msgctxt "OverlayDrawer|"
+msgid "Open drawer"
+msgstr ""
+
+#: controls/templates/private/BackButton.qml:53
+msgctxt "BackButton|"
+msgid "Navigate Back"
+msgstr ""
+
+#: controls/templates/private/ForwardButton.qml:30
+msgctxt "ForwardButton|"
+msgid "Navigate Forward"
+msgstr ""
+
+#: controls/ToolBarApplicationHeader.qml:118
+msgctxt "ToolBarApplicationHeader|"
+msgid "More Actions"
+msgstr ""
+
+#: controls/UrlButton.qml:54
+msgctxt "UrlButton|"
+msgid "Copy Link to Clipboard"
+msgstr ""
+
+#: settings.cpp:220
+#, qt-format
+msgctxt "Settings|"
+msgid "KDE Frameworks %1"
+msgstr ""
+
+#: settings.cpp:222
+#, qt-format
+msgctxt "Settings|"
+msgid "The %1 windowing system"
+msgstr ""
+
+#: settings.cpp:223
+#, qt-format
+msgctxt "Settings|"
+msgid "Qt %2 (built against %3)"
+msgstr ""
