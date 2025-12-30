@@ -94,7 +94,7 @@ Kirigami.ShadowedImage {
     property int rightPadding: headingIcon.valid ? Kirigami.Units.smallSpacing * 2 : Kirigami.Units.largeSpacing
     property int bottomPadding: headingIcon.valid ? Kirigami.Units.smallSpacing * 2 : Kirigami.Units.largeSpacing
 
-    property int implicitWidth: Layout.preferredWidth
+    implicitWidth: Layout.preferredWidth
 
     readonly property bool empty: title.length === 0 &&             // string
                                   source.toString().length === 0 && // QUrl
