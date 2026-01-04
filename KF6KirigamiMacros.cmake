@@ -100,7 +100,9 @@ function(kirigami_package_breeze_icons)
 
     # We need to expand the 'real' path of the root because if it has relative path
     # elements or symlinks in it that breaks the symlink test in _find_breeze_icon.
-    file(REAL_PATH "${BREEZEICONS_DIR}" _BREEZEICONS_DIR EXPAND_TILDE)
+    if (BREEZEICONS_DIR)
+        file(REAL_PATH "${BREEZEICONS_DIR}" _BREEZEICONS_DIR EXPAND_TILDE)
+    endif()
 
     #FIXME: this is a terrible hack
     if(NOT _BREEZEICONS_DIR)
