@@ -154,7 +154,12 @@ ListView {
             }
         }
         Repeater {
-            model: delegateColumn.modelData instanceof Kirigami.Action ? (delegateColumn.modelData as Kirigami.Action).children : []
+            model: {
+                if (!delegateColumn.expanded) {
+                    return [];
+                }
+                return (delegateColumn.modelData as Kirigami.Action)?.children ?? [];
+            }
             delegate: Loader {
                 id: childLoader
                 required property T.Action modelData
@@ -162,7 +167,6 @@ ListView {
                 Layout.leftMargin: Kirigami.Units.gridUnit
                 Layout.preferredHeight: active ? (item as Item).implicitHeight : 0
 
-                active: delegateColumn.expanded
                 sourceComponent: _private.delegateForAction(childLoader.modelData)
                 onItemChanged: if (item) {
                     item.delegate = delegateColumn;
@@ -180,7 +184,7 @@ ListView {
             property T.Action modelData
 
             action: modelData
-            visible: modelData instanceof Kirigami.Action ? (modelData as Kirigami.Action).visible : true
+            visible: (modelData as Kirigami.Action)?.visible ?? true
 
             Component.onCompleted: (contentItem as GridLayout).columns = (contentItem as GridLayout).columns + 1
             contentItem.children: Kirigami.Icon {
@@ -201,7 +205,7 @@ ListView {
             property T.Action modelData
 
             action: modelData
-            visible: modelData instanceof Kirigami.Action ? (modelData as Kirigami.Action).visible : true
+            visible: (modelData as Kirigami.Action)?.visible ?? true
 
             onClicked: root.clicked(modelData)
         }
@@ -215,7 +219,7 @@ ListView {
             QQC2.ButtonGroup.group: modelData.QQC2.ButtonGroup.group
 
             action: modelData
-            visible: modelData instanceof Kirigami.Action ? (modelData as Kirigami.Action).visible : true
+            visible: (modelData as Kirigami.Action)?.visible ?? true
 
             onClicked: root.clicked(modelData)
         }
@@ -228,7 +232,7 @@ ListView {
             property T.Action modelData
             padding: Kirigami.Units.largeSpacing
             contentItem: Kirigami.Separator {
-                visible: separatorControl.modelData instanceof Kirigami.Action ? (separatorControl.modelData as Kirigami.Action).visible : true
+                visible: (separatorControl.modelData as Kirigami.Action)?.visible ?? true
             }
         }
     }
@@ -237,13 +241,13 @@ ListView {
         id: _private
 
         function delegateForAction(action: T.Action) : Component {
-            const isKirigamiAction = action instanceof Kirigami.Action;
-            if (isKirigamiAction && (action as Kirigami.Action).separator) {
+            const kirigamiAction = action as Kirigami.Action;
+            if (kirigamiAction && kirigamiAction.separator) {
                 return separatorDelegate;
-            } else if (isKirigamiAction && (action as Kirigami.Action).displayComponent) {
-                return (action as Kirigami.Action).displayComponent;
+            } else if (kirigamiAction && kirigamiAction.displayComponent) {
+                return kirigamiAction.displayComponent;
             } else if (action.checkable) {
-                return isKirigamiAction && (action as Kirigami.Action).autoExclusive ? radioDelegate : checkDelegate;
+                return kirigamiAction && kirigamiAction.autoExclusive ? radioDelegate : checkDelegate;
             }
             return itemDelegate
         }
