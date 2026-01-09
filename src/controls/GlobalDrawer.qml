@@ -337,7 +337,7 @@ Kirigami.OverlayDrawer {
     Component {
         id: menuComponent
 
-        Column {
+        ColumnLayout {
             id: menuColumn
 
             property alias model: actionsRepeater.model
@@ -350,8 +350,8 @@ Kirigami.OverlayDrawer {
             QQC2.ItemDelegate {
                 id: backItem
 
+                Layout.fillWidth: true
                 visible: menuColumn.level > 0
-                width: parent.width
                 icon.name: mirrored ? "go-previous-symbolic-rtl" : "go-previous-symbolic"
 
                 text: Kirigami.MnemonicData.richTextLabel
@@ -401,7 +401,7 @@ Kirigami.OverlayDrawer {
         }
     }
 
-    component ActionDelegate : Column {
+    component ActionDelegate : ColumnLayout {
         id: delegate
 
         required property int index
@@ -422,9 +422,8 @@ Kirigami.OverlayDrawer {
 
         visible: kAction?.visible ?? true
 
-        width: parent.width
-
-        KP.GlobalDrawerActionItem {
+        KP.GlobalDrawerActionItem {id:bah
+            Layout.fillWidth: true
             Kirigami.Theme.colorSet: !root.modal && !root.collapsed && delegate.withSections
                 ? Kirigami.Theme.Window : parent.Kirigami.Theme.colorSet
 
@@ -545,8 +544,13 @@ Kirigami.OverlayDrawer {
             // HACK: workaround for https://bugreports.qt.io/browse/QTBUG-83890
             QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
 
-            implicitWidth: Math.min(Kirigami.Units.gridUnit * 20, root.parent.width * 0.8)
-
+            implicitWidth: Math.min(mainColumn.implicitWidth, root.parent.width * 0.8)
+            Behavior on implicitWidth {
+                NumberAnimation {
+                    duration: Kirigami.Units.longDuration
+                    easing.type: Easing.InOutQuad
+                }
+            }
             Flickable {
                 id: mainFlickable
 
@@ -611,32 +615,51 @@ Kirigami.OverlayDrawer {
                         Layout.maximumHeight: Layout.minimumHeight
 
                         initialItem: menuComponent
+                        implicitWidth: currentItem.implicitWidth
 
                         // NOTE: it's important those are NumberAnimation and not XAnimators
                         // as while the animation is running the drawer may close, and
                         // the animator would stop when not drawing see BUG 381576
                         popEnter: Transition {
-                            NumberAnimation { property: "x"; from: (stackView.mirrored ? -1 : 1) * -stackView.width; to: 0; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
+                            ParallelAnimation {
+                                NumberAnimation { property: "x"; from: (stackView.mirrored ? -1 : 1) * -stackView.width; to: 0; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
+                                NumberAnimation { property: "opacity"; from: 0; to: 1; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
+                            }
                         }
 
                         popExit: Transition {
-                            NumberAnimation { property: "x"; from: 0; to: (stackView.mirrored ? -1 : 1) * stackView.width; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
+                            ParallelAnimation {
+                                NumberAnimation { property: "x"; from: 0; to: (stackView.mirrored ? -1 : 1) * stackView.width; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
+                                NumberAnimation { property: "opacity"; from: 1; to: 0; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
+                            }
                         }
 
                         pushEnter: Transition {
-                            NumberAnimation { property: "x"; from: (stackView.mirrored ? -1 : 1) * stackView.width; to: 0; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
+                            ParallelAnimation {
+                                NumberAnimation { property: "x"; from: (stackView.mirrored ? -1 : 1) * stackView.width; to: 0; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
+                                NumberAnimation { property: "opacity"; from: 0; to: 1; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
+                            }
                         }
 
                         pushExit: Transition {
-                            NumberAnimation { property: "x"; from: 0; to: (stackView.mirrored ? -1 : 1) * -stackView.width; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
+                            ParallelAnimation {
+                                NumberAnimation { property: "x"; from: 0; to: (stackView.mirrored ? -1 : 1) * -stackView.width; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
+                                NumberAnimation { property: "opacity"; from: 1; to: 0; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
+                            }
                         }
 
                         replaceEnter: Transition {
-                            NumberAnimation { property: "x"; from: (stackView.mirrored ? -1 : 1) * stackView.width; to: 0; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
+                            ParallelAnimation {
+                                NumberAnimation { property: "x"; from: (stackView.mirrored ? -1 : 1) * stackView.width; to: 0; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
+                                NumberAnimation { property: "opacity"; from: 0; to: 1; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
+                            }
                         }
 
                         replaceExit: Transition {
-                            NumberAnimation { property: "x"; from: 0; to: (stackView.mirrored ? -1 : 1) * -stackView.width; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
+                            ParallelAnimation {
+                                NumberAnimation { property: "x"; from: 0; to: (stackView.mirrored ? -1 : 1) * -stackView.width; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
+                                NumberAnimation { property: "opacity"; from: 0; to: 1; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
+                            }
                         }
                     }
 

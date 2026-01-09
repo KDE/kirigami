@@ -31,8 +31,6 @@ QQC2.ItemDelegate {
     highlighted: checked
     activeFocusOnTab: true
 
-    width: parent.width
-
     contentItem: RowLayout {
         spacing: Kirigami.Units.largeSpacing
 
@@ -56,7 +54,8 @@ QQC2.ItemDelegate {
             visible: !listItem.isSeparator
             text: width > height * 2 ? listItem.Kirigami.MnemonicData.mnemonicLabel : ""
             Accessible.name: listItem.Kirigami.MnemonicData.plainTextLabel
-
+            Layout.preferredWidth: metrics.width
+            Layout.minimumWidth: 10
             // Work around Qt bug where left aligned text is not right aligned
             // in RTL mode unless horizontalAlignment is explicitly set.
             // https://bugreports.qt.io/browse/QTBUG-95873
@@ -75,6 +74,11 @@ QQC2.ItemDelegate {
                 } else {
                     return 1.0;
                 }
+            }
+            TextMetrics {
+                id: metrics
+                text: listItem.Kirigami.MnemonicData.mnemonicLabel
+                font: labelItem.font
             }
             Behavior on opacity {
                 NumberAnimation {
