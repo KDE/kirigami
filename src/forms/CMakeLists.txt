@@ -3,7 +3,7 @@ ecm_add_qml_module(KirigamiFormsPrivateFlat URI "org.kde.kirigami.forms.private.
     VERSION 2.0
     GENERATE_PLUGIN_SOURCE
     INSTALLED_PLUGIN_TARGET KF6KirigamiFormsPrivateFlatplugin
-    DEPENDENCIES QtQuick org.kde.kirigami
+    DEPENDENCIES QtQuick org.kde.kirigami.platform org.kde.kirigami.primitives org.kde.kirigami.layouts
 )
 
 set_target_properties(KirigamiFormsPrivateFlat PROPERTIES
@@ -25,7 +25,7 @@ ecm_add_qml_module(KirigamiFormsPrivateCards URI "org.kde.kirigami.forms.private
     VERSION 2.0
     GENERATE_PLUGIN_SOURCE
     INSTALLED_PLUGIN_TARGET KF6KirigamiFormsPrivateCardsplugin
-    DEPENDENCIES QtQuick org.kde.kirigami
+    DEPENDENCIES QtQuick org.kde.kirigami.platform org.kde.kirigami.primitives org.kde.kirigami.layouts
 )
 
 set_target_properties(KirigamiFormsPrivateCards PROPERTIES
@@ -49,7 +49,9 @@ ecm_add_qml_module(KirigamiForms URI "org.kde.kirigami.forms" VERSION 2.0
     INSTALLED_PLUGIN_TARGET KF6KirigamiFormsplugin
     DEPENDENCIES
     "QtQuick.Controls"
-    "org.kde.kirigami"
+    "org.kde.kirigami.platform"
+    "org.kde.kirigami.primitives"
+    "org.kde.kirigami.layouts"
     "org.kde.kirigami.forms.private.flat"
     "org.kde.kirigami.forms.private.cards"
 )

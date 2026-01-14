@@ -12,18 +12,20 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC
 import QtQuick.Templates as T
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.primitives as Primitives
+import org.kde.kirigami.layouts as KirigamiLayouts
 
 Item {
     id: root
 
-    property string title: contentItem?.Kirigami.FormData.label
+    property string title: contentItem?.KirigamiLayouts.FormData.label
     property string subtitle
     property alias contentItem: contentItemWrapper.contentItem
     property alias leadingItems: leadingItems.children
     property alias trailingItems: trailingItems.children
 
-    implicitWidth: Math.max(mainLayout.implicitWidth + impl.padding * 2, Math.min(contentItemWrapper.implicitWidth, Kirigami.Units.gridUnit * 20 + impl.padding * 2))
+    implicitWidth: Math.max(mainLayout.implicitWidth + impl.padding * 2, Math.min(contentItemWrapper.implicitWidth, Platform.Units.gridUnit * 20 + impl.padding * 2))
     implicitHeight: impl.implicitHeight
 
     Layout.fillWidth: true
@@ -36,28 +38,28 @@ Item {
         anchors {
             top: parent.top
             right: parent.left
-            rightMargin: -impl.leftPadding + Kirigami.Units.largeSpacing
-            topMargin: root.contentItem.Kirigami.FormData.buddyFor.y + root.contentItem.Kirigami.FormData.buddyFor.height/2 - label.height/2 + contentItemWrapper.y + impl.topPadding
+            rightMargin: -impl.leftPadding + Platform.Units.largeSpacing
+            topMargin: root.contentItem.KirigamiLayouts.FormData.buddyFor.y + root.contentItem.KirigamiLayouts.FormData.buddyFor.height/2 - label.height/2 + contentItemWrapper.y + impl.topPadding
         }
         visible: text.length > 0 && !impl.formLayout.__collapsed
-        Kirigami.MnemonicData.enabled: {
-                const buddy = root.contentItem?.Kirigami.FormData.buddyFor;
+        Primitives.MnemonicData.enabled: {
+                const buddy = root.contentItem?.KirigamiLayouts.FormData.buddyFor;
                 if (buddy && buddy.enabled && buddy.visible && buddy.activeFocusOnTab) {
                     // Only set mnemonic if the buddy doesn't already have one.
-                    const buddyMnemonic = buddy.Kirigami.MnemonicData;
+                    const buddyMnemonic = buddy.Primitives.MnemonicData;
                     return !buddyMnemonic.label || !buddyMnemonic.enabled;
                 } else {
                     return false;
                 }
             }
-        Kirigami.MnemonicData.controlType: Kirigami.MnemonicData.FormLabel
-        Kirigami.MnemonicData.label: root.title
-        text: Kirigami.MnemonicData.richTextLabel
-        Accessible.name: Kirigami.MnemonicData.plainTextLabel
+        Primitives.MnemonicData.controlType: Primitives.MnemonicData.FormLabel
+        Primitives.MnemonicData.label: root.title
+        text: Primitives.MnemonicData.richTextLabel
+        Accessible.name: Primitives.MnemonicData.plainTextLabel
         Shortcut {
-            sequence: label.Kirigami.MnemonicData.sequence
+            sequence: label.Primitives.MnemonicData.sequence
             onActivated: {
-                const buddy = root.contentItem?.Kirigami.FormData.buddyFor;
+                const buddy = root.contentItem?.KirigamiLayouts.FormData.buddyFor;
 
                 const buttonBuddy = buddy as T.AbstractButton;
                 // animateClick is only in Qt 6.8,
@@ -76,15 +78,15 @@ Item {
         anchors.fill: parent
         implicitWidth: mainLayout.implicitWidth + leftPadding + rightPadding
         implicitHeight: mainLayout.implicitHeight + topPadding + bottomPadding
-        padding: Kirigami.Units.largeSpacing// + Kirigami.Units.smallSpacing
+        padding: Platform.Units.largeSpacing// + Platform.Units.smallSpacing
 
-        leftPadding: impl.formLayout.__collapsed ? padding : root.parent?.__assignedWidthForLabels + Kirigami.Units.largeSpacing * 2
+        leftPadding: impl.formLayout.__collapsed ? padding : root.parent?.__assignedWidthForLabels + Platform.Units.largeSpacing * 2
 
         readonly property bool nextIsFormEntry: root.parent.visibleChildren[root.parent.visibleChildren.indexOf(root) + 1] instanceof FormEntry
         readonly property bool prevIsFormEntry: root.parent.visibleChildren[root.parent.visibleChildren.indexOf(root) - 1] instanceof FormEntry
 
-        topPadding: prevIsFormEntry ? Kirigami.Units.smallSpacing : Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
-        bottomPadding: nextIsFormEntry ? Kirigami.Units.smallSpacing : Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
+        topPadding: prevIsFormEntry ? Platform.Units.smallSpacing : Platform.Units.largeSpacing + Platform.Units.smallSpacing
+        bottomPadding: nextIsFormEntry ? Platform.Units.smallSpacing : Platform.Units.largeSpacing + Platform.Units.smallSpacing
 
         readonly property Item formLayout: {
             let candidate = root.parent
@@ -97,10 +99,10 @@ Item {
             return null
         }
 
-        hoverEnabled: root.contentItem?.Kirigami.FormData.buddyFor instanceof T.AbstractButton || root instanceof FormAction
+        hoverEnabled: root.contentItem?.KirigamiLayouts.FormData.buddyFor instanceof T.AbstractButton || root instanceof FormAction
 
         onClicked: {
-            const buddy = root.contentItem?.Kirigami.FormData.buddyFor;
+            const buddy = root.contentItem?.KirigamiLayouts.FormData.buddyFor;
             buddy.forceActiveFocus(Qt.ShortcutFocusReason);
             if (buddy instanceof T.AbstractButton) {
                 buddy.animateClick();
@@ -113,22 +115,22 @@ Item {
 
         contentItem: GridLayout {
             id: mainLayout
-            columnSpacing: Kirigami.Units.largeSpacing
-            rowSpacing: Kirigami.Units.smallSpacing
+            columnSpacing: Platform.Units.largeSpacing
+            rowSpacing: Platform.Units.smallSpacing
             columns: 1 + leadingItems.visible + trailingItems.visible
             QQC.Label {
                 Layout.columnSpan: mainLayout.columns
                 visible: text.length > 0 && impl.formLayout.__collapsed
-                text: label.Kirigami.MnemonicData.richTextLabel
-                Accessible.name: label.Kirigami.MnemonicData.plainTextLabel
+                text: label.Primitives.MnemonicData.richTextLabel
+                Accessible.name: label.Primitives.MnemonicData.plainTextLabel
             }
             RowLayout {
                 id: leadingItems
                 Layout.rowSpan: subtitleLabel.visible ? 2 : 1
                 visible: children.length > 0
-                spacing: Kirigami.Units.smallSpacing
+                spacing: Platform.Units.smallSpacing
             }
-            Kirigami.Padding {
+            KirigamiLayouts.Padding {
                 id: contentItemWrapper
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignVCenter
@@ -138,39 +140,39 @@ Item {
                 id: trailingItems
                 Layout.rowSpan: subtitleLabel.visible ? 2 : 1
                 visible: children.length > 0
-                spacing: Kirigami.Units.smallSpacing
+                spacing: Platform.Units.smallSpacing
             }
 
             QQC.Label {
                 id: subtitleLabel
                 Layout.fillWidth: true
-                font: Kirigami.Theme.smallFont
+                font: Platform.Theme.smallFont
                 visible: text.length > 0
                 text: root.subtitle
                 wrapMode: Text.WordWrap
                 elide: Text.ElideRight
 
                 leftPadding: Application.layoutDirection === Qt.LeftToRight
-                        ? (root.contentItem.Kirigami.FormData.buddyFor?.indicator?.width ?? 0) + (root.contentItem.Kirigami.FormData.buddyFor?.spacing ?? 0)
+                        ? (root.contentItem.KirigamiLayouts.FormData.buddyFor?.indicator?.width ?? 0) + (root.contentItem.KirigamiLayouts.FormData.buddyFor?.spacing ?? 0)
                         : padding
                 rightPadding: Application.layoutDirection === Qt.RightToLeft
-                        ? root.contentItem.Kirigami.FormData.buddyFor?.indicator?.width + root.contentItem.Kirigami.FormData.buddyFor?.spacing
+                        ? root.contentItem.KirigamiLayouts.FormData.buddyFor?.indicator?.width + root.contentItem.KirigamiLayouts.FormData.buddyFor?.spacing
                         : padding
             }
         }
 
         background: Rectangle {
-            color: Kirigami.Theme.textColor
-            opacity: impl.hovered ? (impl.down || root.contentItem?.Kirigami.FormData.buddyFor?.down ? 0.1 : 0.05) : 0
+            color: Platform.Theme.textColor
+            opacity: impl.hovered ? (impl.down || root.contentItem?.KirigamiLayouts.FormData.buddyFor?.down ? 0.1 : 0.05) : 0
             readonly property bool first: root.parent.children[0] === root
             readonly property bool last: root.parent.children[root.parent.children.length - 1] === root
-            topLeftRadius: first ? Kirigami.Units.cornerRadius : 0
+            topLeftRadius: first ? Platform.Units.cornerRadius : 0
             topRightRadius: topLeftRadius
-            bottomLeftRadius: last ? Kirigami.Units.cornerRadius : 0
+            bottomLeftRadius: last ? Platform.Units.cornerRadius : 0
             bottomRightRadius: bottomLeftRadius
             Behavior on opacity {
                 OpacityAnimator {
-                    duration: Kirigami.Units.longDuration
+                    duration: Platform.Units.longDuration
                     easing.type: Easing.InOutQuad
                 }
             }

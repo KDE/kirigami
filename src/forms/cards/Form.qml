@@ -7,15 +7,15 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.platform as Platform
 
 Item {
     id: root
     default property alias entries: layout.data
     Accessible.role: Accessible.Form
 
-    implicitWidth: layout.implicitWidth + Kirigami.Units.smallSpacing * 2
-    implicitHeight: layout.implicitHeight + Kirigami.Units.smallSpacing * 2
+    implicitWidth: layout.implicitWidth + Platform.Units.smallSpacing * 2
+    implicitHeight: layout.implicitHeight + Platform.Units.smallSpacing * 2
 
     property bool __collapsed: false
 
@@ -42,8 +42,8 @@ Item {
         anchors.centerIn: parent
 
         width: __collapsed
-                ? Math.min(implicitWidth, parent.width, Kirigami.Units.gridUnit * 30)
+                ? Math.min(implicitWidth, parent.width, Platform.Units.gridUnit * 30)
                 : Math.min(implicitWidth, parent.width)
-        spacing: Kirigami.Units.largeSpacing
+        spacing: Platform.Units.largeSpacing
     }
 }

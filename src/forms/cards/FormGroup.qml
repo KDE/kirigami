@@ -6,8 +6,8 @@
 
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls as QQC
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami as Kirigami //FIXME: We need a proper Controls import
+import org.kde.kirigami.layouts as KirigamiLayouts
 
 Item {
     id: root
@@ -22,7 +22,7 @@ Item {
     readonly property real __maxTextLabelWidth: innerLayout.labelWidth
     property alias __assignedWidthForLabels: innerLayout.__assignedWidthForLabels
 
-    Kirigami.HeaderFooterLayout {
+    KirigamiLayouts.HeaderFooterLayout {
         id: layout
         anchors.fill: parent
         spacing: Kirigami.Units.smallSpacing
