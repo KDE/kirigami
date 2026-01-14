@@ -263,6 +263,7 @@ if (NOT BUILD_SHARED_LIBS)
             KirigamiLayoutsPrivateplugin
             KirigamiPrivateplugin
             KirigamiTemplatesplugin
+            KirigamiFormsPlugin
     )
     # for tests to find this under the name it's actually installed with'
     add_library(KF6Kirigamiplugin ALIAS Kirigamiplugin)
@@ -277,6 +278,7 @@ else()
             KirigamiLayouts
             KirigamiPrivate
             KirigamiTemplates
+            KirigamiForms
     )
 endif()
 

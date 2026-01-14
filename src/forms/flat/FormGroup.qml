@@ -6,8 +6,10 @@
 
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls as QQC
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami as Kirigami //FIXME: We need a proper Controls import
+import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.primitives as Primitives
+import org.kde.kirigami.layouts as KirigamiLayouts
 
 Item {
     id: root
@@ -22,26 +24,26 @@ Item {
     readonly property real __maxTextLabelWidth: innerLayout.labelWidth
     property real __assignedWidthForLabels: 0
 
-    Kirigami.Separator {
+    Primitives.Separator {
         id: separator
         visible: root.y > 0 && title.length === 0
         anchors {
             left: parent.left
             right: parent.right
             top: parent.top
-            leftMargin: Kirigami.Units.largeSpacing
-            rightMargin: Kirigami.Units.largeSpacing
-            topMargin: -Kirigami.Units.largeSpacing - Kirigami.Units.smallSpacing
+            leftMargin: Platform.Units.largeSpacing
+            rightMargin: Platform.Units.largeSpacing
+            topMargin: -Platform.Units.largeSpacing - Platform.Units.smallSpacing
         }
     }
 
-    Kirigami.HeaderFooterLayout {
+    KirigamiLayouts.HeaderFooterLayout {
         id: layout
         anchors {
             fill: parent
-            topMargin: separator.visible ? Kirigami.Units.largeSpacing : 0
+            topMargin: separator.visible ? Platform.Units.largeSpacing : 0
         }
-        spacing: Kirigami.Units.smallSpacing
+        spacing: Platform.Units.smallSpacing
 
         header: Kirigami.Heading {
             level: 4
@@ -67,7 +69,7 @@ Item {
                     }
                     labelWidth = w;
                 }
-                spacing: Kirigami.Units.smallSpacing
+                spacing: Platform.Units.smallSpacing
             }
         }
     }
