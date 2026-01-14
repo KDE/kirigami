@@ -9,6 +9,8 @@ import QtQuick.Layouts
 import QtQuick.Controls as QQC
 import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
+import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.primitives as Primitives
 
 FormEntry {
     id: root
@@ -16,7 +18,7 @@ FormEntry {
     required property T.Action action
     readonly property alias triggerIcon: triggerIconProps
 
-    Kirigami.IconPropertiesGroup {
+    Primitives.IconPropertiesGroup {
         id: triggerIconProps
     }
     contentItem: QQC.Button {
@@ -30,9 +32,9 @@ FormEntry {
         text: root.action.text
         onClicked: root.action.trigger()
     }
-    trailingItems: Kirigami.Icon {
+    trailingItems: Primitives.Icon {
         Layout.fillHeight: true
-        Layout.maximumHeight: triggerIconProps.height <= 0 ? Kirigami.Units.iconSizes.smallMedium : Infinity
+        Layout.maximumHeight: triggerIconProps.height <= 0 ? Platform.Units.iconSizes.smallMedium : Infinity
         source: root.triggerIcon.name || root.triggerIcon.source
         color: root.triggerIcon.color
         Layout.preferredWidth: triggerIconProps.width > 0 ? triggerIconProps.width : -1
