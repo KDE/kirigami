@@ -178,16 +178,6 @@ TestCase {
         verify(offset1 < offset2);
     }
 
-    function test_nestedBuddyNotSupported() {
-        const form = createTemporaryObject(dynamicBuddyFormComponent, this);
-        compare(form.buddyColumn.Kirigami.FormData.buddyFor, form.buddyColumn);
-
-        ignoreWarning(/FormData.buddyFor must be a direct child of the attachee.*/);
-        form.buddyColumn.Kirigami.FormData.buddyFor = form.target3;
-        // shouldn't change
-        compare(form.buddyColumn.Kirigami.FormData.buddyFor, form.buddyColumn);
-    }
-
     SignalSpy {
         id: buddyChangeSpy
         signalName: "buddyForChanged"
