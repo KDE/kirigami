@@ -6,10 +6,9 @@
 
 import QtQuick
 import QtQuick.Templates as T
-
-import org.kde.kirigami as Kirigami
-import "templates/private" as TP
+import "private" as P
 import org.kde.kirigami.templates as KT
+import org.kde.kirigami.platform as Platform
 
 /*!
   \qmltype AbstractApplicationItem
@@ -76,7 +75,7 @@ Item {
 
       default: Kirigami.Theme.defaultFont
      */
-    property font font: Kirigami.Theme.defaultFont
+    property font font: Platform.Theme.defaultFont
 
     /*!
       \brief This property holds the locale for this item.
@@ -137,7 +136,7 @@ Item {
 
       \note Different styles can have their own logic for deciding this.
      */
-    property bool wideScreen: width >= Kirigami.Units.gridUnit * 60
+    property bool wideScreen: width >= Platform.Units.gridUnit * 60
 
     /*!
       \brief This property holds the drawer for context-dependent actions.
@@ -202,7 +201,7 @@ Item {
 
       default: Kirigami.Theme.backgroundColor
      */
-    property color color: Kirigami.Theme.backgroundColor
+    property color color: Platform.Theme.backgroundColor
 
     /*!
       \brief This property holds the background of the Application UI.
@@ -303,7 +302,7 @@ Item {
     LayoutMirroring.enabled: Application.layoutDirection === Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
 
-    TP.PassiveNotificationsManager {
+    P.PassiveNotificationsManager {
         id: notificationsObject
 
         anchors.bottom: parent.bottom
@@ -348,7 +347,7 @@ Item {
         }
     }
 
-    implicitWidth: Kirigami.Settings.isMobile ? Kirigami.Units.gridUnit * 30 : Kirigami.Units.gridUnit * 55
-    implicitHeight: Kirigami.Settings.isMobile ? Kirigami.Units.gridUnit * 45 : Kirigami.Units.gridUnit * 40
+    implicitWidth: Platform.Settings.isMobile ? Platform.Units.gridUnit * 30 : Platform.Units.gridUnit * 55
+    implicitHeight: Platform.Settings.isMobile ? Platform.Units.gridUnit * 45 : Platform.Units.gridUnit * 40
     visible: true
 }

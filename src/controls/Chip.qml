@@ -4,8 +4,9 @@
 import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Layouts
-import org.kde.kirigami as Kirigami
 
+import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.primitives as Primitives
 import org.kde.kirigami.templates as KT
 import "private" as P
 
@@ -25,16 +26,16 @@ KT.Chip {
 
     property alias labelItem: label
 
-    icon.width: Kirigami.Units.iconSizes.small
-    icon.height: Kirigami.Units.iconSizes.small
-    spacing: Kirigami.Units.smallSpacing
-    leftPadding: Kirigami.Units.smallSpacing
+    icon.width: Platform.Units.iconSizes.small
+    icon.height: Platform.Units.iconSizes.small
+    spacing: Platform.Units.smallSpacing
+    leftPadding: Platform.Units.smallSpacing
         + ((!iconItem.visible && !mirrored) || (!indicator.visible && mirrored)
-            ? Kirigami.Units.smallSpacing : 0)
+            ? Platform.Units.smallSpacing : 0)
         + (indicator.visible && mirrored ? implicitIndicatorWidth : 0)
-    rightPadding: Kirigami.Units.smallSpacing
+    rightPadding: Platform.Units.smallSpacing
         + ((!iconItem.visible && mirrored) || (!indicator.visible && !mirrored)
-            ? Kirigami.Units.smallSpacing : 0)
+            ? Platform.Units.smallSpacing : 0)
         + (indicator.visible && !mirrored ? implicitIndicatorWidth : 0)
 
     indicator: QQC2.ToolButton {
@@ -43,8 +44,8 @@ KT.Chip {
         visible: chip.closable
         text: qsTr("Remove")
         icon.name: "edit-delete-remove"
-        icon.width: Kirigami.Units.iconSizes.sizeForLabels
-        icon.height: Kirigami.Units.iconSizes.sizeForLabels
+        icon.width: Platform.Units.iconSizes.sizeForLabels
+        icon.height: Platform.Units.iconSizes.sizeForLabels
         display: QQC2.AbstractButton.IconOnly
         onClicked: chip.removed()
     }
@@ -52,7 +53,7 @@ KT.Chip {
     contentItem: RowLayout {
         spacing: chip.spacing
 
-        Kirigami.Icon {
+        Primitives.Icon {
             id: iconItem
             visible: valid && chip.display !== QQC2.AbstractButton.TextOnly
             implicitWidth: chip.icon.width
@@ -68,7 +69,7 @@ KT.Chip {
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
             text: chip.text
-            color: Kirigami.Theme.textColor
+            color: Platform.Theme.textColor
             elide: Text.ElideRight
         }
     }

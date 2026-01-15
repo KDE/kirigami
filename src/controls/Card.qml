@@ -8,7 +8,8 @@ import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Layouts
 import QtQuick.Templates as T
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.controls as KC
+import org.kde.kirigami.layouts as KL
 import "private" as P
 
 /*!
@@ -37,7 +38,7 @@ import "private" as P
 
   \since 2.4
  */
-Kirigami.AbstractCard {
+KC.AbstractCard {
     id: root
 
     /*!
@@ -76,7 +77,7 @@ Kirigami.AbstractCard {
 
     Accessible.name: banner.title
 
-    header: Kirigami.Padding {
+    header: KL.Padding {
         id: headerItem
         topPadding: -root.topPadding + root.background.border.width
         leftPadding: -root.leftPadding + root.background.border.width
@@ -119,7 +120,7 @@ Kirigami.AbstractCard {
         header.anchors.bottomMargin = Qt.binding(() => 0);
     }
 
-    footer: Kirigami.ActionToolBar {
+    footer: KC.ActionToolBar {
         id: actionsToolBar
         actions: root.actions
         position: QQC2.ToolBar.Footer

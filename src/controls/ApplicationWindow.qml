@@ -5,7 +5,7 @@
  */
 
 import QtQuick
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.controls as KC
 
 /*!
   \qmltype ApplicationWindow
@@ -86,7 +86,7 @@ import org.kde.kirigami as Kirigami
   \endqml
 
 */
-Kirigami.AbstractApplicationWindow {
+KC.AbstractApplicationWindow {
     id: root
 
     /*!
@@ -108,15 +108,15 @@ Kirigami.AbstractApplicationWindow {
 
     // Redefined here as here we can know a pointer to PageRow.
     // We negate the canBeEnabled check because we don't want to factor in the automatic drawer provided by Kirigami for page actions for our calculations
-    wideScreen: width >= (root.pageStack.defaultColumnWidth) + ((contextDrawer && !(contextDrawer instanceof Kirigami.ContextDrawer)) ? contextDrawer.width : 0) + (globalDrawer ? globalDrawer.width : 0)
+    wideScreen: width >= (root.pageStack.defaultColumnWidth) + ((contextDrawer && !(contextDrawer instanceof KC.ContextDrawer)) ? contextDrawer.width : 0) + (globalDrawer ? globalDrawer.width : 0)
 
     Component.onCompleted: {
         pageStack.currentItem?.forceActiveFocus()
     }
 
-    Kirigami.PageRow {
+    KC.PageRow {
         id: __pageStack
-        globalToolBar.style: Kirigami.ApplicationHeaderStyle.Auto
+        globalToolBar.style: KC.ApplicationHeaderStyle.Auto
         anchors {
             fill: parent
         }

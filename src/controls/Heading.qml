@@ -6,7 +6,7 @@
 
 import QtQuick
 import QtQuick.Controls as QQC2
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.platform as Platform
 
 /*!
   \qmltype Heading
@@ -104,7 +104,7 @@ QQC2.Label {
             default:
                 break;
         }
-        return Kirigami.Theme.defaultFont.pointSize * factor;
+        return Platform.Theme.defaultFont.pointSize * factor;
     }
     font.weight: type === Heading.Type.Primary ? Font.DemiBold : Font.Normal
 

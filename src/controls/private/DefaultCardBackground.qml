@@ -5,7 +5,8 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 import QtQuick
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.primitives as Primitives
 import org.kde.kirigami.templates as KT
 
 /*!
@@ -15,7 +16,7 @@ import org.kde.kirigami.templates as KT
 
   \internal
  */
-Kirigami.ShadowedRectangle {
+Primitives.ShadowedRectangle {
     id: root
 
 //BEGIN properties
@@ -38,23 +39,23 @@ Kirigami.ShadowedRectangle {
 
       default: Kirigami.Theme.backgroundColor
      */
-    property color defaultColor: Kirigami.Theme.backgroundColor
+    property color defaultColor: Platform.Theme.backgroundColor
 
     /*!
       \brief This property holds the color displayed when a click event is triggered.
       \sa DefaultCardBackground::clickFeedback
      */
-    property color pressedColor: Kirigami.ColorUtils.tintWithAlpha(
+    property color pressedColor: Platform.ColorUtils.tintWithAlpha(
                                      defaultColor,
-                                     Kirigami.Theme.highlightColor, 0.3)
+                                     Platform.Theme.highlightColor, 0.3)
 
     /*!
       \brief This property holds the color displayed when a hover event is triggered.
       \sa DefaultCardBackground::hoverFeedback
      */
-    property color hoverColor: Kirigami.ColorUtils.tintWithAlpha(
+    property color hoverColor: Platform.ColorUtils.tintWithAlpha(
                                    defaultColor,
-                                   Kirigami.Theme.highlightColor, 0.1)
+                                   Platform.Theme.highlightColor, 0.1)
 
     /*!
       \brief This property holds the border width which is displayed at the edge of DefaultCardBackground.
@@ -66,7 +67,7 @@ Kirigami.ShadowedRectangle {
     /*!
       \brief This property holds the border color which is displayed at the edge of DefaultCardBackground.
      */
-    property color borderColor: Kirigami.ColorUtils.linearInterpolation(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, Kirigami.Theme.frameContrast)
+    property color borderColor: Platform.ColorUtils.linearInterpolation(Platform.Theme.backgroundColor, Platform.Theme.textColor, Platform.Theme.frameContrast)
 
 //END properties
 
@@ -80,14 +81,14 @@ Kirigami.ShadowedRectangle {
         return root.defaultColor
     }
 
-    radius: Kirigami.Units.cornerRadius
+    radius: Platform.Units.cornerRadius
 
     border {
         width: root.borderWidth
         color: root.borderColor
     }
     shadow {
-        size: Kirigami.Units.gridUnit
+        size: Platform.Units.gridUnit
         color: Qt.rgba(0, 0, 0, 0.05)
         yOffset: 2
     }
@@ -97,11 +98,11 @@ Kirigami.ShadowedRectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
-        anchors.topMargin: Math.round(Kirigami.Units.smallSpacing / 4)
+        anchors.topMargin: Math.round(Platform.Units.smallSpacing / 4)
 
         radius: root.radius
         height: root.height
-        color: Qt.darker(Qt.rgba(Kirigami.Theme.backgroundColor.r, Kirigami.Theme.backgroundColor.g, Kirigami.Theme.backgroundColor.b, 0.6), 1.1)
+        color: Qt.darker(Qt.rgba(Platform.Theme.backgroundColor.r, Platform.Theme.backgroundColor.g, Platform.Theme.backgroundColor.b, 0.6), 1.1)
         visible: !root.clickFeedback || !(root.parent as KT.AbstractCard)?.down
 
         z: -1

@@ -8,7 +8,9 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC2
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.controls as KC
+import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.primitives as Primitives
 
 /*!
   This Component is used as the header of GlobalDrawer and as the header
@@ -16,7 +18,7 @@ import org.kde.kirigami as Kirigami
   be instantiated directly.
   \internal
  */
-Kirigami.ShadowedImage {
+Primitives.ShadowedImage {
     id: root
 
 //BEGIN properties
@@ -32,7 +34,7 @@ Kirigami.ShadowedImage {
 
       \default Kirigami.Units.iconSizes.large
      */
-    property real titleMinimumIconSize: Kirigami.Units.iconSizes.large
+    property real titleMinimumIconSize: Platform.Units.iconSizes.large
 
     /*!
       \brief This property holds the title's text which is to be displayed on top.
@@ -89,16 +91,16 @@ Kirigami.ShadowedImage {
      */
     property bool checked: false
 
-    property int leftPadding: headingIcon.valid ? Kirigami.Units.smallSpacing * 2 : Kirigami.Units.largeSpacing
-    property int topPadding: headingIcon.valid ? Kirigami.Units.smallSpacing * 2 : Kirigami.Units.largeSpacing
-    property int rightPadding: headingIcon.valid ? Kirigami.Units.smallSpacing * 2 : Kirigami.Units.largeSpacing
-    property int bottomPadding: headingIcon.valid ? Kirigami.Units.smallSpacing * 2 : Kirigami.Units.largeSpacing
+    property int leftPadding: headingIcon.valid ? Platform.Units.smallSpacing * 2 : Platform.Units.largeSpacing
+    property int topPadding: headingIcon.valid ? Platform.Units.smallSpacing * 2 : Platform.Units.largeSpacing
+    property int rightPadding: headingIcon.valid ? Platform.Units.smallSpacing * 2 : Platform.Units.largeSpacing
+    property int bottomPadding: headingIcon.valid ? Platform.Units.smallSpacing * 2 : Platform.Units.largeSpacing
 
     implicitWidth: Layout.preferredWidth
 
     readonly property bool empty: title.length === 0 &&             // string
                                   source.toString().length === 0 && // QUrl
-                                  !titleIcon                        // QVariant handled by Kirigami.Icon
+                                  !titleIcon                        // QVariant handled by Primitives.Icon
 //END properties
 
     signal toggled(bool checked)
@@ -107,7 +109,7 @@ Kirigami.ShadowedImage {
 
     Layout.preferredWidth: titleLayout.implicitWidth || sourceSize.width
     Layout.preferredHeight: titleLayout.completed && source.toString().length > 0 ? width/(sourceSize.width / sourceSize.height) : Layout.minimumHeight
-    Layout.minimumHeight: titleLayout.implicitHeight > 0 ? titleLayout.implicitHeight + Kirigami.Units.smallSpacing * 2 : 0
+    Layout.minimumHeight: titleLayout.implicitHeight > 0 ? titleLayout.implicitHeight + Platform.Units.smallSpacing * 2 : 0
 
     onTitleAlignmentChanged: {
         // VERTICAL ALIGNMENT
@@ -154,7 +156,7 @@ Kirigami.ShadowedImage {
         titleLayout.completed = true;
     }
 
-    Kirigami.ShadowedRectangle {
+    Primitives.ShadowedRectangle {
         id: shadowedRectangle
         anchors {
             left: parent.left
@@ -182,23 +184,23 @@ Kirigami.ShadowedImage {
             rightMargin: root.rightPadding
             bottomMargin: root.bottomPadding
         }
-        width: Math.min(implicitWidth, parent.width -root.leftPadding -root.rightPadding - (checkboxLoader.active ? Kirigami.Units.largeSpacing : 0))
+        width: Math.min(implicitWidth, parent.width -root.leftPadding -root.rightPadding - (checkboxLoader.active ? Platform.Units.largeSpacing : 0))
         height: Math.min(implicitHeight, parent.height -root.topPadding -root.bottomPadding)
-        Kirigami.Icon {
+        Primitives.Icon {
             id: headingIcon
             Layout.minimumWidth: root.titleMinimumIconSize
             Layout.minimumHeight: width
             visible: valid
             isMask: false
         }
-        Kirigami.Heading {
+        KC.Heading {
             id: heading
             Layout.fillWidth: true
             Layout.fillHeight: true
             verticalAlignment: Text.AlignVCenter
             visible: text.length > 0
             level: 1
-            color: root.source.toString().length > 0 ? "white" : Kirigami.Theme.textColor
+            color: root.source.toString().length > 0 ? "white" : Platform.Theme.textColor
             wrapMode: Text.NoWrap
             elide: Text.ElideRight
         }

@@ -9,7 +9,9 @@ import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Layouts
 import QtQuick.Templates as T
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.primitives as Primitives
+import org.kde.kirigami.controls as KC
 import "private"
 
 /*!
@@ -106,7 +108,7 @@ QQC2.SwipeDelegate {
 
       \default Kirigami.Theme.backgroundColor
      */
-    property color backgroundColor: Kirigami.Theme.backgroundColor
+    property color backgroundColor: Platform.Theme.backgroundColor
 
     /*!
       \brief This property holds the background color to be used when
@@ -116,7 +118,7 @@ QQC2.SwipeDelegate {
       \default: Kirigami.Theme.alternateBackgroundColor
 
      */
-    property color alternateBackgroundColor: Kirigami.Theme.alternateBackgroundColor
+    property color alternateBackgroundColor: Platform.Theme.alternateBackgroundColor
 
     /*!
       \brief This property holds the color of the background
@@ -125,7 +127,7 @@ QQC2.SwipeDelegate {
       It is advised to use the default value.
       \default Kirigami.Theme.highlightColor
      */
-    property color activeBackgroundColor: Kirigami.Theme.highlightColor
+    property color activeBackgroundColor: Platform.Theme.highlightColor
 
     /*!
       \brief This property holds the color of the text in the item.
@@ -136,7 +138,7 @@ QQC2.SwipeDelegate {
       If custom text elements are inserted in a SwipeListItem,
       their color will have to be manually set with this property.
      */
-    property color textColor: Kirigami.Theme.textColor
+    property color textColor: Platform.Theme.textColor
 
     /*!
       \brief This property holds the color of the text when the item is pressed or selected.
@@ -147,7 +149,7 @@ QQC2.SwipeDelegate {
       If custom text elements are inserted in a SwipeListItem,
       their color property will have to be manually bound with this property
      */
-    property color activeTextColor: Kirigami.Theme.highlightedTextColor
+    property color activeTextColor: Platform.Theme.highlightedTextColor
 
     /*!
       \brief This property tells whether actions are visible and interactive.
@@ -165,7 +167,7 @@ QQC2.SwipeDelegate {
       default: true in desktop and tablet mode
 
      */
-    property bool alwaysVisibleActions: !Kirigami.Settings.isMobile
+    property bool alwaysVisibleActions: !Platform.Settings.isMobile
 
     /*!
       \brief This property holds actions of the list item.
@@ -234,10 +236,10 @@ QQC2.SwipeDelegate {
 
         // install the SwipeItemEventFilter
         onViewChanged: {
-            if (listItem.alwaysVisibleActions || !Kirigami.Settings.tabletMode) {
+            if (listItem.alwaysVisibleActions || !Platform.Settings.tabletMode) {
                 return;
             }
-            if (viewHasPropertySwipeFilter() && Kirigami.Settings.tabletMode && !internal.view.parent.parent._swipeFilter) {
+            if (viewHasPropertySwipeFilter() && Platform.Settings.tabletMode && !internal.view.parent.parent._swipeFilter) {
                 const component = Qt.createComponent(Qt.resolvedUrl("../private/SwipeItemEventFilter.qml"));
                 internal.view.parent.parent._swipeFilter = component.createObject(internal.view.parent.parent);
                 component.destroy();
@@ -246,12 +248,12 @@ QQC2.SwipeDelegate {
     }
 
     Connections {
-        target: Kirigami.Settings
+        target: Platform.Settings
         function onTabletModeChanged() {
             if (!internal.viewHasPropertySwipeFilter()) {
                 return;
             }
-            if (Kirigami.Settings.tabletMode) {
+            if (Platform.Settings.tabletMode) {
                 if (!internal.swipeFilterItem) {
                     const component = Qt.createComponent(Qt.resolvedUrl("../private/SwipeItemEventFilter.qml"));
                     listItem.ListView.view.parent.parent._swipeFilter = component.createObject(listItem.ListView.view.parent.parent);
@@ -270,7 +272,7 @@ QQC2.SwipeDelegate {
 //BEGIN items
     Loader {
         id: overlayLoader
-        readonly property int paddingOffset: (visible ? width : 0) + Kirigami.Units.smallSpacing
+        readonly property int paddingOffset: (visible ? width : 0) + Platform.Units.smallSpacing
         readonly property var theAlias: anchors
 
         states: State {
@@ -294,15 +296,15 @@ QQC2.SwipeDelegate {
         parent: listItem
         z: listItem.contentItem ? listItem.contentItem.z + 1 : 0
         width: item ? item.implicitWidth : actionsLayout.implicitWidth
-        active: !listItem.alwaysVisibleActions && Kirigami.Settings.tabletMode
+        active: !listItem.alwaysVisibleActions && Platform.Settings.tabletMode
         visible: listItem.actionsVisible && opacity > 0
         asynchronous: true
         sourceComponent: handleComponent
-        opacity: listItem.alwaysVisibleActions || Kirigami.Settings.tabletMode || listItem.hovered ? 1 : 0
+        opacity: listItem.alwaysVisibleActions || Platform.Settings.tabletMode || listItem.hovered ? 1 : 0
         Behavior on opacity {
             OpacityAnimator {
                 id: opacityAnim
-                duration: Kirigami.Units.veryShortDuration
+                duration: Platform.Units.veryShortDuration
                 easing.type: Easing.InOutQuad
             }
         }
@@ -313,7 +315,7 @@ QQC2.SwipeDelegate {
 
         MouseArea {
             id: dragButton
-            implicitWidth: Kirigami.Units.iconSizes.smallMedium
+            implicitWidth: Platform.Units.iconSizes.smallMedium
 
             preventStealing: true
             readonly property real openPosition: (listItem.width - width - listItem.leftPadding * 2)/listItem.width
@@ -372,7 +374,7 @@ QQC2.SwipeDelegate {
                 slideAnim.restart();
             }
 
-            Kirigami.Icon {
+            Primitives.Icon {
                 id: handleIcon
                 anchors.fill: parent
                 selected: listItem.checked || (listItem.down && !listItem.checked && !listItem.sectionDelegate)
@@ -405,7 +407,7 @@ QQC2.SwipeDelegate {
                     }
                 }
                 function onClicked(mouse) {
-                    if (Math.abs(listItem.background.x) < Kirigami.Units.gridUnit && internal.edgeEnabled) {
+                    if (Math.abs(listItem.background.x) < Platform.Units.gridUnit && internal.edgeEnabled) {
                         dragButton.clicked(mouse);
                     }
                 }
@@ -439,7 +441,7 @@ QQC2.SwipeDelegate {
                     bottom: parent.bottom
                 }
                 clip: true
-                color: parent.pressed ? Qt.darker(Kirigami.Theme.backgroundColor, 1.1) : Qt.darker(Kirigami.Theme.backgroundColor, 1.05)
+                color: parent.pressed ? Qt.darker(Platform.Theme.backgroundColor, 1.1) : Qt.darker(Platform.Theme.backgroundColor, 1.05)
                 x: listItem.mirrored ? listItem.background.x - width : (listItem.background.x + listItem.background.width)
                 width: listItem.mirrored ? parent.width - (parent.width - x) : parent.width - x
 
@@ -481,7 +483,7 @@ QQC2.SwipeDelegate {
             bottom: parent.bottom
         }
         visible: parent !== listItem
-        parent: !listItem.alwaysVisibleActions && Kirigami.Settings.tabletMode
+        parent: !listItem.alwaysVisibleActions && Platform.Settings.tabletMode
                 ? listItem.swipe.leftItem?.contentItem || listItem.swipe.rightItem?.contentItem || listItem
                 : overlayLoader
 
@@ -493,7 +495,7 @@ QQC2.SwipeDelegate {
         }
 
         function isActionVisible(action: T.Action): bool {
-            return (action as Kirigami.Action)?.visible ?? true;
+            return (action as KC.Action)?.visible ?? true;
         }
 
         Repeater {
@@ -517,9 +519,9 @@ QQC2.SwipeDelegate {
                 Component.onCompleted: actionsLayout.updateVisibleActions(visible);
                 Component.onDestruction: actionsLayout.updateVisibleActions(visible);
 
-                QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
-                QQC2.ToolTip.visible: (Kirigami.Settings.tabletMode ? pressed : hovered) && QQC2.ToolTip.text.length > 0
-                QQC2.ToolTip.text: (action as Kirigami.Action)?.tooltip ?? action?.text ?? ""
+                QQC2.ToolTip.delay: Platform.Units.toolTipDelay
+                QQC2.ToolTip.visible: (Platform.Settings.tabletMode ? pressed : hovered) && QQC2.ToolTip.text.length > 0
+                QQC2.ToolTip.text: (action as KC.Action)?.tooltip ?? action?.text ?? ""
 
                 onClicked: {
                     slideAnim.to = 0;
@@ -588,19 +590,19 @@ QQC2.SwipeDelegate {
                 }
 
                 Accessible.name: text
-                Accessible.description: (action as Kirigami.Action)?.tooltip ?? ""
+                Accessible.description: (action as KC.Action)?.tooltip ?? ""
             }
         }
     }
 
     swipe {
         enabled: false
-        right: listItem.alwaysVisibleActions || listItem.mirrored || !Kirigami.Settings.tabletMode ? null : actionsBackgroundDelegate
-        left: listItem.alwaysVisibleActions || listItem.mirrored && Kirigami.Settings.tabletMode ? actionsBackgroundDelegate : null
+        right: listItem.alwaysVisibleActions || listItem.mirrored || !Platform.Settings.tabletMode ? null : actionsBackgroundDelegate
+        left: listItem.alwaysVisibleActions || listItem.mirrored && Platform.Settings.tabletMode ? actionsBackgroundDelegate : null
     }
     NumberAnimation {
         id: slideAnim
-        duration: Kirigami.Units.longDuration
+        duration: Platform.Units.longDuration
         easing.type: Easing.InOutQuad
         target: listItem.swipe
         property: "position"

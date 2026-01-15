@@ -9,15 +9,17 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Controls as QQC
 import QtQuick.Layouts
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.controls as KC
+import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.primitives as Primitives
 
 RowLayout {
     id: root
 
-    readonly property Kirigami.PageRow pageRow: {
+    readonly property KC.PageRow pageRow: {
         // This is fetched from breadcrumbLoader in PageRowGlobalToolBarUI.qml
         const pr = parent?.pageRow ?? null;
-        return pr as Kirigami.PageRow;
+        return pr as KC.PageRow;
     }
 
     // No spacing as the separator will be the thing that visually clips the ListView
@@ -34,12 +36,12 @@ RowLayout {
         page: root.pageRow.currentItem
     }
 
-    Kirigami.Separator {
+    Primitives.Separator {
         Layout.fillHeight: true
-        Layout.topMargin: Kirigami.Units.largeSpacing
-        Layout.bottomMargin: Kirigami.Units.largeSpacing
-        Kirigami.Theme.colorSet: Kirigami.Theme.Header
-        Kirigami.Theme.inherit: false
+        Layout.topMargin: Platform.Units.largeSpacing
+        Layout.bottomMargin: Platform.Units.largeSpacing
+        Platform.Theme.colorSet: Platform.Theme.Header
+        Platform.Theme.inherit: false
         visible: navButtons.visible
     }
 
@@ -95,7 +97,7 @@ RowLayout {
         clip: true
         orientation: ListView.Horizontal
         boundsBehavior: Flickable.StopAtBounds
-        interactive: Kirigami.Settings.hasTransientTouchInput
+        interactive: Platform.Settings.hasTransientTouchInput
 
         contentX: {
             if (!currentItem) {
@@ -120,7 +122,7 @@ RowLayout {
 
         Behavior on contentX {
             NumberAnimation {
-                duration: Kirigami.Units.longDuration
+                duration: Platform.Units.longDuration
                 easing.type: Easing.InOutQuad
             }
         }
@@ -142,7 +144,7 @@ RowLayout {
 
             required property int index
 
-            // We can't use Kirigami.Page here instead of Item since we now accept
+            // We can't use KC.Page here instead of Item since we now accept
             // pushing PageRow to a new layer.
             readonly property Item page: {
                 if (!root.pageRow) {
@@ -161,7 +163,7 @@ RowLayout {
             width: Math.ceil(layout.implicitWidth)
             height: ListView.view?.height ?? 0
 
-            hoverEnabled: !Kirigami.Settings.tabletMode
+            hoverEnabled: !Platform.Settings.tabletMode
 
             onClicked: mouse => {
                 list.selectIndex(index);
@@ -169,9 +171,9 @@ RowLayout {
 
             // background
             Rectangle {
-                color: Kirigami.Theme.highlightColor
+                color: Platform.Theme.highlightColor
                 anchors.fill: parent
-                radius: Kirigami.Units.cornerRadius
+                radius: Platform.Units.cornerRadius
                 opacity: list.count > 1 && parent.containsMouse ? 0.1 : 0
             }
 
@@ -181,19 +183,19 @@ RowLayout {
                 anchors.fill: parent
                 spacing: 0
 
-                Kirigami.Icon {
+                Primitives.Icon {
                     visible: delegate.index > 0
                     Layout.alignment: Qt.AlignVCenter
-                    Layout.preferredHeight: Kirigami.Units.iconSizes.small
-                    Layout.preferredWidth: Kirigami.Units.iconSizes.small
+                    Layout.preferredHeight: Platform.Units.iconSizes.small
+                    Layout.preferredWidth: Platform.Units.iconSizes.small
                     isMask: true
-                    color: Kirigami.Theme.textColor
+                    color: Platform.Theme.textColor
                     source: LayoutMirroring.enabled ? "go-next-symbolic-rtl" : "go-next-symbolic"
                 }
-                Kirigami.Heading {
-                    Layout.leftMargin: Kirigami.Units.largeSpacing
-                    Layout.rightMargin: Kirigami.Units.largeSpacing
-                    color: Kirigami.Theme.textColor
+                KC.Heading {
+                    Layout.leftMargin: Platform.Units.largeSpacing
+                    Layout.rightMargin: Platform.Units.largeSpacing
+                    color: Platform.Theme.textColor
                     verticalAlignment: Text.AlignVCenter
                     wrapMode: Text.NoWrap
                     text: delegate.page?.title ?? ""

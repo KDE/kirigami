@@ -9,8 +9,10 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Templates as T
 import QtQuick.Controls as QQC2
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.platform as Platform
 import org.kde.kirigami.primitives as Primitives
+import org.kde.kirigami.layouts as KL
+import org.kde.kirigami.controls as KC
 import org.kde.kirigami.private.polyfill
 import "private" as P
 
@@ -29,7 +31,7 @@ QQC2.Page {
     id: root
 
 //BEGIN properties
-    padding: Kirigami.Units.gridUnit
+    padding: Platform.Units.gridUnit
     topPadding: padding + SafeArea.margins.top
     bottomPadding: padding + SafeArea.margins.bottom
     leftPadding: padding + SafeArea.margins.left
@@ -79,8 +81,8 @@ QQC2.Page {
      */
     //TODO KF6: remove this or at least all the assumptions about the internal tree structure of items
     // Kirigami.ColumnView.view.parent.parent is the StackView in which the ColumnView is, the condition means "is the ColumnView the current layer of the pagerow"
-    readonly property bool isCurrentPage: Kirigami.ColumnView.view
-            ? (Kirigami.ColumnView.index === Kirigami.ColumnView.view.currentIndex && Kirigami.ColumnView.view.parent.parent.currentItem === Kirigami.ColumnView.view.parent)
+    readonly property bool isCurrentPage: KL.ColumnView.view
+            ? (KL.ColumnView.index === KL.ColumnView.view.currentIndex && KL.ColumnView.view.parent.parent.currentItem === KL.ColumnView.view.parent)
             : (parent && parent instanceof QQC2.StackView
                 ? parent.currentItem === root
                 : true)
@@ -156,9 +158,9 @@ QQC2.Page {
         if (globalToolBar.row && !globalToolBar.stack) {
             return globalToolBar.row.globalToolBar.actualStyle;
         } else if (globalToolBar.stack) {
-            return Kirigami.Settings.isMobile ? Kirigami.ApplicationHeaderStyle.Titles : Kirigami.ApplicationHeaderStyle.ToolBar;
+            return Platform.Settings.isMobile ? KC.ApplicationHeaderStyle.Titles : KC.ApplicationHeaderStyle.ToolBar;
         } else {
-            return Kirigami.ApplicationHeaderStyle.None;
+            return KC.ApplicationHeaderStyle.None;
         }
     }
 //END properties
@@ -176,7 +178,7 @@ QQC2.Page {
     signal backRequested(var event);
 
     background: Rectangle {
-        color: Kirigami.Theme.backgroundColor
+        color: Platform.Theme.backgroundColor
     }
 
     // FIXME: on material the shadow would bleed over
@@ -196,12 +198,12 @@ QQC2.Page {
         globalToolBar.stack = null;
         globalToolBar.row = null;
 
-        if (root.Kirigami.ColumnView.view) {
-            globalToolBar.row = root.Kirigami.ColumnView.view.__pageRow ?? null;
+        if (root.KL.ColumnView.view) {
+            globalToolBar.row = root.KL.ColumnView.view.__pageRow ?? null;
         }
         if (root.T.StackView.view) {
             globalToolBar.stack = root.T.StackView.view;
-            globalToolBar.row = root.T.StackView.view.parent instanceof Kirigami.PageRow ? root.T.StackView.view.parent : null;
+            globalToolBar.row = root.T.StackView.view.parent instanceof KC.PageRow ? root.T.StackView.view.parent : null;
         }
         if (globalToolBar.row) {
             root.globalToolBarStyleChanged.connect(globalToolBar.syncSource);
@@ -223,7 +225,7 @@ QQC2.Page {
         }
     ]
     // global top toolbar if we are in a PageRow (in the row or as a layer)
-    Kirigami.ColumnView.globalHeader: Loader {
+    KL.ColumnView.globalHeader: Loader {
         id: globalToolBar
         z: 9999
         Primitives.AlignedSize.height: item ? item.implicitHeight : 0
@@ -239,7 +241,7 @@ QQC2.Page {
         asynchronous: false
 
         visible: active
-        active: root.parent && root.visible && (root.titleDelegate !== defaultTitleDelegate || root.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar || root.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.Titles)
+        active: root.parent && root.visible && (root.titleDelegate !== defaultTitleDelegate || root.globalToolBarStyle === KC.ApplicationHeaderStyle.ToolBar || root.globalToolBarStyle === KC.ApplicationHeaderStyle.Titles)
         onActiveChanged: {
             if (active) {
                 syncSource();
@@ -250,8 +252,8 @@ QQC2.Page {
             if (!row) {
                 return;
             }
-            if (root.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.ToolBar &&
-                root.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.Titles &&
+            if (root.globalToolBarStyle !== KC.ApplicationHeaderStyle.ToolBar &&
+                root.globalToolBarStyle !== KC.ApplicationHeaderStyle.Titles &&
                 root.titleDelegate !== defaultTitleDelegate) {
                 sourceComponent = root.titleDelegate;
             } else if (active) {
@@ -264,7 +266,7 @@ QQC2.Page {
         }
     }
     // bottom action buttons
-    Kirigami.ColumnView.globalFooter: Loader {
+    KL.ColumnView.globalFooter: Loader {
         id: bottomToolBar
 
         property T.Page page: root
@@ -281,9 +283,9 @@ QQC2.Page {
                 return false;
             }
 
-            if ((globalToolBar.row && globalToolBar.row.globalToolBar.actualStyle === Kirigami.ApplicationHeaderStyle.ToolBar)
-                || root.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar
-                || root.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.None) {
+            if ((globalToolBar.row && globalToolBar.row.globalToolBar.actualStyle === KC.ApplicationHeaderStyle.ToolBar)
+                || root.globalToolBarStyle === KC.ApplicationHeaderStyle.ToolBar
+                || root.globalToolBarStyle === KC.ApplicationHeaderStyle.None) {
                 return false;
             }
 

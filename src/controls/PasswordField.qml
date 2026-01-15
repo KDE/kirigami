@@ -5,7 +5,7 @@
  */
 
 import QtQuick
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.controls as KC
 
 /*!
   \qmltype PasswordField
@@ -27,7 +27,7 @@ import org.kde.kirigami as Kirigami
 
   \since 5.57
  */
-Kirigami.ActionTextField {
+KC.ActionTextField {
     id: root
 
     /*!
@@ -42,7 +42,7 @@ Kirigami.ActionTextField {
     echoMode: root.showPassword ? TextInput.Normal : TextInput.Password
     placeholderText: qsTr("Password")
     inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText | Qt.ImhSensitiveData
-    rightActions: Kirigami.Action {
+    rightActions: KC.Action {
         text: root.showPassword ? qsTr("Hide Password") : qsTr("Show Password")
         icon.name: root.showPassword ? "password-show-off" : "password-show-on"
         onTriggered: root.showPassword = !root.showPassword

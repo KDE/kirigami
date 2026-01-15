@@ -7,7 +7,9 @@
 import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Layouts
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.primitives as Primitives
+import org.kde.kirigami.controls as KC
 
 /*!
   \qmltype ListSectionHeader
@@ -60,22 +62,22 @@ QQC2.ItemDelegate {
     activeFocusOnTab: false
 
     icon {
-        width: Kirigami.Units.iconSizes.smallMedium
-        height: Kirigami.Units.iconSizes.smallMedium
+        width: Platform.Units.iconSizes.smallMedium
+        height: Platform.Units.iconSizes.smallMedium
     }
 
     // we do not need a background
     background: Item {}
 
-    topPadding: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
+    topPadding: Platform.Units.largeSpacing + Platform.Units.smallSpacing
 
     Accessible.role: Accessible.Heading
 
     contentItem: RowLayout {
         id: rowLayout
-        spacing: Kirigami.Units.largeSpacing
+        spacing: Platform.Units.largeSpacing
 
-        Kirigami.Icon {
+        Primitives.Icon {
             Layout.alignment: Qt.AlignVCenter
             implicitWidth: listSection.icon.width
             implicitHeight: listSection.icon.height
@@ -83,13 +85,13 @@ QQC2.ItemDelegate {
             source: listSection.icon.name.length > 0 ? listSection.icon.name : listSection.icon.source
             visible: valid
         }
-        Kirigami.Heading {
+        KC.Heading {
             Layout.maximumWidth: rowLayout.width
             Layout.alignment: Qt.AlignVCenter
 
             opacity: 0.75
             level: 5
-            type: Kirigami.Heading.Primary
+            type: KC.Heading.Primary
             text: listSection.text
             elide: Text.ElideRight
 
@@ -99,7 +101,7 @@ QQC2.ItemDelegate {
             Accessible.ignored: true
         }
 
-        Kirigami.Separator {
+        Primitives.Separator {
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignVCenter
             Accessible.ignored: true
