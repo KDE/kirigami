@@ -9,7 +9,7 @@
 import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Layouts
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.platform as Platform
 
 /*!
   \qmltype ContextualHelpButton
@@ -59,15 +59,15 @@ QQC2.ToolButton {
     text: qsTr("Show Contextual Help")
     icon.name: "help-contextual-symbolic"
     display: QQC2.ToolButton.IconOnly
-    
+
     Accessible.description: toolTipText
 
     onReleased: {
-        toolTip.delay = toolTipVisible ? Kirigami.Units.toolTipDelay : 0;
+        toolTip.delay = toolTipVisible ? Platform.Units.toolTipDelay : 0;
         toolTipVisible = !toolTipVisible;
     }
     onActiveFocusChanged: {
-        toolTip.delay = Kirigami.Units.toolTipDelay;
+        toolTip.delay = Platform.Units.toolTipDelay;
         toolTipVisible = false;
     }
     Layout.maximumHeight: parent?.height ?? -1
@@ -79,7 +79,7 @@ QQC2.ToolButton {
         onVisibleChanged: {
             if (!visible && root.toolTipVisible) {
                 root.toolTipVisible = false;
-                delay = Kirigami.Units.toolTipDelay;
+                delay = Platform.Units.toolTipDelay;
             }
         }
         timeout: -1 // Don't disappear while the user might still be reading it!

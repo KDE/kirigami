@@ -10,7 +10,10 @@ import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Layouts
 import QtQuick.Templates as T
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.controls as KC
+import org.kde.kirigami.layouts as KL
+import org.kde.kirigami.primitives as Primitives
+import org.kde.kirigami.platform as Platform
 import org.kde.kirigami.private.polyfill
 import "private" as KP
 
@@ -52,7 +55,7 @@ import "private" as KP
   }
   \endcode
  */
-Kirigami.OverlayDrawer {
+KC.OverlayDrawer {
     id: root
 
     edge: Application.layoutDirection === Qt.RightToLeft ? Qt.RightEdge : Qt.LeftEdge
@@ -80,10 +83,10 @@ Kirigami.OverlayDrawer {
         }
 
         // ...but it still performs additional checks.
-        return !isMenu || Kirigami.Settings.isMobile;
+        return !isMenu || Platform.Settings.isMobile;
     }
 
-    enabled: !isMenu || Kirigami.Settings.isMobile
+    enabled: !isMenu || Platform.Settings.isMobile
 
 //BEGIN properties
     /*!
@@ -323,9 +326,9 @@ Kirigami.OverlayDrawer {
         mainFlickable.returnToBounds()
     }
 
-    // rightPadding: !Kirigami.Settings.isMobile && mainFlickable.contentHeight > mainFlickable.height ? Kirigami.Units.gridUnit : Kirigami.Units.smallSpacing
+    // rightPadding: !Platform.Settings.isMobile && mainFlickable.contentHeight > mainFlickable.height ? Kirigami.Units.gridUnit : Kirigami.Units.smallSpacing
 
-    Kirigami.Theme.colorSet: modal ? Kirigami.Theme.Window : Kirigami.Theme.View
+    Platform.Theme.colorSet: modal ? Platform.Theme.Window : Platform.Theme.View
 
     onIsMenuChanged: drawerOpen = false
 
@@ -354,13 +357,13 @@ Kirigami.OverlayDrawer {
                 visible: menuColumn.level > 0
                 icon.name: mirrored ? "go-previous-symbolic-rtl" : "go-previous-symbolic"
 
-                text: Kirigami.MnemonicData.richTextLabel
-                Accessible.name: Kirigami.MnemonicData.plainTextLabel
+                text: Primitives.MnemonicData.richTextLabel
+                Accessible.name: Primitives.MnemonicData.plainTextLabel
                 activeFocusOnTab: true
 
-                Kirigami.MnemonicData.enabled: enabled && visible
-                Kirigami.MnemonicData.controlType: Kirigami.MnemonicData.MenuItem
-                Kirigami.MnemonicData.label: qsTr("Back")
+                Primitives.MnemonicData.enabled: enabled && visible
+                Primitives.MnemonicData.controlType: Primitives.MnemonicData.MenuItem
+                Primitives.MnemonicData.label: qsTr("Back")
 
                 onClicked: stackView.pop()
 
@@ -372,7 +375,7 @@ Kirigami.OverlayDrawer {
             }
 
             Shortcut {
-                sequence: backItem.Kirigami.MnemonicData.sequence
+                sequence: backItem.Primitives.MnemonicData.sequence
                 onActivated: backItem.clicked()
             }
 
@@ -410,7 +413,7 @@ Kirigami.OverlayDrawer {
 
         property Item backItem
 
-        readonly property Kirigami.Action kAction: tAction as Kirigami.Action
+        readonly property KC.Action kAction: tAction as KC.Action
 
         readonly property bool isExpanded: {
             return !root.collapsed
@@ -423,8 +426,8 @@ Kirigami.OverlayDrawer {
 
         KP.GlobalDrawerActionItem {
             Layout.fillWidth: true
-            Kirigami.Theme.colorSet: !root.modal && !root.collapsed && delegate.withSections
-                ? Kirigami.Theme.Window : parent.Kirigami.Theme.colorSet
+            Platform.Theme.colorSet: !root.modal && !root.collapsed && delegate.withSections
+                ? Platform.Theme.Window : parent.Platform.Theme.colorSet
 
             visible: !delegate.isExpanded
             width: parent.width
@@ -449,20 +452,20 @@ Kirigami.OverlayDrawer {
             id: headerItem
 
             visible: delegate.isExpanded
-            height: sectionHeader.implicitHeight
-            width: parent.width
+            implicitHeight: sectionHeader.implicitHeight
+            Layout.fillWidth: true
 
-            Kirigami.ListSectionHeader {
+            KC.ListSectionHeader {
                 id: sectionHeader
 
                 anchors.fill: parent
-                Kirigami.Theme.colorSet: root.modal ? Kirigami.Theme.View : Kirigami.Theme.Window
+                Platform.Theme.colorSet: root.modal ? Platform.Theme.View : Platform.Theme.Window
 
                 contentItem: RowLayout {
                     spacing: sectionHeader.spacing
 
-                    Kirigami.Icon {
-                        property int size: Kirigami.Units.iconSizes.smallMedium
+                    Primitives.Icon {
+                        property int size: Platform.Units.iconSizes.smallMedium
                         Layout.minimumHeight: size
                         Layout.maximumHeight: size
                         Layout.minimumWidth: size
@@ -470,7 +473,7 @@ Kirigami.OverlayDrawer {
                         source: delegate.tAction.icon.name || delegate.tAction.icon.source
                     }
 
-                    Kirigami.Heading {
+                    KC.Heading {
                         level: 4
                         text: delegate.tAction.text
                         elide: Text.ElideRight
@@ -495,12 +498,12 @@ Kirigami.OverlayDrawer {
     component NestedActionDelegate : KP.GlobalDrawerActionItem {
         required property bool withSections
 
-        width: parent.width
+        Layout.fillWidth: true
         opacity: !root.collapsed
         leftPadding: withSections && !root.collapsed && !root.modal ? padding * 2 : padding * 4
     }
 
-    contentItem: Kirigami.HeaderFooterLayout {
+    contentItem: KL.HeaderFooterLayout {
         id: mainLayout
 
         anchors {
@@ -513,20 +516,20 @@ Kirigami.OverlayDrawer {
 
         Behavior on anchors.topMargin {
             NumberAnimation {
-                duration: Kirigami.Units.longDuration
+                duration: Platform.Units.longDuration
                 easing.type: Easing.InOutQuad
             }
         }
 
         header: RowLayout {
             visible: root.title.length > 0 || Boolean(root.titleIcon)
-            spacing: Kirigami.Units.largeSpacing
+            spacing: Platform.Units.largeSpacing
 
-            Kirigami.Icon {
+            Primitives.Icon {
                 source: root.titleIcon
             }
 
-            Kirigami.Heading {
+            KC.Heading {
                 text: root.title
                 elide: Text.ElideRight
                 visible: !root.collapsed
@@ -538,7 +541,7 @@ Kirigami.OverlayDrawer {
             id: scrollView
 
             //ensure the attached property exists
-            Kirigami.Theme.inherit: true
+            Platform.Theme.inherit: true
 
             // HACK: workaround for https://bugreports.qt.io/browse/QTBUG-83890
             QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
@@ -546,7 +549,7 @@ Kirigami.OverlayDrawer {
             implicitWidth: Math.min(mainColumn.implicitWidth, root.parent.width * 0.8)
             Behavior on implicitWidth {
                 NumberAnimation {
-                    duration: Kirigami.Units.longDuration
+                    duration: Platform.Units.longDuration
                     easing.type: Easing.InOutQuad
                 }
             }
@@ -582,7 +585,7 @@ Kirigami.OverlayDrawer {
                         Layout.alignment: Qt.AlignHCenter
                         Layout.leftMargin: root.leftPadding
                         Layout.rightMargin: root.rightPadding
-                        Layout.bottomMargin: Kirigami.Units.smallSpacing
+                        Layout.bottomMargin: Platform.Units.smallSpacing
                         Layout.topMargin: root.topPadding
                         Layout.fillWidth: true
                         Layout.fillHeight: true
@@ -597,7 +600,7 @@ Kirigami.OverlayDrawer {
                         Behavior on opacity {
                             // not an animator as is binded
                             NumberAnimation {
-                                duration: Kirigami.Units.longDuration
+                                duration: Platform.Units.longDuration
                                 easing.type: Easing.InOutQuad
                             }
                         }
@@ -621,43 +624,43 @@ Kirigami.OverlayDrawer {
                         // the animator would stop when not drawing see BUG 381576
                         popEnter: Transition {
                             ParallelAnimation {
-                                NumberAnimation { property: "x"; from: (stackView.mirrored ? -1 : 1) * -stackView.width; to: 0; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
-                                NumberAnimation { property: "opacity"; from: 0; to: 1; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
+                                NumberAnimation { property: "x"; from: (stackView.mirrored ? -1 : 1) * -stackView.width; to: 0; duration: Platform.Units.veryLongDuration; easing.type: Easing.OutCubic }
+                                NumberAnimation { property: "opacity"; from: 0; to: 1; duration: Platform.Units.veryLongDuration; easing.type: Easing.OutCubic }
                             }
                         }
 
                         popExit: Transition {
                             ParallelAnimation {
-                                NumberAnimation { property: "x"; from: 0; to: (stackView.mirrored ? -1 : 1) * stackView.width; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
-                                NumberAnimation { property: "opacity"; from: 1; to: 0; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
+                                NumberAnimation { property: "x"; from: 0; to: (stackView.mirrored ? -1 : 1) * stackView.width; duration: Platform.Units.veryLongDuration; easing.type: Easing.OutCubic }
+                                NumberAnimation { property: "opacity"; from: 1; to: 0; duration: Platform.Units.veryLongDuration; easing.type: Easing.OutCubic }
                             }
                         }
 
                         pushEnter: Transition {
                             ParallelAnimation {
-                                NumberAnimation { property: "x"; from: (stackView.mirrored ? -1 : 1) * stackView.width; to: 0; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
-                                NumberAnimation { property: "opacity"; from: 0; to: 1; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
+                                NumberAnimation { property: "x"; from: (stackView.mirrored ? -1 : 1) * stackView.width; to: 0; duration: Platform.Units.veryLongDuration; easing.type: Easing.OutCubic }
+                                NumberAnimation { property: "opacity"; from: 0; to: 1; duration: Platform.Units.veryLongDuration; easing.type: Easing.OutCubic }
                             }
                         }
 
                         pushExit: Transition {
                             ParallelAnimation {
-                                NumberAnimation { property: "x"; from: 0; to: (stackView.mirrored ? -1 : 1) * -stackView.width; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
-                                NumberAnimation { property: "opacity"; from: 1; to: 0; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
+                                NumberAnimation { property: "x"; from: 0; to: (stackView.mirrored ? -1 : 1) * -stackView.width; duration: Platform.Units.veryLongDuration; easing.type: Easing.OutCubic }
+                                NumberAnimation { property: "opacity"; from: 1; to: 0; duration: Platform.Units.veryLongDuration; easing.type: Easing.OutCubic }
                             }
                         }
 
                         replaceEnter: Transition {
                             ParallelAnimation {
-                                NumberAnimation { property: "x"; from: (stackView.mirrored ? -1 : 1) * stackView.width; to: 0; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
-                                NumberAnimation { property: "opacity"; from: 0; to: 1; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
+                                NumberAnimation { property: "x"; from: (stackView.mirrored ? -1 : 1) * stackView.width; to: 0; duration: Platform.Units.veryLongDuration; easing.type: Easing.OutCubic }
+                                NumberAnimation { property: "opacity"; from: 0; to: 1; duration: Platform.Units.veryLongDuration; easing.type: Easing.OutCubic }
                             }
                         }
 
                         replaceExit: Transition {
                             ParallelAnimation {
-                                NumberAnimation { property: "x"; from: 0; to: (stackView.mirrored ? -1 : 1) * -stackView.width; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
-                                NumberAnimation { property: "opacity"; from: 0; to: 1; duration: Kirigami.Units.veryLongDuration; easing.type: Easing.OutCubic }
+                                NumberAnimation { property: "x"; from: 0; to: (stackView.mirrored ? -1 : 1) * -stackView.width; duration: Platform.Units.veryLongDuration; easing.type: Easing.OutCubic }
+                                NumberAnimation { property: "opacity"; from: 0; to: 1; duration: Platform.Units.veryLongDuration; easing.type: Easing.OutCubic }
                             }
                         }
                     }
@@ -665,7 +668,7 @@ Kirigami.OverlayDrawer {
                     Item {
                         Layout.fillWidth: true
                         Layout.fillHeight: root.actions.length > 0
-                        Layout.minimumHeight: Kirigami.Units.smallSpacing
+                        Layout.minimumHeight: Platform.Units.smallSpacing
                     }
 
                     ColumnLayout {
@@ -683,14 +686,14 @@ Kirigami.OverlayDrawer {
                         Behavior on opacity {
                             OpacityAnimator {
                                 id: mainContentAnimator
-                                duration: Kirigami.Units.longDuration
+                                duration: Platform.Units.longDuration
                                 easing.type: Easing.InOutQuad
                             }
                         }
                     }
 
                     Item {
-                        Layout.minimumWidth: Kirigami.Units.smallSpacing
+                        Layout.minimumWidth: Platform.Units.smallSpacing
                         Layout.minimumHeight: root.bottomPadding
                     }
 
@@ -717,9 +720,9 @@ Kirigami.OverlayDrawer {
 
                         onClicked: root.collapsed = !root.collapsed
 
-                        QQC2.ToolTip.visible: root.collapsed && (Kirigami.Settings.tabletMode ? pressed : hovered)
+                        QQC2.ToolTip.visible: root.collapsed && (Platform.Settings.tabletMode ? pressed : hovered)
                         QQC2.ToolTip.text: qsTr("Open Sidebar")
-                        QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
+                        QQC2.ToolTip.delay: Platform.Units.toolTipDelay
                     }
                 }
             }

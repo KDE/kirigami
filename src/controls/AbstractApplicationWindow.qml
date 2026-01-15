@@ -7,8 +7,9 @@
 import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
-import org.kde.kirigami as Kirigami
-import "templates/private" as TP
+import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.controls as Controls
+import "private" as P
 
 /*!
   \qmltype AbstractApplicationWindow
@@ -19,7 +20,7 @@ import "templates/private" as TP
 
   Use this class only if you are implementing a custom content item and don’t need
   any of the standard semantics and features of ApplicationWindow.
-  
+
   Otherwise, use ApplicationWindow.
 
   It's usually used as a root QML component for the application.
@@ -110,7 +111,7 @@ QQC2.ApplicationWindow {
 
       \note Different styles can have their own logic for deciding this.
      */
-    property bool wideScreen: width >= Kirigami.Units.gridUnit * 60
+    property bool wideScreen: width >= Platform.Units.gridUnit * 60
 
     /*!
       \brief This property holds the drawer for context-dependent actions.
@@ -172,7 +173,7 @@ QQC2.ApplicationWindow {
       \endcode
       \since 5.76
      */
-    readonly property Kirigami.Action quitAction: Kirigami.Action {
+    readonly property Controls.Action quitAction: Controls.Action {
         text: qsTr("Quit")
         icon.name: "application-exit";
         shortcut: StandardKey.Quit
@@ -223,9 +224,9 @@ QQC2.ApplicationWindow {
     LayoutMirroring.enabled: Application.layoutDirection === Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
 
-    color: Kirigami.Theme.backgroundColor
+    color: Platform.Theme.backgroundColor
 
-    TP.PassiveNotificationsManager {
+    P.PassiveNotificationsManager {
         id: notificationsObject
 
         anchors.bottom: parent.bottom
@@ -275,8 +276,8 @@ QQC2.ApplicationWindow {
         }
     }
 
-    width: Kirigami.Settings.isMobile ? Kirigami.Units.gridUnit * 30 : Kirigami.Units.gridUnit * 55
-    height: Kirigami.Settings.isMobile ? Kirigami.Units.gridUnit * 45 : Kirigami.Units.gridUnit * 40
+    width: Platform.Settings.isMobile ? Platform.Units.gridUnit * 30 : Platform.Units.gridUnit * 55
+    height: Platform.Settings.isMobile ? Platform.Units.gridUnit * 45 : Platform.Units.gridUnit * 40
     visible: true
 
     Component.onCompleted: {

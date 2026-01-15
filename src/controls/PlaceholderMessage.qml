@@ -7,7 +7,8 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC2
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.controls as KC
+import org.kde.kirigami.platform as Platform
 import org.kde.kirigami.primitives as Primitives
 
 /*!
@@ -194,9 +195,9 @@ ColumnLayout {
       \since 5.70
      */
     property Primitives.IconPropertiesGroup icon: Primitives.IconPropertiesGroup {
-        width: Math.round(Kirigami.Units.iconSizes.huge * 1.5)
-        height: Math.round(Kirigami.Units.iconSizes.huge * 1.5)
-        color: Kirigami.Theme.textColor
+        width: Math.round(Platform.Units.iconSizes.huge * 1.5)
+        height: Math.round(Platform.Units.iconSizes.huge * 1.5)
+        color: Platform.Theme.textColor
     }
 
     /*!
@@ -238,7 +239,7 @@ ColumnLayout {
     signal linkActivated(string link)
 //END properties
 
-    spacing: Kirigami.Units.largeSpacing
+    spacing: Platform.Units.largeSpacing
 
     Component.onCompleted: _announce();
     onVisibleChanged: {
@@ -255,7 +256,7 @@ ColumnLayout {
         }
     }
 
-    Kirigami.Icon {
+    Primitives.Icon {
         visible: source !== undefined
         opacity: root.type === PlaceholderMessage.Type.Actionable ? 1 : 0.75
 
@@ -275,11 +276,11 @@ ColumnLayout {
         }
     }
 
-    Kirigami.Heading {
+    KC.Heading {
         text: root.text
         visible: text.length > 0
 
-        type: Kirigami.Heading.Primary
+        type: KC.Heading.Primary
         opacity: root.type === PlaceholderMessage.Type.Actionable ? 1 : 0.75
 
 
@@ -290,7 +291,7 @@ ColumnLayout {
         wrapMode: Text.Wrap
     }
 
-    Kirigami.SelectableLabel {
+    KC.SelectableLabel {
         id: label
 
         text: root.explanation
@@ -310,7 +311,7 @@ ColumnLayout {
         id: actionButton
 
         Layout.alignment: Qt.AlignHCenter
-        Layout.topMargin: Kirigami.Units.gridUnit
+        Layout.topMargin: Platform.Units.gridUnit
         Layout.maximumWidth: implicitWidth
         Layout.fillWidth: true
 

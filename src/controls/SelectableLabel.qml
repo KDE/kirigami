@@ -9,7 +9,7 @@
 pragma ComponentBehavior: Bound
 
 import QtQuick
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.platform as Platform
 import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
 
@@ -245,12 +245,12 @@ QQC2.Control {
         property alias cursorShape: hoverHandler.cursorShape
 
         activeFocusOnTab: root.activeFocusOnTab
-        color: Kirigami.Theme.textColor
+        color: Platform.Theme.textColor
         readOnly: true
         selectByMouse: true
         padding: 0
-        selectedTextColor: Kirigami.Theme.highlightedTextColor
-        selectionColor: Kirigami.Theme.highlightColor
+        selectedTextColor: Platform.Theme.highlightedTextColor
+        selectionColor: Platform.Theme.highlightColor
         textFormat: TextEdit.AutoText
         verticalAlignment: TextEdit.AlignTop
         wrapMode: TextEdit.WordWrap
@@ -317,7 +317,7 @@ QQC2.Control {
             }
         }
 
-        QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
+        QQC2.ToolTip.delay: Platform.Units.toolTipDelay
         QQC2.ToolTip.visible: textEdit.hoveredLink
 
         Binding {
@@ -342,7 +342,7 @@ QQC2.Control {
 
             target: textEdit.QQC2.ToolTip.toolTip
             property: "y"
-            value: toolTipOriginY - textEdit.QQC2.ToolTip.toolTip.implicitHeight - Kirigami.Units.gridUnit
+            value: toolTipOriginY - textEdit.QQC2.ToolTip.toolTip.implicitHeight - Platform.Units.gridUnit
             when: toolTipXBinding.overrideToolTipCoordinates
         }
 
