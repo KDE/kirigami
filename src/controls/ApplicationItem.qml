@@ -5,7 +5,8 @@
  */
 
 import QtQuick
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.controls as KC
 
 /*!
   \qmltype ApplicationItem
@@ -75,7 +76,7 @@ import org.kde.kirigami as Kirigami
   }
   \endcode
 */
-Kirigami.AbstractApplicationItem {
+KC.AbstractApplicationItem {
     id: root
 
     /*!
@@ -98,7 +99,7 @@ Kirigami.AbstractApplicationItem {
         pageStack.currentItem?.forceActiveFocus();
     }
 
-    Kirigami.PageRow {
+    KC.PageRow {
         id: __pageStack
         anchors {
             fill: parent
@@ -115,7 +116,7 @@ Kirigami.AbstractApplicationItem {
                 }
             }
 
-            if (Kirigami.Settings.isMobile && !backEvent.accepted && Qt.platform.os !== "ios") {
+            if (Platform.Settings.isMobile && !backEvent.accepted && Qt.platform.os !== "ios") {
                 Qt.quit();
             }
         }
