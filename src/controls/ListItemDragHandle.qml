@@ -6,8 +6,8 @@
  */
 
 import QtQuick
-import org.kde.kirigami as Kirigami
-
+import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.primitives as Primitives
 /*!
   \qmltype ListItemDragHandle
   \inqmlmodule org.kde.kirigami
@@ -127,8 +127,8 @@ Item {
      */
     signal dropped(int oldIndex, int newIndex)
 
-    implicitWidth: Kirigami.Units.iconSizes.smallMedium
-    implicitHeight: Kirigami.Units.iconSizes.smallMedium
+    implicitWidth: Platform.Units.iconSizes.smallMedium
+    implicitHeight: Platform.Units.iconSizes.smallMedium
 
     MouseArea {
         id: mouseArea
@@ -156,13 +156,13 @@ Item {
             }
         }
 
-        Kirigami.Icon {
+        Primitives.Icon {
             id: internal
 
             anchors.fill: parent
 
             source: "handle-sort"
-            opacity: mouseArea.pressed || (!Kirigami.Settings.tabletMode && root.listItem.hovered) ? 1 : 0.6
+            opacity: mouseArea.pressed || (!Platform.Settings.tabletMode && root.listItem.hovered) ? 1 : 0.6
 
             property real startY
             property real mouseDownY
@@ -235,7 +235,7 @@ Item {
                 target: root.listItem
                 from: root.listItem.y
                 to: 0
-                duration: Kirigami.Units.longDuration
+                duration: Platform.Units.longDuration
                 easing.type: Easing.InOutQuad
             }
             PropertyAction {
@@ -253,13 +253,13 @@ Item {
 
             onTriggered: {
                 if (internal.draggingUp) {
-                    root.listView.contentY -= Kirigami.Units.gridUnit;
+                    root.listView.contentY -= Platform.Units.gridUnit;
                     if (root.listView.atYBeginning) {
                         root.listView.positionViewAtBeginning();
                         stop();
                     }
                 } else {
-                    root.listView.contentY += Kirigami.Units.gridUnit;
+                    root.listView.contentY += Platform.Units.gridUnit;
                     if (root.listView.atYEnd) {
                         root.listView.positionViewAtEnd();
                         stop();

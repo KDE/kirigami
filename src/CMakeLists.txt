@@ -1,3 +1,4 @@
+add_subdirectory(controls)
 add_subdirectory(platform)
 add_subdirectory(primitives)
 add_subdirectory(delegates)
@@ -62,6 +63,7 @@ ecm_add_qml_module(Kirigami URI "org.kde.kirigami" VERSION 2.0
     "org.kde.kirigami.private"
     "org.kde.kirigami.private.polyfill"
     IMPORTS
+    "org.kde.kirigami.controls"
     "org.kde.kirigami.platform"
     "org.kde.kirigami.primitives"
     "org.kde.kirigami.delegates"
@@ -94,15 +96,10 @@ target_include_directories(Kirigami PRIVATE
 )
 
 target_sources(Kirigami PRIVATE
-    enums.h
     imagecolors.cpp
     imagecolors.h
     overlayzstackingattached.cpp
     overlayzstackingattached.h
-    pagepool.cpp
-    pagepool.h
-    scenepositionattached.cpp
-    scenepositionattached.h
     spellcheckattached.cpp
     spellcheckattached.h
     wheelhandler.cpp
@@ -114,111 +111,15 @@ target_sources(Kirigamiplugin PRIVATE
     kirigamiplugin.h
 )
 
-ecm_target_qml_sources(Kirigami SOURCES
-    controls/Action.qml
-    controls/AbstractApplicationHeader.qml
-    controls/AbstractApplicationWindow.qml
-    controls/ApplicationWindow.qml
-    controls/OverlayDrawer.qml
-    controls/ContextDrawer.qml
-    controls/GlobalDrawer.qml
-    controls/Heading.qml
-    controls/PageRow.qml
-    controls/OverlaySheet.qml
-    controls/Page.qml
-    controls/ScrollablePage.qml
-    controls/SwipeListItem.qml
-)
-
-ecm_target_qml_sources(Kirigami VERSION 2.1 SOURCES
-    controls/AbstractApplicationItem.qml
-    controls/ApplicationItem.qml
-)
-
-ecm_target_qml_sources(Kirigami VERSION 2.4 SOURCES
-    controls/AbstractCard.qml
-    controls/Card.qml
-    controls/CardsListView.qml
-    controls/CardsLayout.qml
-    controls/InlineMessage.qml
-)
-
-ecm_target_qml_sources(Kirigami VERSION 2.5 SOURCES
-    controls/ListItemDragHandle.qml
-    controls/ActionToolBar.qml
-)
-
+# TODO AboutPage and AboutItem won't be moved to controls submodule but rather to the future forms one
 ecm_target_qml_sources(Kirigami VERSION 2.6 SOURCES
     controls/AboutPage.qml
-    controls/LinkButton.qml
-    controls/UrlButton.qml
 )
-
-ecm_target_qml_sources(Kirigami VERSION 2.7 SOURCES
-    controls/ActionTextField.qml
-)
-
-ecm_target_qml_sources(Kirigami VERSION 2.8 SOURCES
-    controls/SearchField.qml
-    controls/PasswordField.qml
-)
-
-ecm_target_qml_sources(Kirigami VERSION 2.10 SOURCES
-    controls/ListSectionHeader.qml
-)
-
-ecm_target_qml_sources(Kirigami VERSION 2.11 SOURCES
-    controls/PagePoolAction.qml
-)
-
-ecm_target_qml_sources(Kirigami VERSION 2.12 SOURCES
-    controls/PlaceholderMessage.qml
-)
-
-ecm_target_qml_sources(Kirigami VERSION 2.14 SOURCES
-    controls/FlexColumn.qml
-)
-
 ecm_target_qml_sources(Kirigami VERSION 2.19 SOURCES
     controls/AboutItem.qml
-    controls/NavigationTabBar.qml
-    controls/NavigationTabButton.qml
-    controls/Chip.qml
-    controls/LoadingPlaceholder.qml
 )
 
-ecm_target_qml_sources(Kirigami VERSION 2.20 SOURCES
-    controls/SelectableLabel.qml
-    controls/InlineViewHeader.qml
-    controls/ContextualHelpButton.qml
-)
-
-ecm_target_qml_sources(Kirigami PRIVATE PATH private SOURCES
-    controls/private/ActionMenuItem.qml
-    controls/private/ActionsMenu.qml
-    controls/private/BannerImage.qml
-    controls/private/ContextDrawerActionItem.qml
-    controls/private/DefaultCardBackground.qml
-    controls/private/DefaultChipBackground.qml
-    controls/private/DefaultPageTitleDelegate.qml
-    controls/private/EdgeShadow.qml
-    controls/private/GlobalDrawerActionItem.qml
-    controls/private/MobileDialogLayer.qml
-    controls/private/PrivateActionToolButton.qml
-    controls/private/PullDownIndicator.qml
-    controls/private/SwipeItemEventFilter.qml
-)
-
-ecm_target_qml_sources(Kirigami PRIVATE PATH private/globaltoolbar SOURCES
-    controls/private/globaltoolbar/BreadcrumbControl.qml
-    controls/private/globaltoolbar/HandleButton.qml
-    controls/private/globaltoolbar/NavigationButtons.qml
-    controls/private/globaltoolbar/PageRowGlobalToolBarStyleGroup.qml
-    controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml
-    controls/private/globaltoolbar/ToolBarPageHeader.qml
-    controls/private/globaltoolbar/ToolBarPageFooter.qml
-)
-
+# TODO Styles will become proper imports in the future
 qt_target_qml_sources(Kirigami RESOURCES
     styles/Material/InlineMessage.qml
     styles/Material/Theme.qml
@@ -253,6 +154,7 @@ if (NOT BUILD_SHARED_LIBS)
     # against for static builds to work properly
     target_link_libraries(Kirigamiplugin
         PRIVATE
+            KirigamiControlsplugin
             KirigamiPlatformplugin
             KirigamiDelegatesplugin
             KirigamiPrimitivesplugin
@@ -269,6 +171,7 @@ else()
         PUBLIC
             KirigamiPlatform
         PRIVATE
+            KirigamiControls
             KirigamiDelegates
             KirigamiPrimitives
             KirigamiDialogs

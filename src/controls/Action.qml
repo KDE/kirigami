@@ -9,7 +9,9 @@ import QtQml
 import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.controls as KC
+import org.kde.kirigami.layouts as KL
 import org.kde.kirigami.private as P
 
 /*!
@@ -90,7 +92,7 @@ QQC2.Action {
       \sa DisplayHint
       \since 2.12
      */
-    property int displayHint: Kirigami.DisplayHint.NoPreference
+    property int displayHint: KL.DisplayHint.NoPreference
 
     /*!
       \brief This property holds the component that should be used for displaying this action.
@@ -136,7 +138,7 @@ QQC2.Action {
 
     onChildrenChanged: {
         children
-            .filter(action => action instanceof Kirigami.Action)
+            .filter(action => action instanceof Action)
             .forEach(action => {
                 action.parent = this;
             });
@@ -147,7 +149,7 @@ QQC2.Action {
       \brief This property holds the action's visible child actions.
      */
     readonly property list<T.Action> visibleChildren: children
-        .filter(action => !(action instanceof Kirigami.Action) || action.visible)
+        .filter(action => !(action instanceof Action) || action.visible)
 
     shortcut: fromQAction?.shortcut
     text: fromQAction?.text ?? ''

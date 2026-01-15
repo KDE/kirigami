@@ -5,19 +5,21 @@
  */
 
 import QtQuick
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.controls as KC
+import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.primitives as Primitives
 import org.kde.kirigami.templates as KT
 
-Kirigami.AbstractApplicationHeader {
+KC.AbstractApplicationHeader {
     id: header
     readonly property int leftReservedSpace: {
-        let space = Kirigami.Units.smallSpacing;
+        let space = Platform.Units.smallSpacing;
         if (leftHandleAnchor.visible) {
             space += leftHandleAnchor.width;
         }
         return space
     }
-    readonly property int rightReservedSpace: rightHandleAnchor.visible ? rightHandleAnchor.width + Kirigami.Units.smallSpacing : 0
+    readonly property int rightReservedSpace: rightHandleAnchor.visible ? rightHandleAnchor.width + Platform.Units.smallSpacing : 0
 
     readonly property alias leftHandleAnchor: leftHandleAnchor
     readonly property alias rightHandleAnchor: rightHandleAnchor
@@ -39,17 +41,17 @@ Kirigami.AbstractApplicationHeader {
             return false;
         }
         const item = breadcrumbLoader.pageRow?.[itemProperty] as Item;
-        const style = item?.globalToolBarStyle ?? Kirigami.ApplicationHeaderStyle.None;
-        return globalToolBar.canContainHandles || style === Kirigami.ApplicationHeaderStyle.ToolBar;
+        const style = item?.globalToolBarStyle ?? KC.ApplicationHeaderStyle.None;
+        return globalToolBar.canContainHandles || style === KC.ApplicationHeaderStyle.ToolBar;
     }
 
-    Kirigami.AlignedSize.height: visible ? implicitHeight : 0
+    Primitives.AlignedSize.height: visible ? implicitHeight : 0
     minimumHeight: globalToolBar.minimumHeight
     preferredHeight: globalToolBar.preferredHeight
     maximumHeight: globalToolBar.maximumHeight
     separatorVisible: globalToolBar.separatorVisible
     background.visible: breadcrumbLoader.active
-    Kirigami.Theme.colorSet: globalToolBar.colorSet
+    Platform.Theme.colorSet: globalToolBar.colorSet
 
     Item {
         id: leftHandleAnchor
@@ -72,14 +74,14 @@ Kirigami.AbstractApplicationHeader {
         id: breadcrumbLoader
         anchors.fill: parent
 
-        property Kirigami.PageRow pageRow: root
+        property KC.PageRow pageRow: root
 
         asynchronous: true
 
         active: header.layerIsMainRow
-            && globalToolBar.actualStyle === Kirigami.ApplicationHeaderStyle.Breadcrumb
+            && globalToolBar.actualStyle === KC.ApplicationHeaderStyle.Breadcrumb
             && header.currentItem
-            && header.currentItem.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.None
+            && header.currentItem.globalToolBarStyle !== KC.ApplicationHeaderStyle.None
 
         source: Qt.resolvedUrl("BreadcrumbControl.qml")
     }

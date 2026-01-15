@@ -9,14 +9,16 @@ import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
 import QtQuick.Layouts
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.controls as KC
+import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.primitives as Primitives
 
 QQC2.ItemDelegate {
     id: listItem
 
     required property T.Action tAction
 
-    readonly property Kirigami.Action kAction: tAction as Kirigami.Action
+    readonly property KC.Action kAction: tAction as KC.Action
 
     readonly property bool isSeparator: kAction?.separator ?? false
     readonly property bool isExpandable: kAction?.expandible ?? false
@@ -27,8 +29,8 @@ QQC2.ItemDelegate {
     icon.source: tAction.icon.source
 
     text: tAction.text ? tAction.text : kAction?.tooltip ?? ""
-    hoverEnabled: (!isExpandable || root.collapsed) && !Kirigami.Settings.tabletMode && !isSeparator
-    font.pointSize: Kirigami.Theme.defaultFont.pointSize * (isExpandable ? 1.30 : 1)
+    hoverEnabled: (!isExpandable || root.collapsed) && !Platform.Settings.tabletMode && !isSeparator
+    font.pointSize: Platform.Theme.defaultFont.pointSize * (isExpandable ? 1.30 : 1)
 
     enabled: !isExpandable && tAction.enabled
     visible: kAction?.visible ?? true
@@ -36,7 +38,7 @@ QQC2.ItemDelegate {
 
     Accessible.onPressAction: listItem.clicked()
 
-    Kirigami.Separator {
+    Primitives.Separator {
         id: separatorAction
 
         visible: listItem.isSeparator
@@ -45,7 +47,7 @@ QQC2.ItemDelegate {
 
     ActionsMenu {
         id: actionsMenu
-        y: Kirigami.Settings.isMobile ? -height : listItem.height
+        y: Platform.Settings.isMobile ? -height : listItem.height
         actions: listItem.kAction?.children ?? []
         submenuComponent: ActionsMenu {}
     }

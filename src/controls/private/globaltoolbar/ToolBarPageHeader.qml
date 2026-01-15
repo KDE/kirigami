@@ -9,31 +9,34 @@ import QtQuick.Controls as QQC
 import QtQuick.Window
 import QtQml
 import QtQuick.Layouts
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.controls as KC
+import org.kde.kirigami.layouts as KL
+import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.primitives as Primitives
 import org.kde.kirigami.templates as KT
 import ".." as KP
 
-Kirigami.AbstractApplicationHeader {
+KC.AbstractApplicationHeader {
     id: root
 
     // pageRow.globalToolBar.*Height already include the paddings
-    minimumHeight: pageRow ? pageRow.globalToolBar.minimumHeight : Kirigami.Units.iconSizes.medium + Kirigami.Units.smallSpacing * 2
+    minimumHeight: pageRow ? pageRow.globalToolBar.minimumHeight : Platform.Units.iconSizes.medium + Platform.Units.smallSpacing * 2
     maximumHeight: pageRow ? pageRow.globalToolBar.maximumHeight : minimumHeight
     preferredHeight: pageRow ? pageRow.globalToolBar.preferredHeight : minimumHeight
 
     separatorVisible: pageRow ? pageRow.globalToolBar.separatorVisible : true
 
-    Kirigami.Theme.colorSet: pageRow ? pageRow.globalToolBar.colorSet : Kirigami.Theme.Header
+    Platform.Theme.colorSet: pageRow ? pageRow.globalToolBar.colorSet : Platform.Theme.Header
 
-    implicitWidth: layout.implicitWidth + Kirigami.Units.smallSpacing * 2
-    implicitHeight: Math.max(titleLoader.implicitHeight, toolBar.implicitHeight) + Kirigami.Units.smallSpacing * 2
+    implicitWidth: layout.implicitWidth + Platform.Units.smallSpacing * 2
+    implicitHeight: Math.max(titleLoader.implicitHeight, toolBar.implicitHeight) + Platform.Units.smallSpacing * 2
 
     onActiveFocusChanged: if (activeFocus && toolBar.actions.length > 0) {
         toolBar.contentItem.visibleChildren[0].forceActiveFocus(Qt.TabFocusReason)
     }
 
-    leftPadding: Kirigami.Units.mediumSpacing
-    rightPadding: Kirigami.Units.mediumSpacing
+    leftPadding: Platform.Units.mediumSpacing
+    rightPadding: Platform.Units.mediumSpacing
 
     MouseArea {
         anchors.fill: parent
@@ -46,18 +49,18 @@ Kirigami.AbstractApplicationHeader {
     RowLayout {
         id: layout
         anchors.fill: parent
-        spacing: Kirigami.Units.smallSpacing
+        spacing: Platform.Units.smallSpacing
 
-        Kirigami.Separator {
+        Primitives.Separator {
             id: separator
             Layout.fillHeight: true
-            Layout.topMargin: Kirigami.Units.largeSpacing
-            Layout.bottomMargin: Kirigami.Units.largeSpacing
+            Layout.topMargin: Platform.Units.largeSpacing
+            Layout.bottomMargin: Platform.Units.largeSpacing
             // This must appear at the control edges, disregarding the padding
             Layout.leftMargin: -root.leftPadding
-            Kirigami.Theme.colorSet: Kirigami.Theme.Header
-            Kirigami.Theme.inherit: false
-            visible: root.pageRow?.separatorVisible && !navButtons.visible && root.page?.Kirigami.ColumnView.view?.leadingVisibleItem !== root.page
+            Platform.Theme.colorSet: Platform.Theme.Header
+            Platform.Theme.inherit: false
+            visible: root.pageRow?.separatorVisible && !navButtons.visible && root.page?.KL.ColumnView.view?.leadingVisibleItem !== root.page
         }
 
         HandleButton {
@@ -68,7 +71,7 @@ Kirigami.AbstractApplicationHeader {
                     return false;
                 }
                 let firstVisible = false;
-                const previousPage = root.pageRow.get(root.page.Kirigami.ColumnView.index - 1);
+                const previousPage = root.pageRow.get(root.page.KL.ColumnView.index - 1);
                 if (previousPage) {
                     firstVisible = previousPage.x - root.pageRow.columnView.contentX < -previousPage.width / 2;
                 } else {
@@ -76,8 +79,8 @@ Kirigami.AbstractApplicationHeader {
                 }
 
                 return drawer !== null
-                    && ((drawer.handleVisible && drawer.enabled) || ((drawer as Kirigami.GlobalDrawer)?.isMenu ?? false))
-                    && (root.pageRow.columnView.columnResizeMode === Kirigami.ColumnView.SingleColumn
+                    && ((drawer.handleVisible && drawer.enabled) || ((drawer as KC.GlobalDrawer)?.isMenu ?? false))
+                    && (root.pageRow.columnView.columnResizeMode === KL.ColumnView.SingleColumn
                     || firstVisible);
             }
         }
@@ -114,7 +117,7 @@ Kirigami.AbstractApplicationHeader {
             sourceComponent: root.page?.titleDelegate ?? null
         }
 
-        Kirigami.ActionToolBar {
+        KC.ActionToolBar {
             id: toolBar
 
             Layout.alignment: Qt.AlignVCenter
@@ -122,17 +125,17 @@ Kirigami.AbstractApplicationHeader {
             Layout.fillHeight: true
 
             alignment: root.pageRow?.globalToolBar.toolbarActionAlignment ?? Qt.AlignRight
-            heightMode: root.pageRow?.globalToolBar.toolbarActionHeightMode ?? Kirigami.ToolBarLayout.ConstrainIfLarger
+            heightMode: root.pageRow?.globalToolBar.toolbarActionHeightMode ?? KL.ToolBarLayout.ConstrainIfLarger
 
-            actions: root.page && root.page.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar ? root.page?.actions : []
+            actions: root.page && root.page.globalToolBarStyle === KC.ApplicationHeaderStyle.ToolBar ? root.page?.actions : []
         }
 
         HandleButton {
             drawer: QQC.ApplicationWindow.window?.contextDrawer ?? null
             visible: drawer !== null
                     && drawer.handleVisible && drawer.enabled
-                    && (pageStack.columnView.columnResizeMode === Kirigami.ColumnView.SingleColumn
-                    || root.page.Kirigami.ColumnView.view.trailingVisibleItem === root.page)
+                    && (pageStack.columnView.columnResizeMode === KL.ColumnView.SingleColumn
+                    || root.page.KL.ColumnView.view?.trailingVisibleItem === root.page)
         }
     }
 }

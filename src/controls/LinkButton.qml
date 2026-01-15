@@ -7,7 +7,7 @@
 import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.platform as Platform
 
 /*!
   \qmltype LinkButton
@@ -55,7 +55,7 @@ QQC2.Label {
 
       default: \c Kirigami.Theme.linkColor
      */
-    property color normalColor: Kirigami.Theme.linkColor
+    property color normalColor: Platform.Theme.linkColor
 
     /*!
       This property holds the color of the link while pressed.
@@ -69,7 +69,7 @@ QQC2.Label {
 
       default: \c Kirigami.Theme.textColor
      */
-    property color disabledColor: Kirigami.Theme.textColor
+    property color disabledColor: Platform.Theme.textColor
 
     activeFocusOnTab: true
     Accessible.role: Accessible.Button
