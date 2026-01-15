@@ -8,7 +8,7 @@ import QtQuick
 import QtQuick.Templates as T
 
 import org.kde.kirigami as Kirigami
-import "templates/private" as TP
+import "private" as P
 import org.kde.kirigami.templates as KT
 
 /*!
@@ -303,7 +303,7 @@ Item {
     LayoutMirroring.enabled: Application.layoutDirection === Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
 
-    TP.PassiveNotificationsManager {
+    P.PassiveNotificationsManager {
         id: notificationsObject
 
         anchors.bottom: parent.bottom

@@ -2,4 +2,3 @@ module org.kde.kirigami.templates.private
 
 BorderPropertiesGroup 1.0 BorderPropertiesGroup.qml
 DrawerHandle 1.0 DrawerHandle.qml
-PassiveNotificationsManager 1.0 PassiveNotificationsManager.qml

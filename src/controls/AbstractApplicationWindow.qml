@@ -8,7 +8,7 @@ import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
-import "templates/private" as TP
+import "private" as P
 
 /*!
   \qmltype AbstractApplicationWindow
@@ -19,7 +19,7 @@ import "templates/private" as TP
 
   Use this class only if you are implementing a custom content item and don’t need
   any of the standard semantics and features of ApplicationWindow.
-  
+
   Otherwise, use ApplicationWindow.
 
   It's usually used as a root QML component for the application.
@@ -225,7 +225,7 @@ QQC2.ApplicationWindow {
 
     color: Kirigami.Theme.backgroundColor
 
-    TP.PassiveNotificationsManager {
+    P.PassiveNotificationsManager {
         id: notificationsObject
 
         anchors.bottom: parent.bottom

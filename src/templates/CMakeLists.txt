@@ -23,7 +23,6 @@ ecm_target_qml_sources(KirigamiTemplates SOURCES
 ecm_target_qml_sources(KirigamiTemplates PRIVATE PATH private SOURCES
     private/BorderPropertiesGroup.qml
     private/DrawerHandle.qml
-    private/PassiveNotificationsManager.qml
 )
 
 set_target_properties(KirigamiTemplates PROPERTIES
