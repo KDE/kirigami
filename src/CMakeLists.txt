@@ -116,6 +116,13 @@ target_sources(Kirigamiplugin PRIVATE
     kirigamiplugin.h
 )
 
+# TODO AboutPage and AboutItem won't be moved to controls submodule but rather to the future forms one
+ecm_target_qml_sources(Kirigami VERSION 2.6 SOURCES
+    controls/AboutPage.qml
+)
+ecm_target_qml_sources(Kirigami VERSION 2.19 SOURCES
+    controls/AboutItem.qml
+)
 
 qt_target_qml_sources(Kirigami RESOURCES
     styles/Material/InlineMessage.qml

@@ -7,9 +7,11 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Templates as T
-import org.kde.kirigami as Kirigami
 import "private" as KP
 import org.kde.kirigami.templates as KT
+import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.primitives as Primitives
+import org.kde.kirigami.controls as KC
 
 KT.OverlayDrawer {
     id: root
@@ -32,9 +34,9 @@ KT.OverlayDrawer {
     }
 
     background: Rectangle {
-        color: Kirigami.Theme.backgroundColor
+        color: Platform.Theme.backgroundColor
 
-        Kirigami.Separator {
+        Primitives.Separator {
             id: separator
 
             LayoutMirroring.enabled: false
@@ -49,8 +51,8 @@ KT.OverlayDrawer {
 
             visible: !root.modal
 
-            Kirigami.Theme.inherit: false
-            Kirigami.Theme.colorSet: Kirigami.Theme.Header
+            Platform.Theme.inherit: false
+            Platform.Theme.colorSet: Platform.Theme.Header
         }
 
         Item {
@@ -65,7 +67,7 @@ KT.OverlayDrawer {
                     return false;
                 }
                 // compatible header
-                const header = (root as Kirigami.GlobalDrawer)?.header ?? null;
+                const header = (root as KC.GlobalDrawer)?.header ?? null;
                 if (header instanceof T.ToolBar || header instanceof KT.AbstractApplicationHeader) {
                     return true;
                 }
@@ -100,31 +102,31 @@ KT.OverlayDrawer {
 
             visible: separator.visible
 
-            Kirigami.Separator {
+            Primitives.Separator {
                 LayoutMirroring.enabled: false
 
                 anchors {
                     fill: parent
-                    topMargin: segmentedSeparator.shouldUseSegmentedStyle ? Kirigami.Units.largeSpacing : 0
-                    bottomMargin: segmentedSeparator.shouldUseSegmentedStyle ? Kirigami.Units.largeSpacing : 0
+                    topMargin: segmentedSeparator.shouldUseSegmentedStyle ? Platform.Units.largeSpacing : 0
+                    bottomMargin: segmentedSeparator.shouldUseSegmentedStyle ? Platform.Units.largeSpacing : 0
                 }
 
                 Behavior on anchors.topMargin {
                     NumberAnimation {
-                        duration: Kirigami.Units.longDuration
+                        duration: Platform.Units.longDuration
                         easing.type: Easing.InOutQuad
                     }
                 }
 
                 Behavior on anchors.bottomMargin {
                     NumberAnimation {
-                        duration: Kirigami.Units.longDuration
+                        duration: Platform.Units.longDuration
                         easing.type: Easing.InOutQuad
                     }
                 }
 
-                Kirigami.Theme.inherit: false
-                Kirigami.Theme.colorSet: Kirigami.Theme.Header
+                Platform.Theme.inherit: false
+                Platform.Theme.colorSet: Platform.Theme.Header
             }
         }
 
@@ -143,7 +145,7 @@ KT.OverlayDrawer {
 
             Behavior on opacity {
                 NumberAnimation {
-                    duration: Kirigami.Units.longDuration
+                    duration: Platform.Units.longDuration
                     easing.type: Easing.InOutQuad
                 }
             }

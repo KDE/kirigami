@@ -8,7 +8,8 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.controls as KC
 
 /*!
   \qmltype ActionTextField
@@ -100,21 +101,21 @@ QQC2.TextField {
     LayoutMirroring.enabled: Application.layoutDirection === Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
 
-    leftPadding: Kirigami.Units.smallSpacing + (LayoutMirroring.enabled ? rightActionsRow : leftActionsRow).width
-    rightPadding: Kirigami.Units.smallSpacing + (LayoutMirroring.enabled ? leftActionsRow : rightActionsRow).width
+    leftPadding: Platform.Units.smallSpacing + (LayoutMirroring.enabled ? rightActionsRow : leftActionsRow).width
+    rightPadding: Platform.Units.smallSpacing + (LayoutMirroring.enabled ? leftActionsRow : rightActionsRow).width
 
     Behavior on leftPadding {
-        enabled: Kirigami.Units.longDuration > 0
+        enabled: Platform.Units.longDuration > 0
         NumberAnimation {
-            duration: Kirigami.Units.longDuration
+            duration: Platform.Units.longDuration
             easing.type: Easing.InOutQuad
         }
     }
 
     Behavior on rightPadding {
-        enabled: Kirigami.Units.longDuration > 0
+        enabled: Platform.Units.longDuration > 0
         NumberAnimation {
-            duration: Kirigami.Units.longDuration
+            duration: Platform.Units.longDuration
             easing.type: Easing.InOutQuad
         }
     }
@@ -131,8 +132,8 @@ QQC2.TextField {
         component InlineActionIcon: QQC2.ToolButton {
             required property T.Action modelData
 
-            icon.width: Kirigami.Units.iconSizes.sizeForLabels
-            icon.height: Kirigami.Units.iconSizes.sizeForLabels
+            icon.width: Platform.Units.iconSizes.sizeForLabels
+            icon.height: Platform.Units.iconSizes.sizeForLabels
 
             Layout.fillHeight: true
             Layout.preferredWidth: implicitHeight
@@ -141,7 +142,7 @@ QQC2.TextField {
             text: modelData.text
             display: QQC2.ToolButton.IconOnly
 
-            visible: (modelData as Kirigami.Action)?.visible ?? true
+            visible: (modelData as KC.Action)?.visible ?? true
             enabled: modelData.enabled
             focusPolicy: Qt.TabFocus
 
@@ -154,7 +155,7 @@ QQC2.TextField {
 
     QQC2.ToolTip.visible: focusShortcut.nativeText.length > 0 && root.text.length === 0 && !rightActionsRow.hovered && !leftActionsRow.hovered && hovered
     QQC2.ToolTip.text: focusShortcut.nativeText
-    QQC2.ToolTip.delay: Kirigami.Settings.tabletMode ? Application.styleHints.mousePressAndHoldInterval : Kirigami.Units.toolTipDelay
+    QQC2.ToolTip.delay: Platform.Settings.tabletMode ? Application.styleHints.mousePressAndHoldInterval : Platform.Units.toolTipDelay
 
 
     RowLayout {
@@ -169,7 +170,7 @@ QQC2.TextField {
 
         visible: root.leftActions.length > 0
 
-        spacing: Kirigami.Units.smallSpacing
+        spacing: Platform.Units.smallSpacing
         layoutDirection: Qt.LeftToRight
 
         Repeater {
@@ -190,7 +191,7 @@ QQC2.TextField {
 
         visible: root.rightActions.length > 0
 
-        spacing: Kirigami.Units.smallSpacing
+        spacing: Platform.Units.smallSpacing
         layoutDirection: Qt.RightToLeft
 
         Repeater {

@@ -6,7 +6,7 @@
 
 import QtQuick
 import QtQuick.Layouts
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.platform as Platform
 
 /*!
   \qmltype CardsLayout
@@ -51,7 +51,7 @@ GridLayout {
 
       default: 20 * Kirigami.Units.gridUnit
      */
-    property int maximumColumnWidth: Kirigami.Units.gridUnit * 20
+    property int maximumColumnWidth: Platform.Units.gridUnit * 20
 
     /*!
       \brief This property holds the minimum width the columns may have.
@@ -63,22 +63,22 @@ GridLayout {
 
       \since 2.5
      */
-    property int minimumColumnWidth: Kirigami.Units.gridUnit * 12
+    property int minimumColumnWidth: Platform.Units.gridUnit * 12
 
     columns: Math.max(1, Math.min(maximumColumns > 0 ? maximumColumns : Infinity,
                                   Math.floor(width/minimumColumnWidth),
                                   Math.ceil(width/maximumColumnWidth)));
 
-    rowSpacing: Kirigami.Units.largeSpacing
-    columnSpacing: Kirigami.Units.largeSpacing
+    rowSpacing: Platform.Units.largeSpacing
+    columnSpacing: Platform.Units.largeSpacing
 
 
     // NOTE: this default width which defaults to 2 columns is just to remove a binding loop on columns
-    width: maximumColumnWidth*2 + Kirigami.Units.largeSpacing
+    width: maximumColumnWidth*2 + Platform.Units.largeSpacing
     // same computation of columns, but on the parent size
     Layout.preferredWidth: maximumColumnWidth * Math.max(1, Math.min(maximumColumns > 0 ? maximumColumns : Infinity,
                                   Math.floor(parent.width/minimumColumnWidth),
-                                  Math.ceil(parent.width/maximumColumnWidth))) + Kirigami.Units.largeSpacing * (columns - 1)
+                                  Math.ceil(parent.width/maximumColumnWidth))) + Platform.Units.largeSpacing * (columns - 1)
 
     Layout.maximumWidth: Layout.preferredWidth
     Layout.alignment: Qt.AlignHCenter

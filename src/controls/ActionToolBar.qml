@@ -10,7 +10,9 @@ import QtQml
 import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.controls as KC
+import org.kde.kirigami.layouts as KL
 import "private" as P
 
 /*!
@@ -162,28 +164,28 @@ QQC2.Control {
     topPadding: 0
     bottomPadding: 0
 
-    contentItem: Kirigami.ToolBarLayout {
+    contentItem: KL.ToolBarLayout {
         id: layout
-        spacing: Kirigami.Units.smallSpacing
+        spacing: Platform.Units.smallSpacing
         layoutDirection: root.mirrored ? Qt.RightToLeft : Qt.LeftToRight
 
         fullDelegate: P.PrivateActionToolButton {
             flat: root.flat
             display: root.display
             position: root.position
-            action: Kirigami.ToolBarLayout.action as T.Action
+            action: KL.ToolBarLayout.action as T.Action
         }
 
         iconDelegate: P.PrivateActionToolButton {
             flat: root.flat
             display: QQC2.Button.IconOnly
             position: root.position
-            action: Kirigami.ToolBarLayout.action as T.Action
+            action: KL.ToolBarLayout.action as T.Action
 
             showMenuArrow: false
 
             menuActions: {
-                const kAction = action as Kirigami.Action
+                const kAction = action as KC.Action
                 if (kAction?.displayComponent) {
                     return [action]
                 }
@@ -203,13 +205,13 @@ QQC2.Control {
             Accessible.role: Accessible.ButtonMenu
             position: root.position
 
-            action: Kirigami.Action {
+            action: KC.Action {
                 tooltip: qsTr("More Actions")
                 icon.name: root.overflowIconName
-                displayHint: Kirigami.DisplayHint.IconOnly | Kirigami.DisplayHint.HideChildIndicator
+                displayHint: KL.DisplayHint.IconOnly | KL.DisplayHint.HideChildIndicator
             }
 
-            Accessible.name: (action as Kirigami.Action).tooltip
+            Accessible.name: (action as KC.Action).tooltip
 
             menuActions: root.actions
 
@@ -222,35 +224,35 @@ QQC2.Control {
                         target: actionsMenu.parentItem
                         property: "visible"
                         value: layout.hiddenActions.includes(actionsMenu.parentAction)
-                               && ((actionsMenu.parentAction as Kirigami.Action)?.visible ?? true)
+                               && ((actionsMenu.parentAction as KC.Action)?.visible ?? true)
                         restoreMode: Binding.RestoreBinding
                     }
 
                     Binding {
                         target: actionsMenu.parentItem
                         property: "autoExclusive"
-                        value: (action as Kirigami.Action)?.autoExclusive ?? false
+                        value: (action as KC.Action)?.autoExclusive ?? false
                         restoreMode: Binding.RestoreBinding
                     }
                 }
 
                 itemDelegate: P.ActionMenuItem {
                     visible: layout.hiddenActions.includes(action)
-                             && ((action as Kirigami.Action)?.visible ?? true)
-                    autoExclusive: (action as Kirigami.Action).autoExclusive ?? false
+                             && ((action as KC.Action)?.visible ?? true)
+                    autoExclusive: (action as KC.Action).autoExclusive ?? false
                 }
 
                 loaderDelegate: Loader {
                     property T.Action action
                     height: visible ? implicitHeight : 0
                     visible: layout.hiddenActions.includes(action)
-                             && ((action as Kirigami.Action)?.visible ?? true)
+                             && ((action as KC.Action)?.visible ?? true)
                 }
 
                 separatorDelegate: QQC2.MenuSeparator {
                     property T.Action action
                     visible: layout.hiddenActions.includes(action)
-                             && ((action as Kirigami.Action)?.visible ?? true)
+                             && ((action as KC.Action)?.visible ?? true)
                 }
             }
         }

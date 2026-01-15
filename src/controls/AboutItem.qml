@@ -9,7 +9,10 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Layouts
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.primitives as Primitives
+import org.kde.kirigami.layouts as KL
+import org.kde.kirigami.controls as KC
 
 //TODO: Kf6: move somewhere else which can depend from KAboutData?
 /*!
@@ -124,12 +127,12 @@ Item {
 
             Layout.fillWidth: true
 
-            spacing: Kirigami.Units.smallSpacing * 2
+            spacing: Platform.Units.smallSpacing * 2
 
-            Kirigami.Icon {
+            Primitives.Icon {
                 id: avatarIcon
 
-                implicitWidth: Kirigami.Units.iconSizes.medium
+                implicitWidth: Platform.Units.iconSizes.medium
                 implicitHeight: implicitWidth
 
                 fallback: "user"
@@ -145,15 +148,15 @@ Item {
                         return "user"
                     }
                 }
-                visible: status !== Kirigami.Icon.Loading
+                visible: status !== Primitives.Icon.Loading
             }
 
             // So it's clear that something is happening while avatar images are loaded
             QQC2.BusyIndicator {
-                implicitWidth: Kirigami.Units.iconSizes.medium
+                implicitWidth: Platform.Units.iconSizes.medium
                 implicitHeight: implicitWidth
 
-                visible: avatarIcon.status === Kirigami.Icon.Loading
+                visible: avatarIcon.status === Primitives.Icon.Loading
                 running: visible
             }
 
@@ -168,7 +171,7 @@ Item {
                 enabled: typeof(delegate.modelData.webAddress) !== "undefined" && delegate.modelData.webAddress.length > 0
                 opacity: enabled ? 1 : 0
                 icon.name: "globe"
-                QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
+                QQC2.ToolTip.delay: Platform.Units.toolTipDelay
                 QQC2.ToolTip.visible: hovered
                 QQC2.ToolTip.text: (typeof(delegate.modelData.webAddress) === "undefined" && delegate.modelData.webAddress.length > 0) ? "" : delegate.modelData.webAddress
                 onClicked: Qt.openUrlExternally(delegate.modelData.webAddress)
@@ -178,7 +181,7 @@ Item {
                 enabled: typeof(delegate.modelData.emailAddress) !== "undefined" && delegate.modelData.emailAddress.length > 0
                 opacity: enabled ? 1 : 0
                 icon.name: "mail-sent"
-                QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
+                QQC2.ToolTip.delay: Platform.Units.toolTipDelay
                 QQC2.ToolTip.visible: hovered
                 QQC2.ToolTip.text: qsTr("Send an email to %1").arg(delegate.modelData.emailAddress)
                 onClicked: Qt.openUrlExternally("mailto:%1".arg(delegate.modelData.emailAddress))
@@ -186,7 +189,7 @@ Item {
         }
     }
 
-    Kirigami.FormLayout {
+    KL.FormLayout {
         id: form
 
         anchors.fill: parent
@@ -195,31 +198,31 @@ Item {
             columns: 2
             Layout.fillWidth: true
 
-            Kirigami.Icon {
+            Primitives.Icon {
                 Layout.rowSpan: 3
-                Layout.preferredHeight: Kirigami.Units.iconSizes.huge
+                Layout.preferredHeight: Platform.Units.iconSizes.huge
                 Layout.preferredWidth: height
                 Layout.maximumWidth: aboutItem.width / 3;
-                Layout.rightMargin: Kirigami.Units.largeSpacing
-                source: Kirigami.Settings.applicationWindowIcon || aboutItem.aboutData.programLogo || aboutItem.aboutData.componentName
+                Layout.rightMargin: Platform.Units.largeSpacing
+                source: Platform.Settings.applicationWindowIcon || aboutItem.aboutData.programLogo || aboutItem.aboutData.componentName
             }
 
-            Kirigami.Heading {
+            KC.Heading {
                 Layout.fillWidth: true
                 text: aboutItem.aboutData.displayName + " " + aboutItem.aboutData.version
                 wrapMode: Text.WordWrap
             }
 
-            Kirigami.Heading {
+            KC.Heading {
                 Layout.fillWidth: true
                 level: 3
-                type: Kirigami.Heading.Type.Secondary
+                type: KC.Heading.Type.Secondary
                 wrapMode: Text.WordWrap
                 text: aboutItem.aboutData.shortDescription
             }
 
             RowLayout {
-                spacing: Kirigami.Units.largeSpacing * 2
+                spacing: Platform.Units.largeSpacing * 2
 
                 UrlButton {
                     text: qsTr("Get Involved")
@@ -252,17 +255,17 @@ Item {
             }
         }
 
-        Kirigami.Separator {
+        Primitives.Separator {
             Layout.fillWidth: true
         }
 
-        Kirigami.Heading {
-            Kirigami.FormData.isSection: true
+        KC.Heading {
+            KL.FormData.isSection: true
             text: qsTr("Copyright")
         }
 
         QQC2.Label {
-            Layout.leftMargin: Kirigami.Units.gridUnit
+            Layout.leftMargin: Platform.Units.gridUnit
             text: aboutItem.aboutData.otherText
             visible: text.length > 0
             wrapMode: Text.WordWrap
@@ -270,7 +273,7 @@ Item {
         }
 
         QQC2.Label {
-            Layout.leftMargin: Kirigami.Units.gridUnit
+            Layout.leftMargin: Platform.Units.gridUnit
             text: aboutItem.aboutData.copyrightStatement
             visible: text.length > 0
             wrapMode: Text.WordWrap
@@ -278,7 +281,7 @@ Item {
         }
 
         UrlButton {
-            Layout.leftMargin: Kirigami.Units.gridUnit
+            Layout.leftMargin: Platform.Units.gridUnit
             url: aboutItem.aboutData.homepage
             visible: url.length > 0
             wrapMode: Text.Wrap
@@ -305,7 +308,7 @@ Item {
 
                 required property var modelData
 
-                Layout.leftMargin: Kirigami.Units.smallSpacing
+                Layout.leftMargin: Platform.Units.smallSpacing
 
                 QQC2.Label { text: qsTr("License:") }
 
@@ -327,7 +330,7 @@ Item {
 
             QQC2.Label {
                 required property var modelData
-                Layout.leftMargin: Kirigami.Units.smallSpacing
+                Layout.leftMargin: Platform.Units.smallSpacing
                 Layout.fillWidth: true
                 wrapMode: Text.WordWrap
                 text: qsTr("License: %1").arg(modelData.name)
@@ -339,19 +342,19 @@ Item {
             delegate: aboutItem._usePageStack ? licenseLinkButton : licenseTextItem
         }
 
-        Kirigami.Heading {
-            Kirigami.FormData.isSection: visible
+        KC.Heading {
+            KL.FormData.isSection: visible
             text: qsTr("Libraries in use")
             Layout.fillWidth: true
             wrapMode: Text.WordWrap
-            visible: Kirigami.Settings.information
+            visible: Platform.Settings.information
         }
 
         Repeater {
-            model: Kirigami.Settings.information
+            model: Platform.Settings.information
             delegate: QQC2.Label {
                 required property string modelData
-                Layout.leftMargin: Kirigami.Units.gridUnit
+                Layout.leftMargin: Platform.Units.gridUnit
                 Layout.fillWidth: true
                 wrapMode: Text.WordWrap
                 id: libraries
@@ -365,14 +368,14 @@ Item {
                 required property var modelData
                 Layout.fillWidth: true
                 wrapMode: Text.WordWrap
-                Layout.leftMargin: Kirigami.Units.gridUnit
+                Layout.leftMargin: Platform.Units.gridUnit
                 text: modelData.name + (modelData.version.length === 0 ? "" : " %1".arg(modelData.version))
             }
         }
 
-        Kirigami.Heading {
+        KC.Heading {
             Layout.fillWidth: true
-            Kirigami.FormData.isSection: visible
+            KL.FormData.isSection: visible
             text: qsTr("Authors")
             wrapMode: Text.WordWrap
             visible: aboutItem.aboutData.authors.length > 0
@@ -392,8 +395,8 @@ Item {
             delegate: personDelegate
         }
 
-        Kirigami.Heading {
-            Kirigami.FormData.isSection: visible
+        KC.Heading {
+            KL.FormData.isSection: visible
             text: qsTr("Credits")
             visible: repCredits.count > 0
         }
@@ -404,8 +407,8 @@ Item {
             delegate: personDelegate
         }
 
-        Kirigami.Heading {
-            Kirigami.FormData.isSection: visible
+        KC.Heading {
+            KL.FormData.isSection: visible
             text: qsTr("Translators")
             visible: repTranslators.count > 0
         }
