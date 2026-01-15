@@ -27,7 +27,7 @@ void KirigamiFormsPlugin::registerTypes(const char *uri)
     Q_ASSERT(QLatin1String(uri) == QLatin1String("org.kde.kirigami.forms"));
 
     QString formsChoice = QString::fromLocal8Bit(qgetenv("KDE_KIRIGAMI_FORMS_STYLE"));
-    if (formsChoice.isEmpty() || (formsChoice != QStringLiteral("flat") && formsChoice != QStringLiteral("hybrid"))) {
+    if (formsChoice.isEmpty() || formsChoice != QStringLiteral("flat")) {
         formsChoice = QStringLiteral("cards");
     }
 

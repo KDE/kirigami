@@ -70,7 +70,8 @@ QQC2.ToolButton {
         toolTip.delay = Platform.Units.toolTipDelay;
         toolTipVisible = false;
     }
-    Layout.maximumHeight: parent?.height ?? -1
+    Layout.maximumHeight: implicitHeight
+    Layout.fillHeight: true
 
     QQC2.ToolTip {
         id: toolTip

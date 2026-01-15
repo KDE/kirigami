@@ -139,6 +139,7 @@ Item {
             RowLayout {
                 id: trailingItems
                 Layout.rowSpan: subtitleLabel.visible ? 2 : 1
+                Layout.minimumWidth: implicitWidth
                 visible: children.length > 0
                 spacing: Platform.Units.smallSpacing
             }

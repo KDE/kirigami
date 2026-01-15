@@ -140,6 +140,7 @@ Item {
             }
             RowLayout {
                 id: trailingItems
+                Layout.minimumWidth: implicitWidth
                 visible: children.length > 0
                 spacing: Platform.Units.smallSpacing
             }
