@@ -125,7 +125,7 @@ KC.AbstractApplicationHeader {
             alignment: root.pageRow?.globalToolBar.toolbarActionAlignment ?? Qt.AlignRight
             heightMode: root.pageRow?.globalToolBar.toolbarActionHeightMode ?? KL.ToolBarLayout.ConstrainIfLarger
 
-            actions: root.page && root.page.globalToolBarStyle === KC.ApplicationHeaderStyle.ToolBar ? root.page?.actions : []
+            actions: root.page?.globalToolBarStyle === KC.ApplicationHeaderStyle.ToolBar ? root.page.actions : []
         }
 
         HandleButton {
