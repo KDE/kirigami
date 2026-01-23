@@ -88,7 +88,7 @@ QQuickItem *PagePool::allocatePage(QQmlComponent *component, const QVariantMap &
     QObject *obj = component->createWithInitialProperties(properties, ctx);
 
     if (!obj || component->isError()) {
-        qCWarning(KirigamiLog) << component->errors();
+        qCWarning(KirigamiControlsLog) << component->errors();
         if (obj) {
             obj->deleteLater();
         }
@@ -97,7 +97,7 @@ QQuickItem *PagePool::allocatePage(QQmlComponent *component, const QVariantMap &
 
     QQuickItem *item = qobject_cast<QQuickItem *>(obj);
     if (!item) {
-        qCWarning(KirigamiLog) << "Storing Non-QQuickItem in PagePool not supported";
+        qCWarning(KirigamiControlsLog) << "Storing Non-QQuickItem in PagePool not supported";
         obj->deleteLater();
         return nullptr;
     }
@@ -163,7 +163,7 @@ QQuickItem *PagePool::loadPageWithProperties(const QString &url, const QVariantM
 
         connect(component, &QQmlComponent::statusChanged, this, [this, engine, component, callback, properties](QQmlComponent::Status status) mutable {
             if (status != QQmlComponent::Ready) {
-                qCWarning(KirigamiLog) << component->errors();
+                qCWarning(KirigamiControlsLog) << component->errors();
                 m_componentForUrl.remove(component->url());
                 component->deleteLater();
                 return;
@@ -179,7 +179,7 @@ QQuickItem *PagePool::loadPageWithProperties(const QString &url, const QVariantM
         return nullptr;
 
     } else if (component->status() != QQmlComponent::Ready) {
-        qCWarning(KirigamiLog) << component->errors();
+        qCWarning(KirigamiControlsLog) << component->errors();
         return nullptr;
     }
 

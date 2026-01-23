@@ -11,7 +11,8 @@ import QtQml
 import QtQuick.Layouts
 import QtQuick.Controls as QQC
 import QtQuick.Templates as T
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.controls as KC
+import org.kde.kirigami.platform as Platform
 import org.kde.kirigami.private.polyfill
 
 /*!
@@ -197,7 +198,7 @@ QQC.ToolBar {
      */
     readonly property list<T.Action> visibleActions: actions
         // Note: instanceof check implies `!== null`
-        .filter(action => action instanceof Kirigami.Action
+        .filter(action => action instanceof KC.Action
             ? action.visible
             : action !== null
         )
@@ -206,7 +207,7 @@ QQC.ToolBar {
       \brief The property holds the maximum width of the toolbar actions, before margins are added.
      */
     property real maximumContentWidth: {
-        const minDelegateWidth = Kirigami.Units.gridUnit * 5;
+        const minDelegateWidth = Platform.Units.gridUnit * 5;
         // Always have at least the width of 5 items, so that small amounts of actions look natural.
         return minDelegateWidth * Math.max(visibleActions.length, 5);
     }
@@ -340,9 +341,9 @@ QQC.ToolBar {
             Layout.maximumWidth: root.buttonWidth
             Layout.fillHeight: true
 
-            Kirigami.Theme.textColor: root.Kirigami.Theme.textColor
-            Kirigami.Theme.backgroundColor: root.Kirigami.Theme.backgroundColor
-            Kirigami.Theme.highlightColor: root.Kirigami.Theme.highlightColor
+            Platform.Theme.textColor: root.Platform.Theme.textColor
+            Platform.Theme.backgroundColor: root.Platform.Theme.backgroundColor
+            Platform.Theme.highlightColor: root.Platform.Theme.highlightColor
         }
     }
 }

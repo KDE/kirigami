@@ -7,29 +7,30 @@
  */
 
 import QtQuick
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.controls as KC
+import org.kde.kirigami.platform as Platform
 import org.kde.kirigami.templates as KT
 
 KT.InlineMessage {
     id: root
 
     // a rectangle padded with anchors.margins is used to simulate a border
-    leftPadding: bgFillRect.anchors.leftMargin + Kirigami.Units.smallSpacing
-    topPadding: bgFillRect.anchors.topMargin + Kirigami.Units.smallSpacing
-    rightPadding: bgFillRect.anchors.rightMargin + Kirigami.Units.smallSpacing
-    bottomPadding: bgFillRect.anchors.bottomMargin + Kirigami.Units.smallSpacing
+    leftPadding: bgFillRect.anchors.leftMargin + Platform.Units.smallSpacing
+    topPadding: bgFillRect.anchors.topMargin + Platform.Units.smallSpacing
+    rightPadding: bgFillRect.anchors.rightMargin + Platform.Units.smallSpacing
+    bottomPadding: bgFillRect.anchors.bottomMargin + Platform.Units.smallSpacing
 
     background: Rectangle {
         id: bgBorderRect
 
         color: switch (root.type) {
-            case Kirigami.MessageType.Positive: return Kirigami.Theme.positiveTextColor;
-            case Kirigami.MessageType.Warning: return Kirigami.Theme.neutralTextColor;
-            case Kirigami.MessageType.Error: return Kirigami.Theme.negativeTextColor;
-            default: return Kirigami.Theme.activeTextColor;
+            case KC.MessageType.Positive: return Platform.Theme.positiveTextColor;
+            case KC.MessageType.Warning: return Platform.Theme.neutralTextColor;
+            case KC.MessageType.Error: return Platform.Theme.negativeTextColor;
+            default: return Platform.Theme.activeTextColor;
         }
 
-        radius: root.position === KT.InlineMessage.Position.Inline ? Kirigami.Units.cornerRadius : 0
+        radius: root.position === KT.InlineMessage.Position.Inline ? Platform.Units.cornerRadius : 0
 
         Rectangle {
             id: bgFillRect
@@ -42,7 +43,7 @@ KT.InlineMessage {
                 bottomMargin: root.position === KT.InlineMessage.Position.Footer ? 0 : 1
             }
 
-            color: Kirigami.Theme.backgroundColor
+            color: Platform.Theme.backgroundColor
 
             radius: bgBorderRect.radius * 0.60
         }

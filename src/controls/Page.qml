@@ -9,7 +9,6 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Templates as T
 import QtQuick.Controls as QQC2
-import org.kde.kirigami as Kirigami //TODO remove and move ApplicationHeaderStyle somewhere else
 import org.kde.kirigami.platform as Platform
 import org.kde.kirigami.primitives as Primitives
 import org.kde.kirigami.layouts as KL
@@ -159,9 +158,9 @@ QQC2.Page {
         if (globalToolBar.row && !globalToolBar.stack) {
             return globalToolBar.row.globalToolBar.actualStyle;
         } else if (globalToolBar.stack) {
-            return Platform.Settings.isMobile ? Kirigami.ApplicationHeaderStyle.Titles : Kirigami.ApplicationHeaderStyle.ToolBar;
+            return Platform.Settings.isMobile ? KC.ApplicationHeaderStyle.Titles : KC.ApplicationHeaderStyle.ToolBar;
         } else {
-            return Kirigami.ApplicationHeaderStyle.None;
+            return KC.ApplicationHeaderStyle.None;
         }
     }
 //END properties
@@ -242,7 +241,7 @@ QQC2.Page {
         asynchronous: false
 
         visible: active
-        active: root.parent && root.visible && (root.titleDelegate !== defaultTitleDelegate || root.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar || root.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.Titles)
+        active: root.parent && root.visible && (root.titleDelegate !== defaultTitleDelegate || root.globalToolBarStyle === KC.ApplicationHeaderStyle.ToolBar || root.globalToolBarStyle === KC.ApplicationHeaderStyle.Titles)
         onActiveChanged: {
             if (active) {
                 syncSource();
@@ -253,8 +252,8 @@ QQC2.Page {
             if (!row) {
                 return;
             }
-            if (root.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.ToolBar &&
-                root.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.Titles &&
+            if (root.globalToolBarStyle !== KC.ApplicationHeaderStyle.ToolBar &&
+                root.globalToolBarStyle !== KC.ApplicationHeaderStyle.Titles &&
                 root.titleDelegate !== defaultTitleDelegate) {
                 sourceComponent = root.titleDelegate;
             } else if (active) {
@@ -284,9 +283,9 @@ QQC2.Page {
                 return false;
             }
 
-            if ((globalToolBar.row && globalToolBar.row.globalToolBar.actualStyle === Kirigami.ApplicationHeaderStyle.ToolBar)
-                || root.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar
-                || root.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.None) {
+            if ((globalToolBar.row && globalToolBar.row.globalToolBar.actualStyle === KC.ApplicationHeaderStyle.ToolBar)
+                || root.globalToolBarStyle === KC.ApplicationHeaderStyle.ToolBar
+                || root.globalToolBarStyle === KC.ApplicationHeaderStyle.None) {
                 return false;
             }
 

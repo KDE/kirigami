@@ -4,7 +4,7 @@
 import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Layouts
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.platform as Platform
 
 /*!
   \qmltype PlaceholderMessage
@@ -60,7 +60,7 @@ Kirigami.PlaceholderMessage {
         id: _progressBar
         Layout.alignment: Qt.AlignHCenter
         Layout.fillWidth: true
-        Layout.maximumWidth: Kirigami.Units.gridUnit * 20
+        Layout.maximumWidth: Platform.Units.gridUnit * 20
         indeterminate: !loadingPlaceholder.determinate
         from: 0
         to: 100

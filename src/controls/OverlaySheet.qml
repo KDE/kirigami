@@ -4,7 +4,7 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.platform as Platform
 import "private" as P
 import org.kde.kirigami.templates as T
 
@@ -12,7 +12,7 @@ T.OverlaySheet {
     id: root
 
     background: P.DefaultCardBackground {
-        Kirigami.Theme.colorSet: root.Kirigami.Theme.colorSet
-        Kirigami.Theme.inherit: false
+        Platform.Theme.colorSet: root.Platform.Theme.colorSet
+        Platform.Theme.inherit: false
     }
 }

@@ -10,6 +10,15 @@ ecm_add_qml_module(KirigamiControls URI "org.kde.kirigami.controls"
         org.kde.kirigami.primitives
 )
 
+ecm_qt_declare_logging_category(KirigamiControls
+    HEADER loggingcategory.h
+    IDENTIFIER KirigamiControlsLog
+    CATEGORY_NAME kf.kirigami.controls
+    DESCRIPTION "KirigamiControls"
+    DEFAULT_SEVERITY Warning
+    EXPORT KIRIGAMI
+)
+
 ecm_target_qml_sources(KirigamiControls SOURCES
     AboutItem.qml
     AboutPage.qml
@@ -83,6 +92,16 @@ ecm_target_qml_sources(KirigamiControls PRIVATE PATH private/globaltoolbar SOURC
 
 target_sources(KirigamiControls PRIVATE
     enums.h
+    pagepool.cpp
+    pagepool.h
+)
+
+target_link_libraries(KirigamiControls
+    PUBLIC
+    Qt6::Core
+    Qt6::Gui
+    Qt6::Qml
+    Qt6::Quick
 )
 
 set_target_properties(KirigamiControls PROPERTIES

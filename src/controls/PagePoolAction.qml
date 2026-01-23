@@ -7,7 +7,7 @@
 import QtQuick
 import QtQml
 import QtQuick.Templates as T
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.controls as KC
 
 /*!
   \qmltype PagePoolAction
@@ -18,7 +18,7 @@ import org.kde.kirigami as Kirigami
 
   \sa PagePool
  */
-Kirigami.Action {
+KC.Action {
     id: root
 
 //BEGIN properties
@@ -35,7 +35,7 @@ Kirigami.Action {
       PagePool's lastLoaderUrl property will be used to control the mutual exclusivity of the checked
       state of the PagePoolAction instances sharing the same PagePool.
      */
-    property Kirigami.PagePool pagePool
+    property KC.PagePool pagePool
 
     /*!
       The pageStack property accepts either a Kirigami.PageRow or a QtQuickControls2 StackView;

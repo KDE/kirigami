@@ -7,7 +7,9 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.controls as KC
+import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.primitives as Primitives
 
 /*!
   \qmltype NavigationTabButton
@@ -90,15 +92,15 @@ T.TabButton {
 
     // FIXME: all those internal properties should go, and the button should style itself in a more standard way
     // probably similar to view items
-    readonly property color __foregroundColor: Kirigami.Theme.textColor
-    readonly property color __highlightForegroundColor: Kirigami.Theme.textColor
+    readonly property color __foregroundColor: Platform.Theme.textColor
+    readonly property color __highlightForegroundColor: Platform.Theme.textColor
 
-    readonly property color __pressedColor: Qt.alpha(Kirigami.Theme.highlightColor, 0.3)
-    readonly property color __hoverSelectColor: Qt.alpha(Kirigami.Theme.highlightColor, 0.2)
-    readonly property color __borderColor: Kirigami.Theme.highlightColor
+    readonly property color __pressedColor: Qt.alpha(Platform.Theme.highlightColor, 0.3)
+    readonly property color __hoverSelectColor: Qt.alpha(Platform.Theme.highlightColor, 0.2)
+    readonly property color __borderColor: Platform.Theme.highlightColor
     readonly property color __selectedOutlineBorderColor: Qt.alpha(__borderColor, 0.5)
 
-    readonly property real __verticalMargins: (display === T.AbstractButton.TextBesideIcon) ? Kirigami.Units.largeSpacing : 0
+    readonly property real __verticalMargins: (display === T.AbstractButton.TextBesideIcon) ? Platform.Units.largeSpacing : 0
 
     implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset,
                             implicitContentWidth + leftPadding + rightPadding)
@@ -107,46 +109,46 @@ T.TabButton {
 
     display: T.AbstractButton.TextUnderIcon
 
-    Kirigami.Theme.colorSet: Kirigami.Theme.Window
-    Kirigami.Theme.inherit: false
+    Platform.Theme.colorSet: Platform.Theme.Window
+    Platform.Theme.inherit: false
 
     hoverEnabled: true
 
-    padding: Kirigami.Units.smallSpacing
-    spacing: Kirigami.Units.smallSpacing
+    padding: Platform.Units.smallSpacing
+    spacing: Platform.Units.smallSpacing
 
-    leftInset: Kirigami.Units.smallSpacing
-    rightInset: Kirigami.Units.smallSpacing
-    topInset: Kirigami.Units.smallSpacing
-    bottomInset: Kirigami.Units.smallSpacing
+    leftInset: Platform.Units.smallSpacing
+    rightInset: Platform.Units.smallSpacing
+    topInset: Platform.Units.smallSpacing
+    bottomInset: Platform.Units.smallSpacing
 
-    icon.height: display === T.AbstractButton.TextBesideIcon ? Kirigami.Units.iconSizes.small : Kirigami.Units.iconSizes.smallMedium
-    icon.width: display === T.AbstractButton.TextBesideIcon ? Kirigami.Units.iconSizes.small : Kirigami.Units.iconSizes.smallMedium
+    icon.height: display === T.AbstractButton.TextBesideIcon ? Platform.Units.iconSizes.small : Platform.Units.iconSizes.smallMedium
+    icon.width: display === T.AbstractButton.TextBesideIcon ? Platform.Units.iconSizes.small : Platform.Units.iconSizes.smallMedium
     icon.color: checked ? __highlightForegroundColor : __foregroundColor
 
-    QQC2.ToolTip.text: (control.action as Kirigami.Action)?.tooltip ?? ""
-    QQC2.ToolTip.visible: (Kirigami.Settings.tabletMode ? pressed : hovered) && QQC2.ToolTip.text.length > 0
-    QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
+    QQC2.ToolTip.text: (control.action as KC.Action)?.tooltip ?? ""
+    QQC2.ToolTip.visible: (Platform.Settings.tabletMode ? pressed : hovered) && QQC2.ToolTip.text.length > 0
+    QQC2.ToolTip.delay: Platform.Units.toolTipDelay
 
-    Kirigami.MnemonicData.enabled: enabled && visible
-    Kirigami.MnemonicData.controlType: Kirigami.MnemonicData.MenuItem
-    Kirigami.MnemonicData.label: text
+    Primitives.MnemonicData.enabled: enabled && visible
+    Primitives.MnemonicData.controlType: Primitives.MnemonicData.MenuItem
+    Primitives.MnemonicData.label: text
 
-    Accessible.description: Kirigami.MnemonicData.plainTextLabel
+    Accessible.description: Primitives.MnemonicData.plainTextLabel
     Accessible.onPressAction: control.animateClick()
 
     Shortcut {
         //in case of explicit & the button manages it by itself
         enabled: !(RegExp(/\&[^\&]/).test(control.text))
-        sequence: control.Kirigami.MnemonicData.sequence
+        sequence: control.Primitives.MnemonicData.sequence
         onActivated: control.animateClick()
     }
 
     background: Item {
-        Kirigami.Theme.colorSet: Kirigami.Theme.Button
-        Kirigami.Theme.inherit: false
+        Platform.Theme.colorSet: Platform.Theme.Button
+        Platform.Theme.inherit: false
 
-        implicitHeight: control.display === T.AbstractButton.TextBesideIcon ? 0 : Kirigami.Units.gridUnit * 3
+        implicitHeight: control.display === T.AbstractButton.TextBesideIcon ? 0 : Platform.Units.gridUnit * 3
 
         // Outline for keyboard navigation
         Rectangle {
@@ -154,7 +156,7 @@ T.TabButton {
             anchors.fill: buttonBackground
             anchors.margins: -2 // Needs to lie outside of the button border, and not overlap into the button
 
-            radius: Kirigami.Units.cornerRadius
+            radius: Platform.Units.cornerRadius
             color: 'transparent'
 
             border.color: control.visualFocus ? control.__selectedOutlineBorderColor : "transparent"
@@ -165,14 +167,14 @@ T.TabButton {
             id: buttonBackground
             anchors.fill: parent
 
-            radius: Kirigami.Units.cornerRadius
+            radius: Platform.Units.cornerRadius
             color: control.down ? control.__pressedColor : (control.checked || control.hovered ? control.__hoverSelectColor : "transparent")
 
             border.color: (control.checked || control.down) ? control.__borderColor : color
             border.width: 1
 
-            Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration } }
-            Behavior on border.color { ColorAnimation { duration: Kirigami.Units.shortDuration } }
+            Behavior on color { ColorAnimation { duration: Platform.Units.shortDuration } }
+            Behavior on border.color { ColorAnimation { duration: Platform.Units.shortDuration } }
         }
     }
 
@@ -183,7 +185,7 @@ T.TabButton {
         // if this is a row or a column
         columns: control.display !== T.AbstractButton.TextBesideIcon ? 1 : 2
 
-        Kirigami.Icon {
+        Primitives.Icon {
             id: icon
             source: control.icon.name || control.icon.source
             visible: (control.icon.name.length > 0 || control.icon.source.toString().length > 0) && control.display !== T.AbstractButton.TextOnly
@@ -191,8 +193,8 @@ T.TabButton {
 
             Layout.topMargin: control.__verticalMargins
             Layout.bottomMargin: control.__verticalMargins
-            Layout.leftMargin: (control.display === T.AbstractButton.TextBesideIcon) ? Kirigami.Units.gridUnit : 0
-            Layout.rightMargin: (control.display === T.AbstractButton.TextBesideIcon) ? Kirigami.Units.gridUnit : 0
+            Layout.leftMargin: (control.display === T.AbstractButton.TextBesideIcon) ? Platform.Units.gridUnit : 0
+            Layout.rightMargin: (control.display === T.AbstractButton.TextBesideIcon) ? Platform.Units.gridUnit : 0
 
             Layout.alignment: {
                 if (control.display === T.AbstractButton.TextBesideIcon) {
@@ -206,13 +208,13 @@ T.TabButton {
             implicitHeight: source ? control.icon.height : 0
             implicitWidth: source ? control.icon.width : 0
 
-            Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration } }
+            Behavior on color { ColorAnimation { duration: Platform.Units.shortDuration } }
         }
         QQC2.Label {
             id: label
 
-            text: control.Kirigami.MnemonicData.richTextLabel
-            Accessible.name: control.Kirigami.MnemonicData.plainTextLabel
+            text: control.Primitives.MnemonicData.richTextLabel
+            Accessible.name: control.Primitives.MnemonicData.plainTextLabel
             horizontalAlignment: (control.display === T.AbstractButton.TextBesideIcon) ? Text.AlignLeft : Text.AlignHCenter
 
             visible: control.display !== T.AbstractButton.IconOnly
@@ -221,10 +223,10 @@ T.TabButton {
             color: control.checked ? control.__highlightForegroundColor : control.__foregroundColor
 
             font.pointSize: !icon.visible && control.display === T.AbstractButton.TextUnderIcon
-                    ? Kirigami.Theme.defaultFont.pointSize * 1.20 // 1.20 is equivalent to level 2 heading
-                    : Kirigami.Theme.defaultFont.pointSize
+                    ? Platform.Theme.defaultFont.pointSize * 1.20 // 1.20 is equivalent to level 2 heading
+                    : Platform.Theme.defaultFont.pointSize
 
-            Behavior on color { ColorAnimation { duration: Kirigami.Units.shortDuration } }
+            Behavior on color { ColorAnimation { duration: Platform.Units.shortDuration } }
 
             Layout.topMargin: control.__verticalMargins
             Layout.bottomMargin: control.__verticalMargins

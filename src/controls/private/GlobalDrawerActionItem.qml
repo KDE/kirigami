@@ -11,14 +11,16 @@ import QtQuick.Controls as QQC2
 import QtQuick.Controls.impl as QQC2Impl
 import QtQuick.Layouts
 import QtQuick.Templates as T
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.primitives as Primitives
+import org.kde.kirigami.controls as KC
 
 QQC2.ItemDelegate {
     id: listItem
 
     required property T.Action tAction
     // `as` case operator is still buggy
-    readonly property Kirigami.Action kAction: tAction as Kirigami.Action
+    readonly property KC.Action kAction: tAction as KC.Action
 
     readonly property bool actionVisible: kAction?.visible ?? true
     readonly property bool isSeparator: kAction?.separator ?? false
@@ -32,14 +34,14 @@ QQC2.ItemDelegate {
     activeFocusOnTab: true
 
     contentItem: RowLayout {
-        spacing: Kirigami.Units.largeSpacing
+        spacing: Platform.Units.largeSpacing
 
-        Kirigami.Icon {
+        Primitives.Icon {
             id: iconItem
             color: listItem.tAction.icon.color
             source: listItem.tAction.icon.name || listItem.tAction.icon.source
 
-            readonly property int size: Kirigami.Units.iconSizes.smallMedium
+            readonly property int size: Platform.Units.iconSizes.smallMedium
             Layout.minimumHeight: size
             Layout.maximumHeight: size
             Layout.minimumWidth: size
@@ -52,8 +54,8 @@ QQC2.ItemDelegate {
         QQC2Impl.MnemonicLabel {
             id: labelItem
             visible: !listItem.isSeparator
-            text: width > height * 2 ? listItem.Kirigami.MnemonicData.mnemonicLabel : ""
-            Accessible.name: listItem.Kirigami.MnemonicData.plainTextLabel
+            text: width > height * 2 ? listItem.Primitives.MnemonicData.mnemonicLabel : ""
+            Accessible.name: listItem.Primitives.MnemonicData.plainTextLabel
             Layout.preferredWidth: metrics.width
             Layout.minimumWidth: 0
             // Work around Qt bug where left aligned text is not right aligned
@@ -62,8 +64,8 @@ QQC2.ItemDelegate {
             horizontalAlignment: Text.AlignLeft
 
             Layout.fillWidth: true
-            mnemonicVisible: listItem.Kirigami.MnemonicData.active
-            color: (listItem.highlighted || listItem.checked || listItem.down) ? Kirigami.Theme.highlightedTextColor : Kirigami.Theme.textColor
+            mnemonicVisible: listItem.Primitives.MnemonicData.active
+            color: (listItem.highlighted || listItem.checked || listItem.down) ? Platform.Theme.highlightedTextColor : Platform.Theme.textColor
             elide: Text.ElideRight
             font: listItem.font
             opacity: {
@@ -77,29 +79,29 @@ QQC2.ItemDelegate {
             }
             TextMetrics {
                 id: metrics
-                text: listItem.Kirigami.MnemonicData.mnemonicLabel
+                text: listItem.Primitives.MnemonicData.mnemonicLabel
                 font: labelItem.font
             }
             Behavior on opacity {
                 NumberAnimation {
-                    duration: Kirigami.Units.longDuration/2
+                    duration: Platform.Units.longDuration/2
                     easing.type: Easing.InOutQuad
                 }
             }
         }
 
-        Kirigami.Separator {
+        Primitives.Separator {
             id: separatorAction
 
             visible: listItem.isSeparator
             Layout.fillWidth: true
         }
 
-        Kirigami.Icon {
+        Primitives.Icon {
             isMask: true
             Layout.alignment: Qt.AlignVCenter
             Layout.leftMargin: !root.collapsed ? 0 : -width
-            Layout.preferredHeight: !root.collapsed ? Kirigami.Units.iconSizes.small : Kirigami.Units.iconSizes.small/2
+            Layout.preferredHeight: !root.collapsed ? Platform.Units.iconSizes.small : Platform.Units.iconSizes.small/2
             opacity: 0.75
             selected: listItem.checked || listItem.down
             Layout.preferredWidth: Layout.preferredHeight
@@ -108,13 +110,13 @@ QQC2.ItemDelegate {
         }
     }
 
-    Accessible.name: Kirigami.MnemonicData.plainTextLabel
-    Kirigami.MnemonicData.enabled: enabled && visible
-    Kirigami.MnemonicData.controlType: Kirigami.MnemonicData.MenuItem
-    Kirigami.MnemonicData.label: tAction?.text ?? ""
+    Accessible.name: Primitives.MnemonicData.plainTextLabel
+    Primitives.MnemonicData.enabled: enabled && visible
+    Primitives.MnemonicData.controlType: Primitives.MnemonicData.MenuItem
+    Primitives.MnemonicData.label: tAction?.text ?? ""
 
     Shortcut {
-        sequence: listItem.Kirigami.MnemonicData.sequence
+        sequence: listItem.Primitives.MnemonicData.sequence
         onActivated: listItem.clicked()
     }
 
@@ -138,15 +140,15 @@ QQC2.ItemDelegate {
 
     Behavior on opacity {
         NumberAnimation {
-            duration: Kirigami.Units.longDuration / 2
+            duration: Platform.Units.longDuration / 2
             easing.type: Easing.InOutQuad
         }
     }
 
     enabled: tAction?.enabled ?? false
 
-    hoverEnabled: (!isExpandable || root.collapsed) && !Kirigami.Settings.tabletMode && !isSeparator
-    font.pointSize: isExpandable ? Kirigami.Theme.defaultFont.pointSize * 1.30 : Kirigami.Theme.defaultFont.pointSize
+    hoverEnabled: (!isExpandable || root.collapsed) && !Platform.Settings.tabletMode && !isSeparator
+    font.pointSize: isExpandable ? Platform.Theme.defaultFont.pointSize * 1.30 : Platform.Theme.defaultFont.pointSize
     height: implicitHeight * opacity
 
     QQC2.ToolTip {
@@ -157,7 +159,7 @@ QQC2.ItemDelegate {
             && text.length > 0
 
         text: (listItem.kAction?.tooltip || listItem.tAction?.text) ?? ""
-        delay: Kirigami.Units.toolTipDelay
+        delay: Platform.Units.toolTipDelay
         y: (listItem.height - height) / 2
         x: Application.layoutDirection === Qt.RightToLeft ? -width : listItem.width
     }

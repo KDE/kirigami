@@ -6,7 +6,7 @@
 
 import QtQuick
 import QtQuick.Layouts
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.platform as Platform
 
 //TODO KF6: how much is this used? can be removed?
 /*!
@@ -28,14 +28,14 @@ ColumnLayout {
 
       default: Kirigami.Units.largeSpacing
      */
-    property real padding: Kirigami.Units.largeSpacing
+    property real padding: Platform.Units.largeSpacing
 
     /*!
       \brief This property holds maximum column width.
 
       default: Kirigami.Units.gridUnit * 50
      */
-    property real maximumWidth: Kirigami.Units.gridUnit * 50
+    property real maximumWidth: Platform.Units.gridUnit * 50
 
     /*!
       \brief This property sets column's alignment when it hits its maximum width.

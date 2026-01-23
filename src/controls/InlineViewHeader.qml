@@ -8,7 +8,9 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Templates as T
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.controls as KC
+import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.primitives as Primitives
 
 /*!
   \qmltype InlineViewHeader
@@ -80,10 +82,10 @@ T.ToolBar {
     implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
                              implicitContentHeight + topPadding + bottomPadding)
 
-    topPadding: Kirigami.Units.smallSpacing + (root.position === T.ToolBar.Footer ? separator.implicitHeight : 0)
-    leftPadding: Kirigami.Units.largeSpacing
-    rightPadding: Kirigami.Units.smallSpacing
-    bottomPadding: Kirigami.Units.smallSpacing + (root.position === T.ToolBar.Header ? separator.implicitHeight : 0)
+    topPadding: Platform.Units.smallSpacing + (root.position === T.ToolBar.Footer ? separator.implicitHeight : 0)
+    leftPadding: Platform.Units.largeSpacing
+    rightPadding: Platform.Units.smallSpacing
+    bottomPadding: Platform.Units.smallSpacing + (root.position === T.ToolBar.Header ? separator.implicitHeight : 0)
 
     z: 999 // don't let content overlap it
 
@@ -98,16 +100,16 @@ T.ToolBar {
     }
 
     background: Rectangle {
-        Kirigami.Theme.colorSet: Kirigami.Theme.View
-        Kirigami.Theme.inherit: false
+        Platform.Theme.colorSet: Platform.Theme.View
+        Platform.Theme.inherit: false
         // We want a color that's basically halfway between the view background
         // color and the window background color. But due to the use of color
         // scopes, only one will be available at a time. So to get basically the
         // same thing, we blend the view background color with a smidgen of the
         // text color.
-        color: Qt.tint(Kirigami.Theme.backgroundColor, Qt.alpha(Kirigami.Theme.textColor, 0.03))
+        color: Qt.tint(Platform.Theme.backgroundColor, Qt.alpha(Platform.Theme.textColor, 0.03))
 
-        Kirigami.Separator {
+        Primitives.Separator {
             id: separator
 
             anchors {
@@ -124,7 +126,7 @@ T.ToolBar {
 
         spacing: 0
 
-        Kirigami.Heading {
+        KC.Heading {
             id: label
 
             Layout.fillWidth: !buttonsLoader.active
@@ -151,7 +153,7 @@ T.ToolBar {
             Layout.alignment: Qt.AlignVCenter
             Layout.minimumWidth: (item as Item)?.Layout.minimumWidth ?? 0
             active: root.actions.length > 0
-            sourceComponent: Kirigami.ActionToolBar {
+            sourceComponent: KC.ActionToolBar {
                 actions: root.actions
                 alignment: Qt.AlignRight
             }
