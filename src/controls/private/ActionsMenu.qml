@@ -8,7 +8,7 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.controls as KC
 
 QQC2.Menu {
     id: root
@@ -39,7 +39,7 @@ QQC2.Menu {
             property bool isSubMenu: false
 
             Component.onCompleted: {
-                const asKirigamiAction = action as Kirigami.Action;
+                const asKirigamiAction = action as KC.Action;
                 if (!asKirigamiAction || asKirigamiAction.children.length === 0) {
                     if (asKirigamiAction?.separator) {
                         item = root.separatorDelegate.createObject(null, { action });

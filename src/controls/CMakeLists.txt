@@ -8,6 +8,7 @@ ecm_add_qml_module(KirigamiControls URI "org.kde.kirigami.controls"
         org.kde.kirigami.layouts
         org.kde.kirigami.platform
         org.kde.kirigami.primitives
+        org.kde.kirigami.templates
 )
 
 ecm_qt_declare_logging_category(KirigamiControls

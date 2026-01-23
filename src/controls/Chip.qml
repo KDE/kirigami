@@ -26,16 +26,16 @@ KT.Chip {
 
     property alias labelItem: label
 
-    icon.width: Kirigami.Platform.iconSizes.small
-    icon.height: Kirigami.Platform.iconSizes.small
-    spacing: Kirigami.Platform.smallSpacing
-    leftPadding: Kirigami.Platform.smallSpacing
+    icon.width: Platform.Units.iconSizes.small
+    icon.height: Platform.Units.iconSizes.small
+    spacing: Platform.Units.smallSpacing
+    leftPadding: Platform.Units.smallSpacing
         + ((!iconItem.visible && !mirrored) || (!indicator.visible && mirrored)
-            ? Kirigami.Platform.smallSpacing : 0)
+            ? Platform.Units.smallSpacing : 0)
         + (indicator.visible && mirrored ? implicitIndicatorWidth : 0)
-    rightPadding: Kirigami.Platform.smallSpacing
+    rightPadding: Platform.Units.smallSpacing
         + ((!iconItem.visible && mirrored) || (!indicator.visible && !mirrored)
-            ? Kirigami.Platform.smallSpacing : 0)
+            ? Platform.Units.smallSpacing : 0)
         + (indicator.visible && !mirrored ? implicitIndicatorWidth : 0)
 
     indicator: QQC2.ToolButton {
@@ -44,8 +44,8 @@ KT.Chip {
         visible: chip.closable
         text: qsTr("Remove")
         icon.name: "edit-delete-remove"
-        icon.width: Kirigami.Platform.iconSizes.sizeForLabels
-        icon.height: Kirigami.Platform.iconSizes.sizeForLabels
+        icon.width: Platform.Units.iconSizes.sizeForLabels
+        icon.height: Platform.Units.iconSizes.sizeForLabels
         display: QQC2.AbstractButton.IconOnly
         onClicked: chip.removed()
     }

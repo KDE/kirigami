@@ -9,7 +9,8 @@ import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
 import QtQuick.Layouts
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.primitives as Primitives
 import org.kde.kirigami.private.polyfill
 
 /*!
@@ -24,10 +25,10 @@ Item {
     id: root
 
     readonly property int maximumNotificationWidth: {
-        if (Kirigami.Settings.isMobile) {
-            return applicationWindow().width - Kirigami.Units.largeSpacing * 4
+        if (Platform.Settings.isMobile) {
+            return applicationWindow().width - Platform.Units.largeSpacing * 4
         } else {
-            return Math.min(Kirigami.Units.gridUnit * 25, applicationWindow().width / 1.5)
+            return Math.min(Platform.Units.gridUnit * 25, applicationWindow().width / 1.5)
         }
     }
 
@@ -82,13 +83,13 @@ Item {
     }
 
     // we have to set height to show more than one notification
-    height: Math.min(applicationWindow().height, Kirigami.Units.gridUnit * 10)
+    height: Math.min(applicationWindow().height, Platform.Units.gridUnit * 10)
 
     implicitHeight: listView.implicitHeight
     implicitWidth: listView.implicitWidth
 
-    Kirigami.Theme.inherit: false
-    Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
+    Platform.Theme.inherit: false
+    Platform.Theme.colorSet: Platform.Theme.Complementary
 
     ListModel {
         id: notificationsModel
@@ -98,7 +99,7 @@ Item {
         id: listView
 
         anchors.fill: parent
-        anchors.bottomMargin: Kirigami.Units.largeSpacing
+        anchors.bottomMargin: Platform.Units.largeSpacing
 
         leftMargin: SafeArea.margins.left
         rightMargin: SafeArea.margins.right
@@ -106,7 +107,7 @@ Item {
         bottomMargin: SafeArea.margins.bottom
 
         implicitWidth: root.maximumNotificationWidth
-        spacing: Kirigami.Units.smallSpacing
+        spacing: Platform.Units.smallSpacing
         model: notificationsModel
         verticalLayoutDirection: ListView.BottomToTop
         keyNavigationEnabled: false
@@ -122,13 +123,13 @@ Item {
                     property: "opacity"
                     from: 0
                     to: 1
-                    duration: Kirigami.Units.longDuration
+                    duration: Platform.Units.longDuration
                     easing.type: Easing.OutCubic
                 }
                 NumberAnimation {
                     property: "y"
-                    from: addAnimation.ViewTransition.destination.y - Kirigami.Units.gridUnit * 3
-                    duration: Kirigami.Units.longDuration
+                    from: addAnimation.ViewTransition.destination.y - Platform.Units.gridUnit * 3
+                    duration: Platform.Units.longDuration
                     easing.type: Easing.OutCubic
                 }
             }
@@ -138,12 +139,12 @@ Item {
                 alwaysRunToEnd: true
                 NumberAnimation {
                     property: "y"
-                    duration: Kirigami.Units.longDuration
+                    duration: Platform.Units.longDuration
                     easing.type: Easing.InOutCubic
                 }
                 NumberAnimation {
                     property: "opacity"
-                    duration: Kirigami.Units.longDuration
+                    duration: Platform.Units.longDuration
                     to: 1
                 }
             }
@@ -155,13 +156,13 @@ Item {
                     property: "opacity"
                     from: 1
                     to: 0
-                    duration: Kirigami.Units.longDuration
+                    duration: Platform.Units.longDuration
                     easing.type: Easing.InCubic
                 }
                 NumberAnimation {
                     property: "y"
-                    to: Kirigami.Units.gridUnit * 3
-                    duration: Kirigami.Units.longDuration
+                    to: Platform.Units.gridUnit * 3
+                    duration: Platform.Units.longDuration
                     easing.type: Easing.InCubic
                 }
                 PropertyAction {
@@ -172,7 +173,7 @@ Item {
                     property: "scale"
                     from: 1
                     to: 0
-                    duration: Kirigami.Units.longDuration
+                    duration: Platform.Units.longDuration
                     easing.type: Easing.InCubic
                 }
             }
@@ -191,7 +192,7 @@ Item {
             // created, as this could cause some flickering
             // otherwise; instead, we rely on `add` and
             // `displaced` animations to change the opacity.
-            opacity: Kirigami.Units.longDuration > 0 ? 0 : 1
+            opacity: Platform.Units.longDuration > 0 ? 0 : 1
 
             anchors.horizontalCenter: parent ? parent.horizontalCenter : undefined
             width: Math.min(implicitWidth, root.maximumNotificationWidth)
@@ -211,18 +212,18 @@ Item {
                 }
             }
 
-            leftPadding: Kirigami.Units.largeSpacing
-            rightPadding: Kirigami.Units.largeSpacing
-            topPadding: Kirigami.Units.largeSpacing
-            bottomPadding: Kirigami.Units.largeSpacing
+            leftPadding: Platform.Units.largeSpacing
+            rightPadding: Platform.Units.largeSpacing
+            topPadding: Platform.Units.largeSpacing
+            bottomPadding: Platform.Units.largeSpacing
 
             contentItem: RowLayout {
                 id: mainLayout
 
-                Kirigami.Theme.inherit: false
-                Kirigami.Theme.colorSet: root.Kirigami.Theme.colorSet
+                Platform.Theme.inherit: false
+                Platform.Theme.colorSet: root.Platform.Theme.colorSet
 
-                spacing: Kirigami.Units.mediumSpacing
+                spacing: Platform.Units.mediumSpacing
 
                 TapHandler {
                     acceptedButtons: Qt.LeftButton
@@ -258,16 +259,16 @@ Item {
                     }
                 }
             }
-            background: Kirigami.ShadowedRectangle {
-                Kirigami.Theme.inherit: false
-                Kirigami.Theme.colorSet: root.Kirigami.Theme.colorSet
+            background: Primitives.ShadowedRectangle {
+                Platform.Theme.inherit: false
+                Platform.Theme.colorSet: root.Platform.Theme.colorSet
                 shadow {
-                    size: Kirigami.Units.gridUnit/2
+                    size: Platform.Units.gridUnit/2
                     color: Qt.rgba(0, 0, 0, 0.4)
                     yOffset: 2
                 }
-                radius: Kirigami.Units.cornerRadius
-                color: Kirigami.Theme.backgroundColor
+                radius: Platform.Units.cornerRadius
+                color: Platform.Theme.backgroundColor
                 opacity: 0.9
             }
         }

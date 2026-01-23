@@ -8,7 +8,6 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Templates as QT
 import QtQuick.Controls as QQC2
-import org.kde.kirigami as Kirigami //TODO: move PageStack somewhere else
 import org.kde.kirigami.controls as KC
 import org.kde.kirigami.platform as Platform
 import org.kde.kirigami.primitives as Primitives
@@ -310,7 +309,7 @@ QT.Control {
                         dialog.close();
                     }
                 });
-                (item as Item).Kirigami.PageStack.closeDialog.connect(() => dialog.close());
+                (item as Item).KL.PageStack.closeDialog.connect(() => dialog.close());
                 dialog.open();
             } else {
                 // open as a layer
@@ -318,7 +317,7 @@ QT.Control {
                     properties.globalToolBarStyle = root.globalToolBar.style
                 }
                 item = layers.push(page, properties);
-                item.Kirigami.PageStack.closeDialog.connect(() => layers.pop());
+                item.KL.PageStack.closeDialog.connect(() => layers.pop());
                 Object.defineProperty(item, 'closeDialog', {
                     value: function() {
                         console.warn("Calling closeDialog is deprecated. Use Kirigami.PageStack.closeDialog instead.");
@@ -350,7 +349,7 @@ QT.Control {
             const window = windowComponent.createObject(root, windowProperties);
             windowComponent.destroy();
             item = window.pageStack.push(page, properties);
-            (item as Item).Kirigami.PageStack.closeDialog.connect(() => window.close());
+            (item as Item).KL.PageStack.closeDialog.connect(() => window.close());
             Object.defineProperty(item, 'closeDialog', {
                 value: function() {
                     console.warn("Calling closeDialog is deprecated. Use Kirigami.PageStack.closeDialog instead.");
@@ -1008,7 +1007,7 @@ QT.Control {
             readonly property alias columnView: columnView
             // set the pagestack of this and all children to root, otherwise
             // they would automatically resolve to the layer's stackview
-            Kirigami.PageStack.pageStack: root
+            KL.PageStack.pageStack: root
 
             Item {
                 id: sidebarControl

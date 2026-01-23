@@ -6,7 +6,9 @@
  */
 
 import QtQuick
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.controls as KC
+import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.primitives as Primitives
 
 /*!
   \qmltype SearchField
@@ -27,7 +29,7 @@ import org.kde.kirigami as Kirigami
   \endcode
 
  */
-Kirigami.ActionTextField {
+KC.ActionTextField {
     id: root
     /*!
       \brief This property sets whether the accepted signal is fired automatically
@@ -60,24 +62,24 @@ Kirigami.ActionTextField {
 
     // padding to accommodate search icon nicely
     leftPadding: if (Application.layoutDirection === Qt.RightToLeft) {
-        return _rightActionsRow.width + Kirigami.Units.smallSpacing
+        return _rightActionsRow.width + Platform.Units.smallSpacing
     } else {
-        return searchIcon.width + Kirigami.Units.smallSpacing * 3
+        return searchIcon.width + Platform.Units.smallSpacing * 3
     }
     rightPadding: if (Application.layoutDirection === Qt.RightToLeft) {
-        return searchIcon.width + Kirigami.Units.smallSpacing * 3
+        return searchIcon.width + Platform.Units.smallSpacing * 3
     } else {
-        return _rightActionsRow.width + Kirigami.Units.smallSpacing
+        return _rightActionsRow.width + Platform.Units.smallSpacing
     }
 
-    Kirigami.Icon {
+    Primitives.Icon {
         id: searchIcon
         anchors.left: root.left
-        anchors.leftMargin: Kirigami.Units.smallSpacing * 2
+        anchors.leftMargin: Platform.Units.smallSpacing * 2
         anchors.verticalCenter: root.verticalCenter
         anchors.verticalCenterOffset: Math.round((root.topPadding - root.bottomPadding) / 2)
-        implicitHeight: Kirigami.Units.iconSizes.sizeForLabels
-        implicitWidth: Kirigami.Units.iconSizes.sizeForLabels
+        implicitHeight: Platform.Units.iconSizes.sizeForLabels
+        implicitWidth: Platform.Units.iconSizes.sizeForLabels
         color: root.placeholderTextColor
 
         source: "search"
@@ -92,7 +94,7 @@ Kirigami.ActionTextField {
     inputMethodHints: Qt.ImhNoPredictiveText
     EnterKey.type: Qt.EnterKeySearch
     rightActions: [
-        Kirigami.Action {
+        KC.Action {
             icon.name: root.LayoutMirroring.enabled ? "edit-clear-locationbar-ltr" : "edit-clear-locationbar-rtl"
             visible: root.text.length > 0
             text: qsTr("Clear search")
@@ -109,7 +111,7 @@ Kirigami.ActionTextField {
 
     Timer {
         id: fireSearchDelay
-        interval: root.delaySearch ? Kirigami.Units.humanMoment : Kirigami.Units.shortDuration
+        interval: root.delaySearch ? Platform.Units.humanMoment : Platform.Units.shortDuration
         running: false
         repeat: false
         onTriggered: {

@@ -5,7 +5,9 @@
  */
 
 import QtQuick
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.controls as KC
+import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.primitives as Primitives
 import org.kde.kirigami.private as KirigamiPrivate
 import QtQuick.Controls as QQC2
 
@@ -19,7 +21,7 @@ import QtQuick.Controls as QQC2
 
   \since 5.63
  */
-Kirigami.LinkButton {
+KC.LinkButton {
     id: button
 
     /*!
@@ -51,18 +53,18 @@ Kirigami.LinkButton {
         : qsTr("Open link", "@info:whatsthis")
 
     rightPadding: icon.visible && !LayoutMirroring.enabled
-        ? icon.size + Kirigami.Units.smallSpacing
+        ? icon.size + Platform.Units.smallSpacing
         : 0
     leftPadding: icon.visible && LayoutMirroring.enabled
-        ? icon.size + Kirigami.Units.smallSpacing
+        ? icon.size + Platform.Units.smallSpacing
         : 0
 
     LayoutMirroring.childrenInherit: true
 
-    Kirigami.Icon {
+    Primitives.Icon {
         id: icon
 
-        readonly property int size: Kirigami.Units.iconSizes.sizeForLabels
+        readonly property int size: Platform.Units.iconSizes.sizeForLabels
 
         width: size
         height: size
@@ -90,7 +92,7 @@ Kirigami.LinkButton {
     }
 
     QQC2.ToolTip.visible: button.text !== button.url && button.url.length > 0 && button.mouseArea.containsMouse
-    QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
+    QQC2.ToolTip.delay: Platform.Units.toolTipDelay
     QQC2.ToolTip.text: button.url
 
     QQC2.Menu {

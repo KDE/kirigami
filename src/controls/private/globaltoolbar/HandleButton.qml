@@ -6,7 +6,7 @@
 
 import QtQuick
 import QtQuick.Controls as QQC
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.controls as KC
 import org.kde.kirigami.templates as KT
 import "../" as P
 
@@ -17,19 +17,19 @@ P.PrivateActionToolButton {
     icon.name: drawer?.position === 1 ? (drawer?.handleOpenIcon.name ?? "") : (drawer?.handleClosedIcon.name ?? "")
     icon.source: drawer?.position === 1 ? (drawer?.handleOpenIcon.source ?? "") : (drawer?.handleClosedIcon.source ?? "")
 
-    action: Kirigami.Action {
-        children: root.drawer && (root.drawer as Kirigami.GlobalDrawer)?.isMenu ? (root.drawer as Kirigami.GlobalDrawer).actions : []
+    action: KC.Action {
+        children: root.drawer && (root.drawer as KC.GlobalDrawer)?.isMenu ? (root.drawer as KC.GlobalDrawer).actions : []
         tooltip: {
-            if (root.drawer && (root.drawer as Kirigami.GlobalDrawer)?.isMenu) {
+            if (root.drawer && (root.drawer as KC.GlobalDrawer)?.isMenu) {
                 return checked ? qsTr("Close menu") : qsTr("Open menu");
             }
 
-            return (root.QQC.ApplicationWindow.window as Kirigami.ApplicationWindow)?.globalDrawer?.handleClosedToolTip || ""
+            return (root.QQC.ApplicationWindow.window as KC.ApplicationWindow)?.globalDrawer?.handleClosedToolTip || ""
         }
     }
 
     onClicked: {
-        if (!drawer || (root.drawer as Kirigami.GlobalDrawer)?.isMenu) {
+        if (!drawer || (root.drawer as KC.GlobalDrawer)?.isMenu) {
             return;
         }
         if (drawer.visible) {
@@ -44,9 +44,9 @@ P.PrivateActionToolButton {
         // Only target the GlobalDrawer when it *is* a GlobalDrawer, since
         // it can be something else, and that something else probably
         // doesn't have an isMenuChanged() signal.
-        target: root.drawer as Kirigami.GlobalDrawer
+        target: root.drawer as KC.GlobalDrawer
         function onIsMenuChanged() {
-            if (!(root.drawer as Kirigami.GlobalDrawer).isMenu && root.menu) {
+            if (!(root.drawer as KC.GlobalDrawer).isMenu && root.menu) {
                 root.menu.dismiss()
             }
         }

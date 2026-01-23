@@ -6,8 +6,9 @@
 
 import QtQuick
 import QtQuick.Controls as QQC2
-import org.kde.kirigami as Kirigami
 import QtQuick.Shapes as QQShapes
+import org.kde.kirigami.controls as KC
+import org.kde.kirigami.platform as Platform
 
 /*!
   \brief A pull-down to refresh indicator that can be added to any Flickable or ScrollablePage.
@@ -27,8 +28,8 @@ Item {
         while (candidate) {
             if (candidate instanceof Flickable) {
                 return candidate as Flickable
-            } else if (candidate instanceof Kirigami.ScrollablePage) {
-                return (candidate as Kirigami.ScrollablePage).flickable as Flickable
+            } else if (candidate instanceof KC.ScrollablePage) {
+                return (candidate as KC.ScrollablePage).flickable as Flickable
             }
             candidate = candidate.parent
         }
@@ -80,7 +81,7 @@ Item {
         }
 
         width: root.flickable?.width
-        height: Kirigami.Units.gridUnit * 4
+        height: Platform.Units.gridUnit * 4
         QQC2.BusyIndicator {
             id: busyIndicator
             z: 1
@@ -93,18 +94,18 @@ Item {
             id: spinnerProgress
             anchors {
                 fill: busyIndicator
-                margins: Kirigami.Units.smallSpacing
+                margins: Platform.Units.smallSpacing
             }
             visible: !root.active && root.progress > 0
             QQShapes.ShapePath {
-                strokeWidth: Kirigami.Units.smallSpacing
-                strokeColor: Kirigami.Theme.highlightColor
+                strokeWidth: Platform.Units.smallSpacing
+                strokeColor: Platform.Theme.highlightColor
                 fillColor: "transparent"
                 PathAngleArc {
                     centerX: spinnerProgress.width / 2
                     centerY: spinnerProgress.height / 2
-                    radiusX: spinnerProgress.width / 2 - Kirigami.Units.smallSpacing / 2
-                    radiusY: spinnerProgress.height / 2 - Kirigami.Units.smallSpacing / 2
+                    radiusX: spinnerProgress.width / 2 - Platform.Units.smallSpacing / 2
+                    radiusY: spinnerProgress.height / 2 - Platform.Units.smallSpacing / 2
                     startAngle: 0
                     sweepAngle: 360 * root.progress
                 }
@@ -150,7 +151,7 @@ Item {
                 target: root.flickable
                 properties: "topMargin"
                 easing.type: Easing.InOutQuad
-                duration: Kirigami.Units.longDuration
+                duration: Platform.Units.longDuration
             }
         }
     ]

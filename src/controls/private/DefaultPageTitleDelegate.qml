@@ -6,7 +6,7 @@
 
 import QtQuick
 import QtQuick.Layouts
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.controls as KC
 
 /*!
  * This component is used as a default representation for a page title within
@@ -25,7 +25,7 @@ Item {
     implicitWidth: Math.ceil(heading.implicitWidth)
     implicitHeight: Math.ceil(heading.implicitHeight)
 
-    Kirigami.Heading {
+    KC.Heading {
         id: heading
 
         anchors.fill: parent

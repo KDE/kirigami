@@ -8,7 +8,8 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQml
 import QtQuick.Controls as QQC2
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.controls as KC
+import org.kde.kirigami.platform as Platform
 import org.kde.kirigami.templates as KT
 import "private"
 
@@ -68,7 +69,7 @@ import "private"
   [...]
   \endcode
  */
-Kirigami.Page {
+KC.Page {
     id: root
 
 //BEGIN properties
@@ -235,8 +236,8 @@ Kirigami.Page {
 
     contentHeight: flickable?.contentHeight ?? 0
 
-    Kirigami.Theme.inherit: false
-    Kirigami.Theme.colorSet: flickable?.hasOwnProperty("model") ? Kirigami.Theme.View : Kirigami.Theme.Window
+    Platform.Theme.inherit: false
+    Platform.Theme.colorSet: flickable?.hasOwnProperty("model") ? Platform.Theme.View : Platform.Theme.Window
 
     Keys.forwardTo: {
         if (root.keyboardNavigationEnabled && root.flickable) {

@@ -9,13 +9,15 @@ import QtQuick
 import QtQuick.Controls as QQC
 import QtQml
 import QtQuick.Layouts
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.controls as KC
+import org.kde.kirigami.layouts as KL
+import org.kde.kirigami.platform as Platform
 
 Loader {
     id: root
 
     required property Item page
-    required property Kirigami.PageRow pageStack
+    required property KC.PageRow pageStack
 
     active: {
         if (!pageStack) {
@@ -29,44 +31,44 @@ Loader {
         }
 
         // The application doesn't want nav buttons
-        if (pageStack.globalToolBar.showNavigationButtons === Kirigami.ApplicationHeaderStyle.NoNavigationButtons) {
+        if (pageStack.globalToolBar.showNavigationButtons === KC.ApplicationHeaderStyle.NoNavigationButtons) {
             return false
         }
 
         //Don't show back button on pinned pages
-        if (page.Kirigami.ColumnView.pinned && pageStack.columnView.columnResizeMode !== Kirigami.ColumnView.SingleColumn) {
+        if (page.KL.ColumnView.pinned && pageStack.columnView.columnResizeMode !== KL.ColumnView.SingleColumn) {
             return false;
         }
 
-        const leadingPinned = page?.Kirigami.ColumnView.view?.leadingVisibleItem?.Kirigami.ColumnView.pinned && pageStack.columnView.columnResizeMode !== Kirigami.ColumnView.SingleColumn
-                            ? page.Kirigami.ColumnView.view.leadingVisibleItem
+        const leadingPinned = page?.KL.ColumnView.view?.leadingVisibleItem?.KL.ColumnView.pinned && pageStack.columnView.columnResizeMode !== KL.ColumnView.SingleColumn
+                            ? page.KL.ColumnView.view.leadingVisibleItem
                             : null;
         const leadingPinnedWidth = leadingPinned?.width ?? 0
-        const firstIndex = leadingPinned ? leadingPinned.Kirigami.ColumnView.index + 1 : 0
+        const firstIndex = leadingPinned ? leadingPinned.KL.ColumnView.index + 1 : 0
 
         // If we are on the first page and we don't want to show the forward button, don't
         // show the back button either
-        if (!(pageStack.globalToolBar.showNavigationButtons & Kirigami.ApplicationHeaderStyle.ShowForwardButton) &&
-            page.Kirigami.ColumnView.index === firstIndex) {
+        if (!(pageStack.globalToolBar.showNavigationButtons & KC.ApplicationHeaderStyle.ShowForwardButton) &&
+            page.KL.ColumnView.index === firstIndex) {
             return false;
         }
 
         // If we are in single page mode, always show if depth > 1
-        if (pageStack.columnView.columnResizeMode === Kirigami.ColumnView.SingleColumn) {
+        if (pageStack.columnView.columnResizeMode === KL.ColumnView.SingleColumn) {
             return pageStack.depth > 1;
         }
 
         // Condition: the contents have to be bigger than what the ColumnView can show
         // The gridUnit wiggle room is used to not flicker the button visibility during an animated resize for instance due to a sidebar collapse
-        const overflows = pageStack.columnView.contentWidth > pageStack.columnView.width + Kirigami.Units.gridUnit;
+        const overflows = pageStack.columnView.contentWidth > pageStack.columnView.width + Platform.Units.gridUnit;
 
         // Index will be 0 at the first page in the row, -1 in a page belonging to a layer
-        if (!page || page.Kirigami.ColumnView.index <= firstIndex) {
+        if (!page || page.KL.ColumnView.index <= firstIndex) {
             return overflows || pageStack.columnView.contentX > 0;
         }
 
         // Condition: the page previous of this one is at least half scrolled away
-        const previousPage = pageStack.get(page.Kirigami.ColumnView.index - 1);
+        const previousPage = pageStack.get(page.KL.ColumnView.index - 1);
         let firstVisible = false;
         if (LayoutMirroring.enabled) {
             firstVisible = pageStack.width - (page.x + page.width - pageStack.columnView.contentX - leadingPinnedWidth) < previousPage.width / 2;
@@ -82,7 +84,7 @@ Loader {
     sourceComponent: RowLayout {
         id: layout
 
-        spacing: Kirigami.Units.smallSpacing
+        spacing: Platform.Units.smallSpacing
 
         component NavButton: QQC.ToolButton {
             id: navButton
@@ -91,7 +93,7 @@ Loader {
             QQC.ToolTip {
                 visible: navButton.hovered
                 text: navButton.text
-                delay: Kirigami.Units.toolTipDelay
+                delay: Platform.Units.toolTipDelay
                 y: parent.height
             }
         }
@@ -103,11 +105,11 @@ Loader {
                     : root.pageStack.columnView.contentWidth - root.pageStack.columnView.contentX !== root.pageStack.columnView.width
                 return root.page.QQC.StackView.view || (root.pageStack.depth > 1 && isScrolled);
             }
-            visible: root.page.QQC.StackView.view || root.pageStack.globalToolBar.showNavigationButtons & Kirigami.ApplicationHeaderStyle.ShowBackButton
+            visible: root.page.QQC.StackView.view || root.pageStack.globalToolBar.showNavigationButtons & KC.ApplicationHeaderStyle.ShowBackButton
             onClicked: {
                 // When we are in a layer, pressing back doesn't change  the index on the main ColumnView
                 if (!root.page.QQC.StackView.view) {
-                    root.pageStack.currentIndex = root.page.Kirigami.ColumnView.index;
+                    root.pageStack.currentIndex = root.page.KL.ColumnView.index;
                 }
                 root.pageStack.goBack();
             }
@@ -117,9 +119,9 @@ Loader {
             text: qsTr("Navigate Forward")
             enabled: root.pageStack.currentIndex < root.pageStack.depth - 1
             // Visible when the application enabled it *and* we are not in a layer
-            visible: !root.page.QQC.StackView.view && root.pageStack.globalToolBar.showNavigationButtons & Kirigami.ApplicationHeaderStyle.ShowForwardButton
+            visible: !root.page.QQC.StackView.view && root.pageStack.globalToolBar.showNavigationButtons & KC.ApplicationHeaderStyle.ShowForwardButton
             onClicked: {
-                root.pageStack.currentIndex = root.page.Kirigami.ColumnView.index;
+                root.pageStack.currentIndex = root.page.KL.ColumnView.index;
                 root.pageStack.goForward();
             }
         }

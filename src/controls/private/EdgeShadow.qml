@@ -5,7 +5,7 @@
  */
 
 import QtQuick
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.platform as Platform
 
 Item {
     id: shadow
@@ -21,7 +21,7 @@ Item {
      */
     property int edge: Qt.LeftEdge
 
-    property int radius: Kirigami.Units.cornerRadius
+    property int radius: Platform.Units.cornerRadius
     implicitWidth: radius
     implicitHeight: radius
 

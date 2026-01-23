@@ -7,9 +7,11 @@
 import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Layouts
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.controls as KC
+import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.primitives as Primitives
 
-Kirigami.Dialog {
+QQC2.Dialog {
     id: dialog
 
     clip: true
@@ -20,13 +22,13 @@ Kirigami.Dialog {
     rightPadding: 0
     bottomPadding: 0
 
-    header: Kirigami.AbstractApplicationHeader {
+    header: KC.AbstractApplicationHeader {
         pageRow: null
         page: null
 
-        minimumHeight: Kirigami.Units.gridUnit * 1.6
-        maximumHeight: Kirigami.Units.gridUnit * 1.6
-        preferredHeight: Kirigami.Units.gridUnit * 1.6
+        minimumHeight: Platform.Units.gridUnit * 1.6
+        maximumHeight: Platform.Units.gridUnit * 1.6
+        preferredHeight: Platform.Units.gridUnit * 1.6
 
         Keys.onEscapePressed: event => {
             if (dialog.opened) {
@@ -38,20 +40,20 @@ Kirigami.Dialog {
 
         contentItem: RowLayout {
             width: parent.width
-            Kirigami.Heading {
-                Layout.leftMargin: Kirigami.Units.largeSpacing
+            KC.Heading {
+                Layout.leftMargin: Platform.Units.largeSpacing
                 text: dialog.title
                 elide: Text.ElideRight
             }
             Item {
                 Layout.fillWidth: true
             }
-            Kirigami.Icon {
+            Primitives.Icon {
                 id: closeIcon
                 Layout.alignment: Qt.AlignVCenter
-                Layout.rightMargin: Kirigami.Units.largeSpacing
-                Layout.preferredHeight: Kirigami.Units.iconSizes.smallMedium
-                Layout.preferredWidth: Kirigami.Units.iconSizes.smallMedium
+                Layout.rightMargin: Platform.Units.largeSpacing
+                Layout.preferredHeight: Platform.Units.iconSizes.smallMedium
+                Layout.preferredWidth: Platform.Units.iconSizes.smallMedium
                 source: closeMouseArea.containsMouse ? "window-close" : "window-close-symbolic"
                 active: closeMouseArea.containsMouse
                 MouseArea {

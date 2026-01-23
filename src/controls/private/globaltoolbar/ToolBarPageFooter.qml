@@ -6,7 +6,8 @@
 
 import QtQuick
 import QtQuick.Controls as QQC2
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.controls as KC
+import org.kde.kirigami.platform as Platform
 
 QQC2.ToolBar {
     id: root
@@ -16,7 +17,7 @@ QQC2.ToolBar {
         id: appearAnim
         target: root
         property: "height"
-        duration: Kirigami.Units.longDuration
+        duration: Platform.Units.longDuration
         easing.type: Easing.InOutQuad
     }
 
@@ -34,7 +35,7 @@ QQC2.ToolBar {
         }
     }
 
-    contentItem: Kirigami.ActionToolBar {
+    contentItem: KC.ActionToolBar {
         display: QQC2.Button.TextUnderIcon
         position: QQC2.ToolBar.Footer
         alignment: Qt.AlignCenter
