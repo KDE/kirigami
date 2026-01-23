@@ -120,7 +120,7 @@ KC.AbstractCard {
         header.anchors.bottomMargin = Qt.binding(() => 0);
     }
 
-    footer: KL.ActionToolBar {
+    footer: KC.ActionToolBar {
         id: actionsToolBar
         actions: root.actions
         position: QQC2.ToolBar.Footer
