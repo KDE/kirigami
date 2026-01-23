@@ -8,9 +8,10 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Templates as QT
 import QtQuick.Controls as QQC2
-import org.kde.kirigami as Kirigami //TODO: move ScenePosition and PageStack somewhere else
+import org.kde.kirigami as Kirigami //TODO: move PageStack somewhere else
 import org.kde.kirigami.controls as KC
 import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.primitives as Primitives
 import org.kde.kirigami.layouts as KL
 import "private/globaltoolbar" as GlobalToolBar
 
@@ -842,7 +843,7 @@ QT.Control {
         }
         z: 100
         property QT.Control pageRow: root
-        active: globalToolBar.actualStyle !== Kirigami.ApplicationHeaderStyle.None || (root.leadingVisibleItem && root.leadingVisibleItem.globalToolBarStyle === Kirigami.ApplicationHeaderStyle.ToolBar)
+        active: globalToolBar.actualStyle !== KC.ApplicationHeaderStyle.None || (root.leadingVisibleItem && root.leadingVisibleItem.globalToolBarStyle === KC.ApplicationHeaderStyle.ToolBar)
         visible: active
         height: active ? implicitHeight : 0
         // If load is asynchronous, it will fail to compute the initial implicitHeight
@@ -1017,7 +1018,7 @@ QT.Control {
                     bottom: parent.bottom
                 }
                 transform: Translate {
-                    x: root.mirrored ? -sidebarControl.Kirigami.ScenePosition.x : 0
+                    x: root.mirrored ? -sidebarControl.Primitives.ScenePosition.x : 0
                 }
                 z: 1
                 width: visible ? root.leftSidebar.width * root.leftSidebar.position : 0

@@ -18,6 +18,8 @@ target_sources(KirigamiPrimitives PRIVATE
     shadowedrectangle.h
     shadowedtexture.cpp
     shadowedtexture.h
+    scenepositionattached.cpp
+    scenepositionattached.h
 
     scenegraph/shadernode.cpp
     scenegraph/shadernode.h

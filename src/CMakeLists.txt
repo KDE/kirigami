@@ -100,8 +100,6 @@ target_sources(Kirigami PRIVATE
     imagecolors.h
     overlayzstackingattached.cpp
     overlayzstackingattached.h
-    scenepositionattached.cpp
-    scenepositionattached.h
     spellcheckattached.cpp
     spellcheckattached.h
     wheelhandler.cpp
