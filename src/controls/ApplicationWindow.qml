@@ -116,7 +116,7 @@ KC.AbstractApplicationWindow {
 
     KC.PageRow {
         id: __pageStack
-        globalToolBar.style: Kirigami.ApplicationHeaderStyle.Auto
+        globalToolBar.style: KC.ApplicationHeaderStyle.Auto
         anchors {
             fill: parent
         }

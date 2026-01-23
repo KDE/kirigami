@@ -5,7 +5,7 @@
  */
 
 import QtQuick
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.platform as Platform
 
 /*!
   \qmltype CardsListView
@@ -31,10 +31,10 @@ import org.kde.kirigami as Kirigami
  */
 ListView {
     id: root
-    spacing: Kirigami.Units.largeSpacing * 2
+    spacing: Platform.Units.largeSpacing * 2
     topMargin: headerPositioning !== ListView.InlineHeader ? spacing : 0
-    rightMargin: Kirigami.Units.largeSpacing * 2
-    leftMargin: Kirigami.Units.largeSpacing * 2
+    rightMargin: Platform.Units.largeSpacing * 2
+    leftMargin: Platform.Units.largeSpacing * 2
     contentWidth: width - rightMargin - leftMargin
     reuseItems: true
 

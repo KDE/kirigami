@@ -96,7 +96,6 @@ target_include_directories(Kirigami PRIVATE
 )
 
 target_sources(Kirigami PRIVATE
-    enums.h
     imagecolors.cpp
     imagecolors.h
     overlayzstackingattached.cpp

@@ -138,7 +138,7 @@ QQC2.Action {
 
     onChildrenChanged: {
         children
-            .filter(action => action instanceof KC.Action)
+            .filter(action => action instanceof Action)
             .forEach(action => {
                 action.parent = this;
             });
@@ -149,7 +149,7 @@ QQC2.Action {
       \brief This property holds the action's visible child actions.
      */
     readonly property list<T.Action> visibleChildren: children
-        .filter(action => !(action instanceof KC.Action) || action.visible)
+        .filter(action => !(action instanceof Action) || action.visible)
 
     shortcut: fromQAction?.shortcut
     text: fromQAction?.text ?? ''

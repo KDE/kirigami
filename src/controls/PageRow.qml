@@ -8,7 +8,8 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Templates as QT
 import QtQuick.Controls as QQC2
-import org.kde.kirigami as Kirigami //TODO: move ApplicationHeaderStyle ScenePosition and PageStack somewhere else
+import org.kde.kirigami as Kirigami //TODO: move ScenePosition and PageStack somewhere else
+import org.kde.kirigami.controls as KC
 import org.kde.kirigami.platform as Platform
 import org.kde.kirigami.layouts as KL
 import "private/globaltoolbar" as GlobalToolBar
@@ -300,7 +301,7 @@ QT.Control {
 
                 // Pushing a PageRow is supported but without PageRow toolbar
                 if (item.globalToolBar && item.globalToolBar.style) {
-                    item.globalToolBar.style = Kirigami.ApplicationHeaderStyle.None
+                    item.globalToolBar.style = KC.ApplicationHeaderStyle.None
                 }
                 Object.defineProperty(item, 'closeDialog', {
                     value: function() {
@@ -312,7 +313,7 @@ QT.Control {
                 dialog.open();
             } else {
                 // open as a layer
-                if (root.globalToolBar.style !== Kirigami.ApplicationHeaderStyle.Breadcrumb) {
+                if (root.globalToolBar.style !== KC.ApplicationHeaderStyle.Breadcrumb) {
                     properties.globalToolBarStyle = root.globalToolBar.style
                 }
                 item = layers.push(page, properties);
@@ -1107,14 +1108,14 @@ QT.Control {
 
                 onItemInserted: (position, item) => {
                     item.transform = pageTranslation.createObject(item, {page: item});
-                    item.ColumnView.globalHeader.transform = item.transform;
-                    item.ColumnView.globalFooter.transform = item.transform;
+                    item.KL.ColumnView.globalHeader.transform = item.transform;
+                    item.KL.ColumnView.globalFooter.transform = item.transform;
                     root.pageInserted(position, item);
                 }
                 onItemRemoved: item => {
                     item.transform = null;
-                    item.ColumnView.globalHeader.transform = null;
-                    item.ColumnView.globalFooter.transform = null;
+                    item.KL.ColumnView.globalHeader.transform = null;
+                    item.KL.ColumnView.globalFooter.transform = null;
                     root.pageRemoved(item);
                 }
 

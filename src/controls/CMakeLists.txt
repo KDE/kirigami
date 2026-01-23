@@ -80,6 +80,11 @@ ecm_target_qml_sources(KirigamiControls PRIVATE PATH private/globaltoolbar SOURC
     private/globaltoolbar/ToolBarPageHeader.qml
 )
 
+
+target_sources(KirigamiControls PRIVATE
+    enums.h
+)
+
 set_target_properties(KirigamiControls PROPERTIES
     VERSION     ${PROJECT_VERSION}
     SOVERSION   6
