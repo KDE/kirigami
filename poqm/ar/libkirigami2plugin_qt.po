@@ -1,9 +1,9 @@
-# SPDX-FileCopyrightText: 2021, 2022, 2023, 2024, 2025 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
+# SPDX-FileCopyrightText: 2021, 2022, 2023, 2024, 2025, 2026 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 # Safa Alfulaij <safa1996alfulaij@gmail.com>, 2017, 2018.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2025-07-14 20:26+0400\n"
+"PO-Revision-Date: 2026-01-24 12:36+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -149,7 +149,7 @@ msgstr "كلمة السر"
 #: controls/PasswordField.qml:44
 msgctxt "PasswordField|"
 msgid "Hide Password"
-msgstr "أخف كلمة السر"
+msgstr "أخفِ كلمة السر"
 
 #: controls/PasswordField.qml:44
 msgctxt "PasswordField|"
@@ -225,7 +225,7 @@ msgstr "انتقل إلى %1. تطلب اهتمام."
 #, qt-format
 msgctxt "PageTab|"
 msgid "Navigate to %1."
-msgstr "تنقّل إلى %1."
+msgstr "انتقل إلى %1."
 
 #: controls/templates/OverlayDrawer.qml:141
 msgctxt "OverlayDrawer|"
@@ -240,12 +240,12 @@ msgstr "افتح الخزنة"
 #: controls/templates/private/BackButton.qml:53
 msgctxt "BackButton|"
 msgid "Navigate Back"
-msgstr "تنقّل للخلف"
+msgstr "عُد"
 
 #: controls/templates/private/ForwardButton.qml:30
 msgctxt "ForwardButton|"
 msgid "Navigate Forward"
-msgstr "تنقّل للأمام"
+msgstr "تَقَدَّم"
 
 #: controls/ToolBarApplicationHeader.qml:118
 msgctxt "ToolBarApplicationHeader|"
