@@ -90,6 +90,19 @@ ecm_target_qml_sources(KirigamiControls PRIVATE PATH private/globaltoolbar SOURC
     private/globaltoolbar/ToolBarPageHeader.qml
 )
 
+qt_target_qml_sources(Kirigami RESOURCES
+    styles/Material/InlineMessage.qml
+    styles/Material/Theme.qml
+    OUTPUT_TARGETS _out_targets_1
+)
+
+if (DESKTOP_ENABLED)
+    qt_target_qml_sources(Kirigami RESOURCES
+        styles/org.kde.desktop/AbstractApplicationHeader.qml
+        styles/org.kde.desktop/Theme.qml
+        OUTPUT_TARGETS _out_targets_2
+    )
+endif()
 
 target_sources(KirigamiControls PRIVATE
     enums.h
