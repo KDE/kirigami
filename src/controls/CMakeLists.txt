@@ -1,5 +1,11 @@
-
 add_library(KirigamiControls)
+
+target_include_directories(KirigamiControls PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/../platform
+    ${CMAKE_CURRENT_BINARY_DIR}/../platform
+)
+
+
 ecm_add_qml_module(KirigamiControls URI "org.kde.kirigami.controls"
     GENERATE_PLUGIN_SOURCE
     INSTALLED_PLUGIN_TARGET KF6KirigamiControls
@@ -90,28 +96,31 @@ ecm_target_qml_sources(KirigamiControls PRIVATE PATH private/globaltoolbar SOURC
     private/globaltoolbar/ToolBarPageHeader.qml
 )
 
-qt_target_qml_sources(Kirigami RESOURCES
-    styles/Material/InlineMessage.qml
-    styles/Material/Theme.qml
-    OUTPUT_TARGETS _out_targets_1
-)
-
-if (DESKTOP_ENABLED)
-    qt_target_qml_sources(Kirigami RESOURCES
-        styles/org.kde.desktop/AbstractApplicationHeader.qml
-        styles/org.kde.desktop/Theme.qml
-        OUTPUT_TARGETS _out_targets_2
-    )
-endif()
+# qt_target_qml_sources(Kirigami RESOURCES
+#     styles/Material/InlineMessage.qml
+#     styles/Material/Theme.qml
+#     OUTPUT_TARGETS _out_targets_1
+# )
+#
+# if (DESKTOP_ENABLED)
+#     qt_target_qml_sources(Kirigami RESOURCES
+#         styles/org.kde.desktop/AbstractApplicationHeader.qml
+#         styles/org.kde.desktop/Theme.qml
+#         OUTPUT_TARGETS _out_targets_2
+#     )
+# endif()
 
 target_sources(KirigamiControls PRIVATE
     enums.h
     pagepool.cpp
     pagepool.h
+    kirigamicontrolsplugin.cpp
+    kirigamicontrolsplugin.h
 )
 
 target_link_libraries(KirigamiControls
     PUBLIC
+    KirigamiPlatform
     Qt6::Core
     Qt6::Gui
     Qt6::Qml
