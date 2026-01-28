@@ -10,6 +10,7 @@ import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
 import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.primitives as Primitives
 import org.kde.kirigami.controls as KC
 import org.kde.kirigami.private.polyfill
 import "private" as KP
@@ -98,7 +99,7 @@ KC.OverlayDrawer {
     // Disable for empty menus or when we have a global toolbar
     enabled: {
         const pageStack = typeof applicationWindow !== "undefined" ? applicationWindow().pageStack : null;
-        const itemExistsButStyleIsNotToolBar = item => item && item.globalToolBarStyle !== Kirigami.ApplicationHeaderStyle.ToolBar;
+        const itemExistsButStyleIsNotToolBar = item => item && item.globalToolBarStyle !== KC.ApplicationHeaderStyle.ToolBar;
         return menu.count > 0
             && (!pageStack
                 || !pageStack.globalToolBar
@@ -129,7 +130,7 @@ KC.OverlayDrawer {
 
     contentItem: QQC2.ScrollView {
         // this just to create the attached property
-        Kirigami.Theme.inherit: true
+        Platform.Theme.inherit: true
         implicitWidth: Platform.Units.gridUnit * 20
         ListView {
             id: menu
@@ -139,10 +140,10 @@ KC.OverlayDrawer {
 
             topMargin: root.handle.y > 0 ? menu.height - menu.contentHeight : 0
             header: QQC2.ToolBar {
-                Kirigami.AlignedSize.height: pageStack.globalToolBar.preferredHeight
+                Primitives.AlignedSize.height: pageStack.globalToolBar.preferredHeight
                 width: parent.width
 
-                Kirigami.Heading {
+                KC.Heading {
                     id: heading
                     elide: Text.ElideRight
                     text: root.title

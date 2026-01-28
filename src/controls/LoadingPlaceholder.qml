@@ -5,6 +5,7 @@ import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Layouts
 import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.controls as KC
 
 /*!
   \qmltype PlaceholderMessage
@@ -31,7 +32,7 @@ import org.kde.kirigami.platform as Platform
       }
   \endqml
  */
-Kirigami.PlaceholderMessage {
+KC.PlaceholderMessage {
     id: loadingPlaceholder
 
     /*!
