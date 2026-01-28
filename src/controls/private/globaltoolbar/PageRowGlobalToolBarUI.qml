@@ -48,8 +48,7 @@ Kirigami.AbstractApplicationHeader {
     preferredHeight: globalToolBar.preferredHeight
     maximumHeight: globalToolBar.maximumHeight
     separatorVisible: globalToolBar.separatorVisible
-    background.opacity: breadcrumbLoader.active ? 1 : 0
-
+    background.visible: breadcrumbLoader.active
     Kirigami.Theme.colorSet: globalToolBar.colorSet
 
     Item {
