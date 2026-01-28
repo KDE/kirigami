@@ -90,6 +90,10 @@ void KirigamiPlugin::registerTypes(const char *uri)
     } else {
         QIcon::setFallbackSearchPaths(QIcon::fallbackSearchPaths() << Kirigami::Platform::StyleSelector::resolveFilePath(QStringLiteral("icons")));
     }
+    // FIXME: any better way to make old versione imports work?
+    for (int i = 0; i < 21; ++i) {
+        qmlRegisterTypeNotAvailable(uri, 2, i, "Unavailable", QStringLiteral("Unavailable"));
+    }
 }
 
 void KirigamiPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
