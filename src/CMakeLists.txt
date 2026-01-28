@@ -63,6 +63,8 @@ ecm_add_qml_module(Kirigami URI "org.kde.kirigami" VERSION 2.0
     "org.kde.kirigami.private"
     "org.kde.kirigami.private.polyfill"
     IMPORTS
+    "org.kde.kirigami.controls.org.kde.desktop"
+    "org.kde.kirigami.controls.Material"
     "org.kde.kirigami.controls"
     "org.kde.kirigami.platform"
     "org.kde.kirigami.primitives"

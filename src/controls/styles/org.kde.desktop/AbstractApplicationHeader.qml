@@ -15,6 +15,10 @@ T.AbstractApplicationHeader {
     // it's located on uses a different color set
     Kirigami.Theme.inherit: false
     Kirigami.Theme.colorSet: Kirigami.Theme.Header
+    // TODO: remove
+    Component.onCompleted:{
+        print("Style loaded successfully")
+    }
 
     background: Rectangle {
         color: Kirigami.Theme.backgroundColor
