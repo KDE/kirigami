@@ -16,6 +16,8 @@ ecm_target_qml_sources(KirigamiTemplates SOURCES
     AppHeaderSizeGroup.qml
     Chip.qml
     InlineMessage.qml
+    NavigationTabBar.qml
+    NavigationTabButton.qml
     OverlayDrawer.qml
     OverlaySheet.qml
 )
