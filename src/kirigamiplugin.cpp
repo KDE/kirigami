@@ -65,41 +65,12 @@ KirigamiPlugin::KirigamiPlugin(QObject *parent)
     connect(filter, &LanguageChangeEventFilter::languageChangeEvent, this, &KirigamiPlugin::languageChangeEvent);
 }
 
-QUrl KirigamiPlugin::componentUrl(const QString &fileName) const
-{
-    return Kirigami::Platform::StyleSelector::componentUrl(fileName);
-}
-
 void KirigamiPlugin::registerTypes(const char *uri)
 {
-#if defined(Q_OS_ANDROID)
-    QResource::registerResource(QStringLiteral("assets:/android_rcc_bundle.rcc"));
-#endif
-
-    Q_ASSERT(QLatin1String(uri) == QLatin1String("org.kde.kirigami"));
-
-    Kirigami::Platform::StyleSelector::setBaseUrl(baseUrl());
-
-    if (QIcon::themeName().isEmpty() && !qEnvironmentVariableIsSet("XDG_CURRENT_DESKTOP")) {
-#if defined(Q_OS_ANDROID)
-        QIcon::setThemeSearchPaths({QStringLiteral("assets:/qml/org/kde/kirigami"), QStringLiteral(":/icons")});
-#else
-        QIcon::setThemeSearchPaths({Kirigami::Platform::StyleSelector::resolveFilePath(QStringLiteral(".")), QStringLiteral(":/icons")});
-#endif
-        QIcon::setThemeName(QStringLiteral("breeze-internal"));
-    } else {
-        QIcon::setFallbackSearchPaths(QIcon::fallbackSearchPaths() << Kirigami::Platform::StyleSelector::resolveFilePath(QStringLiteral("icons")));
-    }
     // Keep the old versioned imports from 2.0 to 2.20 working
     for (int i = 0; i < 21; ++i) {
         qmlRegisterModule(uri, 2, i);
     }
-}
-
-void KirigamiPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
-{
-    Q_UNUSED(uri);
-    connect(this, &KirigamiPlugin::languageChangeEvent, engine, &QQmlEngine::retranslate);
 }
 
 #ifdef KIRIGAMI_BUILD_TYPE_STATIC
@@ -117,6 +88,10 @@ void KirigamiPlugin::registerTypes(QQmlEngine *engine)
         qCWarning(KirigamiLog)
             << "Registering Kirigami on a null QQmlEngine instance - you likely want to pass a valid engine, or you will want to manually add the "
                "qrc root path :/ to your import paths list so the engine is able to load the plugin";
+    }
+    // Keep the old versioned imports from 2.0 to 2.20 working
+    for (int i = 0; i < 21; ++i) {
+        qmlRegisterModule(uri, 2, i);
     }
 }
 #endif
