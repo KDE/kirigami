@@ -1,0 +1,5 @@
+add_subdirectory(basic)
+add_subdirectory(Material)
+if (DESKTOP_ENABLED)
+add_subdirectory(org.kde.desktop)
+endif()

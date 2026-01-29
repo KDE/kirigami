@@ -119,6 +119,21 @@ ecm_target_qml_sources(Kirigami VERSION 2.19 SOURCES
     controls/AboutItem.qml
 )
 
+# TODO Styles will become proper imports in the future
+qt_target_qml_sources(Kirigami RESOURCES
+    styles/Material/InlineMessage.qml
+    styles/Material/Theme.qml
+    OUTPUT_TARGETS _out_targets_1
+)
+
+if (DESKTOP_ENABLED)
+    qt_target_qml_sources(Kirigami RESOURCES
+        styles/org.kde.desktop/AbstractApplicationHeader.qml
+        styles/org.kde.desktop/Theme.qml
+        OUTPUT_TARGETS _out_targets_2
+    )
+endif()
+
 target_link_libraries(Kirigami
     PUBLIC
     Qt6::Core

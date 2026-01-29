@@ -1,8 +1,8 @@
 
 add_library(KirigamiControls)
-ecm_add_qml_module(KirigamiControls URI "org.kde.kirigami.controls"
-    GENERATE_PLUGIN_SOURCE
-    INSTALLED_PLUGIN_TARGET KF6KirigamiControls
+ecm_add_qml_module(KirigamiControls URI "org.kde.kirigami.controls" VERSION 2.0
+    CLASS_NAME KirigamiControlsPlugin
+    INSTALLED_PLUGIN_TARGET KF6KirigamiControlsplugin
     DEPENDENCIES
         QtQuick
         org.kde.kirigami.layouts
@@ -90,24 +90,17 @@ ecm_target_qml_sources(KirigamiControls PRIVATE PATH private/globaltoolbar SOURC
     private/globaltoolbar/ToolBarPageHeader.qml
 )
 
-qt_target_qml_sources(KirigamiControls RESOURCES
-    styles/Material/InlineMessage.qml
-    styles/Material/Theme.qml
-    OUTPUT_TARGETS _out_targets_1
-)
-
-if (DESKTOP_ENABLED)
-    qt_target_qml_sources(KirigamiControls RESOURCES
-        styles/org.kde.desktop/AbstractApplicationHeader.qml
-        styles/org.kde.desktop/Theme.qml
-        OUTPUT_TARGETS _out_targets_2
-    )
-endif()
+target_include_directories(KirigamiControlsplugin PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/..)
 
 target_sources(KirigamiControls PRIVATE
     enums.h
     pagepool.cpp
     pagepool.h
+)
+
+target_sources(KirigamiControlsplugin PRIVATE
+    kirigamicontrolsplugin.cpp
+    kirigamicontrolsplugin.h
 )
 
 target_link_libraries(KirigamiControls
@@ -116,6 +109,7 @@ target_link_libraries(KirigamiControls
     Qt6::Gui
     Qt6::Qml
     Qt6::Quick
+    KirigamiPlatform
 )
 
 set_target_properties(KirigamiControls PROPERTIES
@@ -126,4 +120,5 @@ set_target_properties(KirigamiControls PROPERTIES
 
 ecm_finalize_qml_module(KirigamiControls EXPORT KirigamiTargets)
 
-install(TARGETS KirigamiControls EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS KirigamiControls ${_out_targets_1} ${_out_targets_2} EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
+
