@@ -8,6 +8,7 @@ import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
+import org.kde.kirigami.templates as KT
 
 /*!
   \qmltype NavigationTabButton
@@ -68,25 +69,8 @@ import org.kde.kirigami as Kirigami
 
   \since 5.87
  */
-T.TabButton {
+KT.NavigationTabButton {
     id: control
-
-    /*!
-      \brief This property tells the index of this tab within the tab bar.
-     */
-    readonly property int tabIndex: {
-        let tabIdx = 0
-        for (const child of parent.children) {
-            if (child === this) {
-                return tabIdx
-            }
-            // Checking for AbstractButtons because any AbstractButton can act as a tab
-            if (child instanceof T.AbstractButton) {
-                ++tabIdx
-            }
-        }
-        return -1
-    }
 
     // FIXME: all those internal properties should go, and the button should style itself in a more standard way
     // probably similar to view items
@@ -123,24 +107,6 @@ T.TabButton {
     icon.height: display === T.AbstractButton.TextBesideIcon ? Kirigami.Units.iconSizes.small : Kirigami.Units.iconSizes.smallMedium
     icon.width: display === T.AbstractButton.TextBesideIcon ? Kirigami.Units.iconSizes.small : Kirigami.Units.iconSizes.smallMedium
     icon.color: checked ? __highlightForegroundColor : __foregroundColor
-
-    QQC2.ToolTip.text: (control.action as Kirigami.Action)?.tooltip ?? ""
-    QQC2.ToolTip.visible: (Kirigami.Settings.tabletMode ? pressed : hovered) && QQC2.ToolTip.text.length > 0
-    QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
-
-    Kirigami.MnemonicData.enabled: enabled && visible
-    Kirigami.MnemonicData.controlType: Kirigami.MnemonicData.MenuItem
-    Kirigami.MnemonicData.label: text
-
-    Accessible.description: Kirigami.MnemonicData.plainTextLabel
-    Accessible.onPressAction: control.animateClick()
-
-    Shortcut {
-        //in case of explicit & the button manages it by itself
-        enabled: !(RegExp(/\&[^\&]/).test(control.text))
-        sequence: control.Kirigami.MnemonicData.sequence
-        onActivated: control.animateClick()
-    }
 
     background: Item {
         Kirigami.Theme.colorSet: Kirigami.Theme.Button
