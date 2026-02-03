@@ -90,10 +90,6 @@ void KirigamiControlsPlugin::registerTypes(const char *uri)
     } else {
         QIcon::setFallbackSearchPaths(QIcon::fallbackSearchPaths() << Kirigami::Platform::StyleSelector::resolveFilePath(QStringLiteral("../icons")));
     }
-    // Keep the old versioned imports from 2.0 to 2.20 working
-    for (int i = 0; i < 21; ++i) {
-        qmlRegisterModule(uri, 2, i);
-    }
 
     qmlRegisterType(componentUrl(QStringLiteral("Action.qml")), uri, 2, 0, "Action");
     qmlRegisterType(componentUrl(QStringLiteral("AbstractApplicationHeader.qml")), uri, 2, 0, "AbstractApplicationHeader");
