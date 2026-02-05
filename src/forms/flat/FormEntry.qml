@@ -6,10 +6,6 @@
 
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls
-
-import QtQuick
-import QtQuick.Layouts
 import QtQuick.Controls as QQC
 import QtQuick.Templates as T
 import org.kde.kirigami.platform as Platform
@@ -24,6 +20,8 @@ Item {
     property alias contentItem: layout.contentItem
     property alias leadingItems: leadingItems.children
     property alias trailingItems: trailingItems.children
+
+    signal clicked
 
     implicitWidth: Math.max(contentItem.implicitWidth + impl.leftPadding * 2, Math.min(impl.implicitWidth, Platform.Units.gridUnit * 20 + impl.leftPadding * 2))
     implicitHeight: impl.implicitHeight
@@ -68,6 +66,7 @@ Item {
             onTapped: {
                 const buddy = root.contentItem?.KirigamiLayouts.FormData.buddyFor;
                 buddy.forceActiveFocus(Qt.ShortcutFocusReason);
+                root.clicked();
             }
         }
     }
