@@ -1,3 +1,25 @@
+add_library(KirigamiFormsPrivateTemplates)
+ecm_add_qml_module(KirigamiFormsPrivateTemplates URI "org.kde.kirigami.forms.private.templates"
+    VERSION 2.0
+    GENERATE_PLUGIN_SOURCE
+    INSTALLED_PLUGIN_TARGET KF6KirigamiFormsPrivateTemplatesplugin
+    DEPENDENCIES QtQuick org.kde.kirigami.platform org.kde.kirigami.primitives org.kde.kirigami.layouts
+)
+
+set_target_properties(KirigamiFormsPrivateTemplates PROPERTIES
+    VERSION     ${PROJECT_VERSION}
+    SOVERSION   6
+    EXPORT_NAME "KirigamiFormsPrivateTemplates"
+)
+
+ecm_target_qml_sources(KirigamiFormsPrivateTemplates SOURCES
+    templates/FormAction.qml
+    templates/FormEntry.qml
+    templates/FormGroup.qml
+    templates/Form.qml
+    templates/FormSeparator.qml
+)
+
 add_library(KirigamiFormsPrivateFlat)
 ecm_add_qml_module(KirigamiFormsPrivateFlat URI "org.kde.kirigami.forms.private.flat"
     VERSION 2.0
