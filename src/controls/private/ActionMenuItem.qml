@@ -8,6 +8,7 @@
 import QtQuick
 import QtQuick.Controls as QQC2
 import org.kde.kirigami.controls as KC
+import org.kde.kirigami.platform as Platform
 
 QQC2.MenuItem {
     visible: (action as KC.Action)?.visible ?? true
@@ -16,7 +17,7 @@ QQC2.MenuItem {
 
     QQC2.ToolTip.text: (action as KC.Action)?.tooltip ?? ""
     QQC2.ToolTip.visible: hovered && QQC2.ToolTip.text.length > 0
-    QQC2.ToolTip.delay: KC.Units.toolTipDelay
+    QQC2.ToolTip.delay: Platform.Units.toolTipDelay
 
     Accessible.onPressAction: action.trigger()
 }
