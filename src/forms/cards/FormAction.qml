@@ -8,7 +8,6 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC
 import QtQuick.Templates as T
-import org.kde.kirigami as Kirigami
 import org.kde.kirigami.platform as Platform
 import org.kde.kirigami.primitives as Primitives
 
@@ -18,10 +17,8 @@ FormEntry {
     required property T.Action action
     readonly property alias triggerIcon: triggerIconProps
 
+    onClicked: action.triggered()
 
-    Primitives.IconPropertiesGroup {
-        id: iconProps
-    }
     Primitives.IconPropertiesGroup {
         id: triggerIconProps
         name: "go-next-symbolic"
