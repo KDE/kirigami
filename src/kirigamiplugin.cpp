@@ -89,10 +89,6 @@ void KirigamiPlugin::registerTypes(QQmlEngine *engine)
             << "Registering Kirigami on a null QQmlEngine instance - you likely want to pass a valid engine, or you will want to manually add the "
                "qrc root path :/ to your import paths list so the engine is able to load the plugin";
     }
-    // Keep the old versioned imports from 2.0 to 2.20 working
-    for (int i = 0; i < 21; ++i) {
-        qmlRegisterModule(uri, 2, i);
-    }
 }
 #endif
 
