@@ -40,7 +40,7 @@ QStringList StyleSelector::styleChain()
 #if !defined(Q_OS_ANDROID) && !defined(Q_OS_IOS)
     // org.kde.desktop.plasma is a couple of files that fall back to desktop by purpose
     if (style.isEmpty() || style == QStringLiteral("org.kde.desktop.plasma")) {
-        auto path = resolveFilePath(QStringLiteral("/../styles/org.kde.desktop"));
+        auto path = resolveFilePath(QStringLiteral("/styles/org.kde.desktop"));
         if (QFile::exists(path)) {
             s_styleChain.prepend(QStringLiteral("org.kde.desktop"));
         }
@@ -51,11 +51,11 @@ QStringList StyleSelector::styleChain()
     s_styleChain.prepend(QStringLiteral("Material"));
 #endif
 
-    auto stylePath = resolveFilePath(QStringLiteral("/../styles/") + style);
+    auto stylePath = resolveFilePath(QStringLiteral("/styles/") + style);
     if (!style.isEmpty() && QFile::exists(stylePath) && !s_styleChain.contains(style)) {
         s_styleChain.prepend(style);
         // if we have plasma deps installed, use them for extra integration
-        auto plasmaPath = resolveFilePath(QStringLiteral("/../styles/org.kde.desktop.plasma"));
+        auto plasmaPath = resolveFilePath(QStringLiteral("/styles/org.kde.desktop.plasma"));
         if (style == QStringLiteral("org.kde.desktop") && QFile::exists(plasmaPath)) {
             s_styleChain.prepend(QStringLiteral("org.kde.desktop.plasma"));
         }
@@ -72,7 +72,7 @@ QUrl StyleSelector::componentUrl(const QString &fileName)
 {
     const auto chain = styleChain();
     for (const QString &style : chain) {
-        const QString candidate = QStringLiteral("../styles/") + style + QLatin1Char('/') + fileName;
+        const QString candidate = QStringLiteral("styles/") + style + QLatin1Char('/') + fileName;
         if (QFile::exists(resolveFilePath(candidate))) {
             return QUrl(resolveFileUrl(candidate));
         }
@@ -95,7 +95,12 @@ QString StyleSelector::resolveFilePath(const QString &path)
     return QStringLiteral(":/qt/qml/org/kde/kirigami/") + path;
 #else
     if (s_baseUrl.isValid()) {
-        return s_baseUrl.toLocalFile() + QLatin1Char('/') + path;
+        // HACK: this is a transition to support styles in their original place now that
+        // controls are in their own import. This will be removed once styles are their own
+        // import as well
+        QString stylePath(path);
+        stylePath.replace(QStringLiteral("styles/"), QStringLiteral("../styles/"));
+        return s_baseUrl.toLocalFile() + QLatin1Char('/') + stylePath;
     } else {
         return QDir::currentPath() + QLatin1Char('/') + path;
     }
@@ -107,7 +112,12 @@ QString StyleSelector::resolveFileUrl(const QString &path)
 #if defined(KIRIGAMI_BUILD_TYPE_STATIC) || defined(Q_OS_ANDROID)
     return QStringLiteral("qrc:/qt/qml/org/kde/kirigami/") + path;
 #else
-    return s_baseUrl.toString() + QLatin1Char('/') + path;
+    // HACK: this is a transition to support styles in their original place now that
+    // controls are in their own import. This will be removed once styles are their own
+    // import as well
+    QString stylePath(path);
+    stylePath.replace(QStringLiteral("styles/"), QStringLiteral("../styles/"));
+    return s_baseUrl.toString() + QLatin1Char('/') + stylePath;
 #endif
 }
 
