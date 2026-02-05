@@ -55,7 +55,7 @@ install(TARGETS KirigamiPrivate EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFA
 
 # Module: org.kde.kirigami
 
-ecm_add_qml_module(Kirigami URI "org.kde.kirigami"
+ecm_add_qml_module(Kirigami URI "org.kde.kirigami" VERSION 2.0
     CLASS_NAME KirigamiPlugin
     INSTALLED_PLUGIN_TARGET KF6Kirigamiplugin
     DEPENDENCIES
