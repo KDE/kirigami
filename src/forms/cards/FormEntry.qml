@@ -6,10 +6,6 @@
 
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls
-
-import QtQuick
-import QtQuick.Layouts
 import QtQuick.Controls as QQC
 import QtQuick.Templates as T
 import org.kde.kirigami.platform as Platform
@@ -24,6 +20,8 @@ Item {
     property alias contentItem: contentItemWrapper.contentItem
     property alias leadingItems: leadingItems.children
     property alias trailingItems: trailingItems.children
+
+    signal clicked
 
     implicitWidth: Math.max(mainLayout.implicitWidth + impl.padding * 2, Math.min(contentItemWrapper.implicitWidth, Platform.Units.gridUnit * 20 + impl.padding * 2))
     implicitHeight: impl.implicitHeight
@@ -72,12 +70,12 @@ Item {
         anchors.fill: parent
         implicitWidth: mainLayout.implicitWidth + leftPadding + rightPadding
         implicitHeight: mainLayout.implicitHeight + topPadding + bottomPadding
-        padding: Platform.Units.largeSpacing// + Platform.Units.smallSpacing
+        padding: Platform.Units.largeSpacing
 
         leftPadding: impl.formLayout.__collapsed ? padding : root.parent?.__assignedWidthForLabels + Platform.Units.largeSpacing * 2
 
-        readonly property bool nextIsFormEntry: root.parent.visibleChildren[root.parent.visibleChildren.indexOf(root) + 1] instanceof FormEntry
-        readonly property bool prevIsFormEntry: root.parent.visibleChildren[root.parent.visibleChildren.indexOf(root) - 1] instanceof FormEntry
+        readonly property bool nextIsFormEntry: root.parent?.visibleChildren[root.parent.visibleChildren.indexOf(root) + 1] instanceof FormEntry ?? false
+        readonly property bool prevIsFormEntry: root.parent?.visibleChildren[root.parent.visibleChildren.indexOf(root) - 1] instanceof FormEntry ?? false
 
         topPadding: prevIsFormEntry ? Platform.Units.smallSpacing : Platform.Units.largeSpacing + Platform.Units.smallSpacing
         bottomPadding: nextIsFormEntry ? Platform.Units.smallSpacing : Platform.Units.largeSpacing + Platform.Units.smallSpacing
@@ -102,9 +100,9 @@ Item {
                 buddy.animateClick();
             } else if (buddy instanceof T.ComboBox) {
                 buddy.popup.open();
-            } else if (root instanceof FormAction) {
-                root.action.triggered();
             }
+
+            root.clicked()
         }
 
         contentItem: GridLayout {
@@ -124,8 +122,9 @@ Item {
                 visible: children.length > 0
                 spacing: Platform.Units.smallSpacing
             }
-            KirigamiLayouts.Padding {
+            QQC.Control {
                 id: contentItemWrapper
+                padding: 0
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignVCenter
             }
