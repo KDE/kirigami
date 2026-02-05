@@ -61,13 +61,7 @@ Item {
                 const buddy = root.contentItem?.KirigamiLayouts.FormData.buddyFor;
 
                 const buttonBuddy = buddy as T.AbstractButton;
-                // animateClick is only in Qt 6.8,
-                // it also takes into account focus policy.
-                if (buttonBuddy && buttonBuddy.animateClick) {
-                    buttonBuddy.animateClick();
-                } else {
-                    buddy.forceActiveFocus(Qt.ShortcutFocusReason);
-                }
+                buttonBuddy.animateClick();
             }
         }
         TapHandler {
