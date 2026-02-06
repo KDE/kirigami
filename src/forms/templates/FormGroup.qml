@@ -1,5 +1,5 @@
 /*
- *  SPDX-FileCopyrightText: 2025 Marco Martin <mart@kde.org>
+ *  SPDX-FileCopyrightText: 2026 Marco Martin <mart@kde.org>
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
@@ -10,9 +10,11 @@
 
   \brief The container class that identifies a container of related controls in a form.
 
-  This element should always be potitioned in a Form. It is used to group together
+  This element should always be positioned in a Form. It is used to group together
   related form controls, to separate different settings categories.
-  Every form should always have at leat one FormGroup
+  Every form should always have at least one FormGroup.
+
+  A FormGroup should contain only elements of type FormEntry or FormSeparator (or derivates)
 
   Example usage:
   \qml
@@ -41,6 +43,7 @@
                 text: "Dark Theme"
             }
         }
+        Kirigami.FormSeparator {}
         Kirigami.FormEntry {
             contentItem: QQC.CheckBox {
                 text: "High Contrast"

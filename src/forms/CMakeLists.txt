@@ -76,6 +76,7 @@ ecm_add_qml_module(KirigamiForms URI "org.kde.kirigami.forms" VERSION 2.0
     "org.kde.kirigami.layouts"
     "org.kde.kirigami.forms.private.flat"
     "org.kde.kirigami.forms.private.cards"
+    "org.kde.kirigami.forms.private.templates"
 )
 
 target_sources(KirigamiFormsplugin PRIVATE
@@ -84,10 +85,11 @@ target_sources(KirigamiFormsplugin PRIVATE
 )
 
 
-
+install(TARGETS KirigamiFormsPrivateTemplates EXPORT KirigamiTargets ${KF_INSTALL_DEFAULT_ARGUMENTS})
 install(TARGETS KirigamiFormsPrivateFlat EXPORT KirigamiTargets ${KF_INSTALL_DEFAULT_ARGUMENTS})
 install(TARGETS KirigamiFormsPrivateCards EXPORT KirigamiTargets ${KF_INSTALL_DEFAULT_ARGUMENTS})
 install(TARGETS KirigamiForms EXPORT KirigamiTargets ${KF_INSTALL_DEFAULT_ARGUMENTS})
+ecm_finalize_qml_module(KirigamiFormsPrivateTemplates DESTINATION ${KDE_INSTALL_QMLDIR} EXPORT KirigamiFormsPrivateTemplates)
 ecm_finalize_qml_module(KirigamiFormsPrivateFlat DESTINATION ${KDE_INSTALL_QMLDIR} EXPORT KirigamiFormsPrivateFlat)
 ecm_finalize_qml_module(KirigamiFormsPrivateCards DESTINATION ${KDE_INSTALL_QMLDIR} EXPORT KirigamiFormsPrivateCards)
 ecm_finalize_qml_module(KirigamiForms DESTINATION ${KDE_INSTALL_QMLDIR} EXPORT KirigamiForms)
