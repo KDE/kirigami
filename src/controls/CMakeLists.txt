@@ -118,6 +118,8 @@ set_target_properties(KirigamiControls PROPERTIES
     EXPORT_NAME "KirigamiControls"
 )
 
+target_include_directories(KirigamiControls PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/..)
+
 ecm_finalize_qml_module(KirigamiControls EXPORT KirigamiTargets)
 
 install(TARGETS KirigamiControls EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
