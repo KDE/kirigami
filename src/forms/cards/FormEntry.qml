@@ -1,5 +1,5 @@
 /*
- *  SPDX-FileCopyrightText: 2025 Marco Martin <mart@kde.org>
+ *  SPDX-FileCopyrightText: 2026 Marco Martin <mart@kde.org>
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
@@ -11,17 +11,10 @@ import QtQuick.Templates as T
 import org.kde.kirigami.platform as Platform
 import org.kde.kirigami.primitives as Primitives
 import org.kde.kirigami.layouts as KirigamiLayouts
+import org.kde.kirigami.forms.private.templates as FT
 
-Item {
+FT.FormEntry {
     id: root
-
-    property string title: contentItem?.KirigamiLayouts.FormData.label
-    property string subtitle
-    property alias contentItem: contentItemWrapper.contentItem
-    property alias leadingItems: leadingItems.children
-    property alias trailingItems: trailingItems.children
-
-    signal clicked
 
     implicitWidth: Math.max(mainLayout.implicitWidth + impl.padding * 2, Math.min(contentItemWrapper.implicitWidth, Platform.Units.gridUnit * 20 + impl.padding * 2))
     implicitHeight: impl.implicitHeight
@@ -121,12 +114,14 @@ Item {
                 Layout.rowSpan: subtitleLabel.visible ? 2 : 1
                 visible: children.length > 0
                 spacing: Platform.Units.smallSpacing
+                children: root.leadingItems
             }
             QQC.Control {
                 id: contentItemWrapper
                 padding: 0
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignVCenter
+                contentItem: root.contentItem
             }
 
             RowLayout {
@@ -135,6 +130,7 @@ Item {
                 Layout.minimumWidth: implicitWidth
                 visible: children.length > 0
                 spacing: Platform.Units.smallSpacing
+                children: root.trailingItems
             }
 
             QQC.Label {
