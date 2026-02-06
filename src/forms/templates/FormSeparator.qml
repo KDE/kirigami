@@ -1,30 +1,47 @@
 /*
- *  SPDX-FileCopyrightText: 2025 Marco Martin <mart@kde.org>
+ *  SPDX-FileCopyrightText: 2026 Marco Martin <mart@kde.org>
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
 import QtQuick
-import QtQuick.Layouts
-import org.kde.kirigami.platform as Platform
-import org.kde.kirigami.primitives as Primitives
 
-Item {
-    id: root
+/*!
+  \qmltype FormSeparator
+  \inqmlmodule org.kde.kirigami.forms
 
-    Layout.fillWidth: true
+  \brief An item used to ssepare entries within a FormGroup
 
-    implicitWidth: separator.implicitWidth
-    implicitHeight: separator.implicitHeight
+  This component is used when it's needed to separe entries within a FormGroup
+  for clarity, for instance if is needed to have separate subcategories within a FormGroup.
 
-    Primitives.Separator {
-        id: separator
-        opacity: 0.5
-        anchors {
-            left: parent.left
-            right: parent.right
-            leftMargin: Platform.Units.largeSpacing
-            rightMargin: Platform.Units.largeSpacing
+  Example usage:
+  \qml
+  import QtQuick.Controls as QQC
+  import org.kde.kirigami as Kirigami
+
+  Kirigami.Form {
+    Kirigami.FormGroup {
+        title: "Theme Options"
+        Kirigami.FormEntry {
+            title: "Subsection 1"
+            contentItem: QQC.CheckBox {
+                text: "Dark Theme"
+            }
         }
+        Kirigami.FormSeparator {}
+        Kirigami.FormEntry {
+            title: "Subsection 2"
+            contentItem: QQC.CheckBox {
+                text: "High Contrast"
+            }
+        }
+        ...
     }
-}
+  }
+  \endqml
+  \sa FormEntry
+  \sa FormGroup
+  \since 6.24
+*/
+Item {}

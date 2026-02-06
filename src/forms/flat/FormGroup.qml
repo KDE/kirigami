@@ -10,23 +10,28 @@ import org.kde.kirigami as Kirigami //FIXME: We need a proper Controls import
 import org.kde.kirigami.platform as Platform
 import org.kde.kirigami.primitives as Primitives
 import org.kde.kirigami.layouts as KirigamiLayouts
+import org.kde.kirigami.forms.private.templates as FT
 
-Item {
+
+FT.FormGroup {
     id: root
 
     Layout.fillWidth: true
+    Layout.topMargin: separator.visible ? Platform.Units.largeSpacing * 3 : 0
 
-    property string title
+    // Don't document this, should never be used directly
     default property alias entries: innerLayout.data
     implicitWidth: layout.implicitWidth
     implicitHeight: layout.implicitHeight + layout.y
 
+    // Internal
     readonly property real __maxTextLabelWidth: innerLayout.labelWidth
+    // Internal
     property real __assignedWidthForLabels: 0
 
     Primitives.Separator {
         id: separator
-        visible: root.y > 0 && title.length === 0
+        visible: root.parent.visibleChildren[0] !== root && title.length === 0
         anchors {
             left: parent.left
             right: parent.right
@@ -70,6 +75,7 @@ Item {
                     labelWidth = w;
                 }
                 spacing: Platform.Units.smallSpacing
+                children: root.entries
             }
         }
     }

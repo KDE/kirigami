@@ -11,17 +11,10 @@ import QtQuick.Templates as T
 import org.kde.kirigami.platform as Platform
 import org.kde.kirigami.primitives as Primitives
 import org.kde.kirigami.layouts as KirigamiLayouts
+import org.kde.kirigami.forms.private.templates as FT
 
-Item {
+FT.FormEntry {
     id: root
-
-    property string title: contentItem?.KirigamiLayouts.FormData.label
-    property string subtitle
-    property alias contentItem: layout.contentItem
-    property alias leadingItems: leadingItems.children
-    property alias trailingItems: trailingItems.children
-
-    signal clicked
 
     implicitWidth: Math.max(contentItem.implicitWidth + impl.leftPadding * 2, Math.min(impl.implicitWidth, Platform.Units.gridUnit * 20 + impl.leftPadding * 2))
     implicitHeight: impl.implicitHeight
@@ -104,6 +97,7 @@ Item {
                 id: leadingItems
                 visible: children.length > 0
                 spacing: Platform.Units.smallSpacing
+                children: root.leadingItems
             }
             KirigamiLayouts.HeaderFooterLayout {
                 id: layout
@@ -128,14 +122,16 @@ Item {
                     rightPadding: Application.layoutDirection === Qt.RightToLeft
                         ? root.contentItem.KirigamiLayouts.FormData.buddyFor?.indicator?.width + root.contentItem.KirigamiLayouts.FormData.buddyFor?.spacing
                         : padding
-
                 }
+
+                contentItem: root.contentItem
             }
             RowLayout {
                 id: trailingItems
                 Layout.minimumWidth: implicitWidth
                 visible: children.length > 0
                 spacing: Platform.Units.smallSpacing
+                children: root.trailingItems
             }
         }
     }

@@ -5,19 +5,14 @@
  */
 
 import QtQuick
-import QtQuick.Layouts
 import QtQuick.Controls as QQC
-import QtQuick.Templates as T
-import org.kde.kirigami.platform as Platform
-import org.kde.kirigami.primitives as Primitives
+import org.kde.kirigami.forms.private.templates as FT
 
-FormEntry {
+FT.FormAction {
     id: root
 
-    required property T.Action action
-    readonly property Primitives.IconPropertiesGroup triggerIcon: Primitives.IconPropertiesGroup {
-        id: triggerIconProps
-    }
+    triggerIcon.name: ""
+
     contentItem: QQC.Button {
         icon {
             name: root.action.icon.name
@@ -31,13 +26,5 @@ FormEntry {
             root.clicked();
             root.action.trigger();
         }
-    }
-    trailingItems: Primitives.Icon {
-        Layout.fillHeight: true
-        Layout.maximumHeight: triggerIconProps.height <= 0 ? Platform.Units.iconSizes.smallMedium : Infinity
-        source: root.triggerIcon.name || root.triggerIcon.source
-        color: root.triggerIcon.color
-        Layout.preferredWidth: triggerIconProps.width > 0 ? triggerIconProps.width : -1
-        Layout.preferredHeight: triggerIconProps.height > 0 ? triggerIconProps.height : -1
     }
 }

@@ -7,8 +7,9 @@
 import QtQuick
 import QtQuick.Layouts
 import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.forms.private.templates as FT
 
-Item {
+FT.FormSeparator {
     id: root
 
     Layout.fillWidth: true
