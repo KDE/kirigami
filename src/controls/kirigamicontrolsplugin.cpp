@@ -151,7 +151,7 @@ void KirigamiControlsPlugin::registerTypes(QQmlEngine *engine)
     if (engine) {
         engine->addImportPath(QLatin1String(":/"));
     } else {
-        qCWarning(KirigamiLog)
+        qCWarning(KirigamiControlsLog)
             << "Registering Kirigami on a null QQmlEngine instance - you likely want to pass a valid engine, or you will want to manually add the "
                "qrc root path :/ to your import paths list so the engine is able to load the plugin";
     }

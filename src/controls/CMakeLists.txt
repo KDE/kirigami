@@ -120,5 +120,5 @@ set_target_properties(KirigamiControls PROPERTIES
 
 ecm_finalize_qml_module(KirigamiControls EXPORT KirigamiTargets)
 
-install(TARGETS KirigamiControls ${_out_targets_1} ${_out_targets_2} EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS KirigamiControls EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
 
