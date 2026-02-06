@@ -1,5 +1,5 @@
 /*
- *  SPDX-FileCopyrightText: 2025 Marco Martin <mart@kde.org>
+ *  SPDX-FileCopyrightText: 2026 Marco Martin <mart@kde.org>
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
@@ -46,6 +46,7 @@ import org.kde.kirigami.platform as Platform
                 text: "Dark Theme"
             }
         }
+        Kirigami.FormSeparator {}
         Kirigami.FormEntry {
             contentItem: QQC.CheckBox {
                 text: "High Contrast"
@@ -61,12 +62,14 @@ import org.kde.kirigami.platform as Platform
 */
 Item {
     id: root
+    // Implementation detail, don't document
     default property alias entries: layout.data
     Accessible.role: Accessible.Form
 
     implicitWidth: layout.implicitWidth + Platform.Units.smallSpacing * 2
     implicitHeight: layout.implicitHeight + Platform.Units.smallSpacing * 2
 
+    // Internal, don't document
     property bool __collapsed: false
 
     onWidthChanged: layout.relayoutLabels()
