@@ -84,7 +84,7 @@ FT.FormEntry {
             return null
         }
 
-        hoverEnabled: root.contentItem?.KirigamiLayouts.FormData.buddyFor instanceof T.AbstractButton || root instanceof FormAction
+        hoverEnabled: !Platform.Settings.hasTransientTouchInput && (root.contentItem?.KirigamiLayouts.FormData.buddyFor instanceof T.AbstractButton || root instanceof FormAction)
 
         onClicked: {
             const buddy = root.contentItem?.KirigamiLayouts.FormData.buddyFor;
@@ -153,7 +153,7 @@ FT.FormEntry {
 
         background: Rectangle {
             color: Platform.Theme.textColor
-            opacity: impl.hovered ? (impl.down || root.contentItem?.KirigamiLayouts.FormData.buddyFor?.down ? 0.1 : 0.05) : 0
+            opacity: impl.hovered || impl.down ? (impl.down || root.contentItem?.KirigamiLayouts.FormData.buddyFor?.down ? 0.1 : 0.05) : 0
             readonly property bool first: root.parent.children[0] === root
             readonly property bool last: root.parent.children[root.parent.children.length - 1] === root
             topLeftRadius: first ? Platform.Units.cornerRadius : 0
