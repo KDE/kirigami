@@ -65,6 +65,7 @@ TestCase {
             imageColors.source = result.image
             imageColors.update()
         })
+        print(Qt.resolvedUrl("stop-icon.svg"))
         tryCompare(imageColors, "dominant", "#2980b9")
     }
 }
