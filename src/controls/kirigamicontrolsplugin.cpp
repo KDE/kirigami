@@ -74,63 +74,63 @@ QUrl KirigamiControlsPlugin::componentUrl(const QString &fileName) const
 void KirigamiControlsPlugin::registerTypes(const char *uri)
 {
 #if defined(Q_OS_ANDROID)
-    QResource::registerResource(QStringLiteral("assets:/android_rcc_bundle.rcc"));
+    QResource::registerResource(u"assets:/android_rcc_bundle.rcc"_s);
 #endif
 
-    Q_ASSERT(QLatin1String(uri) == QLatin1String("org.kde.kirigami.controls"));
+    Q_ASSERT(QLatin1String(uri) == "org.kde.kirigami.controls"_L1);
 
     if (QIcon::themeName().isEmpty() && !qEnvironmentVariableIsSet("XDG_CURRENT_DESKTOP")) {
 #if defined(Q_OS_ANDROID)
         // Don't change the old icons location
-        QIcon::setThemeSearchPaths({QStringLiteral("assets:/qml/org/kde/kirigami"), QStringLiteral(":/../icons")});
+        QIcon::setThemeSearchPaths({u"assets:/qml/org/kde/kirigami"_s, u":/../icons"_s});
 #else
-        QIcon::setThemeSearchPaths({Kirigami::Platform::StyleSelector::resolveFilePath(QStringLiteral(".")), QStringLiteral(":/../icons")});
+        QIcon::setThemeSearchPaths({Kirigami::Platform::StyleSelector::resolveFilePath(u"."_s), u":/../icons"_s});
 #endif
-        QIcon::setThemeName(QStringLiteral("breeze-internal"));
+        QIcon::setThemeName(u"breeze-internal"_s);
     } else {
-        QIcon::setFallbackSearchPaths(QIcon::fallbackSearchPaths() << Kirigami::Platform::StyleSelector::resolveFilePath(QStringLiteral("../icons")));
+        QIcon::setFallbackSearchPaths(QIcon::fallbackSearchPaths() << Kirigami::Platform::StyleSelector::resolveFilePath(u"../icons"_s));
     }
 
-    qmlRegisterType(componentUrl(QStringLiteral("Action.qml")), uri, 2, 0, "Action");
-    qmlRegisterType(componentUrl(QStringLiteral("AbstractApplicationHeader.qml")), uri, 2, 0, "AbstractApplicationHeader");
-    qmlRegisterType(componentUrl(QStringLiteral("AbstractApplicationWindow.qml")), uri, 2, 0, "AbstractApplicationWindow");
-    qmlRegisterType(componentUrl(QStringLiteral("ApplicationWindow.qml")), uri, 2, 0, "ApplicationWindow");
-    qmlRegisterType(componentUrl(QStringLiteral("OverlayDrawer.qml")), uri, 2, 0, "OverlayDrawer");
-    qmlRegisterType(componentUrl(QStringLiteral("ContextDrawer.qml")), uri, 2, 0, "ContextDrawer");
-    qmlRegisterType(componentUrl(QStringLiteral("GlobalDrawer.qml")), uri, 2, 0, "GlobalDrawer");
-    qmlRegisterType(componentUrl(QStringLiteral("Heading.qml")), uri, 2, 0, "Heading");
-    qmlRegisterType(componentUrl(QStringLiteral("PageRow.qml")), uri, 2, 0, "PageRow");
-    qmlRegisterType(componentUrl(QStringLiteral("OverlaySheet.qml")), uri, 2, 0, "OverlaySheet");
-    qmlRegisterType(componentUrl(QStringLiteral("Page.qml")), uri, 2, 0, "Page");
-    qmlRegisterType(componentUrl(QStringLiteral("ScrollablePage.qml")), uri, 2, 0, "ScrollablePage");
-    qmlRegisterType(componentUrl(QStringLiteral("SwipeListItem.qml")), uri, 2, 0, "SwipeListItem");
-    qmlRegisterType(componentUrl(QStringLiteral("AbstractApplicationItem.qml")), uri, 2, 0, "AbstractApplicationItem");
-    qmlRegisterType(componentUrl(QStringLiteral("ApplicationItem.qml")), uri, 2, 0, "ApplicationItem");
-    qmlRegisterType(componentUrl(QStringLiteral("AbstractCard.qml")), uri, 2, 0, "AbstractCard");
-    qmlRegisterType(componentUrl(QStringLiteral("Card.qml")), uri, 2, 0, "Card");
-    qmlRegisterType(componentUrl(QStringLiteral("CardsListView.qml")), uri, 2, 0, "CardsListView");
-    qmlRegisterType(componentUrl(QStringLiteral("CardsLayout.qml")), uri, 2, 0, "CardsLayout");
-    qmlRegisterType(componentUrl(QStringLiteral("InlineMessage.qml")), uri, 2, 0, "InlineMessage");
-    qmlRegisterType(componentUrl(QStringLiteral("ListItemDragHandle.qml")), uri, 2, 0, "ListItemDragHandle");
-    qmlRegisterType(componentUrl(QStringLiteral("ActionToolBar.qml")), uri, 2, 0, "ActionToolBar");
-    qmlRegisterType(componentUrl(QStringLiteral("AboutPage.qml")), uri, 2, 0, "AboutPage");
-    qmlRegisterType(componentUrl(QStringLiteral("LinkButton.qml")), uri, 2, 0, "LinkButton");
-    qmlRegisterType(componentUrl(QStringLiteral("UrlButton.qml")), uri, 2, 0, "UrlButton");
-    qmlRegisterType(componentUrl(QStringLiteral("ActionTextField.qml")), uri, 2, 0, "ActionTextField");
-    qmlRegisterType(componentUrl(QStringLiteral("SearchField.qml")), uri, 2, 0, "SearchField");
-    qmlRegisterType(componentUrl(QStringLiteral("PasswordField.qml")), uri, 2, 0, "PasswordField");
-    qmlRegisterType(componentUrl(QStringLiteral("ListSectionHeader.qml")), uri, 2, 0, "ListSectionHeader");
-    qmlRegisterType(componentUrl(QStringLiteral("PagePoolAction.qml")), uri, 2, 0, "PagePoolAction");
-    qmlRegisterType(componentUrl(QStringLiteral("PlaceholderMessage.qml")), uri, 2, 0, "PlaceholderMessage");
-    qmlRegisterType(componentUrl(QStringLiteral("FlexColumn.qml")), uri, 2, 0, "FlexColumn");
-    qmlRegisterType(componentUrl(QStringLiteral("AboutItem.qml")), uri, 2, 0, "AboutItem");
-    qmlRegisterType(componentUrl(QStringLiteral("NavigationTabBar.qml")), uri, 2, 0, "NavigationTabBar");
-    qmlRegisterType(componentUrl(QStringLiteral("NavigationTabButton.qml")), uri, 2, 0, "NavigationTabButton");
-    qmlRegisterType(componentUrl(QStringLiteral("Chip.qml")), uri, 2, 0, "Chip");
-    qmlRegisterType(componentUrl(QStringLiteral("LoadingPlaceholder.qml")), uri, 2, 0, "LoadingPlaceholder");
-    qmlRegisterType(componentUrl(QStringLiteral("SelectableLabel.qml")), uri, 2, 0, "SelectableLabel");
-    qmlRegisterType(componentUrl(QStringLiteral("InlineViewHeader.qml")), uri, 2, 0, "InlineViewHeader");
-    qmlRegisterType(componentUrl(QStringLiteral("ContextualHelpButton.qml")), uri, 2, 0, "ContextualHelpButton");
+    qmlRegisterType(componentUrl(u"Action.qml"_s), uri, 2, 0, "Action");
+    qmlRegisterType(componentUrl(u"AbstractApplicationHeader.qml"_s), uri, 2, 0, "AbstractApplicationHeader");
+    qmlRegisterType(componentUrl(u"AbstractApplicationWindow.qml"_s), uri, 2, 0, "AbstractApplicationWindow");
+    qmlRegisterType(componentUrl(u"ApplicationWindow.qml"_s), uri, 2, 0, "ApplicationWindow");
+    qmlRegisterType(componentUrl(u"OverlayDrawer.qml"_s), uri, 2, 0, "OverlayDrawer");
+    qmlRegisterType(componentUrl(u"ContextDrawer.qml"_s), uri, 2, 0, "ContextDrawer");
+    qmlRegisterType(componentUrl(u"GlobalDrawer.qml"_s), uri, 2, 0, "GlobalDrawer");
+    qmlRegisterType(componentUrl(u"Heading.qml"_s), uri, 2, 0, "Heading");
+    qmlRegisterType(componentUrl(u"PageRow.qml"_s), uri, 2, 0, "PageRow");
+    qmlRegisterType(componentUrl(u"OverlaySheet.qml"_s), uri, 2, 0, "OverlaySheet");
+    qmlRegisterType(componentUrl(u"Page.qml"_s), uri, 2, 0, "Page");
+    qmlRegisterType(componentUrl(u"ScrollablePage.qml"_s), uri, 2, 0, "ScrollablePage");
+    qmlRegisterType(componentUrl(u"SwipeListItem.qml"_s), uri, 2, 0, "SwipeListItem");
+    qmlRegisterType(componentUrl(u"AbstractApplicationItem.qml"_s), uri, 2, 0, "AbstractApplicationItem");
+    qmlRegisterType(componentUrl(u"ApplicationItem.qml"_s), uri, 2, 0, "ApplicationItem");
+    qmlRegisterType(componentUrl(u"AbstractCard.qml"_s), uri, 2, 0, "AbstractCard");
+    qmlRegisterType(componentUrl(u"Card.qml"_s), uri, 2, 0, "Card");
+    qmlRegisterType(componentUrl(u"CardsListView.qml"_s), uri, 2, 0, "CardsListView");
+    qmlRegisterType(componentUrl(u"CardsLayout.qml"_s), uri, 2, 0, "CardsLayout");
+    qmlRegisterType(componentUrl(u"InlineMessage.qml"_s), uri, 2, 0, "InlineMessage");
+    qmlRegisterType(componentUrl(u"ListItemDragHandle.qml"_s), uri, 2, 0, "ListItemDragHandle");
+    qmlRegisterType(componentUrl(u"ActionToolBar.qml"_s), uri, 2, 0, "ActionToolBar");
+    qmlRegisterType(componentUrl(u"AboutPage.qml"_s), uri, 2, 0, "AboutPage");
+    qmlRegisterType(componentUrl(u"LinkButton.qml"_s), uri, 2, 0, "LinkButton");
+    qmlRegisterType(componentUrl(u"UrlButton.qml"_s), uri, 2, 0, "UrlButton");
+    qmlRegisterType(componentUrl(u"ActionTextField.qml"_s), uri, 2, 0, "ActionTextField");
+    qmlRegisterType(componentUrl(u"SearchField.qml"_s), uri, 2, 0, "SearchField");
+    qmlRegisterType(componentUrl(u"PasswordField.qml"_s), uri, 2, 0, "PasswordField");
+    qmlRegisterType(componentUrl(u"ListSectionHeader.qml"_s), uri, 2, 0, "ListSectionHeader");
+    qmlRegisterType(componentUrl(u"PagePoolAction.qml"_s), uri, 2, 0, "PagePoolAction");
+    qmlRegisterType(componentUrl(u"PlaceholderMessage.qml"_s), uri, 2, 0, "PlaceholderMessage");
+    qmlRegisterType(componentUrl(u"FlexColumn.qml"_s), uri, 2, 0, "FlexColumn");
+    qmlRegisterType(componentUrl(u"AboutItem.qml"_s), uri, 2, 0, "AboutItem");
+    qmlRegisterType(componentUrl(u"NavigationTabBar.qml"_s), uri, 2, 0, "NavigationTabBar");
+    qmlRegisterType(componentUrl(u"NavigationTabButton.qml"_s), uri, 2, 0, "NavigationTabButton");
+    qmlRegisterType(componentUrl(u"Chip.qml"_s), uri, 2, 0, "Chip");
+    qmlRegisterType(componentUrl(u"LoadingPlaceholder.qml"_s), uri, 2, 0, "LoadingPlaceholder");
+    qmlRegisterType(componentUrl(u"SelectableLabel.qml"_s), uri, 2, 0, "SelectableLabel");
+    qmlRegisterType(componentUrl(u"InlineViewHeader.qml"_s), uri, 2, 0, "InlineViewHeader");
+    qmlRegisterType(componentUrl(u"ContextualHelpButton.qml"_s), uri, 2, 0, "ContextualHelpButton");
 }
 
 void KirigamiControlsPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
