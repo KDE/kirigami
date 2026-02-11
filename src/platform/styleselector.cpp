@@ -124,7 +124,7 @@ QUrl StyleSelector::componentUrlForModule(const QString &module, const QString &
     }
 
     // If that failed, try to find an unstyled version.
-    auto path = installRoot() + u'/' + module + u'/' + fileName;
+    auto path = resolveFilePath(module + u'/' + fileName);
     if (QFile::exists(path)) {
         qCDebug(KirigamiPlatform) << "Found" << path;
         return pathToUrl(path);
@@ -141,24 +141,7 @@ void StyleSelector::setBaseUrl(const QUrl &baseUrl)
 
 QString StyleSelector::resolveFilePath(const QString &path)
 {
-#if defined(KIRIGAMI_BUILD_TYPE_STATIC) || defined(Q_OS_ANDROID)
-    if (path.endsWith(QStringLiteral(".qml")) && !path.endsWith(QStringLiteral("Theme.qml"))) {
-        return QStringLiteral(":/qt/qml/org/kde/kirigami/controls/") + path;
-    } else {
-        return QStringLiteral(":/qt/qml/org/kde/kirigami/") + path;
-    }
-#else
-    if (s_baseUrl.isValid()) {
-        // HACK: this is a transition to support styles in their original place now that
-        // controls are in their own import. This will be removed once styles are their own
-        // import as well
-        QString stylePath(path);
-        stylePath.replace(QStringLiteral("styles/"), QStringLiteral("../styles/"));
-        return s_baseUrl.toLocalFile() + QLatin1Char('/') + stylePath;
-    } else {
-        return QDir::currentPath() + QLatin1Char('/') + path;
-    }
-#endif
+    return installRoot() + u'/' + path;
 }
 
 QString StyleSelector::resolveFileUrl(const QString &path)
