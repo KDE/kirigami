@@ -25,22 +25,27 @@ public:
     static QString style();
     static QStringList styleChain();
 
-    static QUrl componentUrl(const QString &fileName);
-
     /*!
      * Find the URL of a component contained in a specific submodule.
      */
     static QUrl componentUrlForModule(const QString &module, const QString &fileName);
 
-    static void setBaseUrl(const QUrl &baseUrl);
-
     static QString resolveFilePath(const QString &path);
-    static QString resolveFileUrl(const QString &path);
 
     static QString installRoot();
 
+#if KIRIGAMIPLATFORM_ENABLE_DEPRECATED_SINCE(6, 24)
+    KIRIGAMIPLATFORM_DEPRECATED_VERSION(6, 24, "Use componentUrlForModule")
+    static QUrl componentUrl(const QString &fileName);
+
+    KIRIGAMIPLATFORM_DEPRECATED_VERSION(6, 24, "No longer used")
+    static void setBaseUrl(const QUrl &baseUrl);
+
+    KIRIGAMIPLATFORM_DEPRECATED_VERSION(6, 24, "Does the same as resolveFilePath now")
+    static QString resolveFileUrl(const QString &path);
+#endif
+
 private:
-    inline static QUrl s_baseUrl;
     inline static QStringList s_styleChain;
 };
 

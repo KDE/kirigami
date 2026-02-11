@@ -70,7 +70,7 @@ ecm_generate_export_header(KirigamiPlatform
     VERSION ${PROJECT_VERSION}
     BASE_NAME KirigamiPlatform
     USE_VERSION_HEADER
-    DEPRECATION_VERSIONS
+    DEPRECATION_VERSIONS 6.24
 )
 
 target_include_directories(KirigamiPlatform

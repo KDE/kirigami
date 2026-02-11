@@ -72,22 +72,6 @@ QStringList StyleSelector::styleChain()
     return s_styleChain;
 }
 
-QUrl StyleSelector::componentUrl(const QString &fileName)
-{
-    const auto chain = styleChain();
-    for (const QString &style : chain) {
-        const QString candidate = QStringLiteral("styles/") + style + QLatin1Char('/') + fileName;
-        if (QFile::exists(resolveFilePath(candidate))) {
-            return QUrl(resolveFileUrl(candidate));
-        }
-    }
-
-    if (!QFile::exists(resolveFilePath(fileName))) {
-        qCWarning(KirigamiPlatform) << "Requested an unexisting component" << fileName;
-    }
-    return QUrl(resolveFileUrl(fileName));
-}
-
 QUrl StyleSelector::componentUrlForModule(const QString &module, const QString &fileName)
 {
     // Try to find a styled version first.
@@ -134,32 +118,9 @@ QUrl StyleSelector::componentUrlForModule(const QString &module, const QString &
     return QUrl();
 }
 
-void StyleSelector::setBaseUrl(const QUrl &baseUrl)
-{
-    s_baseUrl = baseUrl;
-}
-
 QString StyleSelector::resolveFilePath(const QString &path)
 {
     return installRoot() + u'/' + path;
-}
-
-QString StyleSelector::resolveFileUrl(const QString &path)
-{
-#if defined(KIRIGAMI_BUILD_TYPE_STATIC) || defined(Q_OS_ANDROID)
-    if (path.endsWith(QStringLiteral(".qml")) && !path.endsWith(QStringLiteral("Theme.qml"))) {
-        return QStringLiteral("qrc:/qt/qml/org/kde/kirigami/controls/") + path;
-    } else {
-        return QStringLiteral("qrc:/qt/qml/org/kde/kirigami/") + path;
-    }
-#else
-    // HACK: this is a transition to support styles in their original place now that
-    // controls are in their own import. This will be removed once styles are their own
-    // import as well
-    QString stylePath(path);
-    stylePath.replace(QStringLiteral("styles/"), QStringLiteral("../styles/"));
-    return s_baseUrl.toString() + QLatin1Char('/') + stylePath;
-#endif
 }
 
 QString StyleSelector::installRoot()
@@ -202,5 +163,22 @@ QString StyleSelector::installRoot()
 
     return root;
 }
+
+#if KIRIGAMIPLATFORM_BUILD_DEPRECATED_SINCE(6, 24)
+QUrl StyleSelector::componentUrl(const QString &fileName)
+{
+    return componentUrlForModule(QString{}, fileName);
+}
+
+void StyleSelector::setBaseUrl(const QUrl &baseUrl)
+{
+    Q_UNUSED(baseUrl);
+}
+
+QString StyleSelector::resolveFileUrl(const QString &path)
+{
+    return resolveFilePath(path);
+}
+#endif
 }
 }
