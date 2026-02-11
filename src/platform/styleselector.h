@@ -27,10 +27,17 @@ public:
 
     static QUrl componentUrl(const QString &fileName);
 
+    /*!
+     * Find the URL of a component contained in a specific submodule.
+     */
+    static QUrl componentUrlForModule(const QString &module, const QString &fileName);
+
     static void setBaseUrl(const QUrl &baseUrl);
 
     static QString resolveFilePath(const QString &path);
     static QString resolveFileUrl(const QString &path);
+
+    static QString installRoot();
 
 private:
     inline static QUrl s_baseUrl;
