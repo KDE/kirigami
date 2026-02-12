@@ -147,8 +147,8 @@ void VirtualKeyboardWatcher::Private::updateWillShowOnActive()
         if (reply.isError()) {
             qCDebug(KirigamiPlatform) << reply.error().message();
         } else {
-            if (reply.value().toBool() != willShowOnActive) {
-                willShowOnActive = reply.value().toBool();
+            if (reply.value().value<QDBusVariant>().variant().toBool() != willShowOnActive) {
+                willShowOnActive = reply.value().value<QDBusVariant>().variant().toBool();
                 Q_EMIT q->willShowOnActiveChanged();
             }
         }
@@ -178,6 +178,7 @@ void VirtualKeyboardWatcher::Private::getAllProperties()
         Q_EMIT q->enabledChanged();
         Q_EMIT q->activeChanged();
         Q_EMIT q->visibleChanged();
+        Q_EMIT q->willShowOnActiveChanged();
     });
 }
 
