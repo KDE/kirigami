@@ -139,18 +139,11 @@ FT.FormEntry {
             QQC.Label {
                 id: subtitleLabel
                 Layout.fillWidth: true
-                font: Platform.Theme.smallFont
                 visible: text.length > 0
+                color: Platform.Theme.disabledTextColor
                 text: root.subtitle
                 wrapMode: Text.WordWrap
                 elide: Text.ElideRight
-
-                leftPadding: Application.layoutDirection === Qt.LeftToRight
-                        ? (root.contentItem.KirigamiLayouts.FormData.buddyFor?.indicator?.width ?? 0) + (root.contentItem.KirigamiLayouts.FormData.buddyFor?.spacing ?? 0)
-                        : padding
-                rightPadding: Application.layoutDirection === Qt.RightToLeft
-                        ? root.contentItem.KirigamiLayouts.FormData.buddyFor?.indicator?.width + root.contentItem.KirigamiLayouts.FormData.buddyFor?.spacing
-                        : padding
             }
         }
 
