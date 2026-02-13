@@ -5,6 +5,7 @@
  */
 
 import QtQuick
+import QtQuick.Templates as T
 import org.kde.kirigami.layouts as KirigamiLayouts
 
 /*!
@@ -105,6 +106,19 @@ Item {
       for instance a ContextualHelpButton, that will cover the cumulative height of the title, contentItem and subtitle.
      */
     property list<Item> trailingItems
+
+    /*!
+      \brief Make the whole entry behave like a button
+
+      When true, clicking anywhere on this will emit the clicked signal.
+      Depending on contentITem, if it's a clickable item itself, the click will
+      be passed to it: for instance if contentItem is a CheckBox, clicking anywhere,
+      even outside the checkbox will toggle the CheckBox checked status.
+     */
+    property bool clickEnabled:  {
+        const buddy = root.contentItem?.KirigamiLayouts.FormData.buddyFor;
+        return buddy instanceof T.AbstractButton || buddy instanceof T.ComboBox || buddy instanceof T.TextField || buddy instanceof T.SpinBox || buddy instanceof T.TextArea;
+    }
 
     /*!
       Emitted when the user clicks or taps over this Entry.

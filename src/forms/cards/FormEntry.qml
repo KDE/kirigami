@@ -84,9 +84,12 @@ FT.FormEntry {
             return null
         }
 
-        hoverEnabled: !Platform.Settings.hasTransientTouchInput && (root.contentItem?.KirigamiLayouts.FormData.buddyFor instanceof T.AbstractButton || root instanceof FormAction)
+        hoverEnabled: clickEnabled && !Platform.Settings.hasTransientTouchInput
 
         onClicked: {
+            if (!clickEnabled) {
+                return;
+            }
             const buddy = root.contentItem?.KirigamiLayouts.FormData.buddyFor;
             buddy.forceActiveFocus(Qt.ShortcutFocusReason);
             if (buddy instanceof T.AbstractButton) {

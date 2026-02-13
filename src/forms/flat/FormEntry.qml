@@ -57,6 +57,9 @@ FT.FormEntry {
         }
         TapHandler {
             onTapped: {
+                if (!root.clickEnabled) {
+                    return;
+                }
                 const buddy = root.contentItem?.KirigamiLayouts.FormData.buddyFor;
                 buddy.forceActiveFocus(Qt.ShortcutFocusReason);
                 root.clicked();
