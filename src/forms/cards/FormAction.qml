@@ -13,6 +13,8 @@ import org.kde.kirigami.forms.private.templates as FT
 FT.FormAction {
     id: root
 
+    clickEnabled: true
+
     leadingItems: Primitives.Icon {
         Layout.fillHeight: true
         source: root.action.icon.name || root.action.icon.source
