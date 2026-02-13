@@ -46,6 +46,7 @@ FT.FormEntry {
         Primitives.MnemonicData.controlType: Primitives.MnemonicData.FormLabel
         Primitives.MnemonicData.label: root.title
         text: Primitives.MnemonicData.richTextLabel
+        wrapMode: Text.WordWrap
         Accessible.name: Primitives.MnemonicData.plainTextLabel
         Shortcut {
             sequence: label.Primitives.MnemonicData.sequence
@@ -107,9 +108,11 @@ FT.FormEntry {
             rowSpacing: Platform.Units.smallSpacing
             columns: 1 + leadingItems.visible + trailingItems.visible
             QQC.Label {
+                Layout.fillWidth: true
                 Layout.columnSpan: mainLayout.columns
                 visible: text.length > 0 && impl.formLayout.__collapsed
                 text: label.Primitives.MnemonicData.richTextLabel
+                wrapMode: Text.WordWrap
                 Accessible.name: label.Primitives.MnemonicData.plainTextLabel
             }
             RowLayout {
