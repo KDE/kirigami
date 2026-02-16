@@ -36,6 +36,22 @@ StyleHints::~StyleHints() noexcept
 {
 }
 
+bool StyleHints::useAlternateBackgroundColor() const
+{
+    return d->useAlternateBackgroundColor;
+}
+
+void StyleHints::setUseAlternateBackgroundColor(bool newUseAlternateBackgroundColor)
+{
+    if (newUseAlternateBackgroundColor == d->useAlternateBackgroundColor) {
+        return;
+    }
+
+    d->useAlternateBackgroundColor = newUseAlternateBackgroundColor;
+    propertyChanged(ChangedProperty::UseAlternateBackgroundColor);
+    Q_EMIT useAlternateBackgroundColorChanged();
+}
+
 bool StyleHints::showFramedBackground() const
 {
     return d->showFramedBackground;

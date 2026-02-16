@@ -63,6 +63,16 @@ public:
     ~StyleHints() override;
 
     /*!
+     * \qmlproperty bool StyleHints::useAlternateBackgroundColor
+     *
+     * Should the background color use an alternating colors style.
+     */
+    Q_PROPERTY(bool useAlternateBackgroundColor READ useAlternateBackgroundColor WRITE setUseAlternateBackgroundColor NOTIFY useAlternateBackgroundColorChanged)
+    bool useAlternateBackgroundColor() const;
+    void setUseAlternateBackgroundColor(bool newUseAlternateBackgroundColor);
+    Q_SIGNAL void useAlternateBackgroundColorChanged();
+
+    /*!
      * \qmlproperty bool StyleHints::showFramedBackground
      *
      * Should the background use a framed rather than a plain style.
