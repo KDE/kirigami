@@ -579,8 +579,12 @@ public:
     void setCustomFocusColor(const QColor &color = QColor());
     void setCustomHoverColor(const QColor &color = QColor());
 
+#if KIRIGAMIPLATFORM_ENABLE_DEPRECATED_SINCE(6, 24)
+    KIRIGAMIPLATFORM_DEPRECATED_VERSION(6, 24, "Use StyleHints::useAlternateBackgroundColor instead")
     bool useAlternateBackgroundColor() const;
+    KIRIGAMIPLATFORM_DEPRECATED_VERSION(6, 24, "Use StyleHints::setUseAlternateBackgroundColor instead")
     void setUseAlternateBackgroundColor(bool alternate);
+#endif
 
     // QML attached property
     static PlatformTheme *qmlAttachedProperties(QObject *object);

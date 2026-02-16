@@ -860,6 +860,7 @@ void PlatformTheme::setCustomFocusColor(const QColor &color)
     d->setColor(this, PlatformThemeData::FocusColor, color);
 }
 
+#if KIRIGAMIPLATFORM_BUILD_DEPRECATED_SINCE(6, 24)
 bool PlatformTheme::useAlternateBackgroundColor() const
 {
     auto styleHints = qobject_cast<StyleHints *>(qmlAttachedPropertiesObject<StyleHints>(parent(), false));
@@ -872,6 +873,9 @@ bool PlatformTheme::useAlternateBackgroundColor() const
 
 void PlatformTheme::setUseAlternateBackgroundColor(bool alternate)
 {
+    qCDebug(KirigamiPlatform)
+        << "PlatformTheme::setUseAlternateBackgroundColor is deprecated (since 6.24), use StyleHints::setUseAlternateBackgroundColor() instead";
+
     auto styleHints = qobject_cast<StyleHints *>(qmlAttachedPropertiesObject<StyleHints>(parent()));
 
     bool oldAlternate = styleHints->useAlternateBackgroundColor();
@@ -882,6 +886,7 @@ void PlatformTheme::setUseAlternateBackgroundColor(bool alternate)
         Q_EMIT useAlternateBackgroundColorChanged(alternate);
     }
 }
+#endif
 
 QPalette PlatformTheme::palette() const
 {
