@@ -38,6 +38,8 @@ target_sources(KirigamiPlatform PRIVATE
     virtualkeyboardwatcher.h
     colorutils.cpp
     colorutils.h
+    stylehints.cpp
+    stylehints.h
 )
 
 set(libkirigami_extra_sources "")
@@ -98,6 +100,7 @@ ecm_generate_headers(KirigamiPlatform_CamelCase_HEADERS
     TabletModeWatcher
     Units
     VirtualKeyboardWatcher
+    StyleHints
     REQUIRED_HEADERS KirigamiPlatform_HEADERS
 )
 
