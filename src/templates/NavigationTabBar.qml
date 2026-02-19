@@ -254,6 +254,26 @@ QQC.ToolBar {
         return Math.round(contentItem.width / visibleButtonCount);
     }
 
+    /*!
+     \ *brief Property for the delegate component that will be instantiated inside tab bar.
+
+     \since 6.23
+     */
+    property Component delegate: Controls.NavigationTabButton {
+        id: delegate
+
+        required property T.Action modelData
+
+        parent: root.contentItem
+        action: modelData
+        // Workaround setting the action when checkable is not explicitly set making tabs uncheckable
+        onActionChanged: action.checkable = true
+
+        Layout.minimumWidth: root.buttonWidth
+        Layout.maximumWidth: root.buttonWidth
+        Layout.fillHeight: true
+    }
+
     contentWidth: root.maximumContentWidth
 
     position: {
@@ -318,19 +338,6 @@ QQC.ToolBar {
     Repeater {
         id: instantiator
         model: root.visibleActions
-        delegate: Controls.NavigationTabButton {
-            id: delegate
-
-            required property T.Action modelData
-
-            parent: root.contentItem
-            action: modelData
-            // Workaround setting the action when checkable is not explicitly set making tabs uncheckable
-            onActionChanged: action.checkable = true
-
-            Layout.minimumWidth: root.buttonWidth
-            Layout.maximumWidth: root.buttonWidth
-            Layout.fillHeight: true
-        }
+        delegate: root.delegate
     }
 }
