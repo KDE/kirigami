@@ -18,6 +18,7 @@ ecm_target_qml_sources(KirigamiTemplates SOURCES
     InlineMessage.qml
     OverlayDrawer.qml
     OverlaySheet.qml
+    InlineViewHeader.qml
 )
 
 ecm_target_qml_sources(KirigamiTemplates PRIVATE PATH private SOURCES
