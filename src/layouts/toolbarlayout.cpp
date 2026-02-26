@@ -13,6 +13,7 @@
 #include <QElapsedTimer>
 #include <QQmlComponent>
 #include <QTimer>
+#include <QtMinMax>
 
 #include "loggingcategory.h"
 #include "toolbarlayoutdelegate.h"
@@ -64,6 +65,7 @@ public:
     QQmlComponent *fullDelegate = nullptr;
     QQmlComponent *iconDelegate = nullptr;
     QQmlComponent *separatorDelegate = nullptr;
+    QQmlComponent *expandingSpacerDelegate = nullptr;
     QQmlComponent *moreButton = nullptr;
     qreal spacing = 0.0;
     Qt::Alignment alignment = Qt::AlignLeft;
@@ -238,6 +240,23 @@ void ToolBarLayout::setSeparatorDelegate(QQmlComponent *newSeparatorDelegate)
     d->delegates.clear();
     relayout();
     Q_EMIT separatorDelegateChanged();
+}
+
+QQmlComponent *ToolBarLayout::expandingSpacerDelegate() const
+{
+    return d->expandingSpacerDelegate;
+}
+
+void ToolBarLayout::setExpandingSpacerDelegate(QQmlComponent *newExpandingSpacerDelegate)
+{
+    if (newExpandingSpacerDelegate == d->expandingSpacerDelegate) {
+        return;
+    }
+
+    d->expandingSpacerDelegate = newExpandingSpacerDelegate;
+    d->delegates.clear();
+    relayout();
+    Q_EMIT expandingSpacerDelegateChanged();
 }
 
 QQmlComponent *ToolBarLayout::moreButton() const
@@ -549,6 +568,20 @@ void ToolBarLayoutPrivate::performLayout()
     }
 
     qreal currentX = layoutStart(visibleActionsWidth);
+    int emptyWidth = width - visibleActionsWidth;
+    if (moreButtonInstance->isVisible()) {
+        emptyWidth -= moreButtonInstance->width();
+    }
+    emptyWidth = qMax(0, emptyWidth);
+
+    uint spacersCount{0};
+    for (auto entry : std::as_const(sortedDelegates)) {
+        auto isExpandingSpacer = entry->property("expandingSpacer");
+        if (isExpandingSpacer.isValid() && isExpandingSpacer.toBool()) {
+            spacersCount++;
+        }
+    }
+
     for (auto entry : std::as_const(sortedDelegates)) {
         if (!entry->isVisible()) {
             continue;
@@ -568,12 +601,21 @@ void ToolBarLayoutPrivate::performLayout()
 
         qreal y = qRound((height - entry->height()) / 2.0);
 
+        auto isExpandingSpacer = entry->property("expandingSpacer");
         if (layoutDirection == Qt::LeftToRight) {
-            entry->setPosition(currentX, y);
-            currentX += entry->width() + spacing;
+            if (isExpandingSpacer.isValid() && isExpandingSpacer.toBool()) {
+                currentX += emptyWidth / spacersCount + spacing;
+            } else {
+                entry->setPosition(currentX, y);
+                currentX += entry->width() + spacing;
+            }
         } else {
-            entry->setPosition(currentX - entry->width(), y);
-            currentX -= entry->width() + spacing;
+            if (isExpandingSpacer.isValid() && isExpandingSpacer.toBool()) {
+                currentX -= emptyWidth / spacersCount + spacing;
+            } else {
+                entry->setPosition(currentX - entry->width(), y);
+                currentX -= entry->width() + spacing;
+            }
         }
 
         entry->show();
@@ -645,6 +687,11 @@ ToolBarLayoutDelegate *ToolBarLayoutPrivate::createDelegate(QObject *action)
         fullComponent = separatorDelegate;
     }
 
+    auto expandingSpacer = action->property("expandingSpacer");
+    if (expandingSpacer.isValid() && expandingSpacer.toBool()) {
+        fullComponent = expandingSpacerDelegate;
+    }
+
     auto result = new ToolBarLayoutDelegate(q);
     result->setAction(action);
     result->createItems(fullComponent, iconDelegate, [this, action](QQuickItem *newItem) {
@@ -661,6 +708,9 @@ ToolBarLayoutDelegate *ToolBarLayoutPrivate::createDelegate(QObject *action)
             newItem->stackBefore(q->childItems().first());
         }
     });
+    if (expandingSpacer.toBool()) {
+        result->setProperty("expandingSpacer", true);
+    }
 
     return result;
 }

@@ -50,6 +50,13 @@ QQC2.Action {
      */
     property bool separator: false
 
+  /*!
+    \brief This property sets whether this action is an expandig spacer action.
+
+    default: \c false
+   */
+    property bool expandingSpacer: false
+
     /*!
        \brief This property holds whether auto-exclusivity is enabled.
 
