@@ -209,6 +209,11 @@ public:
     void setSeparatorDelegate(QQmlComponent *newSeparatorDelegate);
     Q_SIGNAL void separatorDelegateChanged();
 
+    Q_PROPERTY(QQmlComponent *expandingSpacerDelegate READ expandingSpacerDelegate WRITE setExpandingSpacerDelegate NOTIFY expandingSpacerDelegateChanged FINAL)
+    QQmlComponent *expandingSpacerDelegate() const;
+    void setExpandingSpacerDelegate(QQmlComponent *newSeparatorDelegate);
+    Q_SIGNAL void expandingSpacerDelegateChanged();
+
     QQmlComponent *moreButton() const;
     void setMoreButton(QQmlComponent *newMoreButton);
     Q_SIGNAL void moreButtonChanged();
