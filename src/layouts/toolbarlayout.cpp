@@ -13,6 +13,7 @@
 #include <QElapsedTimer>
 #include <QQmlComponent>
 #include <QTimer>
+#include <QtMinMax>
 
 #include "loggingcategory.h"
 #include "toolbarlayoutdelegate.h"
@@ -32,6 +33,16 @@ QObject *ToolBarLayoutAttached::action() const
 void ToolBarLayoutAttached::setAction(QObject *action)
 {
     m_action = action;
+}
+
+bool ToolBarLayoutAttached::expandingSpacer() const
+{
+    return m_expandingSpacer;
+}
+
+void ToolBarLayoutAttached::setExpandingSpacer(bool expanding)
+{
+    m_expandingSpacer = expanding;
 }
 
 class ToolBarLayoutPrivate
@@ -548,7 +559,36 @@ void ToolBarLayoutPrivate::performLayout()
         moreButtonInstance->setVisible(false);
     }
 
-    qreal currentX = layoutStart(visibleActionsWidth);
+    int emptyWidth = width - visibleActionsWidth;
+    if (moreButtonInstance->isVisible()) {
+        emptyWidth -= moreButtonInstance->width();
+    }
+    emptyWidth = qMax(0, emptyWidth);
+
+    uint extendingActionsCount{0};
+    for (auto entry : std::as_const(sortedDelegates)) {
+        auto *action = entry->action();
+        if (!action) {
+            continue;
+        }
+        auto attached = static_cast<ToolBarLayoutAttached *>(qmlAttachedPropertiesObject<ToolBarLayout>(action, false));
+        if (attached && attached->expandingSpacer()) {
+            extendingActionsCount++;
+        }
+    }
+
+    int extendingSpacerWidth = 0;
+    qreal currentX = 0.0;
+    if (extendingActionsCount > 0) {
+        extendingSpacerWidth = emptyWidth / extendingActionsCount;
+        // when there is at least one action with ToolBarLayout.expandingSpacer set to true
+        // the actions will always occupy the full width of the layout
+        // in this case alignment is ignored and currentX is set to the beginning of the layout
+        currentX = layoutDirection == Qt::LeftToRight ? 0.0 : q->width();
+    } else {
+        currentX = layoutStart(visibleActionsWidth);
+    }
+
     for (auto entry : std::as_const(sortedDelegates)) {
         if (!entry->isVisible()) {
             continue;
@@ -568,12 +608,26 @@ void ToolBarLayoutPrivate::performLayout()
 
         qreal y = qRound((height - entry->height()) / 2.0);
 
+        auto isExpandingSpacer = false;
+        auto *action = entry->action();
+        if (action) {
+            auto attached = static_cast<ToolBarLayoutAttached *>(qmlAttachedPropertiesObject<ToolBarLayout>(action, false));
+            isExpandingSpacer = attached ? attached->expandingSpacer() : false;
+        }
         if (layoutDirection == Qt::LeftToRight) {
             entry->setPosition(currentX, y);
-            currentX += entry->width() + spacing;
+            if (isExpandingSpacer) {
+                currentX += extendingSpacerWidth + entry->width() + spacing;
+            } else {
+                currentX += entry->width() + spacing;
+            }
         } else {
             entry->setPosition(currentX - entry->width(), y);
-            currentX -= entry->width() + spacing;
+            if (isExpandingSpacer) {
+                currentX -= extendingSpacerWidth + entry->width() + spacing;
+            } else {
+                currentX -= entry->width() + spacing;
+            }
         }
 
         entry->show();
@@ -638,6 +692,16 @@ ToolBarLayoutDelegate *ToolBarLayoutPrivate::createDelegate(QObject *action)
     auto displayComponent = action->property("displayComponent");
     if (displayComponent.isValid()) {
         fullComponent = displayComponent.value<QQmlComponent *>();
+    }
+
+    auto attached = static_cast<ToolBarLayoutAttached *>(qmlAttachedPropertiesObject<ToolBarLayout>(action, false));
+    bool isExpandingSpacer = attached ? attached->expandingSpacer() : false;
+    if (isExpandingSpacer) {
+        // set the display component to an Item
+        // otherwise the action is visible in the toolbar and menu
+        auto component = new QQmlComponent(qmlEngine(q), "QtQuick", "Item");
+        action->setProperty("displayComponent", QVariant::fromValue(component));
+        fullComponent = component;
     }
 
     if (!fullComponent) {

@@ -16,14 +16,27 @@ class ToolBarLayoutAttached : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QObject *action READ action CONSTANT FINAL)
+    /*!
+     * \qmlattachedproperty bool ToolBarLayoutAttached::expandingSpacer
+     *
+     * When \c true the action acts as an expanding spacer
+     *
+     * \since 6.27
+     *
+     */
+    Q_PROPERTY(bool expandingSpacer READ expandingSpacer WRITE setExpandingSpacer CONSTANT FINAL)
 public:
     ToolBarLayoutAttached(QObject *parent = nullptr);
 
     QObject *action() const;
     void setAction(QObject *action);
 
+    bool expandingSpacer() const;
+    void setExpandingSpacer(bool expanding);
+
 private:
     QObject *m_action = nullptr;
+    bool m_expandingSpacer = false;
 };
 
 /*!
