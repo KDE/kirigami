@@ -17,6 +17,7 @@ ecm_target_qml_sources(KirigamiTemplates SOURCES
     Chip.qml
     Heading.qml
     InlineMessage.qml
+    LinkButton.qml
     NavigationTabBar.qml
     NavigationTabButton.qml
     OverlayDrawer.qml
