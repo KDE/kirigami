@@ -21,6 +21,7 @@ ecm_target_qml_sources(KirigamiTemplates SOURCES
     NavigationTabButton.qml
     OverlayDrawer.qml
     OverlaySheet.qml
+    PlaceholderMessage.qml
     InlineViewHeader.qml
 )
 
