@@ -79,17 +79,44 @@ ecm_add_qml_module(KirigamiForms URI "org.kde.kirigami.forms" VERSION 2.0
     "org.kde.kirigami.forms.private.templates"
 )
 
+set_target_properties(KirigamiForms PROPERTIES
+    VERSION     ${PROJECT_VERSION}
+    SOVERSION   6
+    EXPORT_NAME "KirigamiForms"
+)
+
+
 target_sources(KirigamiFormsplugin PRIVATE
     kirigamiformsplugin.cpp
     kirigamiformsplugin.h
 )
 
+if (NOT BUILD_SHARED_LIBS)
+    # Ensure we install the plugin library file as that's required to link
+    # against for static builds to work properly
+    target_link_libraries(KirigamiFormsplugin
+        PRIVATE
+            KirigamiFormsPrivateTemplatesplugin
+            KirigamiFormsPrivateFlatplugin
+            KirigamiFormsPrivateCardsplugin
+    )
+    # for tests to find this under the name it's actually installed with'
+    add_library(KF6KirigamiFormsplugin ALIAS KirigamiFormsplugin)
+else()
+    target_link_libraries(KirigamiForms
+        PRIVATE
+            KirigamiFormsPrivateTemplates
+            KirigamiFormsPrivateFlat
+            KirigamiFormsPrivateCards
+    )
+endif()
+
+ecm_finalize_qml_module(KirigamiFormsPrivateTemplates DESTINATION ${KDE_INSTALL_QMLDIR} EXPORT KirigamiTargets)
+ecm_finalize_qml_module(KirigamiFormsPrivateFlat DESTINATION ${KDE_INSTALL_QMLDIR} EXPORT KirigamiTargets)
+ecm_finalize_qml_module(KirigamiFormsPrivateCards DESTINATION ${KDE_INSTALL_QMLDIR} EXPORT KirigamiTargets)
+ecm_finalize_qml_module(KirigamiForms DESTINATION ${KDE_INSTALL_QMLDIR} EXPORT KirigamiTargets)
 
 install(TARGETS KirigamiFormsPrivateTemplates EXPORT KirigamiTargets ${KF_INSTALL_DEFAULT_ARGUMENTS})
 install(TARGETS KirigamiFormsPrivateFlat EXPORT KirigamiTargets ${KF_INSTALL_DEFAULT_ARGUMENTS})
 install(TARGETS KirigamiFormsPrivateCards EXPORT KirigamiTargets ${KF_INSTALL_DEFAULT_ARGUMENTS})
 install(TARGETS KirigamiForms EXPORT KirigamiTargets ${KF_INSTALL_DEFAULT_ARGUMENTS})
-ecm_finalize_qml_module(KirigamiFormsPrivateTemplates DESTINATION ${KDE_INSTALL_QMLDIR} EXPORT KirigamiFormsPrivateTemplates)
-ecm_finalize_qml_module(KirigamiFormsPrivateFlat DESTINATION ${KDE_INSTALL_QMLDIR} EXPORT KirigamiFormsPrivateFlat)
-ecm_finalize_qml_module(KirigamiFormsPrivateCards DESTINATION ${KDE_INSTALL_QMLDIR} EXPORT KirigamiFormsPrivateCards)
-ecm_finalize_qml_module(KirigamiForms DESTINATION ${KDE_INSTALL_QMLDIR} EXPORT KirigamiForms)
