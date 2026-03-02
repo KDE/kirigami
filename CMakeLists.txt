@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.27)
 
-set(KF_VERSION "6.23.0") # handled by release scripts
+set(KF_VERSION "6.23.1") # handled by release scripts
 set(KF_DEP_VERSION "6.23.0") # handled by release scripts
 
 project(kirigami2 VERSION ${KF_VERSION})
