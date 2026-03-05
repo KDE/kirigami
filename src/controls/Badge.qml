@@ -1,5 +1,5 @@
 /*
- *  SPDX-FileCopyrightText: 2025 Nate Graham <nate@kde.org>
+ *  SPDX-FileCopyrightText: 2025-2026 Nate Graham <nate@kde.org>
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
