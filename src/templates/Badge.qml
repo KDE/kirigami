@@ -80,7 +80,7 @@ T.Control {
      \qmlproperty real icon.height
      \qmlproperty function icon.fromControlsIcon
 
-     This grouped property holds the description of an optional icon.
+     This grouped property determines the appearance of the optional icon.
      note that the \c width, \c height, and \c color properties will be
      ignored.
 

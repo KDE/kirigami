@@ -1,5 +1,5 @@
 /*
- *  SPDX-FileCopyrightText: 2025 Nate Graham <nate@kde.org>
+ *  SPDX-FileCopyrightText: 2026 Nate Graham <nate@kde.org>
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
@@ -21,19 +21,19 @@ Kirigami.ApplicationWindow {
             Kirigami.FormData.isSection: true
         }
         Kirigami.Badge {
-            Kirigami.FormData.label: "Short number badge:"
+            Kirigami.FormData.label: "Short number:"
             text: "1"
         }
         Kirigami.Badge {
-            Kirigami.FormData.label: "Medium number badge:"
+            Kirigami.FormData.label: "Medium number:"
             text: "25"
         }
         Kirigami.Badge {
-            Kirigami.FormData.label: "Large number badge:"
+            Kirigami.FormData.label: "Large number:"
             text: "999"
         }
         Kirigami.Badge {
-            Kirigami.FormData.label: "Very large number badge:"
+            Kirigami.FormData.label: "Very large number:"
             text: "99,999"
         }
 
