@@ -153,7 +153,7 @@ QQC2.Action {
 
     shortcut: fromQAction?.shortcut
     text: fromQAction?.text ?? ''
-    icon.name: fromQAction ? P.ActionHelper.iconName(fromQAction.icon) : ''
+    icon.name: fromQAction ? fromQAction.icon?.name || P.ActionHelper.iconName(fromQAction.icon) : ''
     onTriggered: if (fromQAction) {
         fromQAction.trigger();
     }
