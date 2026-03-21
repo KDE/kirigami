@@ -753,6 +753,10 @@ QT.Control {
             PauseAnimation {
                 duration: Platform.Units.longDuration
             }
+            PropertyAction {
+                property: "opacity"
+                value: 1
+            }
         }
         popExit: Transition {
             ParallelAnimation {
