@@ -21,6 +21,8 @@ FT.FormEntry {
 
     Layout.fillWidth: true
 
+    hovered: impl.hovered
+
     //Internal: never rely on this
     readonly property real __textLabelWidth: label.implicitWidth
 

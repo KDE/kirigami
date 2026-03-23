@@ -120,6 +120,8 @@ Item {
         return buddy instanceof T.AbstractButton || buddy instanceof T.ComboBox || buddy instanceof T.TextField || buddy instanceof T.SpinBox || buddy instanceof T.TextArea;
     }
 
+    property bool hovered: false
+
     /*!
       Emitted when the user clicks or taps over this Entry.
      */

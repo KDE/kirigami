@@ -18,6 +18,20 @@ FT.FormSeparator {
     implicitWidth: separator.implicitWidth
     implicitHeight: separator.implicitHeight
 
+    opacity: {
+        const idx = root.parent.visibleChildren.indexOf(root);
+        if (idx === -1) {
+            return 1;
+        }
+        return !root.parent.visibleChildren[idx - 1]?.hovered && !root.parent.visibleChildren[idx + 1]?.hovered;
+    }
+    Behavior on opacity {
+        OpacityAnimator {
+            duration: Platform.Units.longDuration
+            easing.type: Easing.InOutQuad
+        }
+    }
+
     Primitives.Separator {
         id: separator
         opacity: 0.5
