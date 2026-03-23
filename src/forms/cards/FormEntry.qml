@@ -152,7 +152,7 @@ FT.FormEntry {
 
         background: Rectangle {
             color: Platform.Theme.textColor
-            opacity: impl.hovered || impl.down ? (impl.down || root.contentItem?.KirigamiLayouts.FormData.buddyFor?.down ? 0.1 : 0.05) : 0
+            opacity: root.clickEnabled && (impl.hovered || impl.down) ? (impl.down || root.contentItem?.KirigamiLayouts.FormData.buddyFor?.down ? 0.1 : 0.05) : 0
             readonly property bool first: root.parent.children[0] === root
             readonly property bool last: root.parent.children[root.parent.children.length - 1] === root
             topLeftRadius: first ? Platform.Units.cornerRadius : 0
