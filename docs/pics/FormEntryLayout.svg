@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="1477"
+   height="460"
+   viewBox="0 0 1477 460"
+   fill="none"
+   version="1.1"
+   id="svg12"
+   sodipodi:docname="FormEntryLayout.svg"
+   inkscape:version="1.4.3 (unknown)"
+   inkscape:export-filename="FormEntryLayout.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs12" />
+  <sodipodi:namedview
+     id="namedview12"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.78405091"
+     inkscape:cx="774.82213"
+     inkscape:cy="295.26144"
+     inkscape:window-width="1920"
+     inkscape:window-height="1014"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg12" />
+  <rect
+     x="41.834717"
+     y="38.834717"
+     width="1392.3306"
+     height="383.93994"
+     rx="15.300336"
+     fill="#d1d5d9"
+     stroke="#393c3f"
+     stroke-width="7.66942"
+     id="rect5" />
+  <path
+     style="fill:none;stroke:#393c3f;stroke-width:6;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+     d="M 382.62822,52.292523 V 400.4842"
+     id="path12" />
+  <path
+     style="fill:none;stroke:#393c3f;stroke-width:6;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+     d="M 1093,306.10257 398,306.103"
+     id="path13"
+     sodipodi:nodetypes="cc" />
+  <path
+     style="fill:none;stroke:#393c3f;stroke-width:6;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+     d="M 1408.0306,146 H 398"
+     id="path14"
+     sodipodi:nodetypes="cc" />
+  <path
+     style="fill:none;stroke:#393c3f;stroke-width:6;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+     d="m 1131.3041,173.45812 0,227.02608"
+     id="path15"
+     sodipodi:nodetypes="cc" />
+  <text
+     xml:space="preserve"
+     style="font-style:italic;font-weight:bold;font-size:48px;line-height:1.25;font-family:Sans;-inkscape-font-specification:'Sans Bold Italic';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#393c3f;fill-opacity:1;stroke:none;stroke-opacity:1"
+     x="207.46397"
+     y="207.48001"
+     id="text15"><tspan
+       sodipodi:role="line"
+       id="tspan15"
+       x="207.46397"
+       y="207.48001"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:48px;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans'">Leading</tspan><tspan
+       sodipodi:role="line"
+       x="207.46397"
+       y="267.94299"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:48px;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans'"
+       id="tspan22">Items</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:italic;font-weight:bold;font-size:56px;line-height:1.25;font-family:Sans;-inkscape-font-specification:'Sans Bold Italic';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#393c3f;fill-opacity:1"
+     x="464.25558"
+     y="96.93248"
+     id="text16"><tspan
+       sodipodi:role="line"
+       id="tspan16"
+       x="464.25558"
+       y="96.93248" /></text>
+  <text
+     xml:space="preserve"
+     style="font-style:italic;font-weight:bold;font-size:48px;line-height:1.25;font-family:Sans;-inkscape-font-specification:'Sans Bold Italic';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#393c3f;fill-opacity:1;stroke:none;stroke-opacity:1"
+     x="481.44794"
+     y="109.48001"
+     id="text17"><tspan
+       sodipodi:role="line"
+       id="tspan17"
+       x="481.44794"
+       y="109.48001"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:48px;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans'">Title</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:italic;font-weight:bold;font-size:56px;line-height:1.25;font-family:Sans;-inkscape-font-specification:'Sans Bold Italic';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle"
+     x="520.37439"
+     y="373.70023"
+     id="text18"><tspan
+       sodipodi:role="line"
+       id="tspan18"
+       x="520.37439"
+       y="373.70023" /></text>
+  <text
+     xml:space="preserve"
+     style="font-style:italic;font-weight:bold;font-size:48px;line-height:1.25;font-family:Sans;-inkscape-font-specification:'Sans Bold Italic';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#393c3f;fill-opacity:1;stroke:none;stroke-opacity:1"
+     x="517.56793"
+     y="378.59518"
+     id="text19"><tspan
+       sodipodi:role="line"
+       id="tspan19"
+       x="517.56793"
+       y="378.59518"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:48px;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans'">Subtitle</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:italic;font-weight:bold;font-size:48px;line-height:1.25;font-family:Sans;-inkscape-font-specification:'Sans Bold Italic';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#393c3f;fill-opacity:1;stroke:none;stroke-opacity:1"
+     x="1282.8243"
+     y="279.48001"
+     id="text20"><tspan
+       sodipodi:role="line"
+       id="tspan20"
+       x="1282.8243"
+       y="279.48001"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:48px;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans'">Trailing</tspan><tspan
+       sodipodi:role="line"
+       x="1282.8243"
+       y="339.94299"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:48px;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans'"
+       id="tspan21">Items</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:italic;font-weight:bold;font-size:48px;line-height:1.25;font-family:Sans;-inkscape-font-specification:'Sans Bold Italic';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#393c3f;fill-opacity:1;stroke:none;stroke-opacity:1"
+     x="574.0639"
+     y="243.39989"
+     id="text23"><tspan
+       sodipodi:role="line"
+       id="tspan23"
+       x="574.0639"
+       y="243.39989"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:48px;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans'">ContentItem</tspan></text>
+</svg>

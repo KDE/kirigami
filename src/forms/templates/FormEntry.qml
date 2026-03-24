@@ -56,6 +56,11 @@ import org.kde.kirigami.layouts as KirigamiLayouts
     }
   }
   \endqml
+
+  The form entry will contain a main central contentItem, with optional title,
+  subtitle, and leading and trailing items, with the following layout:
+  \image FormEntryLayout.png
+
   \sa Form
   \sa FormGroup
   \since 6.24
