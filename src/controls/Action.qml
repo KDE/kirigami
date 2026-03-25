@@ -41,7 +41,7 @@ QQC2.Action {
       the cursor is hovering over the control that triggers the tooltip.
       \warning Tooltips may not be supported on all platforms.
      */
-    property string tooltip
+    property string tooltip: fromQAction?.toolTip ?? ""
 
     /*!
       \brief This property sets whether this action is a separator action.
