@@ -153,7 +153,18 @@ QQC2.Action {
 
     shortcut: fromQAction?.shortcut
     text: fromQAction?.text ?? ''
-    icon.name: fromQAction ? fromQAction.icon?.name || P.ActionHelper.iconName(fromQAction.icon) : ''
+    icon.name: {
+        if (!fromQAction) {
+            return "";
+        }
+        // Need to check this as fromQAction.icon?.name || P.ActionHelper.iconName(fromQAction.icon)
+        // might end up calling P.ActionHelper.iconName() with something that is not a QIcon
+        if (fromQAction.icon?.hasOwnProperty("name")) {
+            return fromQAction.icon.name
+        }
+        return P.ActionHelper.iconName(fromQAction.icon);
+    }
+
     onTriggered: if (fromQAction) {
         fromQAction.trigger();
     }
