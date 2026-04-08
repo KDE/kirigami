@@ -107,7 +107,7 @@ FT.FormEntry {
         contentItem: GridLayout {
             id: mainLayout
             columnSpacing: Platform.Units.smallSpacing
-            rowSpacing: 0
+            rowSpacing: Platform.Units.smallSpacing
             columns: 1 + leadingItems.visible + trailingItems.visible
             QQC.Label {
                 Layout.fillWidth: true
@@ -137,6 +137,7 @@ FT.FormEntry {
                 bottomPadding: 0
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignVCenter
+                visible: contentItem
                 contentItem: root.contentItem
                 Binding {
                     when: (contentItemWrapper.contentItem instanceof QQC.Switch) && (contentItemWrapper.contentItem?.contentItem ?? false)
