@@ -154,7 +154,7 @@ QQC2.Dialog {
      */
     property alias emptyHelpfulAction: placeholder.helpfulAction
 
-    width: Math.min(Kirigami.Units.gridUnit * 35, parent.width)
+    width: Math.min(Kirigami.Units.gridUnit * 35, parent.width - leftMargin - rightMargin)
     height: Math.min(Kirigami.Units.gridUnit * 20, parent.height)
 
     padding: 0
