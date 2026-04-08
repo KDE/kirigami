@@ -30,7 +30,7 @@ cmake --build build/
 cmake --install build/
 ```
 
-Alternatively, we recommend you use [kdesrc-build](https://community.kde.org/Get_Involved/development#Setting_up_the_development_environment) to build extra-cmake-modules and Kirigami together.
+Alternatively, we recommend you use [kde-builder](https://develop.kde.org/docs/getting-started/building) to build extra-cmake-modules and Kirigami together.
 
 The provided Kirigami example can be built and run with:
 
