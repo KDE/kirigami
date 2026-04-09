@@ -14,9 +14,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: Lokalize 21.08.1\n"
 "X-Qt-Contexts: true\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: controls/AboutItem.qml:133
 #, qt-format
@@ -25,25 +25,18 @@ msgid "%1 (%2)"
 msgstr ""
 
 #: controls/AboutItem.qml:142
-#, fuzzy, qt-format
-#| msgctxt "AboutPage|"
-#| msgid "Visit %1's KDE Store page"
+#, qt-format
 msgctxt "AboutItem|"
 msgid "Visit %1's KDE Store page"
 msgstr "Navštívte stránku obchodu KDE %1"
 
 #: controls/AboutItem.qml:151
-#, fuzzy, qt-format
-#| msgctxt "AboutPage|"
-#| msgid "Send an email to %1"
+#, qt-format
 msgctxt "AboutItem|"
 msgid "Send an email to %1"
 msgstr "Odoslať email na adresu %1"
 
 #: controls/AboutItem.qml:201
-#, fuzzy
-#| msgctxt "AboutPage|"
-#| msgid "Get Involved"
 msgctxt "AboutItem|"
 msgid "Get Involved"
 msgstr "Zapojiť sa"
@@ -51,76 +44,50 @@ msgstr "Zapojiť sa"
 #: controls/AboutItem.qml:207
 msgctxt "AboutItem|"
 msgid "Donate"
-msgstr ""
+msgstr "Donate"
 
 #: controls/AboutItem.qml:224
-#, fuzzy
-#| msgctxt "AboutPage|"
-#| msgid "Report Bug…"
 msgctxt "AboutItem|"
 msgid "Report a Bug"
 msgstr "Nahlásiť chybu..."
 
 #: controls/AboutItem.qml:237
-#, fuzzy
-#| msgctxt "AboutPage|"
-#| msgid "Copyright"
 msgctxt "AboutItem|"
 msgid "Copyright"
 msgstr "Copyright"
 
 #: controls/AboutItem.qml:281
-#, fuzzy
-#| msgctxt "AboutPage|"
-#| msgid "License:"
 msgctxt "AboutItem|"
 msgid "License:"
 msgstr "Licencia:"
 
 #: controls/AboutItem.qml:303
-#, fuzzy, qt-format
-#| msgctxt "AboutPage|"
-#| msgid "License: %1"
+#, qt-format
 msgctxt "AboutItem|"
 msgid "License: %1"
 msgstr "Licencia: %1"
 
 #: controls/AboutItem.qml:314
-#, fuzzy
-#| msgctxt "AboutPage|"
-#| msgid "Libraries in use"
 msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "Použité knižnice"
 
 #: controls/AboutItem.qml:344
-#, fuzzy
-#| msgctxt "AboutPage|"
-#| msgid "Authors"
 msgctxt "AboutItem|"
 msgid "Authors"
 msgstr "Autori"
 
 #: controls/AboutItem.qml:353
-#, fuzzy
-#| msgctxt "AboutPage|"
-#| msgid "Show author photos"
 msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr "Zobraziť fotografie autora"
 
 #: controls/AboutItem.qml:384
-#, fuzzy
-#| msgctxt "AboutPage|"
-#| msgid "Credits"
 msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "Zásluhy"
 
 #: controls/AboutItem.qml:397
-#, fuzzy
-#| msgctxt "AboutPage|"
-#| msgid "Translators"
 msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "Preklady"
@@ -168,9 +135,6 @@ msgid "Close Sidebar"
 msgstr "Zatvoriť bočný panel"
 
 #: controls/GlobalDrawer.qml:602
-#, fuzzy
-#| msgctxt "GlobalDrawer|"
-#| msgid "Close Sidebar"
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "Zatvoriť bočný panel"
@@ -178,7 +142,7 @@ msgstr "Zatvoriť bočný panel"
 #: controls/LoadingPlaceholder.qml:55
 msgctxt "LoadingPlaceholder|"
 msgid "Loading…"
-msgstr ""
+msgstr "Načítava sa…"
 
 #: controls/PasswordField.qml:41
 msgctxt "PasswordField|"
@@ -186,33 +150,21 @@ msgid "Password"
 msgstr "Heslo"
 
 #: controls/PasswordField.qml:44
-#, fuzzy
-#| msgctxt "PasswordField|"
-#| msgid "Password"
 msgctxt "PasswordField|"
 msgid "Hide Password"
 msgstr "Heslo"
 
 #: controls/PasswordField.qml:44
-#, fuzzy
-#| msgctxt "PasswordField|"
-#| msgid "Password"
 msgctxt "PasswordField|"
 msgid "Show Password"
 msgstr "Heslo"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
-#, fuzzy
-#| msgctxt "OverlayDrawer|"
-#| msgid "Close"
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Close menu"
 msgstr "Zatvoriť"
 
 #: controls/private/globaltoolbar/PageRowGlobalToolBarUI.qml:70
-#, fuzzy
-#| msgctxt "OverlayDrawer|"
-#| msgid "Open"
 msgctxt "PageRowGlobalToolBarUI|"
 msgid "Open menu"
 msgstr "Otvoriť"
@@ -230,7 +182,7 @@ msgstr "Hľadať"
 #: controls/SearchField.qml:107
 msgctxt "SearchField|"
 msgid "Clear search"
-msgstr ""
+msgstr "Vymazať hľadanie"
 
 #: controls/settingscomponents/CategorizedSettings.qml:41
 #: controls/settingscomponents/CategorizedSettings.qml:105
@@ -239,12 +191,10 @@ msgid "Settings"
 msgstr "Nastavenia"
 
 #: controls/settingscomponents/CategorizedSettings.qml:41
-#, fuzzy, qt-format
-#| msgctxt "CategorizedSettings|"
-#| msgid "Settings"
+#, qt-format
 msgctxt "CategorizedSettings|"
 msgid "Settings — %1"
-msgstr "Nastavenia"
+msgstr "Nastavenia — %1"
 
 #. Accessibility text for a page tab. Keep the text as concise as possible and don't use a percent sign.
 #: controls/swipenavigator/templates/PageTab.qml:38
@@ -281,9 +231,6 @@ msgid "Navigate to %1."
 msgstr "Navigovať do %1."
 
 #: controls/templates/OverlayDrawer.qml:141
-#, fuzzy
-#| msgctxt "GlobalDrawer|"
-#| msgid "Close Sidebar"
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
 msgstr "Zatvoriť bočný panel"
@@ -311,7 +258,7 @@ msgstr "Viac akcií"
 #: controls/UrlButton.qml:54
 msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
-msgstr ""
+msgstr "Kopírovať do schránky"
 
 #: settings.cpp:220
 #, qt-format
@@ -336,8 +283,6 @@ msgstr "Qt %2 (zostavené s %3)"
 #~ msgstr "Skopírovať adresu odkazu"
 
 #, fuzzy
-#~| msgctxt "AboutPage|"
-#~| msgid "(%1)"
 #~ msgctxt "AboutItem|"
 #~ msgid "(%1)"
 #~ msgstr "(%1)"
