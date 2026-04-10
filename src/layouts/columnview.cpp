@@ -1358,6 +1358,9 @@ void ColumnView::insertItem(int pos, QQuickItem *item)
 
     item->setVisible(true);
     m_contentItem->m_items.insert(qBound(0, pos, m_contentItem->m_items.length()), item);
+    if (!m_contentData.contains(item)) {
+        m_contentData.append(item);
+    }
 
     connect(item, &QObject::destroyed, m_contentItem, [this, item]() {
         removeItem(item);
@@ -1387,6 +1390,7 @@ void ColumnView::insertItem(int pos, QQuickItem *item)
     }
     // Animate shift to new item.
     m_contentItem->m_shouldAnimate = true;
+    Q_EMIT countChanged();
     m_contentItem->layoutItems();
     Q_EMIT contentChildrenChanged();
 
@@ -1499,6 +1503,7 @@ QQuickItem *ColumnView::removeItem(QQuickItem *item)
     }
 
     const int index = m_contentItem->m_items.indexOf(item);
+    m_contentData.removeAll(item);
 
     // In order to keep the same current item we need to increase the current index if displaced
     if (index >= 0 && m_currentIndex >= index) {
@@ -1700,6 +1705,7 @@ QQuickItem *ColumnView::pop()
     QQuickItem *item = get(count() - 1);
     m_contentItem->m_disappearingItems.append(item);
     m_contentItem->m_items.removeAll(item);
+    m_contentData.removeAll(item);
     // Count - 1 now is the previous item as we already removed this from m_items
     // The item in m_disappearingItems will be definitely removed/deleted as soon the animation stops
     setCurrentIndex(count() - 1);
@@ -2028,20 +2034,10 @@ void ColumnView::contentChildren_append(QQmlListProperty<QQuickItem> *prop, QQui
 {
     // This can only be called from QML
     ColumnView *view = static_cast<ColumnView *>(prop->object);
-    if (!view) {
+    if (!view || !item) {
         return;
     }
-
-    view->m_contentItem->m_items.append(item);
-    connect(item, &QObject::destroyed, view->m_contentItem, [view, item]() {
-        view->removeItem(item);
-    });
-
-    ColumnViewAttached *attached = qobject_cast<ColumnViewAttached *>(qmlAttachedPropertiesObject<ColumnView>(item, true));
-    attached->setOriginalParent(item->parentItem());
-    attached->setShouldDeleteOnRemove(item->parentItem() == nullptr && QQmlEngine::objectOwnership(item) == QQmlEngine::JavaScriptOwnership);
-
-    item->setParentItem(view->m_contentItem);
+    view->addItem(item);
 }
 
 qsizetype ColumnView::contentChildren_count(QQmlListProperty<QQuickItem> *prop)
@@ -2074,7 +2070,7 @@ void ColumnView::contentChildren_clear(QQmlListProperty<QQuickItem> *prop)
         return;
     }
 
-    return view->m_contentItem->m_items.clear();
+    view->clear();
 }
 
 QQmlListProperty<QQuickItem> ColumnView::contentChildren()
@@ -2103,17 +2099,7 @@ void ColumnView::contentData_append(QQmlListProperty<QObject> *prop, QObject *ob
         connect(item, SIGNAL(modelChanged()), view->m_contentItem, SLOT(updateRepeaterModel()));
 
     } else if (item) {
-        view->m_contentItem->m_items.append(item);
-        connect(item, &QObject::destroyed, view->m_contentItem, [view, item]() {
-            view->removeItem(item);
-        });
-
-        ColumnViewAttached *attached = qobject_cast<ColumnViewAttached *>(qmlAttachedPropertiesObject<ColumnView>(item, true));
-        attached->setOriginalParent(item->parentItem());
-        attached->setShouldDeleteOnRemove(view->m_complete && !item->parentItem() && QQmlEngine::objectOwnership(item) == QQmlEngine::JavaScriptOwnership);
-
-        item->setParentItem(view->m_contentItem);
-
+        view->addItem(item);
     } else {
         object->setParent(view);
     }
@@ -2149,7 +2135,8 @@ void ColumnView::contentData_clear(QQmlListProperty<QObject> *prop)
         return;
     }
 
-    return view->m_contentData.clear();
+    view->clear();
+    view->m_contentData.clear();
 }
 
 QQmlListProperty<QObject> ColumnView::contentData()
