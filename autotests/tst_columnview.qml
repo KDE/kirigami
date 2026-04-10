@@ -9,6 +9,7 @@ import org.kde.kirigami as Kirigami
 import QtTest
 
 TestCase {
+    id: root
     name: "ColumnView"
     visible: true
     when: windowShown
@@ -358,5 +359,75 @@ TestCase {
         columnView.clip = false;
         mouseClick(layout, 50);
         compare(columnView.currentIndex, 1); // moves
+    }
+
+    function test_contentChildren_assign() {
+        const columnView = createTemporaryObject(columnViewComponent, this);
+        columnView.width = 800;
+        columnView.height = 500;
+        waitForPolish(columnView);
+        const item1 = createTemporaryObject(emptyItemPageComponent, this);
+        const item2 = createTemporaryObject(emptyItemPageComponent, this);
+        const item3 = createTemporaryObject(emptyItemPageComponent, this);
+
+        compare(columnView.count, 0);
+
+        columnView.contentChildren = [item1, item2, item3]
+
+        waitForPolish(columnView);
+
+        compare(item1.visible, true);
+        compare(item2.visible, true);
+        compare(item3.visible, true);
+
+        compare(item1.parent, columnView.contentItem);
+        compare(item2.parent, columnView.contentItem);
+        compare(item3.parent, columnView.contentItem);
+
+        compare(item1.width, columnView.columnWidth);
+        compare(item2.width, columnView.columnWidth);
+        compare(item3.width, columnView.width - columnView.columnWidth);
+
+        compare(item1.height, columnView.height);
+        compare(item2.height, columnView.height);
+        compare(item3.height, columnView.height);
+
+        // Switch to [item3, item2]
+        columnView.contentChildren = [item3, item2]
+
+        waitForPolish(columnView);
+
+        compare(item1.visible, false);
+        compare(item2.visible, true);
+        compare(item3.visible, true);
+
+        compare(item1.parent, root);
+        compare(item2.parent, columnView.contentItem);
+        compare(item3.parent, columnView.contentItem);
+
+        compare(item2.width, columnView.width - columnView.columnWidth);
+        compare(item3.width, columnView.columnWidth);
+
+        compare(item2.height, columnView.height);
+        compare(item3.height, columnView.height);
+
+        // Switch to [item3, item1]
+        columnView.contentChildren = [item3, item1]
+
+        waitForPolish(columnView);
+
+        compare(item1.visible, true);
+        compare(item2.visible, false);
+        compare(item3.visible, true);
+
+        compare(item1.parent, columnView.contentItem);
+        compare(item2.parent, root);
+        compare(item3.parent, columnView.contentItem);
+
+        compare(item1.width, columnView.width - columnView.columnWidth);
+        compare(item3.width, columnView.columnWidth);
+
+        compare(item1.height, columnView.height);
+        compare(item3.height, columnView.height);
     }
 }
