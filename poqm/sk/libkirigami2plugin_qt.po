@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: libkirigamiplugin_qt\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2016-08-05 07:24+0000\n"
-"PO-Revision-Date: 2021-09-05 19:34+0200\n"
+"PO-Revision-Date: 2026-04-10 12:00+0200\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
 "Language: sk\n"
@@ -22,7 +22,7 @@ msgstr ""
 #, qt-format
 msgctxt "AboutItem|"
 msgid "%1 (%2)"
-msgstr ""
+msgstr "%1 (%2)"
 
 #: controls/AboutItem.qml:142
 #, qt-format
@@ -117,7 +117,7 @@ msgstr "%1 — %2"
 #: controls/Chip.qml:82
 msgctxt "Chip|"
 msgid "Remove Tag"
-msgstr ""
+msgstr "Odstrániť značku"
 
 #: controls/ContextDrawer.qml:67
 msgctxt "ContextDrawer|"
@@ -238,7 +238,7 @@ msgstr "Zatvoriť bočný panel"
 #: controls/templates/OverlayDrawer.qml:147
 msgctxt "OverlayDrawer|"
 msgid "Open drawer"
-msgstr ""
+msgstr "Otvoriť bočný panel"
 
 #: controls/templates/private/BackButton.qml:53
 msgctxt "BackButton|"
