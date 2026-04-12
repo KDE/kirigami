@@ -35,6 +35,16 @@ void ToolBarLayoutAttached::setAction(QObject *action)
     m_action = action;
 }
 
+bool ToolBarLayoutAttached::fillWidth() const
+{
+    return m_fillWidth;
+}
+
+void ToolBarLayoutAttached::setFillWidth(bool fill)
+{
+    m_fillWidth = fill;
+}
+
 class ToolBarLayoutPrivate
 {
     ToolBarLayout *const q;
@@ -415,7 +425,7 @@ void ToolBarLayoutPrivate::calculateImplicitSize()
         return;
     }
 
-    if (!fullDelegate || !iconDelegate || !separatorDelegate || !moreButton) {
+    if (!fullDelegate || !iconDelegate || !separatorDelegate || !expandingSpacerDelegate || !moreButton) {
         qCWarning(KirigamiLayoutsLog) << "ToolBarLayout: Unable to layout, required properties are not set";
         return;
     }
@@ -576,11 +586,31 @@ void ToolBarLayoutPrivate::performLayout()
 
     uint spacersCount{0};
     for (auto entry : std::as_const(sortedDelegates)) {
-        auto isExpandingSpacer = entry->property("expandingSpacer");
-        if (isExpandingSpacer.isValid() && isExpandingSpacer.toBool()) {
+        auto *item = entry->action();
+        if (!item) {
+            continue;
+        }
+        auto attached = static_cast<ToolBarLayoutAttached *>(qmlAttachedPropertiesObject<ToolBarLayout>(item, false));
+        if (attached && attached->fillWidth()) {
             spacersCount++;
         }
     }
+
+    auto updateMoreMenu = false;
+    // remove spacers from hidden actions menu and decrease spacersCount
+    for (auto hiddenAction : std::as_const(hiddenActions)) {
+        auto attached = static_cast<ToolBarLayoutAttached *>(qmlAttachedPropertiesObject<ToolBarLayout>(hiddenAction, false));
+        if (attached && attached->fillWidth()) {
+            hiddenActions.removeOne(hiddenAction);
+            spacersCount--;
+            updateMoreMenu = true;
+        }
+    }
+    if (updateMoreMenu) {
+        // otherwise the actions are visible in the menu if the menu is open while resizing
+        Q_EMIT q->hiddenActionsChanged();
+    }
+    auto spacerWidth = spacersCount == 0 ? 0 : emptyWidth / spacersCount;
 
     for (auto entry : std::as_const(sortedDelegates)) {
         if (!entry->isVisible()) {
@@ -601,17 +631,22 @@ void ToolBarLayoutPrivate::performLayout()
 
         qreal y = qRound((height - entry->height()) / 2.0);
 
-        auto isExpandingSpacer = entry->property("expandingSpacer");
+        auto isExpandingSpacer = false;
+        auto *item = entry->action();
+        if (item) {
+            auto attached = static_cast<ToolBarLayoutAttached *>(qmlAttachedPropertiesObject<ToolBarLayout>(item, false));
+            isExpandingSpacer = attached ? attached->fillWidth() : false;
+        }
         if (layoutDirection == Qt::LeftToRight) {
-            if (isExpandingSpacer.isValid() && isExpandingSpacer.toBool()) {
-                currentX += emptyWidth / spacersCount + spacing;
+            if (isExpandingSpacer) {
+                currentX += spacerWidth + spacing;
             } else {
                 entry->setPosition(currentX, y);
                 currentX += entry->width() + spacing;
             }
         } else {
-            if (isExpandingSpacer.isValid() && isExpandingSpacer.toBool()) {
-                currentX -= emptyWidth / spacersCount + spacing;
+            if (isExpandingSpacer) {
+                currentX -= spacerWidth + spacing;
             } else {
                 entry->setPosition(currentX - entry->width(), y);
                 currentX -= entry->width() + spacing;
@@ -687,8 +722,9 @@ ToolBarLayoutDelegate *ToolBarLayoutPrivate::createDelegate(QObject *action)
         fullComponent = separatorDelegate;
     }
 
-    auto expandingSpacer = action->property("expandingSpacer");
-    if (expandingSpacer.isValid() && expandingSpacer.toBool()) {
+    auto attached = static_cast<ToolBarLayoutAttached *>(qmlAttachedPropertiesObject<ToolBarLayout>(action, false));
+    bool isExpandingSpacer = attached ? attached->fillWidth() : false;
+    if (isExpandingSpacer) {
         fullComponent = expandingSpacerDelegate;
     }
 
@@ -708,9 +744,6 @@ ToolBarLayoutDelegate *ToolBarLayoutPrivate::createDelegate(QObject *action)
             newItem->stackBefore(q->childItems().first());
         }
     });
-    if (expandingSpacer.toBool()) {
-        result->setProperty("expandingSpacer", true);
-    }
 
     return result;
 }

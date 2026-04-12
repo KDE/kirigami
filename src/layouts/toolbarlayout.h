@@ -16,14 +16,19 @@ class ToolBarLayoutAttached : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QObject *action READ action CONSTANT FINAL)
+    Q_PROPERTY(bool fillWidth READ fillWidth WRITE setFillWidth CONSTANT FINAL)
 public:
     ToolBarLayoutAttached(QObject *parent = nullptr);
 
     QObject *action() const;
     void setAction(QObject *action);
 
+    bool fillWidth() const;
+    void setFillWidth(bool fill);
+
 private:
     QObject *m_action = nullptr;
+    bool m_fillWidth = false;
 };
 
 /*!
