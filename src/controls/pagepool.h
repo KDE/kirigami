@@ -106,6 +106,8 @@ public:
 
     Q_INVOKABLE QQuickItem *loadPageWithProperties(const QString &url, const QVariantMap &properties, QJSValue callback = QJSValue());
 
+    QQuickItem *loadPageWithProperties(const QString &url, const QVariantMap &properties, std::function<void(const QString &, QQuickItem *)> callback);
+
     /*!
      * @returns The url of the page for the given instance, empty if there is no correspondence
      */
@@ -161,4 +163,36 @@ private:
     QHash<QQuickItem *, QUrl> m_urlForItem;
 
     bool m_cachePages = true;
+};
+
+class PagePoolView : public QObject
+{
+    Q_OBJECT
+    QML_ELEMENT
+
+    Q_PROPERTY(PagePool *pagePool READ pagePool WRITE setPagePool NOTIFY pagePoolChanged REQUIRED FINAL)
+    Q_PROPERTY(QList<QUrl> urls READ urls WRITE setUrls NOTIFY urlsChanged FINAL)
+    Q_PROPERTY(QList<QQuickItem *> items READ items NOTIFY itemsChanged)
+
+public:
+    PagePoolView(QObject *parent = nullptr);
+    ~PagePoolView();
+
+    PagePool *pagePool() const;
+    void setPagePool(PagePool *pool);
+
+    QList<QUrl> urls() const;
+    void setUrls(const QList<QUrl> urls);
+
+    QList<QQuickItem *> items();
+
+Q_SIGNALS:
+    void pagePoolChanged();
+    void urlsChanged();
+    void itemsChanged();
+
+private:
+    QPointer<PagePool> m_pagePool;
+    QList<QUrl> m_urls;
+    QList<QQuickItem *> m_items;
 };

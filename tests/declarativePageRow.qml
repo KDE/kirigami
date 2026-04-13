@@ -31,6 +31,17 @@ Kirigami.ApplicationWindow {
 
     Item {
         id: appStates
+
+        Kirigami.PagePool {
+            id: pool
+            cachePages: true
+        }
+        Kirigami.PagePoolView {
+            id: s3Pages
+            pagePool: pool
+            urls: ["CardTest.qml"]
+        }
+
         states: [
             State {
                 when: navTabBar.currentIndex === 0
@@ -73,7 +84,7 @@ Kirigami.ApplicationWindow {
                 when: navTabBar.currentIndex === 2
                 PropertyChanges {
                     target: root.pageStack
-                    items: [page3,page2]
+                    items: s3Pages.items
                 }
                 PropertyChanges {
                     target: page2.Kirigami.ColumnView

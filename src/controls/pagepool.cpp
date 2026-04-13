@@ -197,6 +197,80 @@ QQuickItem *PagePool::loadPageWithProperties(const QString &url, const QVariantM
     return item;
 }
 
+QQuickItem *PagePool::loadPageWithProperties(const QString &url, const QVariantMap &properties, std::function<void(const QString &, QQuickItem *)> callback)
+{
+    const auto engine = qmlEngine(this);
+    Q_ASSERT(engine);
+
+    const QUrl actualUrl = resolvedUrl(url);
+
+    auto found = m_itemForUrl.find(actualUrl);
+    if (found != m_itemForUrl.end()) {
+        m_lastLoadedUrl = found.key();
+        m_lastLoadedItem = found.value();
+
+        if (callback) {
+            callback(found.key().toString(), found.value());
+            Q_EMIT lastLoadedUrlChanged();
+            Q_EMIT lastLoadedItemChanged();
+            // We could return the item, but for api coherence return null
+            return nullptr;
+
+        } else {
+            Q_EMIT lastLoadedUrlChanged();
+            Q_EMIT lastLoadedItemChanged();
+            return found.value();
+        }
+    }
+
+    // Note component->url() and actualUrl will be the same.
+    QQmlComponent *&component = m_componentForUrl[actualUrl];
+    if (!component) {
+        component = new QQmlComponent(engine, actualUrl, QQmlComponent::PreferSynchronous);
+    }
+
+    if (component->status() == QQmlComponent::Loading) {
+        if (callback) {
+            component->deleteLater();
+            m_componentForUrl.remove(component->url());
+            return nullptr;
+        }
+
+        connect(component, &QQmlComponent::statusChanged, this, [this, url, engine, component, callback, properties](QQmlComponent::Status status) mutable {
+            if (status != QQmlComponent::Ready) {
+                qCWarning(KirigamiControlsLog) << component->errors();
+                m_componentForUrl.remove(component->url());
+                component->deleteLater();
+                return;
+            }
+
+            QQuickItem *item = allocatePage(component, properties);
+            if (item) {
+                callback(url, item);
+            }
+        });
+
+        return nullptr;
+
+    } else if (component->status() != QQmlComponent::Ready) {
+        qCWarning(KirigamiControlsLog) << component->errors();
+        return nullptr;
+    }
+
+    QQuickItem *item = allocatePage(component, properties);
+
+    if (!item) {
+        return nullptr;
+    }
+
+    if (callback) {
+        callback(url, item);
+        // We could return the item, but for api coherence return null
+        return nullptr;
+    }
+    return item;
+}
+
 QUrl PagePool::resolvedUrl(const QString &stringUrl) const
 {
     const auto ctx = qmlContext(this);
@@ -300,6 +374,66 @@ void PagePool::clear()
     Q_EMIT lastLoadedItemChanged();
     Q_EMIT itemsChanged();
     Q_EMIT urlsChanged();
+}
+
+///////////////
+
+PagePoolView::PagePoolView(QObject *parent)
+    : QObject(parent)
+{
+}
+
+PagePoolView::~PagePoolView()
+{
+}
+
+PagePool *PagePoolView::pagePool() const
+{
+    return m_pagePool;
+}
+
+void PagePoolView::setPagePool(PagePool *pool)
+{
+    if (pool == m_pagePool) {
+        return;
+    }
+
+    m_pagePool = pool;
+
+    QML_ELEMENT pagePoolChanged();
+}
+
+QList<QUrl> PagePoolView::urls() const
+{
+    return m_urls;
+}
+
+void PagePoolView::setUrls(const QList<QUrl> urls)
+{
+    if (urls == m_urls) {
+        return;
+    }
+
+    m_urls = urls;
+    Q_EMIT urlsChanged();
+    Q_EMIT itemsChanged();
+}
+
+QList<QQuickItem *> PagePoolView::items()
+{
+    QList<QQuickItem *> items;
+
+    for (auto url : std::as_const(m_urls)) {
+        auto item = m_pagePool->pageForUrl(url);
+        if (item) {
+            items.append(item);
+        } else {
+            item = m_pagePool->loadPageWithProperties(url.toString(), {}, [this](const QString &url, QQuickItem *item) {
+                Q_EMIT itemsChanged();
+            });
+        }
+    }
+    return items;
 }
 
 #include "moc_pagepool.cpp"
