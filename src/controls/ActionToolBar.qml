@@ -199,7 +199,6 @@ QQC2.Control {
         }
 
         separatorDelegate: QQC2.ToolSeparator {}
-        expandingSpacerDelegate: Item {}
 
         moreButton: P.PrivateActionToolButton {
             flat: root.flat

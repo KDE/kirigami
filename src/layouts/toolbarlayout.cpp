@@ -75,7 +75,6 @@ public:
     QQmlComponent *fullDelegate = nullptr;
     QQmlComponent *iconDelegate = nullptr;
     QQmlComponent *separatorDelegate = nullptr;
-    QQmlComponent *expandingSpacerDelegate = nullptr;
     QQmlComponent *moreButton = nullptr;
     qreal spacing = 0.0;
     Qt::Alignment alignment = Qt::AlignLeft;
@@ -252,23 +251,6 @@ void ToolBarLayout::setSeparatorDelegate(QQmlComponent *newSeparatorDelegate)
     Q_EMIT separatorDelegateChanged();
 }
 
-QQmlComponent *ToolBarLayout::expandingSpacerDelegate() const
-{
-    return d->expandingSpacerDelegate;
-}
-
-void ToolBarLayout::setExpandingSpacerDelegate(QQmlComponent *newExpandingSpacerDelegate)
-{
-    if (newExpandingSpacerDelegate == d->expandingSpacerDelegate) {
-        return;
-    }
-
-    d->expandingSpacerDelegate = newExpandingSpacerDelegate;
-    d->delegates.clear();
-    relayout();
-    Q_EMIT expandingSpacerDelegateChanged();
-}
-
 QQmlComponent *ToolBarLayout::moreButton() const
 {
     return d->moreButton;
@@ -425,7 +407,7 @@ void ToolBarLayoutPrivate::calculateImplicitSize()
         return;
     }
 
-    if (!fullDelegate || !iconDelegate || !separatorDelegate || !expandingSpacerDelegate || !moreButton) {
+    if (!fullDelegate || !iconDelegate || !separatorDelegate || !moreButton) {
         qCWarning(KirigamiLayoutsLog) << "ToolBarLayout: Unable to layout, required properties are not set";
         return;
     }
@@ -593,6 +575,9 @@ void ToolBarLayoutPrivate::performLayout()
         auto attached = static_cast<ToolBarLayoutAttached *>(qmlAttachedPropertiesObject<ToolBarLayout>(item, false));
         if (attached && attached->fillWidth()) {
             spacersCount++;
+            // the expanding action still has a width which is added to visibleActionsWidth
+            // but the action is invisible so add its width to emptyWidth
+            emptyWidth += entry->width();
         }
     }
 
@@ -720,12 +705,6 @@ ToolBarLayoutDelegate *ToolBarLayoutPrivate::createDelegate(QObject *action)
     auto separator = action->property("separator");
     if (separator.isValid() && separator.toBool()) {
         fullComponent = separatorDelegate;
-    }
-
-    auto attached = static_cast<ToolBarLayoutAttached *>(qmlAttachedPropertiesObject<ToolBarLayout>(action, false));
-    bool isExpandingSpacer = attached ? attached->fillWidth() : false;
-    if (isExpandingSpacer) {
-        fullComponent = expandingSpacerDelegate;
     }
 
     auto result = new ToolBarLayoutDelegate(q);
