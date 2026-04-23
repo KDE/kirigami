@@ -12,6 +12,9 @@ import QtQuick.Layouts
 import QtQuick.Templates as T
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
+import org.kde.kirigami.controls as KirigamiControls
+import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.primitives as Primitives
 import org.kde.kirigami.dialogs as KDialogs
 
 /*!
@@ -142,7 +145,7 @@ T.Dialog {
       This is the window height, subtracted by largeSpacing on both the top
       and bottom.
      */
-    readonly property real absoluteMaximumHeight: ((parent && parent.height) || Infinity) - Kirigami.Units.largeSpacing * 2
+    readonly property real absoluteMaximumHeight: ((parent && parent.height) || Infinity) - Platform.Units.largeSpacing * 2
 
     /*!
       \brief This property holds the absolute maximum width the dialog can have.
@@ -150,7 +153,7 @@ T.Dialog {
       By default, it is the window width, subtracted by largeSpacing on both
       the top and bottom.
      */
-    readonly property real absoluteMaximumWidth: ((parent && parent.width) || Infinity) - Kirigami.Units.largeSpacing * 2
+    readonly property real absoluteMaximumWidth: ((parent && parent.width) || Infinity) - Platform.Units.largeSpacing * 2
 
     readonly property real __borderWidth: !root.hasOwnProperty("popupType") || popupType === T.Popup.Item ? 1 : 0
 
@@ -250,7 +253,7 @@ T.Dialog {
     // DialogButtonBox should NOT contain invisible buttons, because in Qt 6
     // ListView preserves space even for invisible items.
     readonly property list<T.Action> __visibleCustomFooterActions: customFooterActions
-        .filter(action => !(action instanceof Kirigami.Action) || action?.visible)
+        .filter(action => !(action instanceof KirigamiControls.Action) || action?.visible)
 
     function standardButton(button): T.AbstractButton {
         // in case a footer is redefined
@@ -297,14 +300,14 @@ T.Dialog {
 
     // center dialog
     x: parent ? Math.round(((parent && parent.width) - width) / 2) : 0
-    y: parent ? Math.round(((parent && parent.height) - height) / 2) + Kirigami.Units.gridUnit * 2 * (1 - opacity) : 0 // move animation
+    y: parent ? Math.round(((parent && parent.height) - height) / 2) + Platform.Units.gridUnit * 2 * (1 - opacity) : 0 // move animation
 
     // dialog enter and exit transitions
     enter: Transition {
-        NumberAnimation { property: "opacity"; from: 0; to: 1; easing.type: Easing.InOutQuad; duration: Kirigami.Units.longDuration }
+        NumberAnimation { property: "opacity"; from: 0; to: 1; easing.type: Easing.InOutQuad; duration: Platform.Units.longDuration }
     }
     exit: Transition {
-        NumberAnimation { property: "opacity"; from: 1; to: 0; easing.type: Easing.InOutQuad; duration: Kirigami.Units.longDuration }
+        NumberAnimation { property: "opacity"; from: 1; to: 0; easing.type: Easing.InOutQuad; duration: Platform.Units.longDuration }
     }
 
     // black background, fades in and out
@@ -314,19 +317,19 @@ T.Dialog {
         // the opacity of the item is changed internally by QQuickPopup on open/close
         Behavior on opacity {
             OpacityAnimator {
-                duration: Kirigami.Units.longDuration
+                duration: Platform.Units.longDuration
                 easing.type: Easing.InOutQuad
             }
         }
     }
 
     // dialog view background
-    background: Kirigami.ShadowedRectangle {
+    background: Primitives.ShadowedRectangle {
         id: rect
-        Kirigami.Theme.colorSet: Kirigami.Theme.View
-        Kirigami.Theme.inherit: false
-        color: Kirigami.Theme.backgroundColor
-        radius: !root.hasOwnProperty("popupType") || root.popupType === T.Popup.Item ? Kirigami.Units.cornerRadius : 0
+        Platform.Theme.colorSet: Platform.Theme.View
+        Platform.Theme.inherit: false
+        color: Platform.Theme.backgroundColor
+        radius: !root.hasOwnProperty("popupType") || root.popupType === T.Popup.Item ? Platform.Units.cornerRadius : 0
         shadow {
             size: radius * 2
             color: Qt.rgba(0, 0, 0, 0.3)
@@ -335,7 +338,7 @@ T.Dialog {
 
         border {
             width: root.__borderWidth
-            color: Kirigami.ColorUtils.linearInterpolation(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, Kirigami.Theme.frameContrast);
+            color: Platform.ColorUtils.linearInterpolation(Platform.Theme.backgroundColor, Platform.Theme.textColor, Platform.Theme.frameContrast);
         }
     }
 
@@ -344,8 +347,8 @@ T.Dialog {
         id: contentControl
 
         // ensure view colour scheme, and background color
-        Kirigami.Theme.inherit: false
-        Kirigami.Theme.colorSet: Kirigami.Theme.View
+        Platform.Theme.inherit: false
+        Platform.Theme.colorSet: Platform.Theme.View
 
         QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
 
@@ -415,10 +418,10 @@ T.Dialog {
 
         // if there is nothing in the footer, still maintain a height so that we can create a rounded bottom buffer for the dialog
         property bool bufferMode: !root.footerLeadingComponent && !dialogButtonBox.visible
-        implicitHeight: bufferMode ? Math.round(Kirigami.Units.smallSpacing / 2) : implicitContentHeight + topPadding + bottomPadding
+        implicitHeight: bufferMode ? Math.round(Platform.Units.smallSpacing / 2) : implicitContentHeight + topPadding + bottomPadding
         implicitWidth: footerLayout.implicitWidth + leftPadding + rightPadding
 
-        padding: !bufferMode ? Kirigami.Units.largeSpacing : 0
+        padding: !bufferMode ? Platform.Units.largeSpacing : 0
 
         contentItem: RowLayout {
             id: footerLayout
@@ -477,7 +480,7 @@ T.Dialog {
         }
 
         background: Item {
-            Kirigami.Separator {
+            Primitives.Separator {
                 id: footerSeparator
                 visible: if (root.contentItem instanceof T.Pane || root.contentItem instanceof Flickable) {
                     const itemContentHeight = (root.contentItem as T.Pane)?.contentHeight ?? (root.contentItem as Flickable)?.contentHeight

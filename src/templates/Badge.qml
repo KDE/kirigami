@@ -6,7 +6,7 @@
 
 import QtQuick
 import QtQuick.Templates as T
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.platform as Platform
 import org.kde.kirigami.primitives as Primitives
 
 /*!
@@ -95,8 +95,8 @@ T.Control {
      \include iconpropertiesgroup.qdocinc grouped-properties
      */
     property Primitives.IconPropertiesGroup icon: Primitives.IconPropertiesGroup {
-        width: Kirigami.Units.iconSizes.sizeForLabels
-        height: Kirigami.Units.iconSizes.sizeForLabels
+        width: Platform.Units.iconSizes.sizeForLabels
+        height: Platform.Units.iconSizes.sizeForLabels
         color: "transparent"
     }
 
@@ -131,7 +131,7 @@ T.Control {
      should use to produce a soft blue background with the Breeze color
      scheme.
      */
-    property int type: Kirigami.Badge.Type.Information
+    property int type: Badge.Type.Information
 
     /*!
      \qmlproperty color customColor

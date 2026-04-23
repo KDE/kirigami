@@ -7,7 +7,8 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Templates as T
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.layouts as KirigamiLayouts
 
 /*!
   \qmltype AbstractCard
@@ -85,17 +86,17 @@ T.ItemDelegate {
     implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
                              outerPaddingLayout.implicitHeight)
 
-    hoverEnabled: !Kirigami.Settings.tabletMode && showClickFeedback
+    hoverEnabled: !Platform.Settings.tabletMode && showClickFeedback
 
-    Kirigami.Theme.inherit: false
-    Kirigami.Theme.colorSet: Kirigami.Theme.View
+    Platform.Theme.inherit: false
+    Platform.Theme.colorSet: Platform.Theme.View
 
     width: ListView.view ? ListView.view.width - ListView.view.leftMargin - ListView.view.rightMargin : undefined
-    padding: Kirigami.Units.largeSpacing
+    padding: Platform.Units.largeSpacing
 
     // Card component repurposes control's contentItem property, so it has to
     // reimplement content layout and its padding manually.
-    Kirigami.Padding {
+    KirigamiLayouts.Padding {
         id: outerPaddingLayout
 
         anchors.fill: parent
@@ -105,10 +106,10 @@ T.ItemDelegate {
         rightPadding: root.rightPadding
         bottomPadding: root.bottomPadding
 
-        contentItem: Kirigami.HeaderFooterLayout {
+        contentItem: KirigamiLayouts.HeaderFooterLayout {
             id: headerFooterLayout
 
-            contentItem: Kirigami.Padding {
+            contentItem: KirigamiLayouts.Padding {
                 id: innerPaddingLayout
 
                 contentItem: root.contentItem
@@ -117,8 +118,8 @@ T.ItemDelegate {
                 // included in control's total implicit height.
                 visible: contentItem !== null
 
-                topPadding: headerFooterLayout.header ? Kirigami.Units.largeSpacing : 0
-                bottomPadding: headerFooterLayout.footer ? Kirigami.Units.largeSpacing : 0
+                topPadding: headerFooterLayout.header ? Platform.Units.largeSpacing : 0
+                bottomPadding: headerFooterLayout.footer ? Platform.Units.largeSpacing : 0
             }
         }
     }

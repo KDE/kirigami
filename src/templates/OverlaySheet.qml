@@ -9,6 +9,10 @@ import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
+import org.kde.kirigami.controls as KirigamiControls
+import org.kde.kirigami.layouts as KirigamiLayouts
+import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.primitives as Primitives
 
 /*!
   \qmltype Overlay
@@ -41,8 +45,8 @@ T.Popup {
     Kirigami.OverlayZStacking.layer: Kirigami.OverlayZStacking.FullScreen
     z: Kirigami.OverlayZStacking.z
 
-    Kirigami.Theme.colorSet: Kirigami.Theme.View
-    Kirigami.Theme.inherit: false
+    Platform.Theme.colorSet: Platform.Theme.View
+    Platform.Theme.inherit: false
 
 //BEGIN Own Properties
 
@@ -58,7 +62,7 @@ T.Popup {
 
       default: Only shown in desktop mode
      */
-    property bool showCloseButton: !Kirigami.Settings.isMobile
+    property bool showCloseButton: !Platform.Settings.isMobile
 
     /*!
       \brief This property holds an optional item which will be used as the
@@ -66,7 +70,7 @@ T.Popup {
 
       default: \c null
      */
-    property Item header: Kirigami.Heading {
+    property Item header: KirigamiControls.Heading {
         level: 2
         text: root.title
         verticalAlignment: Text.AlignVCenter
@@ -98,7 +102,7 @@ T.Popup {
         // the opacity of the item is changed internally by QQuickPopup on open/close
         Behavior on opacity {
             OpacityAnimator {
-                duration: Kirigami.Units.longDuration
+                duration: Platform.Units.longDuration
                 easing.type: Easing.InOutQuad
             }
         }
@@ -120,7 +124,7 @@ T.Popup {
         }
         const visualParentAdjust = sheetHandler.visualParent?.y ?? 0;
         const wantedPosition = parent.height / 2 - implicitHeight / 2;
-        return Math.round(Math.max(visualParentAdjust, wantedPosition, Kirigami.Units.gridUnit * 3));
+        return Math.round(Math.max(visualParentAdjust, wantedPosition, Platform.Units.gridUnit * 3));
     }
 
     width: root.parent ? Math.min(root.parent.width, implicitWidth) : implicitWidth
@@ -143,9 +147,9 @@ T.Popup {
         } else if (scrollView.itemForSizeHints.Layout.preferredHeight > 0) {
             h = scrollView.itemForSizeHints.Layout.preferredHeight;
         } else if (scrollView.itemForSizeHints.implicitHeight > 0) {
-            h = scrollView.itemForSizeHints.implicitHeight + Kirigami.Units.largeSpacing * 2;
+            h = scrollView.itemForSizeHints.implicitHeight + Platform.Units.largeSpacing * 2;
         } else if ((scrollView.itemForSizeHints as Flickable)?.contentHeight > 0) {
-            h = (scrollView.itemForSizeHints as Flickable).contentHeight + Kirigami.Units.largeSpacing * 2;
+            h = (scrollView.itemForSizeHints as Flickable).contentHeight + Platform.Units.largeSpacing * 2;
         } else {
             h = scrollView.itemForSizeHints.height;
         }
@@ -182,8 +186,8 @@ T.Popup {
     contentItem: MouseArea {
         implicitWidth: mainLayout.implicitWidth
         implicitHeight: mainLayout.implicitHeight
-        Kirigami.Theme.colorSet: root.Kirigami.Theme.colorSet
-        Kirigami.Theme.inherit: false
+        Platform.Theme.colorSet: root.Platform.Theme.colorSet
+        Platform.Theme.inherit: false
 
         property real scenePressY
         property real lastY
@@ -225,7 +229,7 @@ T.Popup {
             if (mouseDragBlocker.active) {
                 return;
             }
-            if (Math.abs(mapToItem(null, mouse.x, mouse.y).y - scenePressY) > Kirigami.Units.gridUnit * 5) {
+            if (Math.abs(mapToItem(null, mouse.x, mouse.y).y - scenePressY) > Platform.Units.gridUnit * 5) {
                 root.close();
             } else {
                 restoreAnim.restart();
@@ -243,30 +247,30 @@ T.Popup {
                 Layout.alignment: Qt.AlignTop
                 //Layout.margins: 1
                 visible: root.header || root.showCloseButton
-                implicitHeight: Math.max(headerParent.implicitHeight, closeIcon.height)// + Kirigami.Units.smallSpacing * 2
+                implicitHeight: Math.max(headerParent.implicitHeight, closeIcon.height)// + Platform.Units.smallSpacing * 2
                 z: 2
 
                 Rectangle {
                     anchors {
                         top: parent.top
                         horizontalCenter: parent.horizontalCenter
-                        topMargin: Kirigami.Units.smallSpacing
+                        topMargin: Platform.Units.smallSpacing
                     }
-                    width: Math.round(Kirigami.Units.gridUnit * 3)
-                    height: Math.round(Kirigami.Units.gridUnit / 4)
+                    width: Math.round(Platform.Units.gridUnit * 3)
+                    height: Math.round(Platform.Units.gridUnit / 4)
                     radius: height
-                    color: Kirigami.Theme.textColor
+                    color: Platform.Theme.textColor
                     opacity: 0.4
-                    visible: Kirigami.Settings.hasTransientTouchInput
+                    visible: Platform.Settings.hasTransientTouchInput
                 }
-                Kirigami.Padding {
+                KirigamiLayouts.Padding {
                     id: headerParent
 
-                    readonly property real leadingPadding: Kirigami.Units.largeSpacing
-                    readonly property real trailingPadding: (root.showCloseButton ? closeIcon.width + closeIcon.anchors.rightMargin : 0) + Kirigami.Units.smallSpacing
+                    readonly property real leadingPadding: Platform.Units.largeSpacing
+                    readonly property real trailingPadding: (root.showCloseButton ? closeIcon.width + closeIcon.anchors.rightMargin : 0) + Platform.Units.smallSpacing
 
                     anchors.fill: parent
-                    verticalPadding: Kirigami.Units.largeSpacing
+                    verticalPadding: Platform.Units.largeSpacing
                     leftPadding: root.mirrored ? trailingPadding : leadingPadding
                     rightPadding: root.mirrored ? leadingPadding : trailingPadding
 
@@ -278,8 +282,8 @@ T.Popup {
                     // We want to position the close button in the top-right
                     // corner if the header is very tall, but we want to
                     // vertically center it in a short header
-                    readonly property bool tallHeader: parent.height > (Kirigami.Units.iconSizes.smallMedium + Kirigami.Units.largeSpacing * 2)
-                    readonly property real tallHeaderMargins: Kirigami.Units.largeSpacing
+                    readonly property bool tallHeader: parent.height > (Platform.Units.iconSizes.smallMedium + Platform.Units.largeSpacing * 2)
+                    readonly property real tallHeaderMargins: Platform.Units.largeSpacing
                     readonly property real shortHeaderMargins: Math.round((headerItem.implicitHeight - implicitHeight) / 2)
 
                     anchors {
@@ -295,7 +299,7 @@ T.Popup {
                     onClicked: root.close()
                     display: QQC2.AbstractButton.IconOnly
                 }
-                Kirigami.Separator {
+                Primitives.Separator {
                     anchors {
                         right: parent.right
                         left: parent.left
@@ -331,7 +335,7 @@ T.Popup {
                     const content = flickable.contentItem;
                     content.childrenChanged.connect(() => {
                         for (const item of content.children) {
-                            item.anchors.margins = Kirigami.Units.largeSpacing;
+                            item.anchors.margins = Platform.Units.largeSpacing;
                             item.anchors.top = content.top;
                             item.anchors.left = content.left;
                             item.anchors.right = content.right;
@@ -342,14 +346,14 @@ T.Popup {
             }
 
             // Optional footer
-            Kirigami.Separator {
+            Primitives.Separator {
                 Layout.fillWidth: true
                 visible: footerParent.visible
             }
-            Kirigami.Padding {
+            KirigamiLayouts.Padding {
                 id: footerParent
                 Layout.fillWidth: true
-                padding: Kirigami.Units.smallSpacing
+                padding: Platform.Units.smallSpacing
                 contentItem: root.footer
                 visible: contentItem !== null
             }
@@ -386,7 +390,7 @@ T.Popup {
                 from: translation.y
                 to: 0
                 easing.type: Easing.InOutQuad
-                duration: Kirigami.Units.longDuration
+                duration: Platform.Units.longDuration
             }
             Component.onCompleted: {
                 root.contentItem.parent.transform = translation
@@ -404,15 +408,15 @@ T.Popup {
                 from: 0
                 to: 1
                 easing.type: Easing.InOutQuad
-                duration: Kirigami.Units.longDuration
+                duration: Platform.Units.longDuration
             }
             NumberAnimation {
                 target: translation
                 property: "y"
-                from: Kirigami.Units.gridUnit * 5
+                from: Platform.Units.gridUnit * 5
                 to: 0
                 easing.type: Easing.InOutQuad
-                duration: Kirigami.Units.longDuration
+                duration: Platform.Units.longDuration
             }
         }
     }
@@ -424,15 +428,15 @@ T.Popup {
                 from: 1
                 to: 0
                 easing.type: Easing.InOutQuad
-                duration: Kirigami.Units.longDuration
+                duration: Platform.Units.longDuration
             }
             NumberAnimation {
                 target: translation
                 property: "y"
                 from: translation.y
-                to: translation.y >= 0 ? translation.y + Kirigami.Units.gridUnit * 5 : translation.y - Kirigami.Units.gridUnit * 5
+                to: translation.y >= 0 ? translation.y + Platform.Units.gridUnit * 5 : translation.y - Platform.Units.gridUnit * 5
                 easing.type: Easing.InOutQuad
-                duration: Kirigami.Units.longDuration
+                duration: Platform.Units.longDuration
             }
         }
     }

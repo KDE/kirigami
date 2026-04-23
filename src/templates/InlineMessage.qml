@@ -8,8 +8,9 @@
 import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.controls as KirigamiControls
 import org.kde.kirigami.primitives as Primitives
+import org.kde.kirigami.platform as Platform
 
 /*!
   \qmltype InlineMessage
@@ -169,7 +170,7 @@ T.Control {
 
       The default is Kirigami.MessageType.Information.
      */
-    property int type: Kirigami.MessageType.Information
+    property int type: KirigamiControls.MessageType.Information
 
     /*!
       \qmlproperty string icon.name
@@ -215,7 +216,7 @@ T.Control {
 
     implicitHeight: visible ? (contentLayout.implicitHeight + topPadding + bottomPadding) : 0
 
-    padding: Kirigami.Units.smallSpacing
+    padding: Platform.Units.smallSpacing
 
     Accessible.role: Accessible.AlertMessage
     Accessible.ignored: !visible
@@ -225,7 +226,7 @@ T.Control {
 
         SequentialAnimation {
             PropertyAction { targets: root; property: "_animating"; value: true }
-            NumberAnimation { duration: Kirigami.Units.longDuration }
+            NumberAnimation { duration: Platform.Units.longDuration }
         }
     }
 
@@ -240,7 +241,7 @@ T.Control {
     Behavior on opacity {
         enabled: !root.visible
 
-        NumberAnimation { duration: Kirigami.Units.shortDuration }
+        NumberAnimation { duration: Platform.Units.shortDuration }
     }
 
     onOpacityChanged: {
@@ -266,7 +267,7 @@ T.Control {
             enabled: root.visible && contentLayout.complete
 
             SequentialAnimation {
-                NumberAnimation { duration: Kirigami.Units.shortDuration * 2 }
+                NumberAnimation { duration: Platform.Units.shortDuration * 2 }
                 PropertyAction { targets: root; property: "_animating"; value: false }
             }
         }
@@ -274,7 +275,7 @@ T.Control {
         implicitHeight: {
             let maximumTopHeight = Math.max(label.implicitHeight, icon.implicitHeight, (root.showCloseButton ? closeButton.implicitHeight : 0))
             if (atBottom) {
-                return maximumTopHeight + actionsLayout.implicitHeight + Kirigami.Units.smallSpacing
+                return maximumTopHeight + actionsLayout.implicitHeight + Platform.Units.smallSpacing
             } else {
                 return Math.max(maximumTopHeight, actionsLayout.implicitHeight)
             }
@@ -282,21 +283,21 @@ T.Control {
 
         Accessible.ignored: true
 
-        readonly property real fixedContentWidth: icon.width + Kirigami.Units.smallSpacing * 3 + (root.showCloseButton ? closeButton.width + Kirigami.Units.smallSpacing : 0)
+        readonly property real fixedContentWidth: icon.width + Platform.Units.smallSpacing * 3 + (root.showCloseButton ? closeButton.width + Platform.Units.smallSpacing : 0)
         readonly property real remainingWidth: width - fixedContentWidth - label.implicitWidth
         readonly property bool multiline: remainingWidth <= 0 || atBottom
         readonly property bool atBottom: (root.actions.length > 0) && (label.lineCount > 1 || actionsLayout.implicitWidth > remainingWidth)
 
-        Kirigami.Icon {
+        Primitives.Icon {
             id: icon
 
-            width: Kirigami.Units.iconSizes.smallMedium
-            height: Kirigami.Units.iconSizes.smallMedium
+            width: Platform.Units.iconSizes.smallMedium
+            height: Platform.Units.iconSizes.smallMedium
 
             anchors {
                 left: parent.left
-                leftMargin: Kirigami.Units.smallSpacing
-                topMargin: Kirigami.Units.smallSpacing
+                leftMargin: Platform.Units.smallSpacing
+                topMargin: Platform.Units.smallSpacing
             }
 
             states: [
@@ -330,11 +331,11 @@ T.Control {
                 }
 
                 switch (root.type) {
-                case Kirigami.MessageType.Positive:
+                case KirigamiControls.MessageType.Positive:
                     return "emblem-success";
-                case Kirigami.MessageType.Warning:
+                case KirigamiControls.MessageType.Warning:
                     return "emblem-warning";
-                case Kirigami.MessageType.Error:
+                case KirigamiControls.MessageType.Error:
                     return "emblem-error";
                 default:
                     return "emblem-information";
@@ -346,11 +347,11 @@ T.Control {
             Accessible.ignored: !root.visible
             Accessible.name: {
                 switch (root.type) {
-                case Kirigami.MessageType.Positive:
+                case KirigamiControls.MessageType.Positive:
                     return qsTr("Success");
-                case Kirigami.MessageType.Warning:
+                case KirigamiControls.MessageType.Warning:
                     return qsTr("Warning");
-                case Kirigami.MessageType.Error:
+                case KirigamiControls.MessageType.Error:
                     return qsTr("Error");
                 default:
                     return qsTr("Note");
@@ -358,19 +359,19 @@ T.Control {
              }
         }
 
-        Kirigami.SelectableLabel {
+        KirigamiControls.SelectableLabel {
             id: label
 
             anchors {
                 left: icon.right
-                leftMargin: Kirigami.Units.largeSpacing
+                leftMargin: Platform.Units.largeSpacing
                 top: parent.top
                 bottom: parent.bottom
             }
 
             width: Math.min(parent.width - parent.fixedContentWidth, implicitWidth)
 
-            color: Kirigami.Theme.textColor
+            color: Platform.Theme.textColor
             wrapMode: Text.WordWrap
 
             text: root.text
@@ -400,7 +401,7 @@ T.Control {
             Accessible.ignored: !root.visible
         }
 
-        Kirigami.ActionToolBar {
+        KirigamiControls.ActionToolBar {
             id: actionsLayout
 
             flat: false
@@ -412,7 +413,7 @@ T.Control {
             anchors {
                 bottom: parent.bottom
                 right: (!contentLayout.atBottom && root.showCloseButton) ? closeButton.left : parent.right
-                rightMargin: !contentLayout.atBottom && root.showCloseButton ? Kirigami.Units.smallSpacing : 0
+                rightMargin: !contentLayout.atBottom && root.showCloseButton ? Platform.Units.smallSpacing : 0
             }
 
             width: Math.min(implicitWidth, parent.width)

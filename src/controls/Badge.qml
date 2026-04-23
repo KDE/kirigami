@@ -8,9 +8,9 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 
-import org.kde.kirigami as Kirigami
 import org.kde.kirigami.platform as Platform
 import org.kde.kirigami.templates as KT
+import org.kde.kirigami.primitives as Primitives
 
 
 KT.Badge {
@@ -24,11 +24,11 @@ KT.Badge {
     rightPadding: horizontalPadding + (LayoutMirroring.enabled ? 0 : internal.extraTrailingPadding)
     bottomPadding: padding
 
-    spacing: Kirigami.Units.smallSpacing
+    spacing: Platform.Units.smallSpacing
 
     font.bold: true
-    font.pointSize: Kirigami.Theme.smallFont.pointSize
-    font.family: Kirigami.Theme.smallFont.family
+    font.pointSize: Platform.Theme.smallFont.pointSize
+    font.family: Platform.Theme.smallFont.family
 
     QtObject {
         id: internal
@@ -43,7 +43,7 @@ KT.Badge {
         // TODO: use unmodified semantically appropriate colors from the color scheme, once they exist
         readonly property color borderColor: {
             if (root.customColor !== Qt.color("transparent")) {
-                return Kirigami.ColorUtils.linearInterpolation(root.customColor, Platform.Theme.textColor, 0.5)
+                return Platform.ColorUtils.linearInterpolation(root.customColor, Platform.Theme.textColor, 0.5)
             }
 
             switch (root.type) {
@@ -59,7 +59,7 @@ KT.Badge {
         }
         readonly property color backgroundColor: root.customColor !== Qt.color("transparent")
             ? root.customColor
-            : Kirigami.ColorUtils.tintWithAlpha(Platform.Theme.backgroundColor, borderColor, 0.2)
+            : Platform.ColorUtils.tintWithAlpha(Platform.Theme.backgroundColor, borderColor, 0.2)
         readonly property color textColor: {
             if (root.customTextColor !== Qt.color("transparent")) {
                 return root.customTextColor;
@@ -69,11 +69,11 @@ KT.Badge {
 
             // Ensure readability on arbitrary background colors, overriding
             // the theme's text color if needed
-            if (Kirigami.ColorUtils.brightnessForColor(backgroundColor) == Kirigami.ColorUtils.brightnessForColor(baseTextColor)) {
-                baseTextColor = Kirigami.ColorUtils.brightnessForColor(backgroundColor) == Kirigami.ColorUtils.Light ? "black" : "white"
+            if (Platform.ColorUtils.brightnessForColor(backgroundColor) == Platform.ColorUtils.brightnessForColor(baseTextColor)) {
+                baseTextColor = Platform.ColorUtils.brightnessForColor(backgroundColor) == Platform.ColorUtils.Light ? "black" : "white"
             }
             // 0.17 is the lowest we can go and still achieve WCAG AAA contrast ratio with the default colors
-            Kirigami.ColorUtils.linearInterpolation(baseTextColor, backgroundColor, 0.17)
+            Platform.ColorUtils.linearInterpolation(baseTextColor, backgroundColor, 0.17)
         }
     }
 
@@ -88,7 +88,7 @@ KT.Badge {
     contentItem: RowLayout {
         spacing: root.spacing
 
-        Kirigami.Icon {
+        Primitives.Icon {
             id: icon
 
             Layout.preferredWidth: root.icon.width

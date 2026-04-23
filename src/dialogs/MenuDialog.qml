@@ -10,7 +10,8 @@ import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Layouts
 import QtQuick.Templates as T
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.controls as KirigamiControls
+import org.kde.kirigami.platform as Platform
 import org.kde.kirigami.dialogs as KirigamiDialogs
 
 /*!
@@ -86,7 +87,7 @@ KirigamiDialogs.Dialog {
      */
     property alias contentHeaderControl: columnHeader
 
-    preferredWidth: Kirigami.Units.gridUnit * 20
+    preferredWidth: Platform.Units.gridUnit * 20
     padding: 0
 
     ColumnLayout {
@@ -110,21 +111,21 @@ KirigamiDialogs.Dialog {
                 required property T.Action modelData
 
                 Layout.fillWidth: true
-                Layout.preferredHeight: Kirigami.Units.gridUnit * 2
+                Layout.preferredHeight: Platform.Units.gridUnit * 2
 
                 action: modelData
-                visible: (modelData as Kirigami.Action)?.visible ?? true
+                visible: (modelData as KirigamiControls.Action)?.visible ?? true
 
-                icon.width: Kirigami.Units.gridUnit
-                icon.height: Kirigami.Units.gridUnit
+                icon.width: Platform.Units.gridUnit
+                icon.height: Platform.Units.gridUnit
 
-                horizontalPadding: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
+                horizontalPadding: Platform.Units.largeSpacing + Platform.Units.smallSpacing
                 leftPadding: undefined
                 rightPadding: undefined
 
-                QQC2.ToolTip.text: (modelData as Kirigami.Action)?.tooltip ?? ""
-                QQC2.ToolTip.visible: QQC2.ToolTip.text.length > 0 && (Kirigami.Settings.tabletMode ? pressed : hovered)
-                QQC2.ToolTip.delay: Kirigami.Settings.tabletMode ? Application.styleHints.mousePressAndHoldInterval : Kirigami.Units.toolTipDelay
+                QQC2.ToolTip.text: (modelData as KirigamiControls.Action)?.tooltip ?? ""
+                QQC2.ToolTip.visible: QQC2.ToolTip.text.length > 0 && (Platform.Settings.tabletMode ? pressed : hovered)
+                QQC2.ToolTip.delay: Platform.Settings.tabletMode ? Application.styleHints.mousePressAndHoldInterval : Platform.Units.toolTipDelay
 
                 onClicked: root.close()
             }

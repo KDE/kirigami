@@ -8,7 +8,9 @@ import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Layouts
 
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.controls as KirigamiControls
+import org.kde.kirigami.primitives as Primitives
 
 /*!
   \qmltype SearchDialog
@@ -154,8 +156,8 @@ QQC2.Dialog {
      */
     property alias emptyHelpfulAction: placeholder.helpfulAction
 
-    width: Math.min(Kirigami.Units.gridUnit * 35, parent.width - leftMargin - rightMargin)
-    height: Math.min(Kirigami.Units.gridUnit * 20, parent.height)
+    width: Math.min(Platform.Units.gridUnit * 35, parent.width - leftMargin - rightMargin)
+    height: Math.min(Platform.Units.gridUnit * 20, parent.height)
 
     padding: 0
 
@@ -176,14 +178,14 @@ QQC2.Dialog {
     contentItem: ColumnLayout {
         spacing: 0
 
-        Kirigami.SearchField {
+        KirigamiControls.SearchField {
             id: searchField
 
             Layout.fillWidth: true
 
             background: null
 
-            Layout.margins: Kirigami.Units.smallSpacing
+            Layout.margins: Platform.Units.smallSpacing
 
             Keys.onDownPressed: {
                 const listViewHadFocus = listView.activeFocus;
@@ -227,7 +229,7 @@ QQC2.Dialog {
             onAccepted: root.accepted()
         }
 
-        Kirigami.Separator {
+        Primitives.Separator {
             Layout.fillWidth: true
         }
 
@@ -245,10 +247,10 @@ QQC2.Dialog {
                 Keys.forwardTo: searchField
                 keyNavigationEnabled: true
 
-                Kirigami.PlaceholderMessage {
+                KirigamiControls.PlaceholderMessage {
                     id: placeholder
                     anchors.centerIn: parent
-                    width: parent.width - Kirigami.Units.gridUnit * 4
+                    width: parent.width - Platform.Units.gridUnit * 4
                     icon.name: 'system-search-symbolic'
                     visible: listView.count === 0 && text.length > 0
                 }

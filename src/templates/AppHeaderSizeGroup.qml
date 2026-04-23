@@ -6,8 +6,8 @@ pragma Singleton
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.layouts as KirigamiLayouts
 
-Kirigami.SizeGroup {
-    mode: Kirigami.SizeGroup.Height
+KirigamiLayouts.SizeGroup {
+    mode: KirigamiLayouts.SizeGroup.Height
 }

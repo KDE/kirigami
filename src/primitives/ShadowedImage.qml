@@ -6,7 +6,7 @@
  */
 
 import QtQuick
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.primitives as Primitives
 
 /*!
   \qmltype ShadowedImage
@@ -156,7 +156,7 @@ Item {
         hideSource: true
     }
 
-    Kirigami.ShadowedTexture {
+    Primitives.ShadowedTexture {
         id: shadowRectangle
         anchors.fill: parent
         source: image.status === Image.Ready ? textureSource : null
