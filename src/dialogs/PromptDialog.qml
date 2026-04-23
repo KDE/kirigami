@@ -8,8 +8,11 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC2
-import org.kde.kirigami as Kirigami
 import org.kde.kirigami.dialogs as KirigamiDialogs
+import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.controls as KirigamiControls
+import org.kde.kirigami.primitives as Primitives
+import org.kde.kirigami.layouts as KirigamiLayouts
 
 /*!
   \qmltype PromptDialog
@@ -109,7 +112,7 @@ KirigamiDialogs.Dialog {
 
       Default is Kirigami.Units.largeSpacing.
      */
-    property real contentPadding: Kirigami.Units.largeSpacing
+    property real contentPadding: Platform.Units.largeSpacing
 
     /*!
       The top padding of the content, within the scroll area.
@@ -151,7 +154,7 @@ KirigamiDialogs.Dialog {
 
     header: null
 
-    Kirigami.Padding {
+    KirigamiLayouts.Padding {
         id: wrapper
 
         topPadding: root.contentTopPadding
@@ -160,28 +163,28 @@ KirigamiDialogs.Dialog {
         bottomPadding: root.contentBottomPadding
 
         contentItem: RowLayout {
-            spacing: Kirigami.Units.largeSpacing
+            spacing: Platform.Units.largeSpacing
 
-            Kirigami.Icon {
+            Primitives.Icon {
                 source: root.iconName
                 visible: root.iconName.length > 0
 
-                Layout.preferredWidth: Kirigami.Units.iconSizes.huge
-                Layout.preferredHeight: Kirigami.Units.iconSizes.huge
+                Layout.preferredWidth: Platform.Units.iconSizes.huge
+                Layout.preferredHeight: Platform.Units.iconSizes.huge
                 Layout.alignment: Qt.AlignTop
             }
 
             ColumnLayout {
                 id: mainLayout
 
-                spacing: Kirigami.Units.smallSpacing
+                spacing: Platform.Units.smallSpacing
 
                 Layout.fillWidth: true
 
                 ColumnLayout {
                     spacing: 0
 
-                    Kirigami.Heading {
+                    KirigamiControls.Heading {
                         text: root.title
                         visible: (!root.hasOwnProperty("popupType") || root.popupType === QQC2.Popup.Item) && root.title.length > 0
                         elide: QQC2.Label.ElideRight
@@ -189,7 +192,7 @@ KirigamiDialogs.Dialog {
                         Layout.fillWidth: true
                     }
 
-                    Kirigami.SelectableLabel {
+                    KirigamiControls.SelectableLabel {
                         text: root.subtitle
                         wrapMode: TextEdit.Wrap
                         visible: text.length > 0

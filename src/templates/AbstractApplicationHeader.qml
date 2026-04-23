@@ -6,7 +6,10 @@
 
 import QtQuick
 import QtQuick.Controls as QQC2
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.controls as KirigamiControls
+import org.kde.kirigami.primitives as Primitives
+import org.kde.kirigami.layouts as KirigamiLayouts
 import org.kde.kirigami.private.polyfill
 
 /*!
@@ -32,11 +35,11 @@ Item {
     /*!
      */
     property real minimumHeight: {
-        const window = QQC2.ApplicationWindow.window as Kirigami.ApplicationWindow
+        const window = QQC2.ApplicationWindow.window as KirigamiControls.ApplicationWindow
         if (window) {
             return window.pageStack.globalToolBar.minimumHeight;
         } else if (mainItem.applicationItem) {
-            return (mainItem.applicationItem as Kirigami.ApplicationItem).pageStack.globalToolBar.minimumHeight;
+            return (mainItem.applicationItem as KirigamiControls.ApplicationItem).pageStack.globalToolBar.minimumHeight;
         }
 
         return 0
@@ -46,11 +49,11 @@ Item {
     /*!
      */
     property real preferredHeight: {
-        const window = QQC2.ApplicationWindow.window as Kirigami.ApplicationWindow
+        const window = QQC2.ApplicationWindow.window as KirigamiControls.ApplicationWindow
         if (window) {
             return window.pageStack.globalToolBar.preferredHeight;
         } else if (mainItem.applicationItem) {
-            return (mainItem.applicationItem as Kirigami.ApplicationItem).pageStack.globalToolBar.preferredHeight;
+            return (mainItem.applicationItem as KirigamiControls.ApplicationItem).pageStack.globalToolBar.preferredHeight;
         }
 
         return mainItem.children.reduce((accumulator, item) => {
@@ -61,13 +64,13 @@ Item {
     /*!
      */
     property real maximumHeight: {
-        const window = QQC2.ApplicationWindow.window as Kirigami.ApplicationWindow
+        const window = QQC2.ApplicationWindow.window as KirigamiControls.ApplicationWindow
         if (window) {
             return window.pageStack.globalToolBar.maximumHeight;
         } else if (mainItem.applicationItem) {
-            return (mainItem.applicationItem as Kirigami.ApplicationItem).pageStack.globalToolBar.maximumHeight;
+            return (mainItem.applicationItem as KirigamiControls.ApplicationItem).pageStack.globalToolBar.maximumHeight;
         }
-        return Kirigami.Units.gridUnit * 3 + topPadding + bottomPadding;
+        return Platform.Units.gridUnit * 3 + topPadding + bottomPadding;
     }
 
     /*!
@@ -82,7 +85,7 @@ Item {
 
     /*!
      */
-    property /*Kirigami.Page*/ Item page: pageRow?.currentItem as Kirigami.Page ?? null
+    property /*Kirigami.Page*/ Item page: pageRow?.currentItem as KirigamiControls.Page ?? null
 
     /*!
      */
@@ -94,19 +97,19 @@ Item {
 
     /*!
      */
-    property int leftPadding: Kirigami.Units.mediumSpacing
+    property int leftPadding: Platform.Units.mediumSpacing
 
     /*!
      */
-    property int topPadding: Kirigami.Units.mediumSpacing + (pageRow ? pageRow.SafeArea.margins.top : 0)
+    property int topPadding: Platform.Units.mediumSpacing + (pageRow ? pageRow.SafeArea.margins.top : 0)
 
     /*!
      */
-    property int rightPadding: Kirigami.Units.mediumSpacing
+    property int rightPadding: Platform.Units.mediumSpacing
 
     /*!
      */
-    property int bottomPadding: Kirigami.Units.mediumSpacing
+    property int bottomPadding: Platform.Units.mediumSpacing
 
     /*!
      */
@@ -121,12 +124,12 @@ Item {
     LayoutMirroring.enabled: Application.layoutDirection === Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
 
-    Kirigami.Theme.inherit: true
+    Platform.Theme.inherit: true
 
     // FIXME: remove
     property QtObject __appWindow: typeof applicationWindow !== "undefined" ? applicationWindow() : null
     implicitHeight: preferredHeight
-    Kirigami.AlignedSize.height: preferredHeight
+    Primitives.AlignedSize.height: preferredHeight
 
     /*!
       \brief This property holds the background item.
@@ -145,7 +148,7 @@ Item {
 
         let candidate = parent;
         while (candidate) {
-            mainItem.applicationItem = candidate as Kirigami.ApplicationItem;
+            mainItem.applicationItem = candidate as KirigamiControls.ApplicationItem;
             if (mainItem.applicationItem) {
                 break;
             }
@@ -160,7 +163,7 @@ Item {
         id: heightAnim
         target: root
         property: "implicitHeight"
-        duration: Kirigami.Units.longDuration
+        duration: Platform.Units.longDuration
         easing.type: Easing.InOutQuad
     }
 
@@ -175,14 +178,14 @@ Item {
     }
 
     Connections {
-        target: root.page?.Kirigami.ColumnView ?? null
+        target: root.page?.KirigamiLayouts.ColumnView ?? null
 
         function onScrollIntention(event) {
             headerItem.scrollIntentHandler(event);
         }
     }
 
-    Kirigami.Separator {
+    Primitives.Separator {
         anchors {
             left: parent.left
             top: parent.top
@@ -193,7 +196,7 @@ Item {
         opacity: root.__appWindow?.controlsVisible ? 0 : 1
         Behavior on opacity {
             NumberAnimation {
-                duration: Kirigami.Units.longDuration
+                duration: Platform.Units.longDuration
                 easing.type: Easing.InOutQuad
             }
         }
@@ -204,8 +207,8 @@ Item {
         anchors {
             left: parent.left
             right: parent.right
-            bottom: !Kirigami.Settings.isMobile || root.position === QQC2.ToolBar.Header ? parent.bottom : undefined
-            top: !Kirigami.Settings.isMobile || root.position === QQC2.ToolBar.Footer ? parent.top : undefined
+            bottom: !Platform.Settings.isMobile || root.position === QQC2.ToolBar.Header ? parent.bottom : undefined
+            top: !Platform.Settings.isMobile || root.position === QQC2.ToolBar.Footer ? parent.top : undefined
         }
 
         height: Math.max(root.height, root.minimumHeight > 0 ? root.minimumHeight : root.preferredHeight)
@@ -217,7 +220,7 @@ Item {
             }
 
             if (root.pageRow
-                && root.pageRow.globalToolBar.actualStyle !== Kirigami.ApplicationHeaderStyle.Breadcrumb) {
+                && root.pageRow.globalToolBar.actualStyle !== KirigamiControls.ApplicationHeaderStyle.Breadcrumb) {
                 return;
             }
             if (!root.page.flickable || (root.page.flickable.atYBeginning && root.page.flickable.atYEnd)) {
@@ -244,7 +247,7 @@ Item {
            id: slideResetTimer
            interval: 500
            onTriggered: {
-                if ((root.pageRow?.wideMode ?? (root.__appWindow?.wideScreen ?? false)) || !Kirigami.Settings.isMobile) {
+                if ((root.pageRow?.wideMode ?? (root.__appWindow?.wideScreen ?? false)) || !Platform.Settings.isMobile) {
                     return;
                 }
                 if (root.height > root.minimumHeight + (root.preferredHeight - root.minimumHeight) / 2) {

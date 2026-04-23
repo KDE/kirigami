@@ -10,7 +10,8 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Templates as T
 import QtQuick.Controls as QQC2
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.controls as KirigamiControls
+import org.kde.kirigami.platform as Platform
 
 /*!
   \qmltype DialogHeaderTopContent
@@ -76,9 +77,9 @@ RowLayout {
      */
     property alias showCloseButton: closeButton.visible
 
-    spacing: Kirigami.Units.smallSpacing
+    spacing: Platform.Units.smallSpacing
 
-    Kirigami.Heading {
+    KirigamiControls.Heading {
         Layout.fillWidth: true
         Layout.alignment: Qt.AlignVCenter
 
@@ -102,7 +103,7 @@ RowLayout {
         icon.name: hovered ? "window-close" : "window-close-symbolic"
         text: qsTr("Close", "@action:button close dialog")
         display: QQC2.AbstractButton.IconOnly
-        visible: (root.dialog as Kirigami.Dialog)?.showCloseButton ?? true
+        visible: (root.dialog as Dialog)?.showCloseButton ?? true
 
         onClicked: root.dialog.reject()
     }

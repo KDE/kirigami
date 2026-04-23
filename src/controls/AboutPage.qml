@@ -6,7 +6,6 @@
  */
 
 import QtQuick
-import org.kde.kirigami as Kirigami
 
 //TODO KF6: move somewhere else? kirigami addons?
 /*!
@@ -21,7 +20,7 @@ import org.kde.kirigami as Kirigami
 
   \since 5.52
  */
-Kirigami.ScrollablePage {
+ScrollablePage {
     id: page
 
 //BEGIN properties
@@ -102,7 +101,7 @@ Kirigami.ScrollablePage {
 
     title: qsTr("About %1").arg(page.aboutData.displayName)
 
-    Kirigami.AboutItem {
+    AboutItem {
         id: aboutItem
         wideMode: page.width >= aboutItem.implicitWidth
 

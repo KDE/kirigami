@@ -7,7 +7,7 @@
 import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami.platform as Platform
 import org.kde.kirigami.templates as KT
 
 Item {
@@ -61,7 +61,7 @@ Item {
             const oDrawer = root.drawer as KT.OverlayDrawer
             return oDrawer.drawerOpen ? oDrawer.handleOpenToolTip : oDrawer.handleClosedToolTip
         }
-        QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
+        QQC2.ToolTip.delay: Platform.Units.toolTipDelay
 
         DragHandler {
             target: null
@@ -117,9 +117,9 @@ Item {
     x: {
         switch (drawer.edge) {
         case Qt.LeftEdge:
-            return drawer.background.width * drawer.position + Kirigami.Units.smallSpacing;
+            return drawer.background.width * drawer.position + Platform.Units.smallSpacing;
         case Qt.RightEdge:
-            return parent.width - (drawer.background.width * drawer.position) - width - Kirigami.Units.smallSpacing;
+            return parent.width - (drawer.background.width * drawer.position) - width - Platform.Units.smallSpacing;
         default:
             return 0;
         }
@@ -141,13 +141,13 @@ Item {
             }
             const window = applicationWindow();
 
-            let margin = Kirigami.Units.smallSpacing;
+            let margin = Platform.Units.smallSpacing;
             if (window.footer) {
-                margin = window.footer.height + Kirigami.Units.smallSpacing;
+                margin = window.footer.height + Platform.Units.smallSpacing;
             }
 
             if (drawer.parent && drawer.height < drawer.parent.height) {
-                margin = drawer.parent.height - drawer.height - drawer.y + Kirigami.Units.smallSpacing;
+                margin = drawer.parent.height - drawer.height - drawer.y + Platform.Units.smallSpacing;
             }
 
             if (!window || !window.pageStack ||
@@ -178,14 +178,14 @@ Item {
 
         Behavior on bottomMargin {
             NumberAnimation {
-                duration: Kirigami.Units.shortDuration
+                duration: Platform.Units.shortDuration
                 easing.type: Easing.InOutQuad
             }
         }
     }
 
     visible: drawer.enabled && drawer.modal && (drawer.edge === Qt.LeftEdge || drawer.edge === Qt.RightEdge) && opacity > 0
-    width: handleAnchor?.visible ? handleAnchor.width : Kirigami.Units.iconSizes.smallMedium + Kirigami.Units.smallSpacing * 2
+    width: handleAnchor?.visible ? handleAnchor.width : Platform.Units.iconSizes.smallMedium + Platform.Units.smallSpacing * 2
     height: handleAnchor?.visible ? handleAnchor.height : width
     // NOTE: check on pageStack.depth is to keep and hack elisa is doing working
     opacity: handleAnchor && applicationWindow()?.pageStack.depth > 0
@@ -196,7 +196,7 @@ Item {
         x: (root.drawer as KT.OverlayDrawer).handleVisible ? 0 : (root.drawer.edge === Qt.LeftEdge ? -Math.max(root.width, button.width) : Math.max(root.width, button.width))
         Behavior on x {
             NumberAnimation {
-                duration: Kirigami.Units.longDuration
+                duration: Platform.Units.longDuration
                 easing.type: !(root.drawer as KT.OverlayDrawer).handleVisible ? Easing.OutQuad : Easing.InQuad
             }
         }

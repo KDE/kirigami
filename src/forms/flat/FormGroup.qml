@@ -6,7 +6,7 @@
 
 import QtQuick
 import QtQuick.Layouts
-import org.kde.kirigami as Kirigami //FIXME: We need a proper Controls import
+import org.kde.kirigami.controls as KirigamiControls
 import org.kde.kirigami.platform as Platform
 import org.kde.kirigami.primitives as Primitives
 import org.kde.kirigami.layouts as KirigamiLayouts
@@ -50,7 +50,7 @@ FT.FormGroup {
         }
         spacing: Platform.Units.smallSpacing
 
-        header: Kirigami.Heading {
+        header: KirigamiControls.Heading {
             level: 4
             horizontalAlignment: Text.AlignHCenter
             font.weight: Font.DemiBold

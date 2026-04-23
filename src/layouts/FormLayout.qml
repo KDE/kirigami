@@ -10,7 +10,12 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Templates as T
-import org.kde.kirigami as Kirigami
+
+import org.kde.kirigami.dialogs as KirigamiDialogs
+import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.controls as KirigamiControls
+import org.kde.kirigami.primitives as Primitives
+import org.kde.kirigami.layouts as KirigamiLayouts
 
 /*!
   \qmltype FormLayout
@@ -88,7 +93,7 @@ Item {
         }
     }
 
-    property Kirigami.ScrollablePage scrollablePage: findAncestor(root, (item) => item instanceof Kirigami.ScrollablePage) as Kirigami.ScrollablePage
+    property KirigamiControls.ScrollablePage scrollablePage: findAncestor(root, (item) => item instanceof KirigamiControls.ScrollablePage) as KirigamiControls.ScrollablePage
 
     function findAncestor(item: Item, predicate: /*function Item => bool*/ var): Item {
         let target = item.parent
@@ -132,8 +137,8 @@ Item {
         id: lay
         property int wideImplicitWidth
         columns: root.wideMode ? 2 : 1
-        rowSpacing: Kirigami.Units.smallSpacing
-        columnSpacing: Kirigami.Units.largeSpacing
+        rowSpacing: Platform.Units.smallSpacing
+        columnSpacing: Platform.Units.largeSpacing
 
         //TODO: use state machine
         Binding {
@@ -141,7 +146,7 @@ Item {
             target: lay
             property: "width"
             // Works out to 576px by default; any higher and it's not really very narrow!
-            value: Math.min(lay.implicitWidth, Kirigami.Units.gridUnit * 32, root.width)
+            value: Math.min(lay.implicitWidth, Platform.Units.gridUnit * 32, root.width)
             restoreMode: Binding.RestoreBinding
         }
         Binding {
@@ -268,11 +273,11 @@ Item {
                 return 0;
             }
             const verticalAlignment =
-                item.Kirigami.FormData.labelAlignment !== 0
-                ? item.Kirigami.FormData.labelAlignment
+                item.KirigamiLayouts.FormData.labelAlignment !== 0
+                ? item.KirigamiLayouts.FormData.labelAlignment
                 : Qt.AlignTop;
 
-            if (item.Kirigami.FormData.isSection) {
+            if (item.KirigamiLayouts.FormData.isSection) {
                 return Qt.AlignHCenter;
             }
             if (root.wideMode) {
@@ -289,8 +294,8 @@ Item {
             if (!item) {
                 return 0;
             }
-            if (root.wideMode && !item.Kirigami.FormData.isSection) {
-                return item.Kirigami.FormData.labelAlignment !== 0 ? item.Kirigami.FormData.labelAlignment : Text.AlignVCenter;
+            if (root.wideMode && !item.KirigamiLayouts.FormData.isSection) {
+                return item.KirigamiLayouts.FormData.labelAlignment !== 0 ? item.KirigamiLayouts.FormData.labelAlignment : Text.AlignVCenter;
             }
             return Text.AlignBottom;
         }
@@ -306,7 +311,7 @@ Item {
             if (!(item instanceof Repeater)) {
                 item.Layout.row = row;
                 item.Layout.column = 1;
-                row += root.wideMode && !item.Kirigami.FormData.isSection ? 1 : 2;
+                row += root.wideMode && !item.KirigamiLayouts.FormData.isSection ? 1 : 2;
             }
 
             // skip items that are already there
@@ -345,8 +350,8 @@ Item {
 
             property Item item
 
-            Layout.row: item?.Layout?.row + (root.wideMode && !item.Kirigami.FormData.isSection ? 0 : 1)
-            Layout.column: root.wideMode && !item?.Kirigami.FormData.isSection ? 1 : 0
+            Layout.row: item?.Layout?.row + (root.wideMode && !item.KirigamiLayouts.FormData.isSection ? 0 : 1)
+            Layout.column: root.wideMode && !item?.KirigamiLayouts.FormData.isSection ? 1 : 0
 
             enabled: item?.enabled ?? false
             visible: item?.visible ?? false
@@ -364,8 +369,8 @@ Item {
             Layout.maximumHeight: item?.Layout.maximumHeight ?? 0
 
             Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
-            Layout.fillWidth: item !== null && (item instanceof TextInput || item.Layout.fillWidth || item.Kirigami.FormData.isSection)
-            Layout.columnSpan: item?.Kirigami.FormData.isSection ? lay.columns : 1
+            Layout.fillWidth: item !== null && (item instanceof TextInput || item.Layout.fillWidth || item.KirigamiLayouts.FormData.isSection)
+            Layout.columnSpan: item?.KirigamiLayouts.FormData.isSection ? lay.columns : 1
             onItemChanged: {
                 if (!item) {
                     container.destroy();
@@ -388,7 +393,7 @@ Item {
     }
     Component {
         id: buddyComponent
-        Kirigami.Heading {
+        KirigamiControls.Heading {
             id: labelItem
 
             property Item item
@@ -398,7 +403,7 @@ Item {
             Layout.column: 0
 
             enabled: {
-                const buddy = item?.Kirigami.FormData.buddyFor;
+                const buddy = item?.KirigamiLayouts.FormData.buddyFor;
                 if (buddy) {
                     return buddy.enabled;
                 } else {
@@ -406,41 +411,41 @@ Item {
                 }
             }
             visible: (item?.visible && (root.wideMode || text.length > 0)) ?? false
-            Kirigami.MnemonicData.enabled: {
-                const buddy = item?.Kirigami.FormData.buddyFor as Item;
+            Primitives.MnemonicData.enabled: {
+                const buddy = item?.KirigamiLayouts.FormData.buddyFor as Item;
                 if (buddy && buddy.enabled && buddy.visible && buddy.activeFocusOnTab) {
                     // Only set mnemonic if the buddy doesn't already have one.
-                    const buddyMnemonic = buddy.Kirigami.MnemonicData;
+                    const buddyMnemonic = buddy.Primitives.MnemonicData;
                     return !buddyMnemonic.label || !buddyMnemonic.enabled;
                 } else {
                     return false;
                 }
             }
-            Kirigami.MnemonicData.controlType: Kirigami.MnemonicData.FormLabel
-            Kirigami.MnemonicData.label: item?.Kirigami.FormData.label ?? ""
-            text: Kirigami.MnemonicData.richTextLabel
-            Accessible.name: Kirigami.MnemonicData.plainTextLabel
-            type: item?.Kirigami.FormData.isSection ? Kirigami.Heading.Type.Primary : Kirigami.Heading.Type.Normal
+            Primitives.MnemonicData.controlType: Primitives.MnemonicData.FormLabel
+            Primitives.MnemonicData.label: item?.KirigamiLayouts.FormData.label ?? ""
+            text: Primitives.MnemonicData.richTextLabel
+            Accessible.name: Primitives.MnemonicData.plainTextLabel
+            type: item?.KirigamiLayouts.FormData.isSection ? KirigamiControls.Heading.Type.Primary : KirigamiControls.Heading.Type.Normal
 
-            level: item?.Kirigami.FormData.isSection ? 3 : 5
+            level: item?.KirigamiLayouts.FormData.isSection ? 3 : 5
 
-            Layout.columnSpan: item?.Kirigami.FormData.isSection ? lay.columns : 1
+            Layout.columnSpan: item?.KirigamiLayouts.FormData.isSection ? lay.columns : 1
             Layout.preferredHeight: {
                 if (!item) {
                     return 0;
                 }
-                if (item.Kirigami.FormData.label.length > 0) {
+                if (item.KirigamiLayouts.FormData.label.length > 0) {
                     // Add extra whitespace before textual section headers, which
                     // looks better than separator lines
-                    if (item.Kirigami.FormData.isSection && labelItem.index !== 0) {
-                        return implicitHeight + Kirigami.Units.largeSpacing * 2;
+                    if (item.KirigamiLayouts.FormData.isSection && labelItem.index !== 0) {
+                        return implicitHeight + Platform.Units.largeSpacing * 2;
                     }
-                    else if (root.wideMode && !(item.Kirigami.FormData.buddyFor instanceof TextEdit)) {
-                        return Math.max(implicitHeight, item.Kirigami.FormData.buddyFor?.height ?? implicitHeight)
+                    else if (root.wideMode && !(item.KirigamiLayouts.FormData.buddyFor instanceof TextEdit)) {
+                        return Math.max(implicitHeight, item.KirigamiLayouts.FormData.buddyFor?.height ?? implicitHeight)
                     }
                     return implicitHeight;
                 }
-                return Kirigami.Units.smallSpacing;
+                return Platform.Units.smallSpacing;
             }
 
             Layout.alignment: temp.effectiveLayout(item)
@@ -453,16 +458,16 @@ Item {
                 if (!item) {
                     return 0;
                 }
-                if (item.Kirigami.FormData.buddyFor && root.wideMode && item.Kirigami.FormData.buddyFor.parent !== root) {
-                    return item.Kirigami.FormData.buddyFor.y;
+                if (item.KirigamiLayouts.FormData.buddyFor && root.wideMode && item.KirigamiLayouts.FormData.buddyFor.parent !== root) {
+                    return item.KirigamiLayouts.FormData.buddyFor.y;
                 }
-                if (item?.Kirigami.FormData.isSection && text.length > 0) {
-                    return Kirigami.Units.largeSpacing * 2;
+                if (item?.KirigamiLayouts.FormData.isSection && text.length > 0) {
+                    return Platform.Units.largeSpacing * 2;
                 }
                 if (index === 0 || root.wideMode) {
                     return 0;
                 }
-                return Kirigami.Units.largeSpacing * 2;
+                return Platform.Units.largeSpacing * 2;
             }
             onItemChanged: {
                 if (item.Accessible.hasOwnProperty("labelledBy")) {
@@ -474,9 +479,9 @@ Item {
                 }
             }
             Shortcut {
-                sequence: labelItem.Kirigami.MnemonicData.sequence
+                sequence: labelItem.Primitives.MnemonicData.sequence
                 onActivated: {
-                    const buddy = labelItem.item.Kirigami.FormData.buddyFor;
+                    const buddy = labelItem.item.KirigamiLayouts.FormData.buddyFor;
 
                     const buttonBuddy = buddy as T.AbstractButton;
                     // animateClick is only in Qt 6.8,

@@ -9,6 +9,7 @@ import QtQuick.Templates as T
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 import org.kde.kirigami.primitives as Primitives
+import org.kde.kirigami.platform as Platform
 import "private" as KTP
 
 /*!
@@ -87,7 +88,7 @@ T.Drawer {
 
       default: Units.iconSizes.medium, just enough to accommodate medium sized icons
      */
-    property int collapsedSize: Kirigami.Units.iconSizes.medium
+    property int collapsedSize: Platform.Units.iconSizes.medium
 
     /*!
       \qmlproperty string icon.name
@@ -112,7 +113,7 @@ T.Drawer {
      */
     readonly property Primitives.IconPropertiesGroup handleOpenIcon: Primitives.IconPropertiesGroup {
         name: root.edge === Qt.RightEdge ? "view-right-close" : "view-left-close"
-        width: Kirigami.Units.iconSizes.smallMedium
+        width: Platform.Units.iconSizes.smallMedium
         height: width
     }
 
@@ -136,7 +137,7 @@ T.Drawer {
      */
     property Primitives.IconPropertiesGroup handleClosedIcon: Primitives.IconPropertiesGroup {
         name: root.edge === Qt.RightEdge ? "view-right-new" : "view-left-new"
-        width: Kirigami.Units.iconSizes.smallMedium
+        width: Platform.Units.iconSizes.smallMedium
         height: width
     }
 
@@ -185,16 +186,16 @@ T.Drawer {
     /*!
       \brief The minimum size (width or height, depending on the edge) this drawer is allowed to be resized
 
-      For left and right drawers the default is Kirigami.Units.gridUnit * 8
-      For top and bottom drawers the default is Kirigami.Units.gridUnit * 4
+      For left and right drawers the default is Platform.Units.gridUnit * 8
+      For top and bottom drawers the default is Platform.Units.gridUnit * 4
      */
     property real minimumSize: {
         switch (edge) {
         case Qt.TopEdge:
         case Qt.BottomEdge:
-            return Kirigami.Units.gridUnit * 4;
+            return Platform.Units.gridUnit * 4;
         default:
-            return Kirigami.Units.gridUnit * 8;
+            return Platform.Units.gridUnit * 8;
         }
     }
 
@@ -210,18 +211,18 @@ T.Drawer {
     /*!
       \brief The maximum size (width or height, depending on the edge) this drawer is allowed to be resized
 
-      For left and right drawers the default is the minimum between Kirigami.Units.gridUnit * 25
+      For left and right drawers the default is the minimum between Platform.Units.gridUnit * 25
       and 80% of the window width
-      For Top and bottom drawers the default is the minimum between Kirigami.Units.gridUnit * 15 and half of
+      For Top and bottom drawers the default is the minimum between Platform.Units.gridUnit * 15 and half of
       the window height
     */
     property real maximumSize: {
         switch (edge) {
         case Qt.TopEdge:
         case Qt.BottomEdge:
-            return Math.round(Math.min(T.ApplicationWindow.window.height * 0.5, Kirigami.Units.gridUnit * 15));
+            return Math.round(Math.min(T.ApplicationWindow.window.height * 0.5, Platform.Units.gridUnit * 15));
         default:
-            return Math.round(Math.min(T.ApplicationWindow.window.width * 0.8, Kirigami.Units.gridUnit * 25));
+            return Math.round(Math.min(T.ApplicationWindow.window.width * 0.8, Platform.Units.gridUnit * 25));
         }
     }
 
@@ -238,15 +239,15 @@ T.Drawer {
 
     z: Kirigami.OverlayZStacking.z
 
-    Kirigami.Theme.inherit: false
-    Kirigami.Theme.colorSet: modal ? Kirigami.Theme.View : Kirigami.Theme.Window
-    Kirigami.Theme.onColorSetChanged: {
-        contentItem.Kirigami.Theme.colorSet = Kirigami.Theme.colorSet
-        background.Kirigami.Theme.colorSet = Kirigami.Theme.colorSet
+    Platform.Theme.inherit: false
+    Platform.Theme.colorSet: modal ? Platform.Theme.View : Platform.Theme.Window
+    Platform.Theme.onColorSetChanged: {
+        contentItem.Platform.Theme.colorSet = Platform.Theme.colorSet
+        background.Platform.Theme.colorSet = Platform.Theme.colorSet
     }
 
 //BEGIN reassign properties
-    padding: Kirigami.Units.smallSpacing
+    padding: Platform.Units.smallSpacing
 
     y: modal ? 0 : ((T.ApplicationWindow.menuBar && T.ApplicationWindow.menuBar.visible ? T.ApplicationWindow.menuBar.height : 0) + (T.ApplicationWindow.header && T.ApplicationWindow.header.visible ? T.ApplicationWindow.header.height : 0))
 
@@ -264,7 +265,7 @@ T.Drawer {
         color: Qt.rgba(0, 0, 0, 0.35)
     }
 
-    dragMargin: enabled && (edge === Qt.LeftEdge || edge === Qt.RightEdge) ? Math.min(Kirigami.Units.gridUnit, Application.styleHints.startDragDistance) : 0
+    dragMargin: enabled && (edge === Qt.LeftEdge || edge === Qt.RightEdge) ? Math.min(Platform.Units.gridUnit, Application.styleHints.startDragDistance) : 0
 
     contentWidth: contentItem.implicitWidth || (contentChildren.length === 1 ? contentChildren[0].implicitWidth : 0)
     contentHeight: contentItem.implicitHeight || (contentChildren.length === 1 ? contentChildren[0].implicitHeight : 0)
@@ -292,7 +293,7 @@ T.Drawer {
             }
             NumberAnimation {
                 easing.type: Easing.OutQuad
-                duration: Kirigami.Units.longDuration
+                duration: Platform.Units.longDuration
             }
             ScriptAction {
                 script: enterAnimation.animating = false
@@ -310,7 +311,7 @@ T.Drawer {
             }
             NumberAnimation {
                 easing.type: Easing.InQuad
-                duration: Kirigami.Units.longDuration
+                duration: Platform.Units.longDuration
             }
             ScriptAction {
                 script: exitAnimation.animating = false
@@ -322,7 +323,7 @@ T.Drawer {
 
 //BEGIN signal handlers
     onCollapsedChanged: {
-        if (Kirigami.Settings.isMobile) {
+        if (Platform.Settings.isMobile) {
             collapsed = false;
         }
         if (!__internal.completed) {
@@ -333,7 +334,7 @@ T.Drawer {
         }
     }
     onCollapsibleChanged: {
-        if (Kirigami.Settings.isMobile) {
+        if (Platform.Settings.isMobile) {
             collapsible = false;
         }
         if (!__internal.completed) {
@@ -409,8 +410,8 @@ T.Drawer {
             root.enter.enabled = true;
         }
         __internal.completed = true;
-        contentItem.Kirigami.Theme.colorSet = Kirigami.Theme.colorSet;
-        background.Kirigami.Theme.colorSet = Kirigami.Theme.colorSet;
+        contentItem.Platform.Theme.colorSet = Platform.Theme.colorSet;
+        background.Platform.Theme.colorSet = Platform.Theme.colorSet;
     }
 //END signal handlers
 
@@ -434,7 +435,7 @@ T.Drawer {
                 target: root
                 to: root.drawerOpen ? 1 : 0
                 property: "position"
-                duration: (root.position)*Kirigami.Units.longDuration
+                duration: (root.position)*Platform.Units.longDuration
             }
             ScriptAction {
                 script: {
@@ -457,7 +458,7 @@ T.Drawer {
                     PropertyChanges {
                         root.implicitWidth: {
                             if (root.edge === Qt.TopEdge || root.edge === Qt.BottomEdge) {
-                                return root.T.ApplicationWindow.window?.width ?? Kirigami.Units.gridUnit * 30;
+                                return root.T.ApplicationWindow.window?.width ?? Platform.Units.gridUnit * 30;
                             } else {
                                 const implicitWidth = root.preferredSize > 0 ? root.preferredSize : contentItem.implicitWidth;
                                 return Math.max(root.minimumSize, Math.min(implicitWidth + root.leftPadding + root.rightPadding, root.maximumSize))
@@ -466,7 +467,7 @@ T.Drawer {
 
                         root.implicitHeight: {
                             if (root.edge === Qt.LeftEdge || root.edge === Qt.RightEdge) {
-                                return root.T.ApplicationWindow.window?.height ?? Kirigami.Units.gridUnit * 5;
+                                return root.T.ApplicationWindow.window?.height ?? Platform.Units.gridUnit * 5;
                             } else {
                                 const implicitHeight = root.preferredSize > 0 ? root.preferredSize : contentItem.implicitHeight;
                                 return Math.max(root.minimumSize, Math.min(implicitHeight + root.topPadding + root.bottomPadding, root.maximumSize))
@@ -483,19 +484,19 @@ T.Drawer {
                 enabled: root.collapsible === true
                 NumberAnimation {
                     properties: root.edge === Qt.TopEdge || root.edge === Qt.BottomEdge ? "implicitHeight" : "implicitWidth"
-                    duration: Kirigami.Units.longDuration
+                    duration: Platform.Units.longDuration
                     easing.type: Easing.InOutQuad
                 }
             }
         }
         readonly property MouseArea resizeHandle: MouseArea {
             id: resizeHandle
-            anchors.margins: -Kirigami.Units.smallSpacing
+            anchors.margins: -Platform.Units.smallSpacing
             parent: root.background.parent
             z: 999
             visible: root.interactiveResizeEnabled && !root.collapsed
-            width: Kirigami.Units.smallSpacing * 2
-            height: Kirigami.Units.smallSpacing * 2
+            width: Platform.Units.smallSpacing * 2
+            height: Platform.Units.smallSpacing * 2
             cursorShape: {
                 switch (root.edge) {
                 case Qt.TopEdge:
