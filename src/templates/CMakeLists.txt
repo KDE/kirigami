@@ -4,7 +4,6 @@ ecm_add_qml_module(KirigamiTemplates URI "org.kde.kirigami.templates"
     VERSION 2.0
     GENERATE_PLUGIN_SOURCE
     INSTALLED_PLUGIN_TARGET KF6KirigamiTemplates
-    NO_LINT # https://qt-project.atlassian.net/browse/QTBUG-145572
 )
 
 set_source_files_properties(AppHeaderSizeGroup.qml PROPERTIES

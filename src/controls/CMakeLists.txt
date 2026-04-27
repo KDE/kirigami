@@ -9,7 +9,6 @@ ecm_add_qml_module(KirigamiControls URI "org.kde.kirigami.controls" VERSION 2.0
         TARGET KirigamiPlatform
         TARGET KirigamiPrimitives
         TARGET KirigamiTemplates
-    NO_LINT # https://qt-project.atlassian.net/browse/QTBUG-145572
 )
 
 ecm_qt_declare_logging_category(KirigamiControls
