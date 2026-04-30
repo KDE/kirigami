@@ -36,7 +36,7 @@ FT.FormGroup {
             rightMargin:layout.compactMargins ?  -Platform.Units.cornerRadius : 0
         }
         property bool compactMargins: parentLayout.width >= parentLayout.parent.width
-        property ColumnLayout parentLayout: root.parent
+        property ColumnLayout parentLayout: root.parent as ColumnLayout
         spacing: Platform.Units.smallSpacing
 
         header: KC.Heading {
