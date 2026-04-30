@@ -132,10 +132,10 @@ FT.FormEntry {
                     visible: text.length > 0
                     text: root.subtitle
                     leftPadding: Application.layoutDirection === Qt.LeftToRight
-                        ? root.contentItem.KirigamiLayouts.FormData.buddyFor?.indicator?.width + root.contentItem.KirigamiLayouts.FormData.buddyFor?.spacing
-                        : padding
+                        ? root.contentItem.KirigamiLayouts.FormData.buddyFor?.indicator?.width +  root.contentItem.KirigamiLayouts.FormData.buddyFor?.spacing // qmllint disable missing-property
+                        : padding // qmllint disable missing-property
                     rightPadding: Application.layoutDirection === Qt.RightToLeft
-                        ? root.contentItem.KirigamiLayouts.FormData.buddyFor?.indicator?.width + root.contentItem.KirigamiLayouts.FormData.buddyFor?.spacing
+                        ? root.contentItem.KirigamiLayouts.FormData.buddyFor?.indicator?.width + root.contentItem.KirigamiLayouts.FormData.buddyFor?.spacing // qmllint disable missing-property
                         : padding
                 }
 

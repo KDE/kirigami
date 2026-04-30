@@ -106,6 +106,6 @@ Kirigami.ScrollablePage {
         id: aboutItem
         wideMode: page.width >= aboutItem.implicitWidth
 
-        _usePageStack: applicationWindow().pageStack ? true : false
+        _usePageStack: applicationWindow().pageStack ? true : false // qmllint disable unqualified
     }
 }

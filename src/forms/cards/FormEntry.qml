@@ -77,7 +77,7 @@ FT.FormEntry {
         implicitHeight: mainLayout.implicitHeight + topPadding + bottomPadding
         padding: Platform.Units.largeSpacing + Platform.Units.smallSpacing
 
-        leftPadding: impl.formLayout.__collapsed ? padding : root.parent?.__assignedWidthForLabels + Platform.Units.largeSpacing * 2
+        leftPadding: impl.formLayout.__collapsed ? padding : root.parent?.__assignedWidthForLabels + Platform.Units.largeSpacing * 2 // qmllint disable missing-property
 
         readonly property bool nextIsFormEntry: root.parent?.visibleChildren[root.parent.visibleChildren.indexOf(root) + 1] instanceof FormEntry ?? false
         readonly property bool prevIsFormEntry: root.parent?.visibleChildren[root.parent.visibleChildren.indexOf(root) - 1] instanceof FormEntry ?? false
@@ -150,8 +150,8 @@ FT.FormEntry {
                 visible: contentItem
                 contentItem: root.contentItem
                 Binding {
-                    when: (contentItemWrapper.contentItem instanceof QQC.Switch) && (contentItemWrapper.contentItem?.contentItem ?? false)
-                    target: contentItemWrapper.contentItem?.contentItem ?? null
+                    when: (contentItemWrapper.contentItem instanceof QQC.Switch) && (contentItemWrapper.contentItem?.contentItem ?? false) // qmllint disable missing-property
+                    target: contentItemWrapper.contentItem?.contentItem ?? null // qmllint disable missing-property
                     property: "LayoutMirroring.enabled"
                     value: !contentItemWrapper.LayoutMirroring.enabled
                 }
@@ -175,14 +175,14 @@ FT.FormEntry {
                 wrapMode: Text.WordWrap
                 elide: Text.ElideRight
                 leftPadding: Application.layoutDirection === Qt.LeftToRight
-                    ? root.contentItem.KirigamiLayouts.FormData.buddyFor?.indicator?.width ?? 0 + root.contentItem.KirigamiLayouts.FormData.buddyFor?.spacing ?? 0
+                    ? root.contentItem.KirigamiLayouts.FormData.buddyFor?.indicator?.width ?? 0 + root.contentItem.KirigamiLayouts.FormData.buddyFor?.spacing ?? 0 // qmllint disable missing-property
                     : padding
             }
         }
 
         background: Rectangle {
             color: Platform.Theme.textColor
-            opacity: root.clickEnabled && (impl.hovered || impl.down) ? (impl.down || root.contentItem?.KirigamiLayouts.FormData.buddyFor?.down ? 0.1 : 0.05) : 0
+            opacity: root.clickEnabled && (impl.hovered || impl.down) ? (impl.down || root.contentItem?.KirigamiLayouts.FormData.buddyFor?.down ? 0.1 : 0.05) : 0 // qmllint disable missing-property
             readonly property bool first: root.parent.children[0] === root
             readonly property bool last: root.parent.children[root.parent.children.length - 1] === root
             topLeftRadius: first ? Platform.Units.cornerRadius : 0

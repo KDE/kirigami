@@ -41,7 +41,7 @@ QQC2.ItemDelegate {
     property string subtitle
 
     QQC2.ToolTip.text: text + (subtitle.length > 0 ? "\n\n" + subtitle : "")
-    QQC2.ToolTip.visible: (Platform.Settings.tabletMode ? down : hovered) && (contentItem?.truncated ?? false)
+    QQC2.ToolTip.visible: (Platform.Settings.tabletMode ? down : hovered) && (contentItem?.truncated ?? false) // qmllint disable missing-property
     QQC2.ToolTip.delay: Platform.Units.toolTipDelay
 
     contentItem: IconTitleSubtitle {

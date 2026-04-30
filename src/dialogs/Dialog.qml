@@ -293,7 +293,7 @@ T.Dialog {
 
     // determine parent so that popup knows which window to popup in
     // we want to open the dialog in the center of the window, if possible
-    parent: typeof applicationWindow !== "undefined" ? applicationWindow().overlay : undefined
+    parent: typeof applicationWindow !== "undefined" ? applicationWindow().overlay : undefined // qmllint disable unqualified
 
     // center dialog
     x: parent ? Math.round(((parent && parent.width) - width) / 2) : 0
