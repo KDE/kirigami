@@ -96,10 +96,10 @@ FT.FormEntry {
             return null
         }
 
-        hoverEnabled: clickEnabled && !Platform.Settings.hasTransientTouchInput
+        hoverEnabled: root.clickEnabled && !Platform.Settings.hasTransientTouchInput
 
         onClicked: {
-            if (!clickEnabled) {
+            if (!root.clickEnabled) {
                 return;
             }
             const buddy = root.contentItem?.KirigamiLayouts.FormData.buddyFor;

@@ -90,11 +90,11 @@ Item {
                 }
             }
 
-            __collapsed = implicitWidth > root.width;
+            root.__collapsed = implicitWidth > root.width;
         }
         anchors.centerIn: parent
 
-        width: __collapsed
+        width: root.__collapsed
                 ? Math.min(implicitWidth, parent.width, Platform.Units.gridUnit * 30)
                 : Math.min(implicitWidth, parent.width)
         spacing: Platform.Units.largeSpacing + Platform.Units.smallSpacing

@@ -48,7 +48,7 @@ FT.FormGroup {
         }
         contentItem: KC.AbstractCard {
             padding: 0
-            implicitWidth: innerLayout.implicitWidth + __assignedWidthForLabels
+            implicitWidth: innerLayout.implicitWidth + root.__assignedWidthForLabels
             contentItem: ColumnLayout {
                 id: innerLayout
                 property real labelWidth: 0

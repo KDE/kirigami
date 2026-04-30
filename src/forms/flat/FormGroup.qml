@@ -31,7 +31,7 @@ FT.FormGroup {
 
     Primitives.Separator {
         id: separator
-        visible: root.parent.visibleChildren[0] !== root && title.length === 0
+        visible: root.parent.visibleChildren[0] !== root && root.title.length === 0
         anchors {
             left: parent.left
             right: parent.right
@@ -58,7 +58,7 @@ FT.FormGroup {
             text: root.title
         }
         contentItem: Item {
-            implicitWidth: innerLayout.implicitWidth + __assignedWidthForLabels//+ innerLayout.labelWidth
+            implicitWidth: innerLayout.implicitWidth + root.__assignedWidthForLabels//+ innerLayout.labelWidth
             implicitHeight: innerLayout.implicitHeight
             ColumnLayout {
                 id: innerLayout
