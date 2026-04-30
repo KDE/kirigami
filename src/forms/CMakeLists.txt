@@ -99,6 +99,9 @@ set_target_properties(KirigamiForms PROPERTIES
     EXPORT_NAME "KirigamiForms"
 )
 
+target_sources(KirigamiForms PRIVATE
+    formalignmentgroup.cpp
+)
 
 target_sources(KirigamiFormsplugin PRIVATE
     kirigamiformsplugin.cpp
@@ -113,6 +116,8 @@ if (NOT BUILD_SHARED_LIBS)
             KirigamiFormsPrivateTemplatesplugin
             KirigamiFormsPrivateFlatplugin
             KirigamiFormsPrivateCardsplugin
+            Qt6::Qml
+            Qt6::Quick
     )
     # for tests to find this under the name it's actually installed with'
     add_library(KF6KirigamiFormsplugin ALIAS KirigamiFormsplugin)
@@ -122,6 +127,8 @@ else()
             KirigamiFormsPrivateTemplates
             KirigamiFormsPrivateFlat
             KirigamiFormsPrivateCards
+            Qt6::Qml
+            Qt6::Quick
     )
 endif()
 

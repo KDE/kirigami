@@ -7,6 +7,7 @@
 import QtQuick
 import QtQuick.Layouts
 import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.forms as Forms
 
 /*!
   \qmltype Form
@@ -63,13 +64,6 @@ import org.kde.kirigami.platform as Platform
 Item {
     id: root
 
-    /*!
-      If for some implementation reason multiple Forms have to appear
-      on the same page, they can have each other in twinForms,
-      so they will vertically align with each other perfectly
-     */
-    property list<Item> twinForms
-
     // Implementation detail, don't document
     default property alias entries: layout.data
     Accessible.role: Accessible.Form
@@ -82,47 +76,18 @@ Item {
 
     onWidthChanged: layout.relayoutLabels()
 
-    onTwinFormsChanged: {
-        for (const form of twinForms) {
-            if (!(form instanceof Form)) {
-                continue;
-            }
-            if (!(root in form.children[0].reverseTwins)) {
-                form.children[0].reverseTwins.push(root)
-                Qt.callLater(() => form.children[0].reverseTwinsChanged());
-            }
-        }
-    }
-
-    Component.onDestruction: {
-        for (const form of twinForms) {
-            const child = form.children[0];
-            child.reverseTwins = child.reverseTwins.filter(value => value !== root);
-        }
-    }
-
     ColumnLayout {
         id: layout
         property real labelWidth: 0
         property real twinImplicitWidth: 0
-        property var reverseTwins: []
-        onReverseTwinsChanged: relayoutLabels()
         onImplicitWidthChanged: relayoutLabels()
         function relayoutLabels() {
             let w = 0;
             for (let entry of children) {
                 w = Math.max(w, entry?.__maxTextLabelWidth ?? 0);
             }
-            for (let form of root.twinForms) {
-                if (!(form instanceof Form)) {
-                    continue;
-                }
-                for (let entry of form.entries) {
-                    w = Math.max(w, entry?.__maxTextLabelWidth ?? 0);
-                }
-            }
-            for (let form of reverseTwins) {
-                if (!(form instanceof Form)) {
+            for (let form of root.Forms.FormAlignmentGroup.group.forms) {
+                if (!(form instanceof Form) || !form.visible) {
                     continue;
                 }
                 for (let entry of form.entries) {
@@ -137,14 +102,8 @@ Item {
                 }
             }
 
-            for (let form of root.twinForms) {
-                if (!(form instanceof Form)) {
-                    continue;
-                }
-                twinImplicitWidth = Math.max(twinImplicitWidth, form.children[0]?.implicitWidth);
-            }
-            for (let form of reverseTwins) {
-                if (!(form instanceof Form)) {
+            for (let form of root.Forms.FormAlignmentGroup.group.forms) {
+                if (!(form instanceof Form) || !form.visible) {
                     continue;
                 }
                 twinImplicitWidth = Math.max(twinImplicitWidth, form.children[0]?.implicitWidth);
