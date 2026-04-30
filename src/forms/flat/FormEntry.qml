@@ -90,11 +90,11 @@ FT.FormEntry {
         rightPadding: leftPadding
         topPadding: 0
         bottomPadding: 0
-        readonly property Item formLayout: {
+        readonly property Form formLayout: {
             let candidate = root.parent
             while (candidate) {
                 if (candidate instanceof Form) {
-                    return candidate;
+                    return candidate as Form;
                 }
                 candidate = candidate.parent
             }
