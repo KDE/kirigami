@@ -138,8 +138,8 @@ FT.FormEntry {
                 id: contentItemWrapper
                 LayoutMirroring.childrenInherit: true
                 LayoutMirroring.enabled: contentItem instanceof QQC.Switch
-                        ? Qt.application.layoutDirection === Qt.LeftToRight
-                        : Qt.application.layoutDirection === Qt.RightToLeft
+                        ? Application.layoutDirection === Qt.LeftToRight
+                        : Application.layoutDirection === Qt.RightToLeft
 
                 leftPadding: 0
                 rightPadding: 0
