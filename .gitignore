@@ -29,4 +29,3 @@ CMakeLists.txt.user*
 /cmake-build*
 .cache
 .qmlls.ini
-.qmllint.ini
