@@ -31,6 +31,11 @@ macro(kirigami_add_tests)
 endmacro()
 
 kirigami_add_tests(
+    tst_aboutitem.qml
+    tst_aboutpage.qml
+    tst_abstractapplicationheader.qml
+    tst_abstractapplicationitem.qml
+    tst_abstractapplicationwindow.qml
     tst_action.qml
     tst_actiontoolbar.qml
     tst_badge.qml
