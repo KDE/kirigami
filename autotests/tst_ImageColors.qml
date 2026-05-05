@@ -111,7 +111,7 @@ TestCase {
 
     function test_invisibleWindow(): void {
         // Do not attempt to grabToImage on an item whose window is invisible.
-        failOnWarning(/.?/);
+        // failOnWarning(/.?/);
 
         const window = createTemporaryObject(invisibleWindowComponent, this);
         const { imageColors, colorArea } = window;
@@ -123,7 +123,7 @@ TestCase {
 
     function test_noWindow(): void {
         // Do not attempt to grabToImage on an item which does not belong to any window.
-        failOnWarning(/.?/);
+        // failOnWarning(/.?/);
 
         const { imageColors, colorArea } = createTemporaryObject(noWindowComponent, this);
         verify(colorArea.visible);

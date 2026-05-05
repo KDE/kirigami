@@ -218,10 +218,14 @@ void ImageColors::update()
         m_futureImageData->setFuture(future);
     };
 
+    qWarning() << "imagecolors::update" << m_sourceItem;
+
     if (!m_sourceItem || !m_sourceItem->window() || !m_sourceItem->window()->isVisible()) {
         if (!m_sourceImage.isNull()) {
+            qWarning() << "update";
             runUpdate();
         } else {
+            qWarning() << "no update";
             m_imageData = {};
             Q_EMIT paletteChanged();
         }
