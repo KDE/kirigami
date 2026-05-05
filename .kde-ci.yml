@@ -13,4 +13,4 @@ Options:
   - '--enable=warning,style,performance'
   - '--suppress-xml=cppcheck-suppressions.xml'
  run-qmllint: true
- ctest-arguments: --repeat-until-fail=100
+ ctest-arguments: '--repeat until-fail:100'
