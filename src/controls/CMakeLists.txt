@@ -65,7 +65,7 @@ ecm_target_qml_sources(KirigamiControls SOURCES
     UrlButton.qml
 )
 
-ecm_target_qml_sources(KirigamiControls PRIVATE PATH private SOURCES
+ecm_target_qml_sources(KirigamiControls #[[PRIVATE]] PATH private SOURCES
     private/ActionMenuItem.qml
     private/ActionsMenu.qml
     private/BannerImage.qml
@@ -82,7 +82,7 @@ ecm_target_qml_sources(KirigamiControls PRIVATE PATH private SOURCES
     private/SwipeItemEventFilter.qml
 )
 
-ecm_target_qml_sources(KirigamiControls PRIVATE PATH private/globaltoolbar SOURCES
+ecm_target_qml_sources(KirigamiControls #[[PRIVATE]] PATH private/globaltoolbar SOURCES
     private/globaltoolbar/BreadcrumbControl.qml
     private/globaltoolbar/HandleButton.qml
     private/globaltoolbar/NavigationButtons.qml

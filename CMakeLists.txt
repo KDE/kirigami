@@ -57,6 +57,7 @@ if(NOT BUILD_SHARED_LIBS)
     add_definitions(-DQT_STATICPLUGIN=1)
 endif()
 
+qt_policy(SET QTP0004 NEW)
 qt_policy(SET QTP0005 NEW)
 
 ################# set KDE specific information #################
