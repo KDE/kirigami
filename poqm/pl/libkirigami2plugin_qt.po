@@ -1,8 +1,8 @@
-# SPDX-FileCopyrightText: 2016, 2017, 2018, 2019, 2021, 2022, 2023, 2024, 2025 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+# SPDX-FileCopyrightText: 2016-2019, 2021-2026 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2025-12-24 16:56+0100\n"
+"PO-Revision-Date: 2026-05-09 16:56+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: pl\n"
 "Language: pl\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 25.08.2\n"
+"X-Generator: Lokalize 26.04.0\n"
 "X-Qt-Contexts: true\n"
 
 #: controls/AboutItem.qml:133
@@ -35,7 +35,7 @@ msgstr "Wyślij wiadomość do %1"
 #: controls/AboutItem.qml:201
 msgctxt "AboutItem|"
 msgid "Get Involved"
-msgstr "Współtwórz"
+msgstr "Zacznij współtworzyć"
 
 #: controls/AboutItem.qml:207
 msgctxt "AboutItem|"
@@ -92,7 +92,7 @@ msgstr "Tłumacze"
 #, qt-format
 msgctxt "AboutPage|"
 msgid "About %1"
-msgstr "O %1"
+msgstr "Przeczytaj o %1"
 
 #: controls/AbstractApplicationWindow.qml:201
 msgctxt "AbstractApplicationWindow|"
@@ -173,7 +173,7 @@ msgstr "Poszukaj…"
 #: controls/SearchField.qml:96
 msgctxt "SearchField|"
 msgid "Search"
-msgstr "Szukaj"
+msgstr "Poszukaj"
 
 #: controls/SearchField.qml:107
 msgctxt "SearchField|"
