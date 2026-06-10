@@ -127,7 +127,9 @@ public:
     // changes. This is used instead of signal/slots as this way we only store
     // a little bit of data and that data is shared among instances, whereas
     // signal/slots turn out to have a pretty large memory overhead per instance.
-    using Watcher = PlatformTheme *;
+    // Notifications are synchronous and can re-enter QML, so guard against
+    // watcher deletion while a notification is in progress.
+    using Watcher = QPointer<PlatformTheme>;
     QList<Watcher> watchers;
 
     qreal frameContrast = DefaultFrameContrast;
@@ -214,20 +216,40 @@ public:
 
     inline void addChangeWatcher(PlatformTheme *object)
     {
+        if (!object) {
+            return;
+        }
+
+        if (watchers.contains(object)) {
+            return;
+        }
         watchers.append(object);
     }
 
     inline void removeChangeWatcher(PlatformTheme *object)
     {
-        watchers.removeOne(object);
+        watchers.removeAll(object);
     }
 
     template<typename T>
     inline void notifyWatchers(PlatformTheme *sender, const T &oldValue, const T &newValue)
     {
-        for (auto object : std::as_const(watchers)) {
-            PlatformThemeEvents::PropertyChangedEvent<T> event(sender, oldValue, newValue);
-            QCoreApplication::sendEvent(object, &event);
+        // Wea re sending events in the loop, which mean that an handler could cause the deletion of this,
+        // guard it with a QPointer
+        QPointer<PlatformTheme> senderGuard = sender;
+        const QList<Watcher> snapshot = watchers;
+
+        for (const auto &watcher : snapshot) {
+            if (!senderGuard) {
+                return;
+            }
+
+            if (!watcher || !watchers.contains(watcher)) {
+                continue;
+            }
+
+            PlatformThemeEvents::PropertyChangedEvent<T> event(senderGuard.data(), oldValue, newValue);
+            QCoreApplication::sendEvent(watcher, &event);
         }
     }
 
