@@ -715,7 +715,8 @@ void Icon::windowVisibleChanged(bool visible)
 QRectF Icon::calculateNodeRect()
 {
     const QSizeF iconPixSize(m_icon.width() / m_devicePixelRatio, m_icon.height() / m_devicePixelRatio);
-    const QSizeF itemPixSize = QSizeF((size() * m_devicePixelRatio).toSize()) / m_devicePixelRatio;
+    // pass trough QSize and back just to round the size to a final grid-aligned round value
+    const QSizeF itemPixSize = (QSizeF((size() * m_devicePixelRatio).toSize()) / m_devicePixelRatio).toSize();
     QRectF nodeRect(QPoint(0, 0), itemPixSize);
 
     if (itemPixSize.width() != 0 && itemPixSize.height() != 0) {
