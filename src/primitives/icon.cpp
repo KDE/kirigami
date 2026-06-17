@@ -713,22 +713,10 @@ void Icon::windowVisibleChanged(bool visible)
 
 QRectF Icon::calculateNodeRect()
 {
-    const QSizeF iconPixSize(m_icon.width() / m_devicePixelRatio, m_icon.height() / m_devicePixelRatio);
-    const QSizeF itemPixSize = QSizeF((size() * m_devicePixelRatio).toSize()) / m_devicePixelRatio;
-    QRectF nodeRect(QPoint(0, 0), itemPixSize);
-
-    if (itemPixSize.width() != 0 && itemPixSize.height() != 0) {
-        if (iconPixSize != itemPixSize) {
-            // At this point, the image will already be scaled, but we need to output it in
-            // the correct aspect ratio, painted centered in the viewport. So:
-            QRectF destination(QPointF(0, 0), QSizeF(m_icon.size()).scaled(m_paintedSize, Qt::KeepAspectRatio));
-            destination.moveCenter(nodeRect.center());
-            destination.moveTopLeft(QPointF(destination.topLeft().toPoint() * m_devicePixelRatio) / m_devicePixelRatio);
-            nodeRect = destination;
-        }
-    }
-
-    return nodeRect;
+    // m_paintedSize should have the correct size for painting the icon already.
+    // So we just need to make sure the node is centered.
+    auto position = QPointF{(width() - m_paintedSize.width()) / 2.0, (height() - m_paintedSize.height()) / 2.0};
+    return QRectF{position, m_paintedSize};
 }
 
 bool Icon::isSoftwareRendering() const
