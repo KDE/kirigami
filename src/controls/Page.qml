@@ -256,11 +256,13 @@ QQC2.Page {
                 root.titleDelegate !== defaultTitleDelegate) {
                 sourceComponent = root.titleDelegate;
             } else if (active) {
-                const url = "private/globaltoolbar/ToolBarPageHeader.qml";
-                setSource(Qt.resolvedUrl(url), {
-                    pageRow: Qt.binding(() => row),
-                    page: root
-                });
+                const url = Qt.resolvedUrl("private/globaltoolbar/ToolBarPageHeader.qml")
+                if (source != url) {
+                    setSource(url, {
+                        pageRow: Qt.binding(() => row),
+                        page: root
+                    });
+                }
             }
         }
     }
