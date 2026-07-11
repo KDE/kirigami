@@ -105,7 +105,7 @@ KirigamiDialogs.Dialog {
         header: columnHeader
 
         footer: Item {
-            height: Kirigami.Units.cornerRadius
+            height: Platform.Units.cornerRadius
         }
     }
 
