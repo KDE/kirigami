@@ -37,6 +37,7 @@ kirigami_add_tests(
     tst_abstractapplicationitem.qml
     tst_abstractapplicationwindow.qml
     tst_action.qml
+    tst_actionslistview.qml
     tst_actiontoolbar.qml
     tst_badge.qml
     tst_card.qml
