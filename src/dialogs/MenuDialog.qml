@@ -96,7 +96,7 @@ KirigamiDialogs.Dialog {
     preferredWidth: Platform.Units.gridUnit * 20
     padding: 0
 
-    Kirigami.ActionsListView {
+    KirigamiControls.ActionsListView {
         id: content
         actions: root.actions
 
@@ -105,7 +105,7 @@ KirigamiDialogs.Dialog {
         header: columnHeader
 
         footer: Item {
-            height: Kirigami.Units.cornerRadius
+            height: Platform.Units.cornerRadius
         }
     }
 
