@@ -27,7 +27,7 @@ ecm_target_qml_sources(KirigamiControls SOURCES
     AbstractApplicationWindow.qml
     AbstractCard.qml
     Action.qml
-    ActionList.qml
+    ActionsListView.qml
     ActionTextField.qml
     ActionToolBar.qml
     ApplicationItem.qml

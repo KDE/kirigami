@@ -102,7 +102,7 @@ import org.kde.kirigami as Kirigami
   \endqml
 
   \note Only 1 level of child actions are supported, if you want more you need to
-  implement a custome delegate.
+  implement a custom delegate.
 
   \note It is not recommended to assign an onTriggered to an action with children.
   Instead it is expected that the children have the effects to be triggered.
@@ -186,12 +186,39 @@ ListView {
             action: modelData
             visible: (modelData as Kirigami.Action)?.visible ?? true
 
-            Component.onCompleted: (contentItem as GridLayout).columns = (contentItem as GridLayout).columns + 1
-            contentItem.children: Kirigami.Icon {
-                visible: (item.modelData as Kirigami.Action).children.length > 0
-                implicitWidth: Kirigami.Units.iconSizes.small
-                implicitHeight: Kirigami.Units.iconSizes.small
-                source: item.delegate.expanded ? "go-up" : "go-down"
+            contentItem: RowLayout {
+                LayoutMirroring.enabled: item.mirrored
+
+                Kirigami.Icon {
+                    Layout.preferredHeight: item.icon.height
+                    Layout.preferredWidth: item.icon.width
+                    Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+                    visible: item.icon.name.length > 0 || item.icon.source.toString().length > 0
+                    source: item.icon.name.length > 0 ? item.icon.name : item.icon.source
+                    selected: item.highlighted || item.down
+                }
+                QQC2.Label {
+                    id: textLabel
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    Accessible.ignored: true
+                    text: item.text
+                    font: item.font
+                    color: item.highlighted || item.down
+                    ? Kirigami.Theme.highlightedTextColor
+                    : (item.enabled ? Kirigami.Theme.textColor : Kirigami.Theme.disabledTextColor)
+
+                    elide: Text.ElideRight
+                    visible: item.text
+                    horizontalAlignment: Text.AlignLeft
+                    verticalAlignment: Text.AlignVCenter
+                }
+                Kirigami.Icon {
+                    visible: (item.modelData as Kirigami.Action).children.length > 0
+                    implicitWidth: Kirigami.Units.iconSizes.small
+                    implicitHeight: Kirigami.Units.iconSizes.small
+                    source: item.delegate.expanded ? "go-up" : "go-down"
+                }
             }
 
             onClicked: item.delegate.expanded = !item.delegate.expanded
