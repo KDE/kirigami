@@ -97,8 +97,12 @@ TestCase {
         const { colorArea, imageColors, paletteChangedSpy } = item;
 
         colorArea.color = Qt.rgba(1, 0, 0);
+        // Make sure the new color has actually been rendered before update() grabs
+        // the item (grabToImage only completes after a render pass).
+        verify(waitForRendering(testCase));
         imageColors.update();
-        paletteChangedSpy.wait();
+        // Palette extraction then runs on a worker thread; give slow CI headroom.
+        paletteChangedSpy.wait(10000);
         compare(paletteChangedSpy.count, 1);
         compare(imageColors.dominant, colorArea.color);
 
