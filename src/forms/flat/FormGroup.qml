@@ -17,67 +17,57 @@ FT.FormGroup {
     id: root
 
     Layout.fillWidth: true
-    Layout.topMargin: separator.visible ? Platform.Units.largeSpacing * 3 : 0
 
     // Don't document this, should never be used directly
     default property alias entries: innerLayout.data
     implicitWidth: layout.implicitWidth
-    implicitHeight: layout.implicitHeight + layout.y
+    implicitHeight: layout.implicitHeight
 
     // Internal
     readonly property real __maxTextLabelWidth: innerLayout.labelWidth
     // Internal
     property real __assignedWidthForLabels: 0
+    // Internal
+    readonly property real __formSpacing: root.parent?.spacing ?? Platform.Units.largeSpacing + Platform.Units.smallSpacing
 
-    Primitives.Separator {
-        id: separator
-        visible: root.parent.visibleChildren[0] !== root && title.length === 0
-        anchors {
-            left: parent.left
-            right: parent.right
-            top: parent.top
-            leftMargin: Platform.Units.largeSpacing
-            rightMargin: Platform.Units.largeSpacing
-            topMargin: -Platform.Units.largeSpacing - Platform.Units.smallSpacing
-        }
-    }
 
-    KirigamiLayouts.HeaderFooterLayout {
+    ColumnLayout {
         id: layout
-        anchors {
-            fill: parent
-            topMargin: separator.visible ? Platform.Units.largeSpacing : 0
+        anchors.fill: parent
+        spacing: root.__formSpacing
+        Primitives.Separator {
+            visible: root.parent?.visibleChildren[0] !== root && root.title.length === 0
+            Layout.fillWidth: true
+            Layout.topMargin: root.__formSpacing
+            Layout.margins: Platform.Units.largeSpacing
         }
-        spacing: Platform.Units.smallSpacing
-
-        header: KirigamiControls.Heading {
+        KirigamiControls.Heading {
+            Layout.fillWidth: true
             level: 3
             horizontalAlignment: Text.AlignHCenter
             type: KirigamiControls.Heading.Primary
             visible: text.length > 0
             text: root.title
         }
-        contentItem: Item {
-            implicitWidth: innerLayout.implicitWidthWithInvisible + __assignedWidthForLabels
-            implicitHeight: innerLayout.implicitHeight
-            ColumnLayout {
-                id: innerLayout
-                anchors.fill: parent
-                property real labelWidth: 0
-                // Consider also invisible items when
-                property real implicitWidthWithInvisible: 0
-                onImplicitWidthChanged: {
-                    let w = 0;
-                    implicitWidthWithInvisible = 0
-                    for (let entry of children) {
-                        w = Math.max(w, entry?.__textLabelWidth ?? 0);
-                        implicitWidthWithInvisible = Math.max(implicitWidthWithInvisible, entry.implicitWidth, entry.Layout.preferredWidth)
-                    }
-                    labelWidth = w;
+        ColumnLayout {
+            id: innerLayout
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            Layout.preferredWidth: innerLayout.implicitWidthWithInvisible + root.__assignedWidthForLabels
+            Layout.preferredHeight: innerLayout.implicitHeight
+            property real labelWidth: 0
+            // Consider also invisible items when
+            property real implicitWidthWithInvisible: 0
+            onImplicitWidthChanged: {
+                let w = 0;
+                implicitWidthWithInvisible = 0
+                for (let entry of children) {
+                    w = Math.max(w, entry?.__textLabelWidth ?? 0);
+                    implicitWidthWithInvisible = Math.max(implicitWidthWithInvisible, entry.implicitWidth, entry.Layout.preferredWidth)
                 }
-                spacing: Platform.Units.smallSpacing
-                children: root.entries
+                labelWidth = w;
             }
+            spacing: Platform.Units.smallSpacing
         }
     }
 }
