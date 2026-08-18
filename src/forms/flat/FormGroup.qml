@@ -51,9 +51,9 @@ FT.FormGroup {
         spacing: Platform.Units.smallSpacing
 
         header: KirigamiControls.Heading {
-            level: 4
+            level: 3
             horizontalAlignment: Text.AlignHCenter
-            font.weight: Font.DemiBold
+            type: KirigamiControls.Heading.Primary
             visible: text.length > 0
             text: root.title
         }
