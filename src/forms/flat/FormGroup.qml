@@ -34,15 +34,18 @@ FT.FormGroup {
     ColumnLayout {
         id: layout
         anchors.fill: parent
-        spacing: root.__formSpacing
+        spacing: 0
         Primitives.Separator {
             visible: root.parent?.visibleChildren[0] !== root && root.title.length === 0
             Layout.fillWidth: true
-            Layout.topMargin: root.__formSpacing
             Layout.margins: Platform.Units.largeSpacing
+            Layout.topMargin: root.__formSpacing
+            Layout.bottomMargin: root.__formSpacing
         }
         KirigamiControls.Heading {
             Layout.fillWidth: true
+            Layout.topMargin: root.__formSpacing
+            Layout.bottomMargin: Platform.Units.largeSpacing
             level: 3
             horizontalAlignment: Text.AlignHCenter
             type: KirigamiControls.Heading.Primary
