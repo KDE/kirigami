@@ -143,7 +143,6 @@ target_link_libraries(Kirigami
     Qt6::Quick
     PRIVATE
     Qt6::Concurrent
-    ${Kirigami_EXTRA_LIBS}
 )
 
 if (HAVE_OpenMP)
