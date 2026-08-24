@@ -199,10 +199,10 @@ FT.FormEntry {
                 text: root.subtitle
                 leftPadding:
                     Application.layoutDirection === Qt.LeftToRight
-                    ? (root.contentItem?.KirigamiLayouts.FormData.buddyFor?.indicator?.width ?? 0) + root.contentItem?.KirigamiLayouts.FormData.buddyFor?.spacing
+                    ? (root.contentItem?.KirigamiLayouts.FormData.buddyFor?.indicator?.width ?? 0) + (root.contentItem?.KirigamiLayouts.FormData.buddyFor?.spacing ?? 0)
                     : padding
                 rightPadding: Application.layoutDirection === Qt.RightToLeft
-                    ? (root.contentItem?.KirigamiLayouts.FormData.buddyFor?.indicator?.width ?? 0) + root.contentItem?.KirigamiLayouts.FormData.buddyFor?.spacing
+                    ? (root.contentItem?.KirigamiLayouts.FormData.buddyFor?.indicator?.width ?? 0) + (root.contentItem?.KirigamiLayouts.FormData.buddyFor?.spacing ?? 0)
                     : padding
                 onLinkActivated: (link) => Qt.openUrlExternally(link)
                 HoverHandler {
