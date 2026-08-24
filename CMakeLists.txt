@@ -49,7 +49,6 @@ else()
     set(HAVE_QTGUI_OPENGL 0)
 endif()
 add_feature_info(QtGuiOpenGL HAVE_QTGUI_OPENGL "QtGui built with support for OpenGL")
-set(AUTOMOC_MOC_OPTIONS -Muri=org.kde.kirigami)
 
 if(NOT BUILD_SHARED_LIBS)
     add_definitions(-DKIRIGAMI_BUILD_TYPE_STATIC)
