@@ -12,12 +12,14 @@ if (NOT QT6_IS_SHARED_LIBS_BUILD OR NOT BUILD_SHARED_LIBS)
 endif()
 
 macro(kirigami_add_tests)
+    set(_extra_args)
+
     if (WIN32)
-        set(_extra_args -platform offscreen)
+        list(APPEND _extra_args -platform offscreen)
     endif()
 
     if (BUILD_SHARED_LIBS)
-        set(_extra_args ${_extra_args} -import ${CMAKE_BINARY_DIR}/bin)
+        list(APPEND _extra_args -import ${CMAKE_BINARY_DIR}/bin)
     endif()
 
     foreach(test ${ARGV})
