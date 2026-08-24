@@ -142,7 +142,7 @@ ecm_finalize_qml_module(KirigamiFormsPrivateFlat DESTINATION ${KDE_INSTALL_QMLDI
 ecm_finalize_qml_module(KirigamiFormsPrivateCards DESTINATION ${KDE_INSTALL_QMLDIR} EXPORT KirigamiTargets)
 ecm_finalize_qml_module(KirigamiForms DESTINATION ${KDE_INSTALL_QMLDIR} EXPORT KirigamiTargets)
 
-install(TARGETS KirigamiFormsPrivateTemplates EXPORT KirigamiTargets ${KF_INSTALL_DEFAULT_ARGUMENTS})
-install(TARGETS KirigamiFormsPrivateFlat EXPORT KirigamiTargets ${KF_INSTALL_DEFAULT_ARGUMENTS})
-install(TARGETS KirigamiFormsPrivateCards EXPORT KirigamiTargets ${KF_INSTALL_DEFAULT_ARGUMENTS})
-install(TARGETS KirigamiForms EXPORT KirigamiTargets ${KF_INSTALL_DEFAULT_ARGUMENTS})
+install(TARGETS KirigamiFormsPrivateTemplates EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS KirigamiFormsPrivateFlat EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS KirigamiFormsPrivateCards EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS KirigamiForms EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})

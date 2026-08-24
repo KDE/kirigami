@@ -36,4 +36,4 @@ add_dependencies(KirigamiDialogs
 
 ecm_finalize_qml_module(KirigamiDialogs EXPORT KirigamiTargets)
 
-install(TARGETS KirigamiDialogs EXPORT KirigamiTargets ${KF_INSTALL_DEFAULT_ARGUMENTS})
+install(TARGETS KirigamiDialogs EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})

@@ -26,4 +26,4 @@ target_link_libraries(KirigamiPolyfill PRIVATE Qt6::Quick)
 
 ecm_finalize_qml_module(KirigamiPolyfill EXPORT KirigamiTargets)
 
-install(TARGETS KirigamiPolyfill EXPORT KirigamiTargets ${KF_INSTALL_DEFAULT_ARGUMENTS})
+install(TARGETS KirigamiPolyfill EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
