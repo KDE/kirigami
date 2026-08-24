@@ -72,5 +72,5 @@ target_link_libraries(KirigamiLayouts PRIVATE Qt6::Quick Qt6::QuickControls2 Kir
 
 ecm_finalize_qml_module(KirigamiLayouts EXPORT KirigamiTargets)
 
-install(TARGETS KirigamiLayouts EXPORT KirigamiTargets ${KF_INSTALL_DEFAULT_ARGUMENTS})
-install(TARGETS KirigamiLayoutsPrivate EXPORT KirigamiTargets ${KF_INSTALL_DEFAULT_ARGUMENTS})
+install(TARGETS KirigamiLayouts EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS KirigamiLayoutsPrivate EXPORT KirigamiTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
