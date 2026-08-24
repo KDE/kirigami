@@ -15,8 +15,6 @@ FT.FormGroup {
     id: root
 
     Layout.fillWidth: true
-    Layout.leftMargin: layout.compactMargins ? -Platform.Units.gridUnit : 0
-    Layout.rightMargin: layout.compactMargins ? -Platform.Units.gridUnit : 0
 
     default property alias entries: innerLayout.data
     // remove the margins in order to not have relayouting loops
@@ -26,22 +24,16 @@ FT.FormGroup {
     readonly property real __maxTextLabelWidth: innerLayout.labelWidth
     property alias __assignedWidthForLabels: innerLayout.__assignedWidthForLabels
 
-    clip: layout.compactMargins
-
     KirigamiLayouts.HeaderFooterLayout {
         id: layout
-        anchors {
-            fill: parent
-            leftMargin: layout.compactMargins ? -Platform.Units.cornerRadius : 0
-            rightMargin:layout.compactMargins ?  -Platform.Units.cornerRadius : 0
-        }
+        anchors.fill: parent
         property bool compactMargins: parentLayout.width >= parentLayout.parent.width
         property ColumnLayout parentLayout: root.parent
         spacing: Platform.Units.smallSpacing
 
         header: KC.Heading {
             level: 5
-            leftPadding: Platform.Units.cornerRadius + (layout.compactMargins ? Platform.Units.gridUnit : 0)
+            leftPadding: Platform.Units.cornerRadius + (layout.compactMargins ? Platform.Units.largeSpacing : 0)
             font.weight: Font.DemiBold
             visible: text.length > 0
             text: root.title
@@ -49,6 +41,8 @@ FT.FormGroup {
         contentItem: KC.AbstractCard {
             padding: 0
             implicitWidth: innerLayout.implicitWidth + __assignedWidthForLabels
+            rightInset: layout.compactMargins ? -Platform.Units.largeSpacing : 0
+            leftInset: rightInset
             contentItem: ColumnLayout {
                 id: innerLayout
                 property real labelWidth: 0
