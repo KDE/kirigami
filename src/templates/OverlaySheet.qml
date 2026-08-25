@@ -97,7 +97,7 @@ T.Popup {
 
 //BEGIN Reimplemented Properties
     QQC2.Overlay.modal: Rectangle {
-        color: Qt.rgba(0, 0, 0, 0.3)
+        color: Qt.rgba(0, 0, 0, 0.5)
 
         // the opacity of the item is changed internally by QQuickPopup on open/close
         Behavior on opacity {
