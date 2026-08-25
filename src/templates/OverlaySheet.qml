@@ -215,7 +215,17 @@ T.Popup {
                 return;
             }
             const currentY = mapToItem(null, mouse.x, mouse.y).y;
+            const flickable = scrollView.contentItem as Flickable;
 
+            if (flickable) {
+                if (currentY > lastY && !flickable.atYBeginning && translation.y >= 0) {
+                    lastY = currentY;
+                    return;
+                } else if (currentY < lastY && !flickable.atYEnd && translation.y <= 0) {
+                    lastY = currentY;
+                    return;
+                }
+            }
             if (dragStarted && currentY !== lastY) {
                 translation.y += currentY - lastY;
             }
@@ -229,7 +239,7 @@ T.Popup {
             if (mouseDragBlocker.active) {
                 return;
             }
-            if (Math.abs(mapToItem(null, mouse.x, mouse.y).y - scenePressY) > Platform.Units.gridUnit * 5) {
+            if (Math.abs(translation.y) > Platform.Units.gridUnit * 5) {
                 root.close();
             } else {
                 restoreAnim.restart();
