@@ -1,9 +1,9 @@
-# SPDX-FileCopyrightText: 2018, 2019, 2020, 2021, 2022, 2023, 2024 Tommi Nieminen <translator@legisign.org>
+# SPDX-FileCopyrightText: 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2026 Tommi Nieminen <translator@legisign.org>
 # Lasse Liehu <lasse.liehu@gmail.com>, 2017.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2024-10-21 16:38+0300\n"
+"PO-Revision-Date: 2026-03-05 20:38+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 25.04.0\n"
 "X-Qt-Contexts: true\n"
 
 #: controls/AboutItem.qml:181
@@ -104,12 +104,9 @@ msgid "More Actions"
 msgstr "Lisää toimintoja"
 
 #: controls/Chip.qml:45
-#, fuzzy
-#| msgctxt "Chip|"
-#| msgid "Remove Tag"
 msgctxt "Chip|"
 msgid "Remove"
-msgstr "Poista luokitus"
+msgstr "Poista"
 
 #: controls/ContextDrawer.qml:64
 msgctxt "ContextDrawer|"
@@ -157,33 +154,21 @@ msgid "Show Password"
 msgstr "Näytä salasana"
 
 #: controls/private/globaltoolbar/HandleButton.qml:24
-#, fuzzy
-#| msgctxt "PageRowGlobalToolBarUI|"
-#| msgid "Close menu"
 msgctxt "HandleButton|"
 msgid "Close menu"
 msgstr "Sulje valikko"
 
 #: controls/private/globaltoolbar/HandleButton.qml:24
-#, fuzzy
-#| msgctxt "PageRowGlobalToolBarUI|"
-#| msgid "Open menu"
 msgctxt "HandleButton|"
 msgid "Open menu"
 msgstr "Avaa valikko"
 
 #: controls/private/globaltoolbar/NavigationButtons.qml:102
-#, fuzzy
-#| msgctxt "BackButton|"
-#| msgid "Navigate Back"
 msgctxt "NavigationButtons|"
 msgid "Navigate Back"
 msgstr "Siirry taaksepäin"
 
 #: controls/private/globaltoolbar/NavigationButtons.qml:119
-#, fuzzy
-#| msgctxt "ForwardButton|"
-#| msgid "Navigate Forward"
 msgctxt "NavigationButtons|"
 msgid "Navigate Forward"
 msgstr "Siirry eteenpäin"
@@ -192,12 +177,10 @@ msgstr "Siirry eteenpäin"
 #, qt-format
 msgctxt "@info:tooltip %1 is a keyboard shorcut|"
 msgid "Trigger this action with %1"
-msgstr ""
+msgstr "Käynnistä tämä toiminto pikanäppäimellä %1"
 
 #: controls/private/PrivateActionToolButton.qml:126
-#, fuzzy, qt-format
-#| msgctxt "AboutItem|"
-#| msgid "%1 (%2)"
+#, qt-format
 msgctxt ""
 "@info:tooltip %1 is the tooltip of an action, %2 is its keyboard shorcut|"
 msgid "%1 (%2)"
@@ -245,9 +228,6 @@ msgid "Copy Link to Clipboard"
 msgstr "Kopioi linkki leikepöydälle"
 
 #: dialogs/DialogHeaderTopContent.qml:104
-#, fuzzy
-#| msgctxt "OverlaySheet|@action:button close dialog"
-#| msgid "Close"
 msgctxt "DialogHeaderTopContent|@action:button close dialog"
 msgid "Close"
 msgstr "Sulje"
@@ -273,27 +253,24 @@ msgstr "Qt %2 (koostettu kirjastolla %3)"
 #: templates/InlineMessage.qml:351
 msgctxt "InlineMessage|"
 msgid "Success"
-msgstr ""
+msgstr "Onnistui"
 
 #: templates/InlineMessage.qml:353
 msgctxt "InlineMessage|"
 msgid "Warning"
-msgstr ""
+msgstr "Varoitus"
 
 #: templates/InlineMessage.qml:355
 msgctxt "InlineMessage|"
 msgid "Error"
-msgstr ""
+msgstr "Virhe"
 
 #: templates/InlineMessage.qml:357
 msgctxt "InlineMessage|"
 msgid "Note"
-msgstr ""
+msgstr "Huomautus"
 
 #: templates/InlineMessage.qml:444
-#, fuzzy
-#| msgctxt "OverlaySheet|@action:button close dialog"
-#| msgid "Close"
 msgctxt "InlineMessage|"
 msgid "Close"
 msgstr "Sulje"
