@@ -349,6 +349,7 @@ T.Popup {
                             item.anchors.top = content.top;
                             item.anchors.left = content.left;
                             item.anchors.right = content.right;
+                            item.anchors.rightMargin = Qt.binding(() => {return Platform.Units.largeSpacing + scrollView.T.ScrollBar.vertical.visible ? scrollView.T.ScrollBar.vertical.width : 0});
                         }
                         itemForSizeHints = content.children?.[0] ?? null;
                     });
