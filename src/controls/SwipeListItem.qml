@@ -18,6 +18,10 @@ import "private"
   \qmltype SwipeListItem
   \inqmlmodule org.kde.kirigami
 
+  \deprecated Don't use items of type SwipeListItem, it will be removed in the future.
+  Use instead simpler ItemDelegate instances, with contents from org.kde.kirigami.delegates
+  when needed.
+
   An item delegate intended to support extra actions obtainable
   by uncovering them by dragging away the item with the handle.
 
