@@ -304,7 +304,7 @@ msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "दराजं उद्घाटयन्तु"
 
-#: templates/OverlaySheet.qml:298
+#: templates/OverlaySheet.qml:308
 msgctxt "OverlaySheet|@action:button close dialog"
 msgid "Close"
 msgstr "पिधानं करोतु"

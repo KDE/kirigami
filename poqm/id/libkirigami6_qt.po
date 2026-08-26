@@ -322,7 +322,7 @@ msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "Buka penggambar"
 
-#: templates/OverlaySheet.qml:298
+#: templates/OverlaySheet.qml:308
 #, fuzzy
 #| msgctxt "OverlayDrawer|"
 #| msgid "Close drawer"
