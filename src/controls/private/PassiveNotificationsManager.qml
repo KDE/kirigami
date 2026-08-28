@@ -13,7 +13,7 @@ import org.kde.kirigami.platform as Platform
 import org.kde.kirigami.primitives as Primitives
 
 /*!
-  \brief PassiveNotificatiomodelnManager is meant to display small, passive and inline notifications in the app.
+  \brief PassiveNotificationsManager is meant to display small, passive and inline notifications in the app.
 
   It is used to show messages of limited importance that make sense only when
   the user is using the application and wouldn't be suited as a global
