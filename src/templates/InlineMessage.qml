@@ -291,8 +291,10 @@ T.Control {
         Primitives.Icon {
             id: icon
 
-            width: Platform.Units.iconSizes.smallMedium
-            height: Platform.Units.iconSizes.smallMedium
+            implicitWidth: root.icon.width >= 1 ? root.icon.width : Platform.Units.iconSizes.smallMedium
+            implicitHeight: root.icon.height >= 1 ? root.icon.height : Platform.Units.iconSizes.smallMedium
+            width: implicitWidth
+            height: implicitHeight
 
             anchors {
                 left: parent.left
@@ -365,8 +367,7 @@ T.Control {
             anchors {
                 left: icon.right
                 leftMargin: Platform.Units.largeSpacing
-                top: parent.top
-                bottom: parent.bottom
+                verticalCenter: parent.verticalCenter
             }
 
             width: Math.min(parent.width - parent.fixedContentWidth, implicitWidth)
@@ -375,8 +376,6 @@ T.Control {
             wrapMode: Text.WordWrap
 
             text: root.text
-
-            verticalAlignment: Text.AlignVCenter
 
             // QTBUG-117667 TextEdit (super-type of SelectableLabel) needs
             // very specific state-management trick so it doesn't get stuck.
