@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2026-02-16 12:26+0100\n"
+"PO-Revision-Date: 2026-08-31 17:26+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #: controls/AboutItem.qml:181
 #, qt-format
@@ -31,17 +31,14 @@ msgid "Copyright"
 msgstr "Copyright"
 
 #: controls/AboutItem.qml:244
-#, fuzzy
-#| msgctxt "AboutItem|"
-#| msgid "License:"
 msgctxt "AboutItem|"
 msgid "License"
-msgstr "Licentia:"
+msgstr "Licentia"
 
 #: controls/AboutItem.qml:266
 msgctxt "AboutItem|"
 msgid "Homepage"
-msgstr ""
+msgstr "Pagina Domo o Principal"
 
 #: controls/AboutItem.qml:280
 msgctxt "AboutItem|"
@@ -54,9 +51,6 @@ msgid "Get Involved"
 msgstr "Sea involvite"
 
 #: controls/AboutItem.qml:308
-#, fuzzy
-#| msgctxt "AboutItem|"
-#| msgid "Report a Bug"
 msgctxt "AboutItem|"
 msgid "Report a bug"
 msgstr "Reporta un bug"
