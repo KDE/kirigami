@@ -71,6 +71,11 @@ private Q_SLOTS:
     void updateRepeaterModel();
 
 private:
+    // Returns the item x position in the layout:
+    // if is a normal item returns just the item x
+    // if is pinned returns the position of the "hole" in the layout the item leaves
+    qreal itemXinLayout(QQuickItem *item) const;
+
     ColumnView *m_view;
     QQuickItem *m_globalHeaderParent;
     QQuickItem *m_globalFooterParent;
@@ -80,6 +85,9 @@ private:
     QList<QQuickItem *> m_disappearingItems; // Items that are sliding away to be destroyed by a pop() animation
     QList<QQuickItem *> m_visibleItems;
     QPointer<QQuickItem> m_viewAnchorItem;
+    // All the pinned items, mapped to all the positions they would have
+    // if they were part of the normal layout
+    QHash<QQuickItem *, qreal /*X pos*/> m_pinnedItems;
     QHash<QQuickItem *, QQuickItem *> m_separators;
     QHash<QObject *, QObject *> m_models;
 
