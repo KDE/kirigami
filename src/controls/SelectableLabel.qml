@@ -10,6 +10,7 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.private as KirigamiPrivate
 import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
 
@@ -285,12 +286,16 @@ QQC2.Control {
             acceptedButtons: Qt.RightButton
 
             onPressedChanged: if (pressed) {
+                contextMenu.hoveredLink = root.hoveredLink;
                 contextMenu.popup();
             }
         }
 
         QQC2.Menu {
             id: contextMenu
+
+            property string hoveredLink
+
             QQC2.MenuItem {
                 action: T.Action {
                     icon.name: "edit-copy-symbolic"
@@ -303,6 +308,16 @@ QQC2.Control {
                     textEdit.deselect();
                 }
             }
+
+            QQC2.MenuItem {
+                text: qsTr("Copy &Link Address")
+                icon.name: "edit-copy-path-symbolic"
+                visible: contextMenu.hoveredLink
+                onTriggered: {
+                    KirigamiPrivate.CopyHelperPrivate.copyTextToClipboard(contextMenu.hoveredLink);
+                }
+            }
+
             QQC2.MenuSeparator {}
             QQC2.MenuItem {
                 action: T.Action {
