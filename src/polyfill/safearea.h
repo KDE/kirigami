@@ -14,7 +14,7 @@ namespace Kirigami
 
 /*!
  * \qmltype SafeArea
- * \inqmlmodule org.kde.kirigami.polyfill
+ * \internal
  *
  * \brief A drop-in replacement for Qt's SafeArea attached property
  * when using Qt prior to 6.9. When using Qt 6.9 or higher this type
