@@ -12,7 +12,7 @@ import org.kde.kirigami.layouts as KirigamiLayouts
   \qmltype FormEntry
   \inqmlmodule org.kde.kirigami.forms
 
-  \brief The base type of all Form entries
+  \brief The base type of all Form entries.
 
   This element should always be positioned in a FormGroup.
   It is The base for all the items livinging in a Form and will take

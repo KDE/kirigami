@@ -13,7 +13,7 @@ import org.kde.kirigami.platform as Platform
   \qmltype Heading
   \inqmlmodule org.kde.kirigami
 
-  \brief A pre-formatted label used for titles and section headers
+  \brief A pre-formatted label used for titles and section headers.
 
   Use this component for titles and section headers. The characteristics of the
   text will be automatically set according to the \c Kirigami.Theme.

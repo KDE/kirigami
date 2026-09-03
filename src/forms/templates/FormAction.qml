@@ -17,7 +17,7 @@ import org.kde.kirigami.forms as Forms
   \qmltype FormAction
   \inqmlmodule org.kde.kirigami.forms
 
-  \brief A specialized FormEntry for a big clickable action
+  \brief A specialized FormEntry for a big clickable action.
 
   This component is used when the Form needs entries that represent a big clickable
   action: they will act like a single big button and is controlled by its Action property.

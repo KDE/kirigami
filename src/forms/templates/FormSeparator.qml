@@ -10,7 +10,7 @@ import QtQuick
   \qmltype FormSeparator
   \inqmlmodule org.kde.kirigami.forms
 
-  \brief An item used to ssepare entries within a FormGroup
+  \brief An item used to ssepare entries within a FormGroup.
 
   This component is used when it's needed to separe entries within a FormGroup
   for clarity, for instance if is needed to have separate subcategories within a FormGroup.
