@@ -11,65 +11,65 @@ import QtQuick.Templates as T
 import org.kde.kirigami.platform as Platform
 
 /*!
- *  \qmltype LinkButton
- *  \inqmlmodule org.kde.kirigami
- *  \brief A button that looks like a link.
- *
- *  It uses the color scheme's link color, and triggers an action when clicked.
- *
- *  This component should not be used directly; prefer an actual button to
- *  navigate within the app or trigger actions, and prefer a \l UrlButton to
- *  display a link to a web site or other remote resource. See also
- *  \l https://develop.kde.org/hig/getting_input/#signaling-interactivity
- *
- *  \since 5.52
+   \qmltype LinkButton
+   \inqmlmodule org.kde.kirigami
+   \brief A button that looks like a link.
+
+   It uses the color scheme's link color, and triggers an action when clicked.
+
+   This component should not be used directly; prefer an actual button to
+   navigate within the app or trigger actions, and prefer a \l UrlButton to
+   display a link to a web site or other remote resource. See also
+   \l https://develop.kde.org/hig/getting_input/#signaling-interactivity
+
+   \since 5.52
  */
 QQC2.Label {
     id: control
 
     /*!
-	 *      \qmlproperty Action action
-	 *      An action that will be triggered when the button is clicked
-	 *
-	 *      default: \c null; set an action to make it work.
-	 */
+      \qmlproperty Action action
+      An action that will be triggered when the button is clicked
+
+      default: \c null; set an action to make it work.
+    */
     property T.Action action
 
     /*!
-	 *      \qmlproperty Qt::MouseButtons LinkButton::acceptedButtons
-	 *      \brief This property holds the mouse buttons that the mouse area reacts to.
-	 *      \sa MouseArea::acceptedButtons
-	 *
-	 *      default: \c Qt.LeftButton
-	 */
+      \qmlproperty Qt::MouseButtons LinkButton::acceptedButtons
+      \brief This property holds the mouse buttons that the mouse area reacts to.
+      \sa MouseArea::acceptedButtons
+
+      default: \c Qt.LeftButton
+    */
     property alias acceptedButtons: area.acceptedButtons
 
     /*!
-	 *      \qmlproperty MouseArea LinkButton::mouseArea
-	 *      \brief This property holds the mouse area element covering the button.
-	 */
+      \qmlproperty MouseArea LinkButton::mouseArea
+      \brief This property holds the mouse area element covering the button.
+    */
     property alias mouseArea: area
 
     /*!
-	 *      This property holds the normal color of the link when not pressed
-	 *      or disabled.
-	 *
-	 *      default: \c Kirigami.Theme.linkColor
-	 */
+      This property holds the normal color of the link when not pressed
+      or disabled.
+
+      default: \c Kirigami.Theme.linkColor
+    */
     property color normalColor: Platform.Theme.linkColor
 
     /*!
-	 *      This property holds the color of the link while pressed.
-	 *
-	 *      default: Whatever the normal color is set to, but 200% darker.
-	 */
+      This property holds the color of the link while pressed.
+
+      default: Whatever the normal color is set to, but 200% darker.
+    */
     property color pressedColor: Qt.darker(normalColor)
 
     /*!
-	 *      This property holds the color of the link when disabled.
-	 *
-	 *      default: \c Kirigami.Theme.textColor
-	 */
+      This property holds the color of the link when disabled.
+
+      default: \c Kirigami.Theme.textColor
+    */
     property color disabledColor: Platform.Theme.textColor
 
     activeFocusOnTab: true
