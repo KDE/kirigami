@@ -23,7 +23,7 @@ import QtQuick.Templates as T
   They will appear on the trailing side of the header as buttons, and collapse
   into an overflow menu when there isn't room to show them all.
 
-  The \l width property must be manually set to the parent view's width.
+  The width property must be manually set to the parent view's width.
 
   Example usage:
   \code
