@@ -49,7 +49,7 @@ public:
     // exposed to QML. Unfortunately static methods are not supported.
 
     /*!
-     * \qmlmethod bool DisplayHint::displayHintSet(DisplayHints hints, Hint hint)
+     * \qmlmethod bool DisplayHint::displayHintSet(DisplayHints values, Hint hint)
      *
      * Helper function to check if a certain display hint has been set.
      *
@@ -68,7 +68,7 @@ public:
     Q_INVOKABLE bool displayHintSet(DisplayHints values, Hint hint);
 
     /*!
-     * \qmlmethod bool DisplayHint::displayHintSet(QtObject hints, Hint hint)
+     * \qmlmethod bool DisplayHint::displayHintSet(QtObject object, Hint hint)
      *
      * Check if a certain display hint has been set on an object.
      *
