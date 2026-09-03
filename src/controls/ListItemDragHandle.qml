@@ -189,6 +189,7 @@ Item {
         }
 
         onPressed: mouse => {
+            dropAnimation.stop();
             internal.originalParent = root.listItem.parent;
             root.listItem.parent = root.listView;
             root.listItem.y = internal.originalParent.mapToItem(root.listItem.parent, root.listItem.x, root.listItem.y).y;
