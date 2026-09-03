@@ -19,6 +19,7 @@ import "private" as KP
 /*!
   \qmltype GlobalDrawer
   \inqmlmodule org.kde.kirigami
+  \inherits OverlayDrawer
 
   \brief A specialized form of the Drawer intended for showing an application's
   always-available global actions.

@@ -17,6 +17,7 @@ import "private" as KP
 /*!
   \qmltype ContextDrawer
   \inqmlmodule org.kde.kirigami
+  \inherits OverlayDrawer
 
   \brief A specialized type of drawer that will show a list of actions
   relevant to the application's current page.

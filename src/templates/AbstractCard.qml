@@ -13,6 +13,7 @@ import org.kde.kirigami.layouts as KirigamiLayouts
 /*!
   \qmltype AbstractCard
   \inqmlmodule org.kde.kirigami
+  \inherits ItemDelegate
 
   \brief The base item for all kinds of cards.
 

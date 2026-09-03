@@ -10,6 +10,7 @@ import org.kde.kirigami.controls as KC
 /*!
   \qmltype PasswordField
   \inqmlmodule org.kde.kirigami
+  \inherits ActionTextField
 
   \brief This is a standard password text field.
 

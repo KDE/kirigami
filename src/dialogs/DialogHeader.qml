@@ -16,6 +16,7 @@ import org.kde.kirigami.dialogs as KDialogs
 /*!
   \qmltype DialogHeader
   \inqmlmodule org.kde.kirigami.dialogs
+  \inherits Control
 
   \brief Base for a header, to be used as the header: item of a Dialog.
 

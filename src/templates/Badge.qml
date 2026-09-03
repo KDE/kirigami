@@ -12,7 +12,7 @@ import org.kde.kirigami.primitives as Primitives
 /*!
   \qmltype Badge
   \inqmlmodule org.kde.kirigami
-  \inherits QQC2.Control
+  \inherits Control
 
   \brief A badge with a colored background.
 

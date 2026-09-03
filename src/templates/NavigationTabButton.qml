@@ -14,6 +14,7 @@ import org.kde.kirigami.primitives as Primitives
 /*!
   \qmltype NavigationTabButton
   \inqmlmodule org.kde.kirigami
+  \inherits TabButton
 
   \brief Navigation buttons to be used for the NavigationTabBar component.
 

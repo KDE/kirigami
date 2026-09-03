@@ -15,6 +15,7 @@ import "private" as P
 /*!
   \qmltype Card
   \inqmlmodule org.kde.kirigami
+  \inherits AbstractCard
 
   \brief Card with a standard layout.
 

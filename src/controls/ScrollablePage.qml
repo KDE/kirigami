@@ -19,6 +19,7 @@ import "private"
 /*!
   \qmltype ScrollablePage
   \inqmlmodule org.kde.kirigami
+  \inherits Page
 
   \brief ScrollablePage is a Page that holds scrollable content, such as a ListView.
 

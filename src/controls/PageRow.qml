@@ -17,6 +17,7 @@ import "private/globaltoolbar" as GlobalToolBar
 /*!
   \qmltype PageRow
   \inqmlmodule org.kde.kirigami
+  \inherits Control
 
   \brief A row-based navigation model that can be used
   with a set of interlinked information pages.

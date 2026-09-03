@@ -10,6 +10,7 @@ import org.kde.kirigami.controls as KC
 /*!
   \qmltype PlaceholderMessage
   \inqmlmodule org.kde.kirigami
+  \inherits PlaceholderMessage
 
   \brief A placeholder for loading pages.
 

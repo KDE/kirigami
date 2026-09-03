@@ -11,6 +11,7 @@ import org.kde.kirigami.controls as KC
 /*!
   \qmltype ApplicationItem
   \inqmlmodule org.kde.kirigami
+  \inherits AbstractApplicationItem
 
   \brief An item that provides the features of ApplicationWindow without the window itself.
 

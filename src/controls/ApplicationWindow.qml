@@ -10,6 +10,7 @@ import org.kde.kirigami.controls as KC
 /*!
   \qmltype ApplicationWindow
   \inqmlmodule org.kde.kirigami
+  \inherits AbstractApplicationWindow
 
   \brief A window that provides some basic features needed for all apps.
 

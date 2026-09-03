@@ -12,6 +12,7 @@ import org.kde.kirigami.controls as KC
 /*!
   \qmltype PagePoolAction
   \inqmlmodule org.kde.kirigami
+  \inherits Action
 
   \brief An action used to load Pages coming from a common PagePool
   in a PageRow or QtQuickControls2 StackView.

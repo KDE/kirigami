@@ -11,6 +11,7 @@ import QtQuick.Templates as T
 /*!
  *  \qmltype InlineViewHeader
  *  \inqmlmodule org.kde.kirigami
+ *  \inherits ToolBar
  *
  *  \brief A fancy inline view header showing a title and optional actions.
  *

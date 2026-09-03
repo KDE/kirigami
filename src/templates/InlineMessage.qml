@@ -15,6 +15,7 @@ import org.kde.kirigami.platform as Platform
 /*!
   \qmltype InlineMessage
   \inqmlmodule org.kde.kirigami
+  \inherits Control
 
   \brief An inline message item with support for associated actions.
 

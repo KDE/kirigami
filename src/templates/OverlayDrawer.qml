@@ -15,6 +15,7 @@ import "private" as KTP
 /*!
   \qmltype OverlayDrawer
   \inqmlmodule org.kde.kirigami
+  \inherits Drawer
 
   \brief A Drawer used to expose additional UI elements needed for
   small secondary tasks for which the main UI elements are not needed.

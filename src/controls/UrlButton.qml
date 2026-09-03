@@ -14,6 +14,7 @@ import QtQuick.Controls as QQC2
 /*!
   \qmltype UrlButton
   \inqmlmodule org.kde.kirigami
+  \inherits LinkButton
   \brief A link to a URL or other remote resource.
 
   UrlButton will open the URL when left-clicked, tapped, or activated with the

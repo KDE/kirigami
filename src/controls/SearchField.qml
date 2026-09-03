@@ -13,6 +13,7 @@ import org.kde.kirigami.primitives as Primitives
 /*!
   \qmltype SearchField
   \inqmlmodule org.kde.kirigami
+  \inherits ActionTextField
 
   \brief Standard TextField following the KDE HIG.
 

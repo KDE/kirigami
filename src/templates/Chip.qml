@@ -7,6 +7,7 @@ import QtQuick.Templates as T
 /*!
   \qmltype Chip
   \inqmlmodule org.kde.kirigami
+  \inherits AbstractButton
 
   \brief A compact element that represents an attribute, action, or filter.
 

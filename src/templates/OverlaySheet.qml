@@ -17,6 +17,7 @@ import org.kde.kirigami.primitives as Primitives
 /*!
   \qmltype Overlay
   \inqmlmodule org.kde.kirigami
+  \inherits Popup
 
   \brief An overlay sheet that covers the current Page content.
 
