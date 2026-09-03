@@ -25,7 +25,7 @@ public:
     static QString style();
     static QStringList styleChain();
 
-    /*!
+    /*
      * Find the URL of a component contained in a specific submodule.
      */
     static QUrl componentUrlForModule(const QString &module, const QString &fileName);
