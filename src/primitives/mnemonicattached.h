@@ -14,7 +14,7 @@
 
 /*!
  * \qmltype MnemonicData
- * \inqmlmodule org.kde.kirigami
+ * \inqmlmodule org.kde.kirigami.primitives
  *
  * \brief An attached property used to calculate automated keyboard sequences
  * to trigger actions based upon their text.

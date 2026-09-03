@@ -14,7 +14,7 @@ class QQuickItem;
 
 /*!
  * \qmltype ScenePosition
- * \inqmlmodule org.kde.kirigami
+ * \inqmlmodule org.kde.kirigami.primitives
  *
  * \brief An attached property that contains the information about the scene position of the item.
  *
