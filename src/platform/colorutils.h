@@ -46,7 +46,7 @@ public:
     /*!
      * \qmlmethod enumeration ColorUtils::brightnessForColor(color color)
      *
-     * Returns whether a color is bright or dark.
+     * Returns whether \a color is bright or dark.
      *
      * \qml
      * import QtQuick

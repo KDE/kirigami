@@ -331,7 +331,7 @@ public:
     /*!
      * \qmlmethod bool WheelHandler::scrollUp(double stepSize = -1)
      *
-     * Scroll up one step. If the stepSize parameter is less than 0, the verticalStepSize will be used.
+     * Scroll up one step. If the \a stepSize parameter is less than 0, the verticalStepSize will be used.
      *
      * returns true if the contentItem was moved.
      *
@@ -387,7 +387,7 @@ Q_SIGNALS:
      *
      * \brief This signal is emitted when a wheel event reaches the event filter, just before scrolling is handled.
      *
-     * Accepting the wheel event in the \c onWheel signal handler prevents scrolling from happening.
+     * Accepting the \a wheel event in the \c onWheel signal handler prevents scrolling from happening.
      */
     void wheel(KirigamiWheelEvent *wheel);
 

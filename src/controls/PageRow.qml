@@ -372,7 +372,7 @@ QT.Control {
     /*!
       \qmlmethod Page PageRow::insertPage(int position, var page, var properties)
 
-      \brief Inserts a new page or a list of new pages at an arbitrary position.
+      \brief Inserts a new page or a list of new pages at an arbitrary \a position.
 
       A single page can be defined as an url, a component, or an object. It can
       also be an array of the above said types, but in that case, the
@@ -406,7 +406,8 @@ QT.Control {
     /*!
       \qmlmethod void PageRow::movePage(int fromPos, int toPos)
 
-      Move the page at position fromPos to the new position toPos
+      Move the page at position \a fromPos to the new position \a toPos.
+
       If needed, currentIndex will be adjusted
       in order to keep the same current page.
       \since 2.7
