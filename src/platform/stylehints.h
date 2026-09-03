@@ -126,15 +126,14 @@ public:
 
     static StyleHints *qmlAttachedProperties(QObject *object);
 
+    // TODO KF7:  This should really be part of PlatformPluginFactory but we
+    // cannot add new virtuals to it due to binary compatibility. Once we break
+    // binary compatibility, move this to PlatformPluginFactory.
     /*!
      * Set a different function to be used by qmlAttachedProperties() to create a StyleHints instance.
      *
      * This is provided to allow different platform plugins to provide their own
      * StyleHints subclass.
-     *
-     * \todo KF7: This should really be part of PlatformPluginFactory but we
-     * cannot add new virtuals to it due to binary compatibility. Once we break
-     * binary compatibility, move this to PlatformPluginFactory.
      */
     static void setMakeStyleHintsFunction(const std::function<StyleHints *(QObject *)> &function);
 
