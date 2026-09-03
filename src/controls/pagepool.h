@@ -86,60 +86,80 @@ public:
     bool cachePages() const;
 
     /*!
+     * \qmlmethod Item PagePool::loadPage(string url, var callback)
+     *
      * Returns the instance of the item defined in the QML file identified
      * by url, only one instance will be made per url if cachePAges is true.
      * If the url is remote (i.e. http) don't rely on the return value but
      * us the async callback instead.
      *
-     * @param url full url of the item: it can be a well formed Url, an
+     * \a url full url of the item: it can be a well formed Url, an
      * absolute path or a relative one to the path of the qml file the
      * PagePool is instantiated from
-     * @param callback If we are loading a remote url, we can't have the
+     *
+     * \a callback If we are loading a remote url, we can't have the
      * item immediately but will be passed as a parameter to the provided
      * callback. Normally, don't set a callback, use it only in case of
      * remote urls
-     * @returns the page instance that will have been created if necessary.
+     *
+     * Return the page instance that will have been created if necessary.
      * If the url is remote it will return null, as well will return null
      * if the callback has been provided
      */
     Q_INVOKABLE QQuickItem *loadPage(const QString &url, QJSValue callback = QJSValue());
 
+    /*!
+     * \qmlmethod Item PagePool::loadPageWithProperties(string url, variantMap properties, var callback)
+     */
     Q_INVOKABLE QQuickItem *loadPageWithProperties(const QString &url, const QVariantMap &properties, QJSValue callback = QJSValue());
 
     /*!
-     * @returns The url of the page for the given instance, empty if there is no correspondence
+     * \qmlmethod url PagePool::urlForPage(Item item)
+     *
+     * Returns the url of the page for the given instance, empty if there is no correspondence
      */
     Q_INVOKABLE QUrl urlForPage(QQuickItem *item) const;
 
     /*!
-     * @returns The page associated with a given URL, nullptr if there is no correspondence
+     * \qmlmethod Item PagePool::pageForUrl(url url)
+     *
+     * Returns the page associated with a given URL, nullptr if there is no correspondence
      */
     Q_INVOKABLE QQuickItem *pageForUrl(const QUrl &url) const;
 
     /*!
-     * @returns true if the is managed by the PagePool
-     * @param the page can be either a QQuickItem or an url
+     * \qmlmethod bool PagePool::contains(variant page)
+     *
+     * Return \c  true if \a page is managed by the PagePool
      */
     Q_INVOKABLE bool contains(const QVariant &page) const;
 
     /*!
-     * Deletes the page (only if is managed by the pool.
-     * @param page either the url or the instance of the page
+     * \qmlmethod void PagePool::deletePage(variant page)
+     *
+     * Deletes \a page (only if is managed by the pool).
      */
     Q_INVOKABLE void deletePage(const QVariant &page);
 
     /*!
-     * @returns full url from an absolute or relative path
+     * \qmlmethod url PagePool::resolvedUrl(string file)
+     *
+     * Returns the full url from an absolute or relative path
      */
     Q_INVOKABLE QUrl resolvedUrl(const QString &file) const;
 
     /*!
-     * @returns true if the url identifies a local resource (local file or a file inside Qt's resource system).
-     * False if the url points to a network location
+     * \qmlmethod bool PagePool::isLocalUrl(url url)
+     *
+     * Returns \c true if the url identifies a local resource (local file or a file inside Qt's resource system).
+     *
+     * \c false if the url points to a network location
      */
     Q_INVOKABLE bool isLocalUrl(const QUrl &url);
 
     /*!
+     * \qmlmethod void PagePool::clear()
+     *
      * Deletes all pages managed by the pool.
      */
     Q_INVOKABLE void clear();
