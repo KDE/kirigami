@@ -31,6 +31,7 @@ class Units;
 /*!
  * \qmltype Icon
  * \inqmlmodule org.kde.kirigami.primitives
+ * \inherits Item
  *
  * \brief Class for rendering an icon supporting many different sources.
  *

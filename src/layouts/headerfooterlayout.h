@@ -13,6 +13,7 @@
 /*!
  * \qmltype HeaderFooterLayout
  * \inqmlmodule org.kde.kirigami.layouts
+ * \inherits Item
  *
  * \brief Replicates a little part of what Page does.
  *

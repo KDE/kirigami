@@ -125,6 +125,7 @@ private:
 /*!
  * \qmltype ShadowedRectangle
  * \inqmlmodule org.kde.kirigami.primitives
+ * \inherits Item
  *
  * \brief A rectangle with a shadow behind it.
  *

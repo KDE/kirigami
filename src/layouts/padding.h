@@ -15,6 +15,7 @@ class PaddingPrivate;
 /*!
  * \qmltype Padding
  * \inqmlmodule org.kde.kirigami.layouts
+ * \inherits Item
  *
  * \brief This item simply adds an external padding to contentItem's size.
  *

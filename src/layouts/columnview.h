@@ -259,6 +259,7 @@ private:
 /*!
  * \qmltype ColumnView
  * \inqmlmodule org.kde.kirigami.layouts
+ * \inherits Item
  *
  * \brief A container that lays out items horizontally in a row.
  *
