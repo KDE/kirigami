@@ -53,33 +53,33 @@ import QtQuick.Templates as T
  *  \endcode
  */
 T.ToolBar {
-	id: root
+    id: root
 
-	//BEGIN properties
-	/*!
+    //BEGIN properties
+    /*!
 	 *      \brief This property holds the title text.
 	 */
-	property string text
+    property string text
 
-	/*!
+    /*!
 	 *      \qmlproperty list<Action> InlineViewHeader::actions
 	 *
 	 *      This property holds the list of actions to show on the header. Actions
 	 *      are added from left to right. If more actions are set than can fit, an
 	 *      overflow menu is provided.
 	 */
-	property list<T.Action> actions
-	//END properties
+    property list<T.Action> actions
+    //END properties
 
-	z: 999 // don't let content overlap it
+    z: 999 // don't let content overlap it
 
-	// HACK Due to the lack of a GridView.headerPositioning property,
-	// we need to "stick" ourselves to the top manually by translating Y accordingly.
-	// see see https://bugreports.qt.io/browse/QTBUG-117035.
-	// Conveniently, GridView is only attached to the root of the delegate (or headerItem),
-	// so this will only be done if the InlineViewHeader itself is the header item.
-	// And of course it won't be there for ListView either, where we have headerPositioning.
-	transform: Translate {
-		y: root.GridView.view ? root.GridView.view.contentY + root.height : 0
-	}
+    // HACK Due to the lack of a GridView.headerPositioning property,
+    // we need to "stick" ourselves to the top manually by translating Y accordingly.
+    // see see https://bugreports.qt.io/browse/QTBUG-117035.
+    // Conveniently, GridView is only attached to the root of the delegate (or headerItem),
+    // so this will only be done if the InlineViewHeader itself is the header item.
+    // And of course it won't be there for ListView either, where we have headerPositioning.
+    transform: Translate {
+        y: root.GridView.view ? root.GridView.view.contentY + root.height : 0
+    }
 }
