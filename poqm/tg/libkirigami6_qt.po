@@ -124,7 +124,7 @@ msgctxt "Chip|"
 msgid "Remove"
 msgstr ""
 
-#: controls/ContextDrawer.qml:64
+#: controls/ContextDrawer.qml:65
 msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "Амалҳо"
@@ -134,32 +134,32 @@ msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
 msgstr ""
 
-#: controls/GlobalDrawer.qml:371
+#: controls/GlobalDrawer.qml:372
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "Ба қафо"
 
-#: controls/GlobalDrawer.qml:723
+#: controls/GlobalDrawer.qml:724
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr ""
 
-#: controls/GlobalDrawer.qml:728
+#: controls/GlobalDrawer.qml:729
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr ""
 
-#: controls/LoadingPlaceholder.qml:58
+#: controls/LoadingPlaceholder.qml:59
 msgctxt "LoadingPlaceholder|"
 msgid "Loading…"
 msgstr ""
 
-#: controls/PasswordField.qml:43
+#: controls/PasswordField.qml:44
 msgctxt "PasswordField|"
 msgid "Password"
 msgstr "Ниҳонвожа"
 
-#: controls/PasswordField.qml:46
+#: controls/PasswordField.qml:47
 #, fuzzy
 #| msgctxt "PasswordField|"
 #| msgid "Password"
@@ -167,7 +167,7 @@ msgctxt "PasswordField|"
 msgid "Hide Password"
 msgstr "Ниҳонвожа"
 
-#: controls/PasswordField.qml:46
+#: controls/PasswordField.qml:47
 #, fuzzy
 #| msgctxt "PasswordField|"
 #| msgid "Password"
@@ -214,7 +214,7 @@ msgctxt ""
 msgid "%1 (%2)"
 msgstr ""
 
-#: controls/SearchField.qml:88
+#: controls/SearchField.qml:89
 #, fuzzy
 #| msgctxt "SearchField|"
 #| msgid "Search..."
@@ -222,7 +222,7 @@ msgctxt "SearchField|"
 msgid "Search…"
 msgstr "Ҷустуҷӯ..."
 
-#: controls/SearchField.qml:90
+#: controls/SearchField.qml:91
 #, fuzzy
 #| msgctxt "SearchField|"
 #| msgid "Search..."
@@ -230,7 +230,7 @@ msgctxt "SearchField|"
 msgid "Search"
 msgstr "Ҷустуҷӯ..."
 
-#: controls/SearchField.qml:100
+#: controls/SearchField.qml:101
 msgctxt "SearchField|"
 msgid "Clear search"
 msgstr ""
@@ -248,18 +248,18 @@ msgctxt "SelectableLabel|"
 msgid "Select All"
 msgstr ""
 
-#: controls/UrlButton.qml:52
+#: controls/UrlButton.qml:53
 #, qt-format
 msgctxt "UrlButton|@info:whatsthis"
 msgid "Open link %1"
 msgstr ""
 
-#: controls/UrlButton.qml:53
+#: controls/UrlButton.qml:54
 msgctxt "UrlButton|@info:whatsthis"
 msgid "Open link"
 msgstr ""
 
-#: controls/UrlButton.qml:101
+#: controls/UrlButton.qml:102
 msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr ""
@@ -287,42 +287,42 @@ msgctxt "Kirigami::Platform::Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr ""
 
-#: templates/InlineMessage.qml:351
+#: templates/InlineMessage.qml:352
 msgctxt "InlineMessage|"
 msgid "Success"
 msgstr ""
 
-#: templates/InlineMessage.qml:353
+#: templates/InlineMessage.qml:354
 msgctxt "InlineMessage|"
 msgid "Warning"
 msgstr ""
 
-#: templates/InlineMessage.qml:355
+#: templates/InlineMessage.qml:356
 msgctxt "InlineMessage|"
 msgid "Error"
 msgstr ""
 
-#: templates/InlineMessage.qml:357
+#: templates/InlineMessage.qml:358
 msgctxt "InlineMessage|"
 msgid "Note"
 msgstr ""
 
-#: templates/InlineMessage.qml:444
+#: templates/InlineMessage.qml:445
 msgctxt "InlineMessage|"
 msgid "Close"
 msgstr ""
 
-#: templates/OverlayDrawer.qml:148
+#: templates/OverlayDrawer.qml:149
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
 msgstr ""
 
-#: templates/OverlayDrawer.qml:154
+#: templates/OverlayDrawer.qml:155
 msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr ""
 
-#: templates/OverlaySheet.qml:308
+#: templates/OverlaySheet.qml:309
 msgctxt "OverlaySheet|@action:button close dialog"
 msgid "Close"
 msgstr ""

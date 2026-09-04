@@ -110,7 +110,7 @@ msgctxt "Chip|"
 msgid "Remove"
 msgstr "टैग हटाएँ"
 
-#: controls/ContextDrawer.qml:64
+#: controls/ContextDrawer.qml:65
 msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "कर्माणि"
@@ -120,37 +120,37 @@ msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
 msgstr "सन्दर्भसहायतां दर्शयतु"
 
-#: controls/GlobalDrawer.qml:371
+#: controls/GlobalDrawer.qml:372
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "पृष्ठभागः"
 
-#: controls/GlobalDrawer.qml:723
+#: controls/GlobalDrawer.qml:724
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "पार्श्वपट्टिकां बन्दं कुर्वन्तु"
 
-#: controls/GlobalDrawer.qml:728
+#: controls/GlobalDrawer.qml:729
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "पार्श्वपट्टिका उद्घाटयन्तु"
 
-#: controls/LoadingPlaceholder.qml:58
+#: controls/LoadingPlaceholder.qml:59
 msgctxt "LoadingPlaceholder|"
 msgid "Loading…"
 msgstr "लोडिंग…"
 
-#: controls/PasswordField.qml:43
+#: controls/PasswordField.qml:44
 msgctxt "PasswordField|"
 msgid "Password"
 msgstr "समाभाष्"
 
-#: controls/PasswordField.qml:46
+#: controls/PasswordField.qml:47
 msgctxt "PasswordField|"
 msgid "Hide Password"
 msgstr "गुप्तशब्दं गोपयन्तु"
 
-#: controls/PasswordField.qml:46
+#: controls/PasswordField.qml:47
 msgctxt "PasswordField|"
 msgid "Show Password"
 msgstr "गुप्तशब्दं दर्शयतु"
@@ -202,17 +202,17 @@ msgctxt ""
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: controls/SearchField.qml:88
+#: controls/SearchField.qml:89
 msgctxt "SearchField|"
 msgid "Search…"
 msgstr "अन्वेषण…"
 
-#: controls/SearchField.qml:90
+#: controls/SearchField.qml:91
 msgctxt "SearchField|"
 msgid "Search"
 msgstr "अन्वेषण"
 
-#: controls/SearchField.qml:100
+#: controls/SearchField.qml:101
 msgctxt "SearchField|"
 msgid "Clear search"
 msgstr "अन्वेषणं स्पष्टं कुरुत"
@@ -227,18 +227,18 @@ msgctxt "SelectableLabel|"
 msgid "Select All"
 msgstr "All इति चिनोतु"
 
-#: controls/UrlButton.qml:52
+#: controls/UrlButton.qml:53
 #, qt-format
 msgctxt "UrlButton|@info:whatsthis"
 msgid "Open link %1"
 msgstr "%1 इति लिङ्क् उद्घाटयन्तु"
 
-#: controls/UrlButton.qml:53
+#: controls/UrlButton.qml:54
 msgctxt "UrlButton|@info:whatsthis"
 msgid "Open link"
 msgstr "लिङ्कं उद्घाटयन्तु"
 
-#: controls/UrlButton.qml:101
+#: controls/UrlButton.qml:102
 msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "क्लिप्बोर्ड् मध्ये लिङ्कं प्रतिलिख्यताम्"
@@ -269,42 +269,42 @@ msgctxt "Kirigami::Platform::Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (%3 विरुद्धं निर्मितम्) ."
 
-#: templates/InlineMessage.qml:351
+#: templates/InlineMessage.qml:352
 msgctxt "InlineMessage|"
 msgid "Success"
 msgstr "सफलता"
 
-#: templates/InlineMessage.qml:353
+#: templates/InlineMessage.qml:354
 msgctxt "InlineMessage|"
 msgid "Warning"
 msgstr "चेतवानी"
 
-#: templates/InlineMessage.qml:355
+#: templates/InlineMessage.qml:356
 msgctxt "InlineMessage|"
 msgid "Error"
 msgstr "त्रुटि"
 
-#: templates/InlineMessage.qml:357
+#: templates/InlineMessage.qml:358
 msgctxt "InlineMessage|"
 msgid "Note"
 msgstr "टीका"
 
-#: templates/InlineMessage.qml:444
+#: templates/InlineMessage.qml:445
 msgctxt "InlineMessage|"
 msgid "Close"
 msgstr "पिधानं करोतु"
 
-#: templates/OverlayDrawer.qml:148
+#: templates/OverlayDrawer.qml:149
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
 msgstr "दराजं बन्दं कुर्वन्तु"
 
-#: templates/OverlayDrawer.qml:154
+#: templates/OverlayDrawer.qml:155
 msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "दराजं उद्घाटयन्तु"
 
-#: templates/OverlaySheet.qml:308
+#: templates/OverlaySheet.qml:309
 msgctxt "OverlaySheet|@action:button close dialog"
 msgid "Close"
 msgstr "पिधानं करोतु"

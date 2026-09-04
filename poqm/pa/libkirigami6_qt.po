@@ -110,7 +110,7 @@ msgctxt "Chip|"
 msgid "Remove"
 msgstr "ਟੈਗ ਹਟਾਓ"
 
-#: controls/ContextDrawer.qml:64
+#: controls/ContextDrawer.qml:65
 msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "ਕਾਰਵਾਈਆਂ"
@@ -120,32 +120,32 @@ msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
 msgstr ""
 
-#: controls/GlobalDrawer.qml:371
+#: controls/GlobalDrawer.qml:372
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "ਪਿੱਛੇ"
 
-#: controls/GlobalDrawer.qml:723
+#: controls/GlobalDrawer.qml:724
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "ਬਾਹੀ ਬੰਦ ਕਰੋ"
 
-#: controls/GlobalDrawer.qml:728
+#: controls/GlobalDrawer.qml:729
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "ਬਾਹੀ ਖੋਲ੍ਹੋ"
 
-#: controls/LoadingPlaceholder.qml:58
+#: controls/LoadingPlaceholder.qml:59
 msgctxt "LoadingPlaceholder|"
 msgid "Loading…"
 msgstr "…ਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
 
-#: controls/PasswordField.qml:43
+#: controls/PasswordField.qml:44
 msgctxt "PasswordField|"
 msgid "Password"
 msgstr "ਪਾਸਵਰਡ"
 
-#: controls/PasswordField.qml:46
+#: controls/PasswordField.qml:47
 #, fuzzy
 #| msgctxt "PasswordField|"
 #| msgid "Password"
@@ -153,7 +153,7 @@ msgctxt "PasswordField|"
 msgid "Hide Password"
 msgstr "ਪਾਸਵਰਡ"
 
-#: controls/PasswordField.qml:46
+#: controls/PasswordField.qml:47
 #, fuzzy
 #| msgctxt "PasswordField|"
 #| msgid "Password"
@@ -208,17 +208,17 @@ msgctxt ""
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: controls/SearchField.qml:88
+#: controls/SearchField.qml:89
 msgctxt "SearchField|"
 msgid "Search…"
 msgstr "…ਖੋਜੋ"
 
-#: controls/SearchField.qml:90
+#: controls/SearchField.qml:91
 msgctxt "SearchField|"
 msgid "Search"
 msgstr "ਖੋਜੋ"
 
-#: controls/SearchField.qml:100
+#: controls/SearchField.qml:101
 msgctxt "SearchField|"
 msgid "Clear search"
 msgstr "ਖੋਜ ਮਿਟਾਓ"
@@ -236,13 +236,13 @@ msgctxt "SelectableLabel|"
 msgid "Select All"
 msgstr ""
 
-#: controls/UrlButton.qml:52
+#: controls/UrlButton.qml:53
 #, qt-format
 msgctxt "UrlButton|@info:whatsthis"
 msgid "Open link %1"
 msgstr ""
 
-#: controls/UrlButton.qml:53
+#: controls/UrlButton.qml:54
 #, fuzzy
 #| msgctxt "PageRowGlobalToolBarUI|"
 #| msgid "Open menu"
@@ -250,7 +250,7 @@ msgctxt "UrlButton|@info:whatsthis"
 msgid "Open link"
 msgstr "ਮੇਨੂ ਖੋਲ੍ਹੋ"
 
-#: controls/UrlButton.qml:101
+#: controls/UrlButton.qml:102
 msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "ਲਿੰਕ ਕਲਿੱਪਬੋਰਡ ਵਿੱਚ ਕਾਪੀ ਕਰੋ"
@@ -287,27 +287,27 @@ msgctxt "Kirigami::Platform::Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (%3 ਨਾਲ ਬਣਾਇਆ)"
 
-#: templates/InlineMessage.qml:351
+#: templates/InlineMessage.qml:352
 msgctxt "InlineMessage|"
 msgid "Success"
 msgstr ""
 
-#: templates/InlineMessage.qml:353
+#: templates/InlineMessage.qml:354
 msgctxt "InlineMessage|"
 msgid "Warning"
 msgstr ""
 
-#: templates/InlineMessage.qml:355
+#: templates/InlineMessage.qml:356
 msgctxt "InlineMessage|"
 msgid "Error"
 msgstr ""
 
-#: templates/InlineMessage.qml:357
+#: templates/InlineMessage.qml:358
 msgctxt "InlineMessage|"
 msgid "Note"
 msgstr ""
 
-#: templates/InlineMessage.qml:444
+#: templates/InlineMessage.qml:445
 #, fuzzy
 #| msgctxt "PageRowGlobalToolBarUI|"
 #| msgid "Close menu"
@@ -315,17 +315,17 @@ msgctxt "InlineMessage|"
 msgid "Close"
 msgstr "ਮੇਨੂ ਬੰਦ ਕਰੋ"
 
-#: templates/OverlayDrawer.qml:148
+#: templates/OverlayDrawer.qml:149
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
 msgstr "ਦਰਾਜ ਬੰਦ ਕਰੋ"
 
-#: templates/OverlayDrawer.qml:154
+#: templates/OverlayDrawer.qml:155
 msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "ਦਰਾਜ ਖੋਲ੍ਹੋ"
 
-#: templates/OverlaySheet.qml:308
+#: templates/OverlaySheet.qml:309
 #, fuzzy
 #| msgctxt "PageRowGlobalToolBarUI|"
 #| msgid "Close menu"

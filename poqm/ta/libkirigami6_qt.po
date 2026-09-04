@@ -101,7 +101,7 @@ msgctxt "Chip|"
 msgid "Remove"
 msgstr "நீக்கு"
 
-#: controls/ContextDrawer.qml:64
+#: controls/ContextDrawer.qml:65
 msgctxt "ContextDrawer|"
 msgid "Actions"
 msgstr "செயல்கள்"
@@ -111,37 +111,37 @@ msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
 msgstr "சூழல்சார் உதவியைக் காட்டு"
 
-#: controls/GlobalDrawer.qml:371
+#: controls/GlobalDrawer.qml:372
 msgctxt "GlobalDrawer|"
 msgid "Back"
 msgstr "பின்னே"
 
-#: controls/GlobalDrawer.qml:723
+#: controls/GlobalDrawer.qml:724
 msgctxt "GlobalDrawer|"
 msgid "Close Sidebar"
 msgstr "ஓரப்பட்டையை மூடு"
 
-#: controls/GlobalDrawer.qml:728
+#: controls/GlobalDrawer.qml:729
 msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "ஓரப்பட்டையை திற"
 
-#: controls/LoadingPlaceholder.qml:58
+#: controls/LoadingPlaceholder.qml:59
 msgctxt "LoadingPlaceholder|"
 msgid "Loading…"
 msgstr "ஏற்றப்படுகிறது…"
 
-#: controls/PasswordField.qml:43
+#: controls/PasswordField.qml:44
 msgctxt "PasswordField|"
 msgid "Password"
 msgstr "கடவுச்சொல்"
 
-#: controls/PasswordField.qml:46
+#: controls/PasswordField.qml:47
 msgctxt "PasswordField|"
 msgid "Hide Password"
 msgstr "கடவுச்சொல்லை மறை"
 
-#: controls/PasswordField.qml:46
+#: controls/PasswordField.qml:47
 msgctxt "PasswordField|"
 msgid "Show Password"
 msgstr "கடவுச்சொல்லை காட்டு"
@@ -179,17 +179,17 @@ msgctxt ""
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: controls/SearchField.qml:88
+#: controls/SearchField.qml:89
 msgctxt "SearchField|"
 msgid "Search…"
 msgstr "தேடு..."
 
-#: controls/SearchField.qml:90
+#: controls/SearchField.qml:91
 msgctxt "SearchField|"
 msgid "Search"
 msgstr "தேடல்"
 
-#: controls/SearchField.qml:100
+#: controls/SearchField.qml:101
 msgctxt "SearchField|"
 msgid "Clear search"
 msgstr "தேடலை காலியாக்கு"
@@ -204,18 +204,18 @@ msgctxt "SelectableLabel|"
 msgid "Select All"
 msgstr "அனைத்தையும் தேர்ந்தெடு"
 
-#: controls/UrlButton.qml:52
+#: controls/UrlButton.qml:53
 #, qt-format
 msgctxt "UrlButton|@info:whatsthis"
 msgid "Open link %1"
 msgstr "%1 இணைப்பைத் திற"
 
-#: controls/UrlButton.qml:53
+#: controls/UrlButton.qml:54
 msgctxt "UrlButton|@info:whatsthis"
 msgid "Open link"
 msgstr "இணைப்பைத் திற"
 
-#: controls/UrlButton.qml:101
+#: controls/UrlButton.qml:102
 msgctxt "UrlButton|"
 msgid "Copy Link to Clipboard"
 msgstr "இணைப்பை பிடிப்புப்பலகைக்கு நகலெடு"
@@ -243,42 +243,42 @@ msgctxt "Kirigami::Platform::Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (%3 கொண்டு தொகுக்கப்பட்டது)"
 
-#: templates/InlineMessage.qml:351
+#: templates/InlineMessage.qml:352
 msgctxt "InlineMessage|"
 msgid "Success"
 msgstr "வெற்றி"
 
-#: templates/InlineMessage.qml:353
+#: templates/InlineMessage.qml:354
 msgctxt "InlineMessage|"
 msgid "Warning"
 msgstr "எச்சரிக்கை"
 
-#: templates/InlineMessage.qml:355
+#: templates/InlineMessage.qml:356
 msgctxt "InlineMessage|"
 msgid "Error"
 msgstr "சிக்கல்"
 
-#: templates/InlineMessage.qml:357
+#: templates/InlineMessage.qml:358
 msgctxt "InlineMessage|"
 msgid "Note"
 msgstr "குறிப்பு"
 
-#: templates/InlineMessage.qml:444
+#: templates/InlineMessage.qml:445
 msgctxt "InlineMessage|"
 msgid "Close"
 msgstr "மூடு"
 
-#: templates/OverlayDrawer.qml:148
+#: templates/OverlayDrawer.qml:149
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
 msgstr "மேல்தோன்றும் பலகையை மூடு"
 
-#: templates/OverlayDrawer.qml:154
+#: templates/OverlayDrawer.qml:155
 msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "மேல்தோன்றும் பலகையைத் திற"
 
-#: templates/OverlaySheet.qml:308
+#: templates/OverlaySheet.qml:309
 msgctxt "OverlaySheet|@action:button close dialog"
 msgid "Close"
 msgstr "மூடு"
