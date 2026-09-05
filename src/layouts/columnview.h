@@ -250,6 +250,28 @@ public:
     };
     Q_ENUM(ColumnResizeMode)
 
+    enum VisibilityStatus {
+        /**
+         * @brief The page is fully visible.
+         *
+         * This page is fully in the view and does not have a part of it cut
+         * off.
+         */
+        Visible = 0,
+        /**
+         * @brief The page is partly visible.
+         *
+         * The page is visible but a part of it is not visible in the view.
+         */
+        PartlyVisible,
+
+        /**
+         * @brief The page is hidden and can not be seen.
+         */
+        Hidden
+    };
+    Q_ENUM(VisibilityStatus)
+
     ColumnView(QQuickItem *parent = nullptr);
     ~ColumnView() override;
 
@@ -641,6 +663,7 @@ class ColumnViewAttached : public QObject
     /*!
      * \qmlattachedproperty bool ColumnView::inViewport
      * \readonly
+     * \deprecated[6.31] Use the pageVisibility property instead.
      *
      * True if this column is at least partly visible in the ColumnView's viewport.
      * \since 5.77
@@ -732,6 +755,21 @@ public:
     bool inViewport() const;
     void setInViewport(bool inViewport);
 
+    /**
+     * \brief This property tells whether this item is visible in the view.
+     *
+     * Unlike inViewport, a page fully covered by a pinned page reports
+     * Hidden here, so the two properties can disagree on a covered page.
+     *
+     * \since 6.31
+     */
+    Q_PROPERTY(ColumnView::VisibilityStatus pageVisibility READ pageVisibility NOTIFY pageVisibilityChanged)
+
+    ColumnView::VisibilityStatus pageVisibility() const;
+
+    /** \internal */
+    void setPageVisibility(ColumnView::VisibilityStatus status);
+
     bool interactiveResizeEnabled() const;
     void setInteractiveResizeEnabled(bool interactive);
 
@@ -756,6 +794,7 @@ Q_SIGNALS:
     void pinnedChanged();
     void scrollIntention(ScrollIntentionEvent *event);
     void inViewportChanged();
+    void pageVisibilityChanged();
     void interactiveResizeEnabledChanged();
     void interactiveResizingChanged();
     void globalHeaderChanged(QQuickItem *oldHeader, QQuickItem *newHeader);
@@ -776,6 +815,7 @@ private:
     bool m_preventStealing = false;
     bool m_pinned = false;
     bool m_inViewport = false;
+    ColumnView::VisibilityStatus m_pageVisibility = ColumnView::VisibilityStatus::Hidden;
     bool m_interactiveResizeEnabled = false;
     bool m_interactiveResizing = false;
     QPointer<QQuickItem> m_globalHeader;

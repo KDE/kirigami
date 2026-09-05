@@ -49,6 +49,7 @@ public:
     void layoutPinnedItems();
     qreal childWidth(QQuickItem *child);
     void updateVisibleItems();
+    void updatePageVisibility();
     void forgetItem(QQuickItem *item);
     QQuickItem *ensureSeparator(QQuickItem *previousColumn, QQuickItem *column, QQuickItem *nextColumn);
 

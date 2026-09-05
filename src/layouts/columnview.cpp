@@ -356,6 +356,22 @@ void ColumnViewAttached::setInViewport(bool inViewport)
     Q_EMIT inViewportChanged();
 }
 
+ColumnView::VisibilityStatus ColumnViewAttached::pageVisibility() const
+{
+    return m_pageVisibility;
+}
+
+void ColumnViewAttached::setPageVisibility(ColumnView::VisibilityStatus status)
+{
+    if (m_pageVisibility == status) {
+        return;
+    }
+
+    m_pageVisibility = status;
+
+    Q_EMIT pageVisibilityChanged();
+}
+
 bool ColumnViewAttached::interactiveResizeEnabled() const
 {
     return m_interactiveResizeEnabled;
@@ -799,6 +815,54 @@ void ContentItem::updateVisibleItems()
             Q_EMIT m_view->trailingVisibleItemChanged();
         }
     }
+
+    updatePageVisibility();
+}
+
+void ContentItem::updatePageVisibility()
+{
+    // Pages fully covered by a pinned page report Hidden here. This pass
+    // only feeds the pageVisibility property: visibleItems, enabled state
+    // and inViewport keep their legacy viewport-only meaning, computed
+    // above.
+    QList<QRectF> pinnedRects;
+    if (m_view->columnResizeMode() != ColumnView::SingleColumn) {
+        for (auto *item : std::as_const(m_items)) {
+            ColumnViewAttached *attached = qobject_cast<ColumnViewAttached *>(qmlAttachedPropertiesObject<ColumnView>(item, true));
+            if (item->isVisible() && attached->isPinned()) {
+                pinnedRects.append(QRectF(item->x() + x(), item->y(), item->width(), item->height()));
+            }
+        }
+    }
+
+    for (auto *item : std::as_const(m_items)) {
+        ColumnViewAttached *attached = qobject_cast<ColumnViewAttached *>(qmlAttachedPropertiesObject<ColumnView>(item, true));
+        const qreal itemLeft = item->x() + x();
+        const qreal itemRight = item->x() + item->width() + x();
+
+        if (!item->isVisible() || itemLeft >= m_view->width() || itemRight <= 0) {
+            attached->setPageVisibility(ColumnView::VisibilityStatus::Hidden);
+            continue;
+        }
+
+        bool covered = false;
+        if (!attached->isPinned()) {
+            for (const QRectF &rect : std::as_const(pinnedRects)) {
+                if (rect.left() <= itemLeft && itemRight <= rect.right()) {
+                    covered = true;
+                    break;
+                }
+            }
+        }
+
+        if (covered) {
+            attached->setPageVisibility(ColumnView::VisibilityStatus::Hidden);
+        } else if (0 <= itemLeft && itemRight <= m_view->width()) {
+            attached->setPageVisibility(ColumnView::VisibilityStatus::Visible);
+        } else {
+            attached->setPageVisibility(ColumnView::VisibilityStatus::PartlyVisible);
+        }
+    }
 }
 
 void ContentItem::forgetItem(QQuickItem *item)
@@ -943,6 +1007,10 @@ void ContentItem::geometryChange(const QRectF &newGeometry, const QRectF &oldGeo
     updateVisibleItems();
     if (newGeometry.x() != oldGeometry.x()) {
         layoutPinnedItems();
+        // The pins just moved after the legacy refresh above: recompute
+        // only the new property with the settled positions. Legacy state
+        // (visibleItems, enabled, inViewport) is deliberately untouched.
+        updatePageVisibility();
     }
     QQuickItem::geometryChange(newGeometry, oldGeometry);
 }
