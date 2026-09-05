@@ -3,7 +3,7 @@ if(NOT TARGET Qt6::QuickTest)
     return()
 endif()
 
-add_executable(qmltest qmltest.cpp actiondata.cpp)
+add_executable(qmltest qmltest.cpp actiondata.cpp testutils.h)
 qt_add_qml_module(qmltest URI KirigamiTestUtils)
 target_link_libraries(qmltest PRIVATE Qt6::Qml Qt6::QuickTest Kirigami)
 if (NOT QT6_IS_SHARED_LIBS_BUILD OR NOT BUILD_SHARED_LIBS)

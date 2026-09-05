@@ -6,6 +6,7 @@
 
 import QtQuick
 import org.kde.kirigami as Kirigami
+import KirigamiTestUtils
 import QtTest
 
 TestCase {
@@ -429,5 +430,126 @@ TestCase {
 
         compare(item1.height, columnView.height);
         compare(item3.height, columnView.height);
+    }
+
+    // ==== page visibility (data-driven: ltr + rtl rows) ====
+
+    Component {
+        id: pageComponent
+        Item {
+            height: parent ? parent.height : 100
+        }
+    }
+
+    function setDirection(rtl) {
+        TestUtils.setLayoutDirection(rtl ? Qt.RightToLeft : Qt.LeftToRight);
+    }
+
+    function ltrRtlData() {
+        return [ { tag: "ltr", rtl: false }, { tag: "rtl", rtl: true } ];
+    }
+
+    function makeScrollingView(properties, count) {
+        const view = createTemporaryObject(columnViewComponent, this, properties);
+        verify(view);
+        const items = [];
+        for (let i = 0; i < count; i++) {
+            const item = createTemporaryObject(pageComponent, this, { objectName: "page" + i });
+            view.addItem(item);
+            items.push(item);
+        }
+        waitForPolish(view);
+        return { view, items };
+    }
+
+    function cleanup() {
+        // the RTL tests change the application-wide layout direction
+        TestUtils.setLayoutDirection(Qt.LeftToRight);
+    }
+
+    function test_pageVisibility_states_data() {
+        return ltrRtlData();
+    }
+
+    // Visible/PartlyVisible/Hidden (and inViewport) across the reading start, a half-scrolled row and the reading end.
+    function test_pageVisibility_states(data) {
+        setDirection(data.rtl);
+        const { view, items } = makeScrollingView({
+            width: 200,
+            height: 200,
+            columnWidth: 100,
+            scrollDuration: 0,
+        }, 3);
+
+        const V = Kirigami.ColumnView.Visible;
+        const P = Kirigami.ColumnView.PartlyVisible;
+        const H = Kirigami.ColumnView.Hidden;
+
+        // reading start: LTR contentX 0, RTL contentX max
+        view.contentX = data.rtl ? view.contentWidth - view.width : 0;
+        compare(items[0].Kirigami.ColumnView.pageVisibility, V);
+        compare(items[1].Kirigami.ColumnView.pageVisibility, V);
+        compare(items[2].Kirigami.ColumnView.pageVisibility, H);
+
+        // half-scrolled row: all states in between
+        view.contentX = 50;
+        compare(items[0].Kirigami.ColumnView.pageVisibility, P);
+        compare(items[1].Kirigami.ColumnView.pageVisibility, V);
+        compare(items[2].Kirigami.ColumnView.pageVisibility, P);
+        compare(items[0].Kirigami.ColumnView.inViewport, true);
+        compare(items[2].Kirigami.ColumnView.inViewport, true);
+
+        // reading end: LTR contentX max, RTL contentX 0
+        view.contentX = data.rtl ? 0 : view.contentWidth - view.width;
+        compare(items[0].Kirigami.ColumnView.pageVisibility, H);
+        compare(items[1].Kirigami.ColumnView.pageVisibility, V);
+        compare(items[2].Kirigami.ColumnView.pageVisibility, V);
+        compare(items[0].Kirigami.ColumnView.inViewport, false);
+    }
+
+    function test_pageVisibility_covered_by_pin_data() {
+        // the pin's own legacy state after the scroll is history-dependent
+        // (legacy pin state is not refreshed on pure scrolls): LTR keeps
+        // the pre-scroll values, RTL happens to land fresh. Both are the
+        // preserved base behavior; only pageVisibility is asserted fresh.
+        return [
+            { tag: "ltr", rtl: false, pinInViewport: false, pinEnabled: false, pinInList: false },
+            { tag: "rtl", rtl: true, pinInViewport: true, pinEnabled: true, pinInList: true },
+        ];
+    }
+
+    // a page fully covered by a pinned dock reports Hidden, while its legacy state (inViewport, enabled, visibleItems) is unchanged.
+    function test_pageVisibility_covered_by_pin(data) {
+        setDirection(data.rtl);
+        const { view, items } = makeScrollingView({
+            width: 200,
+            height: 200,
+            columnWidth: 100,
+            scrollDuration: 0,
+        }, 4);
+        items[0].Kirigami.ColumnView.pinned = true;
+        waitForPolish(view);
+
+        // rest at the reading end: the pin docks over page 2's flow slot
+        view.contentX = data.rtl ? 0 : view.contentWidth - view.width;
+        waitForPolish(view);
+
+        const V = Kirigami.ColumnView.Visible;
+        const H = Kirigami.ColumnView.Hidden;
+        compare(items[0].Kirigami.ColumnView.pageVisibility, V, "the docked pin is visible");
+        compare(items[1].Kirigami.ColumnView.pageVisibility, H);
+        compare(items[2].Kirigami.ColumnView.pageVisibility, H, "fully covered by the dock");
+        compare(items[3].Kirigami.ColumnView.pageVisibility, V);
+
+        // legacy behavior is preserved: the covered page keeps its
+        // viewport-only state
+        compare(items[2].Kirigami.ColumnView.inViewport, true, "legacy inViewport untouched");
+        compare(items[2].enabled, true, "legacy enabled untouched");
+        verify(view.visibleItems.indexOf(items[2]) >= 0, "legacy visibleItems untouched");
+
+        // ... as does the pin's own legacy state
+        compare(items[0].Kirigami.ColumnView.inViewport, data.pinInViewport, "pin legacy inViewport");
+        compare(items[0].enabled, data.pinEnabled, "pin legacy enabled");
+        compare(view.visibleItems.indexOf(items[0]) >= 0, data.pinInList, "pin legacy visibleItems");
     }
 }
