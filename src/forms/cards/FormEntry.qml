@@ -24,7 +24,7 @@ FT.FormEntry {
     hovered: impl.hovered
 
     //Internal: never rely on this
-    readonly property real __textLabelWidth: label.implicitWidth
+    readonly property real __textLabelWidth: root.fullWidth ? 0 : label.implicitWidth
 
     QQC.Label {
         id: label
