@@ -127,7 +127,7 @@ FT.FormEntry {
                 id: inlineLabel
                 Layout.fillWidth: true
                 Layout.columnSpan: mainLayout.columns
-                visible: (text.length > 0 || root.fullWidth) && impl.formLayout.__collapsed
+                visible: (impl.formLayout.__collapsed || root.fullWidth) && text.length > 0
                 text: label.Primitives.MnemonicData.richTextLabel
                 wrapMode: Text.WordWrap
                 Accessible.name: label.Primitives.MnemonicData.plainTextLabel
