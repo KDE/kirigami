@@ -130,6 +130,12 @@ Item {
     */
     property alias displayHint: actionToolBar.display
 
+    /*!
+     * The way the text property for the title and subtitle should be displayed.
+     * \since 6.31
+     */
+    property alias textFormat: titleSubtitle.textFormat
+
     implicitWidth: layout.implicitWidth
     implicitHeight: layout.implicitHeight
 
