@@ -150,3 +150,16 @@ install(FILES ${METATYPES_FILE} DESTINATION ${KDE_INSTALL_QTMETATYPESDIR})
 ecm_finalize_qml_module(KirigamiPlatform EXPORT KF6KirigamiPlatformTargets)
 
 ecm_generate_qdoc(KirigamiPlatform kirigamiplatform.qdocconf)
+
+ecm_add_installed_library_check(KirigamiPlatform
+    PACKAGE_NAME "KF6KirigamiPlatform"
+    PACKAGE_TARGET_NAMESPACE "KF6::"
+)
+
+ecm_installed_library_check_include_strings(KirigamiPlatform
+    HEADERS ${KirigamiPlatform_CamelCase_HEADERS}
+)
+
+ecm_installed_library_check_version_preprocessor_macros(KirigamiPlatform
+    PREFIX KIRIGAMIPLATFORM
+)
