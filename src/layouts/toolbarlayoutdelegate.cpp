@@ -6,10 +6,19 @@
 
 #include "toolbarlayoutdelegate.h"
 
+#include <algorithm>
+
 #include "loggingcategory.h"
 #include "toolbarlayout.h"
 
 using namespace Qt::StringLiterals;
+
+static bool wasDestroyedDuringIncubation(const QList<QQmlError> &errors)
+{
+    return std::any_of(errors.cbegin(), errors.cend(), [](const QQmlError &error) {
+        return error.description().contains("Object or context destroyed during incubation"_L1);
+    });
+}
 
 ToolBarDelegateIncubator::ToolBarDelegateIncubator(QQmlComponent *component, QQmlContext *context)
     : QQmlIncubator(QQmlIncubator::Asynchronous)
@@ -51,10 +60,12 @@ void ToolBarDelegateIncubator::setInitialState(QObject *object)
 void ToolBarDelegateIncubator::statusChanged(QQmlIncubator::Status status)
 {
     if (status == QQmlIncubator::Error) {
-        qCWarning(KirigamiLayoutsLog) << "Could not create delegate for ToolBarLayout";
         const auto e = errors();
-        for (const auto &error : e) {
-            qCWarning(KirigamiLayoutsLog) << error;
+        if (!wasDestroyedDuringIncubation(e)) {
+            qCWarning(KirigamiLayoutsLog) << "Could not create delegate for ToolBarLayout";
+            for (const auto &error : e) {
+                qCWarning(KirigamiLayoutsLog) << error;
+            }
         }
         m_finished = true;
     }
@@ -127,10 +138,12 @@ void ToolBarLayoutDelegate::createItems(QQmlComponent *fullComponent, QQmlCompon
     m_fullIncubator->setStateCallback(callback);
     m_fullIncubator->setCompletedCallback([this](ToolBarDelegateIncubator *incubator) {
         if (incubator->isError()) {
-            qCWarning(KirigamiLayoutsLog) << "Could not create delegate for ToolBarLayout";
             const auto errors = incubator->errors();
-            for (const auto &error : errors) {
-                qCWarning(KirigamiLayoutsLog) << error;
+            if (!wasDestroyedDuringIncubation(errors)) {
+                qCWarning(KirigamiLayoutsLog) << "Could not create delegate for ToolBarLayout";
+                for (const auto &error : errors) {
+                    qCWarning(KirigamiLayoutsLog) << error;
+                }
             }
             return;
         }
@@ -153,10 +166,12 @@ void ToolBarLayoutDelegate::createItems(QQmlComponent *fullComponent, QQmlCompon
     m_iconIncubator->setStateCallback(callback);
     m_iconIncubator->setCompletedCallback([this](ToolBarDelegateIncubator *incubator) {
         if (incubator->isError()) {
-            qCWarning(KirigamiLayoutsLog) << "Could not create delegate for ToolBarLayout";
             const auto errors = incubator->errors();
-            for (const auto &error : errors) {
-                qCWarning(KirigamiLayoutsLog) << error;
+            if (!wasDestroyedDuringIncubation(errors)) {
+                qCWarning(KirigamiLayoutsLog) << "Could not create delegate for ToolBarLayout";
+                for (const auto &error : errors) {
+                    qCWarning(KirigamiLayoutsLog) << error;
+                }
             }
             return;
         }
