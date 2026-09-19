@@ -5,6 +5,7 @@
  */
 
 import QtQuick
+import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 import QtTest
 
@@ -25,6 +26,46 @@ TestCase {
     Component {
         id: emptyItemPageComponent
         Item {}
+    }
+
+    Component {
+        id: touchColumnViewComponent
+        Kirigami.ColumnView {
+            width: 300
+            height: 200
+            columnResizeMode: Kirigami.ColumnView.SingleColumn
+            scrollDuration: 1000
+
+            readonly property alias button: button
+
+            Item {
+                QQC2.Button {
+                    id: button
+                    anchors.centerIn: parent
+                    text: "Tap"
+                    property int clickCount: 0
+                    onClicked: clickCount++
+                }
+            }
+        }
+    }
+
+    function test_rapid_touch_taps() {
+        const view = createTemporaryObject(touchColumnViewComponent, this);
+        verify(view);
+        waitForPolish(view);
+        view.currentIndex = 0;
+        tryCompare(view, "moving", false);
+
+        const touch = touchEvent(view.button);
+        for (let i = 0; i < 10; ++i) {
+            touch.press(0, view.button).commit();
+            wait(1);
+            touch.release(0, view.button).commit();
+            wait(1);
+            compare(view.button.clickCount, i + 1);
+        }
+        compare(view.moving, false);
     }
 
     function createViewWith3Items() {

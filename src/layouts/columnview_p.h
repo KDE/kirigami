@@ -71,6 +71,8 @@ private Q_SLOTS:
     void updateRepeaterModel();
 
 private:
+    void finishAnimation();
+
     // Returns the item x position in the layout:
     // if is a normal item returns just the item x
     // if is pinned returns the position of the "hole" in the layout the item leaves

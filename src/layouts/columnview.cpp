@@ -460,25 +460,28 @@ ContentItem::ContentItem(ColumnView *parent)
     // NOTE: the duration will be taken from kirigami units upon classBegin
     m_slideAnim->setDuration(0);
     m_slideAnim->setEasingCurve(QEasingCurve(QEasingCurve::OutExpo));
-    connect(m_slideAnim, &QPropertyAnimation::finished, this, [this]() {
-        while (!m_disappearingItems.isEmpty()) {
-            m_view->removeItem(m_disappearingItems.first());
-        }
-        if (!m_view->currentItem()) {
-            m_view->setCurrentIndex(m_items.indexOf(m_viewAnchorItem));
-        } else {
-            QRectF mapped = m_view->currentItem()->mapRectToItem(m_view, QRectF(QPointF(0, 0), m_view->currentItem()->size()));
-            if (!QRectF(QPointF(0, 0), m_view->size()).intersects(mapped)) {
-                m_view->setCurrentIndex(m_items.indexOf(m_viewAnchorItem));
-            }
-        }
-    });
+    connect(m_slideAnim, &QPropertyAnimation::finished, this, &ContentItem::finishAnimation);
 
     m_creationInProgress = false;
 }
 
 ContentItem::~ContentItem()
 {
+}
+
+void ContentItem::finishAnimation()
+{
+    while (!m_disappearingItems.isEmpty()) {
+        m_view->removeItem(m_disappearingItems.first());
+    }
+    if (!m_view->currentItem()) {
+        m_view->setCurrentIndex(m_items.indexOf(m_viewAnchorItem));
+    } else {
+        QRectF mapped = m_view->currentItem()->mapRectToItem(m_view, QRectF(QPointF(0, 0), m_view->currentItem()->size()));
+        if (!QRectF(QPointF(0, 0), m_view->size()).intersects(mapped)) {
+            m_view->setCurrentIndex(m_items.indexOf(m_viewAnchorItem));
+        }
+    }
 }
 
 void ContentItem::setBoundedX(qreal x)
@@ -499,6 +502,10 @@ void ContentItem::animateX(qreal newX)
     const qreal to = qRound(qBound(qMin(0.0, -width() + parentItem()->width()), newX, 0.0));
 
     m_slideAnim->stop();
+    if (qFuzzyCompare(x(), to)) {
+        finishAnimation();
+        return;
+    }
     m_slideAnim->setStartValue(x());
     m_slideAnim->setEndValue(to);
     m_slideAnim->start();
