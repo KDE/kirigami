@@ -11,131 +11,94 @@ import QtQuick.Templates as T
 import QtQuick.Layouts
 
 import org.kde.kirigami as Kirigami
+import org.kde.kirigami.templates as KT
 
-/*!
-  \qmltype ActionsListView
-  \inqmlmodule org.kde.kirigami
-
-  \brief A control to visualize an array of actions as a list.
-
-  Example usage:
-  \qml
-  QQC2.Dialog {
-      id: root
-      title: i18n("Track Options")
-
-      width: Kirigami.Units.gridUnit * 24
-      padding: 1 // To avoid covering the border
-
-      QQC2.ButtonGroup {
-          id: radioGroup
-      }
-
-      Kirigami.ActionsListView {
-          actions: [
-              Kirigami.Action {
-                  icon.name: "checkmark"
-                  text: qsTr("A normal action")
-                  tooltip: qsTr("A normal action")
-              },
-              Kirigami.Action {
-                  enabled: false
-                  icon.name: "action-unavailable-symbolic"
-                  text: qsTr("A disabled action")
-                  tooltip: qsTr("A disabled action")
-              },
-              Kirigami.Action {
-                  separator: true
-              },
-              Kirigami.Action {
-                  QQC2.ButtonGroup.group: radioGroup
-                  checked: true
-                  checkable: true
-                  autoExclusive: true
-                  text: qsTr("Radio 1", "The first radio button")
-                  tooltip: qsTr("Radio 1")
-              },
-              Kirigami.Action {
-                  QQC2.ButtonGroup.group: radioGroup
-                  checkable: true
-                  autoExclusive: true
-                  text: qsTr("Radio 2", "The second radio button")
-                  tooltip: qsTr("Radio 2")
-              },
-              Kirigami.Action {
-                  QQC2.ButtonGroup.group: radioGroup
-                  checkable: true
-                  autoExclusive: true
-                  text: qsTr("Radio 3", "The third radio button")
-                  tooltip: qsTr("Radio 3")
-              },
-              Kirigami.Action {
-                  checkable: true
-                  text: qsTr("Check button", "An example checkable button")
-                  tooltip: qsTr("Check button")
-              },
-              Kirigami.Action {
-                  separator: true
-              },
-              Kirigami.Action {
-                  icon.name: "list-add"
-                  text: qsTr("With Children", "I.e. an example where the item has child items")
-                  tooltip: qsTr("With Children")
-                  children: [
-                      Kirigami.Action {
-                          icon.name: "user"
-                          text: qsTr("Child 1")
-                          tooltip: qsTr("Child 1")
-                      },
-                      Kirigami.Action {
-                          icon.name: "user"
-                          text: qsTr("Child 2")
-                          tooltip: qsTr("Child 2")
-                      }
-                  ]
-              }
-          ]
-
-          onClicked: index => root.accept()
-      }
-  }
-  \endqml
-
-  \note Only 1 level of child actions are supported, if you want more you need to
-  implement a custom delegate.
-
-  \note It is not recommended to assign an onTriggered to an action with children.
-  Instead it is expected that the children have the effects to be triggered.
-
-  \warning Children are not supported on separator or checkable actions.
-
-  \since 6.17
- */
-ListView {
+KT.ActionsListView {
     id: root
 
-    /*!
-      \qmlproperty list<Action> actionsviewcontext menu.
+    itemDelegate: QQC2.ItemDelegate {
+        id: itemDelegate
+        property Item delegate
+        property T.Action modelData
 
-      \since 6.17
-     */
-    property list<T.Action> actions
+        action: modelData
+        visible: (modelData as Kirigami.Action)?.visible ?? true
 
-    /*!
-      \qmlsignal clicked(T.Action action)
-      \brief Signal emitted when one of the action items is clicked.
+        contentItem: RowLayout {
+            LayoutMirroring.enabled: itemDelegate.mirrored
 
-      The action value is the action of the clicked item.
+            Kirigami.Icon {
+                Layout.preferredHeight: itemDelegate.icon.height
+                Layout.preferredWidth: itemDelegate.icon.width
+                Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+                visible: itemDelegate.icon.name.length > 0 || itemDelegate.icon.source.toString().length > 0
+                source: itemDelegate.icon.name.length > 0 ? itemDelegate.icon.name : itemDelegate.icon.source
+                selected: itemDelegate.highlighted || itemDelegate.down
+            }
+            QQC2.Label {
+                id: textLabel
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                Accessible.ignored: true
+                text: itemDelegate.text
+                font: itemDelegate.font
+                color: itemDelegate.highlighted || itemDelegate.down
+                ? Kirigami.Theme.highlightedTextColor
+                : (itemDelegate.enabled ? Kirigami.Theme.textColor : Kirigami.Theme.disabledTextColor)
 
-      \since 6.17
-     */
-    signal clicked(T.Action action)
+                elide: Text.ElideRight
+                visible: itemDelegate.text
+                horizontalAlignment: Text.AlignLeft
+                verticalAlignment: Text.AlignVCenter
+            }
+            Kirigami.Icon {
+                visible: (itemDelegate.modelData as Kirigami.Action).children.length > 0
+                implicitWidth: Kirigami.Units.iconSizes.small
+                implicitHeight: Kirigami.Units.iconSizes.small
+                source: itemDelegate.delegate.expanded ? "go-up" : "go-down"
+            }
+        }
 
-    implicitWidth: contentWidth
-    implicitHeight: contentHeight
-    clip: true
+        onClicked: {
+            if ((modelData as Kirigami.Action)?.children.length > 0) {
+                item.delegate.expanded = !item.delegate.expanded
+            }
+            root.clicked(modelData)
+        }
+    }
 
-    model: root.actions
+    checkDelegate: QQC2.CheckDelegate {
+        id: check
+        property Item delegate
+        property T.Action modelData
+
+        action: modelData
+        visible: (modelData as Kirigami.Action)?.visible ?? true
+
+        onClicked: root.clicked(modelData)
+    }
+
+    radioDelegate: QQC2.RadioDelegate {
+        property Item delegate
+        property T.Action modelData
+
+        QQC2.ButtonGroup.group: modelData.QQC2.ButtonGroup.group
+
+        action: modelData
+        visible: (modelData as Kirigami.Action)?.visible ?? true
+
+        onClicked: root.clicked(modelData)
+    }
+
+    separatorDelegate: QQC2.Control {
+        id: separatorControl
+        property Item delegate
+        property T.Action modelData
+        padding: Kirigami.Units.largeSpacing
+        contentItem: Kirigami.Separator {
+            visible: (separatorControl.modelData as Kirigami.Action)?.visible ?? true
+        }
+    }
 
     delegate: ColumnLayout {
         id: delegateColumn
@@ -176,107 +139,19 @@ ListView {
         }
     }
 
-    Component {
-        id: itemDelegate
-        QQC2.ItemDelegate {
-            id: item
-            property Item delegate
-            property T.Action modelData
-
-            action: modelData
-            visible: (modelData as Kirigami.Action)?.visible ?? true
-
-            contentItem: RowLayout {
-                LayoutMirroring.enabled: item.mirrored
-
-                Kirigami.Icon {
-                    Layout.preferredHeight: item.icon.height
-                    Layout.preferredWidth: item.icon.width
-                    Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-                    visible: item.icon.name.length > 0 || item.icon.source.toString().length > 0
-                    source: item.icon.name.length > 0 ? item.icon.name : item.icon.source
-                    selected: item.highlighted || item.down
-                }
-                QQC2.Label {
-                    id: textLabel
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-                    Accessible.ignored: true
-                    text: item.text
-                    font: item.font
-                    color: item.highlighted || item.down
-                    ? Kirigami.Theme.highlightedTextColor
-                    : (item.enabled ? Kirigami.Theme.textColor : Kirigami.Theme.disabledTextColor)
-
-                    elide: Text.ElideRight
-                    visible: item.text
-                    horizontalAlignment: Text.AlignLeft
-                    verticalAlignment: Text.AlignVCenter
-                }
-                Kirigami.Icon {
-                    visible: (item.modelData as Kirigami.Action).children.length > 0
-                    implicitWidth: Kirigami.Units.iconSizes.small
-                    implicitHeight: Kirigami.Units.iconSizes.small
-                    source: item.delegate.expanded ? "go-up" : "go-down"
-                }
-            }
-
-            onClicked: item.delegate.expanded = !item.delegate.expanded
-        }
-    }
-    Component {
-        id: checkDelegate
-        QQC2.CheckDelegate {
-            id: check
-            property Item delegate
-            property T.Action modelData
-
-            action: modelData
-            visible: (modelData as Kirigami.Action)?.visible ?? true
-
-            onClicked: root.clicked(modelData)
-        }
-    }
-    Component {
-        id: radioDelegate
-        QQC2.RadioDelegate {
-            property Item delegate
-            property T.Action modelData
-
-            QQC2.ButtonGroup.group: modelData.QQC2.ButtonGroup.group
-
-            action: modelData
-            visible: (modelData as Kirigami.Action)?.visible ?? true
-
-            onClicked: root.clicked(modelData)
-        }
-    }
-    Component {
-        id: separatorDelegate
-        QQC2.Control {
-            id: separatorControl
-            property Item delegate
-            property T.Action modelData
-            padding: Kirigami.Units.largeSpacing
-            contentItem: Kirigami.Separator {
-                visible: (separatorControl.modelData as Kirigami.Action)?.visible ?? true
-            }
-        }
-    }
-
     QtObject {
         id: _private
 
         function delegateForAction(action: T.Action) : Component {
             const kirigamiAction = action as Kirigami.Action;
             if (kirigamiAction && kirigamiAction.separator) {
-                return separatorDelegate;
+                return root.separatorDelegate;
             } else if (kirigamiAction && kirigamiAction.displayComponent) {
                 return kirigamiAction.displayComponent;
             } else if (action.checkable) {
-                return kirigamiAction && kirigamiAction.autoExclusive ? radioDelegate : checkDelegate;
+                return kirigamiAction && kirigamiAction.autoExclusive ? root.radioDelegate : root.checkDelegate;
             }
-            return itemDelegate
+            return root.itemDelegate
         }
     }
 }

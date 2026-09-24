@@ -13,6 +13,7 @@ set_source_files_properties(AppHeaderSizeGroup.qml PROPERTIES
 ecm_target_qml_sources(KirigamiTemplates SOURCES
     AbstractApplicationHeader.qml
     AbstractCard.qml
+    ActionsListView.qml
     AppHeaderSizeGroup.qml
     Badge.qml
     Chip.qml
