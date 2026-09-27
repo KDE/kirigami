@@ -121,7 +121,6 @@ KT.NavigationTabButton {
             id: label
 
             text: control.Primitives.MnemonicData.richTextLabel
-            Accessible.name: control.Primitives.MnemonicData.plainTextLabel
             horizontalAlignment: (control.display === T.AbstractButton.TextBesideIcon) ? Text.AlignLeft : Text.AlignHCenter
 
             visible: control.display !== T.AbstractButton.IconOnly

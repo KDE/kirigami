@@ -99,7 +99,7 @@ T.TabButton {
     Primitives.MnemonicData.controlType: Primitives.MnemonicData.MenuItem
     Primitives.MnemonicData.label: text
 
-    Accessible.description: Primitives.MnemonicData.plainTextLabel
+    Accessible.name: Primitives.MnemonicData.plainTextLabel
     Accessible.onPressAction: control.animateClick()
 
     Shortcut {
