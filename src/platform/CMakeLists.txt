@@ -27,6 +27,8 @@ target_sources(KirigamiPlatform PRIVATE
     platformtheme.h
     basictheme.cpp
     basictheme_p.h
+    cutouts_p.h
+    cutouts.cpp
     inputmethod.cpp
     inputmethod.h
     platformpluginfactory.cpp
@@ -55,6 +57,14 @@ if (WITH_DBUS)
     set_source_files_properties(org.freedesktop.portal.Settings.xml PROPERTIES INCLUDE dbustypes.h)
     qt_add_dbus_interface(libkirigami_extra_sources org.freedesktop.portal.Settings.xml settings_interface)
     set(LIBKIRIGAMKI_EXTRA_LIBS Qt6::DBus)
+endif()
+
+if (WITH_WAYLAND)
+    qt6_generate_wayland_protocol_client_sources(KirigamiPlatform
+        PRIVATE_CODE
+        FILES
+            ${CMAKE_CURRENT_SOURCE_DIR}/xx-cutouts-v1.xml
+    )
 endif()
 
 target_sources(KirigamiPlatform PRIVATE ${libkirigami_extra_sources})
@@ -97,6 +107,13 @@ target_link_libraries(KirigamiPlatform
     Qt6::QuickControls2
     ${LIBKIRIGAMKI_EXTRA_LIBS}
 )
+
+if (WITH_WAYLAND)
+    target_link_libraries(KirigamiPlatform
+        PRIVATE
+        Qt6::WaylandClient
+    )
+endif()
 
 ecm_generate_headers(KirigamiPlatform_CamelCase_HEADERS
     HEADER_NAMES
