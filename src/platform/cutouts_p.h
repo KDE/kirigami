@@ -1,0 +1,33 @@
+/*
+ *  SPDX-FileCopyrightText: 2026 Marco Martin <mart@kde.org>
+ *
+ *  SPDX-License-Identifier: LGPL-2.0-or-later
+ */
+
+#pragma once
+
+namespace Kirigami
+{
+namespace Platform
+{
+
+class Cutouts : public QQuickItem
+{
+    Q_OBJECT
+    QML_ELEMENT
+
+public:
+    Cutouts(QQuickItem *parent = nullptr);
+    ~Cutouts();
+
+    QList<QRectF> cutouts() const;
+
+protected:
+    bool eventFilter(QObject *watched, QEvent *event) override;
+    void itemChange(QQuickItem::ItemChange change, const QQuickItem::ItemChangeData &value) override;
+
+private:
+    void connectAncestors(QQuickItem *item);
+};
+}
+}
