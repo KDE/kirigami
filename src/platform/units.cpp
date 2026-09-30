@@ -10,6 +10,7 @@
 #include <QFont>
 #include <QFontMetrics>
 #include <QGuiApplication>
+#include <QIcon>
 #include <QQmlComponent>
 #include <QQuickStyle>
 #include <QStyleHints>
@@ -19,6 +20,8 @@
 
 #include "kirigamiplatform_logging.h"
 #include "platformpluginfactory.h"
+
+using namespace Qt::StringLiterals;
 
 namespace Kirigami
 {
@@ -292,31 +295,36 @@ IconSizes::IconSizes(Units *units)
     : QObject(units)
     , m_units(units)
 {
+    // TODO: this might have to be redone when t he icon theme changes at runtime
+    const auto icon = QIcon::fromTheme(u"folder"_s);
+    const auto availableSizes = icon.availableSizes();
+    for (auto size : {Small, SmallMedium, Medium, Large, Huge, Enormous}) {
+        const int target = static_cast<int>(size);
+        auto it = std::ranges::min_element(availableSizes, [target](const QSize &a, const QSize &b) {
+            return std::abs(a.width() - target) < std::abs(b.width() - target);
+        });
+
+        if (it != availableSizes.end()) {
+            m_sizes[size] = it->width();
+        }
+    }
+    qWarning() << m_sizes;
 }
 
-int IconSizes::roundedIconSize(int size) const
+int IconSizes::roundedIconSize(int initialSize) const
 {
-    if (size < 16) {
-        return size;
+    if (initialSize < m_sizes.value(Small)) {
+        return initialSize;
     }
 
-    if (size < 22) {
-        return 16;
+    int closestSize = 0;
+    for (const int size : m_sizes) {
+        if (size < initialSize) {
+            closestSize = std::max(closestSize, size);
+        }
     }
 
-    if (size < 32) {
-        return 22;
-    }
-
-    if (size < 48) {
-        return 32;
-    }
-
-    if (size < 64) {
-        return 48;
-    }
-
-    return size;
+    return closestSize;
 }
 
 int IconSizes::sizeForLabels() const
@@ -327,32 +335,32 @@ int IconSizes::sizeForLabels() const
 
 int IconSizes::small() const
 {
-    return 16;
+    return m_sizes.value(Small);
 }
 
 int IconSizes::smallMedium() const
 {
-    return 22;
+    return m_sizes.value(SmallMedium);
 }
 
 int IconSizes::medium() const
 {
-    return 32;
+    return m_sizes.value(Medium);
 }
 
 int IconSizes::large() const
 {
-    return 48;
+    return m_sizes.value(Large);
 }
 
 int IconSizes::huge() const
 {
-    return 64;
+    return m_sizes.value(Huge);
 }
 
 int IconSizes::enormous() const
 {
-    return 128;
+    return m_sizes.value(Enormous);
 }
 }
 }

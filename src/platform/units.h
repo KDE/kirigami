@@ -53,9 +53,20 @@ public:
     Q_INVOKABLE int roundedIconSize(int size) const;
 
 private:
+    // Not exported to QML, those are the old default sizes, we'll compare them to those provided by the theme
+    enum Size {
+        Small = 16,
+        SmallMedium = 22,
+        Medium = 32,
+        Large = 48,
+        Huge = 64,
+        Enormous = 128
+    };
     KIRIGAMIPLATFORM_NO_EXPORT float iconScaleFactor() const;
 
     Units *m_units;
+    QMap<Size, int> m_sizes =
+        {{Small, int(Small)}, {SmallMedium, int(SmallMedium)}, {Medium, int(Medium)}, {Large, int(Large)}, {Huge, int(Huge)}, {Enormous, int(Enormous)}};
 
 Q_SIGNALS:
     void sizeForLabelsChanged();
