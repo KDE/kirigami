@@ -56,9 +56,10 @@ private:
     KIRIGAMIPLATFORM_NO_EXPORT float iconScaleFactor() const;
 
     Units *m_units;
+    QMap
 
-Q_SIGNALS:
-    void sizeForLabelsChanged();
+        Q_SIGNALS : void
+                    sizeForLabelsChanged();
     void smallChanged();
     void smallMediumChanged();
     void mediumChanged();

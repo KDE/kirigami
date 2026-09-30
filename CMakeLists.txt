@@ -93,8 +93,11 @@ ecm_setup_version(PROJECT
 # shall we use DBus?
 # enabled per default on Linux & BSD systems
 set(USE_DBUS_DEFAULT OFF)
+set(USE_WAYLAND_DEFAULT OFF)
 if(UNIX AND NOT APPLE AND NOT ANDROID AND NOT HAIKU)
     set(USE_DBUS_DEFAULT ON)
+    find_package(Qt6WaylandClient ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE)
+    set(WITH_WAYLAND ON)
 endif()
 option(USE_DBUS "Build components using DBus" ${USE_DBUS_DEFAULT})
 if(USE_DBUS)

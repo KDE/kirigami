@@ -135,5 +135,8 @@ KC.AbstractApplicationHeader {
                     && (pageStack.columnView.columnResizeMode === KL.ColumnView.SingleColumn
                     || root.page.KL.ColumnView.view?.trailingVisibleItem === root.page)
         }
+
+        Platform.Cutouts {
+        }
     }
 }
