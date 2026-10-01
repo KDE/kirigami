@@ -8,7 +8,6 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Controls as QQC2
-import QtQuick.Controls.impl as QQC2Impl
 import QtQuick.Layouts
 import QtQuick.Templates as T
 import org.kde.kirigami.platform as Platform
@@ -55,10 +54,10 @@ QQC2.ItemDelegate {
             visible: source !== undefined && !listItem.isSeparator
         }
 
-        QQC2Impl.MnemonicLabel {
+        QQC2.Label {
             id: labelItem
             visible: !listItem.isSeparator
-            text: width > height * 2 ? listItem.Primitives.MnemonicData.mnemonicLabel : ""
+            text: width > height * 2 ? listItem.Primitives.MnemonicData.richTextLabel : ""
             Accessible.name: listItem.Primitives.MnemonicData.plainTextLabel
             Layout.preferredWidth: metrics.width
             Layout.preferredHeight: metrics.height
@@ -69,7 +68,6 @@ QQC2.ItemDelegate {
             horizontalAlignment: Text.AlignLeft
 
             Layout.fillWidth: true
-            mnemonicVisible: listItem.Primitives.MnemonicData.active
             color: (listItem.highlighted || listItem.checked || listItem.down) ? Platform.Theme.highlightedTextColor : Platform.Theme.textColor
             elide: Text.ElideRight
             font: listItem.font
