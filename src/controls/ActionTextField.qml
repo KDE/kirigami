@@ -150,6 +150,7 @@ QQC2.TextField {
 
             QQC2.ToolTip.visible: (hovered || activeFocus) && (text.length > 0)
             QQC2.ToolTip.text: text
+            QQC2.ToolTip.delay: Platform.Units.toolTipDelay
         }
     }
 
