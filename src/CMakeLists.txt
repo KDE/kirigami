@@ -5,7 +5,6 @@ add_subdirectory(templates)
 add_subdirectory(controls)
 add_subdirectory(delegates)
 add_subdirectory(dialogs)
-add_subdirectory(polyfill)
 add_subdirectory(forms)
 
 add_library(Kirigami)
@@ -62,7 +61,6 @@ ecm_add_qml_module(Kirigami URI "org.kde.kirigami" VERSION 2.0
     DEPENDENCIES
     "QtQuick.Controls"
     TARGET KirigamiPrivate
-    TARGET KirigamiPolyfill
     IMPORTS
     TARGET KirigamiControls
     TARGET KirigamiPlatform
