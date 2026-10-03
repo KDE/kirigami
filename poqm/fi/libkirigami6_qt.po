@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2026-03-05 20:38+0200\n"
+"PO-Revision-Date: 2026-09-12 18:04+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -32,17 +32,14 @@ msgid "Copyright"
 msgstr "Tekijänoikeudet"
 
 #: controls/AboutItem.qml:243
-#, fuzzy
-#| msgctxt "AboutItem|"
-#| msgid "License:"
 msgctxt "AboutItem|"
 msgid "License"
-msgstr "Lisenssi:"
+msgstr "Lisenssi"
 
 #: controls/AboutItem.qml:265
 msgctxt "AboutItem|"
 msgid "Homepage"
-msgstr ""
+msgstr "Kotisivu"
 
 #: controls/AboutItem.qml:279
 msgctxt "AboutItem|"
@@ -55,9 +52,6 @@ msgid "Get Involved"
 msgstr "Ota osaa"
 
 #: controls/AboutItem.qml:307
-#, fuzzy
-#| msgctxt "AboutItem|"
-#| msgid "Report a Bug"
 msgctxt "AboutItem|"
 msgid "Report a bug"
 msgstr "Ilmoita viasta"
