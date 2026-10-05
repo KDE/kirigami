@@ -98,7 +98,7 @@ msgstr "Выход"
 #: controls/ActionToolBar.qml:209
 msgctxt "ActionToolBar|"
 msgid "More Actions"
-msgstr "Больше действий"
+msgstr "Дополнительные действия"
 
 #: controls/Chip.qml:45
 msgctxt "Chip|"
