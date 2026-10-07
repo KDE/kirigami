@@ -36,20 +36,11 @@ QQC2.CheckDelegate {
      */
     property string subtitle
 
-    /*!
-     * The way the text property for the title and subtitle should be displayed.
-     * \since 6.31
-     */
-    property alias textFormat: iconTitleSubtitle.textFormat
-
     QQC2.ToolTip.text: text + (subtitle.length > 0 ? "\n\n" + subtitle : "")
     QQC2.ToolTip.visible: (Platform.Settings.tabletMode ? down : hovered) && (contentItem?.truncated ?? false)
     QQC2.ToolTip.delay: Platform.Units.toolTipDelay
 
-
-
     contentItem: IconTitleSubtitle {
-        id: iconTitleSubtitle
         icon: icon.fromControlsIcon(delegate.icon)
         title: delegate.text
         subtitle: delegate.subtitle
