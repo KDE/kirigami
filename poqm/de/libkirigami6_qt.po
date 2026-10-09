@@ -7,15 +7,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libkirigami6_qt\n"
-"PO-Revision-Date: 2026-03-13 00:13+0100\n"
-"Last-Translator: Alexander Becker <alex-at-kde-l10n-de@freenet.de>\n"
+"PO-Revision-Date: 2026-10-03 19:36+0200\n"
+"Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.12.3\n"
+"X-Generator: Lokalize 26.08.0\n"
 "X-Qt-Contexts: true\n"
 
 #: controls/AboutItem.qml:180
@@ -36,17 +36,14 @@ msgid "Copyright"
 msgstr "Copyright"
 
 #: controls/AboutItem.qml:243
-#, fuzzy
-#| msgctxt "AboutItem|"
-#| msgid "License:"
 msgctxt "AboutItem|"
 msgid "License"
-msgstr "Lizenz:"
+msgstr "Lizenz"
 
 #: controls/AboutItem.qml:265
 msgctxt "AboutItem|"
 msgid "Homepage"
-msgstr ""
+msgstr "Startseite"
 
 #: controls/AboutItem.qml:279
 msgctxt "AboutItem|"
@@ -59,9 +56,6 @@ msgid "Get Involved"
 msgstr "Machen Sie mit"
 
 #: controls/AboutItem.qml:307
-#, fuzzy
-#| msgctxt "AboutItem|"
-#| msgid "Report a Bug"
 msgctxt "AboutItem|"
 msgid "Report a bug"
 msgstr "Ein Problem melden"
