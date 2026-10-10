@@ -326,12 +326,23 @@ Item {
             Repeater {
                 model: Platform.Settings.information
                 delegate: KF.FormEntry {
-                    id: delegate
+                    id: infoDelegate
                     required property string modelData
                     contentItem:  QQC2.Label {
                         wrapMode: Text.WordWrap
                         id: libraries
                         text: delegate.modelData
+                    }
+                }
+            }
+            Repeater {
+                model: aboutItem.aboutData.components
+                delegate: KF.FormEntry {
+                    id: compDelegate
+                    required property var modelData
+                    contentItem:  QQC2.Label {
+                        wrapMode: Text.WordWrap
+                        text: "%1 %2".arg(delegate.modelData.name, delegate.modelData.version)
                     }
                 }
             }
