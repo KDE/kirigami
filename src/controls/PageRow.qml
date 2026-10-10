@@ -878,7 +878,7 @@ QT.Control {
                     return false
                 }
                 return page instanceof QT.Page || page instanceof Component || typeof page === 'string'
-                    || (typeof page === 'object' && typeof page.toString() === 'string')
+                    || (page && typeof page === 'object' && typeof page.toString() === 'string')
             }
 
             // check page/pages that it is/they are valid
