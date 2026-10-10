@@ -335,6 +335,17 @@ Item {
                     }
                 }
             }
+            Repeater {
+                model: aboutItem.aboutData.components
+                delegate: KF.FormEntry {
+                    id: delegate
+                    required property var modelData
+                    contentItem:  QQC2.Label {
+                        wrapMode: Text.WordWrap
+                        text: "%1 %2".arg(delegate.modelData.name, delegate.modelData.version)
+                    }
+                }
+            }
         }
 
         QQC2.CheckBox {
