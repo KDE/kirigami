@@ -19,19 +19,20 @@ import org.kde.kirigami.platform as Platform
 
 \brief A simple title delegate that has trailing actions.
 
-This is meant to be used in lists for items that have actions.
-For example lists of usernames, with any related actions after them,
-such as rename and delete actions.
+This is meant to be used in lists for items that have actions but
+don't need an icon. If you need an icon, use \c IconTitleSubtitleWithActions
+instead.
 
 Example usage as contentItem of an ItemDelegate:
 
 \qml
 ItemDelegate {
     id: itemDelegate
-    icon: "user"
-    text: i18nc("@title:row", "Konqi")
-    readonly property string subtitle: i18nc("@label", "The Konqueror")
+
+    text: i18nc("@title:row", "Banana")
+    readonly property string subtitle: i18nc("@label", "Known for deliciousness")
     Accessible.description: subtitle
+
     Kirigami.Theme.useAlternateBackgroundColor: true
 
     onClicked: [...]
@@ -39,21 +40,25 @@ ItemDelegate {
     contentItem: Kirigami.TitleSubtitleWithActions {
         title: itemDelegate.title
         subtitle: itemDelegate.subtitle
+
         elide: Text.ElideRight
         selected: itemDelegate.pressed || itemDelegate.highlighted
+
         actions: [
             Kirigami.Action {
-                icon.name: "edit-entry-symbolic"
-                text: i18nc("@action:button", "Modify user…")
+                icon.name: "face-smile"
+                text: i18nc("@action:button", "Eat Banana…")
+
                 onTriggered: [...]
-                tooltip: text
             },
             Kirigami.Action {
                 icon.name: "edit-delete-remove-symbolic"
-                text: i18nc("@action:button", "Remove user…")
-                onTriggered: [...]
+                text: i18nc("@action:button", "Remove Banana…")
                 tooltip: text
+
                 displayHint: Kirigami.DisplayHint.IconOnly
+
+                onTriggered: [...]
             }
         ]
     }
