@@ -1,11 +1,11 @@
-# SPDX-FileCopyrightText: 2026 Mint <5602mint@gmail.com>
 # Ryuichi Yamada <ryuichi_ya220@outlook.jp>, 2023.
+# SPDX-FileCopyrightText: 2026 Mint <5602mint@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: libkirigamiplugin_qt\n"
-"PO-Revision-Date: 2026-05-10 19:26+0900\n"
+"PO-Revision-Date: 2026-10-03 13:31+0900\n"
 "Last-Translator: Mint <5602mint@gmail.com>\n"
-"Language-Team: Japanese <kde-i18n-doc@kde.org>\n"
+"Language-Team: Japanese <kde-jp@kde.org>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: qtrich\n"
 "X-Qt-Contexts: true\n"
-"X-Generator: Lokalize 26.04.1\n"
+"X-Generator: Lokalize 26.08.1\n"
 
 #: controls/AboutItem.qml:133
 #, qt-format
@@ -170,7 +170,7 @@ msgstr "メニューを開く"
 #: controls/SearchField.qml:94
 msgctxt "SearchField|"
 msgid "Search…"
-msgstr "検索..."
+msgstr "検索…"
 
 #: controls/SearchField.qml:96
 msgctxt "SearchField|"
@@ -180,7 +180,7 @@ msgstr "検索"
 #: controls/SearchField.qml:107
 msgctxt "SearchField|"
 msgid "Clear search"
-msgstr "検索をクリア"
+msgstr "検索欄をクリア"
 
 #: controls/settingscomponents/CategorizedSettings.qml:41
 #: controls/settingscomponents/CategorizedSettings.qml:105
@@ -231,12 +231,12 @@ msgstr ""
 #: controls/templates/OverlayDrawer.qml:141
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
-msgstr "ドロアを閉じる"
+msgstr "ドロワーを閉じる"
 
 #: controls/templates/OverlayDrawer.qml:147
 msgctxt "OverlayDrawer|"
 msgid "Open drawer"
-msgstr "ドロアを開く"
+msgstr "ドロワーを開く"
 
 #: controls/templates/private/BackButton.qml:53
 msgctxt "BackButton|"
@@ -274,4 +274,4 @@ msgstr "%1 ウィンドウシステム"
 #, qt-format
 msgctxt "Settings|"
 msgid "Qt %2 (built against %3)"
-msgstr "Qt %2 (%3 を用いてビルドされました)"
+msgstr "Qt %2 (%3 でビルド)"
