@@ -1,11 +1,11 @@
-# SPDX-FileCopyrightText: 2026 Mint <5602mint@gmail.com>
 # Ryuichi Yamada <ryuichi_ya220@outlook.jp>, 2023.
+# SPDX-FileCopyrightText: 2026 Mint <5602mint@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: libkirigamiplugin_qt\n"
-"PO-Revision-Date: 2026-05-10 19:26+0900\n"
+"PO-Revision-Date: 2026-10-03 13:31+0900\n"
 "Last-Translator: Mint <5602mint@gmail.com>\n"
-"Language-Team: Japanese <kde-i18n-doc@kde.org>\n"
+"Language-Team: Japanese <kde-jp@kde.org>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -14,13 +14,13 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: qtrich\n"
 "X-Qt-Contexts: true\n"
-"X-Generator: Lokalize 26.04.1\n"
+"X-Generator: Lokalize 26.08.1\n"
 
 #: controls/AboutItem.qml:180
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Visit %1's KDE Store page"
-msgstr ""
+msgstr "%1 の KDE Store ページを訪れる"
 
 #: controls/AboutItem.qml:196
 #, qt-format
@@ -34,17 +34,14 @@ msgid "Copyright"
 msgstr "著作権について"
 
 #: controls/AboutItem.qml:243
-#, fuzzy
-#| msgctxt "AboutItem|"
-#| msgid "License:"
 msgctxt "AboutItem|"
 msgid "License"
-msgstr "ライセンス:"
+msgstr "ライセンス"
 
 #: controls/AboutItem.qml:265
 msgctxt "AboutItem|"
 msgid "Homepage"
-msgstr ""
+msgstr "ホームページ"
 
 #: controls/AboutItem.qml:279
 msgctxt "AboutItem|"
@@ -57,9 +54,6 @@ msgid "Get Involved"
 msgstr "参加する"
 
 #: controls/AboutItem.qml:307
-#, fuzzy
-#| msgctxt "AboutItem|"
-#| msgid "Report a Bug"
 msgctxt "AboutItem|"
 msgid "Report a bug"
 msgstr "バグを報告"
@@ -106,12 +100,9 @@ msgid "More Actions"
 msgstr "その他のアクション"
 
 #: controls/Chip.qml:45
-#, fuzzy
-#| msgctxt "Chip|"
-#| msgid "Remove Tag"
 msgctxt "Chip|"
 msgid "Remove"
-msgstr "タグを削除"
+msgstr "削除"
 
 #: controls/ContextDrawer.qml:65
 msgctxt "ContextDrawer|"
@@ -121,7 +112,7 @@ msgstr "アクション"
 #: controls/ContextualHelpButton.qml:60
 msgctxt "ContextualHelpButton|"
 msgid "Show Contextual Help"
-msgstr ""
+msgstr "コンテキストヘルプを表示"
 
 #: controls/GlobalDrawer.qml:372
 msgctxt "GlobalDrawer|"
@@ -159,17 +150,11 @@ msgid "Show Password"
 msgstr "パスワードを表示"
 
 #: controls/private/globaltoolbar/HandleButton.qml:24
-#, fuzzy
-#| msgctxt "PageRowGlobalToolBarUI|"
-#| msgid "Close menu"
 msgctxt "HandleButton|"
 msgid "Close menu"
 msgstr "メニューを閉じる"
 
 #: controls/private/globaltoolbar/HandleButton.qml:24
-#, fuzzy
-#| msgctxt "PageRowGlobalToolBarUI|"
-#| msgid "Open menu"
 msgctxt "HandleButton|"
 msgid "Open menu"
 msgstr "メニューを開く"
@@ -180,9 +165,6 @@ msgid "Navigate Back"
 msgstr "戻る"
 
 #: controls/private/globaltoolbar/NavigationButtons.qml:119
-#, fuzzy
-#| msgctxt "ForwardButton|"
-#| msgid "Navigate Forward"
 msgctxt "NavigationButtons|"
 msgid "Navigate Forward"
 msgstr "進む"
@@ -191,12 +173,10 @@ msgstr "進む"
 #, qt-format
 msgctxt "@info:tooltip %1 is a keyboard shorcut|"
 msgid "Trigger this action with %1"
-msgstr ""
+msgstr "%1 でこの操作を実行"
 
 #: controls/private/PrivateActionToolButton.qml:126
-#, fuzzy, qt-format
-#| msgctxt "AboutItem|"
-#| msgid "%1 (%2)"
+#, qt-format
 msgctxt ""
 "@info:tooltip %1 is the tooltip of an action, %2 is its keyboard shorcut|"
 msgid "%1 (%2)"
@@ -205,7 +185,7 @@ msgstr "%1 (%2)"
 #: controls/SearchField.qml:89
 msgctxt "SearchField|"
 msgid "Search…"
-msgstr "検索..."
+msgstr "検索…"
 
 #: controls/SearchField.qml:91
 msgctxt "SearchField|"
@@ -215,34 +195,28 @@ msgstr "検索"
 #: controls/SearchField.qml:101
 msgctxt "SearchField|"
 msgid "Clear search"
-msgstr "検索をクリア"
+msgstr "検索欄をクリア"
 
 #: controls/SelectableLabel.qml:297
-#, fuzzy
-#| msgctxt "AboutItem|"
-#| msgid "Copyright"
 msgctxt "SelectableLabel|"
 msgid "Copy"
-msgstr "著作権について"
+msgstr "コピー"
 
 #: controls/SelectableLabel.qml:310
 msgctxt "SelectableLabel|"
 msgid "Select All"
-msgstr ""
+msgstr "すべて選択"
 
 #: controls/UrlButton.qml:53
 #, qt-format
 msgctxt "UrlButton|@info:whatsthis"
 msgid "Open link %1"
-msgstr ""
+msgstr "リンク %1 を開く"
 
 #: controls/UrlButton.qml:54
-#, fuzzy
-#| msgctxt "PageRowGlobalToolBarUI|"
-#| msgid "Open menu"
 msgctxt "UrlButton|@info:whatsthis"
 msgid "Open link"
-msgstr "メニューを開く"
+msgstr "リンクを開く"
 
 #: controls/UrlButton.qml:102
 msgctxt "UrlButton|"
@@ -250,87 +224,64 @@ msgid "Copy Link to Clipboard"
 msgstr "リンクをクリップボードにコピー"
 
 #: dialogs/DialogHeaderTopContent.qml:104
-#, fuzzy
-#| msgctxt "PageRowGlobalToolBarUI|"
-#| msgid "Close menu"
 msgctxt "DialogHeaderTopContent|@action:button close dialog"
 msgid "Close"
-msgstr "メニューを閉じる"
+msgstr "閉じる"
 
 #: platform/settings.cpp:219
-#, fuzzy, qt-format
-#| msgctxt "Settings|"
-#| msgid "KDE Frameworks %1"
+#, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "KDE Frameworks %1"
 msgstr "KDE Frameworks %1"
 
 #: platform/settings.cpp:221
-#, fuzzy, qt-format
-#| msgctxt "Settings|"
-#| msgid "The %1 windowing system"
+#, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "The %1 windowing system"
 msgstr "%1 ウィンドウシステム"
 
 #: platform/settings.cpp:222
-#, fuzzy, qt-format
-#| msgctxt "Settings|"
-#| msgid "Qt %2 (built against %3)"
+#, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "Qt %2 (built against %3)"
-msgstr "Qt %2 (%3 を用いてビルドされました)"
+msgstr "Qt %2 (%3 でビルド)"
 
 #: templates/InlineMessage.qml:352
 msgctxt "InlineMessage|"
 msgid "Success"
-msgstr ""
+msgstr "成功"
 
 #: templates/InlineMessage.qml:354
 msgctxt "InlineMessage|"
 msgid "Warning"
-msgstr ""
+msgstr "警告"
 
 #: templates/InlineMessage.qml:356
 msgctxt "InlineMessage|"
 msgid "Error"
-msgstr ""
+msgstr "エラー"
 
 #: templates/InlineMessage.qml:358
 msgctxt "InlineMessage|"
 msgid "Note"
-msgstr ""
+msgstr "備考"
 
 #: templates/InlineMessage.qml:445
-#, fuzzy
-#| msgctxt "PageRowGlobalToolBarUI|"
-#| msgid "Close menu"
 msgctxt "InlineMessage|"
 msgid "Close"
-msgstr "メニューを閉じる"
+msgstr "閉じる"
 
 #: templates/OverlayDrawer.qml:149
 msgctxt "OverlayDrawer|"
 msgid "Close drawer"
-msgstr "ドロアを閉じる"
+msgstr "ドロワーを閉じる"
 
 #: templates/OverlayDrawer.qml:155
 msgctxt "OverlayDrawer|"
 msgid "Open drawer"
-msgstr "ドロアを開く"
+msgstr "ドロワーを開く"
 
 #: templates/OverlaySheet.qml:309
-#, fuzzy
-#| msgctxt "PageRowGlobalToolBarUI|"
-#| msgid "Close menu"
 msgctxt "OverlaySheet|@action:button close dialog"
 msgid "Close"
-msgstr "メニューを閉じる"
-
-#~ msgctxt "AboutItem|"
-#~ msgid "%1 (%2)"
-#~ msgstr "%1 (%2)"
-
-#~ msgctxt "AboutItem|"
-#~ msgid "License: %1"
-#~ msgstr "ライセンス: %1"
+msgstr "閉じる"
