@@ -300,7 +300,7 @@ T.Dialog {
 
     // center dialog
     x: parent ? Math.round(((parent && parent.width) - width) / 2) : 0
-    y: parent ? Math.round(((parent && parent.height) - height) / 2) + Platform.Units.gridUnit * 2 * (1 - opacity) : 0 // move animation
+    y: parent ? Math.round(((parent && parent.height) - implicitHeight) / 2) + Platform.Units.gridUnit * 2 * (1 - opacity) : 0 // move animation
 
     // dialog enter and exit transitions
     enter: Transition {
