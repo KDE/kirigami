@@ -22,6 +22,7 @@
 
 #include "kirigamiplatform_version.h"
 #include "smoothscrollwatcher.h"
+#include "styleselector.h"
 #include "tabletmodewatcher.h"
 
 namespace Kirigami
@@ -194,7 +195,7 @@ bool Settings::hasTransientTouchInput() const
 
 QString Settings::style() const
 {
-    return m_style;
+    return m_style.isEmpty() ? StyleSelector::style() : m_style;
 }
 
 void Settings::setStyle(const QString &style)

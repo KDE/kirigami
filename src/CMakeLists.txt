@@ -120,6 +120,7 @@ ecm_target_qml_sources(Kirigami VERSION 2.19 SOURCES
 
 # TODO Styles will become proper imports in the future
 qt_target_qml_sources(Kirigami RESOURCES
+    styles/Material/AbstractApplicationHeader.qml
     styles/Material/Badge.qml
     styles/Material/InlineMessage.qml
     styles/Material/NavigationTabBar.qml
