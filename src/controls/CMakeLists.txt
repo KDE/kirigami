@@ -31,6 +31,7 @@ ecm_target_qml_sources(KirigamiControls SOURCES
     ActionToolBar.qml
     ApplicationItem.qml
     ApplicationWindow.qml
+    Avatar.qml
     Badge.qml
     Card.qml
     CardsLayout.qml
@@ -94,6 +95,8 @@ target_include_directories(KirigamiControlsplugin PRIVATE ${CMAKE_CURRENT_SOURCE
 
 target_sources(KirigamiControls PRIVATE
     enums.h
+    nameutils.cpp
+    nameutils.h
     pagepool.cpp
     pagepool.h
 )

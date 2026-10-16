@@ -127,39 +127,21 @@ Item {
             property bool hasAvatar: aboutItem.__hasAvatar(modelData)
 
 
-            leadingItems: Item {
+            leadingItems: KC.Avatar {
                 implicitWidth: Platform.Units.iconSizes.medium
                 implicitHeight: implicitWidth
-
-                Primitives.Icon {
-                    id: avatarIcon
-
-                    anchors.fill: parent
-
-                    fallback: "user"
-                    source: {
-                        if (delegate.hasAvatar && aboutItem.loadAvatars) {
-                            // Appending to the params of the url does not work, thus the search is set
-                            const url = new URL(delegate.modelData.avatarUrl);
-                            const params = new URLSearchParams(url.search);
-                            params.append("s", width);
-                            url.search = params.toString();
-                            return url;
-                        } else {
-                            return "user"
-                        }
+                name: delegate.modelData.name
+                source: {
+                    if (delegate.hasAvatar && aboutItem.loadAvatars) {
+                        // Appending to the params of the url does not work, thus the search is set
+                        const url = new URL(delegate.modelData.avatarUrl);
+                        const params = new URLSearchParams(url.search);
+                        params.append("s", width);
+                        url.search = params.toString();
+                        return url;
+                    } else {
+                        return "";
                     }
-                    visible: status !== Primitives.Icon.Loading
-                }
-
-                // So it's clear that something is happening while avatar images are loaded
-                QQC2.BusyIndicator {
-                    anchors.centerIn: parent
-                    implicitWidth: Platform.Units.iconSizes.medium
-                    implicitHeight: implicitWidth
-
-                    visible: avatarIcon.status === Primitives.Icon.Loading
-                    running: visible
                 }
             }
 
