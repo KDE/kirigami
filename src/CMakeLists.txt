@@ -121,6 +121,8 @@ ecm_target_qml_sources(Kirigami VERSION 2.19 SOURCES
 # TODO Styles will become proper imports in the future
 qt_target_qml_sources(Kirigami RESOURCES
     styles/Material/InlineMessage.qml
+    styles/Material/NavigationTabBar.qml
+    styles/Material/NavigationTabButton.qml
     styles/Material/Theme.qml
     OUTPUT_TARGETS _out_targets_1
 )
