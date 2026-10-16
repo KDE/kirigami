@@ -13,6 +13,10 @@ import org.kde.kirigami.platform as Platform
 T.AbstractApplicationHeader {
     id: root
 
+    readonly property bool scrolled: root.page?.flickable ? !root.page.flickable.atYBeginning : false
+    readonly property color pageBackgroundColor: (root.page?.background as Rectangle)?.color
+        ?? (root.page ? root.page.Material.backgroundColor : root.Material.backgroundColor)
+
     preferredHeight: pageRow ? pageRow.globalToolBar.preferredHeight : Platform.Units.largeSpacing * 8
     maximumHeight: pageRow ? pageRow.globalToolBar.maximumHeight : preferredHeight
 
@@ -22,6 +26,8 @@ T.AbstractApplicationHeader {
     bottomPadding: Platform.Units.largeSpacing
 
     background: Rectangle {
-        color: Qt.tint(root.Material.backgroundColor, Qt.alpha(root.Material.primary, 0.05))
+        color: root.scrolled
+            ? Qt.tint(root.pageBackgroundColor, Qt.alpha(root.Material.primaryColor, 0.05))
+            : root.pageBackgroundColor
     }
 }
