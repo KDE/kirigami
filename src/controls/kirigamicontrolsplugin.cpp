@@ -88,6 +88,7 @@ void KirigamiControlsPlugin::registerTypes(const char *uri)
         QIcon::setFallbackSearchPaths(QIcon::fallbackSearchPaths() << Kirigami::Platform::StyleSelector::resolveFilePath(u"../icons"_s));
     }
 
+    qmlRegisterType(componentUrl(u"Badge.qml"_s), uri, 2, 0, "Badge");
     qmlRegisterType(componentUrl(u"Action.qml"_s), uri, 2, 0, "Action");
     qmlRegisterType(componentUrl(u"AbstractApplicationHeader.qml"_s), uri, 2, 0, "AbstractApplicationHeader");
     qmlRegisterType(componentUrl(u"AbstractApplicationWindow.qml"_s), uri, 2, 0, "AbstractApplicationWindow");
