@@ -340,4 +340,27 @@ TestCase {
         toolbar.actions.push(actionB);
         waitForPolish(toolbar);
     }
+
+    Component {
+        id: droppedToolBarLoader
+        Loader {
+            sourceComponent: Kirigami.ActionToolBar {
+                actions: [
+                    Kirigami.Action { text: "Shown" },
+                    Kirigami.Action { text: "Hidden"; displayHint: Kirigami.DisplayHint.AlwaysHide }
+                ]
+            }
+        }
+    }
+
+    // A toolbar that a Loader drops while its delegates are still being created, as a page header
+    // does when it is rebuilt, stops creating them without errors.
+    function test_droppedWhileCreatingDelegates() {
+        failOnWarning(/Could not create delegate/);
+        failOnWarning(/invalid context/);
+        const loader = createTemporaryObject(droppedToolBarLoader, this);
+        verify(loader.item);
+        loader.active = false;
+        wait(500); // Let the pending delegate creation run
+    }
 }

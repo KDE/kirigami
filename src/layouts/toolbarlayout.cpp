@@ -358,8 +358,16 @@ void ToolBarLayout::geometryChange(const QRectF &newGeometry, const QRectF &oldG
 void ToolBarLayout::itemChange(QQuickItem::ItemChange change, const QQuickItem::ItemChangeData &data)
 {
     if (change == ItemSceneChange) {
+        if (!data.window) {
+            // Out of a window, a delegate that is still being created cannot finish: the context it
+            // is created in may already be gone, for example when a Loader drops the toolbar. Its
+            // creation is cancelled, and it is created again on the next layout in a window.
+            std::erase_if(d->delegates, [](const auto &entry) {
+                return !entry.second->isReady();
+            });
+        }
         relayout();
-    } else if (change == ItemVisibleHasChanged) {
+    } else if (change == ItemVisibleHasChanged && data.boolValue) {
         // If we just became visible we want all the actions to be visible and laid out,
         // in order to not draw a frame with an empty toolbar
         for (auto &delegate : std::as_const(d->delegates)) {
