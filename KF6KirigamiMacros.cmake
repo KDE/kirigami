@@ -6,8 +6,7 @@
 include(ExternalProject)
 
 function(kirigami_package_breeze_icons)
-    set(_multiValueArgs ICONS)
-    cmake_parse_arguments(ARG "" "" "${_multiValueArgs}" ${ARGN} )
+    cmake_parse_arguments(PARSE_ARGV 0 ARG "" "OVERRIDE_REPOSITORY;OVERRIDE_DIR" "ICONS")
 
     if(NOT ARG_ICONS)
         message(FATAL_ERROR "No ICONS argument given to kirigami_package_breeze_icons")
@@ -61,10 +60,11 @@ function(kirigami_package_breeze_icons)
         view-right-close
     )
 
-    function(_find_breeze_icon icon)
-        foreach(_size 48 32 22 16 12)
+    function(_find_breeze_icon icon icon_dir found)
+        set(_found FALSE)
+        foreach(_size 48 32 24 22 16 12)
             SET(path "")
-            file(GLOB_RECURSE path ${_BREEZEICONS_DIR}/icons/*/${_size}/${icon}.svg)
+            file(GLOB_RECURSE path "${icon_dir}/*/${_size}/${icon}.svg")
             if (path STREQUAL "")
                 continue()
             endif()
@@ -76,30 +76,48 @@ function(kirigami_package_breeze_icons)
             list(GET path 0 path)
 
             get_filename_component(realpath "${path}" REALPATH)
-            if (EXISTS ${realpath})
-                install(FILES ${realpath} DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/kirigami/breeze-internal/icons/${_size})
+            if (EXISTS "${realpath}")
+                install(FILES "${realpath}" DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/kirigami/breeze-internal/icons/${_size}
+                    RENAME "${icon}.svg")
+                set(_found TRUE)
             endif()
-
-            # Create direct symlink if original icon was also a symlink
-            # We can't reuse the existing symlink because often it's a chain
-            # of symlink and we can only get the final destination.
-            if (NOT "${realpath}" MATCHES "${path}")
-                get_filename_component(filename "${realpath}" NAME)
-                file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/${_size}/")
-                file(CREATE_LINK ${filename} "${CMAKE_CURRENT_BINARY_DIR}/${_size}/${icon}.svg" SYMBOLIC)
-                install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${_size}/${icon}.svg"
-                    DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/kirigami/breeze-internal/icons/${_size})
-            endif()
-
         endforeach()
+        set(${found} ${_found} PARENT_SCOPE)
     endfunction()
+
+    if(ARG_OVERRIDE_REPOSITORY AND ARG_OVERRIDE_DIR)
+        message(FATAL_ERROR "Specify only one of OVERRIDE_REPOSITORY and OVERRIDE_DIR")
+    endif()
+
+    if(ARG_OVERRIDE_DIR)
+        file(REAL_PATH "${ARG_OVERRIDE_DIR}" _override_dir EXPAND_TILDE)
+        if(NOT IS_DIRECTORY "${_override_dir}")
+            message(FATAL_ERROR "OVERRIDE_DIR does not point to an existing directory: ${ARG_OVERRIDE_DIR}")
+        endif()
+    elseif(ARG_OVERRIDE_REPOSITORY)
+        string(SHA256 _override_id "${ARG_OVERRIDE_REPOSITORY}")
+        set(_override_dir "${CMAKE_BINARY_DIR}/kirigami-icons/${_override_id}")
+        if(NOT EXISTS "${_override_dir}")
+            find_package(Git REQUIRED)
+            execute_process(
+                COMMAND "${GIT_EXECUTABLE}" clone --depth 1 -- "${ARG_OVERRIDE_REPOSITORY}" "${_override_dir}"
+                COMMAND_ERROR_IS_FATAL ANY
+            )
+        endif()
+    endif()
+
+    if(_override_dir)
+        if(IS_DIRECTORY "${_override_dir}/icons")
+            string(APPEND _override_dir "/icons")
+        endif()
+        message(STATUS "Using icon overrides from: ${_override_dir}")
+    endif()
 
     if (BREEZEICONS_DIR AND NOT EXISTS ${BREEZEICONS_DIR})
         message(FATAL_ERROR "BREEZEICONS_DIR variable does not point to existing dir: \"${BREEZEICONS_DIR}\"")
     endif()
 
-    # We need to expand the 'real' path of the root because if it has relative path
-    # elements or symlinks in it that breaks the symlink test in _find_breeze_icon.
+    # Resolve relative paths and symlinks in the Breeze checkout path.
     if (BREEZEICONS_DIR)
         file(REAL_PATH "${BREEZEICONS_DIR}" _BREEZEICONS_DIR EXPAND_TILDE)
     endif()
@@ -118,10 +136,16 @@ function(kirigami_package_breeze_icons)
 
     message (STATUS "Found external breeze icons:")
     foreach(_iconName ${ARG_ICONS})
-        _find_breeze_icon(${_iconName})
+        set(_overridden FALSE)
+        if(_override_dir)
+            _find_breeze_icon("${_iconName}" "${_override_dir}" _overridden)
+        endif()
+        if(NOT _overridden)
+            _find_breeze_icon("${_iconName}" "${_BREEZEICONS_DIR}/icons" _found)
+        endif()
     endforeach()
 
     #generate an index.theme that qiconloader can understand
-    file(WRITE ${CMAKE_BINARY_DIR}/index.theme "[Icon Theme]\nName=Breeze\nDirectories=icons/12,icons/16,icons/22,icons/32,icons/48,icons\nFollowsColorScheme=true\n[icons/12]\nSize=12\nType=Fixed\n[icons/16]\nSize=16\nType=Fixed\n[icons/22]\nSize=22\nType=Fixed\n[icons/32]\nSize=32\nType=Fixed\n[icons/48]\nSize=48\nType=Fixed\n[icons]\nSize=32\nType=Scalable\n")
+    file(WRITE ${CMAKE_BINARY_DIR}/index.theme "[Icon Theme]\nName=Breeze\nDirectories=icons/12,icons/16,icons/22,icons/24,icons/32,icons/48,icons\nFollowsColorScheme=true\n[icons/12]\nSize=12\nType=Fixed\n[icons/16]\nSize=16\nType=Fixed\n[icons/22]\nSize=22\nType=Fixed\n[icons/24]\nSize=24\nType=Fixed\n[icons/32]\nSize=32\nType=Fixed\n[icons/48]\nSize=48\nType=Fixed\n[icons]\nSize=32\nType=Scalable\n")
     install(FILES ${CMAKE_BINARY_DIR}/index.theme DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/kirigami/breeze-internal/)
 endfunction()
