@@ -41,8 +41,8 @@ Kirigami.BasicThemeDefinition {
     buttonFocusColor: Material.buttonColor(Material.theme, Material.background, Material.accent, true, false, true, false)
 
     viewTextColor: Material.foreground
-    viewBackgroundColor: Material.dialogColor
-    viewAlternateBackgroundColor: Qt.darker(Material.dialogColor, 1.05)
+    viewBackgroundColor: Material.background
+    viewAlternateBackgroundColor: Qt.darker(Material.background, 1.05)
     viewHoverColor: Material.listHighlightColor
     viewFocusColor: Material.listHighlightColor
 
@@ -81,12 +81,8 @@ Kirigami.BasicThemeDefinition {
     ]
 
     onSync: object => {
-        //TODO: actually check if it's a dark or light color
-        if (object.Kirigami.Theme.colorSet === Kirigami.Theme.Complementary) {
-            object.Material.theme = Material.Dark
-        } else {
-            object.Material.theme = Material.Light
-        }
+        object.Material.theme = object.Kirigami.Theme.backgroundColor.hslLightness < 0.5
+            ? Material.Dark : Material.Light
 
         object.Material.foreground = object.Kirigami.Theme.textColor
         object.Material.background = object.Kirigami.Theme.backgroundColor
