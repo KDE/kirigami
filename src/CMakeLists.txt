@@ -125,6 +125,7 @@ qt_target_qml_sources(Kirigami RESOURCES
     styles/Material/InlineMessage.qml
     styles/Material/NavigationTabBar.qml
     styles/Material/NavigationTabButton.qml
+    styles/Material/OverlayDrawer.qml
     styles/Material/Theme.qml
     OUTPUT_TARGETS _out_targets_1
 )
