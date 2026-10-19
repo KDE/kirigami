@@ -17,6 +17,7 @@ ecm_target_qml_sources(KirigamiTemplates SOURCES
     Avatar.qml
     Badge.qml
     Chip.qml
+    GlobalDrawer.qml
     Heading.qml
     InlineMessage.qml
     LinkButton.qml
@@ -28,6 +29,7 @@ ecm_target_qml_sources(KirigamiTemplates SOURCES
 )
 
 ecm_target_qml_sources(KirigamiTemplates PRIVATE PATH private SOURCES
+    private/GlobalDrawerActionItem.qml
     private/BorderPropertiesGroup.qml
     private/DrawerHandle.qml
 )

@@ -12,12 +12,12 @@ import QtQuick.Templates as T
 import org.kde.kirigami.templates as KT
 import org.kde.kirigami.platform as Platform
 import org.kde.kirigami.primitives as Primitives
+import "private" as Private
 
 KT.NavigationTabButton {
     id: control
 
     readonly property color _foregroundColor: Qt.alpha(Material.foreground, !enabled ? 0.38 : checked ? 1 : 0.8)
-    readonly property real _stateOpacity: !enabled ? 0 : down || visualFocus ? 0.12 : hovered ? 0.08 : 0
     readonly property bool _hasIcon: icon.name.length > 0 || icon.source.toString().length > 0
 
     implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset,
@@ -60,29 +60,12 @@ KT.NavigationTabButton {
             Layout.maximumWidth: implicitWidth
             Layout.alignment: Qt.AlignCenter
 
-            Rectangle {
+            Private.NavigationIndicator {
                 id: activeIndicator
                 objectName: "activeIndicator"
 
                 anchors.fill: parent
-                radius: height / 2
-                color: control.checked ? Qt.alpha(control.Material.accent, control.enabled ? 0.16 : 0.08) : "transparent"
-
-                Behavior on color {
-                    ColorAnimation { duration: Platform.Units.shortDuration }
-                }
-
-                Rectangle {
-                    anchors.fill: parent
-                    radius: parent.radius
-                    color: Qt.alpha(control.Material.foreground, control._stateOpacity)
-                    border.width: control.visualFocus ? 2 : 0
-                    border.color: control.Material.accent
-
-                    Behavior on color {
-                        ColorAnimation { duration: Platform.Units.shortDuration }
-                    }
-                }
+                control: control
             }
 
             Primitives.Icon {

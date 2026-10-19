@@ -122,6 +122,9 @@ ecm_target_qml_sources(Kirigami VERSION 2.19 SOURCES
 qt_target_qml_sources(Kirigami RESOURCES
     styles/Material/AbstractApplicationHeader.qml
     styles/Material/Badge.qml
+    styles/Material/GlobalDrawer.qml
+    styles/Material/private/GlobalDrawerActionItem.qml
+    styles/Material/private/NavigationIndicator.qml
     styles/Material/InlineMessage.qml
     styles/Material/NavigationTabBar.qml
     styles/Material/NavigationTabButton.qml

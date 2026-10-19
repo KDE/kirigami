@@ -193,7 +193,7 @@ TestCase {
         app.globalDrawer.open();
         app.globalDrawer.collapsible = true;
         app.globalDrawer.collapsed = true;
-        tryVerify(() => {return app.globalDrawer.width == app.sidebarSizeItem.implicitWidth + app.globalDrawer.leftPadding + app.globalDrawer.rightPadding});
+        tryVerify(() => {return app.globalDrawer.width == app.globalDrawer.collapsedSize + app.globalDrawer.leftPadding + app.globalDrawer.rightPadding});
         verify(app.globalDrawer.width  > 0);
     }
 
