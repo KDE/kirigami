@@ -200,13 +200,13 @@ bool BasicTheme::event(QEvent *event)
 QColor BasicTheme::tint(const QColor &color)
 {
     if (QQuickItem *item = qobject_cast<QQuickItem *>(parent()); item && !item->isEnabled()) {
-        return QColor::fromHsvF(color.hueF(), color.saturationF() * 0.5, color.valueF() * 0.8);
+        return QColor::fromHsvF(color.hueF(), color.saturationF() * 0.5, color.valueF() * 0.8, color.alphaF());
     }
     switch (colorGroup()) {
     case PlatformTheme::Inactive:
-        return QColor::fromHsvF(color.hueF(), color.saturationF() * 0.5, color.valueF());
+        return QColor::fromHsvF(color.hueF(), color.saturationF() * 0.5, color.valueF(), color.alphaF());
     case PlatformTheme::Disabled:
-        return QColor::fromHsvF(color.hueF(), color.saturationF() * 0.5, color.valueF() * 0.8);
+        return QColor::fromHsvF(color.hueF(), color.saturationF() * 0.5, color.valueF() * 0.8, color.alphaF());
     default:
         return color;
     }
