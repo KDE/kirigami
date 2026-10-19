@@ -33,7 +33,7 @@ T.Drawer {
 
       default: \c false
      */
-    property bool drawerOpen: false
+    property bool drawerOpen: !modal
 
     /*!
       \brief This property tells whether the drawer is in a state between open
@@ -161,6 +161,9 @@ T.Drawer {
       Currently supported only on left and right drawers.
      */
     property bool handleVisible: {
+        if (!interactive || (!modal && drawerOpen)) {
+            return false;
+        }
         if (typeof applicationWindow === "function") {
             const w = applicationWindow();
             if (w) {
@@ -236,7 +239,12 @@ T.Drawer {
     }
 //END properties
 
-    interactive: modal
+    focus: false
+    closePolicy: modal ? T.Popup.CloseOnEscape | T.Popup.CloseOnReleaseOutside : T.Popup.NoAutoClose
+
+    // FIXME: set to false when it does not lead to blocking closePolicy.
+    // See Kirigami bug: 454119
+    interactive: true
 
     z: Kirigami.OverlayZStacking.z
 
@@ -364,6 +372,9 @@ T.Drawer {
     onPositionChanged: {
         if (peeking) {
             visible = true
+        }
+        if (!modal && !peeking && !animating) {
+            position = 1;
         }
     }
     onVisibleChanged: {

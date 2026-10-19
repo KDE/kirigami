@@ -16,23 +16,6 @@ import org.kde.kirigami.controls as KC
 KT.OverlayDrawer {
     id: root
 
-//BEGIN Properties
-    focus: false
-    modal: true
-    drawerOpen: !modal
-    closePolicy: modal ? T.Popup.CloseOnEscape | T.Popup.CloseOnReleaseOutside : T.Popup.NoAutoClose
-    handleVisible: interactive && (modal || !drawerOpen) && (typeof(applicationWindow)===typeof(Function) && applicationWindow() ? applicationWindow().controlsVisible : true)
-
-    // FIXME: set to false when it does not lead to blocking closePolicy.
-    // See Kirigami bug: 454119
-    interactive: true
-
-    onPositionChanged: {
-        if (!modal && !root.peeking && !root.animating) {
-            position = 1;
-        }
-    }
-
     background: Rectangle {
         color: Platform.Theme.backgroundColor
 
