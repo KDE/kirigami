@@ -331,6 +331,13 @@ QT.Control {
             if (!("modality" in windowProperties)) {
                 windowProperties.modality = Qt.WindowModal;
             }
+            if (Qt.platform.os === "osx" && windowProperties.modality === Qt.WindowModal) {
+                // On macOS, a window-modal window with a transient parent is presented as a
+                // sheet, which doesn't have a title bar or a close button. Application
+                // modality is used instead: the window is then presented as a regular window,
+                // while the parent window is still blocked from being interacted with.
+                windowProperties.modality = Qt.ApplicationModal;
+            }
             if (!("height" in windowProperties)) {
                 windowProperties.height = Platform.Units.gridUnit * 30;
             }
