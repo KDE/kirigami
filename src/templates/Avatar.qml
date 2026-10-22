@@ -11,7 +11,6 @@ import QtQuick.Window
 import QtQuick.Controls as QQC
 import org.kde.kirigami.primitives as Primitives
 import org.kde.kirigami.platform as Platform
-import org.kde.kirigami.controls as KC
 
 /*!
    \qmltype Avatar
@@ -49,15 +48,17 @@ QQC.Control {
     property alias source: avatarImage.source
 
     /*!
-       \qmlproperty var iconSource
-       \brief This property holds avatar's icon source.
+      \qmlproperty string Page::icon.name
+      \qmlproperty string Page::icon.source
+      \qmlproperty int Page::icon.width
+      \qmlproperty int Page::icon.height
+      \qmlproperty color Page::icon.color
 
-       This icon  is displayed when using an icon with Avatar.InitialsMode.UseIcon and
-       Avatar.ImageNode.AlwaysShowInitials enabled.
-
-       \sa {Icon::source} {Kirigami.Icon.source}
+      \brief This holds the icon that represents this page.
      */
-    property alias iconSource: avatarIcon.source
+    property Primitives.IconPropertiesGroup icon: Primitives.IconPropertiesGroup {
+        name: "user"
+    }
 
     /*!
        \brief This property holds how the button should represent the user when no user-set image is available.
@@ -117,7 +118,7 @@ QQC.Control {
 
        If not explicitly set, this defaults to generating a color from the name.
      */
-    property color color: KC.NameUtils.colorsFromString(name)
+    property color color: Primitives.NameUtils.colorsFromString(name)
 
     /*!
        \brief This property holds the color of the avatar's initials.
@@ -160,7 +161,7 @@ QQC.Control {
         }
     }
 
-    readonly property bool __unsuitableForInitials: KC.NameUtils.isStringUnsuitableForInitials(root.name)
+    readonly property bool __unsuitableForInitials: Primitives.NameUtils.isStringUnsuitableForInitials(root.name)
 
     contentItem: Item {
         id: clippedContent
@@ -177,7 +178,7 @@ QQC.Control {
                     !root.__showImage &&
                     !root.__unsuitableForInitials
 
-            text: KC.NameUtils.initialsFromString(root.name)
+            text: Primitives.NameUtils.initialsFromString(root.name)
             textFormat: Text.PlainText
             color: root.color
 
@@ -200,13 +201,13 @@ QQC.Control {
 
             anchors.fill: parent
             anchors.margins: Platform.Units.largeSpacing
+            source: root.icon.name || root.icon.source
 
             visible: !root.__showImage
                 && (root.initialsMode === Avatar.InitialsMode.UseIcon
                     || root.__unsuitableForInitials)
 
             color: root.__textColor
-            source: "user"
         }
 
         Image {

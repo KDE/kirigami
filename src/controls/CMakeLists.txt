@@ -95,8 +95,6 @@ target_include_directories(KirigamiControlsplugin PRIVATE ${CMAKE_CURRENT_SOURCE
 
 target_sources(KirigamiControls PRIVATE
     enums.h
-    nameutils.cpp
-    nameutils.h
     pagepool.cpp
     pagepool.h
 )
