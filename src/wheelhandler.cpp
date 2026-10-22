@@ -535,7 +535,8 @@ bool WheelHandler::scrollFlickable(QPointF pixelDelta, QPointF angleDelta, Qt::K
     const qreal refreshRate = screen ? screen->refreshRate() : 0;
 
     // HACK: Only transpose deltas when not using xcb in order to not conflict with xcb's own delta transposing
-    if (modifiers & m_defaultHorizontalScrollModifiers && qGuiApp->platformName() != QLatin1String("xcb")) {
+    if (modifiers & m_defaultHorizontalScrollModifiers && qGuiApp->platformName() != QLatin1String("xcb")
+        && qGuiApp->platformName() != QLatin1String("wayland")) {
         angleDelta = angleDelta.transposed();
         pixelDelta = pixelDelta.transposed();
     }
