@@ -249,19 +249,19 @@ msgctxt "DialogHeaderTopContent|@action:button close dialog"
 msgid "Close"
 msgstr "Pechar"
 
-#: platform/settings.cpp:219
+#: platform/settings.cpp:220
 #, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "KDE Frameworks %1"
 msgstr "Versión %1 das infraestruturas de KDE"
 
-#: platform/settings.cpp:221
+#: platform/settings.cpp:222
 #, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "The %1 windowing system"
 msgstr "O sistema de xanelas %1"
 
-#: platform/settings.cpp:222
+#: platform/settings.cpp:223
 #, qt-format
 msgctxt "Kirigami::Platform::Settings|"
 msgid "Qt %2 (built against %3)"
