@@ -128,6 +128,10 @@ KirigamiDialogs.Dialog {
                 QQC2.ToolTip.delay: Platform.Settings.tabletMode ? Application.styleHints.mousePressAndHoldInterval : Platform.Units.toolTipDelay
 
                 onClicked: root.close()
+                Accessible.onPressAction: {
+                    modelData.trigger();
+                    clicked();
+                }
             }
         }
     }
