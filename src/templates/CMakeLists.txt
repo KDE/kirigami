@@ -23,6 +23,7 @@ ecm_target_qml_sources(KirigamiTemplates SOURCES
     NavigationTabButton.qml
     OverlayDrawer.qml
     OverlaySheet.qml
+    SearchField.qml
     InlineViewHeader.qml
 )
 

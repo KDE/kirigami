@@ -94,6 +94,7 @@ QQC2.TextField {
 
     property alias _leftActionsRow: leftActionsRow
     property alias _rightActionsRow: rightActionsRow
+    property int _actionIconSize: Platform.Units.iconSizes.sizeForLabels
 
     hoverEnabled: true
 
@@ -132,8 +133,8 @@ QQC2.TextField {
         component InlineActionIcon: QQC2.ToolButton {
             required property T.Action modelData
 
-            icon.width: Platform.Units.iconSizes.sizeForLabels
-            icon.height: Platform.Units.iconSizes.sizeForLabels
+            icon.width: root._actionIconSize
+            icon.height: root._actionIconSize
 
             Layout.fillHeight: true
             Layout.preferredWidth: implicitHeight
