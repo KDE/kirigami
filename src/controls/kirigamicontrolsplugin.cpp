@@ -93,6 +93,7 @@ void KirigamiControlsPlugin::registerTypes(const char *uri)
     qmlRegisterType(componentUrl(u"AbstractApplicationHeader.qml"_s), uri, 2, 0, "AbstractApplicationHeader");
     qmlRegisterType(componentUrl(u"AbstractApplicationWindow.qml"_s), uri, 2, 0, "AbstractApplicationWindow");
     qmlRegisterType(componentUrl(u"ApplicationWindow.qml"_s), uri, 2, 0, "ApplicationWindow");
+    qmlRegisterType(componentUrl(u"Avatar.qml"_s), uri, 2, 0, "Avatar");
     qmlRegisterType(componentUrl(u"OverlayDrawer.qml"_s), uri, 2, 0, "OverlayDrawer");
     qmlRegisterType(componentUrl(u"ContextDrawer.qml"_s), uri, 2, 0, "ContextDrawer");
     qmlRegisterType(componentUrl(u"GlobalDrawer.qml"_s), uri, 2, 0, "GlobalDrawer");
