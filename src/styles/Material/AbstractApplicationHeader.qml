@@ -27,7 +27,7 @@ T.AbstractApplicationHeader {
 
     background: Rectangle {
         color: root.scrolled
-            ? root.Material.color(root.Material.background, root.Material.Shade50)
+            ? Qt.tint(root.pageBackgroundColor, Qt.alpha(root.Material.primary, 0.05))
             : root.pageBackgroundColor
     }
 }
