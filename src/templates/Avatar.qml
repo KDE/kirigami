@@ -37,11 +37,11 @@ T.Control {
     property string source
 
     /*!
-      \qmlproperty string Page::icon.name
-      \qmlproperty string Page::icon.source
-      \qmlproperty int Page::icon.width
-      \qmlproperty int Page::icon.height
-      \qmlproperty color Page::icon.color
+      \qmlproperty string Avatar::icon.name
+      \qmlproperty string Avatar::icon.source
+      \qmlproperty int Avatar::icon.width
+      \qmlproperty int Avatar::icon.height
+      \qmlproperty color Avatar::icon.color
 
       \brief This holds the icon that represents this page.
      */
@@ -60,7 +60,6 @@ T.Control {
        \qmlproperty bool asynchronous
        \brief Load the image asynchronously.
        \sa {Image::asynchronous} {Image.asynchronous}
-       \since 1.7.0
      */
     property bool asynchronous: true
 

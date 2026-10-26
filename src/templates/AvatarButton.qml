@@ -41,7 +41,6 @@ QQC2.AbstractButton {
        \qmlproperty bool asynchronous
        \brief Load the image asynchronously.
        \sa {Image::asynchronous} {Image.asynchronous}
-       \since 1.7.0
      */
     property bool asynchronous: true
 
@@ -65,10 +64,6 @@ QQC2.AbstractButton {
     padding: 1
 
     hoverEnabled: true // so the tooltip works
-
-    HoverHandler {
-        cursorShape: Qt.PointingHandCursor
-    }
 
     QQC2.ToolTip.visible: text.length > 0 && (hovered || activeFocus)
     QQC2.ToolTip.text: text

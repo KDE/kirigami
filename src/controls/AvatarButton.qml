@@ -29,6 +29,6 @@ KT.AvatarButton {
     background: Rectangle {
         radius: height
         color: Platform.Theme.focusColor
-        visible: root.visualFocus || root.down
+        visible: root.visualFocus || root.down || root.hovered
     }
 }
