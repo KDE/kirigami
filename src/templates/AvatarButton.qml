@@ -70,7 +70,7 @@ QQC2.AbstractButton {
         cursorShape: Qt.PointingHandCursor
     }
 
-    QQC2.ToolTip.visible: hovered && text.length > 0
+    QQC2.ToolTip.visible: text.length > 0 && (hovered || activeFocus)
     QQC2.ToolTip.text: text
     QQC2.ToolTip.delay: Platform.Units.toolTipDelay
 }
