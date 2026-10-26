@@ -64,9 +64,9 @@ Kirigami.BasicThemeDefinition {
     complementaryHoverColor: Material.buttonColor(Material.theme, Material.background, Material.accent, true, false, true, false)
     complementaryFocusColor: Material.buttonColor(Material.theme, Material.background, Material.accent, true, false, true, false)
 
-    headerTextColor: Material.foreground
-    headerBackgroundColor: Material.background
-    headerAlternateBackgroundColor: Qt.darker(Material.background, 1.05)
+    headerTextColor: fontMetrics.Material.primaryTextColor
+    headerBackgroundColor: fontMetrics.Material.primaryColor
+    headerAlternateBackgroundColor: Qt.lighter(fontMetrics.Material.primaryColor, 1.05)
     headerHoverColor: Material.buttonColor(Material.theme, Material.background, Material.accent, true, false, true, false)
     headerFocusColor: Material.buttonColor(Material.theme, Material.background, Material.accent, true, false, true, false)
 
