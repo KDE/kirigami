@@ -13,8 +13,6 @@ import org.kde.kirigami.primitives as Primitives
 KT.Avatar {
     id: root
 
-    padding: 1
-
     contentItem: Item {
         QQC.Label {
             anchors.fill: parent
@@ -65,7 +63,7 @@ KT.Avatar {
     }
 
     background: Rectangle {
-        visible: !root.__showImage
+        visible: avatarImage.status !== Image.Ready
         anchors.fill: parent
         radius: Math.min(width, height)
 

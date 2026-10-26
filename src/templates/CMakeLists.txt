@@ -15,6 +15,7 @@ ecm_target_qml_sources(KirigamiTemplates SOURCES
     AbstractCard.qml
     AppHeaderSizeGroup.qml
     Avatar.qml
+    AvatarButton.qml
     Badge.qml
     Chip.qml
     Heading.qml

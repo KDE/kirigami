@@ -32,6 +32,7 @@ ecm_target_qml_sources(KirigamiControls SOURCES
     ApplicationItem.qml
     ApplicationWindow.qml
     Avatar.qml
+    AvatarButton.qml
     Badge.qml
     Card.qml
     CardsLayout.qml

@@ -54,7 +54,7 @@ T.Control {
        \brief This property sets whether the provided image should be cached.
        \sa {Image::cache} {Image.cache}
      */
-    property bool cache
+    property bool cache: true
 
     /*!
        \qmlproperty bool asynchronous
@@ -69,10 +69,7 @@ T.Control {
        \brief This property holds the source size of the user's profile picture.
        \sa {Image::sourceSize} {Image.sourceSize}
      */
-    property size sourceSize: {
-        width: width
-        height: height
-    }
+    property size sourceSize: Qt.binding(() => {Qt.size(width, height)})
 
     /*!
        \brief This property holds the color to use for this avatar.
