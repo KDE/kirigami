@@ -147,6 +147,8 @@ Item {
 
             contentItem: QQC2.Label {
                 readonly property bool withTask: typeof(delegate.modelData.task) !== "undefined" && delegate.modelData.task.length > 0
+                // Without a subtitle nothing else fills the row, which would push the name away from the avatar
+                Layout.fillWidth: true
                 text: delegate.modelData.name
                 wrapMode: Text.WordWrap
             }
