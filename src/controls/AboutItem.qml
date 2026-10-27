@@ -231,7 +231,10 @@ Item {
                     action: KC.Action {
                         text: licenseLinkButton.modelData.name
                         onTriggered: {
-                            licenseSheet.text = licenseLinkButton.modelData.text
+                            // License texts are hard-wrapped at ~76 columns. Join each line with the
+                            // next one so paragraphs wrap to the sheet's width, but keep empty lines
+                            // and lines starting with whitespace (headings, list items) on their own.
+                            licenseSheet.text = licenseLinkButton.modelData.text.replace(/([^\r\n])\r?\n(?!\s)/g, "$1 ")
                             licenseSheet.title = licenseLinkButton.modelData.name
                             licenseSheet.open()
                         }
@@ -358,7 +361,7 @@ Item {
 
         OverlaySheet {
             id: licenseSheet
-            width: Math.min(aboutItem.width - Platform.Units.gridUnit * 2, bodyLabel.implicitWidth)
+            width: Math.min(aboutItem.width - Platform.Units.gridUnit * 2, Platform.Units.gridUnit * 30, bodyLabel.implicitWidth)
             height: parent.Window.window.height - Platform.Units.gridUnit * 8
             property alias text: bodyLabel.text
 
