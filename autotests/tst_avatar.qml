@@ -36,5 +36,11 @@ TestCase {
     function test_avatarButton() {
         const avatarButton = createTemporaryObject(avatarButtonComponent, this);
         verify(avatarButton);
+
+        compare(avatarButton.leftInset, 0);
+        mousePress(avatarButton);
+        compare(avatarButton.leftInset, -1);
+        mouseRelease(avatarButton);
+        compare(avatarButton.leftInset, 0);
     }
 }
