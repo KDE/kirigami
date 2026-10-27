@@ -84,6 +84,17 @@ Item {
      */
     property url donateUrl: aboutData.desktopFileName.startsWith("org.kde.") ? "https://kde.org/community/donations" : ""
 
+    /*!
+      \brief This property defines whether to show "Libraries in use".
+
+      Set it to false when the about data describes a plugin rather than the
+      application itself.
+
+      default: \c true
+      \since 6.32
+     */
+    property bool showLibraries: true
+
     property bool _usePageStack: false
 
     /*!
@@ -333,8 +344,9 @@ Item {
 
         KF.FormGroup {
             title: qsTr("Libraries in use")
+            visible: aboutItem.showLibraries
             Repeater {
-                model: Platform.Settings.information
+                model: aboutItem.showLibraries ? Platform.Settings.information : null
                 delegate: KF.FormEntry {
                     id: delegate
                     required property string modelData

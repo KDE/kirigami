@@ -86,6 +86,19 @@ ScrollablePage {
     property alias donateUrl: aboutItem.donateUrl
 
     /*!
+      \qmlproperty bool AboutPage::showLibraries
+
+      \brief This property defines whether to show "Libraries in use".
+
+      Set it to false when the about data describes a plugin rather than the
+      application itself.
+
+      default: \c true
+      \since 6.32
+     */
+    property alias showLibraries: aboutItem.showLibraries
+
+    /*!
       \qmlproperty bool AboutPage::loadAvatars
 
       \brief This property controls whether to load avatars by URL.
