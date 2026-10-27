@@ -19,69 +19,69 @@ msgstr ""
 "X-Generator: Lokalize 26.11.70\n"
 "X-Qt-Contexts: true\n"
 
-#: controls/AboutItem.qml:180
+#: controls/AboutItem.qml:162
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Visit %1's KDE Store page"
 msgstr "造訪 %1 在 KDE Store 的頁面"
 
-#: controls/AboutItem.qml:196
+#: controls/AboutItem.qml:178
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Send an email to %1"
 msgstr "傳送電子郵件給 %1"
 
-#: controls/AboutItem.qml:234
+#: controls/AboutItem.qml:216
 msgctxt "AboutItem|"
 msgid "Copyright"
 msgstr "著作權"
 
-#: controls/AboutItem.qml:243
+#: controls/AboutItem.qml:225
 msgctxt "AboutItem|"
 msgid "License"
 msgstr "授權條款"
 
-#: controls/AboutItem.qml:265
+#: controls/AboutItem.qml:247
 msgctxt "AboutItem|"
 msgid "Homepage"
 msgstr "首頁"
 
-#: controls/AboutItem.qml:279
+#: controls/AboutItem.qml:261
 msgctxt "AboutItem|"
 msgid "Donate"
 msgstr "贊助"
 
-#: controls/AboutItem.qml:293
+#: controls/AboutItem.qml:275
 msgctxt "AboutItem|"
 msgid "Get Involved"
 msgstr "參與"
 
-#: controls/AboutItem.qml:307
+#: controls/AboutItem.qml:289
 msgctxt "AboutItem|"
 msgid "Report a bug"
 msgstr "回報問題"
 
-#: controls/AboutItem.qml:325
+#: controls/AboutItem.qml:307
 msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "使用函式庫"
 
-#: controls/AboutItem.qml:345
+#: controls/AboutItem.qml:327
 msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr "顯示作者照片"
 
-#: controls/AboutItem.qml:348
+#: controls/AboutItem.qml:330
 msgctxt "AboutItem|"
 msgid "Authors"
 msgstr "作者群"
 
-#: controls/AboutItem.qml:358
+#: controls/AboutItem.qml:340
 msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "致謝"
 
-#: controls/AboutItem.qml:368
+#: controls/AboutItem.qml:350
 msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "翻譯者"

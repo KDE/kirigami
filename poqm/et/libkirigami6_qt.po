@@ -14,13 +14,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 20.08.1\n"
 
-#: controls/AboutItem.qml:180
+#: controls/AboutItem.qml:162
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Visit %1's KDE Store page"
 msgstr ""
 
-#: controls/AboutItem.qml:196
+#: controls/AboutItem.qml:178
 #, fuzzy, qt-format
 #| msgctxt "AboutPage|"
 #| msgid "Send an email to %1"
@@ -28,7 +28,7 @@ msgctxt "AboutItem|"
 msgid "Send an email to %1"
 msgstr "Saada e-kiri aadressile %1"
 
-#: controls/AboutItem.qml:234
+#: controls/AboutItem.qml:216
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Copyright"
@@ -36,7 +36,7 @@ msgctxt "AboutItem|"
 msgid "Copyright"
 msgstr "Autoriõigus"
 
-#: controls/AboutItem.qml:243
+#: controls/AboutItem.qml:225
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "License:"
@@ -44,27 +44,27 @@ msgctxt "AboutItem|"
 msgid "License"
 msgstr "Litsents:"
 
-#: controls/AboutItem.qml:265
+#: controls/AboutItem.qml:247
 msgctxt "AboutItem|"
 msgid "Homepage"
 msgstr ""
 
-#: controls/AboutItem.qml:279
+#: controls/AboutItem.qml:261
 msgctxt "AboutItem|"
 msgid "Donate"
 msgstr ""
 
-#: controls/AboutItem.qml:293
+#: controls/AboutItem.qml:275
 msgctxt "AboutItem|"
 msgid "Get Involved"
 msgstr ""
 
-#: controls/AboutItem.qml:307
+#: controls/AboutItem.qml:289
 msgctxt "AboutItem|"
 msgid "Report a bug"
 msgstr ""
 
-#: controls/AboutItem.qml:325
+#: controls/AboutItem.qml:307
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Libraries in use"
@@ -72,12 +72,12 @@ msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "Kasutatavad teegid"
 
-#: controls/AboutItem.qml:345
+#: controls/AboutItem.qml:327
 msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr ""
 
-#: controls/AboutItem.qml:348
+#: controls/AboutItem.qml:330
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Authors"
@@ -85,7 +85,7 @@ msgctxt "AboutItem|"
 msgid "Authors"
 msgstr "Autorid"
 
-#: controls/AboutItem.qml:358
+#: controls/AboutItem.qml:340
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Credits"
@@ -93,7 +93,7 @@ msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "Tunnustus"
 
-#: controls/AboutItem.qml:368
+#: controls/AboutItem.qml:350
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Translators"

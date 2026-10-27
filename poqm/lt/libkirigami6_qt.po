@@ -14,69 +14,69 @@ msgstr ""
 "X-Qt-Contexts: true\n"
 "X-Generator: Poedit 3.9\n"
 
-#: controls/AboutItem.qml:180
+#: controls/AboutItem.qml:162
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Visit %1's KDE Store page"
 msgstr "Apsilankyti KDE parduotuvės %1 puslapyje"
 
-#: controls/AboutItem.qml:196
+#: controls/AboutItem.qml:178
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Send an email to %1"
 msgstr "Siųsti el. laišką, adresu %1"
 
-#: controls/AboutItem.qml:234
+#: controls/AboutItem.qml:216
 msgctxt "AboutItem|"
 msgid "Copyright"
 msgstr "Autorių teisės"
 
-#: controls/AboutItem.qml:243
+#: controls/AboutItem.qml:225
 msgctxt "AboutItem|"
 msgid "License"
 msgstr "Licencija"
 
-#: controls/AboutItem.qml:265
+#: controls/AboutItem.qml:247
 msgctxt "AboutItem|"
 msgid "Homepage"
 msgstr "Pagrindinis puslapis"
 
-#: controls/AboutItem.qml:279
+#: controls/AboutItem.qml:261
 msgctxt "AboutItem|"
 msgid "Donate"
 msgstr "Paremti"
 
-#: controls/AboutItem.qml:293
+#: controls/AboutItem.qml:275
 msgctxt "AboutItem|"
 msgid "Get Involved"
 msgstr "Įsitraukti"
 
-#: controls/AboutItem.qml:307
+#: controls/AboutItem.qml:289
 msgctxt "AboutItem|"
 msgid "Report a bug"
 msgstr "Pranešti apie klaidą"
 
-#: controls/AboutItem.qml:325
+#: controls/AboutItem.qml:307
 msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "Naudojamos bibliotekos"
 
-#: controls/AboutItem.qml:345
+#: controls/AboutItem.qml:327
 msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr "Rodyti autorių nuotraukas"
 
-#: controls/AboutItem.qml:348
+#: controls/AboutItem.qml:330
 msgctxt "AboutItem|"
 msgid "Authors"
 msgstr "Autoriai"
 
-#: controls/AboutItem.qml:358
+#: controls/AboutItem.qml:340
 msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "Padėkos"
 
-#: controls/AboutItem.qml:368
+#: controls/AboutItem.qml:350
 msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "Vertėjai"

@@ -18,69 +18,69 @@ msgstr ""
 "X-Generator: Lokalize 21.08.1\n"
 "X-Qt-Contexts: true\n"
 
-#: controls/AboutItem.qml:180
+#: controls/AboutItem.qml:162
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Visit %1's KDE Store page"
 msgstr "Navštíviť stránku %1 v obchode KDE"
 
-#: controls/AboutItem.qml:196
+#: controls/AboutItem.qml:178
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Send an email to %1"
 msgstr "Odoslať email na adresu %1"
 
-#: controls/AboutItem.qml:234
+#: controls/AboutItem.qml:216
 msgctxt "AboutItem|"
 msgid "Copyright"
 msgstr "Copyright"
 
-#: controls/AboutItem.qml:243
+#: controls/AboutItem.qml:225
 msgctxt "AboutItem|"
 msgid "License"
 msgstr "Licencia"
 
-#: controls/AboutItem.qml:265
+#: controls/AboutItem.qml:247
 msgctxt "AboutItem|"
 msgid "Homepage"
 msgstr "Domovská stránka"
 
-#: controls/AboutItem.qml:279
+#: controls/AboutItem.qml:261
 msgctxt "AboutItem|"
 msgid "Donate"
 msgstr "Donate"
 
-#: controls/AboutItem.qml:293
+#: controls/AboutItem.qml:275
 msgctxt "AboutItem|"
 msgid "Get Involved"
 msgstr "Zapojiť sa"
 
-#: controls/AboutItem.qml:307
+#: controls/AboutItem.qml:289
 msgctxt "AboutItem|"
 msgid "Report a bug"
 msgstr "Nahlásiť chybu"
 
-#: controls/AboutItem.qml:325
+#: controls/AboutItem.qml:307
 msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "Použité knižnice"
 
-#: controls/AboutItem.qml:345
+#: controls/AboutItem.qml:327
 msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr "Zobraziť fotografie autora"
 
-#: controls/AboutItem.qml:348
+#: controls/AboutItem.qml:330
 msgctxt "AboutItem|"
 msgid "Authors"
 msgstr "Autori"
 
-#: controls/AboutItem.qml:358
+#: controls/AboutItem.qml:340
 msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "Zásluhy"
 
-#: controls/AboutItem.qml:368
+#: controls/AboutItem.qml:350
 msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "Preklady"

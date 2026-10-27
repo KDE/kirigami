@@ -14,69 +14,69 @@ msgstr ""
 "n % 10 == 0) ? 2 : 3));\n"
 "X-Generator: Lokalize 26.04.3\n"
 
-#: controls/AboutItem.qml:180
+#: controls/AboutItem.qml:162
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Visit %1's KDE Store page"
 msgstr "ביקור בעמוד של %1 בחנות של KDE"
 
-#: controls/AboutItem.qml:196
+#: controls/AboutItem.qml:178
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Send an email to %1"
 msgstr "שליחת דוא״ל אל %1"
 
-#: controls/AboutItem.qml:234
+#: controls/AboutItem.qml:216
 msgctxt "AboutItem|"
 msgid "Copyright"
 msgstr "זכויות יוצרים"
 
-#: controls/AboutItem.qml:243
+#: controls/AboutItem.qml:225
 msgctxt "AboutItem|"
 msgid "License"
 msgstr "רישיון"
 
-#: controls/AboutItem.qml:265
+#: controls/AboutItem.qml:247
 msgctxt "AboutItem|"
 msgid "Homepage"
 msgstr "דף הבית"
 
-#: controls/AboutItem.qml:279
+#: controls/AboutItem.qml:261
 msgctxt "AboutItem|"
 msgid "Donate"
 msgstr "תרומה"
 
-#: controls/AboutItem.qml:293
+#: controls/AboutItem.qml:275
 msgctxt "AboutItem|"
 msgid "Get Involved"
 msgstr "הצטרפות"
 
-#: controls/AboutItem.qml:307
+#: controls/AboutItem.qml:289
 msgctxt "AboutItem|"
 msgid "Report a bug"
 msgstr "דיווח על תקלה"
 
-#: controls/AboutItem.qml:325
+#: controls/AboutItem.qml:307
 msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "ספריות בשימוש"
 
-#: controls/AboutItem.qml:345
+#: controls/AboutItem.qml:327
 msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr "הצגת תמונות היוצרים"
 
-#: controls/AboutItem.qml:348
+#: controls/AboutItem.qml:330
 msgctxt "AboutItem|"
 msgid "Authors"
 msgstr "יוצרים"
 
-#: controls/AboutItem.qml:358
+#: controls/AboutItem.qml:340
 msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "תודות"
 
-#: controls/AboutItem.qml:368
+#: controls/AboutItem.qml:350
 msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "מתרגמים"
