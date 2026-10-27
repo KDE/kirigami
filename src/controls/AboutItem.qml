@@ -246,6 +246,31 @@ Item {
         }
 
         KF.FormGroup {
+            id: linksGroup
+
+            readonly property bool hasHomepage: aboutItem.aboutData.homepage.toString().length > 0
+            readonly property bool hasDonate: aboutItem.donateUrl.toString().length > 0
+            readonly property bool hasGetInvolved: aboutItem.getInvolvedUrl.toString().length > 0
+            readonly property string bugUrl: {
+                const bugAddress = aboutItem.aboutData.bugAddress ?? "";
+                if (bugAddress !== "submit@bugs.kde.org") {
+                    // A plain email address can only be opened with a mailto: scheme.
+                    if (bugAddress.includes("@") && !bugAddress.includes(":")) {
+                        return "mailto:" + bugAddress;
+                    }
+                    return bugAddress;
+                }
+                const elements = (aboutItem.aboutData.productName ?? "").split('/');
+                let url = `https://bugs.kde.org/enter_bug.cgi?format=guided&product=${elements[0]}&version=${aboutItem.aboutData.version}`;
+                if (elements.length === 2) {
+                    url += "&component=" + elements[1];
+                }
+                return url;
+            }
+            readonly property bool hasBugUrl: bugUrl.length > 0
+
+            visible: hasHomepage || hasDonate || hasGetInvolved || hasBugUrl
+
             KF.FormAction {
                 action: KC.Action {
                     icon.name: "globe-symbolic"
@@ -255,10 +280,10 @@ Item {
                     }
                 }
                 triggerIcon.name: "open-link-symbolic"
-                visible: aboutItem.aboutData.homepage.toString().length > 0
+                visible: linksGroup.hasHomepage
             }
             KF.FormSeparator {
-                visible: aboutItem.aboutData.homepage.toString().length > 0
+                visible: linksGroup.hasHomepage && (linksGroup.hasDonate || linksGroup.hasGetInvolved || linksGroup.hasBugUrl)
             }
             KF.FormAction {
                 action: KC.Action {
@@ -269,10 +294,10 @@ Item {
                     }
                 }
                 triggerIcon.name: "open-link-symbolic"
-                visible: aboutItem.donateUrl.toString().length > 0
+                visible: linksGroup.hasDonate
             }
             KF.FormSeparator {
-                visible: aboutItem.donateUrl.toString().length > 0
+                visible: linksGroup.hasDonate && (linksGroup.hasGetInvolved || linksGroup.hasBugUrl)
             }
             KF.FormAction {
                 action: KC.Action {
@@ -283,28 +308,21 @@ Item {
                     }
                 }
                 triggerIcon.name: "open-link-symbolic"
-                visible: aboutItem.getInvolvedUrl.toString().length > 0
+                visible: linksGroup.hasGetInvolved
             }
             KF.FormSeparator {
-                visible: aboutItem.getInvolvedUrl.toString().length > 0
+                visible: linksGroup.hasGetInvolved && linksGroup.hasBugUrl
             }
             KF.FormAction {
                 action: KC.Action {
                     icon.name: "tools-report-bug-symbolic"
                     text: qsTr("Report a bug")
                     onTriggered: {
-                        if (aboutItem.aboutData.bugAddress !== "submit@bugs.kde.org") {
-                            Qt.openUrlExternally(aboutItem.aboutData.bugAddress)
-                        }
-                        const elements = aboutItem.aboutData.productName.split('/');
-                        let url = `https://bugs.kde.org/enter_bug.cgi?format=guided&product=${elements[0]}&version=${aboutItem.aboutData.version}`;
-                        if (elements.length === 2) {
-                            url += "&component=" + elements[1];
-                        }
-                        Qt.openUrlExternally(url)
+                        Qt.openUrlExternally(linksGroup.bugUrl)
                     }
                 }
                 triggerIcon.name: "open-link-symbolic"
+                visible: linksGroup.hasBugUrl
             }
         }
 
