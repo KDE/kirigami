@@ -212,8 +212,11 @@ Item {
                     source: aboutItem.aboutData.programLogo || Platform.Settings.applicationWindowIcon || aboutItem.aboutData.componentName
                 }
             }
-            KF.FormSeparator {}
+            KF.FormSeparator {
+                visible: copyrightEntry.subtitle.length > 0
+            }
             KF.FormEntry {
+                id: copyrightEntry
                 contentItem: QQC2.Label {
                     text: qsTr("Copyright")
                 }
@@ -225,7 +228,9 @@ Item {
 
         KF.FormGroup {
             title: qsTr("License")
+            visible: repLicenses.count > 0
             Repeater {
+                id: repLicenses
                 model: aboutItem.aboutData.licenses
                 delegate: KF.FormAction {
                     id: licenseLinkButton
