@@ -26,6 +26,11 @@ KT.AvatarButton {
         }
     }
 
+    leftInset: root.down ? -1 : 0
+    topInset: leftInset
+    rightInset: leftInset
+    bottomInset: leftInset
+
     background: Rectangle {
         radius: height
         color: Platform.Theme.focusColor
