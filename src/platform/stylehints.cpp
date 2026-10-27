@@ -19,6 +19,7 @@ class KIRIGAMIPLATFORM_NO_EXPORT StyleHints::Private
 public:
     bool useAlternateBackgroundColor = false;
     bool showFramedBackground = false;
+    bool scrollingModifiesControls = false;
     int tickMarkStepSize = 0;
     QString iconName;
     QUrl iconSource;
@@ -113,6 +114,22 @@ void StyleHints::setIconSource(const QUrl &newIconSource)
 
     d->iconSource = newIconSource;
     Q_EMIT iconSourceChanged();
+}
+
+bool StyleHints::scrollingModifiesControls() const
+{
+    return d->scrollingModifiesControls;
+}
+
+void StyleHints::setScrollingModifiesControls(const bool &scrollingModifies)
+{
+    if (scrollingModifies == d->scrollingModifiesControls) {
+        return;
+    }
+
+    d->scrollingModifiesControls = scrollingModifies;
+    propertyChanged(ChangedProperty::ScrollingModifiesControls);
+    Q_EMIT scrollingModifiesControlsChanged();
 }
 
 StyleHints *StyleHints::qmlAttachedProperties(QObject *object)

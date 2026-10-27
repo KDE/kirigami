@@ -57,6 +57,7 @@ public:
         TickMarkStepSize,
         IconName,
         IconSource,
+        ScrollingModifiesControls,
     };
 
     explicit StyleHints(QObject *parent = nullptr);
@@ -123,6 +124,26 @@ public:
     QUrl iconSource() const;
     void setIconSource(const QUrl &newIconSource);
     Q_SIGNAL void iconSourceChanged();
+
+    /*!
+     * \qmlproperty bool StyleHints::scrollingModifiesControls
+     *
+     * Whether controls (such as sliders and comboboxes) should respond to
+     * scroll wheel events and change values, or pass the event to parent
+     * items.
+     *
+     * Kirigami platform plugins should set this according to their platform
+     * conventions, if available. It default to false if not set by a plugin.
+     *
+     * Application authors can read this to adjust their custom controls
+     * to this. The value can't be changed from Kirigami, but if necessary
+     * you can force the behavior of individual controls setting wheelEnabled
+     * on QtQuick.Controls that support it, or by implementing a wheelHandler.
+     */
+    Q_PROPERTY(bool scrollingModifiesControls READ scrollingModifiesControls NOTIFY scrollingModifiesControlsChanged)
+    bool scrollingModifiesControls() const;
+    void setScrollingModifiesControls(const bool &scrollingModifies);
+    Q_SIGNAL void scrollingModifiesControlsChanged();
 
     static StyleHints *qmlAttachedProperties(QObject *object);
 
