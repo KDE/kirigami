@@ -69,4 +69,8 @@ QQC2.AbstractButton {
     QQC2.ToolTip.visible: text.length > 0 && (hovered || activeFocus)
     QQC2.ToolTip.text: text
     QQC2.ToolTip.delay: Platform.Units.toolTipDelay
+
+    Accessible.role: Accessible.Button
+    Accessible.name: root.name
+    Accessible.onPressAction: root.animateClick()
 }
