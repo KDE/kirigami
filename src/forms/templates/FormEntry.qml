@@ -15,7 +15,7 @@ import org.kde.kirigami.layouts as KirigamiLayouts
   \brief The base type of all Form entries.
 
   This element should always be positioned in a FormGroup.
-  It is The base for all the items livinging in a Form and will take
+  It is The base for all the items living in a Form and will take
   care of common styling and behaviors, like positioning of titles and subtitles,
   background and what happens when the item is clicked even outside the contentItem.
 
