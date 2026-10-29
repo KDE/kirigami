@@ -119,7 +119,7 @@ KC.Page {
     /*!
       \brief Set if the vertical scrollbar should be interactable.
      */
-    property bool verticalScrollBarInteractive: true
+    property bool verticalScrollBarInteractive: Platform.Settings.style !== 'Material'
 
     /*!
       \brief This property sets the horizontal scrollbar policy.
@@ -138,7 +138,7 @@ KC.Page {
     /*!
       \brief Set if the horizontal scrollbar should be interactable.
      */
-    property bool horizontalScrollBarInteractive: true
+    property bool horizontalScrollBarInteractive: Platform.Settings.style !== 'Material'
 
     default property alias scrollablePageData: itemsParent.data
     property alias scrollablePageChildren: itemsParent.children
