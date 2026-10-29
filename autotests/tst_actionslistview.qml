@@ -105,33 +105,33 @@ TestCase {
         const actionListView = createTemporaryObject(actionsListViewComponent, root);
         verify(actionListView);
 
-        compare(actionListView.count, 10);
+        compare(actionListView.children[0].count, 10);
         for (var i = 0; i < actionListView.count; i++)  {
-            compare(actionListView.itemAtIndex(i).modelData, actionListView.actions[i]);
+            compare(actionListView.children[0].itemAtIndex(i).modelData, actionListView.actions[i]);
         }
 
         // Make sure that the delegates all have the right types
-        compare(actionListView.itemAtIndex(0).children[0].item instanceof QQC2.ItemDelegate, true);
-        compare(actionListView.itemAtIndex(1).children[0].item instanceof QQC2.ItemDelegate, true);
-        compare(actionListView.itemAtIndex(2).children[0].item instanceof QQC2.Control, true);
-        compare(actionListView.itemAtIndex(2).children[0].item.contentItem instanceof Primitives.Separator, true);
-        compare(actionListView.itemAtIndex(3).children[0].item instanceof QQC2.RadioDelegate, true);
-        compare(actionListView.itemAtIndex(4).children[0].item instanceof QQC2.RadioDelegate, true);
-        compare(actionListView.itemAtIndex(5).children[0].item instanceof QQC2.RadioDelegate, true);
-        compare(actionListView.itemAtIndex(6).children[0].item instanceof QQC2.CheckDelegate, true);
-        compare(actionListView.itemAtIndex(7).children[0].item instanceof QQC2.Label, true);
-        compare(actionListView.itemAtIndex(8).children[0].item instanceof QQC2.Control, true);
-        compare(actionListView.itemAtIndex(8).children[0].item.contentItem instanceof Primitives.Separator, true);
-        compare(actionListView.itemAtIndex(9).children[0].item instanceof QQC2.ItemDelegate, true);
+        compare(actionListView.children[0].itemAtIndex(0).children[0].item instanceof QQC2.ItemDelegate, true);
+        compare(actionListView.children[0].itemAtIndex(1).children[0].item instanceof QQC2.ItemDelegate, true);
+        compare(actionListView.children[0].itemAtIndex(2).children[0].item instanceof QQC2.Control, true);
+        compare(actionListView.children[0].itemAtIndex(2).children[0].item.contentItem instanceof Primitives.Separator, true);
+        compare(actionListView.children[0].itemAtIndex(3).children[0].item instanceof QQC2.RadioDelegate, true);
+        compare(actionListView.children[0].itemAtIndex(4).children[0].item instanceof QQC2.RadioDelegate, true);
+        compare(actionListView.children[0].itemAtIndex(5).children[0].item instanceof QQC2.RadioDelegate, true);
+        compare(actionListView.children[0].itemAtIndex(6).children[0].item instanceof QQC2.CheckDelegate, true);
+        compare(actionListView.children[0].itemAtIndex(7).children[0].item instanceof QQC2.Label, true);
+        compare(actionListView.children[0].itemAtIndex(8).children[0].item instanceof QQC2.Control, true);
+        compare(actionListView.children[0].itemAtIndex(8).children[0].item.contentItem instanceof Primitives.Separator, true);
+        compare(actionListView.children[0].itemAtIndex(9).children[0].item instanceof QQC2.ItemDelegate, true);
 
         // Check the children are created when the parent is clicked
         let childrenRepeater = undefined;
-        for (var i = 0; i < actionListView.itemAtIndex(9).children.length; i++)  {
-            if (actionListView.itemAtIndex(9).children[i] instanceof Repeater) {
-                childrenRepeater = actionListView.itemAtIndex(9).children[i];
+        for (var i = 0; i < actionListView.children[0].itemAtIndex(9).children.length; i++)  {
+            if (actionListView.children[0].itemAtIndex(9).children[i] instanceof Repeater) {
+                childrenRepeater = actionListView.children[0].itemAtIndex(9).children[i];
             }
         }
-        mouseClick(actionListView.itemAtIndex(9).children[0], Qt.LeftButton);
+        mouseClick(actionListView.children[0].itemAtIndex(9).children[0], Qt.LeftButton);
         compare(childrenRepeater.count, 2);
     }
 }
