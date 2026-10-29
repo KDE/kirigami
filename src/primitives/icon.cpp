@@ -727,7 +727,7 @@ QRectF Icon::calculateNodeRect()
     // So we just need to make sure the node is centered.
     auto position = QPointF{(width() - m_paintedSize.width()) / 2.0, (height() - m_paintedSize.height()) / 2.0};
     position.setX(std::round(position.x() * m_devicePixelRatio) / m_devicePixelRatio);
-    position.setY(std::round(position.x() * m_devicePixelRatio) / m_devicePixelRatio);
+    position.setY(std::round(position.y() * m_devicePixelRatio) / m_devicePixelRatio);
     return QRectF{position, m_paintedSize};
 }
 
