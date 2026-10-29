@@ -16,6 +16,9 @@ import org.kde.kirigami.templates as KT
 KT.ActionsListView {
     id: root
 
+    implicitWidth: innerList.contentWidth
+    implicitHeight: innerList.contentHeight
+
     itemDelegate: QQC2.ItemDelegate {
         id: itemDelegate
         property Item delegate
@@ -61,7 +64,8 @@ KT.ActionsListView {
 
         onClicked: {
             if ((modelData as Kirigami.Action)?.children.length > 0) {
-                item.delegate.expanded = !item.delegate.expanded
+                itemDelegate.delegate.expanded = !itemDelegate.delegate.expanded
+                return;
             }
             root.clicked(modelData)
         }
@@ -100,47 +104,57 @@ KT.ActionsListView {
         }
     }
 
-    delegate: ColumnLayout {
-        id: delegateColumn
-        required property T.Action modelData
+    ListView {
+        id: innerList
+        anchors.fill: parent
 
-        property bool expanded: false
+        clip: true
 
-        width: ListView.view.width - ListView.view.leftMargin - ListView.view.rightMargin
-        Loader {
-            Layout.fillWidth: true
+        header: root.header
+        footer: root.footer
+        model: root.actions
+        delegate: ColumnLayout {
+            id: delegateColumn
+            required property T.Action modelData
 
-            sourceComponent: _private.delegateForAction(delegateColumn.modelData)
-            onItemChanged: if (item) {
-                item.delegate = delegateColumn;
-                item.modelData = delegateColumn.modelData;
-            }
-        }
-        Repeater {
-            model: {
-                if (!delegateColumn.expanded) {
-                    return [];
-                }
-                return (delegateColumn.modelData as Kirigami.Action)?.children ?? [];
-            }
-            delegate: Loader {
-                id: childLoader
-                required property T.Action modelData
+            property bool expanded: false
+
+            width: ListView.view.width - ListView.view.leftMargin - ListView.view.rightMargin
+            Loader {
                 Layout.fillWidth: true
-                Layout.leftMargin: Kirigami.Units.gridUnit
-                Layout.preferredHeight: active ? (item as Item).implicitHeight : 0
 
-                sourceComponent: _private.delegateForAction(childLoader.modelData)
+                sourceComponent: innerList.delegateForAction(delegateColumn.modelData)
                 onItemChanged: if (item) {
-                    item.delegate = delegateColumn;
-                    item.modelData = childLoader.modelData;
+                    if (item.delegate === null) {
+                        item.delegate = delegateColumn;
+                    }
+                    if (item.modelData === null) {
+                        item.modelData = delegateColumn.modelData;
+                    }
+                }
+            }
+            Repeater {
+                model: {
+                    if (!delegateColumn.expanded) {
+                        return [];
+                    }
+                    return (delegateColumn.modelData as Kirigami.Action)?.children ?? [];
+                }
+                delegate: Loader {
+                    id: childLoader
+                    required property T.Action modelData
+                    Layout.fillWidth: true
+                    Layout.leftMargin: Kirigami.Units.gridUnit
+                    Layout.preferredHeight: active ? (item as Item).implicitHeight : 0
+
+                    sourceComponent: innerList.delegateForAction(childLoader.modelData)
+                    onItemChanged: if (item) {
+                        item.delegate = delegateColumn;
+                        item.modelData = childLoader.modelData;
+                    }
                 }
             }
         }
-    }
-
-    QtObject {
-        id: _private
 
         function delegateForAction(action: T.Action) : Component {
             const kirigamiAction = action as Kirigami.Action;

@@ -85,7 +85,7 @@ KirigamiDialogs.Dialog {
       This makes it possible to access its internal properties to, for example, change its padding:
       contentHeaderControl.topPadding
      */
-    property Item contentHeaderControl: QQC2.Control {
+    property QQC2.Control contentHeaderControl: QQC2.Control {
         id: columnHeader
         topPadding: 0
         leftPadding: 0
@@ -102,7 +102,16 @@ KirigamiDialogs.Dialog {
 
         onClicked: action => root.accept()
 
-        header: columnHeader
+        // This stupid but is to maintain API. contentHeaderControl is type QQC2.Control
+        // but ListView.header is Component.
+        header: QQC2.Control {
+            width: parent.width
+            topPadding: 0
+            leftPadding: 0
+            rightPadding: 0
+            bottomPadding: 0
+            contentItem: root.contentHeaderControl
+        }
 
         footer: Item {
             height: Platform.Units.cornerRadius

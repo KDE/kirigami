@@ -107,7 +107,7 @@ import QtQuick.Templates as T
 
   \since 6.17
  */
-ListView {
+Item {
     id: root
 
     /*!
@@ -152,6 +152,24 @@ ListView {
     property Component separatorDelegate
 
     /*!
+      \qmlproperty Component header
+
+      The component to place as a header at the top of the view.
+
+      \since 6.17
+     */
+    property Component header
+
+    /*!
+      \qmlproperty Component footer
+
+      The component to place as a footer at the bottom of the view.
+
+      \since 6.17
+     */
+    property Component footer
+
+    /*!
       \qmlsignal clicked(T.Action action)
       \brief Signal emitted when one of the action items is clicked.
 
@@ -160,10 +178,4 @@ ListView {
       \since 6.17
      */
     signal clicked(T.Action action)
-
-    implicitWidth: contentWidth
-    implicitHeight: contentHeight
-    clip: true
-
-    model: root.actions
 }
