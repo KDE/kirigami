@@ -11,74 +11,74 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Qt-Contexts: true\n"
 
-#: controls/AboutItem.qml:162
+#: controls/AboutItem.qml:175
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Visit %1's KDE Store page"
 msgstr ""
 
-#: controls/AboutItem.qml:178
+#: controls/AboutItem.qml:191
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Send an email to %1"
 msgstr ""
 
-#: controls/AboutItem.qml:216
+#: controls/AboutItem.qml:232
 msgctxt "AboutItem|"
 msgid "Copyright"
 msgstr ""
 
-#: controls/AboutItem.qml:225
+#: controls/AboutItem.qml:241
 msgctxt "AboutItem|"
 msgid "License"
 msgstr ""
 
-#: controls/AboutItem.qml:247
+#: controls/AboutItem.qml:293
 msgctxt "AboutItem|"
 msgid "Homepage"
 msgstr ""
 
-#: controls/AboutItem.qml:261
+#: controls/AboutItem.qml:307
 msgctxt "AboutItem|"
 msgid "Donate"
 msgstr ""
 
-#: controls/AboutItem.qml:275
+#: controls/AboutItem.qml:321
 msgctxt "AboutItem|"
 msgid "Get Involved"
 msgstr ""
 
-#: controls/AboutItem.qml:289
+#: controls/AboutItem.qml:335
 msgctxt "AboutItem|"
 msgid "Report a bug"
 msgstr ""
 
-#: controls/AboutItem.qml:307
+#: controls/AboutItem.qml:346
 msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr ""
 
-#: controls/AboutItem.qml:327
+#: controls/AboutItem.qml:367
 msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr ""
 
-#: controls/AboutItem.qml:330
+#: controls/AboutItem.qml:370
 msgctxt "AboutItem|"
 msgid "Authors"
 msgstr ""
 
-#: controls/AboutItem.qml:340
+#: controls/AboutItem.qml:380
 msgctxt "AboutItem|"
 msgid "Credits"
 msgstr ""
 
-#: controls/AboutItem.qml:350
+#: controls/AboutItem.qml:390
 msgctxt "AboutItem|"
 msgid "Translators"
 msgstr ""
 
-#: controls/AboutPage.qml:102
+#: controls/AboutPage.qml:115
 #, qt-format
 msgctxt "AboutPage|"
 msgid "About %1"

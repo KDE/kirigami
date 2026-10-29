@@ -16,74 +16,74 @@ msgstr ""
 "X-Qt-Contexts: true\n"
 "X-Generator: Lokalize 26.08.1\n"
 
-#: controls/AboutItem.qml:162
+#: controls/AboutItem.qml:175
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Visit %1's KDE Store page"
 msgstr "%1 の KDE Store ページを訪れる"
 
-#: controls/AboutItem.qml:178
+#: controls/AboutItem.qml:191
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Send an email to %1"
 msgstr "%1 にメールを送る"
 
-#: controls/AboutItem.qml:216
+#: controls/AboutItem.qml:232
 msgctxt "AboutItem|"
 msgid "Copyright"
 msgstr "著作権について"
 
-#: controls/AboutItem.qml:225
+#: controls/AboutItem.qml:241
 msgctxt "AboutItem|"
 msgid "License"
 msgstr "ライセンス"
 
-#: controls/AboutItem.qml:247
+#: controls/AboutItem.qml:293
 msgctxt "AboutItem|"
 msgid "Homepage"
 msgstr "ホームページ"
 
-#: controls/AboutItem.qml:261
+#: controls/AboutItem.qml:307
 msgctxt "AboutItem|"
 msgid "Donate"
 msgstr "寄付する"
 
-#: controls/AboutItem.qml:275
+#: controls/AboutItem.qml:321
 msgctxt "AboutItem|"
 msgid "Get Involved"
 msgstr "参加する"
 
-#: controls/AboutItem.qml:289
+#: controls/AboutItem.qml:335
 msgctxt "AboutItem|"
 msgid "Report a bug"
 msgstr "バグを報告"
 
-#: controls/AboutItem.qml:307
+#: controls/AboutItem.qml:346
 msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "使用されているライブラリ"
 
-#: controls/AboutItem.qml:327
+#: controls/AboutItem.qml:367
 msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr "作者の写真を表示"
 
-#: controls/AboutItem.qml:330
+#: controls/AboutItem.qml:370
 msgctxt "AboutItem|"
 msgid "Authors"
 msgstr "作者"
 
-#: controls/AboutItem.qml:340
+#: controls/AboutItem.qml:380
 msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "クレジット"
 
-#: controls/AboutItem.qml:350
+#: controls/AboutItem.qml:390
 msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "翻訳者"
 
-#: controls/AboutPage.qml:102
+#: controls/AboutPage.qml:115
 #, qt-format
 msgctxt "AboutPage|"
 msgid "About %1"

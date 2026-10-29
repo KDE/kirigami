@@ -15,74 +15,74 @@ msgstr ""
 "X-Qt-Contexts: true\n"
 "X-POOTLE-MTIME: 1497529432.000000\n"
 
-#: controls/AboutItem.qml:162
+#: controls/AboutItem.qml:175
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Visit %1's KDE Store page"
 msgstr "%1 KDE Store sayfasını ziyaret et"
 
-#: controls/AboutItem.qml:178
+#: controls/AboutItem.qml:191
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Send an email to %1"
 msgstr "%1 kişisine bir e-posta gönder"
 
-#: controls/AboutItem.qml:216
+#: controls/AboutItem.qml:232
 msgctxt "AboutItem|"
 msgid "Copyright"
 msgstr "Telif Hakkı"
 
-#: controls/AboutItem.qml:225
+#: controls/AboutItem.qml:241
 msgctxt "AboutItem|"
 msgid "License"
 msgstr "Lisans"
 
-#: controls/AboutItem.qml:247
+#: controls/AboutItem.qml:293
 msgctxt "AboutItem|"
 msgid "Homepage"
 msgstr "Ana Sayfa"
 
-#: controls/AboutItem.qml:261
+#: controls/AboutItem.qml:307
 msgctxt "AboutItem|"
 msgid "Donate"
 msgstr "Bağış Yap"
 
-#: controls/AboutItem.qml:275
+#: controls/AboutItem.qml:321
 msgctxt "AboutItem|"
 msgid "Get Involved"
 msgstr "Katıl"
 
-#: controls/AboutItem.qml:289
+#: controls/AboutItem.qml:335
 msgctxt "AboutItem|"
 msgid "Report a bug"
 msgstr "Hata Bildir"
 
-#: controls/AboutItem.qml:307
+#: controls/AboutItem.qml:346
 msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "Kullanımdaki Kitaplıklar"
 
-#: controls/AboutItem.qml:327
+#: controls/AboutItem.qml:367
 msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr "Yazar fotoğraflarını göster"
 
-#: controls/AboutItem.qml:330
+#: controls/AboutItem.qml:370
 msgctxt "AboutItem|"
 msgid "Authors"
 msgstr "Yazarlar"
 
-#: controls/AboutItem.qml:340
+#: controls/AboutItem.qml:380
 msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "Emeği Geçenler"
 
-#: controls/AboutItem.qml:350
+#: controls/AboutItem.qml:390
 msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "Çevirmenler"
 
-#: controls/AboutPage.qml:102
+#: controls/AboutPage.qml:115
 #, qt-format
 msgctxt "AboutPage|"
 msgid "About %1"

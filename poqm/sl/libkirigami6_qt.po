@@ -19,74 +19,74 @@ msgstr ""
 "X-Qt-Contexts: true\n"
 "X-Generator: Poedit 3.9\n"
 
-#: controls/AboutItem.qml:162
+#: controls/AboutItem.qml:175
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Visit %1's KDE Store page"
 msgstr "Obiščite stran %1 v KDE Store"
 
-#: controls/AboutItem.qml:178
+#: controls/AboutItem.qml:191
 #, qt-format
 msgctxt "AboutItem|"
 msgid "Send an email to %1"
 msgstr "Pošljite e-pošto za %1"
 
-#: controls/AboutItem.qml:216
+#: controls/AboutItem.qml:232
 msgctxt "AboutItem|"
 msgid "Copyright"
 msgstr "Copyright"
 
-#: controls/AboutItem.qml:225
+#: controls/AboutItem.qml:241
 msgctxt "AboutItem|"
 msgid "License"
 msgstr "Licenca"
 
-#: controls/AboutItem.qml:247
+#: controls/AboutItem.qml:293
 msgctxt "AboutItem|"
 msgid "Homepage"
 msgstr "Domača stran"
 
-#: controls/AboutItem.qml:261
+#: controls/AboutItem.qml:307
 msgctxt "AboutItem|"
 msgid "Donate"
 msgstr "Donirajte"
 
-#: controls/AboutItem.qml:275
+#: controls/AboutItem.qml:321
 msgctxt "AboutItem|"
 msgid "Get Involved"
 msgstr "Sodelujte"
 
-#: controls/AboutItem.qml:289
+#: controls/AboutItem.qml:335
 msgctxt "AboutItem|"
 msgid "Report a bug"
 msgstr "Poročajte o napaki"
 
-#: controls/AboutItem.qml:307
+#: controls/AboutItem.qml:346
 msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "Knjižnice v rabi"
 
-#: controls/AboutItem.qml:327
+#: controls/AboutItem.qml:367
 msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr "Prikaži fotografije avtorjev"
 
-#: controls/AboutItem.qml:330
+#: controls/AboutItem.qml:370
 msgctxt "AboutItem|"
 msgid "Authors"
 msgstr "Avtorji"
 
-#: controls/AboutItem.qml:340
+#: controls/AboutItem.qml:380
 msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "Zasluge"
 
-#: controls/AboutItem.qml:350
+#: controls/AboutItem.qml:390
 msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "Prevajalci"
 
-#: controls/AboutPage.qml:102
+#: controls/AboutPage.qml:115
 #, qt-format
 msgctxt "AboutPage|"
 msgid "About %1"
