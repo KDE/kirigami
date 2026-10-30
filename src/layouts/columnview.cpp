@@ -949,6 +949,7 @@ void ContentItem::itemChange(QQuickItem::ItemChange change, const QQuickItem::It
 
 void ContentItem::geometryChange(const QRectF &newGeometry, const QRectF &oldGeometry)
 {
+    updateVisibleItems();
     if (newGeometry.x() != oldGeometry.x()) {
         layoutPinnedItems();
     }
