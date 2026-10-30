@@ -9,7 +9,6 @@
 #include <QIcon>
 #include <QtMath>
 #include <cmath>
-#include <map>
 
 #include "kirigamiplatform_logging.h"
 

@@ -6,7 +6,6 @@
 
 #include "toolbarlayout.h"
 
-#include <cmath>
 #include <unordered_map>
 
 #include <QDeadlineTimer>
