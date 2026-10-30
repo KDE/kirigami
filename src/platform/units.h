@@ -53,8 +53,6 @@ public:
     Q_INVOKABLE int roundedIconSize(int size) const;
 
 private:
-    KIRIGAMIPLATFORM_NO_EXPORT float iconScaleFactor() const;
-
     Units *m_units;
 
 Q_SIGNALS:

@@ -294,18 +294,14 @@ protected:
     QImage findIcon(const QSize &size);
     void handleFinished(QNetworkReply *reply);
     void handleRedirect(QNetworkReply *reply);
-    bool guessMonochrome(const QImage &img);
     void setStatus(Status status);
     void updatePolish() override;
     void updatePaintedGeometry();
-    void updateIsMaskHeuristic(const QString &iconSource);
     void itemChange(QQuickItem::ItemChange change, const QQuickItem::ItemChangeData &value) override;
 
 private:
     void valueChanged(const QVariant &value);
     void windowVisibleChanged(bool visible);
-    QSGNode *createSubtree(qreal initialOpacity);
-    void updateSubtree(QSGNode *node, qreal opacity);
     QSize iconSizeHint() const;
     inline QImage iconPixmap(const QIcon &icon) const;
     QIcon loadFromTheme(const QString &iconName) const;
