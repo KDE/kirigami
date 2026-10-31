@@ -136,7 +136,7 @@ Item {
         }
 
         width: root.__collapsed
-                ? Math.min(implicitWidth, parent.width, Platform.Units.gridUnit * 30)
+                ? Math.min(Math.max(implicitWidth, Platform.Units.gridUnit * 30), parent.width)
                 : Math.min(Math.max(implicitWidth, twinImplicitWidth), parent.width)
         spacing: Platform.Units.largeSpacing + Platform.Units.smallSpacing
     }
