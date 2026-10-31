@@ -1896,7 +1896,7 @@ bool ColumnView::childMouseEventFilter(QQuickItem *item, QEvent *event)
             setCurrentIndex(m_currentIndex - 1);
             me->accept();
             return true;
-        } else if (me->button() == Qt::ForwardButton) {
+        } else if (me->button() == Qt::ForwardButton && m_currentIndex < count() - 1) {
             setCurrentIndex(m_currentIndex + 1);
             me->accept();
             return true;
