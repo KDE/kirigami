@@ -34,7 +34,7 @@ FT.FormEntry {
             rightMargin: -impl.leftPadding + Platform.Units.largeSpacing
             topMargin: root.contentItem.KirigamiLayouts.FormData.buddyFor.y + root.contentItem.KirigamiLayouts.FormData.buddyFor.height/2 - label.height/2 + contentItemWrapper.y + impl.topPadding
         }
-        visible: text.length > 0 && !impl.formLayout.__collapsed && !root.fullWidth
+        visible: text.length > 0 && !root.fullWidth && !(impl.formLayout?.__collapsed ?? true)
         Primitives.MnemonicData.enabled: {
                 const buddy = root.contentItem?.KirigamiLayouts.FormData.buddyFor as Item;
                 if (buddy && buddy.enabled && buddy.visible && buddy.activeFocusOnTab) {
@@ -127,7 +127,7 @@ FT.FormEntry {
                 id: inlineLabel
                 Layout.fillWidth: true
                 Layout.columnSpan: mainLayout.columns
-                visible: (impl.formLayout.__collapsed || root.fullWidth) && text.length > 0
+                visible: text.length > 0 && (root.fullWidth || (impl.formLayout?.__collapsed ?? true))
                 text: label.Primitives.MnemonicData.richTextLabel
                 wrapMode: Text.WordWrap
                 Accessible.name: label.Primitives.MnemonicData.plainTextLabel
