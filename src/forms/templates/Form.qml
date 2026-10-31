@@ -74,6 +74,19 @@ Item {
     // Internal, don't document
     property bool __collapsed: false
 
+    /*!
+      \qmlproperty bool Form::wideMode
+      \brief true if this Form is using a 'wide screen' layout.
+
+      If the width of this Form is not sufficient to display each FormEntry title and
+      contentItem together on a single line, then this property will be false and the
+      title (if one is set) will be displayed above the contentItem as if the FormEntry
+      fullWidth property was set for all entries in the Form.
+
+      \since 6.33
+     */
+    readonly property bool wideMode: !__collapsed
+
     onWidthChanged: layout.relayoutLabels()
 
     ColumnLayout {
