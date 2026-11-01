@@ -712,6 +712,8 @@ void ContentItem::layoutItems()
     } else {
         setBoundedX(newContentX);
     }
+
+    updateVisibleItems();
 }
 
 void ContentItem::layoutPinnedItems()
@@ -768,11 +770,7 @@ void ContentItem::updateVisibleItems()
                 m_visibleItems.removeAll(item);
             });
             attached->setInViewport(true);
-            // SetEnabled is rather heavy as it does a while loop regardless of the
-            // item already being set enabled/disabled, since it also checks the whole hierarchy.
-            if (item->isEnabled()) {
-                item->setEnabled(true);
-            }
+            item->setEnabled(true);
             if (attached->globalHeader()) {
                 attached->globalHeader()->setEnabled(true);
             }
@@ -781,9 +779,7 @@ void ContentItem::updateVisibleItems()
             }
         } else {
             attached->setInViewport(false);
-            if (!item->isEnabled()) {
-                item->setEnabled(false);
-            }
+            item->setEnabled(false);
             if (attached->globalHeader()) {
                 attached->globalHeader()->setEnabled(false);
             }
@@ -859,6 +855,7 @@ void ContentItem::forgetItem(QQuickItem *item)
     m_pinnedItems.remove(item);
     // We are connected not only to destroyed but also to lambdas
     disconnect(item, nullptr, this, nullptr);
+    updateVisibleItems();
     m_shouldAnimate = true;
     m_view->polish();
 
@@ -937,6 +934,7 @@ void ContentItem::itemChange(QQuickItem::ItemChange change, const QQuickItem::It
         break;
     }
     case QQuickItem::ItemVisibleHasChanged:
+        updateVisibleItems();
         if (value.boolValue) {
             m_view->polish();
         }
@@ -949,6 +947,7 @@ void ContentItem::itemChange(QQuickItem::ItemChange change, const QQuickItem::It
 
 void ContentItem::geometryChange(const QRectF &newGeometry, const QRectF &oldGeometry)
 {
+    updateVisibleItems();
     if (newGeometry.x() != oldGeometry.x()) {
         layoutPinnedItems();
     }
@@ -1739,6 +1738,7 @@ void ColumnView::geometryChange(const QRectF &newGeometry, const QRectF &oldGeom
     m_contentItem->m_shouldAnimate = false;
     polish();
 
+    m_contentItem->updateVisibleItems();
     QQuickItem::geometryChange(newGeometry, oldGeometry);
 }
 
@@ -2009,7 +2009,6 @@ void ColumnView::componentComplete()
 void ColumnView::updatePolish()
 {
     m_contentItem->layoutItems();
-    m_contentItem->updateVisibleItems();
 }
 
 void ColumnView::itemChange(QQuickItem::ItemChange change, const QQuickItem::ItemChangeData &value)
