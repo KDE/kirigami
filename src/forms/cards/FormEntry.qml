@@ -185,7 +185,10 @@ FT.FormEntry {
                 text: root.subtitle
                 wrapMode: Text.WordWrap
                 elide: Text.ElideRight
-                leftPadding: Application.layoutDirection === Qt.LeftToRight
+                leftPadding: Application.layoutDirection === Qt.LeftToRight && !(root.contentItem.KirigamiLayouts.FormData.buddyFor instanceof QQC.Switch)
+                    ? (root.contentItem.KirigamiLayouts.FormData.buddyFor?.indicator?.width ?? 0) + (root.contentItem.KirigamiLayouts.FormData.buddyFor?.spacing ?? 0)
+                    : padding
+                rightPadding: Application.layoutDirection === Qt.LeftToRight && root.contentItem.KirigamiLayouts.FormData.buddyFor instanceof QQC.Switch
                     ? (root.contentItem.KirigamiLayouts.FormData.buddyFor?.indicator?.width ?? 0) + (root.contentItem.KirigamiLayouts.FormData.buddyFor?.spacing ?? 0)
                     : padding
                 onLinkActivated: (link) => Qt.openUrlExternally(link)
