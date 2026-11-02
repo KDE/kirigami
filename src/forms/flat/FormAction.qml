@@ -24,7 +24,6 @@ FT.FormAction {
         text: root.action.text
         onClicked: {
             root.clicked();
-            root.action.trigger();
         }
     }
 }
