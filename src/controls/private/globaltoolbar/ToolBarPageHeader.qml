@@ -35,8 +35,8 @@ KC.AbstractApplicationHeader {
         toolBar.contentItem.visibleChildren[0].forceActiveFocus(Qt.TabFocusReason)
     }
 
-    leftPadding: Platform.Units.mediumSpacing
-    rightPadding: Platform.Units.mediumSpacing
+    leftPadding: Platform.Units.mediumSpacing + Platform.CutoutsMargins.leftMargin
+    rightPadding: Platform.Units.mediumSpacing + Platform.CutoutsMargins.rightMargin
 
     MouseArea {
         anchors.fill: parent
@@ -134,9 +134,6 @@ KC.AbstractApplicationHeader {
                     && drawer.handleVisible && drawer.enabled
                     && (pageStack.columnView.columnResizeMode === KL.ColumnView.SingleColumn
                     || root.page.KL.ColumnView.view?.trailingVisibleItem === root.page)
-        }
-
-        Platform.Cutouts {
         }
     }
 }
