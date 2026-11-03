@@ -179,6 +179,7 @@ void CutoutsMargins::setupCutouts()
 
     m_cutoutsWayland = new CutoutsWayland(m_cutoutsManager->get_cutouts(surface), this);
     connect(m_cutoutsWayland, &CutoutsWayland::cutoutsChanged, this, &CutoutsMargins::refreshGeometries);
+    refreshGeometries();
 }
 
 qreal CutoutsMargins::leftMargin() const
