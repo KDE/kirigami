@@ -64,6 +64,7 @@ protected:
         Q_UNUSED(type)
         Q_UNUSED(id)
         m_pendingCutouts.append(QRectF(x, y, width, height));
+        qWarning() << "CUTOUT ARRIVED" << m_pendingCutouts;
     }
 
     void xx_cutouts_v1_configure() override
@@ -167,6 +168,7 @@ void CutoutsMargins::connectToNativeSurface()
 
 void CutoutsMargins::setupCutouts()
 {
+    qWarning() << "SETTING UP";
     if (m_cutoutsWayland || !m_window || !m_cutoutsManager->isActive()) {
         return;
     }
@@ -179,7 +181,6 @@ void CutoutsMargins::setupCutouts()
 
     m_cutoutsWayland = new CutoutsWayland(m_cutoutsManager->get_cutouts(surface), this);
     connect(m_cutoutsWayland, &CutoutsWayland::cutoutsChanged, this, &CutoutsMargins::refreshGeometries);
-    refreshGeometries();
 }
 
 qreal CutoutsMargins::leftMargin() const
