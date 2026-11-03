@@ -9,6 +9,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls.Material
 import "../../../templates/private" as Private
+import org.kde.kirigami.layouts as KL
 import org.kde.kirigami.platform as Platform
 import org.kde.kirigami.primitives as Primitives
 
@@ -17,6 +18,7 @@ Private.GlobalDrawerActionItem {
 
     readonly property color _foregroundColor: Qt.alpha(Material.foreground, !enabled ? 0.38 : checked ? 1 : 0.8)
     readonly property bool _hasIcon: (tAction?.icon.name.length ?? 0) > 0 || (tAction?.icon.source.toString().length ?? 0) > 0
+    readonly property bool _iconOnly: _hasIcon && kAction !== null && KL.DisplayHint.displayHintSet(kAction, KL.DisplayHint.IconOnly)
 
     visible: actionVisible && (!drawerCollapsed || !isSeparator)
     opacity: 1
@@ -29,8 +31,11 @@ Private.GlobalDrawerActionItem {
 
     implicitWidth: implicitContentWidth + leftPadding + rightPadding
     implicitHeight: isSeparator ? Platform.Units.largeSpacing
-        : Math.max(Platform.Units.largeSpacing * (drawerCollapsed ? 8 : 6), implicitContentHeight + topPadding + bottomPadding)
-    horizontalPadding: drawerCollapsed ? 0 : Platform.Units.largeSpacing * 2
+        : Math.max(Platform.Units.largeSpacing * (drawerCollapsed && !_iconOnly ? 8 : 6), implicitContentHeight + topPadding + bottomPadding)
+    horizontalPadding: drawerCollapsed ? 0
+        : _iconOnly ? (implicitHeight - Platform.Units.iconSizes.smallMedium) / 2
+        : Platform.Units.largeSpacing * 2
+    Layout.maximumWidth: _iconOnly && !drawerCollapsed ? implicitWidth : Number.POSITIVE_INFINITY
     verticalPadding: Platform.Units.smallSpacing
     leftInset: Math.max(0, leftPadding - horizontalPadding)
     rightInset: Math.max(0, rightPadding - horizontalPadding)
@@ -40,6 +45,10 @@ Private.GlobalDrawerActionItem {
         control: control
         visible: !control.isSeparator && (!control.drawerCollapsed || !control._hasIcon)
     }
+
+    ToolTip.visible: _iconOnly && !drawerCollapsed && !hasToolTip && !hasVisibleMenu && hovered
+    ToolTip.text: tAction?.text ?? ""
+    ToolTip.delay: Platform.Units.toolTipDelay
 
     contentItem: GridLayout {
         columns: control.drawerCollapsed ? 1 : 3
@@ -71,7 +80,7 @@ Private.GlobalDrawerActionItem {
         }
 
         Label {
-            visible: !control.isSeparator
+            visible: !control.isSeparator && !control._iconOnly
             text: control.Primitives.MnemonicData.richTextLabel
             color: control._foregroundColor
             font: control.font

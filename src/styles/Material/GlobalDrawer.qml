@@ -9,15 +9,27 @@ import QtQuick.Controls.Material
 import org.kde.kirigami.controls as KC
 import org.kde.kirigami.primitives as Primitives
 import org.kde.kirigami.templates as KT
+import org.kde.kirigami.layouts as KL
 import org.kde.kirigami.platform as Platform
 
 KT.GlobalDrawer {
     id: root
 
-    collapsedSize: Platform.Units.largeSpacing * 10
+    readonly property bool _allActionsIconOnly: actions.length > 0 && actions.every(action =>
+        !(action.visible ?? true) || (action.separator ?? false)
+            || KL.DisplayHint.displayHintSet(action, KL.DisplayHint.IconOnly))
+
+    collapsedSize: Platform.Units.largeSpacing * (_allActionsIconOnly ? 7 : 10)
     preferredSize: Platform.Units.gridUnit * 18
 
     _actionSpacing: collapsed ? Platform.Units.smallSpacing : 0
+
+    Binding {
+        target: (root.header as KT.AbstractApplicationHeader)?.background ?? null
+        property: "visible"
+        value: false
+        when: target !== null
+    }
 
     header: Item {
         visible: root.title.length > 0 || Boolean(root.titleIcon)
