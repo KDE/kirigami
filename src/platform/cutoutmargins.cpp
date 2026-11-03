@@ -4,7 +4,7 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-#include "cutouts_p.h"
+#include "cutoutmargins_p.h"
 #include "helpers.h"
 
 #ifdef KIRIGAMI_ENABLE_DBUS
@@ -25,16 +25,17 @@ namespace Platform
 
 class CutoutsManager : public QWaylandClientExtensionTemplate<CutoutsManager>, public QtWayland::xx_cutouts_manager_v1
 {
+    Q_OBJECT
 public:
-    CutoutsManager()
-        : QWaylandClientExtensionTemplate<CutoutsManager>(1)
+    CutoutsManager(QObject *parent = nullptr)
+        : QWaylandClientExtensionTemplate<CutoutsManager>(1, parent)
     {
-        initialize();
     }
 };
 
 class CutoutsWayland : public QObject, public QtWayland::xx_cutouts_v1
 {
+    Q_OBJECT
 public:
     CutoutsWayland(struct ::xx_cutouts_v1 *object, QObject *parent)
         : QObject(parent)
@@ -49,29 +50,136 @@ public:
         }
     }
 
+    QList<QRectF> cutouts() const
+    {
+        return m_cutouts;
+    }
+
+Q_SIGNALS:
+    void cutoutsChanged();
+
 protected:
     void xx_cutouts_v1_cutout_box(int32_t x, int32_t y, int32_t width, int32_t height, uint32_t type, uint32_t id) override
     {
-        m_cutouts[id] = QRect(x, y, width, height);
-        qWarning() << "NEW BOX" << id << m_cutouts[id];
+        Q_UNUSED(type)
+        Q_UNUSED(id)
+        m_pendingCutouts.append(QRectF(x, y, width, height));
+    }
+
+    void xx_cutouts_v1_configure() override
+    {
+        m_cutouts = m_pendingCutouts;
+        m_pendingCutouts.clear();
+        Q_EMIT cutoutsChanged();
     }
 
 private:
-    QHash<uint32_t, QRect> m_cutouts;
+    QList<QRectF> m_cutouts;
+    QList<QRectF> m_pendingCutouts;
 };
 
 CutoutsMargins::CutoutsMargins(QObject *parent)
     : QObject(parent)
     , m_parentItem(qobject_cast<QQuickItem *>(parent))
+    , m_cutoutsManager(new CutoutsManager(this))
 {
+    connect(m_cutoutsManager, &CutoutsManager::activeChanged, this, &CutoutsMargins::setupCutouts);
+
     if (m_parentItem) {
         connectAncestors(m_parentItem);
         connect(m_parentItem, &QQuickItem::widthChanged, this, &CutoutsMargins::refreshGeometries);
         connect(m_parentItem, &QQuickItem::heightChanged, this, &CutoutsMargins::refreshGeometries);
+        connect(m_parentItem, &QQuickItem::windowChanged, this, &CutoutsMargins::handleWindowChanged);
+        handleWindowChanged();
     }
 }
 
 CutoutsMargins::~CutoutsMargins() = default;
+
+bool CutoutsMargins::eventFilter(QObject *watched, QEvent *event)
+{
+    if (event->type() == QEvent::PlatformSurface) {
+        QPlatformSurfaceEvent *se = static_cast<QPlatformSurfaceEvent *>(event);
+        if (se->surfaceEventType() == QPlatformSurfaceEvent::SurfaceCreated) {
+            connectToNativeSurface();
+        }
+    }
+
+    return QObject::eventFilter(watched, event);
+}
+
+void CutoutsMargins::handleWindowChanged()
+{
+    QWindow *window = m_parentItem ? m_parentItem->window() : nullptr;
+    if (window == m_window) {
+        return;
+    }
+
+    if (m_window) {
+        m_window->removeEventFilter(this);
+    }
+
+    if (m_native) {
+        disconnect(m_native, nullptr, this, nullptr);
+        m_native = nullptr;
+    }
+
+    delete m_cutoutsWayland;
+    m_cutoutsWayland = nullptr;
+
+    m_window = window;
+
+    if (m_window) {
+        m_window->installEventFilter(this);
+        connectToNativeSurface();
+    }
+
+    refreshGeometries();
+}
+
+void CutoutsMargins::connectToNativeSurface()
+{
+    if (!m_window) {
+        return;
+    }
+
+    auto native = m_window->nativeInterface<QNativeInterface::Private::QWaylandWindow>();
+    if (!native || m_native == native) {
+        return;
+    }
+
+    if (m_native) {
+        disconnect(m_native, nullptr, this, nullptr);
+    }
+    m_native = native;
+
+    connect(native, &QNativeInterface::Private::QWaylandWindow::surfaceRoleCreated, this, &CutoutsMargins::setupCutouts);
+
+    connect(native, &QNativeInterface::Private::QWaylandWindow::surfaceRoleDestroyed, this, [this]() {
+        delete m_cutoutsWayland;
+        m_cutoutsWayland = nullptr;
+        refreshGeometries();
+    });
+
+    // The role may have been created before we connected to the signal.
+    setupCutouts();
+}
+
+void CutoutsMargins::setupCutouts()
+{
+    if (m_cutoutsWayland || !m_window || !m_cutoutsManager->isActive()) {
+        return;
+    }
+
+    // The protocol requires the surface to have the xdg_toplevel role.
+    wl_surface *surface = surfaceForWindow(m_window);
+    if (!surface || !xdgToplevelForWindow(m_window)) {
+        return;
+    }
+
+    m_cutoutsWayland = new CutoutsWayland(m_cutoutsManager->get_cutouts(surface), this);
+    connect(m_cutoutsWayland, &CutoutsWayland::cutoutsChanged, this, &CutoutsMargins::refreshGeometries);
+}
 
 qreal CutoutsMargins::leftMargin() const
 {
@@ -136,14 +244,14 @@ void CutoutsMargins::refreshGeometries()
         return;
     }
 
-    m_cutouts = {{0.0, 0.0, 64.0, 24.0}, {m_parentItem->window()->width() - 120.0, 0.0, 120.0, 24.0}};
+    m_cutouts = m_cutoutsWayland ? m_cutoutsWayland->cutouts() : QList<QRectF>();
 
     const auto sceneRect = m_parentItem->mapRectToScene(m_parentItem->boundingRect());
     const QPointF center = sceneRect.center();
 
     QMarginsF margins;
 
-    for (const auto rect : m_cutouts) {
+    for (const auto &rect : std::as_const(m_cutouts)) {
         // Left edge
         if (rect.right() <= center.x()) {
             margins.setLeft(std::max(margins.left(), rect.right() - sceneRect.left()));
@@ -157,8 +265,8 @@ void CutoutsMargins::refreshGeometries()
             margins.setRight(std::max(margins.right(), sceneRect.right() - rect.left()));
         }
         // Bottom edge
-        if (rect.top() >= center.x()) {
-            margins.setBottom(std::max(margins.top(), sceneRect.bottom() - rect.bottom()));
+        if (rect.top() >= center.y()) {
+            margins.setBottom(std::max(margins.bottom(), sceneRect.bottom() - rect.top()));
         }
     }
 
@@ -167,15 +275,15 @@ void CutoutsMargins::refreshGeometries()
         Q_EMIT leftMarginChanged();
     }
     if (m_margins.top() != margins.top()) {
-        m_margins.setLeft(margins.top());
+        m_margins.setTop(margins.top());
         Q_EMIT topMarginChanged();
     }
     if (m_margins.right() != margins.right()) {
-        m_margins.setLeft(margins.right());
+        m_margins.setRight(margins.right());
         Q_EMIT rightMarginChanged();
     }
     if (m_margins.bottom() != margins.bottom()) {
-        m_margins.setLeft(margins.bottom());
+        m_margins.setBottom(margins.bottom());
         Q_EMIT bottomMarginChanged();
     }
 }
@@ -183,4 +291,5 @@ void CutoutsMargins::refreshGeometries()
 }
 }
 
-#include "moc_cutouts_p.cpp"
+#include "cutoutmargins.moc"
+#include "moc_cutoutmargins_p.cpp"

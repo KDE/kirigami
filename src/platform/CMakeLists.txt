@@ -27,8 +27,8 @@ target_sources(KirigamiPlatform PRIVATE
     platformtheme.h
     basictheme.cpp
     basictheme_p.h
-    cutouts_p.h
-    cutouts.cpp
+    cutoutmargins_p.h
+    cutoutmargins.cpp
     inputmethod.cpp
     inputmethod.h
     platformpluginfactory.cpp
