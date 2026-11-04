@@ -14,5 +14,5 @@ public:
     using ShaderMaterial::ShaderMaterial;
 
 protected:
-    void updateRenderStateUniforms(const QSGMaterialShader::RenderState &state) override;
+    bool updateRenderStateUniforms(QSGMaterialShader::RenderState &state) override;
 };

@@ -213,7 +213,7 @@ QSGNode *Icon::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaintNodeData * 
         shaderName += u"default"_s;
     }
     shaderNode->setShader(shaderName);
-    shaderNode->setUniformBufferSize(sizeof(float) * 28);
+    shaderNode->setUniformBufferSize(sizeof(float) * 48);
 
     if (shouldBeAnimated) {
         shaderNode->setTextureChannels(2);

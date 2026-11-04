@@ -6,11 +6,20 @@
 
 #include "iconmaterial.h"
 
+#include <QByteArray>
+
 #include <array>
 #include <cstring>
 
-void IconMaterial::updateRenderStateUniforms(const QSGMaterialShader::RenderState &state)
+bool IconMaterial::updateRenderStateUniforms(QSGMaterialShader::RenderState &state)
 {
+    auto *uniformData = state.uniformData();
+    auto *data = uniformData->data();
+    const auto modelView = state.modelViewMatrix();
+    const auto projection = state.projectionMatrix();
+    memcpy(data, modelView.constData(), sizeof(float) * 16);
+    memcpy(data + sizeof(float) * 28, projection.constData(), sizeof(float) * 16);
+
     const auto viewport = state.viewportRect();
     const float w = viewport.width();
     const float h = viewport.height();
@@ -22,5 +31,9 @@ void IconMaterial::updateRenderStateUniforms(const QSGMaterialShader::RenderStat
         2.0f / h,
     };
 
-    memcpy(uniformData().data() + sizeof(float) * 24, viewportData.data(), sizeof(viewportData));
+    memcpy(data + sizeof(float) * 24, viewportData.data(), sizeof(viewportData));
+
+    const float dpr = state.devicePixelRatio();
+    memcpy(data + sizeof(float) * 44, &dpr, sizeof(dpr));
+    return true;
 }

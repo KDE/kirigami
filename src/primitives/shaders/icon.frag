@@ -7,7 +7,7 @@
 #version 440
 
 layout(std140, binding = 0) uniform buf {
-    highp mat4 matrix;
+    highp mat4 model_view;
     mediump float opacity;
 
     mediump float mix_amount;
@@ -16,6 +16,8 @@ layout(std140, binding = 0) uniform buf {
     mediump vec4 mask_color;
     highp vec2 viewport_half;
     highp vec2 inv_viewport_double;
+    highp mat4 projection;
+    highp float dpr;
 } uniforms;
 
 layout(binding = 1) uniform sampler2D texture_source_0;

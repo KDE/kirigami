@@ -92,9 +92,10 @@ void ShaderMaterial::setTextureFiltering(int binding, QSGTexture::Filtering filt
     }
 }
 
-void ShaderMaterial::updateRenderStateUniforms(const QSGMaterialShader::RenderState &state)
+bool ShaderMaterial::updateRenderStateUniforms(QSGMaterialShader::RenderState &state)
 {
     Q_UNUSED(state);
+    return false;
 }
 
 QString ShaderMaterial::nameForType(QSGMaterialType *type)
@@ -148,15 +149,13 @@ bool ShaderMaterialShader::updateUniformData(RenderState &state, QSGMaterial *ne
     remainingSize -= sizeof(float);
 
     auto material = static_cast<ShaderMaterial *>(newMaterial);
-    material->updateRenderStateUniforms(state);
-
     if (!oldMaterial || newMaterial->compare(oldMaterial) != 0) {
         const auto uniformData = static_cast<ShaderMaterial *>(newMaterial)->uniformData();
         memcpy(data, uniformData.data() + sizeof(float) * 17, remainingSize);
         changed = true;
     }
 
-    return changed;
+    return material->updateRenderStateUniforms(state) || changed;
 }
 
 void ShaderMaterialShader::updateSampledImage(QSGMaterialShader::RenderState &state,

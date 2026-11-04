@@ -44,7 +44,7 @@ public:
     static QSGMaterialType *typeForName(const QString &name);
 
 protected:
-    virtual void updateRenderStateUniforms(const QSGMaterialShader::RenderState &state);
+    virtual bool updateRenderStateUniforms(QSGMaterialShader::RenderState &state);
 
 private:
     QString m_name;
