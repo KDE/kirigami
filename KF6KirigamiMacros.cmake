@@ -19,15 +19,20 @@ function(kirigami_package_breeze_icons)
     #include icons used by Kirigami components themselves
     set(ARG_ICONS ${ARG_ICONS}
         application-exit
+        application-menu-symbolic
         dialog-close
         dialog-error
         dialog-information
         dialog-positive
         dialog-warning
+        edit-clear
         edit-clear-locationbar-ltr
         edit-clear-locationbar-rtl
         edit-copy
         edit-delete-remove
+        edit-delete-remove-symbolic
+        edit-entry-symbolic
+        edit-select-all-symbolic
         emblem-error
         emblem-information
         emblem-success
@@ -41,6 +46,8 @@ function(kirigami_package_breeze_icons)
         go-previous-symbolic-rtl
         go-up
         handle-sort
+        help-contextual-symbolic
+        list-add-symbolic
         mail-sent
         open-menu-symbolic
         open-link-symbolic
@@ -48,16 +55,20 @@ function(kirigami_package_breeze_icons)
         overflow-menu-left
         overflow-menu-right
         overflow-menu
+        overflow-menu-symbolic
         password-show-off
         password-show-on
         process-working-symbolic
         search
+        tag-symbolic
         tools-report-bug
         user
         view-left-new
         view-right-new
         view-left-close
         view-right-close
+        window-close
+        window-close-symbolic
     )
 
     function(_find_breeze_icon icon icon_dir found)
