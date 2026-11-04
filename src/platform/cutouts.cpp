@@ -160,20 +160,18 @@ void Cutouts::setupCutouts(QWindow *window)
         Q_EMIT cutoutsChanged(window, m_cutoutsWayland[window]->cutouts());
     });
 }
-/*
+
 bool Cutouts::eventFilter(QObject *watched, QEvent *event)
 {
     if (event->type() == QEvent::PlatformSurface) {
         QPlatformSurfaceEvent *se = static_cast<QPlatformSurfaceEvent *>(event);
         if (se->surfaceEventType() == QPlatformSurfaceEvent::SurfaceCreated) {
-            connectToNativeSurface();
+            registerWindow(static_cast<QWindow *>(watched));
         }
     }
 
     return QObject::eventFilter(watched, event);
 }
-*/
-
 }
 }
 

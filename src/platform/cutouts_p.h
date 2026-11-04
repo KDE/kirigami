@@ -39,6 +39,9 @@ public:
     void registerWindow(QWindow *window);
     QList<QRectF> cutouts(QWindow *window);
 
+protected:
+    bool eventFilter(QObject *watched, QEvent *event) override;
+
 Q_SIGNALS:
     void cutoutsChanged(QWindow *window, const QList<QRectF> &cutouts);
 
