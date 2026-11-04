@@ -482,7 +482,9 @@ T.Dialog {
         background: Item {
             Primitives.Separator {
                 id: footerSeparator
-                visible: if (root.contentItem instanceof T.Pane || root.contentItem instanceof Flickable) {
+                visible: if (footerToolBar.bufferMode) {
+                    return false;
+                } else if (root.contentItem instanceof T.Pane || root.contentItem instanceof Flickable) {
                     const itemContentHeight = (root.contentItem as T.Pane)?.contentHeight ?? (root.contentItem as Flickable)?.contentHeight
                     return root.contentItem.height < itemContentHeight;
                 } else {
