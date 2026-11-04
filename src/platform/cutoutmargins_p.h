@@ -6,8 +6,8 @@
 
 #pragma once
 
+#include <QMarginsF>
 #include <QObject>
-#include <QPointer>
 #include <QQuickItem>
 #include <qqmlregistration.h>
 
@@ -17,9 +17,6 @@ namespace Kirigami
 {
 namespace Platform
 {
-
-class CutoutsManager;
-class CutoutsWayland;
 
 class CutoutsMargins : public QObject
 {
@@ -50,23 +47,15 @@ Q_SIGNALS:
     void rightMarginChanged();
     void bottomMarginChanged();
 
-protected:
-    bool eventFilter(QObject *watched, QEvent *event) override;
-
 private:
     void connectAncestors(QQuickItem *item);
     void handleWindowChanged();
-    void connectToNativeSurface();
-    void setupCutouts();
     void refreshGeometries();
 
     QQuickItem *m_parentItem = nullptr;
     QMarginsF m_margins;
 
-    CutoutsManager *m_cutoutsManager = nullptr;
-    CutoutsWayland *m_cutoutsWayland = nullptr;
     QWindow *m_window = nullptr;
-    QPointer<QObject> m_native;
     QList<QQuickItem *> m_ancestors;
     QList<QRectF> m_cutouts;
 };

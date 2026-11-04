@@ -94,7 +94,7 @@ Item {
 
     /*!
      */
-    property int leftPadding: Platform.Units.mediumSpacing
+    property int leftPadding: Platform.Units.mediumSpacing + Platform.CutoutsMargins.leftMargin
 
     /*!
      */
@@ -102,7 +102,7 @@ Item {
 
     /*!
      */
-    property int rightPadding: Platform.Units.mediumSpacing
+    property int rightPadding: Platform.Units.mediumSpacing + Platform.CutoutsMargins.rightMargin
 
     /*!
      */

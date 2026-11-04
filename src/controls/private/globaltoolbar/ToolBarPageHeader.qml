@@ -35,9 +35,6 @@ KC.AbstractApplicationHeader {
         toolBar.contentItem.visibleChildren[0].forceActiveFocus(Qt.TabFocusReason)
     }
 
-    leftPadding: Platform.Units.mediumSpacing + Platform.CutoutsMargins.leftMargin
-    rightPadding: Platform.Units.mediumSpacing + Platform.CutoutsMargins.rightMargin
-
     MouseArea {
         anchors.fill: parent
         onPressed: mouse => {

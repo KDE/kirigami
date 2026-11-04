@@ -5,86 +5,27 @@
  */
 
 #include "cutoutmargins_p.h"
-#include "helpers.h"
+#include "cutouts_p.h"
 
-#ifdef KIRIGAMI_ENABLE_DBUS
-#include <QDBusConnection>
-#endif
-
-#include "kirigamiplatform_logging.h"
-#include "qwayland-xx-cutouts-v1.h"
-#include <QPlatformSurfaceEvent>
 #include <QQuickWindow>
-#include <QtWaylandClient/QWaylandClientExtension>
-#include <QtWaylandClient/QWaylandClientExtensionTemplate>
 
 namespace Kirigami
 {
 namespace Platform
 {
 
-class CutoutsManager : public QWaylandClientExtensionTemplate<CutoutsManager>, public QtWayland::xx_cutouts_manager_v1
-{
-    Q_OBJECT
-public:
-    CutoutsManager(QObject *parent = nullptr)
-        : QWaylandClientExtensionTemplate<CutoutsManager>(1, parent)
-    {
-    }
-};
-
-class CutoutsWayland : public QObject, public QtWayland::xx_cutouts_v1
-{
-    Q_OBJECT
-public:
-    CutoutsWayland(struct ::xx_cutouts_v1 *object, QObject *parent)
-        : QObject(parent)
-        , QtWayland::xx_cutouts_v1(object)
-    {
-    }
-
-    ~CutoutsWayland() override
-    {
-        if (isQpaAlive()) {
-            destroy();
-        }
-    }
-
-    QList<QRectF> cutouts() const
-    {
-        return m_cutouts;
-    }
-
-Q_SIGNALS:
-    void cutoutsChanged();
-
-protected:
-    void xx_cutouts_v1_cutout_box(int32_t x, int32_t y, int32_t width, int32_t height, uint32_t type, uint32_t id) override
-    {
-        Q_UNUSED(type)
-        Q_UNUSED(id)
-        m_pendingCutouts.append(QRectF(x, y, width, height));
-        qWarning() << "CUTOUT ARRIVED" << m_pendingCutouts;
-    }
-
-    void xx_cutouts_v1_configure() override
-    {
-        m_cutouts = m_pendingCutouts;
-        m_pendingCutouts.clear();
-        Q_EMIT cutoutsChanged();
-    }
-
-private:
-    QList<QRectF> m_cutouts;
-    QList<QRectF> m_pendingCutouts;
-};
-
 CutoutsMargins::CutoutsMargins(QObject *parent)
     : QObject(parent)
     , m_parentItem(qobject_cast<QQuickItem *>(parent))
-    , m_cutoutsManager(new CutoutsManager(this))
 {
-    connect(m_cutoutsManager, &CutoutsManager::activeChanged, this, &CutoutsMargins::setupCutouts);
+    connect(Cutouts::self(), &Cutouts::cutoutsChanged, this, [this](QWindow *window, const QList<QRectF> &cutouts) {
+        if (window != m_window) {
+            return;
+        }
+
+        m_cutouts = cutouts;
+        refreshGeometries();
+    });
 
     if (m_parentItem) {
         connectAncestors(m_parentItem);
@@ -97,90 +38,21 @@ CutoutsMargins::CutoutsMargins(QObject *parent)
 
 CutoutsMargins::~CutoutsMargins() = default;
 
-bool CutoutsMargins::eventFilter(QObject *watched, QEvent *event)
-{
-    if (event->type() == QEvent::PlatformSurface) {
-        QPlatformSurfaceEvent *se = static_cast<QPlatformSurfaceEvent *>(event);
-        if (se->surfaceEventType() == QPlatformSurfaceEvent::SurfaceCreated) {
-            connectToNativeSurface();
-        }
-    }
-
-    return QObject::eventFilter(watched, event);
-}
-
 void CutoutsMargins::handleWindowChanged()
 {
     QWindow *window = m_parentItem ? m_parentItem->window() : nullptr;
     if (window == m_window) {
-        return;
+        //   return;
     }
-
-    if (m_window) {
-        m_window->removeEventFilter(this);
-    }
-
-    if (m_native) {
-        disconnect(m_native, nullptr, this, nullptr);
-        m_native = nullptr;
-    }
-
-    delete m_cutoutsWayland;
-    m_cutoutsWayland = nullptr;
 
     m_window = window;
-
+    m_cutouts.clear();
     if (m_window) {
-        m_window->installEventFilter(this);
-        connectToNativeSurface();
+        Cutouts::self()->registerWindow(m_window);
+        m_cutouts = Cutouts::self()->cutouts(m_window);
     }
 
     refreshGeometries();
-}
-
-void CutoutsMargins::connectToNativeSurface()
-{
-    if (!m_window) {
-        return;
-    }
-
-    auto native = m_window->nativeInterface<QNativeInterface::Private::QWaylandWindow>();
-    if (!native || m_native == native) {
-        return;
-    }
-
-    if (m_native) {
-        disconnect(m_native, nullptr, this, nullptr);
-    }
-    m_native = native;
-
-    connect(native, &QNativeInterface::Private::QWaylandWindow::surfaceRoleCreated, this, &CutoutsMargins::setupCutouts);
-
-    connect(native, &QNativeInterface::Private::QWaylandWindow::surfaceRoleDestroyed, this, [this]() {
-        delete m_cutoutsWayland;
-        m_cutoutsWayland = nullptr;
-        refreshGeometries();
-    });
-
-    // The role may have been created before we connected to the signal.
-    setupCutouts();
-}
-
-void CutoutsMargins::setupCutouts()
-{
-    qWarning() << "SETTING UP";
-    if (m_cutoutsWayland || !m_window || !m_cutoutsManager->isActive()) {
-        return;
-    }
-
-    // The protocol requires the surface to have the xdg_toplevel role.
-    wl_surface *surface = surfaceForWindow(m_window);
-    if (!surface || !xdgToplevelForWindow(m_window)) {
-        return;
-    }
-
-    m_cutoutsWayland = new CutoutsWayland(m_cutoutsManager->get_cutouts(surface), this);
-    connect(m_cutoutsWayland, &CutoutsWayland::cutoutsChanged, this, &CutoutsMargins::refreshGeometries);
 }
 
 qreal CutoutsMargins::leftMargin() const
@@ -246,8 +118,6 @@ void CutoutsMargins::refreshGeometries()
         return;
     }
 
-    m_cutouts = m_cutoutsWayland ? m_cutoutsWayland->cutouts() : QList<QRectF>();
-
     const auto sceneRect = m_parentItem->mapRectToScene(m_parentItem->boundingRect());
     const QPointF center = sceneRect.center();
 
@@ -293,5 +163,4 @@ void CutoutsMargins::refreshGeometries()
 }
 }
 
-#include "cutoutmargins.moc"
 #include "moc_cutoutmargins_p.cpp"
