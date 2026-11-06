@@ -80,6 +80,7 @@ ImageColors::~ImageColors()
 void ImageColors::setSource(const QVariant &source)
 {
     if (m_futureSourceImageData) {
+        m_futureSourceImageData->disconnect(this);
         m_futureSourceImageData->cancel();
         m_futureSourceImageData->deleteLater();
         m_futureSourceImageData = nullptr;
@@ -103,16 +104,20 @@ void ImageColors::setSource(const QVariant &source)
                 }
                 return QImage(sourceString);
             });
-            m_futureSourceImageData = new QFutureWatcher<QImage>(this);
-            connect(m_futureSourceImageData, &QFutureWatcher<QImage>::finished, this, [this, source]() {
-                const QImage image = m_futureSourceImageData->future().result();
-                m_futureSourceImageData->deleteLater();
+            auto watcher = new QFutureWatcher<QImage>(this);
+            m_futureSourceImageData = watcher;
+            connect(watcher, &QFutureWatcher<QImage>::finished, this, [this, watcher, source]() {
+                if (watcher != m_futureSourceImageData || watcher->isCanceled()) {
+                    return;
+                }
+                const QImage image = watcher->future().result();
+                watcher->deleteLater();
                 m_futureSourceImageData = nullptr;
                 setSourceImage(image);
                 m_source = source;
                 Q_EMIT sourceChanged();
             });
-            m_futureSourceImageData->setFuture(future);
+            watcher->setFuture(future);
             return;
         }
     } else {
