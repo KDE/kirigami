@@ -81,6 +81,7 @@ struct ImageData {
     QList<colorStat> m_clusters;
     QList<PaletteSwatch> m_palette;
 
+    bool m_monochrome = false;
     bool m_darkPalette = true;
     QColor m_dominant = Qt::transparent;
     QColor m_dominantContrast;

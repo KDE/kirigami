@@ -113,6 +113,24 @@ TestCase {
         compare(imageColors.palette[0], item.swatch);
     }
 
+    function test_extractMonochrome(): void {
+        const item = createTemporaryObject(colorsComponent, testCase);
+        const { colorArea, imageColors, paletteChangedSpy } = item;
+
+        colorArea.color = Qt.rgba(0.5, 0.5, 0.5);
+        verify(waitForRendering(testCase));
+        imageColors.update();
+        paletteChangedSpy.wait(10000);
+        compare(paletteChangedSpy.count, 1);
+
+        // A monochrome image used to produce an empty palette because of the
+        // chroma filter, which made consumers fall back to the color scheme's
+        // accent color.
+        compare(imageColors.palette.length, 1);
+        compare(imageColors.palette[0].ratio, 1.0);
+        compare(imageColors.palette[0].color.toString(), colorArea.color.toString());
+    }
+
     function test_invisibleWindow(): void {
         // Do not attempt to grabToImage on an item whose window is invisible.
         failOnWarning(/.?/);

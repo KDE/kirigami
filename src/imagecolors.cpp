@@ -380,6 +380,42 @@ ImageData ImageColors::generatePalette(const QImage &sourceImage)
     } // END omp parallel for
 
     if (imageData.m_samples.isEmpty()) {
+        // A fully monochrome image has no pixels that pass the chroma filter
+        // above. Fall back to sampling it as grayscale instead of returning an
+        // empty palette, so that consumers do not have to fall back to the
+        // color scheme's accent color.
+        imageData.m_monochrome = true;
+        r = 0;
+        g = 0;
+        b = 0;
+        c = 0;
+
+        // QImage sources may be full resolution, while item grabs are already
+        // small. Downscale for this second pass to keep monochrome images cheap.
+        const QImage fallbackImage = (sourceImage.width() > 256 || sourceImage.height() > 256)
+            ? sourceImage.scaled(256, 256, Qt::KeepAspectRatio, Qt::SmoothTransformation)
+            : sourceImage;
+
+#pragma omp parallel for collapse(2) reduction(+ : r) reduction(+ : g) reduction(+ : b) reduction(+ : c)
+        for (int x = 0; x < fallbackImage.width(); ++x) {
+            for (int y = 0; y < fallbackImage.height(); ++y) {
+                const QColor sampleColor = fallbackImage.pixelColor(x, y);
+                if (sampleColor.alpha() == 0) {
+                    continue;
+                }
+                const int gray = qGray(sampleColor.rgb());
+                const QRgb rgb = qRgb(gray, gray, gray);
+                ++c;
+                r += qRed(rgb);
+                g += qGreen(rgb);
+                b += qBlue(rgb);
+#pragma omp critical
+                imageData.m_samples << rgb;
+            }
+        } // END omp parallel for
+    }
+
+    if (imageData.m_samples.isEmpty()) {
         return imageData;
     }
 
@@ -413,7 +449,12 @@ ImageData ImageColors::generatePalette(const QImage &sourceImage)
         positionColorMP(imageData.m_samples, imageData.m_clusters, numCore);
     }
 
-    std::sort(imageData.m_clusters.begin(), imageData.m_clusters.end(), [](const ImageData::colorStat &a, const ImageData::colorStat &b) {
+    std::sort(imageData.m_clusters.begin(), imageData.m_clusters.end(), [&imageData](const ImageData::colorStat &a, const ImageData::colorStat &b) {
+        // Monochrome clusters have no chroma, so sort by dominance instead;
+        // otherwise their order would be arbitrary.
+        if (imageData.m_monochrome) {
+            return a.ratio > b.ratio;
+        }
         return getClusterScore(a) > getClusterScore(b);
     });
 
@@ -555,15 +596,20 @@ void ImageColors::postProcess(ImageData &imageData) const
     adjustSaturation(imageData.m_highlight);
     adjustSaturation(imageData.m_average);
 
-    auto adjustLightness = [lowerLum, upperLum](QColor &color) {
+    // Monochrome accents may start as pure black or pure white, so allow enough
+    // steps to bring them into the legible range. Keep the previous limit for
+    // colorful images to avoid changing their accent more than necessary.
+    const short unsigned maxLightnessOperations = imageData.m_monochrome ? 34 : 10;
+
+    auto adjustLightness = [lowerLum, upperLum, maxLightnessOperations](QColor &color) {
         short unsigned colorOperationCount = 0;
         const qreal h = color.hslHueF();
         const qreal s = color.hslSaturationF();
         const qreal l = color.lightnessF();
-        while (ColorUtils::luminance(color.rgb()) < lowerLum && colorOperationCount++ < 10) {
+        while (ColorUtils::luminance(color.rgb()) < lowerLum && colorOperationCount++ < maxLightnessOperations) {
             color.setHslF(h, s, std::min(1.0, l + colorOperationCount * 0.03));
         }
-        while (ColorUtils::luminance(color.rgb()) > upperLum && colorOperationCount++ < 10) {
+        while (ColorUtils::luminance(color.rgb()) > upperLum && colorOperationCount++ < maxLightnessOperations) {
             color.setHslF(h, s, std::max(0.0, l - colorOperationCount * 0.03));
         }
     };
