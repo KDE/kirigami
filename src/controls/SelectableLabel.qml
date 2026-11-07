@@ -287,6 +287,7 @@ QQC2.Control {
             onPressedChanged: if (pressed) {
                 contextMenu.popup();
             }
+            onTapped: {}
         }
 
         QQC2.Menu {

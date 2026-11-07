@@ -190,6 +190,8 @@ T.Popup {
         Platform.Theme.colorSet: root.Platform.Theme.colorSet
         Platform.Theme.inherit: false
 
+        acceptedButtons: Qt.AllButtons
+
         property real scenePressY
         property real lastY
         property bool dragStarted
@@ -207,6 +209,9 @@ T.Popup {
         }
 
         onPressed: mouse => {
+            if (mouse.button !== Qt.LeftButton) {
+                return;
+            }
             scenePressY = mapToItem(null, mouse.x, mouse.y).y;
             lastY = scenePressY;
             dragStarted = false;
@@ -237,6 +242,9 @@ T.Popup {
         }
         onCanceled: restoreAnim.restart();
         onReleased: mouse => {
+            if (mouse.button !== Qt.LeftButton) {
+                return;
+            }
             if (mouseDragBlocker.active) {
                 return;
             }
@@ -380,12 +388,16 @@ T.Popup {
             z: -1
             width:  visualParent?.width ?? 0
             height: (visualParent?.height ?? 0) * 2
+            acceptedButtons: Qt.AllButtons
 
             property var pressPos
             onPressed: mouse => {
                 pressPos = mapToItem(null, mouse.x, mouse.y)
             }
             onReleased: mouse => {
+                if (mouse.button !== Qt.LeftButton) {
+                    return;
+                }
                 // onClicked is emitted even if the mouse was dragged a lot, so we have to check the Manhattan length by hand
                 // https://en.wikipedia.org/wiki/Taxicab_geometry
                 let pos = mapToItem(null, mouse.x, mouse.y)

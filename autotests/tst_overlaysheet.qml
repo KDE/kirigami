@@ -140,4 +140,13 @@ TestCase {
             verify(sheet.implicitHeight >= 400);
         }
     }
+
+    function test_acceptedButtons() {
+        setupWarningsFilter();
+        const sheet = createTemporaryObject(itemContentComponent, this);
+        verify(sheet);
+        const mouseArea = sheet.contentItem as MouseArea;
+        verify(mouseArea);
+        compare(mouseArea.acceptedButtons, Qt.AllButtons);
+    }
 }

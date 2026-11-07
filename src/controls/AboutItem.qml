@@ -399,7 +399,7 @@ Item {
         OverlaySheet {
             id: licenseSheet
             width: Math.min(aboutItem.width - Platform.Units.gridUnit * 2, Platform.Units.gridUnit * 30, bodyLabel.implicitWidth)
-            height: parent.Window.window.height - Platform.Units.gridUnit * 8
+            height: (parent.Window.window ? parent.Window.window.height : 0) - Platform.Units.gridUnit * 8
             property alias text: bodyLabel.text
 
             SelectableLabel {
