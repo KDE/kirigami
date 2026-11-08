@@ -11,55 +11,57 @@ import org.kde.kirigami.layouts as KirigamiLayouts
 /*!
   \qmltype FormEntry
   \inqmlmodule org.kde.kirigami.forms
+  \inherits Item
 
-  \brief The base type of all Form entries.
+  \brief The base type of all \c Form entries.
 
-  This element should always be positioned in a FormGroup.
-  It is The base for all the items living in a Form and will take
-  care of common styling and behaviors, like positioning of titles and subtitles,
-  background and what happens when the item is clicked even outside the contentItem.
+  This element should always be positioned in a \c FormGroup.
+  It is The base for all the items living in a \c Form and will take
+  care of common styling and behaviors, like positioning of titles, text and subtitles,
+  background and what happens when the item is clicked even outside the \c contentItem.
 
   Example usage:
   \qml
   import QtQuick.Controls as QQC
-  import org.kde.kirigami as Kirigami
+  import org.kde.kirigami.forms as Forms
 
-  Kirigami.Form {
-    Kirigami.FormGroup {
+  Forms.Form {
+    Forms.FormGroup {
         title: "Global Settings"
-        Kirigami.FormEntry {
-            contentItem: QQC.CheckBox {
-                text: "Show Sidebar"
-            }
+        Forms.FormEntry {
+            text: "Show Sidebar"
+            contentItem: QQC.CheckBox {}
         }
-        Kirigami.FormEntry {
-            contentItem: QQC.CheckBox {
-                text: "Auto Save"
-            }
+        Forms.FormEntry {
+            text: "Auto Save"
+            contentItem: QQC.CheckBox {}
         }
     }
-    Kirigami.FormGroup {
+    Forms.FormGroup {
         title: "Theme Options"
-        Kirigami.FormEntry {
+        Forms.FormEntry {
             title: "Colors"
-            contentItem: QQC.CheckBox {
-                text: "Dark Theme"
-            }
+            text: "Dark Theme"
+            contentItem: QQC.CheckBox {}
         }
-        Kirigami.FormSeparator {}
-        Kirigami.FormEntry {
-            contentItem: QQC.CheckBox {
-                text: "High Contrast"
-            }
+        Forms.FormSeparator {}
+        Forms.FormEntry {
+            text: "High Contrast"
+            contentItem: QQC.CheckBox {}
         }
         ...
     }
   }
   \endqml
 
-  The form entry will contain a main central contentItem, with optional title,
+  The form entry will contain a main central \c contentItem, with optional title, text
   subtitle, and leading and trailing items, with the following layout:
   \image FormEntryLayout.png
+
+  \note Users should prefer setting the text property of the \c FromEntry even when
+  using a custom \c contentItem as this will automatically be bound to any text property.
+  If the \c contentItem does not have a text property the user should manually bind the
+  \c text property into the appropriate place.
 
   \sa Form
   \sa FormGroup
@@ -76,6 +78,16 @@ Item {
       provide enough explanation on what it does.
      */
     property string title: contentItem?.KirigamiLayouts.FormData.label
+
+    /*!
+      \brief The main text of the \c FormEntry
+
+      By default the \c FormEntry has a label which will show the text. If the
+      \c contentItem is overridden by a control with a \c text property it will automatically
+      be set. If the custom \c contentItem does not have a \c text property the user
+      must manually bind the text value where appropriate.
+     */
+    property string text
 
     /*!
       \brief Extra subtitle.

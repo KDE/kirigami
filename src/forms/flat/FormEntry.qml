@@ -24,6 +24,17 @@ FT.FormEntry {
     //Internal: never rely on this
     readonly property real __textLabelWidth: root.fullWidth ? 0 : label.implicitWidth
 
+    contentItem: QQC.Label {
+        Layout.fillWidth: true
+        visible: text.length > 0
+        text: root.text
+        wrapMode: Text.WordWrap
+    }
+
+    onContentItemChanged: if (contentItem.hasOwnProperty("text") && contentItem.text.length <= 0) {
+        contentItem.text = Qt.binding(() => root.text);
+    }
+
     QQC.Label {
         id: label
         anchors {
@@ -172,6 +183,7 @@ FT.FormEntry {
 
                     spacing: parent.spacing // Ensure that `contentItem.parent.spacing` works
                     implicitWidth: contentItem?.Layout.preferredWidth > 0 ? (contentItem?.Layout.preferredWidth ?? 0) : (contentItem?.implicitWidth ?? 0)
+                    implicitHeight: contentItem?.visible ? contentItem.implicitHeight : 0
                     Layout.fillWidth: contentItem?.Layout.fillWidth ?? false
                     Layout.minimumWidth: contentItem?.Layout.minimumWidth ?? -1
                     Layout.maximumWidth: contentItem?.Layout.maximumWidth ?? -1
