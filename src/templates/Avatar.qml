@@ -43,7 +43,8 @@ T.Control {
       \qmlproperty int Page::icon.height
       \qmlproperty color Page::icon.color
 
-      \brief This holds the icon that represents this page.
+      \brief This holds the placeholder icon to be shown in this Avatar
+        when there is neither \c name nor \c source set.
      */
     property Primitives.IconPropertiesGroup icon: Primitives.IconPropertiesGroup {
         name: "user"
@@ -60,7 +61,6 @@ T.Control {
        \qmlproperty bool asynchronous
        \brief Load the image asynchronously.
        \sa {Image::asynchronous} {Image.asynchronous}
-       \since 1.7.0
      */
     property bool asynchronous: true
 

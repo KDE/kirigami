@@ -11,8 +11,8 @@
 #include <qqmlregistration.h>
 
 /*!
- * \qmltype PagePool
- * \inqmlmodule org.kde.kirigami.controls
+ * \qmltype NameUtils
+ * \inqmlmodule org.kde.kirigami.primitives
  *
  * \brief Some utilities for processing names.
  *
