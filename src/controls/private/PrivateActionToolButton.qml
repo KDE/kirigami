@@ -13,6 +13,7 @@ import QtQuick.Templates as T
 import org.kde.kirigami.controls as KC
 import org.kde.kirigami.layouts as KL
 import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.private as KP
 
 QQC2.ToolButton {
     id: control
@@ -111,7 +112,7 @@ QQC2.ToolButton {
                 let tooltip;
                 // Use the defiend tooltip, otherwise fallback to the action's text where applicable.
                 // If the action has no text (bad!) then display the shortcut if defined. Ultimately display no tooltip in the worst case.
-                if (ka?.tooltip && ka?.tooltip !== ka.text) {
+                if (ka?.tooltip && KP.ActionHelper.hasUsefulToolTip(ka.tooltip, a.text)) {
                     tooltip = ka.tooltip;
                 } else if (a.text && control.display === QQC2.Button.IconOnly) {
                     tooltip = a.text;

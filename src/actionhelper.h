@@ -19,4 +19,5 @@ public:
     Q_INVOKABLE QString nativeKey(const QKeySequence &keys);
     Q_INVOKABLE QList<QKeySequence> alternateShortcuts(QAction *action) const;
     Q_INVOKABLE QString iconName(const QIcon &icon) const;
+    Q_INVOKABLE bool hasUsefulToolTip(const QString &text, const QString &toolTip) const;
 };
