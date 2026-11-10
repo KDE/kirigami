@@ -353,7 +353,7 @@ Item {
                     contentItem:  QQC2.Label {
                         wrapMode: Text.WordWrap
                         id: libraries
-                        text: delegate.modelData
+                        text: infoDelegate.modelData
                     }
                 }
             }
@@ -364,7 +364,7 @@ Item {
                     required property var modelData
                     contentItem:  QQC2.Label {
                         wrapMode: Text.WordWrap
-                        text: "%1 %2".arg(delegate.modelData.name, delegate.modelData.version)
+                        text: compDelegate.modelData.name + " " + compDelegate.modelData.version
                     }
                 }
             }
