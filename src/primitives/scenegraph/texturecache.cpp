@@ -16,7 +16,7 @@ std::shared_ptr<QSGTexture> TextureCache::loadTexture(QQuickWindow *window, cons
         return nullptr;
     }
 
-    auto id = qMakePair(image.cacheKey(), window);
+    auto id = std::make_pair(image.cacheKey(), window);
     std::shared_ptr<QSGTexture> texture = s_cache.value(id).lock();
 
     if (!texture) {

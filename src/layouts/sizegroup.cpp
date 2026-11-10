@@ -43,7 +43,7 @@ void SizeGroup::connectItem(QQuickItem *item)
     auto conn2 = connect(item, &QQuickItem::implicitHeightChanged, this, [this]() {
         adjustItems(Mode::Height);
     });
-    m_connections[item] = qMakePair(conn1, conn2);
+    m_connections[item] = std::make_pair(conn1, conn2);
     adjustItems(m_mode);
 }
 

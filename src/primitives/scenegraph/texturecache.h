@@ -8,6 +8,8 @@
 
 #include <QSGTexture>
 
+#include <utility>
+
 class TextureCache
 {
 public:
@@ -25,5 +27,5 @@ public:
     static std::shared_ptr<QSGTexture> loadTexture(QQuickWindow *window, const QImage &image);
 
 private:
-    inline static QHash<QPair<qint64, QWindow *>, std::weak_ptr<QSGTexture>> s_cache;
+    inline static QHash<std::pair<qint64, QWindow *>, std::weak_ptr<QSGTexture>> s_cache;
 };

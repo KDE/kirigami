@@ -8,11 +8,12 @@
 
 #include <QMap>
 #include <QObject>
-#include <QPair>
 #include <QPointer>
 #include <QQmlListProperty>
 #include <QQmlParserStatus>
 #include <QQuickItem>
+
+#include <utility>
 
 /*!
  * \qmltype SizeGroup
@@ -39,7 +40,7 @@ public:
 private:
     Mode m_mode = None;
     QList<QPointer<QQuickItem>> m_items;
-    QMap<QQuickItem *, QPair<QMetaObject::Connection, QMetaObject::Connection>> m_connections;
+    QMap<QQuickItem *, std::pair<QMetaObject::Connection, QMetaObject::Connection>> m_connections;
 
 public:
     /*!
