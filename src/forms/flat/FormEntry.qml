@@ -16,8 +16,11 @@ import org.kde.kirigami.forms.private.templates as FT
 FT.FormEntry {
     id: root
 
-    implicitWidth: Math.max(contentItemWrapper.implicitWidth +  Platform.Units.largeSpacing * 2, Platform.Units.gridUnit * 20 +  Platform.Units.largeSpacing * 2)
+    implicitWidth: Math.max(contentItemWrapper.implicitWidth + __sideItemsWidth + Platform.Units.largeSpacing * 2, Platform.Units.gridUnit * 20 + Platform.Units.largeSpacing * 2)
     implicitHeight: mainLayout.implicitHeight
+
+    readonly property real __sideItemsWidth: (root.leadingItems.length > 0 ? leadingItems.implicitWidth + Platform.Units.smallSpacing : 0)
+        + (root.trailingItems.length > 0 ? trailingItems.implicitWidth + Platform.Units.smallSpacing : 0)
 
     Layout.fillWidth: true
 
