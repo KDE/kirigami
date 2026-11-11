@@ -201,13 +201,13 @@ msgctxt "NavigationButtons|"
 msgid "Navigate Forward"
 msgstr "Ба пеш паймудан"
 
-#: controls/private/PrivateActionToolButton.qml:119
+#: controls/private/PrivateActionToolButton.qml:120
 #, qt-format
 msgctxt "@info:tooltip %1 is a keyboard shorcut|"
 msgid "Trigger this action with %1"
 msgstr ""
 
-#: controls/private/PrivateActionToolButton.qml:126
+#: controls/private/PrivateActionToolButton.qml:127
 #, qt-format
 msgctxt ""
 "@info:tooltip %1 is the tooltip of an action, %2 is its keyboard shorcut|"
@@ -235,7 +235,7 @@ msgctxt "SearchField|"
 msgid "Clear search"
 msgstr ""
 
-#: controls/SelectableLabel.qml:297
+#: controls/SelectableLabel.qml:298
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Copyright"
@@ -243,7 +243,7 @@ msgctxt "SelectableLabel|"
 msgid "Copy"
 msgstr "Ҳуқуқи муаллиф"
 
-#: controls/SelectableLabel.qml:310
+#: controls/SelectableLabel.qml:311
 msgctxt "SelectableLabel|"
 msgid "Select All"
 msgstr ""
@@ -322,7 +322,7 @@ msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr ""
 
-#: templates/OverlaySheet.qml:309
+#: templates/OverlaySheet.qml:317
 msgctxt "OverlaySheet|@action:button close dialog"
 msgid "Close"
 msgstr ""

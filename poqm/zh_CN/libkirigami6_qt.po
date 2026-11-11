@@ -168,13 +168,13 @@ msgctxt "NavigationButtons|"
 msgid "Navigate Forward"
 msgstr "前进"
 
-#: controls/private/PrivateActionToolButton.qml:119
+#: controls/private/PrivateActionToolButton.qml:120
 #, qt-format
 msgctxt "@info:tooltip %1 is a keyboard shorcut|"
 msgid "Trigger this action with %1"
 msgstr "使用 %1 触发此操作"
 
-#: controls/private/PrivateActionToolButton.qml:126
+#: controls/private/PrivateActionToolButton.qml:127
 #, qt-format
 msgctxt ""
 "@info:tooltip %1 is the tooltip of an action, %2 is its keyboard shorcut|"
@@ -196,12 +196,12 @@ msgctxt "SearchField|"
 msgid "Clear search"
 msgstr "清除搜索内容"
 
-#: controls/SelectableLabel.qml:297
+#: controls/SelectableLabel.qml:298
 msgctxt "SelectableLabel|"
 msgid "Copy"
 msgstr "复制"
 
-#: controls/SelectableLabel.qml:310
+#: controls/SelectableLabel.qml:311
 msgctxt "SelectableLabel|"
 msgid "Select All"
 msgstr "全部选择"
@@ -280,7 +280,7 @@ msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "打开抽屉栏"
 
-#: templates/OverlaySheet.qml:309
+#: templates/OverlaySheet.qml:317
 msgctxt "OverlaySheet|@action:button close dialog"
 msgid "Close"
 msgstr "关闭"

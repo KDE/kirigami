@@ -174,13 +174,13 @@ msgctxt "NavigationButtons|"
 msgid "Navigate Forward"
 msgstr "Naviger frem"
 
-#: controls/private/PrivateActionToolButton.qml:119
+#: controls/private/PrivateActionToolButton.qml:120
 #, qt-format
 msgctxt "@info:tooltip %1 is a keyboard shorcut|"
 msgid "Trigger this action with %1"
 msgstr "Utløs denne handlingen med %1"
 
-#: controls/private/PrivateActionToolButton.qml:126
+#: controls/private/PrivateActionToolButton.qml:127
 #, qt-format
 msgctxt ""
 "@info:tooltip %1 is the tooltip of an action, %2 is its keyboard shorcut|"
@@ -202,12 +202,12 @@ msgctxt "SearchField|"
 msgid "Clear search"
 msgstr "Tøm søkefelt"
 
-#: controls/SelectableLabel.qml:297
+#: controls/SelectableLabel.qml:298
 msgctxt "SelectableLabel|"
 msgid "Copy"
 msgstr "Kopier"
 
-#: controls/SelectableLabel.qml:310
+#: controls/SelectableLabel.qml:311
 msgctxt "SelectableLabel|"
 msgid "Select All"
 msgstr "Merk alle"
@@ -286,7 +286,7 @@ msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "Åpne skuff"
 
-#: templates/OverlaySheet.qml:309
+#: templates/OverlaySheet.qml:317
 msgctxt "OverlaySheet|@action:button close dialog"
 msgid "Close"
 msgstr "Lukk"

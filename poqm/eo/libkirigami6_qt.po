@@ -193,13 +193,13 @@ msgctxt "NavigationButtons|"
 msgid "Navigate Forward"
 msgstr "Navigi Antaŭen"
 
-#: controls/private/PrivateActionToolButton.qml:119
+#: controls/private/PrivateActionToolButton.qml:120
 #, qt-format
 msgctxt "@info:tooltip %1 is a keyboard shorcut|"
 msgid "Trigger this action with %1"
 msgstr ""
 
-#: controls/private/PrivateActionToolButton.qml:126
+#: controls/private/PrivateActionToolButton.qml:127
 #, fuzzy, qt-format
 #| msgctxt "AboutItem|"
 #| msgid "%1 (%2)"
@@ -223,12 +223,12 @@ msgctxt "SearchField|"
 msgid "Clear search"
 msgstr "Klara serĉo"
 
-#: controls/SelectableLabel.qml:297
+#: controls/SelectableLabel.qml:298
 msgctxt "SelectableLabel|"
 msgid "Copy"
 msgstr "Kopii"
 
-#: controls/SelectableLabel.qml:310
+#: controls/SelectableLabel.qml:311
 msgctxt "SelectableLabel|"
 msgid "Select All"
 msgstr "Elekti Ĉiujn"
@@ -307,7 +307,7 @@ msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "Malfermi tirkeston"
 
-#: templates/OverlaySheet.qml:309
+#: templates/OverlaySheet.qml:317
 msgctxt "OverlaySheet|@action:button close dialog"
 msgid "Close"
 msgstr "Fermi"

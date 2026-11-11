@@ -169,13 +169,13 @@ msgctxt "NavigationButtons|"
 msgid "Navigate Forward"
 msgstr "進む"
 
-#: controls/private/PrivateActionToolButton.qml:119
+#: controls/private/PrivateActionToolButton.qml:120
 #, qt-format
 msgctxt "@info:tooltip %1 is a keyboard shorcut|"
 msgid "Trigger this action with %1"
 msgstr "%1 でこの操作を実行"
 
-#: controls/private/PrivateActionToolButton.qml:126
+#: controls/private/PrivateActionToolButton.qml:127
 #, qt-format
 msgctxt ""
 "@info:tooltip %1 is the tooltip of an action, %2 is its keyboard shorcut|"
@@ -197,12 +197,12 @@ msgctxt "SearchField|"
 msgid "Clear search"
 msgstr "検索欄をクリア"
 
-#: controls/SelectableLabel.qml:297
+#: controls/SelectableLabel.qml:298
 msgctxt "SelectableLabel|"
 msgid "Copy"
 msgstr "コピー"
 
-#: controls/SelectableLabel.qml:310
+#: controls/SelectableLabel.qml:311
 msgctxt "SelectableLabel|"
 msgid "Select All"
 msgstr "すべて選択"
@@ -281,7 +281,7 @@ msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "ドロワーを開く"
 
-#: templates/OverlaySheet.qml:309
+#: templates/OverlaySheet.qml:317
 msgctxt "OverlaySheet|@action:button close dialog"
 msgid "Close"
 msgstr "閉じる"

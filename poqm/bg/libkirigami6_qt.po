@@ -167,13 +167,13 @@ msgctxt "NavigationButtons|"
 msgid "Navigate Forward"
 msgstr "Навигиране напред"
 
-#: controls/private/PrivateActionToolButton.qml:119
+#: controls/private/PrivateActionToolButton.qml:120
 #, qt-format
 msgctxt "@info:tooltip %1 is a keyboard shorcut|"
 msgid "Trigger this action with %1"
 msgstr "Задействане на това действие с  %1"
 
-#: controls/private/PrivateActionToolButton.qml:126
+#: controls/private/PrivateActionToolButton.qml:127
 #, qt-format
 msgctxt ""
 "@info:tooltip %1 is the tooltip of an action, %2 is its keyboard shorcut|"
@@ -195,12 +195,12 @@ msgctxt "SearchField|"
 msgid "Clear search"
 msgstr "Изчистване на търсенето"
 
-#: controls/SelectableLabel.qml:297
+#: controls/SelectableLabel.qml:298
 msgctxt "SelectableLabel|"
 msgid "Copy"
 msgstr "Копиране"
 
-#: controls/SelectableLabel.qml:310
+#: controls/SelectableLabel.qml:311
 msgctxt "SelectableLabel|"
 msgid "Select All"
 msgstr "Избиране на всичко"
@@ -279,7 +279,7 @@ msgctxt "OverlayDrawer|"
 msgid "Open drawer"
 msgstr "Отваряне на чекмеджето"
 
-#: templates/OverlaySheet.qml:309
+#: templates/OverlaySheet.qml:317
 msgctxt "OverlaySheet|@action:button close dialog"
 msgid "Close"
 msgstr "Затваряне"
