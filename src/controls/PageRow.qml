@@ -692,10 +692,12 @@ QT.Control {
 
     Shortcut {
         sequences: [ StandardKey.Back ]
+        enabled: root.layers.depth > 1 || root.currentIndex > 0
         onActivated: root.goBack()
     }
     Shortcut {
         sequences: [ StandardKey.Forward ]
+        enabled: root.currentIndex < root.depth - 1
         onActivated: root.goForward()
     }
 
