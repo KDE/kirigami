@@ -6,6 +6,7 @@
  */
 
 import QtQuick
+import QtQuick.Controls as QQC2
 import org.kde.kirigami.platform as Platform
 import org.kde.kirigami.primitives as Primitives
 /*!
@@ -15,6 +16,9 @@ import org.kde.kirigami.primitives as Primitives
   \brief A handle to reorder items in a view.
 
   Implements a drag handle supposed to be in items in ListViews to reorder items.
+
+  The handle is also keyboard operable: focus it, press Space to enter reorder
+  mode, then use the Up and Down arrow keys to move the item.
 
   The ListView must visualize a model which supports item reordering,
   such as ListModel.move() or QAbstractItemModel  instances with moveRows() correctly implemented.
@@ -62,10 +66,18 @@ import org.kde.kirigami.primitives as Primitives
             }
         }
         //this is optional to make list items animated when reordered
-        moveDisplaced: Transition {
-            YAnimator {
+        move: Transition {
+            NumberAnimation {
+                property: "y"
                 duration: Kirigami.Units.longDuration
-                easing.type: Easing.InOutQuad
+                easing.type: Easing.InOutCubic
+            }
+        }
+        moveDisplaced: Transition {
+            NumberAnimation {
+                property: "y"
+                duration: Kirigami.Units.longDuration
+                easing.type: Easing.InOutCubic
             }
         }
         delegate: Loader {
@@ -76,7 +88,7 @@ import org.kde.kirigami.primitives as Primitives
     ...
   \endcode
  */
-Item {
+QQC2.ToolButton {
     id: root
 
     /*!
@@ -95,6 +107,18 @@ Item {
       \brief This property holds the fact that we are doing incremental move requests or not.
      */
     property bool incrementalMoves: true
+
+    /*!
+      \brief Whether the handle is in keyboard reorder mode.
+
+      Give the handle focus and press Space to enter this mode; the Up and Down
+      arrow keys then move the item. Escape or moving focus away leaves it.
+
+      While this mode is active, the handle renders as a checked ToolButton.
+
+      \since 6.26
+     */
+    property alias reorderModeActive: root.checked
 
     /*!
       \brief This property holds the fact that the handle is being dragged.
@@ -127,8 +151,73 @@ Item {
      */
     signal dropped(int oldIndex, int newIndex)
 
-    implicitWidth: Platform.Units.iconSizes.smallMedium
-    implicitHeight: Platform.Units.iconSizes.smallMedium
+    text: qsTr("Reorder")
+    display: QQC2.AbstractButton.IconOnly
+    checkable: true
+    hoverEnabled: false
+    padding: Platform.Units.smallSpacing
+    icon.width: Platform.Units.iconSizes.smallMedium
+    icon.height: Platform.Units.iconSizes.smallMedium
+
+    // Custom contentItem so only the icon is dimmed until the list item is hovered;
+    // dimming the whole button would also fade its focus and checked visuals.
+    // icon.name stays unset, otherwise styles that paint the icon in the background draw it twice.
+    contentItem: Primitives.Icon {
+        implicitWidth: root.icon.width
+        implicitHeight: root.icon.height
+        source: "handle-sort"
+        opacity: mouseArea.pressed || root.activeFocus || root.checked || (!Platform.Settings.tabletMode && root.listItem?.hovered) ? 1 : 0.6
+    }
+
+    Accessible.role: Accessible.Grip
+    Accessible.checkable: true
+    Accessible.checked: root.reorderModeActive
+    Accessible.description: root.reorderModeActive ? QQC2.ToolTip.text : qsTr("Press Space to start reordering this item")
+    Accessible.onToggleAction: root.reorderModeActive = !root.reorderModeActive
+    Accessible.onDecreaseAction: _internal.moveBy(-1)
+    Accessible.onIncreaseAction: _internal.moveBy(1)
+
+    QQC2.ToolTip.text: qsTr("Arrow Up/Down keys to move")
+    // Show immediately, since the tooltip only appears when the user explicitly enters reorder mode.
+    QQC2.ToolTip.visible: root.reorderModeActive
+
+    onActiveFocusChanged: if (!activeFocus && !_internal.moving) {
+        root.reorderModeActive = false;
+    }
+
+    Keys.onEscapePressed: event => {
+        if (root.reorderModeActive) {
+            root.reorderModeActive = false;
+        } else {
+            event.accepted = false;
+        }
+    }
+    Keys.onUpPressed: event => event.accepted = _internal.moveBy(-1)
+    Keys.onDownPressed: event => event.accepted = _internal.moveBy(1)
+
+    QtObject {
+        id: _internal
+
+        property bool moving: false
+
+        function moveBy(delta: int): bool {
+            if (!root.reorderModeActive || !root.listView) {
+                return false;
+            }
+            const from = index;
+            const to = from + delta;
+            if (from < 0 || to < 0 || to >= root.listView.count) {
+                return true;
+            }
+
+            _internal.moving = true;
+            root.moveRequested(from, to);
+            root.listView.positionViewAtIndex(to, ListView.Contain);
+            root.forceActiveFocus(Qt.TabFocusReason);
+            _internal.moving = false;
+            return true;
+        }
+    }
 
     MouseArea {
         id: mouseArea
@@ -156,13 +245,8 @@ Item {
             }
         }
 
-        Primitives.Icon {
+        QtObject {
             id: internal
-
-            anchors.fill: parent
-
-            source: "handle-sort"
-            opacity: mouseArea.pressed || (!Platform.Settings.tabletMode && root.listItem.hovered) ? 1 : 0.6
 
             property real startY
             property real mouseDownY

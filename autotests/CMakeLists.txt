@@ -53,6 +53,7 @@ kirigami_add_tests(
     tst_inlinemessage.qml
     tst_inlineviewheader.qml
     tst_keynavigation.qml
+    tst_listitemdraghandle.qml
     tst_listskeynavigation.qml
     tst_menudialog.qml
     tst_mnemonicdata.qml
@@ -98,6 +99,7 @@ set_tests_properties(
 )
 
 set_tests_properties(
+    tst_listitemdraghandle.qml
     tst_navigationtabbar.qml
     wheelhandler/tst_scrolling.qml
 
