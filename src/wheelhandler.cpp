@@ -95,7 +95,7 @@ WheelHandler::WheelHandler(QObject *parent)
 
     m_wheelScrollingTimer.setSingleShot(true);
     m_wheelScrollingTimer.setInterval(m_wheelScrollingDuration);
-    m_wheelScrollingTimer.callOnTimeout([this]() {
+    m_wheelScrollingTimer.callOnTimeout(this, [this]() {
         setScrolling(false);
     });
 

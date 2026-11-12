@@ -191,7 +191,7 @@ void ShaderNode::setTexture(TextureChannel channel, QSGTextureProvider *provider
         return;
     }
 
-    auto connection = QObject::connect(provider, &QSGTextureProvider::textureChanged, [this]() {
+    auto connection = QObject::connect(provider, &QSGTextureProvider::textureChanged, provider, [this]() {
         markDirty(QSGNode::DirtyMaterial);
     });
 
