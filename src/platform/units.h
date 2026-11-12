@@ -332,6 +332,30 @@ class KIRIGAMIPLATFORM_EXPORT Units : public QObject
      */
     Q_PROPERTY(qreal cornerRadius READ cornerRadius NOTIFY cornerRadiusChanged FINAL)
 
+    /*!
+     * \qmlproperty real Units::maximumParagraphWidth
+     *
+     * A suggested maximum width for page content to have, in order to prevent long lines of text that are more difficult to read.
+     *
+     * This is defined as the width of 80 characters of text (specifically '0') at the standard font size.
+     *
+     * See \l {https://develop.kde.org/hig/text_and_labels/#word-ordering-and-length}
+     *
+     * \since TODO
+     */
+    /*!
+     * \property Kirigami::Platform::Units::maximumParagraphWidth
+     *
+     * A suggested maximum width for page content to have, in order to prevent long lines of text that are more difficult to read.
+     *
+     * This is defined as the width of 80 characters of text (specifically '0') at the standard font size.
+     *
+     * See \l {https://develop.kde.org/hig/text_and_labels/#word-ordering-and-length}
+     *
+     * \since TODO
+     */
+    Q_PROPERTY(int maximumParagraphWidth READ maximumParagraphWidth NOTIFY maximumParagraphWidthChanged FINAL)
+
 public:
     ~Units() override;
 
@@ -370,6 +394,9 @@ public:
     qreal cornerRadius() const;
     void setcornerRadius(qreal cornerRadius);
 
+    int maximumParagraphWidth() const;
+    void setMaximumParagraphWidth(int size);
+
     IconSizes *iconSizes() const;
 
     static Units *create(QQmlEngine *qmlEngine, QJSEngine *jsEngine);
@@ -387,6 +414,7 @@ Q_SIGNALS:
     void toolTipDelayChanged();
     void wheelScrollLinesChanged();
     void cornerRadiusChanged();
+    void maximumParagraphWidthChanged();
 
 protected:
     explicit Units(QObject *parent = nullptr);

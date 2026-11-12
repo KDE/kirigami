@@ -44,6 +44,7 @@ public:
         , humanMoment(2000)
         , toolTipDelay(700)
         , cornerRadius(5)
+        , maximumParagraphWidth(fontMetrics.horizontalAdvance(QString(80, u'0')))
         , iconSizes(new IconSizes(units))
     {
     }
@@ -52,13 +53,10 @@ public:
     // TextMetrics uses QFontMetricsF internally, so this should do the same
     QFontMetricsF fontMetrics;
 
-    // units
     int gridUnit;
     int smallSpacing;
     int mediumSpacing;
     int largeSpacing;
-
-    // durations
     int veryLongDuration;
     int longDuration;
     int shortDuration;
@@ -66,6 +64,7 @@ public:
     int humanMoment;
     int toolTipDelay;
     qreal cornerRadius;
+    int maximumParagraphWidth;
 
     IconSizes *const iconSizes;
 
@@ -251,6 +250,22 @@ void Units::setcornerRadius(qreal cornerRadius)
     Q_EMIT cornerRadiusChanged();
 }
 
+int Units::maximumParagraphWidth() const
+{
+    return d->maximumParagraphWidth;
+}
+
+void Units::setMaximumParagraphWidth(int size)
+{
+    if (d->maximumParagraphWidth == size) {
+        return;
+    }
+
+    d->maximumParagraphWidth = size;
+    d->customUnitsSet = true;
+    Q_EMIT maximumParagraphWidthChanged();
+}
+
 Units *Units::create(QQmlEngine *qmlEngine, [[maybe_unused]] QJSEngine *jsEngine)
 {
 #ifndef KIRIGAMI_BUILD_TYPE_STATIC
@@ -278,7 +293,10 @@ bool Units::eventFilter([[maybe_unused]] QObject *watched, QEvent *event)
             return false;
         }
 
+        d->maximumParagraphWidth = d->fontMetrics.horizontalAdvance(QString(80, u'0'));
+
         Q_EMIT d->iconSizes->sizeForLabelsChanged();
+        Q_EMIT maximumParagraphWidthChanged();
     }
     return false;
 }
