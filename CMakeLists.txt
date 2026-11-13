@@ -127,6 +127,8 @@ ecm_set_disabled_deprecation_versions(
     KF 6.27.0
 )
 
+add_compile_definitions(QT_ENABLE_STRICT_MODE_UP_TO=0x060A00) # 6.10
+
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     # link time optimization has been observed to break colors. Force-disable it.
     # Before undoing this make double sure the lockscreen
