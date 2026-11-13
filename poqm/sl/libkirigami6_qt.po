@@ -132,6 +132,21 @@ msgctxt "GlobalDrawer|"
 msgid "Open Sidebar"
 msgstr "Odpri stransko letvico"
 
+#: controls/ListItemDragHandle.qml:154
+msgctxt "ListItemDragHandle|"
+msgid "Reorder"
+msgstr ""
+
+#: controls/ListItemDragHandle.qml:175
+msgctxt "ListItemDragHandle|"
+msgid "Press Space to start reordering this item"
+msgstr ""
+
+#: controls/ListItemDragHandle.qml:180
+msgctxt "ListItemDragHandle|"
+msgid "Arrow Up/Down keys to move"
+msgstr ""
+
 #: controls/LoadingPlaceholder.qml:59
 msgctxt "LoadingPlaceholder|"
 msgid "Loading…"
