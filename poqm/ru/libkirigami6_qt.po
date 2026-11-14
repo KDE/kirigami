@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2026-08-31 13:28+0300\n"
-"Last-Translator: Olesya Gerasimenko <goa@altlinux.org>\n"
+"PO-Revision-Date: 2026-11-13 07:44+0200\n"
+"Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Basealt Translation Team\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -133,17 +133,17 @@ msgstr "Открыть боковую панель"
 #: controls/ListItemDragHandle.qml:154
 msgctxt "ListItemDragHandle|"
 msgid "Reorder"
-msgstr ""
+msgstr "Изменить порядок"
 
 #: controls/ListItemDragHandle.qml:175
 msgctxt "ListItemDragHandle|"
 msgid "Press Space to start reordering this item"
-msgstr ""
+msgstr "Нажмите клавишу «Пробел», чтобы начать перемещение этого элемента"
 
 #: controls/ListItemDragHandle.qml:180
 msgctxt "ListItemDragHandle|"
 msgid "Arrow Up/Down keys to move"
-msgstr ""
+msgstr "Перемещение — клавишами со стрелками вверх и вниз"
 
 #: controls/LoadingPlaceholder.qml:59
 msgctxt "LoadingPlaceholder|"

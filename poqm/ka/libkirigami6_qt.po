@@ -11,7 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Qt-Contexts: true\n"
-"X-Generator: Poedit 3.9\n"
+"X-Generator: Poedit 3.10\n"
 
 #: controls/AboutItem.qml:175
 #, qt-format
@@ -129,17 +129,17 @@ msgstr "გვერდითი ზოლის გახსნა"
 #: controls/ListItemDragHandle.qml:154
 msgctxt "ListItemDragHandle|"
 msgid "Reorder"
-msgstr ""
+msgstr "გადალაგება"
 
 #: controls/ListItemDragHandle.qml:175
 msgctxt "ListItemDragHandle|"
 msgid "Press Space to start reordering this item"
-msgstr ""
+msgstr "ამ ელემენტის გადალაგების დასაწყებად დააჭირეთ ღილაკს 'ჰარე'"
 
 #: controls/ListItemDragHandle.qml:180
 msgctxt "ListItemDragHandle|"
 msgid "Arrow Up/Down keys to move"
-msgstr ""
+msgstr "გადაადგილებისთვის ისარი დაბლა/მაღლა გამოყენება"
 
 #: controls/LoadingPlaceholder.qml:59
 msgctxt "LoadingPlaceholder|"

@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2026-08-06 20:15+0300\n"
+"PO-Revision-Date: 2026-11-13 19:01+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 26.04.2\n"
+"X-Generator: Lokalize 26.08.2\n"
 "X-Qt-Contexts: true\n"
 "X-POOTLE-MTIME: 1497529432.000000\n"
 
@@ -131,17 +131,17 @@ msgstr "Kenar çubuğunu aç"
 #: controls/ListItemDragHandle.qml:154
 msgctxt "ListItemDragHandle|"
 msgid "Reorder"
-msgstr ""
+msgstr "Yeniden Diz"
 
 #: controls/ListItemDragHandle.qml:175
 msgctxt "ListItemDragHandle|"
 msgid "Press Space to start reordering this item"
-msgstr ""
+msgstr "Bu ögenin sırasını yeniden ayarlamak için “Boşluk” düğmesine basın"
 
 #: controls/ListItemDragHandle.qml:180
 msgctxt "ListItemDragHandle|"
 msgid "Arrow Up/Down keys to move"
-msgstr ""
+msgstr "Hareket ettirmek için “Yukarı/Aşağı Ok” düğmelerini kullanın"
 
 #: controls/LoadingPlaceholder.qml:59
 msgctxt "LoadingPlaceholder|"

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libkirigami2plugin_qt\n"
-"PO-Revision-Date: 2026-08-06 08:35+0300\n"
+"PO-Revision-Date: 2026-11-13 09:12+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -136,17 +136,17 @@ msgstr "Відкрити бічну панель"
 #: controls/ListItemDragHandle.qml:154
 msgctxt "ListItemDragHandle|"
 msgid "Reorder"
-msgstr ""
+msgstr "Перевпорядкування"
 
 #: controls/ListItemDragHandle.qml:175
 msgctxt "ListItemDragHandle|"
 msgid "Press Space to start reordering this item"
-msgstr ""
+msgstr "Натисніть пробіл, щоб розпочати перевпорядкування цього пункту"
 
 #: controls/ListItemDragHandle.qml:180
 msgctxt "ListItemDragHandle|"
 msgid "Arrow Up/Down keys to move"
-msgstr ""
+msgstr "Клавіші зі стрілками вгору і вниз для пересування"
 
 #: controls/LoadingPlaceholder.qml:59
 msgctxt "LoadingPlaceholder|"
