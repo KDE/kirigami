@@ -46,8 +46,6 @@ QStringList StyleSelector::styleChain()
 #if !defined(Q_OS_ANDROID) && !defined(Q_OS_IOS)
         u"org.kde.desktop.plasma"_s,
         u"org.kde.desktop"_s,
-#else
-        u"Material"_s,
 #endif
     };
 
