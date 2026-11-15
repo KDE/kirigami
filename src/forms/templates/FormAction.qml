@@ -57,12 +57,12 @@ Forms.FormEntry { // Needs to be instantiated from the global forms import in or
     required property T.Action action
 
     /*!
-      An icon to be displayed on the rightof this FormEntry which represents what kind of
+      An icon to be displayed on the right of this FormEntry which represents what kind of
       action this is. By default is "go-next-symbolic", which suggests this action is opening something
-      else or that is going to replace the PAge it's in.
+      else or that is going to replace the Page it's in.
      */
     readonly property Primitives.IconPropertiesGroup triggerIcon: Primitives.IconPropertiesGroup {
-        name: "go-next-symbolic"
+        name: Qt.application.layoutDirection == Qt.RightToLeft ? "go-next-rtl-symbolic" : "go-next-symbolic"
     }
 
     onClicked: action.trigger(root)
