@@ -128,19 +128,22 @@ msgid "Open Sidebar"
 msgstr "Отваряне на страничната лента"
 
 #: controls/ListItemDragHandle.qml:154
+#, fuzzy
 msgctxt "ListItemDragHandle|"
 msgid "Reorder"
-msgstr ""
+msgstr "Преподреждане"
 
 #: controls/ListItemDragHandle.qml:175
+#, fuzzy
 msgctxt "ListItemDragHandle|"
 msgid "Press Space to start reordering this item"
-msgstr ""
+msgstr "Натискане на Space за започване на пренареждане на този елемент"
 
 #: controls/ListItemDragHandle.qml:180
+#, fuzzy
 msgctxt "ListItemDragHandle|"
 msgid "Arrow Up/Down keys to move"
-msgstr ""
+msgstr "Клавиши Стрелка нагоре/надолу за преместване"
 
 #: controls/LoadingPlaceholder.qml:59
 msgctxt "LoadingPlaceholder|"
