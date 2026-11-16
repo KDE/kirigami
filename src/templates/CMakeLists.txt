@@ -25,6 +25,7 @@ ecm_target_qml_sources(KirigamiTemplates SOURCES
     OverlayDrawer.qml
     OverlaySheet.qml
     InlineViewHeader.qml
+    SegmentedControl.qml
 )
 
 ecm_target_qml_sources(KirigamiTemplates PRIVATE PATH private SOURCES
