@@ -59,6 +59,7 @@ ecm_target_qml_sources(KirigamiControls SOURCES
     PlaceholderMessage.qml
     ScrollablePage.qml
     SearchField.qml
+    SegmentedControl.qml
     SelectableLabel.qml
     SwipeListItem.qml
     UrlButton.qml
