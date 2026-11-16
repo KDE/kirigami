@@ -112,6 +112,7 @@ void StyleHints::setIconSource(const QUrl &newIconSource)
     }
 
     d->iconSource = newIconSource;
+    propertyChanged(ChangedProperty::IconSource);
     Q_EMIT iconSourceChanged();
 }
 
