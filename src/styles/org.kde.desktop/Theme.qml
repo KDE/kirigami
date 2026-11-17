@@ -24,11 +24,11 @@ Kirigami.BasicThemeDefinition {
     hoverColor: palette.highlight
     focusColor: palette.highlight
     negativeTextColor: "#DA4453"
-    negativeBackgroundColor: "#DA4453"
+    negativeBackgroundColor: "#F5DDDF"
     neutralTextColor: "#F67400"
-    neutralBackgroundColor: "#F67400"
+    neutralBackgroundColor: "#FBE1D2"
     positiveTextColor: "#27AE60"
-    positiveBackgroundColor: "#27AE60"
+    positiveBackgroundColor: "#ADF6CA"
 
     buttonTextColor: palette.buttonText
     buttonBackgroundColor: palette.button
