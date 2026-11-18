@@ -19,4 +19,7 @@
     </ul>
     <p>Keep in mind to XML-escape characters, and that this is not HTML markup.</p>
   </description>
+  <releases>
+    <release version="6.24.1" date="2026-11-25"/>
+  </releases>
 </component>
