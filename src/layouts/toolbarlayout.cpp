@@ -693,73 +693,58 @@ void ToolBarLayoutPrivate::maybeHideDelegate(int index, qreal &currentWidth, qre
         return;
     }
 
-    if (currentWidth + delegate->width() < totalWidth && (firstHiddenIndex < 0 || index < firstHiddenIndex)) {
-        // If the delegate is fully visible and we have not already hidden
-        // actions, do nothing.
+    if (currentWidth + delegate->width() <= totalWidth && (delegate->isKeepVisible() || firstHiddenIndex < 0 || index < firstHiddenIndex)) {
         return;
     }
 
     if (delegate->isKeepVisible()) {
-        // If the action is marked as KeepVisible, we need to try our best to
-        // keep it in view. If the full size delegate does not fit, we try the
-        // icon-only delegate. If that also does not fit, try and find other
-        // actions to hide. Finally, if that also fails, we will hide the
-        // delegate.
-        if (currentWidth + delegate->iconWidth() > totalWidth) {
-            // First, hide any earlier actions that are not marked as KeepVisible.
-            for (auto currentIndex = index - 1; currentIndex >= 0; --currentIndex) {
-                auto previousDelegate = sortedDelegates.at(currentIndex);
-                if (!previousDelegate->isVisible() || previousDelegate->isKeepVisible()) {
-                    continue;
-                }
-
-                auto width = previousDelegate->width();
-                previousDelegate->hide();
-                hiddenActions.append(previousDelegate->action());
-                currentWidth -= (width + spacing);
-
-                if (currentWidth + delegate->fullWidth() <= totalWidth) {
-                    delegate->showFull();
-                    break;
-                } else if (currentWidth + delegate->iconWidth() <= totalWidth) {
-                    delegate->showIcon();
-                    break;
-                }
+        // Give up space occupied by lower-priority actions before collapsing a KeepVisible action.
+        for (auto previousIndex = index - 1; previousIndex >= 0; --previousIndex) {
+            auto previousDelegate = sortedDelegates.at(previousIndex);
+            if (!previousDelegate->isVisible() || previousDelegate->isKeepVisible()) {
+                continue;
             }
+
+            currentWidth -= previousDelegate->width() + spacing;
+            previousDelegate->hide();
+            hiddenActions.append(previousDelegate->action());
 
             if (currentWidth + delegate->width() <= totalWidth) {
                 return;
             }
-
-            // Hiding normal actions did not help enough, so go through actions
-            // with KeepVisible set and try and collapse them to IconOnly.
-            for (auto currentIndex = index - 1; currentIndex >= 0; --currentIndex) {
-                auto previousDelegate = sortedDelegates.at(currentIndex);
-                if (!previousDelegate->isVisible() || !previousDelegate->isKeepVisible()) {
-                    continue;
-                }
-
-                auto extraSpace = previousDelegate->width() - previousDelegate->iconWidth();
-                previousDelegate->showIcon();
-                currentWidth -= extraSpace;
-
-                if (currentWidth + delegate->fullWidth() <= totalWidth) {
-                    delegate->showFull();
-                    break;
-                } else if (currentWidth + delegate->iconWidth() <= totalWidth) {
-                    delegate->showIcon();
-                    break;
-                }
-            }
-
-            // If that also did not work, then hide this action after all.
-            if (currentWidth + delegate->width() > totalWidth) {
-                delegate->hide();
-                hiddenActions.append(delegate->action());
-            }
-        } else {
-            delegate->showIcon();
         }
+
+        if (currentWidth + delegate->iconWidth() <= totalWidth) {
+            delegate->showIcon();
+            return;
+        }
+
+        // Collapse earlier KeepVisible actions if this action still cannot fit.
+        for (auto previousIndex = index - 1; previousIndex >= 0; --previousIndex) {
+            auto previousDelegate = sortedDelegates.at(previousIndex);
+            if (!previousDelegate->isVisible() || !previousDelegate->isKeepVisible()) {
+                continue;
+            }
+
+            const auto extraSpace = previousDelegate->width() - previousDelegate->iconWidth();
+            if (extraSpace <= 0) {
+                continue;
+            }
+
+            previousDelegate->showIcon();
+            currentWidth -= extraSpace;
+
+            if (currentWidth + delegate->width() <= totalWidth) {
+                return;
+            }
+            if (currentWidth + delegate->iconWidth() <= totalWidth) {
+                delegate->showIcon();
+                return;
+            }
+        }
+
+        delegate->hide();
+        hiddenActions.append(delegate->action());
     } else {
         // The action is not marked as KeepVisible and it does not fit within
         // the current layout, so hide it.

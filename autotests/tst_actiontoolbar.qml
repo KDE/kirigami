@@ -104,6 +104,17 @@ TestCase {
         }
     }
 
+    Component {
+        id: keepVisible
+        Kirigami.ActionToolBar {
+            font.pointSize: 10
+            actions: [
+                Kirigami.Action { icon.name: "document-new"; text: "Test Action" },
+                Kirigami.Action { icon.name: "document-new"; text: "Test Action"; displayHint: Kirigami.DisplayHint.KeepVisible; displayComponent: TextField { } }
+            ]
+        }
+    }
+
     function test_layout_data() {
         return [
             // One action
@@ -145,7 +156,20 @@ TestCase {
             // Mix of different display hints, displayComponent and normal actions.
             // Full window width, should display everything, but one action is collapsed to icon
             { tag: "mixed", component: mixed, width: testCase.width,
-                expected: testCase.textIconButton.width * 2 + testCase.iconButton.width * 2 + testCase.textField.width + Kirigami.Units.smallSpacing * 4 }
+                expected: testCase.textIconButton.width * 2 + testCase.iconButton.width * 2 + testCase.textField.width + Kirigami.Units.smallSpacing * 4 },
+            // KeepVisible
+            // Full window width, should display everything
+            { tag: "keep_visible_full", component: keepVisible, width: testCase.width,
+                expected: testCase.textIconButton.width + testCase.textField.width + Kirigami.Units.smallSpacing },
+            // Only the full delegate fits next to the overflow button, so the
+            // earlier action should be hidden instead of collapsing to icon-only
+            { tag: "keep_visible_hide_earlier", component: keepVisible,
+                width: testCase.textField.width + testCase.iconButton.width + Kirigami.Units.smallSpacing + 10,
+                expected: testCase.textField.width + testCase.iconButton.width + Kirigami.Units.smallSpacing },
+            // Not even the full delegate fits, so fall back to icon-only
+            { tag: "keep_visible_icon", component: keepVisible,
+                width: testCase.iconButton.width * 2 + Kirigami.Units.smallSpacing + 2,
+                expected: testCase.iconButton.width * 2 + Kirigami.Units.smallSpacing }
         ]
     }
 

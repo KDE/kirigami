@@ -29,8 +29,8 @@ import "private" as P
   placing the ones that don't fit into an overflow menu. You can control this
   behavior by setting the displayHint property on an item's Action. For example,
   when setting the DisplayHint.KeepVisible display hint, ActionToolBar will try
-  to keep that action's item in view as long as possible, transforming it into
-  an icon-only button if a button with an icon and text doesn't fit.
+  to keep that action's item in view as long as possible. It moves ordinary
+  actions into the overflow menu before falling back to an icon-only button.
 
   \since 2.5
  */
