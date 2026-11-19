@@ -207,12 +207,6 @@ FT.FormEntry {
             topRightRadius: topLeftRadius
             bottomLeftRadius: last ? Platform.Units.cornerRadius : 0
             bottomRightRadius: bottomLeftRadius
-            Behavior on opacity {
-                OpacityAnimator {
-                    duration: Platform.Units.longDuration
-                    easing.type: Easing.InOutQuad
-                }
-            }
         }
     }
 }

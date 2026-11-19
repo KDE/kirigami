@@ -27,12 +27,6 @@ FT.FormSeparator {
         const next = root.parent.visibleChildren[idx + 1];
         return (!prev?.clickEnabled || !next?.clickEnabled) || (!prev?.hovered && !next?.hovered);
     }
-    Behavior on opacity {
-        OpacityAnimator {
-            duration: Platform.Units.longDuration
-            easing.type: Easing.InOutQuad
-        }
-    }
 
     Primitives.Separator {
         id: separator
