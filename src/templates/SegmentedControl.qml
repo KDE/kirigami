@@ -38,6 +38,9 @@ T.Control {
     */
     property alias checkedAction: actionGroup.checkedAction
 
+    implicitWidth: contentItem.implicitWidth
+    implicitHeight: contentItem.implicitHeight
+
     QQC.ActionGroup {
       id: actionGroup
       exclusive: false

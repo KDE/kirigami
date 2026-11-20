@@ -5,9 +5,8 @@
  */
 
 import QtQuick
-import QtQuick.Controls as QQC2
+import QtQuick.Controls as QQC
 import QtQuick.Layouts
-
 import org.kde.kirigami as Kirigami
 
 Kirigami.ApplicationWindow {
@@ -20,7 +19,9 @@ Kirigami.ApplicationWindow {
             anchors.centerIn: parent
             spacing: Kirigami.Units.largeSpacing
 
-            // Not checkable: the actions behave like push buttons.
+            QQC.Label {
+                text: "Not checkable: the actions behave like push buttons."
+            }
             Kirigami.SegmentedControl {
                 Layout.alignment: Qt.AlignHCenter
 
@@ -31,7 +32,9 @@ Kirigami.ApplicationWindow {
                 ]
             }
 
-            // Checkable: each action can be toggled independently.
+            QQC.Label {
+                text: "Checkable: each action can be toggled independently."
+            }
             Kirigami.SegmentedControl {
                 Layout.alignment: Qt.AlignHCenter
 
@@ -42,7 +45,9 @@ Kirigami.ApplicationWindow {
                 ]
             }
 
-            // Exclusive: only one action can be checked at a time.
+            QQC.Label {
+                text: "Exclusive: only one action can be checked at a time."
+            }
             Kirigami.SegmentedControl {
                 Layout.alignment: Qt.AlignHCenter
 
@@ -52,6 +57,51 @@ Kirigami.ApplicationWindow {
                     Kirigami.Action { text: "One"; checkable: true },
                     Kirigami.Action { text: "Two"; checkable: true },
                     Kirigami.Action { text: "Three"; checkable: true }
+                ]
+            }
+
+            QQC.Label {
+                text: "Segmented control with a custom delegate"
+            }
+            Kirigami.SegmentedControl {
+                id: segment
+                Layout.alignment: Qt.AlignHCenter
+
+                exclusive: true
+                property int zoom: 100
+
+                actions: [
+                    Kirigami.Action {
+                        text: "Zoom Out"
+                        icon.name: "zoom-out-symbolic"
+                        displayHint: Kirigami.DisplayHint.IconOnly
+                        onTriggered: segment.zoom = Math.max(0, segment.zoom - 10)
+                    },
+                    Kirigami.Action {
+                        displayComponent: QQC.TextField {
+                            Layout.fillWidth: false
+                            Layout.preferredWidth: Kirigami.Units.gridUnit * 3
+                            text: segment.zoom + "%"
+                            inputMask: "000%"
+                            validator: RegularExpressionValidator {
+                                regularExpression: /[0-9]+%/
+                            }
+                            onAccepted: {
+                                const cleaned = String(text).replace(/%/g, '').trim();
+                                print(cleaned)
+                                const num = Number(cleaned);
+                                if (Number.isFinite(num)) {
+                                    segment.zoom = Math.min(200, Math.max(0, num));
+                                }
+                            }
+                        }
+                    },
+                    Kirigami.Action {
+                        text: "Zoom In"
+                        icon.name: "zoom-in-symbolic"
+                        displayHint: Kirigami.DisplayHint.IconOnly
+                        onTriggered: segment.zoom = Math.min(200, segment.zoom + 10)
+                    }
                 ]
             }
         }
