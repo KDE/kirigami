@@ -5,6 +5,7 @@
  */
 
 import QtQuick
+import QtQuick.Controls as QQC
 import QtTest
 import org.kde.kirigami as Kirigami
 
@@ -26,6 +27,13 @@ TestCase {
     Component {
         id: actionComponent
         Kirigami.Action {}
+    }
+
+    Component {
+        id: customDelegateComponent
+        QQC.TextField {
+            property string customDelegateMarker: "custom"
+        }
     }
 
     function createAction(checkable) {
@@ -99,5 +107,27 @@ TestCase {
         verify(!buttons[0].checked);
         verify(!buttons[1].checked);
         verify(buttons[2].checked);
+    }
+
+    function test_customDelegate() {
+        const control = createTemporaryObject(segmentedControlComponent, root, {
+            width: 400,
+            height: 60,
+        });
+        verify(control);
+        const customAction = createAction(false);
+        customAction.displayComponent = customDelegateComponent;
+        control.actions = [customAction, createAction(false), createAction(false)];
+        waitForItemPolished(control.contentItem);
+
+        const loaders = control.contentItem.children.filter((child) => child instanceof Loader);
+        compare(loaders.length, 3);
+        // The action with a displayComponent must use the custom delegate.
+        verify(loaders[0].item instanceof QQC.TextField);
+        compare(loaders[0].item.customDelegateMarker, "custom");
+        verify(loaders[0].item.width > 0);
+        // The other actions still use the default button delegate.
+        verify(loaders[1].item instanceof QQC.Button);
+        verify(loaders[2].item instanceof QQC.Button);
     }
 }
