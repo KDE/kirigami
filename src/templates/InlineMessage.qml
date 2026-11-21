@@ -223,7 +223,8 @@ T.Control {
     Accessible.ignored: !visible
 
     Behavior on implicitHeight {
-        enabled: !root.visible
+        // Do not animate when the user turned off animations
+        enabled: !root.visible && Platform.Units.longDuration > 1
 
         SequentialAnimation {
             PropertyAction { targets: root; property: "_animating"; value: true }
