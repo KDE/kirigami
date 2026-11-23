@@ -131,17 +131,17 @@ msgstr "显示侧边栏"
 #: controls/ListItemDragHandle.qml:154
 msgctxt "ListItemDragHandle|"
 msgid "Reorder"
-msgstr ""
+msgstr "重新排序"
 
 #: controls/ListItemDragHandle.qml:175
 msgctxt "ListItemDragHandle|"
 msgid "Press Space to start reordering this item"
-msgstr ""
+msgstr "按空格开始重新排序此项目"
 
 #: controls/ListItemDragHandle.qml:180
 msgctxt "ListItemDragHandle|"
 msgid "Arrow Up/Down keys to move"
-msgstr ""
+msgstr "向上/向下方向键以移动"
 
 #: controls/LoadingPlaceholder.qml:59
 msgctxt "LoadingPlaceholder|"
