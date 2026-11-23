@@ -10,7 +10,7 @@ sourcedirs += . ../docs/includes
 imagedirs = . ../docs/pics
 exampledirs = . ../examples primitives/examples
 
-depends = kde qtcore qtqml qtquick qtquickcontrols kcoreaddons kirigamiplatform
+depends += kde qtcore qtqml qtquick qtquickcontrols kcoreaddons kirigamiplatform
 
 excludedirs = platform
 

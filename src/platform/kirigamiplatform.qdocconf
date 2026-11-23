@@ -10,7 +10,7 @@ sourcedirs += .
 
 excludefiles = basictheme_p.h
 
-depends = kde qtcore qtgui qtqml qtquick qtquickcontrols
+depends += kde qtcore qtgui qtqml qtquick qtquickcontrols
 
 navigation.landingpage = "Kirigami"
 
