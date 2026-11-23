@@ -67,6 +67,10 @@ Forms.FormEntry { // Needs to be instantiated from the global forms import in or
 
     onClicked: action.trigger(root)
 
+    Accessible.role: Accessible.Button
+    Accessible.name: action.text
+    Accessible.onPressAction: action.trigger(root)
+
     trailingItems: Primitives.Icon {
         Layout.fillHeight: true
         Layout.maximumHeight: root.triggerIcon.height <= 0 ? Platform.Units.iconSizes.small : Infinity
