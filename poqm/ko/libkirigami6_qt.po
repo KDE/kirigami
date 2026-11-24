@@ -258,27 +258,27 @@ msgctxt "Kirigami::Platform::Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2(%3(으)로 빌드됨)"
 
-#: templates/InlineMessage.qml:352
+#: templates/InlineMessage.qml:353
 msgctxt "InlineMessage|"
 msgid "Success"
 msgstr "성공"
 
-#: templates/InlineMessage.qml:354
+#: templates/InlineMessage.qml:355
 msgctxt "InlineMessage|"
 msgid "Warning"
 msgstr "경고"
 
-#: templates/InlineMessage.qml:356
+#: templates/InlineMessage.qml:357
 msgctxt "InlineMessage|"
 msgid "Error"
 msgstr "오류"
 
-#: templates/InlineMessage.qml:358
+#: templates/InlineMessage.qml:359
 msgctxt "InlineMessage|"
 msgid "Note"
 msgstr "메모"
 
-#: templates/InlineMessage.qml:445
+#: templates/InlineMessage.qml:446
 msgctxt "InlineMessage|"
 msgid "Close"
 msgstr "닫기"

@@ -260,27 +260,27 @@ msgctxt "Kirigami::Platform::Settings|"
 msgid "Qt %2 (built against %3)"
 msgstr "Qt %2 (sestaveno oproti %3)"
 
-#: templates/InlineMessage.qml:352
+#: templates/InlineMessage.qml:353
 msgctxt "InlineMessage|"
 msgid "Success"
 msgstr "Úspěch"
 
-#: templates/InlineMessage.qml:354
+#: templates/InlineMessage.qml:355
 msgctxt "InlineMessage|"
 msgid "Warning"
 msgstr "Varování"
 
-#: templates/InlineMessage.qml:356
+#: templates/InlineMessage.qml:357
 msgctxt "InlineMessage|"
 msgid "Error"
 msgstr "Chyba"
 
-#: templates/InlineMessage.qml:358
+#: templates/InlineMessage.qml:359
 msgctxt "InlineMessage|"
 msgid "Note"
 msgstr "Poznámka"
 
-#: templates/InlineMessage.qml:445
+#: templates/InlineMessage.qml:446
 msgctxt "InlineMessage|"
 msgid "Close"
 msgstr "Zavřít"
