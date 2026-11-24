@@ -95,6 +95,7 @@ FT.FormEntry {
             top: parent.top
             bottom: parent.bottom
             leftMargin: !mainLayout.formLayout || mainLayout.formLayout.__collapsed || root.fullWidth || !formGroup ? padding : formGroup.__assignedWidthForLabels + Platform.Units.largeSpacing * 2
+            rightMargin: padding
         }
 
         spacing: Platform.Units.smallSpacing
