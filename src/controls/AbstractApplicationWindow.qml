@@ -224,7 +224,7 @@ QQC2.ApplicationWindow {
     LayoutMirroring.enabled: Application.layoutDirection === Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
 
-    color: Platform.Theme.backgroundColor
+    // Don't set color or background here; have the style decide them
 
     P.PassiveNotificationsManager {
         id: notificationsObject

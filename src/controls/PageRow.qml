@@ -1060,10 +1060,27 @@ QT.Control {
                         property bool wasDragging
                         readonly property bool active: columnView.moving
                                     && columnView.columnResizeMode === KL.ColumnView.SingleColumn
-                                    && page.background
-                                    && (page.background?.color.a === 1 ?? true)
-                                    && (columnView.trailingVisibleItem?.background ?? false)
-                                    && (columnView.trailingVisibleItem?.background?.color.a === 1 ?? true)
+                                    && hasOpaqueBackground(page)
+                                    && hasOpaqueBackground(columnView.trailingVisibleItem)
+
+                        // Backgrounds should come from the style and can be any kind of Item; don't assume a Rectangle
+                        // We don't want fading in the case of see-through backgrounds
+                        // So make sure opacity is at 1, color alpha is 1, and that it's not a gradient
+                        function hasOpaqueBackground(item: Item): bool {
+                            const background = (item as QT.Control)?.background;
+                            if (!background) {
+                                return false;
+                            }
+                            if (!background.visible || background.opacity !== 1) {
+                                return false;
+                            }
+                            // Rectangle with a gradient returns #ffffff for background.color, but can have transparent stops
+                            if (background.gradient) {
+                                return false;
+                            }
+                            return (background.color?.a ?? 0) === 1;
+                        }
+
                         readonly property real progress: Math.max(-1, Math.min(1, (page.x - columnView.contentX) / columnView.width))
                         x: {
                             if (!active) {

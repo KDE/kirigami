@@ -23,6 +23,10 @@ import "private" as P
 
   Everything pushed to the ApplicationWindow's pageStack should be a Page.
 
+  The background of the Page is provided by the  style in use.
+  It can be any Item, so don't assume it is a Rectangle or that it has a color.
+  You can test various background styles with 'tests/PageBackgroundTest.qml'
+
   \sa ScrollablePage
   For content that should be scrollable, such as ListViews, use ScrollablePage instead.
  */
@@ -176,9 +180,7 @@ QQC2.Page {
      */
     signal backRequested(var event);
 
-    background: Rectangle {
-        color: Platform.Theme.backgroundColor
-    }
+    // No background is set here on purpose: it should be provided by the style
 
     // FIXME: on material the shadow would bleed over
     clip: root.header !== null;
