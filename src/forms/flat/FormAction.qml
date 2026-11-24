@@ -6,6 +6,9 @@
 
 import QtQuick
 import QtQuick.Controls as QQC
+import org.kde.kirigami.platform as Platform
+import org.kde.kirigami.controls as KC
+import org.kde.kirigami.private as KP
 import org.kde.kirigami.forms.private.templates as FT
 
 FT.FormAction {
@@ -22,6 +25,16 @@ FT.FormAction {
             height: root.action.icon.height
         }
         text: root.action.text
+
+        QQC.ToolTip.visible: QQC.ToolTip.text.length > 0 && (hovered || visualFocus)
+        QQC.ToolTip.text: {
+            const kirigamiAction = root.action as KC.Action;
+            if (kirigamiAction && KP.ActionHelper.hasUsefulToolTip(kirigamiAction.text, kirigamiAction.tooltip)) {
+                return kirigamiAction.tooltip;
+            }
+            return "";
+        }
+        QQC.ToolTip.delay: Platform.Units.toolTipDelay
         onClicked: {
             root.clicked();
         }

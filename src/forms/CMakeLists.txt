@@ -34,6 +34,7 @@ ecm_add_qml_module(KirigamiFormsPrivateFlat URI "org.kde.kirigami.forms.private.
         TARGET KirigamiPlatform
         TARGET KirigamiPrimitives
         TARGET KirigamiLayouts
+        TARGET KirigamiControls
 )
 
 set_target_properties(KirigamiFormsPrivateFlat PROPERTIES
@@ -60,6 +61,7 @@ ecm_add_qml_module(KirigamiFormsPrivateCards URI "org.kde.kirigami.forms.private
         TARGET KirigamiPlatform
         TARGET KirigamiPrimitives
         TARGET KirigamiLayouts
+        TARGET KirigamiControls
 )
 
 set_target_properties(KirigamiFormsPrivateCards PROPERTIES
