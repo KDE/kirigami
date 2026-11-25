@@ -157,14 +157,6 @@ FT.FormEntry {
                 Layout.alignment: Qt.AlignVCenter
                 visible: contentItem
                 contentItem: root.contentItem
-                Binding {
-                    when: contentItemWrapper.contentItem instanceof QQC.Switch
-                    target: contentItemWrapper.contentItem
-                    property: "LayoutMirroring.enabled"
-                    value: contentItemWrapper.contentItem instanceof QQC.Switch
-                        ? Application.layoutDirection === Qt.LeftToRight
-                        : Application.layoutDirection === Qt.RightToLeft
-                }
             }
 
             RowLayout {
