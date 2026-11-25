@@ -154,6 +154,7 @@ ecm_generate_qdoc(KirigamiPlatform kirigamiplatform.qdocconf)
 ecm_add_installed_library_check(KirigamiPlatform
     PACKAGE_NAME "KF6KirigamiPlatform"
     PACKAGE_TARGET_NAMESPACE "KF6::"
+    QT_STRICT_MODE_LEVEL 6.12
 )
 
 ecm_installed_library_check_include_strings(KirigamiPlatform
