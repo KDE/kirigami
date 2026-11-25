@@ -40,6 +40,7 @@ FT.FormAction {
     contentItem: QQC.Label {
         Layout.fillWidth: true
         text: root.action.text
+        enabled: root.action.enabled
     }
 }
 

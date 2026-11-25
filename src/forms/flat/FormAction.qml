@@ -25,6 +25,7 @@ FT.FormAction {
             height: root.action.icon.height
         }
         text: root.action.text
+        enabled: root.action.enabled
 
         QQC.ToolTip.visible: QQC.ToolTip.text.length > 0 && (hovered || visualFocus)
         QQC.ToolTip.text: {

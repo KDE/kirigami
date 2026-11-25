@@ -76,6 +76,7 @@ Forms.FormEntry { // Needs to be instantiated from the global forms import in or
         Layout.maximumHeight: root.triggerIcon.height <= 0 ? Platform.Units.iconSizes.small : Infinity
         source: root.triggerIcon.name || root.triggerIcon.source
         color: root.triggerIcon.color
+        enabled: root.action.enabled
         Layout.preferredWidth: root.triggerIcon.width > 0 ? root.triggerIcon.width : -1
         Layout.preferredHeight: root.triggerIcon.height > 0 ? root.triggerIcon.height : -1
     }
