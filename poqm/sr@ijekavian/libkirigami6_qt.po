@@ -64,22 +64,22 @@ msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr ""
 
-#: controls/AboutItem.qml:367
+#: controls/AboutItem.qml:378
 msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr ""
 
-#: controls/AboutItem.qml:370
+#: controls/AboutItem.qml:381
 msgctxt "AboutItem|"
 msgid "Authors"
 msgstr ""
 
-#: controls/AboutItem.qml:380
+#: controls/AboutItem.qml:391
 msgctxt "AboutItem|"
 msgid "Credits"
 msgstr ""
 
-#: controls/AboutItem.qml:390
+#: controls/AboutItem.qml:401
 msgctxt "AboutItem|"
 msgid "Translators"
 msgstr ""

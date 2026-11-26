@@ -60,22 +60,22 @@ msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "பயன்படுத்தும் நிரலகங்கள்"
 
-#: controls/AboutItem.qml:367
+#: controls/AboutItem.qml:378
 msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr "இயற்றியவர்களின் படங்களைக் காட்டு"
 
-#: controls/AboutItem.qml:370
+#: controls/AboutItem.qml:381
 msgctxt "AboutItem|"
 msgid "Authors"
 msgstr "இயற்றியவர்கள்"
 
-#: controls/AboutItem.qml:380
+#: controls/AboutItem.qml:391
 msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "நன்றி"
 
-#: controls/AboutItem.qml:390
+#: controls/AboutItem.qml:401
 msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "மொழிபெயர்ப்பாளர்கள்"

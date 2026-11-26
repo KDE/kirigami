@@ -72,12 +72,12 @@ msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "Kasutatavad teegid"
 
-#: controls/AboutItem.qml:367
+#: controls/AboutItem.qml:378
 msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr ""
 
-#: controls/AboutItem.qml:370
+#: controls/AboutItem.qml:381
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Authors"
@@ -85,7 +85,7 @@ msgctxt "AboutItem|"
 msgid "Authors"
 msgstr "Autorid"
 
-#: controls/AboutItem.qml:380
+#: controls/AboutItem.qml:391
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Credits"
@@ -93,7 +93,7 @@ msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "Tunnustus"
 
-#: controls/AboutItem.qml:390
+#: controls/AboutItem.qml:401
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Translators"

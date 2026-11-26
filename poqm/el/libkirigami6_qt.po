@@ -66,22 +66,22 @@ msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "Βιβλιοθήκες σε χρήση"
 
-#: controls/AboutItem.qml:367
+#: controls/AboutItem.qml:378
 msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr "Εμφάνιση φωτογραφιών συγγραφέων"
 
-#: controls/AboutItem.qml:370
+#: controls/AboutItem.qml:381
 msgctxt "AboutItem|"
 msgid "Authors"
 msgstr "Συγγραφείς"
 
-#: controls/AboutItem.qml:380
+#: controls/AboutItem.qml:391
 msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "Ευχαριστίες"
 
-#: controls/AboutItem.qml:390
+#: controls/AboutItem.qml:401
 msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "Μεταφραστές"

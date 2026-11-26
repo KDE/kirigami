@@ -62,22 +62,22 @@ msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "Použité knihovny"
 
-#: controls/AboutItem.qml:367
+#: controls/AboutItem.qml:378
 msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr "Zobrazit fotografie autora"
 
-#: controls/AboutItem.qml:370
+#: controls/AboutItem.qml:381
 msgctxt "AboutItem|"
 msgid "Authors"
 msgstr "Autoři"
 
-#: controls/AboutItem.qml:380
+#: controls/AboutItem.qml:391
 msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "Poděkování"
 
-#: controls/AboutItem.qml:390
+#: controls/AboutItem.qml:401
 msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "Překladatelé"

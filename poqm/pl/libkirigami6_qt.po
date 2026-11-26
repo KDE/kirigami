@@ -67,22 +67,22 @@ msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "Używane biblioteki"
 
-#: controls/AboutItem.qml:367
+#: controls/AboutItem.qml:378
 msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr "Pokaż zdjęcia autorów"
 
-#: controls/AboutItem.qml:370
+#: controls/AboutItem.qml:381
 msgctxt "AboutItem|"
 msgid "Authors"
 msgstr "Autorzy"
 
-#: controls/AboutItem.qml:380
+#: controls/AboutItem.qml:391
 msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "Zasługi"
 
-#: controls/AboutItem.qml:390
+#: controls/AboutItem.qml:401
 msgctxt "AboutItem|"
 msgid "Translators"
 msgstr "Tłumacze"

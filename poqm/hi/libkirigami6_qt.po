@@ -76,7 +76,7 @@ msgctxt "AboutItem|"
 msgid "Libraries in use"
 msgstr "उपयोग किए गए संग्रह"
 
-#: controls/AboutItem.qml:367
+#: controls/AboutItem.qml:378
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Show author photos"
@@ -84,7 +84,7 @@ msgctxt "AboutItem|"
 msgid "Show author photos"
 msgstr "लेखक की फोटोओं को दिखाएँ"
 
-#: controls/AboutItem.qml:370
+#: controls/AboutItem.qml:381
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Authors"
@@ -92,7 +92,7 @@ msgctxt "AboutItem|"
 msgid "Authors"
 msgstr "लेखक"
 
-#: controls/AboutItem.qml:380
+#: controls/AboutItem.qml:391
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Credits"
@@ -100,7 +100,7 @@ msgctxt "AboutItem|"
 msgid "Credits"
 msgstr "आभार सूची"
 
-#: controls/AboutItem.qml:390
+#: controls/AboutItem.qml:401
 #, fuzzy
 #| msgctxt "AboutPage|"
 #| msgid "Translators"
