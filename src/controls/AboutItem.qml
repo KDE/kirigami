@@ -261,7 +261,7 @@ Item {
             }
         }
 
-        KF.FormGroup {
+        KF.GridFormGroup {
             id: linksGroup
 
             readonly property bool hasHomepage: aboutItem.aboutData.homepage.toString().length > 0
@@ -298,9 +298,7 @@ Item {
                 triggerIcon.name: "open-link-symbolic"
                 visible: linksGroup.hasHomepage
             }
-            KF.FormSeparator {
-                visible: linksGroup.hasHomepage && (linksGroup.hasDonate || linksGroup.hasGetInvolved || linksGroup.hasBugUrl)
-            }
+
             KF.FormAction {
                 action: KC.Action {
                     icon.name: "donate-symbolic"
@@ -312,9 +310,7 @@ Item {
                 triggerIcon.name: "open-link-symbolic"
                 visible: linksGroup.hasDonate
             }
-            KF.FormSeparator {
-                visible: linksGroup.hasDonate && (linksGroup.hasGetInvolved || linksGroup.hasBugUrl)
-            }
+
             KF.FormAction {
                 action: KC.Action {
                     icon.name: "applications-development-symbolic"
@@ -326,9 +322,7 @@ Item {
                 triggerIcon.name: "open-link-symbolic"
                 visible: linksGroup.hasGetInvolved
             }
-            KF.FormSeparator {
-                visible: linksGroup.hasGetInvolved && linksGroup.hasBugUrl
-            }
+
             KF.FormAction {
                 action: KC.Action {
                     icon.name: "tools-report-bug-symbolic"

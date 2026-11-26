@@ -22,6 +22,7 @@ ecm_target_qml_sources(KirigamiFormsPrivateTemplates SOURCES
     templates/FormGroup.qml
     templates/Form.qml
     templates/FormSeparator.qml
+    templates/GridFormGroup.qml
 )
 
 add_library(KirigamiFormsPrivateFlat)
@@ -49,6 +50,7 @@ ecm_target_qml_sources(KirigamiFormsPrivateFlat SOURCES
     flat/FormGroup.qml
     flat/Form.qml
     flat/FormSeparator.qml
+    flat/GridFormGroup.qml
 )
 
 add_library(KirigamiFormsPrivateCards)
@@ -76,6 +78,7 @@ ecm_target_qml_sources(KirigamiFormsPrivateCards SOURCES
     cards/FormGroup.qml
     cards/Form.qml
     cards/FormSeparator.qml
+    cards/GridFormGroup.qml
 )
 
 add_library(KirigamiForms)

@@ -81,7 +81,7 @@ FT.FormEntry {
         implicitHeight: mainLayout.implicitHeight + topPadding + bottomPadding
         padding: Platform.Units.largeSpacing + Platform.Units.smallSpacing
 
-        leftPadding:  !impl.formLayout || impl.formLayout.__collapsed || root.fullWidth ? padding : root.parent?.__assignedWidthForLabels + Platform.Units.largeSpacing * 2
+        leftPadding: !impl.formLayout || impl.formLayout.__collapsed || root.fullWidth ? padding : root.parent?.__assignedWidthForLabels + Platform.Units.largeSpacing * 2
 
         readonly property bool nextIsFormEntry: root.parent?.visibleChildren[root.parent.visibleChildren.indexOf(root) + 1] instanceof FormEntry ?? false
         readonly property bool prevIsFormEntry: root.parent?.visibleChildren[root.parent.visibleChildren.indexOf(root) - 1] instanceof FormEntry ?? false
