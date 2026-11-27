@@ -13,13 +13,18 @@ FT.GridFormGroup {
 
     background: Item {
         Repeater {
-            model: root.visibleChildren
+            model: root.columns > 1 ? root.entries.filter((entry) => {return !(entry instanceof FormSeparator)}) : 0
             delegate: KC.AbstractCard {
                 x: modelData.x
                 y: modelData.y
                 width: modelData.width
                 height: modelData.height
+                visible: modelData.visible
             }
+        }
+        KC.AbstractCard {
+            anchors.fill: parent
+            visible: root.columns === 1
         }
     }
 }

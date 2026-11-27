@@ -299,6 +299,8 @@ Item {
                 visible: linksGroup.hasHomepage
             }
 
+            KF.FormSeparator {}
+
             KF.FormAction {
                 action: KC.Action {
                     icon.name: "donate-symbolic"
@@ -311,6 +313,8 @@ Item {
                 visible: linksGroup.hasDonate
             }
 
+            KF.FormSeparator {}
+
             KF.FormAction {
                 action: KC.Action {
                     icon.name: "applications-development-symbolic"
@@ -322,6 +326,8 @@ Item {
                 triggerIcon.name: "open-link-symbolic"
                 visible: linksGroup.hasGetInvolved
             }
+
+            KF.FormSeparator {}
 
             KF.FormAction {
                 action: KC.Action {
