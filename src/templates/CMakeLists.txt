@@ -17,6 +17,7 @@ ecm_target_qml_sources(KirigamiTemplates SOURCES
     Avatar.qml
     Badge.qml
     Chip.qml
+    DatePicker.qml
     Heading.qml
     InlineMessage.qml
     LinkButton.qml

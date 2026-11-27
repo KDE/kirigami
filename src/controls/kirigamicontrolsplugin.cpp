@@ -130,6 +130,7 @@ void KirigamiControlsPlugin::registerTypes(const char *uri)
     qmlRegisterType(componentUrl(u"SelectableLabel.qml"_s), uri, 2, 0, "SelectableLabel");
     qmlRegisterType(componentUrl(u"InlineViewHeader.qml"_s), uri, 2, 0, "InlineViewHeader");
     qmlRegisterType(componentUrl(u"ContextualHelpButton.qml"_s), uri, 2, 0, "ContextualHelpButton");
+    qmlRegisterType(componentUrl(u"DatePicker.qml"_s), uri, 2, 0, "DatePicker");
 }
 
 void KirigamiControlsPlugin::initializeEngine(QQmlEngine *engine, const char *uri)

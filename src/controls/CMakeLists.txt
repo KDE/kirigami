@@ -39,6 +39,7 @@ ecm_target_qml_sources(KirigamiControls SOURCES
     Chip.qml
     ContextDrawer.qml
     ContextualHelpButton.qml
+    DatePicker.qml
     FlexColumn.qml
     GlobalDrawer.qml
     Heading.qml
