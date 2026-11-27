@@ -24,7 +24,7 @@ T.Control {
     /*!
       \brief A list of QML Actions that will be represented as buttons
     */
-    property alias actions: actionGroup.actions
+    default property alias actions: actionGroup.actions
 
     /*!
       \brief If true all the checkable buttons in the control will be exclusive and only one of them
@@ -38,11 +38,14 @@ T.Control {
     */
     property alias checkedAction: actionGroup.checkedAction
 
+    signal triggered(action: T.Action)
+
     implicitWidth: contentItem.implicitWidth
     implicitHeight: contentItem.implicitHeight
 
     QQC.ActionGroup {
-      id: actionGroup
-      exclusive: false
+        id: actionGroup
+        exclusive: false
+        onTriggered: (action) => root.triggered(action)
     }
 }

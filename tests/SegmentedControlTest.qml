@@ -38,7 +38,7 @@ Kirigami.ApplicationWindow {
                 actions: [
                     Kirigami.Action { text: "One" },
                     Kirigami.Action { text: "Two" },
-                    Kirigami.Action { text: "Three" }
+                    Kirigami.Action { text: "Three"}
                 ]
             }
 
@@ -48,11 +48,9 @@ Kirigami.ApplicationWindow {
             Kirigami.SegmentedControl {
                 Layout.alignment: Qt.AlignHCenter
 
-                actions: [
-                    Kirigami.Action { text: "One"; checkable: true },
-                    Kirigami.Action { text: "Two"; checkable: true },
-                    Kirigami.Action { text: "Three"; checkable: true }
-                ]
+                Kirigami.Action { text: "One"; checkable: true }
+                Kirigami.Action { text: "Two"; checkable: true }
+                Kirigami.Action { text: "Three"; checkable: true }
             }
 
             QQC.Label {
@@ -63,11 +61,9 @@ Kirigami.ApplicationWindow {
 
                 exclusive: true
 
-                actions: [
-                    Kirigami.Action { text: "One"; checkable: true },
-                    Kirigami.Action { text: "Two"; checkable: true },
-                    Kirigami.Action { text: "Three"; checkable: true }
-                ]
+                Kirigami.Action { text: "One"; checkable: true }
+                Kirigami.Action { text: "Two"; checkable: true }
+                Kirigami.Action { text: "Three"; checkable: true }
             }
 
             QQC.Label {
@@ -80,39 +76,37 @@ Kirigami.ApplicationWindow {
                 exclusive: true
                 property int zoom: 100
 
-                actions: [
-                    Kirigami.Action {
-                        text: "Zoom Out"
-                        icon.name: "zoom-out-symbolic"
-                        displayHint: Kirigami.DisplayHint.IconOnly
-                        onTriggered: segment.zoom = Math.max(0, segment.zoom - 10)
-                    },
-                    Kirigami.Action {
-                        displayComponent: QQC.TextField {
-                            Layout.fillWidth: false
-                            Layout.preferredWidth: Kirigami.Units.gridUnit * 3
-                            text: segment.zoom + "%"
-                            inputMask: "000%"
-                            validator: RegularExpressionValidator {
-                                regularExpression: /[0-9]+%/
-                            }
-                            onAccepted: {
-                                const cleaned = String(text).replace(/%/g, '').trim();
-                                print(cleaned)
-                                const num = Number(cleaned);
-                                if (Number.isFinite(num)) {
-                                    segment.zoom = Math.min(200, Math.max(0, num));
-                                }
+                Kirigami.Action {
+                    text: "Zoom Out"
+                    icon.name: "zoom-out-symbolic"
+                    displayHint: Kirigami.DisplayHint.IconOnly
+                    onTriggered: segment.zoom = Math.max(0, segment.zoom - 10)
+                }
+                Kirigami.Action {
+                    displayComponent: QQC.TextField {
+                        Layout.fillWidth: false
+                        Layout.preferredWidth: Kirigami.Units.gridUnit * 3
+                        text: segment.zoom + "%"
+                        inputMask: "000%"
+                        validator: RegularExpressionValidator {
+                            regularExpression: /[0-9]+%/
+                        }
+                        onAccepted: {
+                            const cleaned = String(text).replace(/%/g, '').trim();
+                            print(cleaned)
+                            const num = Number(cleaned);
+                            if (Number.isFinite(num)) {
+                                segment.zoom = Math.min(200, Math.max(0, num));
                             }
                         }
-                    },
-                    Kirigami.Action {
-                        text: "Zoom In"
-                        icon.name: "zoom-in-symbolic"
-                        displayHint: Kirigami.DisplayHint.IconOnly
-                        onTriggered: segment.zoom = Math.min(200, segment.zoom + 10)
                     }
-                ]
+                }
+                Kirigami.Action {
+                    text: "Zoom In"
+                    icon.name: "zoom-in-symbolic"
+                    displayHint: Kirigami.DisplayHint.IconOnly
+                    onTriggered: segment.zoom = Math.min(200, segment.zoom + 10)
+                }
             }
         }
     }
