@@ -18,7 +18,7 @@ KT.SegmentedControl {
         id: buttonDelegate
         QQC.Button {
             action: parent.modelData
-            display: action.displayHint === KL.DisplayHint.IconOnly ? QQC.AbstractButton.IconOnly : QQC.AbstractButton.TextBesideIcon
+            display: action.displayHint & KL.DisplayHint.IconOnly ? QQC.AbstractButton.IconOnly : QQC.AbstractButton.TextBesideIcon
         }
     }
 
