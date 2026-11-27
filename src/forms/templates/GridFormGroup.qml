@@ -15,14 +15,14 @@ import org.kde.kirigami.layouts as KL
   \qmltype GridFormGroup
   \inqmlmodule org.kde.kirigami.forms
 
-  \brief A container class for related rorm entries. When there is enough horizontal space, it will
+  \brief A container class for related form entries. When there is enough horizontal space, it will
   show the entries in a two columns grid.
 
-  Use this group when you want to have controls in two columns, they will be represented as a grid of little cards.
+  Use this group when you want to have controls in two columns; they will be represented as a grid of little cards.
   This element should always be positioned in a Form. It is used to group together
   related form controls, to separate different settings categories.
 
-  A FormGroup should contain only elements of type FormEntry or FormSeparator (or derivates)
+  A FormGroup should contain only elements of type FormEntry or FormSeparator (or derivates).
 
   Example usage:
   \qml
@@ -60,7 +60,7 @@ import org.kde.kirigami.layouts as KL
   \sa Form
   \sa FormEntry
   \sa FormGroup
-  \since 6.24
+  \since 6.33
 */
 FormGroup {
     id: root
