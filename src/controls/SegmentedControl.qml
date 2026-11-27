@@ -14,16 +14,16 @@ import org.kde.kirigami.templates as KT
 KT.SegmentedControl {
     id: root
 
-    Component {
-        id: buttonDelegate
-        QQC.Button {
-            action: parent.modelData
-            display: action.displayHint & KL.DisplayHint.IconOnly ? QQC.AbstractButton.IconOnly : QQC.AbstractButton.TextBesideIcon
-        }
-    }
-
     contentItem: RowLayout {
         spacing: Platform.Units.smallSpacing
+        Component {
+            id: buttonDelegate
+            QQC.Button {
+                action: parent.modelData
+                display: action.displayHint & KL.DisplayHint.IconOnly ? QQC.AbstractButton.IconOnly : QQC.AbstractButton.TextBesideIcon
+            }
+        }
+
         Repeater {
             model: root.actions
             delegate: Loader {

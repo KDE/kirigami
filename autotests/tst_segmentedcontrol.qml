@@ -57,7 +57,15 @@ TestCase {
     }
 
     function controlButtons(control) {
-        return control.contentItem.children.filter((child) => child.checkable !== undefined);
+        let buttons = [];
+        for (const candidate of control.contentItem.children) {
+            if (candidate instanceof Loader) {
+                if (candidate.item.hasOwnProperty("checkable")) {
+                    buttons.push(candidate.item);
+                }
+            }
+        }
+        return buttons;
     }
 
     function test_notCheckable() {
