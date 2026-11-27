@@ -15,6 +15,16 @@ Kirigami.ApplicationWindow {
     visible: true
 
     pageStack.initialPage: Kirigami.Page {
+        actions: [
+            Kirigami.Action { text: "One" },
+            Kirigami.Action {
+                displayHint: Kirigami.DisplayHint.ShowAsGroup
+                Kirigami.Action { text: "S1"; checkable: true }
+                Kirigami.Action { text: "S2"; checkable: true }
+                Kirigami.Action { text: "S3"; checkable: true }
+            },
+            Kirigami.Action { text: "Three" }
+        ]
         ColumnLayout {
             anchors.centerIn: parent
             spacing: Kirigami.Units.largeSpacing

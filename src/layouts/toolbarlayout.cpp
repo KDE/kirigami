@@ -62,6 +62,7 @@ public:
     QList<QObject *> hiddenActions;
     QQmlComponent *fullDelegate = nullptr;
     QQmlComponent *iconDelegate = nullptr;
+    QQmlComponent *groupedDelegate = nullptr;
     QQmlComponent *separatorDelegate = nullptr;
     QQmlComponent *moreButton = nullptr;
     qreal spacing = 0.0;
@@ -220,6 +221,21 @@ void ToolBarLayout::setIconDelegate(QQmlComponent *newIconDelegate)
     d->delegates.clear();
     relayout();
     Q_EMIT iconDelegateChanged();
+}
+
+QQmlComponent *ToolBarLayout::groupedDelegate() const
+{
+    return d->groupedDelegate;
+}
+
+void ToolBarLayout::setGroupedDelegate(QQmlComponent *newGroupedDelegate)
+{
+    if (newGroupedDelegate == d->groupedDelegate) {
+        return;
+    }
+
+    d->groupedDelegate = newGroupedDelegate;
+    Q_EMIT groupedDelegateChanged();
 }
 
 QQmlComponent *ToolBarLayout::separatorDelegate() const
@@ -395,7 +411,7 @@ void ToolBarLayoutPrivate::calculateImplicitSize()
         return;
     }
 
-    if (!fullDelegate || !iconDelegate || !separatorDelegate || !moreButton) {
+    if (!fullDelegate || !iconDelegate || !groupedDelegate || !separatorDelegate || !moreButton) {
         qCWarning(KirigamiLayoutsLog) << "ToolBarLayout: Unable to layout, required properties are not set";
         return;
     }
@@ -650,7 +666,7 @@ ToolBarLayoutDelegate *ToolBarLayoutPrivate::createDelegate(QObject *action)
 
     auto result = new ToolBarLayoutDelegate(q);
     result->setAction(action);
-    result->createItems(fullComponent, iconDelegate, [this, action](QQuickItem *newItem) {
+    result->createItems(fullComponent, iconDelegate, groupedDelegate, [this, action](QQuickItem *newItem) {
         newItem->setParentItem(q);
         newItem->setParent(q);
         auto attached = static_cast<ToolBarLayoutAttached *>(qmlAttachedPropertiesObject<ToolBarLayout>(newItem, true));

@@ -82,6 +82,14 @@ class ToolBarLayout : public QQuickItem
      */
     Q_PROPERTY(QQmlComponent *iconDelegate READ iconDelegate WRITE setIconDelegate NOTIFY iconDelegateChanged FINAL)
     /*!
+     * \qmlproperty Component ToolBarLayout::groupedDelegate
+     *
+     * A component that is used to create delegates for grouped actions, for instance to be shown in a segmented button.
+     *
+     * \sa fullDelegate
+     */
+    Q_PROPERTY(QQmlComponent *groupedDelegate READ groupedDelegate WRITE setGroupedDelegate NOTIFY groupedDelegateChanged FINAL)
+    /*!
      * \qmlproperty Component ToolBarLayout::separatorDelegate
      *
      * A component that is used to create separator delegates from.
@@ -204,6 +212,10 @@ public:
     QQmlComponent *iconDelegate() const;
     void setIconDelegate(QQmlComponent *newIconDelegate);
     Q_SIGNAL void iconDelegateChanged();
+
+    QQmlComponent *groupedDelegate() const;
+    void setGroupedDelegate(QQmlComponent *newGroupedDelegate);
+    Q_SIGNAL void groupedDelegateChanged();
 
     QQmlComponent *separatorDelegate() const;
     void setSeparatorDelegate(QQmlComponent *newSeparatorDelegate);

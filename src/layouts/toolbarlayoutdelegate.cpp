@@ -121,8 +121,16 @@ void ToolBarLayoutDelegate::setAction(QObject *action)
     }
 }
 
-void ToolBarLayoutDelegate::createItems(QQmlComponent *fullComponent, QQmlComponent *iconComponent, std::function<void(QQuickItem *)> callback)
+void ToolBarLayoutDelegate::createItems(QQmlComponent *fullComponent,
+                                        QQmlComponent *iconComponent,
+                                        QQmlComponent *groupedComponent,
+                                        std::function<void(QQuickItem *)> callback)
 {
+    if (DisplayHint::isDisplayHintSet(m_displayHint, DisplayHint::ShowAsGroup)) {
+        fullComponent = groupedComponent;
+        iconComponent = groupedComponent;
+    }
+
     m_fullIncubator = new ToolBarDelegateIncubator(fullComponent, qmlContext(fullComponent));
     m_fullIncubator->setStateCallback(callback);
     m_fullIncubator->setCompletedCallback([this](ToolBarDelegateIncubator *incubator) {

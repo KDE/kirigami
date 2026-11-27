@@ -198,6 +198,17 @@ QQC2.Control {
             }
         }
 
+        groupedDelegate: KC.SegmentedControl {
+            actions: {
+                const kAction = KL.ToolBarLayout.action as KC.Action
+                if (!kAction) {
+                    return [];
+                }
+
+                return kAction.children;
+            }
+        }
+
         separatorDelegate: QQC2.ToolSeparator {}
 
         moreButton: P.PrivateActionToolButton {

@@ -40,6 +40,7 @@ public:
         KeepVisible = 2,
         AlwaysHide = 4,
         HideChildIndicator = 8,
+        ShowAsGroup = 16
     };
     Q_DECLARE_FLAGS(DisplayHints, Hint)
     Q_ENUM(Hint)

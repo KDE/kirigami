@@ -54,7 +54,7 @@ public:
 
     QObject *action() const;
     void setAction(QObject *action);
-    void createItems(QQmlComponent *fullComponent, QQmlComponent *iconComponent, std::function<void(QQuickItem *)> callback);
+    void createItems(QQmlComponent *fullComponent, QQmlComponent *iconComponent, QQmlComponent *groupedComponent, std::function<void(QQuickItem *)> callback);
 
     bool isReady() const;
     bool isActionVisible() const;
@@ -102,8 +102,9 @@ private:
     QQuickItem *m_full = nullptr;
     QQuickItem *m_icon = nullptr;
     ToolBarDelegateIncubator *m_fullIncubator = nullptr;
-    ToolBarDelegateIncubator *m_iconIncubator = nullptr;
 
+    ToolBarDelegateIncubator *m_iconIncubator = nullptr;
+    ToolBarDelegateIncubator *m_groupedIncubator = nullptr;
     DisplayHint::DisplayHints m_displayHint = DisplayHint::NoPreference;
     bool m_ready = false;
     bool m_actionVisible = true;
